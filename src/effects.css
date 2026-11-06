@@ -22,69 +22,133 @@
 .firefly { animation: lantern 4.8s var(--delay, 0s) ease-in-out infinite alternate; }
 .dialogue p { animation: reveal-dialogue .42s ease-out both; }
 .reward { animation: reward-rise .55s ease-out both; }
-.arena[data-fx="ready"] .enemy.boss { animation: king-arrives .75s ease-out both; }
-.arena[data-fx="sword"] .hero { animation: sword-strike .62s ease-out both; }
-.arena[data-fx="sword"] .enemy, .arena[data-fx="fire"] .enemy { animation: struck .4s .22s ease-out both; }
-.arena[data-fx="fire"] .hero { animation: casting .56s ease-in-out both; }
-.arena[data-fx="guard"] .hero { transform: translateX(-2%) rotate(-4deg); filter: drop-shadow(0 0 10px #8ae6ff); }
-.arena[data-fx="heal"] .hero { animation: recovery .64s ease-out both; }
-.arena[data-fx="enemy"] .enemy { animation: jelly-lunge .62s ease-out both; }
-.arena[data-fx="enemy"] .hero { animation: hero-hit .4s .2s ease-out both; }
-.arena[data-fx="win"] .enemy { animation: shatter .7s ease-out both; }
-.arena[data-fx="win"] .hero { animation: salute .75s ease-in-out both; }
+/* All movement is decorative. The engine supplies the action and impact state. */
+.arena { container-type: inline-size; isolation: isolate; }
+.arena .combatant { pointer-events: none; }
+.arena .hero { z-index: 1; animation: none; }
+.arena-status,.arena .float { z-index: 4; }
+.arena .fx { z-index: 2; position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.hero-torso { transform-origin: 94px 151px; animation: breathe-armor 3.8s ease-in-out infinite; }
+.hero-head { transform-origin: 103px 77px; }
+.hero-cape { transform-origin: 80px 93px; animation: cloth-drift 3.1s ease-in-out infinite alternate; }
+.sword-arm { transform-origin: 122px 99px; animation: sword-ready 3.8s ease-in-out infinite; }
+.spell-arm { transform-origin: 64px 108px; }
+.weapon { transform-origin: 165px 117px; }
+.arena .enemy { animation: none; }
+.gel-body { transform-origin: 106px 177px; animation: jelly-breathe 2.35s ease-in-out infinite; }
+.jelly-eyes { transform-origin: 81px 107px; animation: blink 5.7s linear infinite; }
+.jelly-core { transform-origin: 120px 134px; animation: ember-heart 3.2s ease-in-out infinite; }
+.boss-aura { animation: aura-light 3.2s ease-in-out infinite alternate; }
+.crystal-orbit { animation: levitate-shard 2.8s var(--delay,0s) ease-in-out infinite alternate; }
+.arena[data-stage="2"] .gel-body { animation: float-jelly 3.4s ease-in-out infinite; }
+.arena[data-stage="3"] .gel-body { animation-duration: 3.8s; }
+.arena[data-intent="charge"] .jelly-core,.arena[data-fx="charge"] .jelly-core { animation: charged-heart .69s ease-in-out infinite alternate; }
+.arena[data-intent="heavy"] .boss-aura { stroke: #ffe2aa; stroke-width: 2; opacity: .95; }
+.arena[data-stage="3"][data-phase="2"] .gel-body { filter: drop-shadow(0 0 5px #c9a3ef); }
+.arena[data-stage="3"][data-phase="2"] .boss-aura { stroke: #f3d8ff; stroke-width: 2.2; }
+.arena[data-fx="ready"] .enemy.boss { animation: king-arrives .76s cubic-bezier(.24,.68,.33,1) both; }
+.arena[data-fx="sword"] .hero { animation: blade-footwork .8s cubic-bezier(.4,0,.35,1) both; z-index: 3; }
+.arena[data-fx="sword"] .hero-torso { animation: blade-turn .8s ease-out both; }
+.arena[data-fx="sword"] .sword-arm { animation: blade-arm .8s ease-in-out both; }
+.arena[data-fx="sword"] .weapon { animation: blade-wrist .8s ease-out both; }
+.arena[data-fx="sword"] .hero-cape { animation: blade-cape .8s ease-out both; }
+.arena[data-fx="sword"] .gel-body { animation: struck .36s .36s ease-out both; }
+.arena[data-fx="fire"] .gel-body { animation: struck .29s .58s ease-out both; }
+.arena[data-fx="fire"] .hero-torso,.arena[data-fx="heal"] .hero-torso { animation: invocation .82s ease-out both; }
+.arena[data-fx="fire"] .spell-arm,.arena[data-fx="heal"] .spell-arm { animation: cast-arm .82s ease-in-out both; }
+.arena[data-fx="fire"] .sword-arm,.arena[data-fx="heal"] .sword-arm { animation: lower-blade .82s ease-in-out both; }
+.arena[data-fx="guard"] .hero-torso { transform: rotate(-7deg) translateY(3px); animation: none; }
+.arena[data-fx="guard"] .spell-arm { transform: rotate(-49deg); }
+.arena[data-fx="guard"] .sword-arm { transform: rotate(-19deg); animation: none; }
+.arena[data-fx="enemy"] .enemy { animation: jelly-hop .74s ease-in-out both; }
+.arena[data-fx="enemy"][data-stage="2"] .enemy { animation: crystal-dash .74s ease-in-out both; }
+.arena[data-fx="enemy"] .hero,.arena[data-fx="heavy"] .hero { animation: hero-hit .35s .37s ease-out both; }
+.arena[data-fx="heavy"] .enemy { animation: king-slam .74s ease-out both; }
+.arena[data-fx="win"] .enemy { animation: shatter .72s ease-out both; }
+.arena[data-fx="win"] .sword-arm { animation: salute .85s ease-out both; }
+.arena[data-fx="win"] .hero-head { transform: rotate(-7deg); }
 .arena[data-fx="lose"] .hero { animation: wounded .7s ease-out both; }
-.arena[data-fx="miss"] .hero { animation: falter .45s ease-out both; }
-.arena .fx { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.arena[data-fx="miss"] .hero-torso { animation: falter .48s ease-out both; }
 .arena[data-fx="sword"] .fx::after {
-  content: ''; position: absolute; top: 35%; left: 32%; width: 45%; height: 24%;
-  border-bottom: 6px solid #fff0bb; border-radius: 50%; filter: drop-shadow(0 0 7px #ffce75);
-  animation: slash-trail .55s ease-out both;
+  content: ''; position: absolute; top: 41%; right: 16%; width: 29%; height: 29%;
+  border-bottom: 5px solid #fff0bb; border-radius: 50%; filter: drop-shadow(0 0 6px #efb76f);
+  animation: slash-trail .27s .25s ease-out both;
 }
 .arena[data-fx="fire"] .fx::before {
-  content: ''; position: absolute; top: 56%; left: 29%; width: 11%; height: 7%;
-  border-radius: 90% 45% 45% 90%;
-  background: linear-gradient(90deg, transparent, #de7848 45%, #ffdb8b 83%, #fffad8);
-  filter: drop-shadow(0 0 9px #ffb350);
-  animation: fire-flight .55s ease-in both;
+  content: ''; position: absolute; top: 57%; left: 26%; width: 8%; height: 7%;
+  border-radius: 90% 45% 45% 90%; background: radial-gradient(ellipse at 76% 48%, #ffffd7 4%, #ffc16b 29%, #dc6c48 56%, transparent 73%);
+  filter: drop-shadow(0 0 7px #ee9e53); animation: fire-flight .59s linear both;
 }
-.arena[data-fx="fire"] .fx::after, .arena[data-fx="win"] .fx::after {
-  content: ''; position: absolute; top: 42%; right: 19%; width: 12%; aspect-ratio: 1;
-  border: 4px dotted #ffda95; border-radius: 50%; animation: impact-ring .44s .28s ease-out both;
+.arena[data-fx="fire"] .fx::after,.arena[data-fx="win"] .fx::after {
+  content: ''; position: absolute; top: 46%; right: 16%; width: 14%; aspect-ratio: 1;
+  border: 4px dotted #ffda95; border-radius: 50%; animation: impact-ring .35s .58s ease-out both;
 }
-.arena[data-fx="guard"] .fx::before {
-  content: ''; position: absolute; left: 15%; bottom: 7%; width: min(16%, 150px); height: 49%;
+.arena[data-fx="win"] .fx::after { animation-delay: .15s; }
+.arena[data-fx="guard"] .fx::before,.arena[data-guarded="true"]:is([data-fx="enemy"],[data-fx="heavy"]) .fx::before {
+  content: ''; position: absolute; left: 14%; bottom: 8%; width: min(16%,155px); height: 48%;
   border-radius: 28% 55% 52% 37% / 18% 29% 67% 72%;
   border: 2px solid #baf6fb; box-shadow: inset 0 0 18px #79daff77, 0 0 9px #79daff77;
-  background: linear-gradient(145deg, #acf2ff4d, #69bee41c); animation: ward .55s ease-out both;
+  background: linear-gradient(145deg,#acf2ff4d,#69bee41c); animation: ward .6s ease-out both;
 }
-.arena[data-fx="heal"] .fx::before, .arena[data-fx="win"] .fx::before {
-  content: ''; position: absolute; bottom: 13%; left: 18%; width: 8px; height: 8px;
-  color:#b9ffb5; background:currentColor; transform:rotate(45deg);
-  box-shadow: 17px -37px 0 -1px currentColor, -38px -19px 0 -2px currentColor, 45px -12px 0 -2px currentColor,
-              -16px -66px 0 -1px currentColor, 31px -93px 0 -2px currentColor, 58px -58px 0 -1px currentColor;
-  animation: runes-rise .7s ease-out both;
+.arena[data-guarded="true"]:is([data-fx="enemy"],[data-fx="heavy"]) .fx::before { animation: shield-contact .76s ease-out both; }
+.arena[data-fx="heavy"] .fx::after {
+  content: ''; position: absolute; bottom: 4%; left: 6%; width: 81%; height: 21%; border-radius: 50%;
+  border: 3px solid #ddc3fd; box-shadow: inset 0 0 16px #c99eea77,0 0 10px #e4c4ff88;
+  transform-origin: 88% center; animation: impact-ring .37s .37s ease-out both;
+}
+.arena[data-fx="heal"] .fx::before,.arena[data-fx="win"] .fx::before {
+  content: ''; position: absolute; bottom: 13%; left: 19%; width: 8px; height: 8px;
+  color: #b9ffb5; background: currentColor;
+  box-shadow: 17px -37px 0 -1px currentColor,-38px -19px 0 -2px currentColor,45px -12px 0 -2px currentColor,-16px -66px 0 -1px currentColor,31px -93px 0 -2px currentColor,58px -58px 0 -1px currentColor;
+  animation: runes-rise .82s ease-out both;
 }
 .arena[data-fx="win"] .fx::before { color: #f5d48b; }
+.spring-ripples { animation: water-drift 7.6s ease-in-out infinite alternate; }
+.water-threads { animation: falling-water 1.4s ease-in-out infinite alternate; }
+@keyframes king-arrives { from { transform: translateY(-25%) scale(.82); opacity: .08; } 70% { transform: scale(1.12,.87); } }
+@keyframes breathe-armor { 50% { transform: translateY(-1.5px) rotate(-1.4deg); } }
+@keyframes cloth-drift { from { transform: skewX(-1deg); } to { transform: rotate(4deg) skewX(3deg); } }
+@keyframes sword-ready { 50% { transform: rotate(-4deg); } }
+@keyframes blade-footwork {
+  0%,100% { transform: translateX(0); } 23% { transform: translateX(-3%) scale(.99,.98); }
+  45%,52% { transform: translateX(clamp(12px,calc(78cqw - 138%),720px)); }
+  76% { transform: translateX(clamp(10px,calc(65cqw - 118%),584px)); }
+}
+@keyframes blade-turn { 21% { transform: rotate(-10deg); } 46%,55% { transform: rotate(11deg); } 73% { transform: rotate(5deg); } }
+@keyframes blade-arm { 22% { transform: rotate(-68deg); } 45%,53% { transform: rotate(27deg); } 64% { transform: rotate(42deg); } }
+@keyframes blade-wrist { 23% { transform: rotate(-23deg); } 47%,57% { transform: rotate(46deg); } 74% { transform: rotate(22deg); } }
+@keyframes blade-cape { 40%,57% { transform: rotate(16deg) skewX(10deg); } }
+@keyframes struck { 28% { transform: translateX(6px) skewX(-7deg) scale(.91,1.06); filter: brightness(1.5); } 75% { transform: scale(1.06,.93); } }
+@keyframes invocation { 34% { transform: rotate(-5deg); } 67% { transform: rotate(4deg); } }
+@keyframes cast-arm { 35% { transform: rotate(-71deg); } 62% { transform: rotate(-103deg); filter: brightness(1.45); } }
+@keyframes lower-blade { 44% { transform: rotate(12deg); } }
+@keyframes jelly-breathe { 24%,78% { transform: scale(1.03,.964); } 51% { transform: translateY(-3px) scale(.981,1.035); } }
+@keyframes float-jelly { 50% { transform: translateY(-8px) scale(.986,1.016); } }
+@keyframes blink { 0%,41%,44%,100% { transform: scaleY(1); } 42.8% { transform: scaleY(.12); } }
+@keyframes ember-heart { 50% { transform: scale(1.08); opacity: .8; } }
+@keyframes charged-heart { to { transform: scale(1.35); filter: brightness(1.3); } }
+@keyframes aura-light { from { opacity: .4; } to { opacity: .95; } }
+@keyframes levitate-shard { to { transform: translateY(-7px) rotate(15deg); } }
+@keyframes jelly-hop { 24% { transform: scale(1.16,.78); } 50% { transform: translateX(clamp(-650px,calc(-72cqw + 131%),0px)) translateY(-3%) scale(.96,1.04); } }
+@keyframes crystal-dash { 32% { transform: translate(4%,-13%) scale(.93,1.03); filter: brightness(1.19); } 50% { transform: translateX(clamp(-650px,calc(-72cqw + 131%),0px)) skew(-7deg) scale(1.08,.96); } }
+@keyframes king-slam { 20% { transform: scale(1.1,.83); } 42% { transform: translate(-3%,-15%) scale(.97,1.05); } 51% { transform: translate(-4%,0) scale(1.17,.8); } 75% { transform: scale(.98,1.03); } }
+@keyframes hero-hit { 30% { transform: translateX(-6%) rotate(-5deg); filter: brightness(1.5); } }
+@keyframes shatter { 35% { filter: brightness(1.6); transform: scale(1.08,.92); } to { opacity: 0; transform: scale(.8,.6); } }
+@keyframes salute { 30% { transform: rotate(5deg); } 72%,100% { transform: rotate(-44deg); } }
+@keyframes wounded { to { transform: translateY(9%) rotate(-12deg); filter: saturate(.5); } }
+@keyframes falter { 42% { transform: rotate(-5deg); } }
+@keyframes slash-trail { 0% { opacity: 0; transform: rotate(-50deg) scale(.55); } 32% { opacity: 1; } 100% { opacity: 0; transform: rotate(-9deg) scale(1); } }
+@keyframes fire-flight { 0% { opacity: 0; transform: scale(.2); } 38% { opacity: 1; left: 26%; transform: scale(.55,1.15); } 95% { opacity: 1; } 100% { opacity: 0; left: 72%; } }
+@keyframes impact-ring { from { opacity: 0; transform: scale(.2); } 22% { opacity: 1; } to { opacity: 0; transform: scale(1.2); } }
+@keyframes ward { from { opacity: 0; transform: scale(.75); } 75% { opacity: 1; } to { opacity: .8; } }
+@keyframes shield-contact { 0%,40% { opacity: .64; } 53% { opacity: 1; transform: scale(1.09); filter: brightness(1.5); } to { opacity: 0; } }
+@keyframes runes-rise { from { opacity: 0; } 34% { opacity: 1; } to { opacity: 0; transform: translateY(-52px) rotate(58deg); } }
+@keyframes water-drift { to { transform: translateX(9px); opacity: .73; } }
+@keyframes falling-water { to { opacity: .51; transform: translateY(3px); } }
 @keyframes drift-mist { to { transform: translateX(19px); opacity: .65; } }
 @keyframes lantern { 0%, 15% { opacity: .27; } 75%, 100% { opacity: .97; transform: translate(5px,-8px); } }
 @keyframes reveal-dialogue { from { opacity: .15; transform: translateY(3px); } }
 @keyframes reward-rise { from { opacity: .2; transform: translateY(7px); } }
-@keyframes king-arrives { from { transform: translateY(-27%) scale(.77); opacity: .1; } 72% { transform: scale(1.09,.91); } }
-@keyframes sword-strike { 0%,100% { transform: translateX(0); } 24% { transform: translateX(-8%) rotate(-5deg); } 58% { transform: translateX(27%) rotate(8deg); } }
-@keyframes struck { 25% { transform: translateX(9%) scale(.93,1.06); filter: brightness(1.75); } 75% { transform: scale(1.05,.93); } }
-@keyframes casting { 54% { transform: translateY(-5px) rotate(-4deg); filter: drop-shadow(0 0 8px #f4be7b); } }
-@keyframes recovery { 45% { filter: drop-shadow(0 0 16px #91ebb3); } }
-@keyframes jelly-lunge { 20% { transform: scale(1.12,.8); } 52% { transform: translate(-25%,-4%) scale(.95,1.05); } }
-@keyframes hero-hit { 30% { transform: translateX(-9%) rotate(-4deg); filter: brightness(1.6); } }
-@keyframes shatter { 35% { filter: brightness(1.6); transform: scale(1.08,.92); } to { opacity: 0; transform: scale(.8,.6); } }
-@keyframes salute { 60%,100% { transform: translateY(-2%) rotate(-5deg); filter: drop-shadow(0 0 6px #dfcc84); } }
-@keyframes wounded { to { transform: translateY(11%) rotate(-16deg); filter: saturate(.5); } }
-@keyframes falter { 42% { transform: rotate(-3deg); filter: saturate(.45); } }
-@keyframes slash-trail { 0% { opacity: 0; transform: rotate(-35deg) scale(.2); } 42% { opacity: 1; } 100% { opacity: 0; transform: rotate(-19deg) scale(1); } }
-@keyframes fire-flight { 0% { opacity: 0; transform: scale(.2); } 22% { opacity: 1; } 90% { opacity: 1; } to { opacity: 0; left: 70%; } }
-@keyframes impact-ring { from { opacity: 0; transform: scale(.2); } 20% { opacity: 1; } to { opacity: 0; transform: scale(1.45); } }
-@keyframes ward { from { opacity: 0; transform: scale(.75); } 75% { opacity: 1; } to { opacity: .77; } }
-@keyframes runes-rise { from { opacity: 0; } 34% { opacity: 1; } to { opacity: 0; transform: translateY(-52px) rotate(58deg); } }
 @media (max-width: 700px) {
   /* The viewBox crops toward its centre on tall screens. Keep all four landmarks in the frame. */
   .title-art .painted-moon { transform: translate(-180px, -44px); }
