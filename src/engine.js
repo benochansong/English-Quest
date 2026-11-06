@@ -3,7 +3,8 @@ const Engine = (() => {
   const legacyKey = 'EnglishQuest.chapter1.v1';
   const v2Key = 'EnglishQuest.chapter1.v2';
   const v3Key = 'EnglishQuest.v3';
-  const saveKey = 'EnglishQuest.v4';
+  const v4Key = 'EnglishQuest.v4';
+  const saveKey = 'EnglishQuest.v5';
   const active = new WeakMap();
   const reviews = new WeakMap();
   const achievements = [
@@ -12,7 +13,8 @@ const Engine = (() => {
     {id:'combo3', name:'이어지는 말', description:'한 전투에서 세 번 연속 정답 맞히기'},
     {id:'firstReview', name:'다시 만난 표현', description:'복습 문제에 처음 답하기'},
     {id:'forestClear', name:'숲의 목소리', description:'슬라임 왕을 물리치기'},
-    {id:'villageVoice', name:'마을의 통역사', description:'문장 골렘 격파 후 실전 대화를 마치기'}
+    {id:'villageVoice', name:'마을의 통역사', description:'문장 골렘 격파 후 실전 대화를 마치기'},
+    ...RPG.achievements
   ];
   function unlock(profile, id) {
     if (!profile.achievements.includes(id)) profile.achievements.push(id);
@@ -32,20 +34,18 @@ const Engine = (() => {
     ? clamp(value, 0, max) : fallback;
   const emptyRecord = () => ({seen:false, correct:0, wrong:0, streak:0});
   function fresh() {
-    return {version:4, started:false, currentChapter:1, level:1, xp:0, gold:0, hp:100,
+    return {version:5, started:false, currentChapter:1, level:1, xp:0, gold:0, hp:100,rpg:RPG.fresh(),
       completed:[], unlocked:1, chapterComplete:false, learning:{}, mistakes:{},
       marked:[], schedule:{}, history:[], achievements:[], village:VillageEngine.fresh(),
       voice:VoiceLearning.fresh(),
       settings:{sound:true, voice:true, volume:0.45, speechRate:'normal',speechVolume:1}};
   }
   function stats(profile) {
-    const steps = profile.level - 1;
-    return {maxHp:100 + 12*steps + (profile.village?.inventory.cloak ? 6 : 0), attack:12 + 2*steps, magic:18 + 3*steps,
-      defense:3, nextXp:100 + 30*steps};
+    return {...RPG.breakdown(profile).total,nextXp:100+30*(profile.level-1)};
   }
   function hydrate(raw) {
     const profile = fresh();
-    if (!raw || ![1, 2, 3, 4].includes(raw.version)) return profile;
+    if (!raw || ![1, 2, 3, 4, 5].includes(raw.version)) return profile;
     profile.started = raw.started === true;
     profile.level = Math.max(1, integer(raw.level, 1, 9999));
     profile.gold = integer(raw.gold, 0, Number.MAX_SAFE_INTEGER);
@@ -59,7 +59,8 @@ const Engine = (() => {
       profile.village = VillageEngine.hydrate(raw.village, profile.chapterComplete);
       if (profile.chapterComplete && raw.currentChapter === 2) profile.currentChapter = 2;
     }
-    if (raw.version === 4) profile.voice=VoiceLearning.hydrate(raw.voice);
+    if (raw.version >= 4) profile.voice=VoiceLearning.hydrate(raw.voice);
+    RPG.hydrate(profile,raw.version===5?raw.rpg:null);
     const {maxHp, nextXp} = stats(profile);
     profile.hp = integer(raw.hp, maxHp, maxHp);
     profile.xp = integer(raw.xp, 0, nextXp - 1);
@@ -101,6 +102,7 @@ const Engine = (() => {
     if (profile.completed.length) unlock(profile, 'firstVictory');
     if (profile.chapterComplete) unlock(profile, 'forestClear');
     if (profile.village.scenarioComplete) unlock(profile,'villageVoice');
+    RPG.refresh(profile);
     return profile;
   }
   function stored(key) {
@@ -111,9 +113,9 @@ const Engine = (() => {
   function load() {
     try {
       const current = stored(saveKey);
-      if (current?.version === 4) return hydrate(current);
-      for (const legacy of [stored(v3Key),stored(v2Key),stored(legacyKey),current]) {
-        if (![1,2,3].includes(legacy?.version)) continue;
+      if (current?.version === 5) return hydrate(current);
+      for (const legacy of [stored(v4Key),stored(v3Key),stored(v2Key),stored(legacyKey),current]) {
+        if (![1,2,3,4].includes(legacy?.version)) continue;
         const profile = hydrate(legacy);
         save(profile);
         return profile;
@@ -124,7 +126,7 @@ const Engine = (() => {
   }
   function save(profile) {
     try {
-      if (profile.version !== 4 || stored(saveKey)?.version > 4) return false;
+      if (profile.version !== 5 || stored(saveKey)?.version > 5) return false;
       localStorage.setItem(saveKey, JSON.stringify(profile));
       return true;
     }
@@ -136,6 +138,7 @@ const Engine = (() => {
       const record = profile.learning[id] ||= emptyRecord();
       record.seen = true;
     }
+    RPG.refresh(profile);
   }
   function record(profile, question, correct, options={}) {
     VoiceLearning.note(profile,question,correct,options);
@@ -381,11 +384,13 @@ const Engine = (() => {
     const {ability, correct, stage} = encounter;
     const hero = stats(profile);
     let damage = 0, healing = 0, comboBonus = 0, counterBonus = 0;
+    const build=RPG.combat(profile,ability,encounter.combo,encounter.hp);
     if (correct && ['sword','fire','voice','burst'].includes(ability)) {
       const power = {sword:hero.attack,fire:hero.magic,voice:hero.attack+3,burst:hero.magic+4}[ability];
-      const strike = Math.max(1, power - enemies[stage-1].defense) * (exposed(encounter) ? 2 : 1);
-      const boosted = Math.round(strike*(100+bonusPercent(encounter.combo))/100);
-      comboBonus = Math.min(encounter.enemyHp, boosted) - Math.min(encounter.enemyHp, strike);
+      const strike = Math.max(1, power + build.flat - enemies[stage-1].defense) * (exposed(encounter) ? 2 : 1);
+      const skilled = Math.round(strike*(100+build.percent)/100);
+      const boosted = Math.round(strike*(100+build.percent+bonusPercent(encounter.combo))/100);
+      comboBonus = Math.min(encounter.enemyHp, boosted) - Math.min(encounter.enemyHp, skilled);
       const beforeCounter = Math.min(encounter.enemyHp, boosted);
       damage = Math.min(encounter.enemyHp, boosted + (encounter.counterReady ? 12 : 0));
       counterBonus = damage - beforeCounter;
@@ -394,7 +399,7 @@ const Engine = (() => {
       if (ability === 'fire') unlock(profile,'firstSpell');
     }
     if (correct && ability === 'heal') {
-      healing = Math.min(20, hero.maxHp - encounter.hp);
+      healing = Math.min(build.heal, hero.maxHp - encounter.hp);
       encounter.hp += healing;
     }
     const won = encounter.enemyHp === 0;
@@ -423,7 +428,8 @@ const Engine = (() => {
     const hit = Math.max(1, Math.round(rawHit * encounter.incomingScale) - (encounter.charm ? 3 : 0));
     const stopped = charge || interrupted;
     const unguarded = stopped ? 0 : Math.min(encounter.hp, hit);
-    const factor=guard ? (encounter.ability==='echo' ? .3 : .4) : 1;
+    const build=RPG.combat(profile,encounter.ability,encounter.combo,encounter.hp);
+    const factor=guard ? build.guardFactor : 1;
     const damage = stopped ? 0 : Math.min(encounter.hp, Math.max(1, Math.round(hit*factor)));
     if (guard && powerful) encounter.counterReady = true;
     encounter.hp -= damage;
@@ -431,7 +437,7 @@ const Engine = (() => {
     for (const id of Object.keys(cooldown)) {
       encounter.cooldowns[id] = Math.max(0, encounter.cooldowns[id] - 1);
     }
-    if (encounter.correct) encounter.cooldowns[encounter.ability] = cooldown[encounter.ability];
+    if (encounter.correct) encounter.cooldowns[encounter.ability] = build.resonance ? 1 : cooldown[encounter.ability];
     encounter.phase = lost ? 'DEFEAT' : 'PLAYER_SELECT';
     if (lost) { if (!encounter.training) profile.hp = 0; }
     else encounter.turn++;
@@ -447,14 +453,16 @@ const Engine = (() => {
     const replay = encounter.training || (stage <= 3 ? profile.completed.includes(stage) : profile.village.progress[stage].completed);
     const prize = stage <= 3 ? enemy : VillageData.quests.find(q => q.stage === stage);
     const xp = replay ? 0 : prize.xp + bonus;
-    const gold = replay ? 0 : prize.gold;
+    const gold = replay ? 0 : Math.min(prize.gold,Number.MAX_SAFE_INTEGER-profile.gold);
     const oldLevel = profile.level;
     profile.xp += xp;
     profile.gold += gold;
-    while (profile.xp >= stats(profile).nextXp) {
+    while (profile.level<9999 && profile.xp >= stats(profile).nextXp) {
       profile.xp -= stats(profile).nextXp;
       profile.level++;
     }
+    if(profile.level===9999)profile.xp=Math.min(profile.xp,stats(profile).nextXp-1);
+    RPG.syncPoints(profile);
     const levelUp = profile.level > oldLevel;
     if (!encounter.training) profile.hp = Math.min(stats(profile).maxHp, encounter.hp + (levelUp ? 30 : 0));
     if (!replay && stage <= 3) profile.completed.push(stage);
@@ -463,10 +471,12 @@ const Engine = (() => {
     profile.chapterComplete = profile.completed.length === 3;
     unlock(profile,'firstVictory');
     if (profile.chapterComplete) unlock(profile,'forestClear');
+    const gearId=replay?null:RPG.bossLoot(profile,stage);
+    RPG.refresh(profile);
     encounter.phase = 'REWARD';
-    return {xp, gold, levelUp, bonus, replay};
+    return {xp, gold, levelUp, bonus, replay,gearId};
   }
-  return {saveKey, legacyKey, v2Key, v3Key, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
+  return {saveKey, legacyKey, v2Key, v3Key, v4Key, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
     achievements, mark, reviewList, startReview, answerReview, dashboard, heavy, bonusPercent,
     training, golemBreak, diving, pulsing, retryBroken, useItem,voicePending,voiceResult,
     available, charging, exposed, shuffle, select, answer, playerAction, enemyAction, reward};

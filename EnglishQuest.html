@@ -807,6 +807,205 @@ dialog::backdrop {background:#031318bd;backdrop-filter:blur(3px);}
 }
 @media(max-width:400px){.voice-trial{padding:12px;}.voice-prompt h3{font-size:1.2rem;}.voice-medallion{flex-basis:48px;}.typed-answer>div{flex-wrap:wrap;}.typed-answer input{flex-basis:100%;}}
 @media(prefers-reduced-motion:reduce){.mic-state i{animation:none!important;}}
+
+/* Crystal Hall: enamel class plates, brass fittings and illuminated inspection panels. */
+.camp-links,.rpg-nav,.class-decision,.rpg-heading,.points-band,.slot-row,.passives>div,.rpg-loot-reveal,.trial-tally{display:flex;gap:12px;align-items:center;}
+.camp-links,.rpg-nav{flex-wrap:wrap;gap:7px;margin:12px 0;}
+.camp-links .btn,.rpg-nav .btn {min-height:44px;padding:8px 13px;}
+.camp-links .btn {color:#f5dc9b;border-color:#ab9764;background:linear-gradient(115deg,#334c40,#1a302a);}
+.rpg-nav {padding-bottom:10px;border-bottom:1px solid #b6aa784f;}
+.rpg-nav .btn[aria-pressed=true],.slot-button[aria-pressed=true],.gear-tile[aria-pressed=true] {border-color:#f1d18c;box-shadow:inset 0 0 0 1px #ddbf756a;}
+.rpg-nav .btn:last-child {margin-left:auto;}
+.class-gallery,.trial-doors,.gear-tiles,.skill-layout,.armory-layout,.hero-record,.class-inspector,.trial-brief {display:grid;gap:clamp(12px,1.8vw,24px);}
+.class-gallery,.trial-doors {grid-template-columns:repeat(3,minmax(0,1fr));}
+.btn.class-card,.btn.trial-door {padding:0;overflow:hidden;text-align:left;border-radius:6px 6px 10px 10px;background:#183130;border:1px solid #8790779c;transition:border-color .2s,box-shadow .2s;}
+.class-card[aria-pressed=true],.trial-door[aria-pressed=true] {border-color:#f1d298;box-shadow:0 0 0 1px #dfbe77,0 8px 23px #101c2399;}
+.class-stage {display:block;height:clamp(145px,18vw,248px);position:relative;isolation:isolate;}
+.tone-vanguard {--plate:#486783;--glow:#dcc895;}
+.tone-arcanist {--plate:#625074;--glow:#d6b7ef;}
+.tone-pathfinder {--plate:#486d58;--glow:#c4d597;}
+.class-stage,.hero-portrait {background:radial-gradient(at 50% 28%,var(--plate),transparent 67%),linear-gradient(150deg,#213435,#13252b);}
+.class-stage:before,.hero-portrait:before {content:'';position:absolute;inset:8px;border:1px solid #ddc68c48;pointer-events:none;}
+.halo {position:absolute;left:50%;top:48%;width:min(66%,184px);aspect-ratio:1;border:1px solid var(--glow);box-shadow:0 0 18px #ead69c26,inset 0 0 16px #ead69c26;border-radius:50%;transform:translate(-50%,-50%);opacity:.62;pointer-events:none;}
+.halo:after {content:'';position:absolute;inset:8%;border:1px dashed var(--glow);border-radius:50%;transform:rotate(-15deg);}
+.class-stage .rpg-hero,.hero-figure .rpg-hero {position:relative;filter:drop-shadow(0 8px 4px #0b181c7a);padding:9px;}
+.class-caption,.door-caption {display:block;padding:clamp(11px,1.8vw,20px);border-top:1px solid #cab47f7a;}
+.class-caption i,.gear-detail i {display:block;font:italic .95rem Georgia,serif;color:#cfbc92;}
+.class-caption strong,.door-caption strong {display:block;color:#ffe8b9;font:700 clamp(1.25rem,2.2vw,1.9rem) var(--serif);margin:4px 0;}
+.class-caption small,.door-caption>span,.trial-brief small,.gear-detail>small {font-size:.85rem;color:#cfddcf;}
+.class-inspector,.trial-brief {grid-template-columns:1fr 1fr;padding:clamp(16px,2.3vw,30px);margin:16px 0;background:linear-gradient(125deg,#233d37,#1b3032);}
+.class-inspector h3,.trial-brief h3,.gear-detail h3,.skill-inspector h3,.rpg-heading h2,.trial-results h2 {font:700 clamp(1.45rem,2.5vw,2.15rem) var(--serif);margin:5px 0 10px;}
+.stat-gain,.skill-inspector .rpg-message,.rpg-message {color:#f5d694;font-weight:650;}
+.passives {display:grid;gap:12px;border-left:1px solid #9aac8559;padding-left:18px;}
+.passives b,.passives small {display:block;}
+.passives small,.gear-tile small,.slot-button small,.class-decision p,.class-inspector p,.rpg-help p,.gear-detail p,.skill-inspector p {color:#cbdace;line-height:1.6;}
+.passives .ui-icon {color:#dbc99a;}
+.class-decision,.rpg-heading,.points-band {justify-content:space-between;flex-wrap:wrap;}
+.class-decision p {margin:4px 0;}
+.class-decision .actions {margin:0;}
+.rpg-help {border:1px solid #97a58c61;border-radius:6px;margin-top:15px;padding:3px 16px;background:#1b332f;}
+.rpg-help summary {cursor:pointer;padding:10px 0;min-height:44px;color:#ecd6a7;}
+.rpg-help>p {margin:2px 0 12px;}
+.hero-record {grid-template-columns:minmax(210px,.7fr) minmax(0,1.45fr);}
+.hero-portrait {position:relative;overflow:hidden;isolation:isolate;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:24px 16px;min-height:340px;}
+.hero-figure {position:relative;height:clamp(220px,28vw,360px);width:100%;margin:8px 0;}
+.hero-identity,.hero-portrait>.eyebrow {position:relative;text-align:center;}
+.hero-identity h2 {font:700 2rem var(--serif);margin:5px 0 12px;}
+.hero-identity i {font:italic 1.15rem Georgia;color:#dbc59a;}
+.hero-ledger {display:grid;align-content:start;gap:14px;min-width:0;}
+.stat-ledger,.slots-panel,.skill-inspector,.gear-detail,.gear-picker,.loadout,.trial-results,.trial-console {padding:clamp(14px,2.3vw,28px);}
+.hero-meter {margin:8px 0;}
+.hero-meter label {display:flex;justify-content:space-between;font-size:.88rem;}
+.hero-meter progress {width:100%;height:8px;display:block;border:none;border-radius:4px;overflow:hidden;margin-top:5px;background:#142b2d;color:#9dba9c;}
+.hero-meter progress::-webkit-progress-bar {background:#142b2d;}
+.hero-meter progress::-webkit-progress-value {background:linear-gradient(90deg,#59897e,#abc2a0);}
+.hero-meter.xp progress::-webkit-progress-value {background:linear-gradient(90deg,#946f43,#dcc27b);}
+.stats-table {border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.9rem;margin:16px 0;}
+.stats-table caption {text-align:left;font-weight:700;color:#efdcb0;margin-bottom:6px;}
+.stats-table th,.stats-table td {padding:7px 3px;text-align:center;border-bottom:1px solid #9ca99136;}
+.stats-table tr>:first-child {text-align:left;}
+.stats-table thead th {font-weight:500;font-size:.77rem;color:#b5c9bb;}
+.stats-table td strong {color:#f4d7a0;}
+.points-band {padding:12px 15px;background:#2a4037;border:1px solid #a1976359;border-radius:5px;}
+.points-band b,.slot-button b {color:#f1d8a3;}
+.class-techniques {font-size:.86rem;line-height:1.65;}
+.slots-panel h3,.gear-picker h3 {font:700 1.2rem var(--serif);margin:0 0 12px;}
+.slot-row {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+.btn.slot-button,.btn.gear-tile {display:flex;align-items:center;gap:8px;text-align:left;min-width:0;padding:7px 9px;}
+.slot-button b,.slot-button small,.gear-tile b,.gear-tile small {display:block;}
+.slot-symbol,.gear-mini {display:grid;place-items:center;width:42px;height:46px;flex-shrink:0;color:#d4c69b;}
+.slot-symbol svg.gear-art,.gear-mini svg {width:100%;height:100%;}
+.skill-layout {grid-template-columns:minmax(0,1.8fr) minmax(220px,.8fr);margin-top:15px;align-items:start;}
+.constellation {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:clamp(10px,2vw,25px);background:radial-gradient(ellipse at 50% 65%,#3b5058,#1b3138 64%,#142630);position:relative;overflow:hidden;}
+.skill-branch {--rune:#e4c47e;text-align:center;}
+.branch-arcane {--rune:#cfaae8;}.branch-survival {--rune:#a5c59a;}
+.skill-branch h3 {font:1.16rem var(--serif);color:var(--rune);}
+.btn.skill-node {width:100%;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 3px;background:#142b30da;border-color:#8b9c956e;position:relative;}
+.skill-node small {font-size:.78rem;color:#bfccc0;}
+.skill-node.learned {background:#284139;border-color:#a4bf88;}
+.skill-node.available .skill-stone {box-shadow:0 0 14px #e0d59955;}
+.skill-node[aria-pressed=true] {outline:1px solid var(--rune);outline-offset:2px;}
+.skill-stone {display:grid;place-items:center;width:43px;height:43px;color:var(--rune);border:1px solid var(--rune);border-radius:45% 45% 42% 42%;background:linear-gradient(135deg,#52625b,#182f30);}
+.skill-stone svg {width:24px;height:24px;}
+.skill-link {height:26px;width:2px;margin:auto;background:var(--rune);box-shadow:0 0 6px var(--rune);}
+.respec-confirm {margin-top:12px;padding:16px;border-color:#d1b373;}
+.armory-layout {grid-template-columns:minmax(175px,.82fr) minmax(210px,1fr) minmax(240px,1.2fr);align-items:start;}
+.loadout {background:radial-gradient(at 50% 18%,#446653,#1d3333 64%);}
+.loadout-figure {height:165px;margin-bottom:6px;}
+.worn-slots,.gear-tiles {display:grid;gap:8px;}
+.gear-display {height:130px;background:radial-gradient(ellipse at center,#66887866,transparent 68%);margin-bottom:12px;}
+.gear-kicker,.rarity-tag {font-size:.8rem;}
+.rarity-tag {display:inline-block;padding:3px 7px;border:1px solid currentColor;border-radius:4px;}
+.rarity-tag.common {color:#cbd1bd;}.rarity-tag.uncommon {color:#a9cfa5;}.rarity-tag.rare {color:#a9cee5;}.rarity-tag.epic {color:#d3b2e6;}
+.rare-common{--edge:#a5ada2;}.rare-uncommon{--edge:#91b38e;}.rare-rare{--edge:#8eafcb;}.rare-epic{--edge:#b79acf;}
+.gear-detail,.gear-tile,.shop-item[class*=rare-] {border-left:3px solid var(--edge);}
+.gear-detail i {margin-top:10px;}
+.gear-comparison {border-block:1px solid #a4ab895c;padding:10px 0;margin:12px 0;}
+.gear-comparison small,.gear-comparison b {display:block;}
+.gear-comparison p {margin:3px 0;}
+.gear-comparison p span {display:block;}
+.gear-comparison small {font-size:.82rem;color:#b9ccb9;}
+.rpg-loot-reveal {border:1px solid var(--edge);background:linear-gradient(110deg,#30433c,#263a3d);padding:10px 16px;border-radius:7px;margin:16px auto;width:fit-content;}
+.rpg-loot-reveal>svg {width:58px;height:65px;}
+.rpg-loot-reveal small,.rpg-loot-reveal strong,.rpg-loot-reveal span {display:block;text-align:left;}
+.rpg-loot-reveal strong {color:#f1d9a5;font:700 1.2rem var(--serif);}
+.door-image {display:block;height:clamp(130px,15vw,192px);position:relative;overflow:hidden;}
+.door-image>.trial-room-art {position:absolute;inset:0;}
+.door-watcher {position:absolute;inset:14% 10% 1%;}
+.door-caption small,.trial-scene-label>span {font:italic .92rem Georgia,serif;color:#dbc9a7;}
+.trial-brief {align-items:center;grid-template-columns:1.5fr 1fr;}
+.trial-play {max-width:1130px;margin:auto;}
+.trial-arena {height:clamp(240px,36vh,390px);position:relative;overflow:hidden;border:1px solid #b1a4798c;border-radius:9px 9px 0 0;background:#193539;}
+.trial-arena>.trial-room-art,.trial-vignette {position:absolute;inset:0;}
+.trial-vignette {background:linear-gradient(0deg,#122329c9,transparent 25%,transparent 60%,#14242ac9);}
+.trial-fighter,.trial-guardian {position:absolute;bottom:8%;height:70%;width:32%;filter:drop-shadow(0 4px 4px #14232580);}
+.trial-fighter {left:6%;}.trial-guardian {right:5%;}
+.trial-scene-label {position:absolute;top:12px;left:18px;text-shadow:0 2px 4px #101d22;}
+.trial-scene-label h2 {margin:2px 0;color:#fff0c9;font:700 1.4rem var(--serif);}
+.seal-strip {position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;gap:10px;justify-content:flex-end;padding:6px 12px;background:#11292bbf;}
+.seal-strip b {margin-right:auto;font-size:.85rem;}
+.seal-strip>span {display:flex;gap:6px;}
+.seal-strip i {width:9px;height:9px;transform:rotate(45deg);border:1px solid #c3c69c;}
+.seal-strip i.released {background:#d0e7b9;box-shadow:0 0 8px #badac5;}
+.trial-console {border-radius:0 0 8px 8px;min-height:165px;}
+.trial-console h3 {line-height:1.5;margin:10px 0;}
+.trial-feedback>b {color:#efd498;}
+.trial-cue {padding:8px 12px;border-left:2px solid #ad9ac9;color:#e9e1f1;}
+.trial-results {max-width:850px;margin:16px auto;}
+.trial-tally {justify-content:space-between;flex-wrap:wrap;color:#ead7ab;border-block:1px solid #a99d704d;padding:12px 0;}
+.trial-recap {padding:0;list-style:none;}
+.trial-recap li {display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #96a68b50;}
+.trial-recap small,.trial-recap strong,.trial-recap span {display:block;}
+.trial-recap small {font-size:.78rem;color:#c9b78c;}
+.trial-recap p {margin:3px 0;font-size:.89rem;color:#c6d6c9;}
+@media(max-width:860px){
+ .armory-layout{grid-template-columns:1fr 1.2fr;}.loadout{grid-column:1/-1;display:flex;align-items:center;gap:16px;}.loadout-figure{height:116px;width:96px;}.worn-slots{flex:1;grid-template-columns:repeat(3,minmax(0,1fr));}
+ .skill-layout{grid-template-columns:1.5fr 1fr;}.hero-record{grid-template-columns:minmax(170px,.65fr) minmax(0,1.5fr);}
+ .slot-row .slot-button{flex-direction:column;}
+}
+@media(max-width:620px){
+ .camp-links,.rpg-nav{gap:5px;}.rpg-nav .btn,.camp-links .btn{padding:7px;min-height:44px;font-size:.84rem;}
+ .class-gallery,.trial-doors{gap:6px;}.class-stage{height:115px;}.class-caption,.door-caption{padding:8px 5px;}
+ .class-caption strong,.door-caption strong{font-size:1rem;}.class-caption small,.door-caption small{font-size:.72rem;}.class-caption i{font-size:.76rem;}
+ .class-inspector,.trial-brief,.skill-layout,.hero-record{grid-template-columns:1fr;}
+ .passives{border-left:0;padding-left:0;border-top:1px solid #9aac8559;padding-top:12px;}
+ .hero-portrait{min-height:160px;flex-direction:row;justify-content:space-around;padding:10px;}.hero-portrait>.eyebrow{display:none;}.hero-figure{height:152px;width:46%;margin:0;}.hero-identity h2{font-size:1.65rem;}
+ .stats-table{font-size:.82rem;}.armory-layout{grid-template-columns:1fr;}.loadout{padding:10px;gap:6px;}.loadout-figure{width:68px;height:100px;}.worn-slots{gap:3px;}
+ .worn-slots .slot-button{flex-direction:column;font-size:.76rem;padding:4px;}.slot-symbol{height:33px;width:34px;}
+ .gear-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;}.gear-mini{width:28px;height:34px;}
+ .gear-tile{font-size:.84rem;}.gear-display{height:94px;}.skill-branch h3{font-size:.99rem;}
+ .door-image{height:108px;}.door-caption>span{display:block;font-size:.72rem;}
+ .trial-brief{gap:10px;}.trial-arena{height:220px;}.trial-fighter,.trial-guardian{height:62%;bottom:12%;width:39%;}.trial-fighter{left:2%;}.trial-guardian{right:2%;}
+ .trial-scene-label h2{font-size:1.1rem;}.trial-tally{font-size:.9rem;}
+}
+@media(prefers-reduced-motion:reduce){.class-card,.trial-door{transition:none!important;}}
+
+/* Each class uses the shared combat skeleton and a separate set of illustrated costume pieces. */
+.rpg-hero,.gear-art,.trial-room-art,.trial-guardian-art { display:block; width:100%; height:100%; }
+.rpg-vanguard { --class-light:#b7dbed; }
+.rpg-arcanist { --class-light:#d5c1ef; }
+.rpg-pathfinder { --class-light:#c8dba4; }
+.rpg-hero .class-orbit { animation: class-light 4.4s ease-in-out infinite alternate; }
+.rpg-arcanist .staff-crystal { transform-origin:1px -83px; animation: staff-light 3.2s ease-in-out infinite alternate; }
+.arena[data-fx="fire"] .rpg-arcanist .sword-arm { animation: star-staff .86s ease-out both; }
+.arena[data-fx="fire"] .rpg-arcanist .staff-crystal { filter:drop-shadow(0 0 4px #cfb9ff); }
+.arena[data-fx="guard"] .rpg-vanguard .spell-arm { transform:rotate(-27deg) translate(5px,-2px); }
+.arena[data-fx="heal"] .rpg-pathfinder .class-orbit { filter:brightness(1.35); }
+.trial-float,.trial-mote { animation: trial-hover 4.8s var(--lag,0s) ease-in-out infinite alternate; }
+.trial-mote { animation-duration:3.9s; }
+.echo-bell { transform-origin:0 -29px; animation: suspended-chime 5.4s ease-in-out infinite alternate; }
+.echo-haze { animation: mist-layer 9s ease-in-out infinite alternate; }
+.echo-resonance { animation: echo-harmonic 4.9s ease-in-out infinite alternate; }
+.stag-spine { transform-origin:117px 159px; animation: stag-breathe 3.9s ease-in-out infinite alternate; }
+.stag-head { transform-origin:85px 103px; animation: stag-watch 4.2s ease-in-out infinite alternate; }
+.owl-hover,.ray-drift { animation: trial-hover 4.3s ease-in-out infinite alternate; }
+.folio-wing { transform-origin:0 5px; animation: parchment-wing 2.7s ease-in-out infinite alternate; }
+.owl-head { transform-origin:116px 115px; animation: owl-watch 5.3s ease-in-out infinite alternate; }
+.echo-fin { transform-origin:0 3px; animation: ray-fin 3.8s ease-in-out infinite alternate; }
+.trial-arena[data-fx="hit"] .trial-guardian-art { animation: guardian-hit .44s ease-out both; }
+.trial-arena[data-fx="win"] .trial-guardian-art { animation: guardian-release .8s ease-out both; }
+.rpg-loot-reveal { animation: reward-seal .67s cubic-bezier(.18,.77,.21,1) both; }
+.rpg-loot-reveal .gear-art { filter:drop-shadow(0 0 8px #c8b17b60); }
+@keyframes class-light { from { opacity:.54; } to { opacity:.92; } }
+@keyframes staff-light { to { transform:translateY(-1.4px); filter:brightness(1.15); } }
+@keyframes star-staff { 24% { transform:rotate(-28deg); } 43% { transform:rotate(-37deg); } 66% { transform:rotate(13deg); } }
+@keyframes trial-hover { from { transform:translateY(1px); } to { transform:translateY(-5px); } }
+@keyframes suspended-chime { from { transform:rotate(-2deg); } to { transform:rotate(2deg); } }
+@keyframes mist-layer { to { transform:translateX(11px); opacity:.09; } }
+@keyframes echo-harmonic { to { opacity:.57; } }
+@keyframes stag-breathe { to { transform:translateY(-.8px) rotate(-.8deg); } }
+@keyframes stag-watch { to { transform:rotate(3deg); } }
+@keyframes parchment-wing { from { transform:rotate(-2deg); } to { transform:rotate(6deg) scaleY(.96); } }
+@keyframes owl-watch { to { transform:rotate(-4deg); } }
+@keyframes ray-fin { from { transform:rotate(-7deg) scaleY(.97); } to { transform:rotate(4deg); } }
+@keyframes guardian-hit { 35% { transform:translateX(4px) rotate(2deg); filter:brightness(1.38); } }
+@keyframes guardian-release { 35% { filter:brightness(1.4); } to { transform:translateY(-8px) scale(.95); opacity:.22; } }
+@keyframes reward-seal { from { transform:translateY(7px) scale(.96); opacity:.35; } 72% { transform:scale(1.02); } to { transform:none; opacity:1; } }
+@media (prefers-reduced-motion:reduce) {
+  .rpg-hero *, .trial-room-art *, .trial-guardian-art *, .trial-arena .trial-guardian-art, .rpg-loot-reveal {
+    animation:none !important;
+  }
+}
 </style></head><body><main id="app"></main><div id="voice-live" class="sr-only" role="status" aria-live="polite"></div><dialog id="pause"></dialog><noscript>게임을 실행하려면 자바스크립트를 켜 주세요.</noscript><script>
 'use strict';
 // Chapter 1 content. Each entry is also a teachable vocabulary-book card.
@@ -1371,6 +1570,7 @@ const VoiceLearning = (() => {
     open.delete(p);
     if(h.battle) Engine.voiceResult(p,h.battle,h,correct);
     note(p,a,correct,{assisted:h.assisted,aids:h.aids,mode,review:h.review,now});
+    if(h.review)RPG.refresh(p);
     const m=h.missionId && mission(h.missionId);
     if(m?.kind==='conversation' && p.currentChapter===2 && !h.replay) {
       const q=VillageData.quests.find(q=>q.npc===m.npc);
@@ -1463,12 +1663,211 @@ const VoiceLearning = (() => {
 })();
 
 ;
+// Durable state contains choices and owned item IDs. All combat values are derived.
+const RPG = (() => {
+  const classes = [
+    {id:'vanguard',name:'수호 기사',en:'Vanguard',role:'전열을 지키는 방패와 검',bonus:'최대 체력 +10 · 방어 +1',
+      strength:'큰 반격을 막으며 검격을 이어 가요.',limitation:'화염 마법에는 직업 보너스가 없어요.',
+      abilities:[{en:'Steel Resolve',name:'강철의 결의',description:'방어 +1. 수호 방패로 반격 피해를 65% 줄여요.'},
+        {en:'Guardian Strike',name:'수호자의 검격',description:'정답 검격의 위력이 2 증가해요.'}]},
+    {id:'arcanist',name:'원소 마법사',en:'Arcanist',role:'룬과 화염을 다루는 마법 전문가',bonus:'마력 +3',
+      strength:'화염과 대화의 폭발을 더 강하게 사용해요.',limitation:'직업에 따른 추가 체력과 방어는 없어요.',
+      abilities:[{en:'Arcane Focus',name:'비전 집중',description:'성공한 화염 마법과 대화의 폭발의 위력이 1 증가해요.'},
+        {en:'Flame Resonance',name:'화염 공명',description:'연속 정답 3회 이상에서 성공한 화염은 다음 한 턴만 쉬어요.'}]},
+    {id:'pathfinder',name:'숲의 정찰자',en:'Pathfinder',role:'검술과 회복을 겸하는 정찰병',bonus:'공격 +2 · 방어 +1',
+      strength:'검격과 언어의 일격, 위기에서의 회복에 능해요.',limitation:'마력과 최대 체력에는 직업 보너스가 없어요.',
+      abilities:[{en:'Precision',name:'정밀 타격',description:'성공한 검격과 언어의 일격의 위력이 1 증가해요.'},
+        {en:'Second Wind',name:'다시 고른 숨',description:'현재 체력이 절반 이하라면 치유 마법의 회복량이 4 증가해요.'}]}
+  ];
+  const skills = [
+    ['swordTraining','검술 훈련','Sword Training','sword','sword',null,'검격과 언어의 일격 피해 +5%.'],
+    ['bladeMastery','검날 숙련','Blade Mastery','sword','sword','swordTraining','정답 검격의 피해 +5%. 검술 훈련과 합해 +10%.'],
+    ['magicTraining','마력 훈련','Magic Training','arcane','fire',null,'화염 마법과 대화의 폭발 피해 +5%.'],
+    ['flameMastery','화염 숙련','Flame Mastery','arcane','fire','magicTraining','정답 화염 마법 피해 +5%. 마력 훈련과 합해 +10%.'],
+    ['ironDefense','철벽 방어','Iron Defense','survival','shield',null,'방어 +1. 적의 공격에서 방어를 차감해 피해를 정해요.'],
+    ['healingKnowledge','치유 지식','Healing Knowledge','survival','heal','ironDefense','성공한 치유 마법의 회복량 +5. 최대 체력을 넘지 않아요.']
+  ].map(([id,name,en,branch,icon,requires,description])=>({id,name,en,branch,icon,requires,description,cost:1}));
+  const gear = [
+    ['travelerSword','여행자의 검',"Traveler's Sword",'weapon','common',{attack:2},null,'시작 장비','균형이 잘 잡힌 여행용 검이에요.'],
+    ['crystalBlade','수정 칼날','Crystal Blade','weapon','uncommon',{attack:5},null,'슬라임 왕 첫 승리','숲에서 되찾은 수정 조각으로 칼날을 다듬었어요.'],
+    ['runicSword','룬 문자검','Runic Sword','weapon','rare',{attack:3,magic:3},null,'문장 골렘 첫 승리','검신의 문자가 검술과 마법을 함께 보강해요.'],
+    ['leatherArmor','가죽 갑옷','Leather Armor','armor','common',{defense:2},35,'클라라의 상점','단단한 가죽판이 적의 반격을 막아 줘요.'],
+    ['guardianArmor','수호자의 갑옷','Guardian Armor','armor','uncommon',{defense:4,maxHp:10},null,'단어의 방 첫 완료','수정 수호자의 흉갑은 오래 버티는 데 알맞아요.'],
+    ['enchantedRobe','마법 깃든 로브','Enchanted Robe','armor','rare',{defense:2,magic:5},null,'문장의 방 첫 완료','은실로 수놓은 문장이 마력을 더해 줘요.'],
+    ['forestCharm','숲의 호부','Forest Charm','accessory','common',{maxHp:5},25,'클라라의 상점','착용하는 동안 최대 체력이 늘어나는 나무 장식이에요.'],
+    ['crystalPendant','수정 펜던트','Crystal Pendant','accessory','uncommon',{magic:2},40,'클라라의 상점','작은 푸른 수정이 마법에 힘을 보태요.'],
+    ['scholarAmulet','학자의 목걸이',"Scholar's Amulet",'accessory','rare',{attack:2,magic:2},95,'클라라의 상점','작은 책 모양의 장식이 두 공격을 모두 보강해요.'],
+    ['echoSigil','메아리의 인장','Echo Sigil','accessory','epic',{defense:2,magic:3},null,'메아리의 방 첫 완료','울림을 간직한 인장이 마력과 방어를 보강해요.']
+  ].map(([id,name,en,slot,rarity,bonuses,price,source,description])=>({id,name,en,slot,rarity,bonuses,price,source,description,limit:1}));
+  const dungeonPrizes = {words:{gearId:'guardianArmor',gold:20},sentences:{gearId:'enchantedRobe',gold:25},echoes:{gearId:'echoSigil',gold:30}};
+  const achievements = [
+    ['firstAdventurer','첫 모험가','처음으로 직업 선택하기'],
+    ['swordApprentice','검술 수련생','검술 훈련 배우기'],
+    ['crystalGuardian','수정의 수호자','언어 수정의 시련 한 곳 완료하기'],
+    ['wellEquipped','빈틈없는 채비','무기·방어구·장신구를 동시에 착용하기'],
+    ['wordExplorer','표현 탐험가','서로 다른 영어 표현 12개 만나기'],
+    ['villageRestored','되살아난 목소리','문장 골렘을 쓰러뜨리고 마을의 목소리 되찾기']
+  ].map(([id,name,description])=>({id,name,description}));
+  const slots=['weapon','armor','accessory'];
+  const statKeys=['maxHp','attack','magic','defense'];
+  const emptyStats=()=>({maxHp:0,attack:0,magic:0,defense:0});
+  const item=id=>gear.find(g=>g.id===id);
+  const job=id=>classes.find(c=>c.id===id);
+  const node=id=>skills.find(s=>s.id===id);
+  const knownChallenge=id=>Q.some(q=>q.id===id)||VoiceData.activities.some(a=>a.id===id);
+  const budget=p=>Math.max(0,Math.min(9999,p.level)-1);
+  function fresh() {
+    return {classId:null,promptSeen:false,skills:[],availablePoints:0,spentPoints:0,collection:['travelerSword'],
+      equipped:{weapon:null,armor:null,accessory:null},dungeons:Object.fromEntries(
+        Object.keys(dungeonPrizes).map(id=>[id,{clears:0,best:0,lastIds:[]}]))};
+  }
+  function syncPoints(p) {
+    p.rpg.spentPoints=p.rpg.skills.length;
+    p.rpg.availablePoints=budget(p)-p.rpg.spentPoints;
+  }
+  function grant(p,id) {
+    if(!item(id) || p.rpg.collection.includes(id)) return false;
+    p.rpg.collection.push(id);
+    return true;
+  }
+  function hydrate(p,raw) {
+    const r=p.rpg=fresh();
+    if(raw && typeof raw==='object'){
+      r.classId=job(raw.classId)?.id || null;
+      r.promptSeen=raw.promptSeen===true || !!r.classId;
+      if(Array.isArray(raw.collection)) for(const g of gear) if(raw.collection.includes(g.id)) grant(p,g.id);
+      for(const slot of slots){
+        const g=item(raw.equipped?.[slot]);
+        if(g?.slot===slot && r.collection.includes(g.id)) r.equipped[slot]=g.id;
+      }
+      for(const s of skills){
+        if(Array.isArray(raw.skills) && raw.skills.includes(s.id) && r.skills.length<budget(p)
+          && (!s.requires || r.skills.includes(s.requires))) r.skills.push(s.id);
+      }
+      for(const [id,state] of Object.entries(r.dungeons)){
+        const saved=raw.dungeons?.[id];
+        if(!Number.isSafeInteger(saved?.clears) || saved.clears<1) continue;
+        state.clears=Math.min(saved.clears,999999);
+        state.best=Number.isInteger(saved.best)?Math.max(0,Math.min(5,saved.best)):0;
+        state.lastIds=Array.isArray(saved.lastIds)?[...new Set(saved.lastIds.filter(knownChallenge))].slice(-5):[];
+        grant(p,dungeonPrizes[id].gearId);
+      }
+    }
+    if(p.chapterComplete)grant(p,'crystalBlade');
+    if(p.village?.progress[6]?.completed)grant(p,'runicSword');
+    syncPoints(p);
+  }
+  function breakdown(p, equipped=p.rpg?.equipped) {
+    const steps=Math.max(0,Math.min(9999,p.level)-1);
+    const base={maxHp:100+12*steps,attack:12+2*steps,magic:18+3*steps,defense:3};
+    const classBonus=emptyStats(),equipment=emptyStats(),permanent=emptyStats(),skillStats=emptyStats();
+    const cls=p.rpg?.classId;
+    if(cls==='vanguard'){classBonus.maxHp=10;classBonus.defense=1;}
+    if(cls==='arcanist')classBonus.magic=3;
+    if(cls==='pathfinder'){classBonus.attack=2;classBonus.defense=1;}
+    permanent.maxHp=p.village?.inventory.cloak?6:0;
+    skillStats.defense=p.rpg?.skills.includes('ironDefense')?1:0;
+    for(const slot of slots){
+      const g=item(equipped?.[slot]);
+      if(g?.slot===slot) for(const [k,n] of Object.entries(g.bonuses))equipment[k]+=n;
+    }
+    const total=Object.fromEntries(statKeys.map(k=>[k,base[k]+classBonus[k]+equipment[k]+permanent[k]+skillStats[k]]));
+    return {base,classBonus,equipment,permanent,skills:skillStats,total};
+  }
+  function refresh(p) {
+    const unlock=id=>{if(!p.achievements.includes(id))p.achievements.push(id);};
+    if(p.rpg.classId)unlock('firstAdventurer');
+    if(p.rpg.skills.includes('swordTraining'))unlock('swordApprentice');
+    if(slots.every(slot=>p.rpg.equipped[slot]))unlock('wellEquipped');
+    if(Object.values(p.rpg.dungeons).some(d=>d.clears))unlock('crystalGuardian');
+    if(p.village.progress[6].completed)unlock('villageRestored');
+    if(!p.achievements.includes('wordExplorer')){
+      const expressions=new Set(lessons.filter(l=>p.learning[l.id]?.seen).map(l=>VoiceLearning.normalize(l.en)));
+      for(const a of VoiceData.activities) if(p.voice.introduced.includes(a.id))expressions.add(VoiceLearning.normalize(a.english));
+      if(expressions.size>=12)unlock('wordExplorer');
+    }
+    if(Object.values(p.voice.records).some(r=>r.reviewDay))unlock('firstReview');
+  }
+  function chooseClass(p,id) {
+    if(!job(id) || p.rpg.classId===id)return false;
+    p.rpg.classId=id;p.rpg.promptSeen=true;
+    // Changing gear or class may reduce remaining HP but cannot be used to heal.
+    p.hp=Math.min(p.hp,breakdown(p).total.maxHp);
+    refresh(p);
+    return true;
+  }
+  function canLearn(p,id) {
+    const s=node(id);
+    return !!s && p.rpg.availablePoints>=s.cost && !p.rpg.skills.includes(id)
+      && (!s.requires || p.rpg.skills.includes(s.requires));
+  }
+  function learn(p,id) {
+    if(!canLearn(p,id))return false;
+    p.rpg.skills.push(id);syncPoints(p);refresh(p);
+    return true;
+  }
+  function resetSkills(p) {
+    if(!p.rpg.skills.length)return false;
+    p.rpg.skills=[];syncPoints(p);
+    return true;
+  }
+  function equip(p,id,slot=item(id)?.slot) {
+    if(!slots.includes(slot) || item(id)?.slot!==slot || !p.rpg.collection.includes(id) || p.rpg.equipped[slot]===id)return false;
+    p.rpg.equipped[slot]=id;p.hp=Math.min(p.hp,breakdown(p).total.maxHp);refresh(p);
+    return true;
+  }
+  function unequip(p,slot) {
+    if(!slots.includes(slot) || !p.rpg.equipped[slot])return false;
+    p.rpg.equipped[slot]=null;p.hp=Math.min(p.hp,breakdown(p).total.maxHp);
+    return true;
+  }
+  function preview(p,id) {
+    const g=item(id);
+    if(!g)return null;
+    const before=breakdown(p).total,after=breakdown(p,{...p.rpg.equipped,[g.slot]:id}).total;
+    const delta=Object.fromEntries(statKeys.map(k=>[k,after[k]-before[k]]));
+    return {before,after,delta};
+  }
+  function combat(p,ability,combo,hp) {
+    const cls=p.rpg.classId,has=id=>p.rpg.skills.includes(id);
+    const physical=ability==='sword'||ability==='voice', magical=ability==='fire'||ability==='burst';
+    let flat=0;
+    if(cls==='vanguard' && ability==='sword')flat=2;
+    if((cls==='arcanist' && magical) || (cls==='pathfinder' && physical))flat=1;
+    const percent=5*(Number(physical&&has('swordTraining'))+Number(ability==='sword'&&has('bladeMastery'))+
+      Number(magical&&has('magicTraining'))+Number(ability==='fire'&&has('flameMastery')));
+    const extraHeal=(has('healingKnowledge')?5:0)+(cls==='pathfinder'&&hp<=breakdown(p).total.maxHp/2?4:0);
+    return {flat,percent,heal:20+extraHeal,guardFactor:ability==='echo'?.3:cls==='vanguard'?.35:.4,
+      resonance:cls==='arcanist'&&ability==='fire'&&combo>=3};
+  }
+  function bossLoot(p,stage) {
+    const id=stage===3?'crystalBlade':stage===6?'runicSword':null;
+    return id&&grant(p,id)?id:null;
+  }
+  function finishDungeon(p,id,correct,questionIds) {
+    if(!Object.hasOwn(dungeonPrizes,id)||!Number.isInteger(correct)||correct<0||correct>5
+      || !Array.isArray(questionIds)||questionIds.length!==5||new Set(questionIds).size!==5
+      || !questionIds.every(knownChallenge))return null;
+    const state=p.rpg.dungeons[id],prize=dungeonPrizes[id],first=state.clears===0;
+    state.clears=Math.min(999999,state.clears+1);state.best=Math.max(state.best,correct);
+    state.lastIds=[...questionIds];
+    const gearId=first&&grant(p,prize.gearId)?prize.gearId:null;
+    const gold=first?Math.min(prize.gold,Number.MAX_SAFE_INTEGER-p.gold):0;
+    p.gold+=gold;refresh(p);
+    return {first,gearId,gold};
+  }
+  return {classes,skills,gear,achievements,dungeonPrizes,fresh,hydrate,syncPoints,grant,breakdown,refresh,
+    chooseClass,canLearn,learn,resetSkills,equip,unequip,preview,combat,bossLoot,finishDungeon};
+})();
+
+;
 // A profile is the saved checkpoint. Encounter state and pending actions stay in memory.
 const Engine = (() => {
   const legacyKey = 'EnglishQuest.chapter1.v1';
   const v2Key = 'EnglishQuest.chapter1.v2';
   const v3Key = 'EnglishQuest.v3';
-  const saveKey = 'EnglishQuest.v4';
+  const v4Key = 'EnglishQuest.v4';
+  const saveKey = 'EnglishQuest.v5';
   const active = new WeakMap();
   const reviews = new WeakMap();
   const achievements = [
@@ -1477,7 +1876,8 @@ const Engine = (() => {
     {id:'combo3', name:'이어지는 말', description:'한 전투에서 세 번 연속 정답 맞히기'},
     {id:'firstReview', name:'다시 만난 표현', description:'복습 문제에 처음 답하기'},
     {id:'forestClear', name:'숲의 목소리', description:'슬라임 왕을 물리치기'},
-    {id:'villageVoice', name:'마을의 통역사', description:'문장 골렘 격파 후 실전 대화를 마치기'}
+    {id:'villageVoice', name:'마을의 통역사', description:'문장 골렘 격파 후 실전 대화를 마치기'},
+    ...RPG.achievements
   ];
   function unlock(profile, id) {
     if (!profile.achievements.includes(id)) profile.achievements.push(id);
@@ -1497,20 +1897,18 @@ const Engine = (() => {
     ? clamp(value, 0, max) : fallback;
   const emptyRecord = () => ({seen:false, correct:0, wrong:0, streak:0});
   function fresh() {
-    return {version:4, started:false, currentChapter:1, level:1, xp:0, gold:0, hp:100,
+    return {version:5, started:false, currentChapter:1, level:1, xp:0, gold:0, hp:100,rpg:RPG.fresh(),
       completed:[], unlocked:1, chapterComplete:false, learning:{}, mistakes:{},
       marked:[], schedule:{}, history:[], achievements:[], village:VillageEngine.fresh(),
       voice:VoiceLearning.fresh(),
       settings:{sound:true, voice:true, volume:0.45, speechRate:'normal',speechVolume:1}};
   }
   function stats(profile) {
-    const steps = profile.level - 1;
-    return {maxHp:100 + 12*steps + (profile.village?.inventory.cloak ? 6 : 0), attack:12 + 2*steps, magic:18 + 3*steps,
-      defense:3, nextXp:100 + 30*steps};
+    return {...RPG.breakdown(profile).total,nextXp:100+30*(profile.level-1)};
   }
   function hydrate(raw) {
     const profile = fresh();
-    if (!raw || ![1, 2, 3, 4].includes(raw.version)) return profile;
+    if (!raw || ![1, 2, 3, 4, 5].includes(raw.version)) return profile;
     profile.started = raw.started === true;
     profile.level = Math.max(1, integer(raw.level, 1, 9999));
     profile.gold = integer(raw.gold, 0, Number.MAX_SAFE_INTEGER);
@@ -1524,7 +1922,8 @@ const Engine = (() => {
       profile.village = VillageEngine.hydrate(raw.village, profile.chapterComplete);
       if (profile.chapterComplete && raw.currentChapter === 2) profile.currentChapter = 2;
     }
-    if (raw.version === 4) profile.voice=VoiceLearning.hydrate(raw.voice);
+    if (raw.version >= 4) profile.voice=VoiceLearning.hydrate(raw.voice);
+    RPG.hydrate(profile,raw.version===5?raw.rpg:null);
     const {maxHp, nextXp} = stats(profile);
     profile.hp = integer(raw.hp, maxHp, maxHp);
     profile.xp = integer(raw.xp, 0, nextXp - 1);
@@ -1566,6 +1965,7 @@ const Engine = (() => {
     if (profile.completed.length) unlock(profile, 'firstVictory');
     if (profile.chapterComplete) unlock(profile, 'forestClear');
     if (profile.village.scenarioComplete) unlock(profile,'villageVoice');
+    RPG.refresh(profile);
     return profile;
   }
   function stored(key) {
@@ -1576,9 +1976,9 @@ const Engine = (() => {
   function load() {
     try {
       const current = stored(saveKey);
-      if (current?.version === 4) return hydrate(current);
-      for (const legacy of [stored(v3Key),stored(v2Key),stored(legacyKey),current]) {
-        if (![1,2,3].includes(legacy?.version)) continue;
+      if (current?.version === 5) return hydrate(current);
+      for (const legacy of [stored(v4Key),stored(v3Key),stored(v2Key),stored(legacyKey),current]) {
+        if (![1,2,3,4].includes(legacy?.version)) continue;
         const profile = hydrate(legacy);
         save(profile);
         return profile;
@@ -1589,7 +1989,7 @@ const Engine = (() => {
   }
   function save(profile) {
     try {
-      if (profile.version !== 4 || stored(saveKey)?.version > 4) return false;
+      if (profile.version !== 5 || stored(saveKey)?.version > 5) return false;
       localStorage.setItem(saveKey, JSON.stringify(profile));
       return true;
     }
@@ -1601,6 +2001,7 @@ const Engine = (() => {
       const record = profile.learning[id] ||= emptyRecord();
       record.seen = true;
     }
+    RPG.refresh(profile);
   }
   function record(profile, question, correct, options={}) {
     VoiceLearning.note(profile,question,correct,options);
@@ -1846,11 +2247,13 @@ const Engine = (() => {
     const {ability, correct, stage} = encounter;
     const hero = stats(profile);
     let damage = 0, healing = 0, comboBonus = 0, counterBonus = 0;
+    const build=RPG.combat(profile,ability,encounter.combo,encounter.hp);
     if (correct && ['sword','fire','voice','burst'].includes(ability)) {
       const power = {sword:hero.attack,fire:hero.magic,voice:hero.attack+3,burst:hero.magic+4}[ability];
-      const strike = Math.max(1, power - enemies[stage-1].defense) * (exposed(encounter) ? 2 : 1);
-      const boosted = Math.round(strike*(100+bonusPercent(encounter.combo))/100);
-      comboBonus = Math.min(encounter.enemyHp, boosted) - Math.min(encounter.enemyHp, strike);
+      const strike = Math.max(1, power + build.flat - enemies[stage-1].defense) * (exposed(encounter) ? 2 : 1);
+      const skilled = Math.round(strike*(100+build.percent)/100);
+      const boosted = Math.round(strike*(100+build.percent+bonusPercent(encounter.combo))/100);
+      comboBonus = Math.min(encounter.enemyHp, boosted) - Math.min(encounter.enemyHp, skilled);
       const beforeCounter = Math.min(encounter.enemyHp, boosted);
       damage = Math.min(encounter.enemyHp, boosted + (encounter.counterReady ? 12 : 0));
       counterBonus = damage - beforeCounter;
@@ -1859,7 +2262,7 @@ const Engine = (() => {
       if (ability === 'fire') unlock(profile,'firstSpell');
     }
     if (correct && ability === 'heal') {
-      healing = Math.min(20, hero.maxHp - encounter.hp);
+      healing = Math.min(build.heal, hero.maxHp - encounter.hp);
       encounter.hp += healing;
     }
     const won = encounter.enemyHp === 0;
@@ -1888,7 +2291,8 @@ const Engine = (() => {
     const hit = Math.max(1, Math.round(rawHit * encounter.incomingScale) - (encounter.charm ? 3 : 0));
     const stopped = charge || interrupted;
     const unguarded = stopped ? 0 : Math.min(encounter.hp, hit);
-    const factor=guard ? (encounter.ability==='echo' ? .3 : .4) : 1;
+    const build=RPG.combat(profile,encounter.ability,encounter.combo,encounter.hp);
+    const factor=guard ? build.guardFactor : 1;
     const damage = stopped ? 0 : Math.min(encounter.hp, Math.max(1, Math.round(hit*factor)));
     if (guard && powerful) encounter.counterReady = true;
     encounter.hp -= damage;
@@ -1896,7 +2300,7 @@ const Engine = (() => {
     for (const id of Object.keys(cooldown)) {
       encounter.cooldowns[id] = Math.max(0, encounter.cooldowns[id] - 1);
     }
-    if (encounter.correct) encounter.cooldowns[encounter.ability] = cooldown[encounter.ability];
+    if (encounter.correct) encounter.cooldowns[encounter.ability] = build.resonance ? 1 : cooldown[encounter.ability];
     encounter.phase = lost ? 'DEFEAT' : 'PLAYER_SELECT';
     if (lost) { if (!encounter.training) profile.hp = 0; }
     else encounter.turn++;
@@ -1912,14 +2316,16 @@ const Engine = (() => {
     const replay = encounter.training || (stage <= 3 ? profile.completed.includes(stage) : profile.village.progress[stage].completed);
     const prize = stage <= 3 ? enemy : VillageData.quests.find(q => q.stage === stage);
     const xp = replay ? 0 : prize.xp + bonus;
-    const gold = replay ? 0 : prize.gold;
+    const gold = replay ? 0 : Math.min(prize.gold,Number.MAX_SAFE_INTEGER-profile.gold);
     const oldLevel = profile.level;
     profile.xp += xp;
     profile.gold += gold;
-    while (profile.xp >= stats(profile).nextXp) {
+    while (profile.level<9999 && profile.xp >= stats(profile).nextXp) {
       profile.xp -= stats(profile).nextXp;
       profile.level++;
     }
+    if(profile.level===9999)profile.xp=Math.min(profile.xp,stats(profile).nextXp-1);
+    RPG.syncPoints(profile);
     const levelUp = profile.level > oldLevel;
     if (!encounter.training) profile.hp = Math.min(stats(profile).maxHp, encounter.hp + (levelUp ? 30 : 0));
     if (!replay && stage <= 3) profile.completed.push(stage);
@@ -1928,10 +2334,12 @@ const Engine = (() => {
     profile.chapterComplete = profile.completed.length === 3;
     unlock(profile,'firstVictory');
     if (profile.chapterComplete) unlock(profile,'forestClear');
+    const gearId=replay?null:RPG.bossLoot(profile,stage);
+    RPG.refresh(profile);
     encounter.phase = 'REWARD';
-    return {xp, gold, levelUp, bonus, replay};
+    return {xp, gold, levelUp, bonus, replay,gearId};
   }
-  return {saveKey, legacyKey, v2Key, v3Key, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
+  return {saveKey, legacyKey, v2Key, v3Key, v4Key, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
     achievements, mark, reviewList, startReview, answerReview, dashboard, heavy, bonusPercent,
     training, golemBreak, diving, pulsing, retryBroken, useItem,voicePending,voiceResult,
     available, charging, exposed, shuffle, select, answer, playerAction, enemyAction, reward};
@@ -1944,11 +2352,16 @@ const VillageEngine = (() => {
   const conversations = new WeakMap();
   const practice = new WeakMap();
   const offers = new WeakMap();
-  const items = [
+  const supplies = [
     {id:'potion', name:'작은 회복 물약', price:20, limit:3, description:'한 턴을 사용해 체력을 30까지 회복해요.'},
     {id:'charm', name:'여행자의 부적', price:50, limit:1, description:'한 턴을 사용해 이번 전투가 끝날 때까지 받는 피해를 3 줄여요. 중첩되지 않아요.'},
     {id:'cloak', name:'탐험가의 망토', price:80, limit:1, description:'구입 즉시 장착하여 최대 체력이 영구히 6 늘어요.'}
   ];
+  const items=[...supplies,...RPG.gear.filter(g=>Number.isSafeInteger(g.price)&&g.price>0)];
+  function quantity(profile,id) {
+    if(RPG.gear.some(g=>g.id===id))return Number(profile.rpg.collection.includes(id));
+    return profile.village.inventory[id] || 0;
+  }
   const count = value => Number.isSafeInteger(value) ? Math.max(0,value) : 0;
   function fresh() {
     const progress = {};
@@ -1960,7 +2373,7 @@ const VillageEngine = (() => {
   function hydrate(raw, open) {
     const village = fresh();
     if (!open || !raw || typeof raw !== 'object') return village;
-    for (const item of items) village.inventory[item.id] = Math.min(item.limit,count(raw.inventory?.[item.id]));
+    for (const item of supplies) village.inventory[item.id] = Math.min(item.limit,count(raw.inventory?.[item.id]));
     for (const {stage,npc} of VillageData.quests) {
       const saved = raw.progress?.[stage];
       if (!saved?.accepted) break;
@@ -2063,9 +2476,9 @@ const VillageEngine = (() => {
   function offer(profile,id) {
     const item = items.find(i => i.id === id);
     if (profile.currentChapter !== 2 || !profile.chapterComplete || !item
-      || profile.village.inventory[id] >= item.limit || profile.gold < item.price) return null;
+      || quantity(profile,id) >= item.limit || profile.gold < item.price) return null;
     const token = Object.freeze({id, price:item.price});
-    offers.set(token,{profile, gold:profile.gold, quantity:profile.village.inventory[id]});
+    offers.set(token,{profile, gold:profile.gold, quantity:quantity(profile,id)});
     return token;
   }
   function buy(profile,token) {
@@ -2073,14 +2486,133 @@ const VillageEngine = (() => {
     if (!quoted || quoted.profile !== profile) return false;
     offers.delete(token);
     const item = items.find(i => i.id === token.id);
-    const quantity = profile.village.inventory[item.id];
-    if (profile.currentChapter !== 2 || !profile.chapterComplete || quantity !== quoted.quantity
-      || profile.gold !== quoted.gold || profile.gold < item.price || quantity >= item.limit) return false;
+    const owned = quantity(profile,item.id);
+    if (profile.currentChapter !== 2 || !profile.chapterComplete || owned !== quoted.quantity
+      || profile.gold !== quoted.gold || profile.gold < item.price || owned >= item.limit) return false;
+    if(item.slot){
+      if(!RPG.grant(profile,item.id))return false;
+    } else profile.village.inventory[item.id]++;
     profile.gold -= item.price;
-    profile.village.inventory[item.id]++;
     return true;
   }
-  return {items,fresh,hydrate,selectChapter,status,accept,track,summary,dialogue,reply,offer,buy};
+  return {items,quantity,fresh,hydrate,selectChapter,status,accept,track,summary,dialogue,reply,offer,buy};
+})();
+
+;
+// Trial rooms use authored questions from the same dictionaries as story battles.
+const Trials = (() => {
+  const rooms = [
+    {id:'words',name:'단어의 방',en:'Chamber of Words',focus:'단어와 뜻',guardian:'숲빛 수정지기',previous:null,
+      description:'수정 속에 잠든 단어를 읽고 알맞은 뜻을 찾아 초록 봉인을 풀어 보세요.'},
+    {id:'sentences',name:'문장의 방',en:'Chamber of Sentences',focus:'문장 배열과 빈칸',guardian:'서고의 파수꾼',previous:'words',
+      description:'공중에 흩어진 문장 조각을 잇고, 빈칸에 꼭 맞는 말을 고르세요.'},
+    {id:'echoes',name:'메아리의 방',en:'Chamber of Echoes',focus:'듣기와 대답',guardian:'잔향의 수호령',previous:'sentences',
+      description:'수정에 남은 목소리를 듣고 뜻과 대답을 찾아보세요. 소리가 없으면 글로 도전할 수 있어요.'}
+  ];
+  const open=new WeakMap();
+  function unlocked(p,id){
+    const index=rooms.findIndex(r=>r.id===id);
+    return index>=0 && p.started && rooms.slice(0,index).every(room=>p.rpg.dungeons[room.id].clears>0);
+  }
+  function echoed(activity){
+    return {id:activity.id, type:'listening', phrase:activity.english, answer:activity.answer,
+      choices:activity.choices, tags:activity.tags, instruction:activity.objective,
+      explanation:activity.explanation, voiceActivity:activity, difficulty:activity.difficulty};
+  }
+  function deck(p,id,random){
+    const questions=Q.filter(q=>q.chapter!==2||p.chapterComplete);
+    const familiar=q=>q.tags.some(t=>p.learning[t]?.seen);
+    const last=p.rpg.dungeons[id].lastIds||[];
+    const selected=[];
+    const phrases=new Set();
+    function select(pool){
+      const candidates=Engine.shuffle(pool,random).filter(q=>!selected.some(s=>s.id===q.id));
+      function priority(q){
+        const key=q.type==='order'?q.answer:q.phrase;
+        return (phrases.has(key)?-32:0) - (last.includes(q.id)?13:0) +
+          (p.mistakes[q.id]||p.voice.records[q.id]?.wrong>p.voice.records[q.id]?.correct?5:0) +
+          (familiar(q)?2:0) - Math.min(2,(q.difficulty||1)-1);
+      }
+      const next=candidates.sort((a,b)=>priority(b)-priority(a))[0];
+      if(!next)throw Error('시련 문항 목록을 확인해 주세요.');
+      selected.push(next);phrases.add(next.type==='order'?next.answer:next.phrase);
+    }
+    if(id==='words'){
+      const pool=questions.filter(q=>q.type==='vocab');
+      for(let i=0;i<5;i++)select(pool);
+    }else if(id==='sentences'){
+      for(const type of ['order','sentence','order','sentence','order']){
+        select(questions.filter(q=>q.type===type && (type!=='sentence'||q.phrase.includes('___'))));
+      }
+    }else{
+      const meaning=questions.filter(q=>q.type==='listening').concat(VoiceData.activities.filter(a=>a.kind==='listen'&&a.mode==='meaning').map(echoed));
+      const response=VoiceData.activities.filter(a=>a.kind==='listen'&&a.mode==='respond').map(echoed);
+      for(const pool of [meaning,response,meaning,response,meaning])select(pool);
+    }
+    // Reordering the first two of the same type is safe even in mixed rooms.
+    if(selected[0].id===last.at(-1)){
+      const swap=selected.findIndex((q,i)=>i>0&&q.type===selected[0].type);
+      if(swap>0)[selected[0],selected[swap]]=[selected[swap],selected[0]];
+    }
+    return selected;
+  }
+  function prepare(run){
+    const q=run.questions[run.index];
+    run.question=q;
+    run.choices=Engine.shuffle(q.choices,run.random);
+    if(q.type==='order' && run.choices.join(' ')===q.choices.join(' '))run.choices.push(run.choices.shift());
+    run.order=[];run.phase='question';run.feedback=null;
+    run.aids=new Set();run.showTranscript=false;run.showHint=false;
+  }
+  function start(p,id,random=Math.random){
+    if(!unlocked(p,id))return null;
+    const run={id,random,questions:deck(p,id,random),index:0,seals:0,results:[],reward:null};
+    open.set(p,run);prepare(run);return run;
+  }
+  function inPhase(p,run,phase){return !!run&&open.get(p)===run&&run.phase===phase;}
+  function normal(value){return value.trim().replace(/\s+/g,' ').replace(/[.!?]$/,'').toLowerCase();}
+  function answer(p,run,value){
+    if(!inPhase(p,run,'question')||typeof value!=='string')return null;
+    const q=run.question;
+    if(q.type==='order'){
+      const tokenBag=words=>words.map(normal).sort().join(' ');
+      if(tokenBag(value.trim().split(/\s+/))!==tokenBag(q.choices))return null;
+    }else if(!run.choices.includes(value))return null;
+    const correct=normal(value)===normal(q.answer);
+    let row=run.results[run.index];
+    if(!row){row={id:q.id,firstCorrect:correct,attempts:0,assisted:false};run.results.push(row);}
+    if(row.attempts>0)run.aids.add('correction');
+    row.attempts++;row.assisted ||= run.aids.size>0;
+    const options={assisted:run.aids.size>0,aids:[...run.aids]};
+    if(q.voiceActivity){
+      VoiceLearning.introduce(p,q.id);VoiceLearning.note(p,q.voiceActivity,correct,options);
+    }else Engine.record(p,q,correct,options);
+    run.feedback={correct};run.phase='feedback';
+    if(correct){
+      run.seals++;
+      if(run.seals===5){
+        const score=run.results.filter(r=>r.firstCorrect).length;
+        run.reward=RPG.finishDungeon(p,run.id,score,run.questions.map(x=>x.id));
+        run.phase='victory';
+      }
+    }
+    return run.feedback;
+  }
+  function next(p,run){
+    if(inPhase(p,run,'victory')){run.phase='results';open.delete(p);return true;}
+    if(!inPhase(p,run,'feedback'))return false;
+    if(run.feedback.correct)run.index++;
+    prepare(run);return true;
+  }
+  function assist(p,run,reason){
+    if(!inPhase(p,run,'question')||!['transcript','fallback','translation'].includes(reason))return false;
+    run.aids.add(reason);
+    if(reason==='translation')run.showHint=true;
+    else run.showTranscript=true;
+    return true;
+  }
+  function leave(p){open.delete(p);}
+  return {rooms,unlocked,start,answer,next,assist,leave};
 })();
 
 ;
@@ -2584,18 +3116,18 @@ function dewfallGrove(id){
     const bottom=path('M0 456 Q89 428 166 439 T295 451 Q379 467 426 520 Q490 563 562 600 H0Z M1400 416 Q1345 435 1295 435 Q1212 430 1170 475 Q1096 549 998 600 H1400Z',dark);
     return svg('0 0 1400 600',`${defs}<rect width="1400" height="600" fill="${ref('sky')}"/>${title?stars+stars4:''}<g class="painted-moon">${circle(moonX,moonY,190,ref('moon'))}${circle(moonX,moonY,25,'#f2e3b1','opacity=".93"')}${circle(moonX,moonY,35,'none',`stroke="${glow}" stroke-opacity=".33" stroke-width="1"`)}</g>${ridges}<g class="painted-keep">${castle(castleX,289,.86)}</g>${banks}${turf}${title?'':dewfallGrove(id)}<g class="forest-mist">${path('M-30 361 Q220 330 437 363 T862 351 Q1057 325 1430 344 Q1138 335 895 365 T447 379 Q217 352 -30 376Z',glow,'opacity=".09"')}${path('M484 400Q711 371 874 379T1213 359Q1106 393 879 387T484 400Z',glow,'opacity=".12"')}</g>${path('M255 0h60l405 470 -90 -10Z M358 0h21l304 315Z M1044 0h32L801 409 740 448Z',ref('ray'))}${bottom}<g class="painted-traveler">${traveler}</g><g class="painted-left">${foregroundTree(0,1)}</g><g class="painted-right">${foregroundTree(1400,-.95)}</g>${herbs(90,482,1)}${herbs(1260,476,1.14,-1)}${herbs(1300,507,.67)}${crystal(title?1169:1060,455,.6)}${crystal(title?1184:1077,458,.35)}${crystal(176,472,.5)}${motes}`,title?'title-art':'arena-bg','xMidYMid slice');
   }
-  function hero(){
+  function hero(outfit={}){
     const id=`hero${++serial}`,paint=x=>`url(#${id}${x})`;
     const defs=`<defs><linearGradient id="${id}blue" x2="1" y2="1"><stop stop-color="#58808a"/><stop offset=".42" stop-color="#294b60"/><stop offset="1" stop-color="#112236"/></linearGradient><linearGradient id="${id}metal" x2=".8" y2="1"><stop stop-color="#ebdfaf"/><stop offset=".4" stop-color="#a0b6b2"/><stop offset=".55" stop-color="#596b70"/><stop offset="1" stop-color="#293c4b"/></linearGradient><linearGradient id="${id}cape" x2=".9" y2=".8"><stop stop-color="#294251"/><stop offset=".63" stop-color="#22786f"/><stop offset="1" stop-color="#172b39"/></linearGradient></defs>`;
-    return svg('0 0 230 264',`${defs}<ellipse cx="105" cy="255" rx="68" ry="6" fill="#071817" opacity=".48"/>
+    return svg('0 0 230 264',`${defs}${outfit.defs||''}${outfit.aura||''}<ellipse cx="105" cy="255" rx="68" ry="6" fill="#071817" opacity=".48"/>
       <g stroke-linejoin="round" stroke-linecap="round">
-      <g class="hero-cape">
+      <g class="hero-cape">${outfit.cape||`
       ${path('M76 86 Q54 98 51 126 Q46 152 20 170 Q42 172 47 166 Q35 181 22 186 Q60 190 83 167 L99 131Z',paint('cape'),'stroke="#162c39" stroke-width="2"')}
       ${path('M85 87q-17 -8 -33 4 -17 13 -47 6 12 16 39 13 -10 8 -27 8 26 10 48 -9l21 -10Z','#2e776d','stroke="#214b4c" stroke-width="1.3"')}
       ${path('M9 100q24 11 41 -1t34 -10 M23 118q19 5 35 -8','none','stroke="#baaa77" stroke-width="1.5"')}
       ${path('M77 98Q62 121 59 146T36 177 M73 116Q66 149 53 158','none','stroke="#72b3a0" opacity=".52" stroke-width="2"')}
       ${path('M68 108Q53 156 26 170q15 -2 28 -13 -4 13 -28 28 26 -7 46 -26Z','#34695f')}
-      ${path('M27 183q26 -6 41 -32 M69 103l-7 26','none','stroke="#d6be80" stroke-width="1.5"')}</g>
+      ${path('M27 183q26 -6 41 -32 M69 103l-7 26','none','stroke="#d6be80" stroke-width="1.5"')}`}</g>
       ${path('M84 154 L112 157 120 195 135 230 129 238 119 233 99 208 91 195 72 177Z','#243440','stroke="#12222c" stroke-width="3"')}
       ${path('M113 196l10 -4 14 34 -9 8 -12 -13z','#536168')}${path('M122 227l13 -7 6 15 12 7q3 6 -3 7l-26 -8z','#573d32','stroke="#263036" stroke-width="2"')}
       ${path('M77 157l26 6 -7 38 -20 36 -16 -3 8 -39z',paint('blue'),'stroke="#15242a" stroke-width="3"')}
@@ -2617,7 +3149,7 @@ function dewfallGrove(id){
       ${path('M58 111l17 3 -6 23 -6 10 -10 -3 -1 -12Z','#394e55','stroke="#1d3039" stroke-width="2"')}
       ${path('M52 131l17 3 -5 21 -13 -3z',paint('metal'),'stroke="#31434c" stroke-width="2"')}${path('M49 148l13 2 1 11 -5 6 -10 -3 -2 -8z','#82654a')}
       ${path('M50 140l6 -7 6 8 -6 8z','#70e0d8','stroke="#c0d4a7" stroke-width="2"')}
-      ${path('M50 151l10 3 -1 3 -10 -3Z','#b99f74')}</g>
+      ${path('M50 151l10 3 -1 3 -10 -3Z','#b99f74')}${outfit.offhand||''}</g>
       ${path('M67 142l48 -3 2 10 -48 4Z','#70513e','stroke="#352f2b" stroke-width="2"')}${path('M89 142l13 -1 1 9 -13 1Z','#b89754','stroke="#f3d595" stroke-width="1.5"')}
       ${path('M73 149l11 1 -5 26 -9 7 -6 -5Z','#496263','stroke="#9f9a73" stroke-width="1.5"')}
       ${path('M103 149l11 -2 5 24 -9 9 -7 -8Z','#294751','stroke="#b19b6b" stroke-width="1.5"')}
@@ -2625,12 +3157,13 @@ function dewfallGrove(id){
       ${path('M60 151l11 3 -3 13 -11 -3Z','#855637','stroke="#c29b66" stroke-width="1"')}
       ${path('M64 153l3 1 -3 11 -3 -1Z','#d0b478')}
       ${path('M106 150l3 17 4 4 3 -5 -2 -16Z','#477578','stroke="#bea778" stroke-width="1"')}
+      ${outfit.armor||''}
       <g class="sword-arm">
       ${path('M117 92q12 -4 17 7l-1 11 -10 6 -11 -8Z',paint('metal'),'stroke="#263e44" stroke-width="2"')}
       ${path('M125 109l10 -5 8 13 17 -3 4 11 -23 9 -10 -5Z','#40525b','stroke="#253642" stroke-width="2"')}
       ${path('M144 117l15 -5 5 15 -17 5Z',paint('metal'),'stroke="#293943" stroke-width="2"')}
       ${path('M158 113l7 -5 7 4 3 8 -9 6 -7 -2Z','#9e7956')}
-      <g class="weapon">${path('M161 126l-4 -3 16 -30 5 3Z','#584239','stroke="#d4bb81" stroke-width="1.5"')}${path('M161 94q7 1 13 6l11 -1 4 -4 -4 10 -9 2 -11 -7 -9 -1Z','#c6a459','stroke="#4b4436" stroke-width="1.6"')}${path('M173 96L207 22l16 -17 -4 23 -39 71Z','#c4d8d4','stroke="#576b76" stroke-width="1.5"')}${path('M223 5l-13 24 -34 69 4 1 39 -71Z','#8097a0')}${path('M209 28l-33 67','none','stroke="#f8f6db" stroke-width="1.4"')}${path('M176 91l9 -22 3 1 -9 23Z','#e8ebcd')}${path('M183 69l5 -6 -1 10 -5 6Z','#f4d39b')}${path('M158 101q-8 -4 -4 -12l5 7 10 1 6 4 9 -2 7 -10q2 13 -9 16l-10 2 -7 -7Z','#c7a258','stroke="#725c40" stroke-width="1"')}${path('M166 109l6 3 M164 115l5 2','none','stroke="#dbc08b" stroke-width="1.5"')}</g>
+      <g class="weapon">${outfit.weapon||`${path('M161 126l-4 -3 16 -30 5 3Z','#584239','stroke="#d4bb81" stroke-width="1.5"')}${path('M161 94q7 1 13 6l11 -1 4 -4 -4 10 -9 2 -11 -7 -9 -1Z','#c6a459','stroke="#4b4436" stroke-width="1.6"')}${path('M173 96L207 22l16 -17 -4 23 -39 71Z','#c4d8d4','stroke="#576b76" stroke-width="1.5"')}${path('M223 5l-13 24 -34 69 4 1 39 -71Z','#8097a0')}${path('M209 28l-33 67','none','stroke="#f8f6db" stroke-width="1.4"')}${path('M176 91l9 -22 3 1 -9 23Z','#e8ebcd')}${path('M183 69l5 -6 -1 10 -5 6Z','#f4d39b')}${path('M158 101q-8 -4 -4 -12l5 7 10 1 6 4 9 -2 7 -10q2 13 -9 16l-10 2 -7 -7Z','#c7a258','stroke="#725c40" stroke-width="1"')}${path('M166 109l6 3 M164 115l5 2','none','stroke="#dbc08b" stroke-width="1.5"')}`}</g>
       ${path('M154 122l-6 -3 -2 2 4 7 9 -2Z','#6b828a','stroke="#b2c5c1" stroke-width=".9"')}
       ${path('M162 124l-3 2 -3 -4 3 -4 4 1Z','#8ed1d0','stroke="#dac18a" stroke-width="1.4"')}
       </g><g class="hero-head">
@@ -2641,7 +3174,7 @@ function dewfallGrove(id){
       ${path('M101 57q7 7 15 6l-3 6 -10 -3Z','#c29474')}
       ${path('M119 54q4 -2 8 -1l-2 3 -5 1Z','#e8d5bb')}${circle(123.4,54.8,1.45,'#354a45')}
       ${path('M88 35q11 -16 30 -12 M99 37l16 -12','none','stroke="#8d7155" stroke-width="2.3"')}${path('M117 50l9 -2 M123 58l1 -4 M125 69l-7 1','none','stroke="#473a34" stroke-width="2"')}${path('M101 65q7 9 15 10l9 -3 -4 7 -11 -2Z','#8b6450')}
-      </g></g></g>`,'hero-art');
+      ${outfit.head||''}</g></g></g>`,outfit.id?'hero-art rpg-hero rpg-'+outfit.id:'hero-art');
   }
   function slime(stage=1){
     const id=`jelly${++serial}`,ref=k=>`url(#${id}${k})`;
@@ -3120,6 +3653,358 @@ function courtyard(id) {
 })();
 
 ;
+// Original class outfits, relic illustrations and trial chambers for the offline gallery.
+const RpgArt = (function crystalGallery() {
+  let serial=0;
+  const svg=(box,classes,body,fit='xMidYMid meet')=>`<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" viewBox="${box}" preserveAspectRatio="${fit}" aria-hidden="true" focusable="false">${body}</svg>`;
+  const path=(d,fill,attrs='')=>`<path d="${d}" fill="${fill}" ${attrs}/>`;
+  const line=(d,stroke,width=1,alpha=1)=>path(d,'none',`stroke="${stroke}" stroke-width="${width}" stroke-opacity="${alpha}" stroke-linecap="round" stroke-linejoin="round"`);
+  const dot=(x,y,r,color,alpha=1)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${color}" opacity="${alpha}"/>`;
+  const oval=(x,y,rx,ry,fill,attrs='')=>`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${fill}" ${attrs}/>`;
+  const rect=(x,y,w,h,color)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${color}"/>`;
+  const at=(x,y,s,body,angle=0)=>`<g transform="translate(${x} ${y}) rotate(${angle}) scale(${s})">${body}</g>`;
+  const many=(n,draw)=>Array.from({length:n},(_,i)=>draw(i)).join('');
+  const paint=id=>`url(#${id})`;
+  const grad=(id,a,b,c)=>`<linearGradient id="${id}" x2=".73" y2="1"><stop stop-color="${a}"/><stop offset=".45" stop-color="${b}"/><stop offset="1" stop-color="${c}"/></linearGradient>`;
+  const aura=(id,color)=>`<radialGradient id="${id}"><stop stop-color="${color}" stop-opacity=".55"/><stop offset=".38" stop-color="${color}" stop-opacity=".21"/><stop offset="1" stop-color="${color}" stop-opacity="0"/></radialGradient>`;
+  const rim=(color='#333f47',w=1.6)=>`stroke="${color}" stroke-width="${w}" stroke-linejoin="round"`;
+  const gold='#d6b577', glint='#f9eaca';
+  const themes={
+    words:{night:'#173b3d',sky:'#4d8878',wall:'#4d675f',face:'#779681',shadow:'#274646',base:'#253b3b',stone:'#75877a',rim:'#b5be93',light:'#a3e6ba',gem:'#6eb69e',darkGem:'#38867d'},
+    sentences:{night:'#25324f',sky:'#577b92',wall:'#526374',face:'#89929a',shadow:'#35445d',base:'#29364e',stone:'#758191',rim:'#c2beae',light:'#a9d9ec',gem:'#77b7ce',darkGem:'#487eaa'},
+    echoes:{night:'#332d50',sky:'#78698d',wall:'#685f79',face:'#9e8e99',shadow:'#443c59',base:'#363348',stone:'#878292',rim:'#d2bfbd',light:'#e5c3ef',gem:'#b19acb',darkGem:'#7d6aab'}
+  };
+  function gem(x,y,s,tilt,shade){
+    return at(x,y,s,`${path('M0 0l-9 -12 2 -26 9 -17 10 19 -1 24 -7 12Z',shade.gem,rim(shade.light,.95))}
+      ${path('M2 -55l-1 23 -8 -6Z',shade.light)}${path('M1 -32l11 -4 -1 24 -7 12 -4 -14Z',shade.darkGem)}
+      ${line('M2 -54l-1 22 -1 18 4 14 M1 -32l10 -4 M-8 -14l8 5 10 -6',shade.light,.9,.9)}`,tilt);
+  }
+  function blade(type) {
+    const crystal=type==='crystal', rune=type==='rune';
+    const silver=crystal?'#9be3da':rune?'#bbc8de':'#d9e0d1';
+    const edge=crystal?'#52a6aa':rune?'#7284aa':'#85989c';
+    const tip=crystal?-43:rune?-49:-47,wide=crystal?7:4.5;
+    return `<g>${path(`M-3 0l${-wide+3} -7 ${wide*.38} ${tip+13} L0 ${tip-8}l${wide} 12 -.5 ${-tip-15} -3 10Z`,silver,rim('#5e707a',1.1))}
+      ${path(`M0 ${tip-7}l${wide} 12 -.5 ${-tip-15} -3 10 -2 -3Z`,edge)}
+      ${line(`M-2 -7L0 ${tip+2}`,glint,1)}
+      ${rune?line('M-1 -35l2 3 -3 3 2 3 M-2 -22l3 2 -3 3','#bff0e5',1.5):''}
+      ${crystal?line('M-4 -22l5 4 3 -4 M-5 -10l6 3 3 -4','#e2f9e9',1.2):''}
+      ${path('M-11 -6l6 4 4 -2 3 0 4 3 7 -5 -3 8 -7 1 -3 -3 -4 3 -5 -1Z',gold,rim('#745f45',1.1))}
+      ${path('M-2 2l5 0 -1 14 -4 0Z','#69544a',rim('#635342',1))}
+      ${line('M-2 5l4 1 M-2 9l4 1 M-2 13l4 1','#bc9d73',1)}
+      ${path('M-4 16l4 -2 4 3 -4 5Z',rune?'#8ebcbd':crystal?'#7cbeb4':gold,rim('#756c52',1))}</g>`;
+  }
+  function classPaint(id,palette) {
+    return `<defs>${grad(id+'cloth',...palette.cloth)}${grad(id+'metal',...palette.metal)}${aura(id+'halo',palette.light)}</defs>`;
+  }
+  function vanguard(id) {
+    return {
+      cape:path('M81 83q-24 2 -31 29l-8 32q-11 37 -33 51 17 4 30 -4l-8 15q38 -7 56 -40l18 -55Z',paint(id+'cloth'),rim('#334d63',2))+
+        line('M14 193q30 -3 49 -51 M38 200q25 -19 33 -44','#c3a56c',2),
+      armor:path('M76 91q13 -2 19 5l19 -7 13 15 -14 22 -16 11 -23 -15 -5 -17Z',paint(id+'metal'),rim('#4f6574',2))+
+        path('M76 100l19 10 25 -13 -6 12 -19 13 -18 -9Z','#9eafa9')+
+        line('M77 101l18 10 23 -11 M76 117l20 13 17 -10','#e6c98c',2)+
+        path('M93 103l4 -5 5 4 -5 8Z','#81b7cf',rim('#e4ca93',1.2))+
+        path('M74 147l39 -2 5 25 -11 12 -9 -7 -6 4 -8 -10 -10 2Z',paint(id+'metal'),rim('#5c717b',1.7))+
+        path('M88 149l14 -1 0 42 -9 8 -8 -10Z','#436a86',rim('#c4aa73',1.2))+
+        line('M91 158v22l3 5 4 -5v-23','#d1b576',1.1),
+      offhand:path('M54 110l22 8 -4 25 -24 32 -18 -19 3 -30Z','#4d6e86',rim('#e1c68f',3))+
+        path('M53 116l18 5 -5 23 -16 22 -15 -12 3 -25Z',paint(id+'metal'),rim('#6b7c80',1.5))+
+        path('M53 122l10 5 -2 14 -12 17 -9 -8 2 -17Z','#436882')+
+        path('M53 126l2 9 6 2 -6 2 -6 10 1 -10 -5 -3 5 -2Z','#edcd88'),
+      head:path('M81 51q-2 -22 13 -32l12 -6 23 14 8 15 -8 0q-11 -10 -22 -9l-12 6 -6 20Z',paint(id+'metal'),rim('#4b6069',1.8))+
+        path('M85 43q21 -21 47 -8l7 8 -10 -2 -13 -5 -18 10 -7 17 -6 -6Z','#bdc7bc',rim('#726c58',1.2))+
+        path('M94 24l10 -16 13 -5 -6 12 14 -5 -7 9 -14 4Z','#6592a7')+
+        line('M87 43q15 -15 33 -12','#e8cd8a',2),
+      weapon:at(170,102,1.52,blade('rune'),26)+line('M179 84l27 -58','#d6f7f1',1.6)
+    };
+  }
+  function arcanist(id) {
+    return {
+      cape:path('M81 83q-24 1 -27 29l-8 31q-6 37 -30 58 13 5 28 -3l-4 16q31 -12 41 -34l22 -66Z',paint(id+'cloth'),rim('#433b60',2))+
+        line('M20 199q27 -8 41 -46 M45 205l13 -20','#bfac82',1.8),
+      armor:path('M76 89l16 -8 15 7 10 -6 11 14 -8 28 -9 17 8 27 24 50 -13 7 -20 -6 -8 15 -18 -10 -19 3 -14 -10 21 -60 5 -29 -9 -15Z',paint(id+'cloth'),rim('#38334f',2.2))+
+        path('M90 86l10 13 13 -14 4 3 -15 20 -13 23 -4 -8 10 -23 -10 -11Z','#c0b18d')+
+        path('M80 128l31 -4 2 10 -35 6Z','#857795',rim('#c3ad7d',1.3))+
+        path('M93 137l12 -2 -7 41 7 37 -7 13 -9 -9 -6 -45Z','#697293',rim('#bca77b',1.2))+
+        line('M77 150l-15 60 7 8 M109 149l15 59 9 10 M92 153l6 -6 1 7 -5 7 -4 -4 M90 182l6 -5 4 10 -5 7 -3 -5','#c8b58b',1.3),
+      offhand:path('M50 129l16 4 -3 15 -7 7 -9 -4Z','#6b6587',rim('#c5ae82',1.2))+
+        dot(53,145,10,paint(id+'halo'))+dot(53,145,3,'#ddd7f6'),
+      head:path('M79 49q-3 -17 10 -28l18 -17 11 -2 2 13 9 11 11 13 -7 8 -7 -9 -15 -7 -14 8 -5 14 -6 9 -7 -5Z',paint(id+'cloth'),rim('#49405a',1.8))+
+        line('M83 56q5 -24 27 -29l17 7 8 10','#c8b58a',1.7)+
+        path('M108 23l4 -10 4 6 -2 7Z','#d3c299'),
+      weapon:at(166,117,1,`${path('M-3 80l-1 -148 4 -12 4 11 0 146Z','#8c7664',rim('#564e4c',1.5))}
+        ${line('M0 68l0 -123','#d9be8d',1.2)}
+        ${path('M-1 -57q-18 -12 -12 -28l2 -9 3 15 9 10 8 -12 2 -11 5 13 -8 19Z','#c0aca1',rim('#756a75',1.6))}
+        <g class="staff-crystal">${dot(1,-87,21,paint(id+'halo'))}${path('M-8 -85l7 -18 9 15 -2 13 -6 5Z','#b9a4df',rim('#eee1bb',1.5))}${path('M-1 -103l0 21 7 7 2 -13Z','#786fba')}</g>
+        ${line('M-3 -45l6 2 M-3 -40l6 2 M-3 31l6 2','#d1b37a',2)}`,20)
+    };
+  }
+  function pathfinder(id) {
+    return {
+      cape:path('M74 83q-22 5 -26 24l-10 26 -25 23 13 2 -8 9 12 1 -4 10 20 -5 1 6 18 -12 13 -30Z',paint(id+'cloth'),rim('#314d49',2))+
+        path('M37 148l-8 12 10 -3 2 5 14 -11 5 -12Z','#7c9a75')+
+        at(60,114,1,`${path('M-7 22l7 -39 14 4 -8 43Z','#785841',rim('#4e4f41',1.5))}
+        ${many(3,i=>line(`M${i*4} -10l${6+i*2} -37 M${7+i*5} -40l-2 -7 -4 4`,'#a6a67a',1.8))}`,-19),
+      armor:path('M76 90l16 -7 15 8 10 -6 9 10 -8 26 -9 20 -33 3 -4 -23 -5 -17Z',paint(id+'metal'),rim('#465747',2))+
+        path('M73 89q14 -12 24 -7l12 5 13 -3 -6 12 -18 5 -11 -4 -10 6 -13 -1Z',paint(id+'cloth'),rim('#54634f',1.5))+
+        path('M78 103l8 -3 24 43 -8 2Z','#8d694c',rim('#5a503b',1.1))+
+        path('M78 142l32 -3 4 8 -36 7Z','#976e4d',rim('#65503d',1.4))+
+        path('M92 142l9 -1 1 8 -8 2Z','#d3b880')+
+        path('M74 151l14 -1 -8 30 -9 4 -5 -7Z',paint(id+'cloth'),rim('#777d5c',1.1))+
+        path('M111 149l9 9 -7 13 -12 -5 2 -12Z','#947457',rim('#584c3f',1.4)),
+      offhand:path('M53 126l15 5 -4 18 -13 -1Z','#725b48',rim('#879076',1.4))+
+        line('M54 131l11 9 M53 138l10 6','#b49f75',1.5),
+      head:path('M80 56q-1 -26 10 -36 16 -15 33 -8l12 19 7 7 -10 4 -7 -10 -10 -2 -14 8 -5 17 -9 12Z',paint(id+'cloth'),rim('#39554f',2))+
+        path('M88 49q9 -20 26 -22l15 4 8 7 -13 -4 -9 -4 -18 12 -8 17Z','#9ba882')+
+        path('M94 25q-17 -10 -23 -23 14 2 22 10l-4 -9q10 8 11 18Z','#bbad76',rim('#788066',1.1)),
+      weapon:at(169,105,1.07,`${path('M-3 -1l-4 -14 4 -25 15 -17 -6 22 0 16 -5 14Z','#d3dbbc',rim('#667d71',1.3))}
+        ${path('M12 -57l-9 28 -3 24 4 -4 2 -14v-16Z','#879e90')}${path('M-9 -4l8 2 7 -2 4 -8 2 4 -3 10 -10 3 -10 -5Z','#c7ad74',rim('#756749',1.1))}
+        ${path('M-3 2h5l-1 18 -4 1Z','#705844')}${line('M-2 6l4 2 M-2 12l3 2','#c0a576',1.4)}`,35)
+    };
+  }
+  const outfits={
+    vanguard:{cloth:['#7fa9b4','#416e8c','#284654'],metal:['#ebe5c9','#aac0c1','#667b89'],light:'#a2d8ee',make:vanguard},
+    arcanist:{cloth:['#a091b5','#615b82','#33374f'],metal:['#bdb7c7','#878caa','#4b526f'],light:'#cdc1ff',make:arcanist},
+    pathfinder:{cloth:['#a3b695','#658469','#375854'],metal:['#aa9d79','#748467','#516154'],light:'#c7dda2',make:pathfinder}
+  };
+  function hero(classId) {
+    if (!Object.hasOwn(outfits,classId)) return Art.hero();
+    const id=`outfit${++serial}`, palette=outfits[classId];
+    return Art.hero({...palette.make(id), id:classId, defs:classPaint(id,palette),
+      aura:`<g class="class-orbit">${dot(101,102,91,paint(id+'halo'),.44)}
+        ${many(6,i=>path(`M${[40,55,141,170,62,153][i]} ${[69,36,21,79,201,173][i]}l2 4 4 1 -4 2 -2 4 -1 -4 -3 -2 3 -1Z`,palette.light,`opacity="${.28+i*.055}"`))}</g>`});
+  }
+  function cuirass(id,heavy) {
+    const material=heavy?paint(id+'steel'):paint(id+'hide');
+    return `${path('M21 24l12 -11 11 7 10 0 12 -8 14 14 -10 14 -3 17 5 15 -18 13 -25 -5 -6 -12 4 -23Z',material,rim())}
+      ${path('M32 15q13 14 32 -1l3 8 -17 12 -16 -7Z',heavy?'#89999d':'#815e49')}
+      ${path('M27 30l20 13 24 -14 -7 17 -17 10 -16 -8Z',heavy?'#afbbb4':'#a28460')}
+      ${line('M29 30l18 12 23 -14 M33 48l15 7 15 -8 M33 60l14 6 17 -7',heavy?gold:'#c09c72',2)}
+      ${path('M23 61l44 -4 2 9 -43 6Z','#755d49',rim('#4d473d',1.2))}
+      ${path('M43 60l10 -1 1 9 -11 1Z',gold,rim('#806b4e',1.2))}
+      ${heavy?path('M22 19l9 -9 9 5 -7 11 -15 9 -7 -6Z',material,rim())+path('M62 15l7 -8 13 5 7 14 -6 6 -17 -9Z',material,rim()):line('M31 23l6 3 -5 8 M66 24l-5 3 5 6 M33 74l8 -1 M58 72l7 -1','#ccb187',2)}`;
+  }
+  function robe(id) {
+    return `${path('M36 15l10 -8 12 4 8 8 10 10 10 24 -14 7 -8 -16 2 18 11 22 -27 7 -12 -8 -18 3 8 -27 2 -14 -8 11 -12 -7 13 -27Z',paint(id+'violet'),rim('#4b465c',2))}
+      ${path('M35 19l10 9 16 -12 3 5 -19 22 -5 13 -8 -6 8 -15 -9 -11Z','#b0aab2')}
+      ${line('M14 49l10 6 M76 54l8 -4 M28 80l10 -3 12 8 19 -5 M49 56l-4 16 5 7 4 -7 -2 -12',gold,2)}
+      ${path('M35 48l25 -5 2 7 -28 7Z','#998b9d',rim('#b8a27d',1.2))}${dot(48,48,3.2,'#d4c8e4')}`;
+  }
+  function necklace(id,name) {
+    const epic=name==='echoSigil',scholar=name==='scholarAmulet',leaf=name==='forestCharm';
+    const chain=epic?'#e8cba6':gold;
+    let pendant;
+    if (leaf) pendant=path('M45 78q-14 -16 -9 -29 6 -10 24 -9 -4 26 -15 38Z','#8eae80',rim('#c1b782',2))+line('M45 74l10 -28 M48 67l-7 -10 M51 60l7 -7','#d9d6a4',1.5);
+    else if (scholar) pendant=path('M26 44q10 -5 20 0 12 -8 24 -5l1 26q-11 -2 -23 7 -10 -6 -21 -3Z','#b59b73',rim('#66594c',2))+path('M30 44q8 -3 17 2v21q-10 -6 -18 -3Z','#e1d7b4')+path('M49 46q11 -7 17 -5l1 20q-9 0 -17 6Z','#c7b990')+line('M33 50l10 2 M54 51l8 -4 M54 56l9 -4','#928368',1.2);
+    else if (epic) pendant=`${dot(48,59,24,paint(id+'glow'))}${oval(48,57,18,22,'none','stroke="#bdb0d1" stroke-width="2.5"')}${path('M47 33l6 14 15 8 -12 9 -9 16 -8 -17 -13 -8 15 -9Z','#a493bf',rim('#e9cda1',2))}${path('M48 45l9 11 -10 12 -8 -12Z','#e2d8ed',rim('#b99885',1.4))}${line('M44 56l3 -6 4 5 -4 6','#9385aa',1.7)}`;
+    else pendant=gem(48,77,.72,-5,themes.sentences);
+    return `${line('M20 11q-8 13 5 25l19 13 M76 11q7 14 -6 25L53 48',chain,2.8)}${line('M20 13q-3 13 7 20 M73 15q2 9 -5 14','#e7dfb4',1.2)}
+      ${pendant}${oval(48,42,3.5,4.4,'none',`stroke="${chain}" stroke-width="2"`)}`;
+  }
+  function gear(name) {
+    const id=`item${++serial}`;
+    const defs=`<defs>${grad(id+'steel','#eee5c9','#abbabc','#627987')}${grad(id+'hide','#c29e76','#987052','#695549')}${grad(id+'violet','#ac9fb6','#746f92','#444b65')}${aura(id+'glow','#d8c2eb')}</defs>`;
+    const blades={travelerSword:'plain',crystalBlade:'crystal',runicSword:'rune'};
+    let body;
+    if (Object.hasOwn(blades,name)) body=at(35,63,1.15,blade(blades[name]),35);
+    else if (name==='guardianArmor'||name==='leatherArmor') body=cuirass(id,name==='guardianArmor');
+    else if (name==='enchantedRobe') body=robe(id);
+    else body=necklace(id,name);
+    return svg('0 0 96 94','gear-art gear-'+name,defs+body);
+  }
+  const shapeText=(x,y,text,color,size=13)=>`<text x="${x}" y="${y}" fill="${color}" text-anchor="middle" font-family="Georgia,serif" font-size="${size}" letter-spacing="1">${text}</text>`;
+  function slab(x,y,s,t,rune='diamond'){
+    const glyphs={diamond:'M-7 -78l9 -11 8 10 -8 12Z M1 -66v10',fork:'M-8 -74l7 9 10 -14 M-1 -65v14',branch:'M-3 -84v29 M-3 -73l10 -10 M-3 -63l-7 -5'};
+    return at(x,y,s,`${path('M-22 0l4 -105 11 -18 21 2 11 21 3 99Z',t.wall,rim(t.shadow,2))}
+      ${path('M-17 -105l11 -17 15 1 -11 14 -8 102 -10 5Z',t.face)}
+      ${path('M8 -111l8 -6 9 19 3 93 -13 -6Z',t.shadow)}
+      ${line(glyphs[rune],t.light,2.3,.85)}${line('M6 -45l-5 9 6 5 -2 14',t.shadow,1.5)}
+      ${path('M-31 1l9 -9 14 2 12 -5 23 7 11 7 -30 3Z',t.stone)}`);
+  }
+  function floor(id,t){
+    return `${path('M0 359Q310 344 597 353t603 -4v211H0Z',paint(id+'floor'))}
+      ${many(7,i=>line(`M${-165+i*226} 560l${(3-i)*144} -206`,t.rim,1.8,.21))}
+      ${many(4,i=>line(`M0 ${380+i*47}q584 ${18+i*4} 1200 -7`,t.rim,1.6,.19))}
+      ${oval(606,436,274,40,'none',`stroke="${t.light}" stroke-width="1.5" opacity=".57"`)}
+      ${oval(606,436,259,35,'none',`stroke="${t.rim}" stroke-dasharray="4 10" opacity=".57"`)}
+      ${path('M401 436l204 -29 205 29 -205 30Z','none',`stroke="${t.light}" opacity=".31"`)}`;
+  }
+  function runeWheel(x,y,r,t) {
+    return at(x,y,r/100,`${oval(0,0,99,99,'none',`stroke="${t.rim}" stroke-width="2" opacity=".68"`)}
+      ${oval(0,0,90,90,'none',`stroke="${t.light}" stroke-dasharray="2 8" stroke-width="2" opacity=".8"`)}
+      ${many(12,i=>`<g transform="rotate(${i*30})">${path('M0 -102l3 5 -3 5 -3 -5Z',i%3===0?t.light:t.rim)}</g>`)}
+      ${line('M-87 0H87 M0 -87V87 M-61 -61l122 122 M-61 61L61 -61',t.rim,1,.22)}`);
+  }
+  function wordsChamber(id,t) {
+    const bough=(x,flip)=>`<g transform="translate(${x} 0) scale(${flip} 1)">
+      ${path('M-18 0h144q-5 38 -26 67 40 -28 72 -27l43 -30 40 -10h42l-48 24 -49 44 -61 17 -40 39q-27 60 -11 129l24 46 36 23 -30 1 -24 -12 9 31 -30 -11 -18 -28 -13 22 -32 8 12 -25 -36 10 -6 -28 20 -30 14 -56 -2 -66Z',t.shadow)}
+      ${path('M60 286q21 -56 5 -123 -14 -48 8 -93l16 -24 -5 29q-21 30 -4 69 5 -29 27 -45 39 -35 82 -48l33 -21 -25 30 -56 23 -33 30 -19 43 8 95 17 37 -30 -21 -4 -40Z',t.wall)}
+      ${line('M94 294q-23 -41 -17 -96 M55 183l-2 -38 9 -29 M119 99l44 -31',t.face,2.2,.65)}
+      ${many(8,i=>at(112+i*18,55-(i%4)*8,.73,`${path('M0 0q-9 -9 -25 -6 8 11 24 9 -13 6 -11 18 12 -4 15 -18Z','#698976')}`))}
+    </g>`;
+    const arch=path('M345 346V228q24 -109 119 -148l37 -39 87 -31 91 25 47 42q113 27 143 141v127h-61v-88q-4 -111 -118 -164l-100 -37 -110 46q-89 46 -92 149v95Z',paint(id+'wall'),rim(t.shadow,4))+
+      path('M393 346V245q5 -107 102 -152l95 -39 110 41q93 45 101 150v99h-14v-98q-8 -98 -95 -138L591 69l-91 40q-88 38 -93 138v99Z',t.face)+
+      many(10,i=>{const side=i<5?-1:1,k=(i%5+1)/6;return line(`M${590+side*(186-137*k*k)} ${236-144*k}l${side*25} -13`,t.shadow,3,.7);});
+    return `${rect(0,0,1200,560,paint(id+'sky'))}
+      ${dot(598,182,240,paint(id+'halo'))}${runeWheel(590,183,92,t)}
+      ${gem(593,238,1.82,1,t)}${arch}
+      ${slab(280,353,1.18,t,'fork')}${slab(910,351,1.32,t,'branch')}${slab(421,353,.67,t)}${slab(773,351,.71,t,'branch')}
+      ${path('M487 332h200l24 10H463Z M461 346h251l42 15H427Z',t.face,rim(t.shadow,1.8))}
+      ${floor(id,t)}${bough(0,1)}${bough(1200,-1)}
+      ${gem(153,379,2.17,-13,t)}${gem(180,380,1.43,14,t)}${gem(127,384,1.08,-30,t)}
+      ${gem(1007,370,2.04,15,t)}${gem(978,373,1.18,-8,t)}${gem(1031,373,1.23,24,t)}
+      ${[['oak',451,164],['dew',736,151],['leaf',500,262]].map(([word,x,y],i)=>gFloatingTablet(x,y,.85,i,t,word)).join('')}
+      ${path('M287 0h33l277 327 -61 15Z M360 0h13l201 203Z M898 0h32L726 284l-50 26Z',t.light,'opacity=".065"')}`;
+  }
+  function gFloatingTablet(x,y,s,i,t,word){
+    return at(x,y,s,`<g class="trial-float" style="--lag:-${i*.8}s">${path('M-23 -14l38 -3 8 7 -4 18 -35 5 -10 -7Z',t.wall,rim(t.rim,1.2))}${shapeText(0,3,word,t.light,12)}</g>`,i%2?9:-7);
+  }
+  function book(x,y,s,angle,t){
+    return at(x,y,s,`${path('M-25 -8q12 -4 25 1 12 -8 27 -5l2 23q-18 -2 -28 5 -13 -6 -26 -2Z','#7c7365',rim(t.shadow,1.7))}
+      ${path('M-22 -11q11 -4 22 3v20q-11 -6 -22 -4Z','#e0d8b5')}${path('M1 -8q12 -8 22 -6l1 21q-13 -1 -23 6Z','#b9b695')}
+      ${line('M-17 -5l12 3 M-17 0l10 3 M5 -4l14 -4 M5 2l12 -3','#8b8e80',1.4)}`,angle);
+  }
+  function sentenceChamber(id,t){
+    const libraryWing=(x,flip)=>`<g transform="translate(${x} 0) scale(${flip} 1)">
+      ${path('M0 0h363l50 26 -15 285 -27 46L0 390Z',paint(id+'wall'),rim(t.shadow,3))}
+      ${[0,1,2].map(bay=>{const x=25+bay*126;return at(x,0,.98,`${path('M0 317V90q2 -38 51 -65 50 21 51 61v202Z',t.shadow,rim(t.face,3))}
+        ${[0,1,2,3].map(row=>{const y=126+row*46;return `<g>${many(8,i=>{const bx=i*10+11,ht=14+(i*13+row*11+bay*3)%22;return `${path(`M${bx} ${y}l-1 -${ht} 6 -2 2 ${ht}Z`,['#7f8989','#a98d76','#899ca2','#829486'][i%4])}${line(`M${bx} ${y-7}l5 -1`,t.rim,1,.65)}`;})}${line(`M4 ${y+1}l92 -6`,t.face,4)}</g>`;}).join('')}
+        ${path('M-4 321l3 -235 6 -19 2 248 8 8Z',t.face)}`);}).join('')}
+      ${line('M0 337l376 -33 M0 350l382 -33',t.rim,2,.55)}
+      ${path('M0 0h414l-14 24 -39 24 -47 -6 -37 -16L0 46Z',t.shadow)}
+    </g>`;
+    const ladder=at(195,343,.98,`${line('M-18 0l37 -168 M-1 -1l37 -169','#b6a38a',4)}
+      ${many(8,i=>line(`M${-14+i*4.3} ${-13-i*20}l16 -1`,'#c4b79a',2.4))}`);
+    return `${rect(0,0,1200,560,paint(id+'sky'))}${dot(600,135,221,paint(id+'halo'))}
+      ${path('M397 306V130q2 -62 60 -101 63 38 67 101v176Z M677 307V126q6 -67 63 -99 63 36 73 98v179Z',t.wall,'opacity=".73"')}
+      ${path('M421 297V137q-1 -45 38 -80 36 34 39 81v159Z M701 294V126q7 -43 38 -69 46 32 46 71v166Z',t.sky)}
+      ${libraryWing(0,1)}${libraryWing(1200,-1)}${ladder}${runeWheel(606,167,76,t)}
+      <g class="trial-float">${book(608,173,2,-4,t)}</g>
+      ${book(817,112,1.02,18,t)}${book(430,235,.92,-18,t)}
+      ${gFloatingTablet(500,149,.7,1,t,'May')}${gFloatingTablet(703,213,.75,2,t,'I')}${gFloatingTablet(748,162,.7,3,t,'read')}
+      ${path('M479 342l25 -16 46 -9 10 -38h91l12 35 52 13 16 16Z',t.stone,rim(t.shadow,2))}${book(606,276,1.83,0,t)}
+      ${floor(id,t)}${gem(127,371,1.64,-13,t)}${gem(150,375,.95,10,t)}${gem(1037,367,1.63,11,t)}
+      ${line('M381 -4q20 54 76 105 M818 -5q-25 53 -72 94',t.rim,1.7,.7)}
+      ${dot(459,108,24,paint(id+'halo'))}${dot(745,100,24,paint(id+'halo'))}
+      ${path('M452 102l7 -7 7 7 -5 13 -6 -1Z M739 93l7 -7 6 7 -5 13 -5 -1Z',t.light)}
+      ${path('M0 513l121 -30 88 17 82 60H0Z M1200 473l-96 13 -72 52 -49 22h217Z',t.shadow)}`;
+  }
+  function echoChamber(id,t){
+    const pipe=(x,y,s)=>at(x,y,s,`${path('M-15 0l-4 -144 7 -24 18 -6 12 13 -6 149Z',paint(id+'wall'),rim(t.shadow,2))}
+      ${oval(-1,-157,13,9,t.shadow,`stroke="${t.rim}" stroke-width="2"`)}
+      ${line('M-10 -143v122 M4 -143L-1 -20 M-14 -36l28 -3',t.rim,1.7,.7)}`);
+    const bell=(x,y,s)=>at(x,y,s,`${line('M0 -90v64',t.rim,2)}
+      <g class="echo-bell">${path('M-20 6q8 -11 9 -22 1 -10 11 -16 12 6 14 18l6 17 6 5 -46 4Z','#a39a8b',rim(t.shadow,2))}
+      ${line('M-17 6l36 -4 M-4 -22l7 -2','#e1cc9f',1.8)}${dot(2,10,4.4,gold)}</g>`);
+    const fork=(x,y,s,flip)=>`<g transform="translate(${x} ${y}) scale(${flip*s} ${s})">
+      ${path('M-30 0l10 -12 10 -7v-68q-28 -17 -31 -46l-6 -76 12 -38 5 116q3 14 20 22l15 -6q14 -10 17 -26l9 -107 10 30 -3 81q-3 30 -29 49l-1 69 9 8 10 5Z',paint(id+'wall'),rim(t.shadow,3))}
+      ${line('M-39 -212l4 81q5 24 32 32 29 -9 34 -37l5 -77 M-4 -92v70',t.rim,2.2)}
+      ${gem(0,-112,.85,1,t)}${path('M-37 1h75l10 8h-93Z',t.stone)}</g>`;
+    return `${rect(0,0,1200,560,paint(id+'sky'))}
+      ${many(37,i=>dot((i*179+31)%1190,30+(i*67)%227,i%5?1.2:2.2,t.light,.5))}
+      ${path('M0 0h1200v28l-118 12 -50 46 -113 -14 -54 39 -51 -35 -63 1 -37 -31 -81 12 -50 -23 -67 35 -90 -7 -57 62 -74 -28 -52 44 -48 -20 -99 30 -66 -21Z',t.shadow)}
+      ${many(9,i=>pipe(85+i*32,337,.67+(i%4)*.2))}${many(9,i=>pipe(838+i*32,332,.7+((i+1)%4)*.19))}
+      ${dot(599,183,209,paint(id+'halo'))}
+      <g class="echo-resonance">${oval(605,181,125,79,'none',`stroke="${t.rim}" stroke-width="2.1" opacity=".59" transform="rotate(-12 605 181)"`)}
+      ${oval(605,181,104,65,'none',`stroke="${t.light}" stroke-dasharray="2 7" opacity=".7" transform="rotate(-12 605 181)"`)}
+      ${oval(605,181,81,51,'none',`stroke="${t.rim}" stroke-width="1.4" opacity=".57" transform="rotate(-12 605 181)"`)}</g>
+      ${bell(606,178,1.64)}${bell(488,124,1.02)}${bell(736,119,.91)}
+      ${path('M0 325q166 -23 353 1t351 -8q257 -24 496 -1v88H0Z',t.gem,'opacity=".72"')}
+      ${many(21,i=>line(`M${(i*127)%1150} ${335+(i*13)%33}q23 -2 47 -1`,t.light,1.3,.45))}
+      ${floor(id,t)}${fork(348,350,1.19,1)}${fork(860,344,1.12,-1)}
+      ${gem(172,376,2.23,-24,t)}${gem(197,383,1.64,6,t)}${gem(1047,373,2.16,15,t)}${gem(1022,376,1.43,-7,t)}
+      ${path('M-10 334q147 -22 307 -4t315 -3q195 -22 361 -2 109 15 240 0 -87 30 -252 15t-347 4q-175 12 -318 -1t-303 7Z',t.light,'class="echo-haze" opacity=".17"')}`;
+  }
+  function room(dungeonId,fit='xMidYMid slice') {
+    const id=`trial${++serial}`, t=themes[dungeonId]||themes.words;
+    const defs=`<defs>${grad(id+'sky',t.night,t.sky,t.shadow)}${grad(id+'floor',t.stone,t.wall,t.base)}${grad(id+'wall',t.face,t.wall,t.shadow)}${aura(id+'halo',t.light)}</defs>`;
+    const draw=({words:wordsChamber,sentences:sentenceChamber,echoes:echoChamber})[dungeonId]||wordsChamber;
+    const motes=many(18,i=>`<g class="trial-mote" style="--lag:-${i%7}s">${dot(135+(i*151)%951,89+(i*73)%282,i%4?1.6:2.5,t.light,.75)}</g>`);
+    return svg('0 0 1200 560','trial-room-art trial-room-'+dungeonId,defs+draw(id,t)+motes,fit);
+  }
+  function greenStag(id,t){
+    const horn=(x,y,s,tilt)=>at(x,y,s,`${path('M-3 2q7 -15 4 -36l-7 -21 2 -17 7 28 3 9 9 -16 3 -24 3 20 -7 29 17 -9 15 -18 -7 18 -22 17 -13 4 -3 17Z','#baae81',rim('#686d59',1.4))}
+      ${line('M2 -4l7 -21 11 -21 M9 -21l22 -13','#e3d795',1.1)}`,tilt);
+    const leg=(x,y,s,lean,near)=>at(x,y,s,`${path('M-7 -9l15 1 1 24 -10 24 1 18 -9 13 -7 0 4 -12 3 -22 5 -26Z',near?paint(id+'shell'):t.darkGem,rim(t.shadow,1.6))}
+      ${path('M-8 54l9 3 -4 10 -11 4 -2 -3Z',t.base)}${line('M3 1v12l-8 19',t.light,1.4,.7)}`,lean);
+    return `${oval(117,217,82,6,'#112c28','opacity=".4"')}
+      ${leg(111,150,.85,-5,false)}${leg(167,151,.87,-13,false)}
+      <g class="stag-spine">
+      ${path('M77 102q13 -6 34 4l36 10 24 -8 17 7 9 22 -11 20 -24 12 -40 -1 -24 -9 -18 -19 -15 -5Z',paint(id+'body'),rim(t.shadow,2.6))}
+      ${path('M94 111l29 0 22 11 29 -7 14 6 -13 15 -40 4 -22 -4Z','#84ad91')}${path('M132 142l37 -3 23 -12 -6 28 -21 12 -36 -3Z','#579588')}
+      ${path('M179 117l14 -10 13 1 -8 14 -12 6Z',t.gem,rim(t.shadow,1.4))}
+      ${path('M83 93l-7 24 11 28 20 13 12 -7 -10 -25 -11 -24Z',paint(id+'shell'),rim(t.shadow,2))}
+      ${path('M91 108l12 15 7 22 -11 -2 -10 -11Z','#bad7ab')}${line('M99 128l3 7 6 3',gold,1.5)}
+      ${leg(96,151,.96,12,true)}${leg(164,156,.9,5,true)}
+      <g class="stag-head">${horn(95,82,.78,17)}${horn(70,82,.82,-12)}
+      ${path('M60 80l-13 -17 6 -2 17 6 12 9 13 -8 17 -2 -9 16 -13 7 -6 20 -16 10 -12 -5 -13 1 -8 -6 11 -16Z',paint(id+'shell'),rim(t.shadow,2.1))}
+      ${path('M58 84l12 -9 14 6 -6 13 -12 6 -18 7 -5 -4 11 -12Z','#c3d6ac')}
+      ${path('M61 89l11 -4 7 1 -8 8 -10 1Z','#365f59')}${dot(69,89.5,2.4,'#e4f1bd')}
+      ${path('M39 103l9 -2 3 7 -8 4 -8 -4Z','#507d72')}
+      ${line('M84 84l8 -7 9 -3 M47 112l12 -3 M67 107l11 -5',gold,1.5)}
+      </g>
+      ${gem(124,118,.74,-12,t)}${gem(141,122,.63,11,t)}${gem(154,121,.44,17,t)}
+      ${path('M123 145l8 -8 10 8 -9 12Z','#a7d5ae',rim(gold,1.8))}${line('M131 140v11 M127 144l4 4 5 -5','#578a78',1.2)}</g>`;
+  }
+  function vellumOwl(id,t){
+    const wing=(x,y,flip)=>`<g transform="translate(${x} ${y}) scale(${flip} 1)"><g class="folio-wing">
+      ${path('M3 -1q-32 -24 -49 -59l-16 -12 -1 27 -12 -17 0 25 -10 -13 1 33 -9 -9 4 23 14 22 42 10Z','#929b9e',rim(t.shadow,2.3))}
+      ${path('M-8 2q-30 -14 -47 -51 0 26 19 48l-12 -6 16 16Z','#d8d7bd')}
+      ${path('M-40 -2l-19 -20 3 18 -13 -13 4 19 14 18 23 1Z','#b8bdae')}
+      ${line('M-11 4l-24 -14 M-15 11l-17 -8 M-50 -27l-5 -13 M-48 -2l-11 -13','#7e8889',1.4)}
+      ${path('M-5 5l-18 -1 -9 6 16 6 16 0Z',t.gem)}
+      </g></g>`;
+    return `${oval(110,210,69,5,'#20333e','opacity=".33"')}
+      <g class="owl-hover">${wing(97,109,1)}${wing(136,106,-1)}
+      ${path('M80 118q0 -36 36 -54 30 -4 39 33l-9 55 -18 34 -16 -8 -8 9 -26 -33Z',paint(id+'shell'),rim(t.shadow,2.4))}
+      ${path('M78 148q12 7 24 3l7 10 14 -11 16 -6 -9 26 -16 9 -19 -5Z','#b9bdaf')}
+      ${path('M81 166l8 5 11 0 -3 8 -18 3 -7 -4Z M119 173l8 -6 6 5 11 -5 -2 8 -15 8 -11 -3Z','#c4a77c',rim('#776d60',1.2))}
+      ${path('M82 121q13 -4 27 5 15 -14 33 -13l-4 39q-14 0 -27 10 -14 -9 -31 -9Z','#817f79',rim('#5c6570',2))}
+      ${path('M85 120q13 -2 23 7v28q-10 -8 -24 -7Z','#e0d9b6')}${path('M111 127q14 -12 27 -13l-4 32q-14 0 -23 9Z','#c9c6a7')}
+      ${line('M90 128l13 4 M90 135l13 5 M116 131l15 -7 M116 138l14 -6','#9a9a88',1.2)}
+      <g class="owl-head">${path('M65 71l-5 -33q22 2 40 19l17 -3 14 -12 25 -12 -2 28q14 13 10 31 -6 29 -44 38 -35 -2 -52 -22l-7 -17Z',paint(id+'body'),rim(t.shadow,2.4))}
+      ${path('M64 45l22 13 9 9 -21 -6Z M137 53l13 -15 -2 21 -13 6Z',t.light)}
+      ${path('M68 76q15 -15 37 -5l9 9q10 -22 32 -22l12 5 -3 22 -16 20 -24 11 -23 -3 -19 -17Z','#d3d0b6')}
+      ${oval(90,86,15,13,'#71848c')}${oval(135,78,15,13,'#748794')}${oval(91,86,10,9,t.base)}${oval(135,78,10,9,t.base)}
+      <g class="guardian-eyes">${dot(91,85,4.1,t.light)}${dot(134,77,4.1,t.light)}${dot(90,83,1.5,'#fff2cb')}${dot(133,75,1.5,'#fff2cb')}</g>
+      ${path('M103 92l10 -9 9 4 -8 16Z','#ccb17c',rim('#8b8165',1.4))}
+      ${line('M74 75q16 -12 32 0 M122 69q9 -11 25 -10 M87 103l8 4 9 -1 M130 99l8 -5',gold,1.7)}
+      ${path('M111 66l-5 -25 15 -20 13 -5 -3 16 -11 17 3 12Z',t.gem,rim(t.shadow,1.4))}${line('M114 58l13 -31',t.light,1.4)}</g></g>`;
+  }
+  function resonanceRay(id,t) {
+    const antenna=(x,y,flip)=>`<g transform="translate(${x} ${y}) scale(${flip} 1)">${line('M0 0q-13 -24 -8 -45t22 -33q-13 14 -9 24','#c4b49c',4)}
+      ${line('M-7 -40q-14 -20 -7 -37','#e1c795',1.8)}${dot(4,-50,4,t.light)}${dot(4,-50,10,paint(id+'halo'))}</g>`;
+    const fin=(x,y,flip)=>`<g transform="translate(${x} ${y}) scale(${flip} 1)"><g class="echo-fin">
+      ${path('M1 -3q-16 -37 -48 -53l-24 -22q0 36 15 59 -2 9 -19 2 18 27 40 29l-4 6q17 4 36 -10Z',paint(id+'shell'),rim(t.shadow,2))}
+      ${path('M-63 -65q10 27 27 42l26 15 -12 -20 -25 -21Z',t.light,'opacity=".65"')}
+      ${line('M-59 -50q15 35 43 47 M-47 -10q11 10 23 11',gold,1.4)}
+      </g></g>`;
+    return `${oval(110,211,70,6,paint(id+'halo'))}
+      <g class="ray-drift">${path('M120 142q-2 27 21 30 31 -1 27 18 -5 17 -37 12 39 1 30 -16 -5 -5 -23 -3 -29 2 -36 -29Z',t.darkGem,rim(t.gem,1.5))}
+      ${fin(81,121,1)}${fin(141,119,-1)}
+      ${antenna(95,87,1)}${antenna(133,86,-1)}
+      ${path('M74 124q-2 -35 22 -52l16 -13 12 6 12 15q23 15 22 43l-12 25 -29 18 -32 -18Z',paint(id+'body'),rim(t.darkGem,2.3))}
+      ${path('M76 115l23 -26 13 -18 11 4 22 27 6 13 -16 -4 -15 8 -10 10 -15 -9Z',paint(id+'shell'),rim(t.light,1.35))}
+      ${path('M88 119q10 -3 18 5l-2 6 -9 -1Z M125 115q8 -10 19 -9l-4 9 -10 6Z',t.shadow)}
+      ${line('M92 120l8 4 M131 115l7 -5',t.light,2.6)}
+      ${path('M108 133l7 -4 7 3 -6 5Z','#d6b9c9')}
+      ${path('M94 146l17 6 7 7 8 -9 15 -10 -8 17 -16 11 -18 -12Z',t.darkGem)}
+      ${line('M82 116q16 -19 28 -21l8 -14 16 16 M102 144l13 6 15 -9',gold,1.8)}
+      ${dot(116,96,17,paint(id+'halo'))}${path('M109 95l7 -11 7 9 -7 10Z',t.light,rim(gold,1.4))}
+      <g class="echo-resonance">${oval(115,148,68,17,'none',`stroke="${t.light}" stroke-width="1.8" stroke-dasharray="47 8 5 8 22 94" transform="rotate(-12 115 148)"`)}</g>
+      </g>`;
+  }
+  function guardian(dungeonId) {
+    const id=`trialGuardian${++serial}`, t=themes[dungeonId]||themes.words;
+    const defs=`<defs>${grad(id+'shell',t.light,t.gem,t.darkGem)}${grad(id+'body',t.face,t.gem,t.shadow)}${aura(id+'halo',t.light)}</defs>`;
+    const maker=({words:greenStag,sentences:vellumOwl,echoes:resonanceRay})[dungeonId]||greenStag;
+    return svg('0 0 226 225','trial-guardian-art guardian-'+dungeonId,defs+maker(id,t));
+  }
+  return Object.freeze({hero,gear,room,guardian});
+})();
+
+;
 // Scene controller. Only controls from the currently rendered scene may dispatch.
 const app = document.querySelector('#app');
 const pauseDialog = document.querySelector('#pause');
@@ -3149,6 +4034,7 @@ const stageCards = [forestLessons.slice(0,10), forestLessons.slice(8), forestLes
 const koreanExamples = {hello:'안녕, 친구야.',thanks:'고마워요, 로완.',apple:'나는 사과를 좋아해요.',water:'나는 물을 마셔요.',bread:'나는 빵을 먹어요.',book:'나는 책을 가지고 있어요.',sword:'나는 검을 가지고 있어요.',forest:'숲은 조용해요.',iam:'나는 학생이에요.',ihave:'나는 책을 가지고 있어요.',ilike:'나는 사과를 좋아해요.',iwant:'물을 좀 원해요.',ieat:'나는 빵을 먹어요.',idrink:'나는 물을 마셔요.'};
 const labels = {'New':'새 표현','Learning':'익히는 중','Review Needed':'복습 필요','Familiar':'익숙한 표현'};
 const paths = {
+  hero:'M6 21v-2a6 6 0 0 1 12 0v2ZM8 8a4 4 0 1 0 8 0 4 4 0 1 0-8 0Z',
   lock:'M6 10h12v11H6Zm3 0V7a3 3 0 0 1 6 0v3',
   crown:'m3 7 5 4 4-7 4 7 5-4-2 12H5Zm2 9h14',
   mic:'M9 6a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0Zm-3 5v1a6 6 0 0 0 12 0v-1m-6 7v4m-4 0h8',
@@ -3176,6 +4062,7 @@ function save(){
   game.hint = Engine.save(game.profile) ? '' : '이 브라우저에서 저장할 수 없어요. 창을 닫기 전까지는 계속 플레이할 수 있어요.';
 }
 function change(screen){
+  if(game.trial&&!['TRIAL_RUN','TRIAL_RESULTS','PAUSED'].includes(screen)){Trials.leave(game.profile);game.trial=null;}
   if(game.voice && !['VOICE_PRACTICE','QUESTION_ACTIVE','ANSWER_FEEDBACK','PAUSED'].includes(screen))discardVoice();
   if (game.screen === 'PAUSED') pauseDialog.close();
   AudioFX.stop(); game.screen=screen; render(); window.scrollTo(0,0);
@@ -3187,7 +4074,7 @@ function titleView(){
   const hasSave=game.profile.started;
   const begin=button('new',icon('sword')+' 게임 시작',{cl:hasSave?'':'primary'});
   const resume=button('continue','이어하기',{cl:hasSave?'primary':'',disabled:!hasSave});
-  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.4</div></section>';
+  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.5</div></section>';
 }
 function introView(){
   const item=saga[game.page];
@@ -3217,7 +4104,7 @@ function mapView(){
       '</strong><small>'+Engine.enemies[i].name+' · '+stateText[state]+'</small></span>'+icon(state==='locked'?'lock':'arrow'),
       {id:n,cl:'stage '+state,disabled:state==='locked'});
   }).join('');
-  return heading('CHAPTER I  /  FOREST ATLAS','속삭이는 숲')+
+  return rpgHubLinks()+heading('CHAPTER I  /  FOREST ATLAS','속삭이는 숲')+
     '<div class="map-grid"><section class="atlas panel"><div class="atlas-heading"><span class="eyebrow">THE WHISPERING FOREST</span><span>'+icon('crystal')+' '+p.completed.length+' / 3</span></div>'+
     '<div class="atlas-plate">'+Art.map()+pins+'</div><div class="atlas-caption" aria-live="polite"><div><small>'+stagesEN[selected-1]+'</small><strong>'+zones[selected-1]+'</strong></div><p>'+
     stageNotes[selected-1]+' '+(selected>p.unlocked?'앞 숲길을 완료하면 열립니다.':'')+'</p></div></section>'+
@@ -3244,7 +4131,7 @@ function battleRibbon() {
 function arena(){
   const b=game.battle,n=game.stage,foe=Engine.enemies[n-1];
   return '<div class="arena" data-stage="'+n+'" data-phase="'+b.bossPhase+'" data-intent="'+game.battleIntent+'" data-fx="'+game.effect+'">'+
-    (n>3?VillageArt.scene(b.training?'square':villageQuest(n).location,true):Art.forest(n))+'<div class="arena-shade"></div><div class="combatant hero">'+Art.hero()+'</div><div class="combatant enemy '+(n===3||n===6?'boss':'')+'">'+(n>3?VillageArt.enemy(n):Art.slime(n))+
+    (n>3?VillageArt.scene(b.training?'square':villageQuest(n).location,true):Art.forest(n))+'<div class="arena-shade"></div><div class="combatant hero">'+RpgArt.hero(game.profile.rpg.classId)+'</div><div class="combatant enemy '+(n===3||n===6?'boss':'')+'">'+(n>3?VillageArt.enemy(n):Art.slime(n))+
     '</div><div class="fx"></div><div class="arena-status">'+statBar('모험가 · Lv. '+game.battleLevel,b.hp,game.battleMaxHp)+statBar(foe.name,b.enemyHp,b.enemyMaxHp,true)+'</div></div>';
 }
 function abilitiesView(){
@@ -3333,7 +4220,7 @@ function rewardView(){
  return '<section class="center-card panel reward '+(r.levelUp?'level-up':'')+'"><div class="reward-crystal">'+icon('crystal')+'</div>'+
    heading(r.replay?'PRACTICE COMPLETE':'QUEST COMPLETE',zones[stage-1]+' 탐험 완료')+'<p>'+(r.replay?'복습 전투를 마쳤어요. 이번 답변을 학습 기록에 더했습니다.':story[stage-1])+'</p>'+
    (r.replay?'':'<div class="reward-tally"><strong>+'+r.xp+' XP</strong><strong>금화 +'+r.gold+'</strong></div>')+
-   (r.bonus?'<p>챕터 완주 보너스 '+r.bonus+' XP 포함</p>':'')+(r.levelUp?'<h3>레벨 상승 · Lv. '+game.profile.level+'</h3>':'')+
+   (r.bonus?'<p>챕터 완주 보너스 '+r.bonus+' XP 포함</p>':'')+(r.levelUp?'<h3>레벨 상승 · Lv. '+game.profile.level+' · 사용 가능 '+game.profile.rpg.availablePoints+' SP</h3>':'')+lootReveal(r.gearId)+
    (earned.length?'<p class="earned-names">'+icon('star')+' 획득 · '+earned.map(a=>safe(a.name)).join(' / ')+'</p>':'')+
    (!r.replay&&stage<3?'<p>새로 열린 길 · '+zones[stage]+'</p>':'')+button('onwards',stage===3?'로완에게 돌아가기':'지도 펼치기',{cl:'primary'})+'</section>';
 }
@@ -3346,7 +4233,7 @@ function bookView(){
  return '<article class="book-row"><div><strong lang="en">'+l.en+'</strong><small>'+l.ko+'</small></div><div>'+l.example+'<small>'+labels[Engine.status(r)]+' · 정답 '+(r?.correct||0)+' / 오답 '+(r?.wrong||0)+'</small></div>'+speakButton(l.en)+'</article>';
  }).join('')+'</section><div class="actions">'+button('map','지도')+button('review','오답 복습')+'</div>';
 }
-const screens={VOICE_HALL:hallView,VOICE_PRACTICE:voicePracticeView,TODAY:todayView,TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView,DASHBOARD:dashboardView,CHAPTERS:chaptersView,VILLAGE:villageView,LOCATION:locationView,QUESTS:questsView,SHOP:()=>itemView(true),BAG:()=>itemView(false),DIALOGUE:dialogueView,VILLAGE_END:villageEnding};
+const screens={CLASSES:classView,PROFILE:profileView,SKILLS:skillView,EQUIPMENT:equipmentView,TRIALS:trialList,TRIAL_RUN:trialView,TRIAL_RESULTS:trialResults,VOICE_HALL:hallView,VOICE_PRACTICE:voicePracticeView,TODAY:todayView,TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView,DASHBOARD:dashboardView,CHAPTERS:chaptersView,VILLAGE:villageView,LOCATION:locationView,QUESTS:questsView,SHOP:()=>itemView(true),BAG:()=>itemView(false),DIALOGUE:dialogueView,VILLAGE_END:villageEnding};
 function render(){
  if(game.screen==='PAUSED'){showSettings();return;}
  const scene=app.querySelector('.battle');
@@ -3479,7 +4366,7 @@ function questObjective(q){
   return '완료한 대화와 전투를 다시 연습할 수 있어요.';
 }
 function villageNav(){
-  return '<nav class="village-nav" aria-label="마을 수첩">'+
+  return rpgHubLinks()+'<nav class="village-nav" aria-label="마을 수첩">'+
     button('quests',icon('book')+' 의뢰 일지')+button('inventory',icon('shield')+' 소지품')+
     button('book',icon('leaf')+' 단어 도감')+button('review','표현 복습')+
     button('voice-hall',icon('mic')+' 메아리의 전당',{cl:'hall-link'})+button('today','오늘의 복습')+button('dashboard','학습 기록')+button('chapters','장 선택')+'</nav>';
@@ -3567,17 +4454,22 @@ function dialogueView(){
     '<section class="panel reply-panel">'+lines+'</section><div class="actions">'+button('village-home','광장으로')+'</div>';
 }
 function itemView(shop){
-  const p=game.profile,inv=p.village.inventory;
+  const p=game.profile;
   if(shop&&game.offer){
     const item=VillageEngine.items.find(it=>it.id===game.offer.id);
-    return heading('MERCHANT’S MARKET','구매 확인')+'<section class="panel receipt">'+VillageArt.item(item.id)+'<h2>'+item.name+'</h2><p>'+item.description+'</p>'+
+    const gear=gearInfo(item.id);
+    return heading('MERCHANT’S MARKET','구매 확인')+'<section class="panel receipt">'+(gear?RpgArt.gear(item.id):VillageArt.item(item.id))+'<h2>'+item.name+'</h2><p>'+item.description+'</p>'+
+      (gear?compareGear(p,gear):'')+
       '<div class="receipt-cost"><span>가격 <b>'+item.price+' 금화</b></span><span>구매 후 잔액 <b>'+(p.gold-item.price)+' 금화</b></span></div>'+
       '<div class="actions">'+button('buy-confirm','구매 확정',{cl:'primary'})+button('buy-cancel','취소')+'</div></section>';
   }
   return heading(shop?'MERCHANT’S MARKET':'TRAVELER’S PACK',shop?'클라라의 물품 상점':'모험가의 소지품','보유 금화 '+p.gold)+
     (game.purchaseNotice?'<p role="status" class="objective">'+safe(game.purchaseNotice)+'</p>':'')+
-    '<div class="item-shelf">'+VillageEngine.items.map(item=>{
-      const n=inv[item.id],full=n>=item.limit,poor=p.gold<item.price;
+    (shop?'<nav class="rpg-nav" aria-label="상점 분류">'+button('shop-supplies','여행용품',{pressed:!game.shopGear})+button('shop-gear','전투 장비',{pressed:!!game.shopGear})+'</nav>':
+      '<div class="actions">'+button('equipment','장비 보관함 · '+p.rpg.collection.length+'종')+'</div>')+
+    '<div class="item-shelf">'+VillageEngine.items.filter(item=>!!gearInfo(item.id)===!!(shop&&game.shopGear)).map(item=>{
+      if(gearInfo(item.id))return gearShopCard(p,gearInfo(item.id));
+      const n=VillageEngine.quantity(p,item.id),full=n>=item.limit,poor=p.gold<item.price;
       return '<article class="panel shop-item"><div class="item-art">'+VillageArt.item(item.id)+'</div><h3>'+item.name+'</h3><p>'+item.description+'</p>'+
         '<div class="stock"><b>'+item.price+' 금화</b><span>보유 '+n+' / '+item.limit+'</span></div>'+
         (shop?button('purchase',full?'보유 한도 도달':poor?'금화 부족':'구매하기',{id:item.id,cl:'primary',disabled:full||poor}):'<small>'+(item.id==='cloak'?(n?'장착 중':'구매 즉시 장착'):'전투 명령에서 사용')+'</small>')+'</article>';
@@ -3591,7 +4483,7 @@ function villageReward(){
   return '<section class="panel quest-results"><div class="eyebrow">'+(r.replay?'PRACTICE COMPLETE':'QUEST COMPLETE')+'</div><h2>'+title+'</h2>'+
     (r.replay?'<p>이번 답변이 학습 기록에 반영되었습니다. 연습 전투 보상은 없습니다.</p>':
     '<p>되찾은 말이 마을에 울려 퍼집니다.</p><div class="reward-tally"><strong>+'+r.xp+' XP</strong><strong>금화 +'+r.gold+'</strong></div>'+
-    (r.levelUp?'<p>레벨 상승 · Lv. '+game.profile.level+'</p>':'')+
+    (r.levelUp?'<p>레벨 상승 · Lv. '+game.profile.level+' · 사용 가능 '+game.profile.rpg.availablePoints+' SP</p>':'')+lootReveal(r.gearId)+
     '<h3>의뢰에서 연습한 표현</h3><p>대화와 전투 · 정답 '+s.correct+'회 / 오답 '+s.wrong+'회</p>'+
     '<div class="summary-words">'+heard.map(l=>'<div>'+utterance(l.en)+' <small>'+safe(l.ko)+'</small>'+audioChip(l.en)+'</div>').join('')+'</div>'+
     '<p>다시 볼 표현 · '+(s.reviewTags.length?s.reviewTags.map(nameOf).map(safe).join(' / '):'없음')+'</p>')+
@@ -3689,7 +4581,7 @@ function villageAction(action,id){
     if(action==='accept-quest'&&+id===stage&&VillageEngine.accept(p,stage)){save();change('LOCATION');return true;}
     if(action==='talk'&&+id===stage){showTalk(stage);return true;}
     if(action==='village-fight'&&+id===stage){game.stage=stage;startBattle();return true;}
-    if(action==='shop'&&game.location==='market'){game.offer=null;game.purchaseNotice='';change('SHOP');return true;}
+    if(action==='shop'&&game.location==='market'){game.shopGear=false;game.offer=null;game.purchaseNotice='';change('SHOP');return true;}
   }
   if(s==='VILLAGE_END'&&action==='talk'&&id==='scenario'){showTalk('scenario');return true;}
   if(s==='DIALOGUE'){
@@ -4158,6 +5050,322 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)leaveWhenHi
 window.addEventListener('pagehide',leaveWhenHidden);
 
 ;
+// Hero record, loadout and skill inspection share the values used by the combat engine.
+const statNames={maxHp:'최대 체력',attack:'공격',magic:'마력',defense:'방어'};
+const slotNames={weapon:'무기',armor:'방어구',accessory:'장신구'};
+const rarityNames={common:'일반',uncommon:'고급',rare:'희귀',epic:'영웅'};
+const branchNames={sword:'검술',arcane:'마법',survival:'생존'};
+const classInfo=id=>RPG.classes.find(c=>c.id===id);
+const gearInfo=id=>RPG.gear.find(g=>g.id===id);
+const signed=n=>n>0?'+'+n:String(n);
+function rpgHubLinks(){
+  return '<nav class="camp-links" aria-label="모험가 성장과 시련">'+button('profile',icon('hero')+' 영웅 기록')+button('trials',icon('crystal')+' 언어 수정의 시련')+'</nav>';
+}
+function bonusText(bonuses){
+  return Object.entries(statNames).filter(([k])=>bonuses[k]).map(([k,label])=>label+' '+signed(bonuses[k])).join(' · ')||'변화 없음';
+}
+function helpNote(title,description){
+  return '<details class="rpg-help"><summary>'+title+'</summary><p>'+description+'</p></details>';
+}
+function rpgNav(active){
+  const links=[['profile','hero','영웅 기록'],['skills','star','스킬 트리'],['equipment','shield','장비'],['trials','crystal','수정 시련']];
+  return '<nav class="rpg-nav" aria-label="모험가 메뉴">'+links.map(([act,glyph,label])=>
+    button(act,icon(glyph)+' '+label,{pressed:act===active})).join('')+button('rpg-home','지도로')+'</nav>';
+}
+function gearLabel(g){
+  return '<span class="rarity-tag '+g.rarity+'">'+rarityNames[g.rarity]+'</span> <span>'+slotNames[g.slot]+'</span>';
+}
+function classView(){
+  const p=game.profile, selected=classInfo(game.classPreview)||RPG.classes[0],old=classInfo(p.rpg.classId);
+  const tiles=RPG.classes.map(c=>button('class-preview',
+    '<span class="class-stage tone-'+c.id+'"><span class="halo" aria-hidden="true"></span>'+RpgArt.hero(c.id)+'</span>'+
+    '<span class="class-caption"><i>'+c.en+'</i><strong>'+c.name+'</strong><small>'+c.role+'</small></span>',
+    {id:c.id,cl:'class-card '+(c.id===selected.id?'chosen':''),pressed:c.id===selected.id,aria:c.name+' 미리보기'})).join('');
+  return heading('HEROES OF THE WORD CRYSTAL','모험가의 직업','세 모습을 눌러 전투 방식을 비교하세요. 모든 직업으로 같은 영어 문제와 이야기를 플레이할 수 있어요.')+
+    '<div class="class-gallery">'+tiles+'</div><section class="panel class-inspector"><div><span class="eyebrow">'+selected.en.toUpperCase()+'</span><h3>'+selected.name+'</h3>'+
+    '<p class="stat-gain">'+selected.bonus+'</p><p>'+selected.strength+' '+selected.limitation+'</p></div><div class="passives">'+selected.abilities.map(a=>
+    '<div>'+icon('crystal')+'<span><b>'+a.name+'</b><small>'+a.description+'</small></span></div>').join('')+'</div></section>'+
+    '<div class="class-decision"><p>'+(old?'현재 직업 · '+old.name+'<br>':'')+'직업 변경은 무료이며 스킬·장비·학습 기록을 유지합니다.</p><div class="actions">'+
+    button('class-confirm',selected.name+(old?'로 변경 확정':' 선택 확정'),{cl:'primary',disabled:old?.id===selected.id})+
+    button('class-later',game.classOrigin==='arrival'?'나중에 선택':'영웅 기록으로')+'</div></div>';
+}
+function profileView(){
+  const p=game.profile,s=Engine.stats(p),c=classInfo(p.rpg.classId),parts=RPG.breakdown(p);
+  const stats=Object.entries(statNames).map(([key,label])=>'<tr data-stat="'+key+'"><th scope="row">'+label+'</th>'+
+    ['base','classBonus','equipment','skills','permanent'].map(part=>'<td>'+((parts[part]?.[key])||'—')+'</td>').join('')+'<td><strong>'+s[key]+'</strong></td></tr>').join('');
+  const slots=Object.entries(slotNames).map(([slot,name])=>{
+    const g=gearInfo(p.rpg.equipped[slot]);
+    return button('gear-slot','<span class="slot-symbol">'+(g?RpgArt.gear(g.id):icon(slot==='weapon'?'sword':slot==='armor'?'shield':'crystal'))+
+      '</span><span><small>'+name+'</small><b>'+(g?g.name:'빈 슬롯')+'</b></span>',{id:slot,cl:'slot-button'});
+  }).join('');
+  const achievements=Engine.achievements.filter(a=>p.achievements.includes(a.id));
+  return rpgNav('profile')+'<div class="hero-record"><section class="panel hero-portrait tone-'+(c?.id||'vanguard')+'"><div class="halo" aria-hidden="true"></div>'+
+    '<span class="eyebrow">ADVENTURER</span><div class="hero-figure">'+RpgArt.hero(c?.id)+'</div><div class="hero-identity"><small>Lv. '+p.level+' · '+(c?.name||'직업 미선택')+'</small>'+
+    '<h2>알렉스 <i>Alex</i></h2>'+button('class-open',c?'직업 변경':'직업 선택')+'</div></section>'+
+    '<div class="hero-ledger"><section class="panel stat-ledger"><div class="rpg-heading"><div><span class="eyebrow">CHARACTER RECORD</span><h2>영웅 기록</h2></div><b class="purse">금화 '+p.gold+'</b></div>'+
+    '<div class="hero-meter"><label>체력 <b>'+p.hp+' / '+s.maxHp+'</b></label><progress aria-label="체력" value="'+p.hp+'" max="'+s.maxHp+'"></progress></div>'+
+    '<div class="hero-meter xp"><label>경험치 <b>'+p.xp+' / '+s.nextXp+'</b></label><progress aria-label="경험치" value="'+p.xp+'" max="'+s.nextXp+'"></progress></div>'+
+    '<table class="stats-table"><caption>능력치 구성</caption><thead><tr><th>능력</th><th>기본</th><th>직업</th><th>장비</th><th>스킬</th><th>망토</th><th>합계</th></tr></thead><tbody>'+stats+'</tbody></table>'+
+    (c?'<div class="class-techniques">'+c.abilities.map(a=>'<p><b>'+a.name+'</b> '+a.description+'</p>').join('')+'</div>':'')+
+    '<div class="points-band"><span>사용할 스킬 포인트 <b>'+p.rpg.availablePoints+' SP</b></span>'+button('skills','스킬 트리 열기')+'</div></section>'+
+    '<section class="panel slots-panel"><h3>착용 장비</h3><div class="slot-row">'+slots+'</div></section></div></div>'+
+    '<details class="rpg-help"><summary>모험 업적 · '+achievements.length+' / '+Engine.achievements.length+'</summary><div class="achievement-list">'+
+    Engine.achievements.map(a=>'<div class="achievement '+(p.achievements.includes(a.id)?'earned':'')+'">'+icon(p.achievements.includes(a.id)?'star':'lock')+
+    '<div><strong>'+safe(a.name)+'</strong><small>'+safe(a.description)+'</small></div></div>').join('')+'</div></details>'+
+    helpNote('능력치 읽는 법','이 수치는 전투에서 쓰는 힘입니다. 검격에만 적용되는 추가 피해와 스킬의 백분율 효과는 해당 기술을 쓸 때 계산해요. 영어 연습량은 나의 영어 성장 기록에서 볼 수 있어요.');
+}
+function skillView(){
+  const p=game.profile,r=p.rpg,inspected=RPG.skills.find(s=>s.id===game.skillInspect)||RPG.skills[0];
+  const learned=r.skills.includes(inspected.id),pre=RPG.skills.find(s=>s.id===inspected.requires);
+  const glyph=s=>s.branch==='arcane'?'flame':s.branch==='survival'?(s.requires?'leaf':'shield'):'sword';
+  const trees=Object.entries(branchNames).map(([branch,title])=>{
+    const nodes=RPG.skills.filter(s=>s.branch===branch).map(s=>{
+      const has=r.skills.includes(s.id),can=RPG.canLearn(p,s.id),status=has?'습득':can?'습득 가능':s.requires&&!r.skills.includes(s.requires)?'선행 스킬 필요':'포인트 필요';
+      return button('skill-node','<span class="skill-stone">'+icon(glyph(s))+'</span><b>'+s.name+'</b><small>'+status+'</small>',{id:s.id,cl:'skill-node '+(has?'learned':can?'available':'locked'),pressed:s.id===inspected.id});
+    }).join('<div class="skill-link" aria-hidden="true"></div>');
+    return '<div class="skill-branch branch-'+branch+'"><h3>'+title+'</h3><div class="node-chain">'+nodes+'</div></div>';
+  }).join('');
+  return rpgNav('skills')+heading('CRYSTAL CONSTELLATIONS','스킬 트리','레벨 2부터 레벨당 1포인트를 얻어요. 별을 눌러 효과를 먼저 살펴보세요.')+
+    '<div class="points-band panel"><span>사용 가능 <b>'+r.availablePoints+' SP</b> · 사용한 포인트 '+r.spentPoints+'</span>'+
+    button('skill-reset','스킬 초기화',{disabled:!r.spentPoints})+'</div>'+
+    (game.resetPending?'<div class="panel respec-confirm" role="group"><h3>스킬을 초기화할까요?</h3><p>배운 스킬을 해제하고 '+r.spentPoints+' SP를 돌려받습니다. 레벨, 장비, 학습 기록은 유지됩니다.</p>'+button('skill-reset-cancel','취소')+' '+button('skill-reset-confirm','초기화 확정',{cl:'primary'})+'</div>':'')+
+    '<div class="skill-layout"><div class="panel constellation">'+trees+'</div><section class="panel skill-inspector"><span class="eyebrow">'+inspected.en.toUpperCase()+'</span><h3>'+inspected.name+'</h3>'+
+    '<p>'+inspected.description+'</p><p>비용 '+inspected.cost+' SP · 선행 '+(pre?pre.name:'없음')+'</p>'+
+    button('skill-learn',learned?'이미 습득':!RPG.canLearn(p,inspected.id)?(pre&&!r.skills.includes(pre.id)?pre.name+' 먼저 습득':'포인트 부족'):'1 SP로 습득',{cl:'primary',disabled:!RPG.canLearn(p,inspected.id)||game.resetPending})+
+    messageBox()+'</section></div>'+helpNote('스킬과 직업의 차이','여섯 스킬은 어느 직업이든 배울 수 있어요. 직업 고유 효과는 직업과 함께 바뀌고, 이곳에서 배운 스킬은 전직 후에도 남아요.');
+}
+function messageBox(){return game.rpgMessage?'<p class="rpg-message" role="status">'+safe(game.rpgMessage)+'</p>':'';}
+function compareGear(p,g){
+  const current=gearInfo(p.rpg.equipped[g.slot]),preview=RPG.preview(p,g.id);
+  const changes=Object.entries(statNames).filter(([key])=>preview.delta[key]).map(([key,label])=>
+    '<span>'+label+' '+preview.before[key]+' → <strong>'+preview.after[key]+'</strong> ('+signed(preview.delta[key])+')</span>'
+  ).join('');
+  return '<div class="gear-comparison"><small>현재 '+slotNames[g.slot]+' · '+(current?current.name:'미착용')+'</small><b>착용 시 변화</b>'+
+    '<p>'+ (changes||'변화 없음')+'</p></div>';
+}
+function equipmentView(){
+  const p=game.profile,r=p.rpg,slot=game.gearSlot||'weapon';
+  const g=gearInfo(game.gearInspect)||RPG.gear.find(g=>g.slot===slot);
+  const owned=r.collection.includes(g.id),worn=r.equipped[g.slot]===g.id;
+  const slots=Object.entries(slotNames).map(([key,label])=>{
+    const item=gearInfo(r.equipped[key]);
+    return button('gear-slot','<span class="slot-symbol">'+(item?RpgArt.gear(item.id):icon(key==='weapon'?'sword':key==='armor'?'shield':'crystal'))+'</span><span><b>'+label+'</b><small>'+(item?item.name:'미착용')+'</small></span>',{id:key,cl:'slot-button',pressed:slot===key});
+  }).join('');
+  const tiles=RPG.gear.filter(i=>i.slot===slot).map(i=>button('gear-inspect','<span class="gear-mini">'+RpgArt.gear(i.id)+'</span><span><small>'+rarityNames[i.rarity]+' · '+(r.equipped[slot]===i.id?'착용 중':r.collection.includes(i.id)?'보유':'미보유')+'</small><b>'+i.name+'</b></span>',
+    {id:i.id,cl:'gear-tile rare-'+i.rarity,pressed:i.id===g.id})).join('');
+  return rpgNav('equipment')+heading('ARMORY','장비 보관함','슬롯을 고른 뒤 장비를 눌러 착용 전후의 차이를 확인하세요.')+
+    '<div class="armory-layout"><aside class="panel loadout"><div class="loadout-figure">'+RpgArt.hero(r.classId)+'</div><div class="worn-slots">'+slots+'</div></aside>'+
+    '<section class="panel gear-picker"><h3>'+slotNames[slot]+' 도감</h3><div class="gear-tiles">'+tiles+'</div></section>'+
+    '<section class="panel gear-detail rare-'+g.rarity+'"><div class="gear-display">'+RpgArt.gear(g.id)+'</div><div class="gear-kicker">'+gearLabel(g)+'</div><i>'+g.en+'</i>'+
+    '<h3>'+g.name+'</h3><p>'+g.description+'</p><strong class="stat-gain">'+bonusText(g.bonuses)+'</strong>'+compareGear(p,g)+
+    '<p>획득 · '+g.source+(g.price!==null?' · '+g.price+' 금화':'')+'</p>'+
+    (worn?button('gear-unequip','장착 해제'):owned?button('gear-equip','장착하기',{cl:'primary'}):
+     (p.currentChapter===2&&g.price!==null?button('gear-market','시장 상점으로'):'<small>획득하면 장착할 수 있어요.</small>'))+messageBox()+'</section></div>';
+}
+function gearShopCard(p,g){
+  const n=VillageEngine.quantity(p,g.id),poor=p.gold<g.price;
+  return '<article class="panel shop-item rare-'+g.rarity+'"><div class="item-art">'+RpgArt.gear(g.id)+'</div>'+gearLabel(g)+'<h3>'+g.name+'</h3><p>'+g.description+'</p>'+
+    '<b>'+bonusText(g.bonuses)+'</b>'+compareGear(p,g)+'<div class="stock"><b>'+g.price+' 금화</b><small>보유 '+n+' / 1</small></div>'+
+    button('purchase',n?'보유 중':poor?'금화 부족':'구매하기',{id:g.id,disabled:n>0||poor,cl:'primary'})+'</article>';
+}
+function lootReveal(id){
+  const gear=gearInfo(id);if(!gear)return '';
+  return '<div class="rpg-loot-reveal rare-'+gear.rarity+'">'+RpgArt.gear(id)+'<div><small>'+rarityNames[gear.rarity]+' 장비 획득</small><strong>'+gear.name+'</strong><span>'+bonusText(gear.bonuses)+'</span></div></div>';
+}
+
+;
+const trialRoom=id=>Trials.rooms.find(r=>r.id===id);
+function trialList(){
+  const p=game.profile,selected=trialRoom(game.trialSelection)||Trials.rooms[0];
+  const doors=Trials.rooms.map(room=>{
+    const status=p.rpg.dungeons[room.id],open=Trials.unlocked(p,room.id);
+    return button('trial-select','<span class="door-image">'+RpgArt.room(room.id)+'<span class="door-watcher">'+RpgArt.guardian(room.id)+'</span></span>'+
+      '<span class="door-caption"><small>'+room.en+'</small><strong>'+room.name+'</strong><span>'+icon(!open?'lock':status.clears?'check':'crystal')+' '+
+      (open?status.clears?'완료 '+status.clears+'회 · 최고 '+status.best+' / 5':room.focus:trialRoom(room.previous).name+' 완료 후 개방')+'</span></span>',
+      {id:room.id,cl:'trial-door room-'+room.id,pressed:room.id===selected.id});
+  }).join('');
+  const reward=RPG.dungeonPrizes[selected.id],cleared=p.rpg.dungeons[selected.id].clears>0;
+  return rpgNav('trials')+heading('TRIALS OF THE WORD CRYSTAL','언어 수정의 시련','다섯 표현으로 수호자의 봉인을 풀어 보세요. 틀린 말은 해설을 읽고 다시 시도할 수 있어요.')+
+    '<div class="trial-doors">'+doors+'</div><section class="panel trial-brief"><div><span class="eyebrow">'+selected.en.toUpperCase()+'</span><h3>'+selected.name+'</h3>'+
+    '<p>'+selected.description+'</p><small>다섯 문제 · 시간 제한 없음 · 첫 답변 기준으로 기록</small></div><div><b>'+ (cleared?'첫 완료 보상 수령함':'첫 완료 보상')+'</b><p>'+
+    gearInfo(reward.gearId).name+' · 금화 '+reward.gold+'</p>'+button('trial-start',!Trials.unlocked(p,selected.id)?'앞 시련 완료 필요':cleared?'다시 도전':'시련 입장',{cl:'primary',disabled:!Trials.unlocked(p,selected.id)})+'</div></section>'+
+    helpNote('시련 안내','틀려도 체력은 줄지 않아요. 정답을 찾아야 봉인이 풀리며, 다섯 봉인을 모두 풀면 다음 방이 열려요. 전투력과 장비는 정답을 대신하지 않아요. 완료 전 떠나면 봉인은 처음부터, 답한 학습 기록은 그대로입니다.');
+}
+function trialArena(run){
+  const room=trialRoom(run.id),fx=run.phase==='victory'?'win':run.feedback?.correct?'hit':'';
+  return '<div class="trial-arena room-'+run.id+'" data-fx="'+fx+'">'+RpgArt.room(run.id)+'<div class="trial-vignette"></div>'+
+    '<div class="trial-fighter">'+RpgArt.hero(game.profile.rpg.classId)+'</div><div class="trial-guardian">'+RpgArt.guardian(run.id)+'</div>'+
+    '<div class="trial-scene-label"><span>'+room.en+'</span><h2>'+room.name+'</h2></div>'+
+    '<div class="seal-strip" aria-label="해제한 봉인 '+run.seals+'개"><b>'+room.guardian+'</b><span>'+Array.from({length:5},(_,i)=>'<i class="'+(i<run.seals?'released':'')+'"></i>').join('')+'</span><small>봉인 해제 '+run.seals+' / 5</small></div></div>';
+}
+function trialAnswerView(run){
+  const q=run.question,isOrder=q.type==='order',voice=q.type==='listening';
+  const play=AudioFX.canSpeak(game.profile.settings);
+  let context='';
+  if(voice){
+    context='<div class="actions">'+button('trial-play',icon('sound')+' 다시 듣기',{id:'normal',disabled:!play})+
+      button('trial-play','천천히 듣기',{id:'slow',disabled:!play})+button('trial-transcript','원문 보기',{pressed:run.showTranscript})+'</div>'+
+      (run.showTranscript||!play?'<p class="trial-cue">'+(play?'원문':'글로 푸는 듣기')+' · <span lang="en">'+safe(q.phrase)+'</span></p>':'');
+  }else if(q.type==='sentence'&&q.instruction.includes('___')&&q.chapter!==2){
+    context='<p>'+safe(koreanExamples[q.tags[0]])+'</p>';
+  }
+  const controls=isOrder?'<div class="answer-line" aria-live="polite">'+(run.order.length?run.order.map(i=>safe(run.choices[i])).join(' '):'단어를 눌러 문장을 만드세요.')+
+    '</div><div class="words">'+run.choices.map((v,i)=>button('trial-tile',safe(v),{id:i,cl:'word',disabled:run.order.includes(i)})).join('')+
+    '</div><div class="actions">'+button('trial-submit','문장 확인',{cl:'primary',disabled:run.order.length!==run.choices.length})+
+    button('trial-undo','한 단어 되돌리기',{disabled:!run.order.length})+'</div>':
+    '<div class="choices">'+run.choices.map((v,i)=>button('trial-choice','<span class="choice-index">'+String.fromCharCode(65+i)+'</span>'+safe(v),{id:i,cl:'choice'})).join('')+'</div>';
+  return '<span class="eyebrow">'+(run.index+1)+' / 5 · '+trialRoom(run.id).focus+'</span><h3>'+safe(q.instruction)+'</h3>'+context+controls;
+}
+function trialView(){
+  const run=game.trial,q=run.question;
+  const feedback=run.phase==='question'?trialAnswerView(run):
+    '<div class="trial-feedback" aria-live="polite"><b>'+(run.feedback.correct?run.phase==='victory'?'마지막 봉인이 풀렸어요!':'수정 봉인을 하나 풀었어요.':'다시 이어 볼까요?')+
+    '</b><h3>'+safe(q.type==='listening'?q.phrase:expression(q))+'</h3><p>정답 · '+safe(q.answer)+'</p><p>'+safe(q.explanation)+'</p>'+speakButton(q.type==='listening'?q.phrase:expression(q))+
+    '<div class="actions">'+button('trial-next',run.phase==='victory'?'시련 결과 보기':run.feedback.correct?'다음 봉인':'같은 표현 다시 풀기',{cl:'primary'})+'</div></div>';
+  return '<section class="trial-play">'+trialArena(run)+'<div class="panel trial-console">'+feedback+'</div>'+
+    '<div class="actions">'+button('trial-leave','시련에서 나가기')+'</div>'+
+    (game.trialLeaving?'<div class="panel respec-confirm"><p>시련에서 나갈까요? 지금까지 답한 학습 기록은 남습니다.</p>'+button('trial-stay','계속 도전')+' '+button('trial-leave-confirm','나가기 확정')+'</div>':'')+'</section>';
+}
+function trialResults(){
+  const run=game.trial,room=trialRoom(run.id),score=run.results.filter(r=>r.firstCorrect).length;
+  return '<section class="panel trial-results"><div class="eyebrow">TRIAL COMPLETE</div><h2>'+room.name+' · 다섯 봉인 해제</h2>'+
+    '<div class="trial-tally"><b>첫 시도 정답 '+score+' / 5</b><span>다시 익힌 표현 '+(5-score)+'개</span></div>'+
+    (run.reward?.first?lootReveal(run.reward.gearId)+'<p class="purse">첫 완료 · 금화 +'+run.reward.gold+'</p>':'<p>연습 기록이 갱신되었습니다. 첫 완료 보상은 이미 받았어요.</p>')+
+    '<ol class="trial-recap">'+run.results.map((r,i)=>{
+      const q=run.questions[i];
+      return '<li><div><small>'+(r.firstCorrect?'첫 답 정답':'복습할 표현')+(r.assisted?' · 도움 사용':'')+'</small><strong>'+safe(expression(q))+
+        '</strong><span>정답 · '+safe(q.answer)+'</span><p>'+safe(q.explanation)+'</p></div>'+speakButton(expression(q))+'</li>';
+    }).join('')+'</ol><div class="actions">'+button('trials','시련 목록',{cl:'primary'})+button('trial-again','같은 방 다시 도전')+
+    button('equipment','획득 장비 보기')+button('rpg-home','지도로')+'</div></section>';
+}
+
+;
+function rpgHub(){
+  if(game.profile.currentChapter===2)enterVillage();else change('MAP');
+}
+function offerClass(){
+  const r=game.profile.rpg;
+  if(!r.classId&&!r.promptSeen){
+    r.promptSeen=true;game.classOrigin='arrival';game.classPreview='vanguard';save();change('CLASSES');
+  }else rpgHub();
+}
+function rpgMessage(text){game.rpgMessage=text;save();render();}
+function openGear(slot='weapon',itemId=''){
+  const r=game.profile.rpg;
+  game.gearSlot=slot;
+  game.gearInspect=itemId||r.equipped[slot]||RPG.gear.find(g=>g.slot===slot).id;
+  game.rpgMessage='';change('EQUIPMENT');
+}
+function setTrialAudioFallback(run,q,turn){
+  if(game.screen!=='TRIAL_RUN'||game.trial!==run||run.question!==q||run.phase!=='question'||turn!==game.trialAudio)return;
+  Trials.assist(game.profile,run,'fallback');refreshTrialQuestion();
+}
+function playTrial(rate=game.profile.settings.speechRate){
+  const run=game.trial,q=run.question;
+  if(q.type!=='listening'||run.phase!=='question')return;
+  const turn=++game.trialAudio;
+  const fallback=()=>setTrialAudioFallback(run,q,turn);
+  if(!readAloud(q.phrase,fallback,rate))fallback();
+}
+function refreshTrialQuestion(){
+  const panel=app.querySelector('.trial-console');
+  if(panel&&game.trial.phase==='question')panel.innerHTML=trialAnswerView(game.trial);else render();
+}
+function startTrial(id){
+  const run=Trials.start(game.profile,id);
+  if(!run)return;
+  game.trial=run;game.trialLeaving=false;game.trialAudio=0;game.trialSelection=id;
+  change('TRIAL_RUN');playTrial();
+}
+function submitTrial(value){
+  const p=game.profile,run=game.trial;
+  if(run.question.type==='listening'&&!AudioFX.canSpeak(p.settings))Trials.assist(p,run,'fallback');
+  const feedback=Trials.answer(p,run,value);
+  if(!feedback)return;
+  game.trialAudio++;AudioFX.stop();save();render();
+  AudioFX.play(run.phase==='victory'?'victory':feedback.correct?'correct':'wrong',p.settings);
+  app.querySelector('[data-act="trial-next"]')?.focus({preventScroll:true});
+}
+function trialAction(action,id){
+  const p=game.profile,run=game.trial;
+  if(!run)return false;
+  if(action==='trial-leave'){game.trialLeaving=true;AudioFX.stop();render();return true;}
+  if(game.trialLeaving){
+    if(action==='trial-stay'){game.trialLeaving=false;render();}
+    if(action==='trial-leave-confirm'){Trials.leave(p);game.trial=null;game.trialLeaving=false;change('TRIALS');}
+    return true;
+  }
+  if(action==='trial-next'){
+    if(Trials.next(p,run)){
+      if(run.phase==='results')change('TRIAL_RESULTS');
+      else{change('TRIAL_RUN');playTrial();}
+    }
+    return true;
+  }
+  if(run.phase!=='question')return true;
+  const index=Number(id);
+  if(action==='trial-choice'&&run.question.type!=='order'&&Number.isInteger(index))submitTrial(run.choices[index]);
+  if(action==='trial-tile'&&run.question.type==='order'&&Number.isInteger(index)&&index>=0&&index<run.choices.length&&!run.order.includes(index)){
+    run.order.push(index);refreshTrialQuestion();
+    app.querySelector('[data-act="trial-tile"]:not(:disabled),[data-act="trial-submit"]:not(:disabled)')?.focus({preventScroll:true});
+  }
+  if(action==='trial-undo'&&run.question.type==='order'){run.order.pop();refreshTrialQuestion();}
+  if(action==='trial-submit'&&run.question.type==='order'&&run.order.length===run.choices.length)submitTrial(run.order.map(i=>run.choices[i]).join(' '));
+  if(action==='trial-transcript'){Trials.assist(p,run,'transcript');refreshTrialQuestion();}
+  if(action==='trial-play')playTrial(id==='slow'?'slow':'normal');
+  return true;
+}
+function rpgAction(action,id){
+  const s=game.screen,p=game.profile,r=p.rpg;
+  const sheets=['PROFILE','SKILLS','EQUIPMENT','TRIALS','TRIAL_RESULTS'];
+  const hub=['MAP','VILLAGE',...sheets];
+  if(action==='rpg-home'&&sheets.includes(s)){game.rpgMessage='';rpgHub();return true;}
+  if(action==='profile'&&hub.includes(s)){game.rpgMessage='';change('PROFILE');return true;}
+  if(action==='skills'&&hub.includes(s)){game.rpgMessage='';game.resetPending=false;change('SKILLS');return true;}
+  if(action==='equipment'&&[...hub,'BAG','SHOP'].includes(s)){openGear();return true;}
+  if(action==='trials'&&hub.includes(s)){game.trialSelection=game.trialSelection||'words';change('TRIALS');return true;}
+  if(action==='class-open'&&s==='PROFILE'){game.classOrigin='profile';game.classPreview=r.classId||'vanguard';change('CLASSES');return true;}
+  if(s==='CLASSES'){
+    if(action==='class-preview'&&classInfo(id)){game.classPreview=id;render();focusControl(action,id);}
+    if(action==='class-confirm'&&RPG.chooseClass(p,game.classPreview)){save();AudioFX.play('level',p.settings);if(game.classOrigin==='arrival')rpgHub();else change('PROFILE');}
+    if(action==='class-later'){if(game.classOrigin==='arrival')rpgHub();else change('PROFILE');}
+    return true;
+  }
+  if(s==='SKILLS'){
+    if(action==='skill-node'&&!game.resetPending&&RPG.skills.some(t=>t.id===id)){game.skillInspect=id;game.rpgMessage='';render();focusControl(action,id);}
+    if(action==='skill-learn'&&!game.resetPending){
+      const skill=RPG.skills.find(t=>t.id===(game.skillInspect||RPG.skills[0].id));
+      if(skill&&RPG.learn(p,skill.id)){AudioFX.play('level',p.settings);rpgMessage(skill.name+' 습득 · 남은 포인트 '+r.availablePoints+' SP');}
+    }
+    if(action==='skill-reset'&&r.spentPoints){game.resetPending=true;render();app.querySelector('[data-act="skill-reset-cancel"]')?.focus();}
+    if(action==='skill-reset-cancel'){game.resetPending=false;render();}
+    if(action==='skill-reset-confirm'&&game.resetPending){
+      game.resetPending=false;
+      if(RPG.resetSkills(p))rpgMessage('스킬 포인트를 돌려받았어요. 사용 가능 '+r.availablePoints+' SP');else render();
+    }
+    return true;
+  }
+  if(action==='gear-slot'&&['PROFILE','EQUIPMENT'].includes(s)&&Object.hasOwn(slotNames,id)){openGear(id);focusControl(action,id);return true;}
+  if(s==='EQUIPMENT'){
+    const selected=gearInfo(game.gearInspect);
+    if(action==='gear-inspect'&&gearInfo(id)?.slot===game.gearSlot){game.gearInspect=id;game.rpgMessage='';render();focusControl(action,id);}
+    if(action==='gear-equip'&&selected&&RPG.equip(p,selected.id,game.gearSlot))rpgMessage(selected.name+' 장착 완료');
+    if(action==='gear-unequip'&&selected&&r.equipped[game.gearSlot]===selected.id&&RPG.unequip(p,game.gearSlot))rpgMessage(selected.name+' 장착 해제');
+    if(action==='gear-market'&&p.currentChapter===2){game.location='market';game.shopGear=true;game.offer=null;game.purchaseNotice='';change('SHOP');}
+    return true;
+  }
+  if(s==='SHOP'&&!game.offer&&['shop-gear','shop-supplies'].includes(action)){game.shopGear=action==='shop-gear';game.purchaseNotice='';render();return true;}
+  if(s==='TRIALS'){
+    if(action==='trial-select'&&trialRoom(id)){game.trialSelection=id;render();focusControl(action,id);}
+    if(action==='trial-start')startTrial(game.trialSelection||'words');
+    return true;
+  }
+  if(s==='TRIAL_RUN')return trialAction(action,id);
+  if(s==='TRIAL_RESULTS'&&action==='trial-again'){startTrial(game.trial.id);return true;}
+  return false;
+}
+
+;
 // Keep modal inputs outside the scene so opening settings preserves the current question.
 function showSettings(){
  const p=game.profile, cfg=p.settings;
@@ -4175,6 +5383,9 @@ function openSettings(mode=''){
 }
 function closeSettings(){
  game.confirm='';game.screen=game.pausedFrom;pauseDialog.close();
+ if(game.screen==='TRIAL_RUN'&&game.trial?.question.type==='listening'&&!AudioFX.canSpeak(game.profile.settings)){
+  Trials.assist(game.profile,game.trial,'fallback');
+ }
  if(!game.voice&&['QUESTION_ACTIVE','REVIEW'].includes(game.screen)&&game.task?.question.type==='listening'&&!AudioFX.canSpeak(game.profile.settings)){
   game.speechFallback=true;markQuestionAssist('fallback');
  }
@@ -4346,6 +5557,7 @@ function dispatch(action,id){
   if(action==='to-title'){game.battle=null;change('TITLE');}
   return;
  }
+ if(rpgAction(action,id))return;
  if(voiceAction(action,id))return;
  if(villageAction(action,id))return;
  if(action==='map'&&['BOOK','DEFEAT','CHAPTER_COMPLETE','LEARNING','DASHBOARD'].includes(game.screen)){game.battle=null;change('MAP');return;}
@@ -4354,10 +5566,10 @@ function dispatch(action,id){
  switch(game.screen){
  case 'TITLE':
   if(action==='new'){if(p.started)openSettings('new');else startNew();}
-  if(action==='continue'&&p.started){if(p.currentChapter===2)enterVillage();else change('MAP');}
+  if(action==='continue'&&p.started)offerClass();
   break;
  case 'INTRO':
-  if(action==='intro-skip'||(action==='intro-next'&&game.page===2))change('MAP');
+  if(action==='intro-skip'||(action==='intro-next'&&game.page===2))offerClass();
   else if(action==='intro-next'){game.page++;render();}
   break;
  case 'MAP':
@@ -4396,7 +5608,7 @@ function dispatch(action,id){
 }
 function handleClick(event){
  const el=event.target.closest('button[data-act]');
- if(!el||!el.isConnected||el.disabled||(event.detail>1&&el.dataset.act!=='word'))return;
+ if(!el||!el.isConnected||el.disabled||(event.detail>1&&!['word','trial-tile'].includes(el.dataset.act)))return;
  if(game.screen==='PAUSED'&&!pauseDialog.contains(el))return;
  AudioFX.play('ui',game.profile.settings);dispatch(el.dataset.act,el.dataset.id);
 }

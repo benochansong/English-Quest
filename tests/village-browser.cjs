@@ -5,7 +5,7 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const {chromium} = require('playwright');
 const {
-  chapter, checkLayout, ctl, click, wait, visible, rapidClick, createOfflinePage,
+  chapter, checkLayout, ctl, click, wait, visible, rapidClick, createOfflinePage, continueSaved,
   profile, encounter, attempts, answerReview
 } = require('./browser.cjs');
 const captureDir = process.argv.includes('--village-screenshots')
@@ -197,6 +197,7 @@ async function villageBattle(page,stage,training=false,replay=false) {
     assert.equal(after.village.progress[stage].completed,true);
     assert.ok(after.gold>before.gold);
     if(stage===6) assert.ok(attemptedBreak && interrupted);
+    if(stage===6) assert.ok(after.rpg.collection.includes('runicSword'));
   }
   console.log('village',training?'training':stage,'completed, question types', [...types].join(', '));
   await click(page,'onwards');
@@ -306,7 +307,7 @@ async function loadLegacyProfile(page) {
   const source = await fs.readFile(path.join(__dirname,'fixtures/v02-completed.json'),'utf8');
   await page.evaluate(text => localStorage.setItem('EnglishQuest.chapter1.v2',text),source);
   await page.reload();
-  await click(page,'continue');
+  await continueSaved(page);
   return source;
 }
 
@@ -330,11 +331,12 @@ async function migration(browser) {
     const source = await loadLegacyProfile(page);
     const old = JSON.parse(source);
     const migrated = await page.evaluate(() => game.profile);
-    assert.equal(migrated.version,4);
+    assert.equal(migrated.version,5);
     for(const field of ['level','xp','hp','gold','completed','chapterComplete','mistakes','learning','history','schedule']) {
       assert.deepEqual(migrated[field],old[field],'v0.2 '+field+' was changed');
     }
-    for (const field of ['achievements','marked']) assert.deepEqual([...migrated[field]].sort(),[...old[field]].sort());
+    assert.deepEqual([...migrated.marked].sort(),[...old.marked].sort());
+    for(const id of old.achievements) assert.ok(migrated.achievements.includes(id));
     for(const [key,value] of Object.entries(old.settings)) assert.equal(migrated.settings[key],value);
     await click(page,'chapters');
     await click(page,'chapter',2);
@@ -353,7 +355,7 @@ async function migration(browser) {
     assert.equal(rates.length,2);
     assert.ok(rates[0]>rates[1] && rates[1]>0);
     assert.deepEqual(problems,[]); assert.deepEqual(network,[]);
-    console.log('actual v0.2 checkpoint → v0.4 and Chapter 2 entry passed, original bytes preserved');
+    console.log('actual v0.2 checkpoint → v0.5 and Chapter 2 entry passed, original bytes preserved');
   } finally { await context.close(); }
 }
 

@@ -4,11 +4,16 @@ const VillageEngine = (() => {
   const conversations = new WeakMap();
   const practice = new WeakMap();
   const offers = new WeakMap();
-  const items = [
+  const supplies = [
     {id:'potion', name:'작은 회복 물약', price:20, limit:3, description:'한 턴을 사용해 체력을 30까지 회복해요.'},
     {id:'charm', name:'여행자의 부적', price:50, limit:1, description:'한 턴을 사용해 이번 전투가 끝날 때까지 받는 피해를 3 줄여요. 중첩되지 않아요.'},
     {id:'cloak', name:'탐험가의 망토', price:80, limit:1, description:'구입 즉시 장착하여 최대 체력이 영구히 6 늘어요.'}
   ];
+  const items=[...supplies,...RPG.gear.filter(g=>Number.isSafeInteger(g.price)&&g.price>0)];
+  function quantity(profile,id) {
+    if(RPG.gear.some(g=>g.id===id))return Number(profile.rpg.collection.includes(id));
+    return profile.village.inventory[id] || 0;
+  }
   const count = value => Number.isSafeInteger(value) ? Math.max(0,value) : 0;
   function fresh() {
     const progress = {};
@@ -20,7 +25,7 @@ const VillageEngine = (() => {
   function hydrate(raw, open) {
     const village = fresh();
     if (!open || !raw || typeof raw !== 'object') return village;
-    for (const item of items) village.inventory[item.id] = Math.min(item.limit,count(raw.inventory?.[item.id]));
+    for (const item of supplies) village.inventory[item.id] = Math.min(item.limit,count(raw.inventory?.[item.id]));
     for (const {stage,npc} of VillageData.quests) {
       const saved = raw.progress?.[stage];
       if (!saved?.accepted) break;
@@ -123,9 +128,9 @@ const VillageEngine = (() => {
   function offer(profile,id) {
     const item = items.find(i => i.id === id);
     if (profile.currentChapter !== 2 || !profile.chapterComplete || !item
-      || profile.village.inventory[id] >= item.limit || profile.gold < item.price) return null;
+      || quantity(profile,id) >= item.limit || profile.gold < item.price) return null;
     const token = Object.freeze({id, price:item.price});
-    offers.set(token,{profile, gold:profile.gold, quantity:profile.village.inventory[id]});
+    offers.set(token,{profile, gold:profile.gold, quantity:quantity(profile,id)});
     return token;
   }
   function buy(profile,token) {
@@ -133,12 +138,14 @@ const VillageEngine = (() => {
     if (!quoted || quoted.profile !== profile) return false;
     offers.delete(token);
     const item = items.find(i => i.id === token.id);
-    const quantity = profile.village.inventory[item.id];
-    if (profile.currentChapter !== 2 || !profile.chapterComplete || quantity !== quoted.quantity
-      || profile.gold !== quoted.gold || profile.gold < item.price || quantity >= item.limit) return false;
+    const owned = quantity(profile,item.id);
+    if (profile.currentChapter !== 2 || !profile.chapterComplete || owned !== quoted.quantity
+      || profile.gold !== quoted.gold || profile.gold < item.price || owned >= item.limit) return false;
+    if(item.slot){
+      if(!RPG.grant(profile,item.id))return false;
+    } else profile.village.inventory[item.id]++;
     profile.gold -= item.price;
-    profile.village.inventory[item.id]++;
     return true;
   }
-  return {items,fresh,hydrate,selectChapter,status,accept,track,summary,dialogue,reply,offer,buy};
+  return {items,quantity,fresh,hydrate,selectChapter,status,accept,track,summary,dialogue,reply,offer,buy};
 })();

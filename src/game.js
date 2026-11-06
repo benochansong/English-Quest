@@ -27,6 +27,7 @@ const stageCards = [forestLessons.slice(0,10), forestLessons.slice(8), forestLes
 const koreanExamples = {hello:'안녕, 친구야.',thanks:'고마워요, 로완.',apple:'나는 사과를 좋아해요.',water:'나는 물을 마셔요.',bread:'나는 빵을 먹어요.',book:'나는 책을 가지고 있어요.',sword:'나는 검을 가지고 있어요.',forest:'숲은 조용해요.',iam:'나는 학생이에요.',ihave:'나는 책을 가지고 있어요.',ilike:'나는 사과를 좋아해요.',iwant:'물을 좀 원해요.',ieat:'나는 빵을 먹어요.',idrink:'나는 물을 마셔요.'};
 const labels = {'New':'새 표현','Learning':'익히는 중','Review Needed':'복습 필요','Familiar':'익숙한 표현'};
 const paths = {
+  hero:'M6 21v-2a6 6 0 0 1 12 0v2ZM8 8a4 4 0 1 0 8 0 4 4 0 1 0-8 0Z',
   lock:'M6 10h12v11H6Zm3 0V7a3 3 0 0 1 6 0v3',
   crown:'m3 7 5 4 4-7 4 7 5-4-2 12H5Zm2 9h14',
   mic:'M9 6a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0Zm-3 5v1a6 6 0 0 0 12 0v-1m-6 7v4m-4 0h8',
@@ -54,6 +55,7 @@ function save(){
   game.hint = Engine.save(game.profile) ? '' : '이 브라우저에서 저장할 수 없어요. 창을 닫기 전까지는 계속 플레이할 수 있어요.';
 }
 function change(screen){
+  if(game.trial&&!['TRIAL_RUN','TRIAL_RESULTS','PAUSED'].includes(screen)){Trials.leave(game.profile);game.trial=null;}
   if(game.voice && !['VOICE_PRACTICE','QUESTION_ACTIVE','ANSWER_FEEDBACK','PAUSED'].includes(screen))discardVoice();
   if (game.screen === 'PAUSED') pauseDialog.close();
   AudioFX.stop(); game.screen=screen; render(); window.scrollTo(0,0);
@@ -65,7 +67,7 @@ function titleView(){
   const hasSave=game.profile.started;
   const begin=button('new',icon('sword')+' 게임 시작',{cl:hasSave?'':'primary'});
   const resume=button('continue','이어하기',{cl:hasSave?'primary':'',disabled:!hasSave});
-  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.4</div></section>';
+  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.5</div></section>';
 }
 function introView(){
   const item=saga[game.page];
@@ -95,7 +97,7 @@ function mapView(){
       '</strong><small>'+Engine.enemies[i].name+' · '+stateText[state]+'</small></span>'+icon(state==='locked'?'lock':'arrow'),
       {id:n,cl:'stage '+state,disabled:state==='locked'});
   }).join('');
-  return heading('CHAPTER I  /  FOREST ATLAS','속삭이는 숲')+
+  return rpgHubLinks()+heading('CHAPTER I  /  FOREST ATLAS','속삭이는 숲')+
     '<div class="map-grid"><section class="atlas panel"><div class="atlas-heading"><span class="eyebrow">THE WHISPERING FOREST</span><span>'+icon('crystal')+' '+p.completed.length+' / 3</span></div>'+
     '<div class="atlas-plate">'+Art.map()+pins+'</div><div class="atlas-caption" aria-live="polite"><div><small>'+stagesEN[selected-1]+'</small><strong>'+zones[selected-1]+'</strong></div><p>'+
     stageNotes[selected-1]+' '+(selected>p.unlocked?'앞 숲길을 완료하면 열립니다.':'')+'</p></div></section>'+
@@ -122,7 +124,7 @@ function battleRibbon() {
 function arena(){
   const b=game.battle,n=game.stage,foe=Engine.enemies[n-1];
   return '<div class="arena" data-stage="'+n+'" data-phase="'+b.bossPhase+'" data-intent="'+game.battleIntent+'" data-fx="'+game.effect+'">'+
-    (n>3?VillageArt.scene(b.training?'square':villageQuest(n).location,true):Art.forest(n))+'<div class="arena-shade"></div><div class="combatant hero">'+Art.hero()+'</div><div class="combatant enemy '+(n===3||n===6?'boss':'')+'">'+(n>3?VillageArt.enemy(n):Art.slime(n))+
+    (n>3?VillageArt.scene(b.training?'square':villageQuest(n).location,true):Art.forest(n))+'<div class="arena-shade"></div><div class="combatant hero">'+RpgArt.hero(game.profile.rpg.classId)+'</div><div class="combatant enemy '+(n===3||n===6?'boss':'')+'">'+(n>3?VillageArt.enemy(n):Art.slime(n))+
     '</div><div class="fx"></div><div class="arena-status">'+statBar('모험가 · Lv. '+game.battleLevel,b.hp,game.battleMaxHp)+statBar(foe.name,b.enemyHp,b.enemyMaxHp,true)+'</div></div>';
 }
 function abilitiesView(){
@@ -211,7 +213,7 @@ function rewardView(){
  return '<section class="center-card panel reward '+(r.levelUp?'level-up':'')+'"><div class="reward-crystal">'+icon('crystal')+'</div>'+
    heading(r.replay?'PRACTICE COMPLETE':'QUEST COMPLETE',zones[stage-1]+' 탐험 완료')+'<p>'+(r.replay?'복습 전투를 마쳤어요. 이번 답변을 학습 기록에 더했습니다.':story[stage-1])+'</p>'+
    (r.replay?'':'<div class="reward-tally"><strong>+'+r.xp+' XP</strong><strong>금화 +'+r.gold+'</strong></div>')+
-   (r.bonus?'<p>챕터 완주 보너스 '+r.bonus+' XP 포함</p>':'')+(r.levelUp?'<h3>레벨 상승 · Lv. '+game.profile.level+'</h3>':'')+
+   (r.bonus?'<p>챕터 완주 보너스 '+r.bonus+' XP 포함</p>':'')+(r.levelUp?'<h3>레벨 상승 · Lv. '+game.profile.level+' · 사용 가능 '+game.profile.rpg.availablePoints+' SP</h3>':'')+lootReveal(r.gearId)+
    (earned.length?'<p class="earned-names">'+icon('star')+' 획득 · '+earned.map(a=>safe(a.name)).join(' / ')+'</p>':'')+
    (!r.replay&&stage<3?'<p>새로 열린 길 · '+zones[stage]+'</p>':'')+button('onwards',stage===3?'로완에게 돌아가기':'지도 펼치기',{cl:'primary'})+'</section>';
 }
@@ -224,7 +226,7 @@ function bookView(){
  return '<article class="book-row"><div><strong lang="en">'+l.en+'</strong><small>'+l.ko+'</small></div><div>'+l.example+'<small>'+labels[Engine.status(r)]+' · 정답 '+(r?.correct||0)+' / 오답 '+(r?.wrong||0)+'</small></div>'+speakButton(l.en)+'</article>';
  }).join('')+'</section><div class="actions">'+button('map','지도')+button('review','오답 복습')+'</div>';
 }
-const screens={VOICE_HALL:hallView,VOICE_PRACTICE:voicePracticeView,TODAY:todayView,TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView,DASHBOARD:dashboardView,CHAPTERS:chaptersView,VILLAGE:villageView,LOCATION:locationView,QUESTS:questsView,SHOP:()=>itemView(true),BAG:()=>itemView(false),DIALOGUE:dialogueView,VILLAGE_END:villageEnding};
+const screens={CLASSES:classView,PROFILE:profileView,SKILLS:skillView,EQUIPMENT:equipmentView,TRIALS:trialList,TRIAL_RUN:trialView,TRIAL_RESULTS:trialResults,VOICE_HALL:hallView,VOICE_PRACTICE:voicePracticeView,TODAY:todayView,TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView,DASHBOARD:dashboardView,CHAPTERS:chaptersView,VILLAGE:villageView,LOCATION:locationView,QUESTS:questsView,SHOP:()=>itemView(true),BAG:()=>itemView(false),DIALOGUE:dialogueView,VILLAGE_END:villageEnding};
 function render(){
  if(game.screen==='PAUSED'){showSettings();return;}
  const scene=app.querySelector('.battle');

@@ -15,6 +15,9 @@ function openSettings(mode=''){
 }
 function closeSettings(){
  game.confirm='';game.screen=game.pausedFrom;pauseDialog.close();
+ if(game.screen==='TRIAL_RUN'&&game.trial?.question.type==='listening'&&!AudioFX.canSpeak(game.profile.settings)){
+  Trials.assist(game.profile,game.trial,'fallback');
+ }
  if(!game.voice&&['QUESTION_ACTIVE','REVIEW'].includes(game.screen)&&game.task?.question.type==='listening'&&!AudioFX.canSpeak(game.profile.settings)){
   game.speechFallback=true;markQuestionAssist('fallback');
  }
@@ -186,6 +189,7 @@ function dispatch(action,id){
   if(action==='to-title'){game.battle=null;change('TITLE');}
   return;
  }
+ if(rpgAction(action,id))return;
  if(voiceAction(action,id))return;
  if(villageAction(action,id))return;
  if(action==='map'&&['BOOK','DEFEAT','CHAPTER_COMPLETE','LEARNING','DASHBOARD'].includes(game.screen)){game.battle=null;change('MAP');return;}
@@ -194,10 +198,10 @@ function dispatch(action,id){
  switch(game.screen){
  case 'TITLE':
   if(action==='new'){if(p.started)openSettings('new');else startNew();}
-  if(action==='continue'&&p.started){if(p.currentChapter===2)enterVillage();else change('MAP');}
+  if(action==='continue'&&p.started)offerClass();
   break;
  case 'INTRO':
-  if(action==='intro-skip'||(action==='intro-next'&&game.page===2))change('MAP');
+  if(action==='intro-skip'||(action==='intro-next'&&game.page===2))offerClass();
   else if(action==='intro-next'){game.page++;render();}
   break;
  case 'MAP':
@@ -236,7 +240,7 @@ function dispatch(action,id){
 }
 function handleClick(event){
  const el=event.target.closest('button[data-act]');
- if(!el||!el.isConnected||el.disabled||(event.detail>1&&el.dataset.act!=='word'))return;
+ if(!el||!el.isConnected||el.disabled||(event.detail>1&&!['word','trial-tile'].includes(el.dataset.act)))return;
  if(game.screen==='PAUSED'&&!pauseDialog.contains(el))return;
  AudioFX.play('ui',game.profile.settings);dispatch(el.dataset.act,el.dataset.id);
 }

@@ -1,7 +1,7 @@
 import { readFile, writeFile, rename, rm } from 'node:fs/promises';
 const source = name => readFile(new URL('./src/' + name, import.meta.url), 'utf8');
-const styles = await Promise.all(['styles.css','ui.css','effects.css','chapter.css','village-effects.css','village.css','spoken-effects.css','voice.css'].map(source));
-const scripts = await Promise.all(['questions.js','village-data.js','voice-data.js','voice-learning.js','engine.js','village-engine.js','audio.js','speech.js','art.js','village-art.js','game.js','journal.js','village-ui.js','village-controls.js','voice-ui.js','voice-controls.js','controls.js'].map(source));
+const styles = await Promise.all(['styles.css','ui.css','effects.css','chapter.css','village-effects.css','village.css','spoken-effects.css','voice.css','rpg.css','rpg-effects.css'].map(source));
+const scripts = await Promise.all(['questions.js','village-data.js','voice-data.js','voice-learning.js','rpg.js','engine.js','village-engine.js','trials.js','audio.js','speech.js','art.js','village-art.js','rpg-art.js','game.js','journal.js','village-ui.js','village-controls.js','voice-ui.js','voice-controls.js','rpg-ui.js','trial-ui.js','rpg-controls.js','controls.js'].map(source));
 const html = `<!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0c2426"><title>English Quest · The Lost Kingdom of Words</title>

@@ -1,0 +1,46 @@
+/* Each class uses the shared combat skeleton and a separate set of illustrated costume pieces. */
+.rpg-hero,.gear-art,.trial-room-art,.trial-guardian-art { display:block; width:100%; height:100%; }
+.rpg-vanguard { --class-light:#b7dbed; }
+.rpg-arcanist { --class-light:#d5c1ef; }
+.rpg-pathfinder { --class-light:#c8dba4; }
+.rpg-hero .class-orbit { animation: class-light 4.4s ease-in-out infinite alternate; }
+.rpg-arcanist .staff-crystal { transform-origin:1px -83px; animation: staff-light 3.2s ease-in-out infinite alternate; }
+.arena[data-fx="fire"] .rpg-arcanist .sword-arm { animation: star-staff .86s ease-out both; }
+.arena[data-fx="fire"] .rpg-arcanist .staff-crystal { filter:drop-shadow(0 0 4px #cfb9ff); }
+.arena[data-fx="guard"] .rpg-vanguard .spell-arm { transform:rotate(-27deg) translate(5px,-2px); }
+.arena[data-fx="heal"] .rpg-pathfinder .class-orbit { filter:brightness(1.35); }
+.trial-float,.trial-mote { animation: trial-hover 4.8s var(--lag,0s) ease-in-out infinite alternate; }
+.trial-mote { animation-duration:3.9s; }
+.echo-bell { transform-origin:0 -29px; animation: suspended-chime 5.4s ease-in-out infinite alternate; }
+.echo-haze { animation: mist-layer 9s ease-in-out infinite alternate; }
+.echo-resonance { animation: echo-harmonic 4.9s ease-in-out infinite alternate; }
+.stag-spine { transform-origin:117px 159px; animation: stag-breathe 3.9s ease-in-out infinite alternate; }
+.stag-head { transform-origin:85px 103px; animation: stag-watch 4.2s ease-in-out infinite alternate; }
+.owl-hover,.ray-drift { animation: trial-hover 4.3s ease-in-out infinite alternate; }
+.folio-wing { transform-origin:0 5px; animation: parchment-wing 2.7s ease-in-out infinite alternate; }
+.owl-head { transform-origin:116px 115px; animation: owl-watch 5.3s ease-in-out infinite alternate; }
+.echo-fin { transform-origin:0 3px; animation: ray-fin 3.8s ease-in-out infinite alternate; }
+.trial-arena[data-fx="hit"] .trial-guardian-art { animation: guardian-hit .44s ease-out both; }
+.trial-arena[data-fx="win"] .trial-guardian-art { animation: guardian-release .8s ease-out both; }
+.rpg-loot-reveal { animation: reward-seal .67s cubic-bezier(.18,.77,.21,1) both; }
+.rpg-loot-reveal .gear-art { filter:drop-shadow(0 0 8px #c8b17b60); }
+@keyframes class-light { from { opacity:.54; } to { opacity:.92; } }
+@keyframes staff-light { to { transform:translateY(-1.4px); filter:brightness(1.15); } }
+@keyframes star-staff { 24% { transform:rotate(-28deg); } 43% { transform:rotate(-37deg); } 66% { transform:rotate(13deg); } }
+@keyframes trial-hover { from { transform:translateY(1px); } to { transform:translateY(-5px); } }
+@keyframes suspended-chime { from { transform:rotate(-2deg); } to { transform:rotate(2deg); } }
+@keyframes mist-layer { to { transform:translateX(11px); opacity:.09; } }
+@keyframes echo-harmonic { to { opacity:.57; } }
+@keyframes stag-breathe { to { transform:translateY(-.8px) rotate(-.8deg); } }
+@keyframes stag-watch { to { transform:rotate(3deg); } }
+@keyframes parchment-wing { from { transform:rotate(-2deg); } to { transform:rotate(6deg) scaleY(.96); } }
+@keyframes owl-watch { to { transform:rotate(-4deg); } }
+@keyframes ray-fin { from { transform:rotate(-7deg) scaleY(.97); } to { transform:rotate(4deg); } }
+@keyframes guardian-hit { 35% { transform:translateX(4px) rotate(2deg); filter:brightness(1.38); } }
+@keyframes guardian-release { 35% { filter:brightness(1.4); } to { transform:translateY(-8px) scale(.95); opacity:.22; } }
+@keyframes reward-seal { from { transform:translateY(7px) scale(.96); opacity:.35; } 72% { transform:scale(1.02); } to { transform:none; opacity:1; } }
+@media (prefers-reduced-motion:reduce) {
+  .rpg-hero *, .trial-room-art *, .trial-guardian-art *, .trial-arena .trial-guardian-art, .rpg-loot-reveal {
+    animation:none !important;
+  }
+}

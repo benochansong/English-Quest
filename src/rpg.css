@@ -1,0 +1,151 @@
+/* Crystal Hall: enamel class plates, brass fittings and illuminated inspection panels. */
+.camp-links,.rpg-nav,.class-decision,.rpg-heading,.points-band,.slot-row,.passives>div,.rpg-loot-reveal,.trial-tally{display:flex;gap:12px;align-items:center;}
+.camp-links,.rpg-nav{flex-wrap:wrap;gap:7px;margin:12px 0;}
+.camp-links .btn,.rpg-nav .btn {min-height:44px;padding:8px 13px;}
+.camp-links .btn {color:#f5dc9b;border-color:#ab9764;background:linear-gradient(115deg,#334c40,#1a302a);}
+.rpg-nav {padding-bottom:10px;border-bottom:1px solid #b6aa784f;}
+.rpg-nav .btn[aria-pressed=true],.slot-button[aria-pressed=true],.gear-tile[aria-pressed=true] {border-color:#f1d18c;box-shadow:inset 0 0 0 1px #ddbf756a;}
+.rpg-nav .btn:last-child {margin-left:auto;}
+.class-gallery,.trial-doors,.gear-tiles,.skill-layout,.armory-layout,.hero-record,.class-inspector,.trial-brief {display:grid;gap:clamp(12px,1.8vw,24px);}
+.class-gallery,.trial-doors {grid-template-columns:repeat(3,minmax(0,1fr));}
+.btn.class-card,.btn.trial-door {padding:0;overflow:hidden;text-align:left;border-radius:6px 6px 10px 10px;background:#183130;border:1px solid #8790779c;transition:border-color .2s,box-shadow .2s;}
+.class-card[aria-pressed=true],.trial-door[aria-pressed=true] {border-color:#f1d298;box-shadow:0 0 0 1px #dfbe77,0 8px 23px #101c2399;}
+.class-stage {display:block;height:clamp(145px,18vw,248px);position:relative;isolation:isolate;}
+.tone-vanguard {--plate:#486783;--glow:#dcc895;}
+.tone-arcanist {--plate:#625074;--glow:#d6b7ef;}
+.tone-pathfinder {--plate:#486d58;--glow:#c4d597;}
+.class-stage,.hero-portrait {background:radial-gradient(at 50% 28%,var(--plate),transparent 67%),linear-gradient(150deg,#213435,#13252b);}
+.class-stage:before,.hero-portrait:before {content:'';position:absolute;inset:8px;border:1px solid #ddc68c48;pointer-events:none;}
+.halo {position:absolute;left:50%;top:48%;width:min(66%,184px);aspect-ratio:1;border:1px solid var(--glow);box-shadow:0 0 18px #ead69c26,inset 0 0 16px #ead69c26;border-radius:50%;transform:translate(-50%,-50%);opacity:.62;pointer-events:none;}
+.halo:after {content:'';position:absolute;inset:8%;border:1px dashed var(--glow);border-radius:50%;transform:rotate(-15deg);}
+.class-stage .rpg-hero,.hero-figure .rpg-hero {position:relative;filter:drop-shadow(0 8px 4px #0b181c7a);padding:9px;}
+.class-caption,.door-caption {display:block;padding:clamp(11px,1.8vw,20px);border-top:1px solid #cab47f7a;}
+.class-caption i,.gear-detail i {display:block;font:italic .95rem Georgia,serif;color:#cfbc92;}
+.class-caption strong,.door-caption strong {display:block;color:#ffe8b9;font:700 clamp(1.25rem,2.2vw,1.9rem) var(--serif);margin:4px 0;}
+.class-caption small,.door-caption>span,.trial-brief small,.gear-detail>small {font-size:.85rem;color:#cfddcf;}
+.class-inspector,.trial-brief {grid-template-columns:1fr 1fr;padding:clamp(16px,2.3vw,30px);margin:16px 0;background:linear-gradient(125deg,#233d37,#1b3032);}
+.class-inspector h3,.trial-brief h3,.gear-detail h3,.skill-inspector h3,.rpg-heading h2,.trial-results h2 {font:700 clamp(1.45rem,2.5vw,2.15rem) var(--serif);margin:5px 0 10px;}
+.stat-gain,.skill-inspector .rpg-message,.rpg-message {color:#f5d694;font-weight:650;}
+.passives {display:grid;gap:12px;border-left:1px solid #9aac8559;padding-left:18px;}
+.passives b,.passives small {display:block;}
+.passives small,.gear-tile small,.slot-button small,.class-decision p,.class-inspector p,.rpg-help p,.gear-detail p,.skill-inspector p {color:#cbdace;line-height:1.6;}
+.passives .ui-icon {color:#dbc99a;}
+.class-decision,.rpg-heading,.points-band {justify-content:space-between;flex-wrap:wrap;}
+.class-decision p {margin:4px 0;}
+.class-decision .actions {margin:0;}
+.rpg-help {border:1px solid #97a58c61;border-radius:6px;margin-top:15px;padding:3px 16px;background:#1b332f;}
+.rpg-help summary {cursor:pointer;padding:10px 0;min-height:44px;color:#ecd6a7;}
+.rpg-help>p {margin:2px 0 12px;}
+.hero-record {grid-template-columns:minmax(210px,.7fr) minmax(0,1.45fr);}
+.hero-portrait {position:relative;overflow:hidden;isolation:isolate;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:24px 16px;min-height:340px;}
+.hero-figure {position:relative;height:clamp(220px,28vw,360px);width:100%;margin:8px 0;}
+.hero-identity,.hero-portrait>.eyebrow {position:relative;text-align:center;}
+.hero-identity h2 {font:700 2rem var(--serif);margin:5px 0 12px;}
+.hero-identity i {font:italic 1.15rem Georgia;color:#dbc59a;}
+.hero-ledger {display:grid;align-content:start;gap:14px;min-width:0;}
+.stat-ledger,.slots-panel,.skill-inspector,.gear-detail,.gear-picker,.loadout,.trial-results,.trial-console {padding:clamp(14px,2.3vw,28px);}
+.hero-meter {margin:8px 0;}
+.hero-meter label {display:flex;justify-content:space-between;font-size:.88rem;}
+.hero-meter progress {width:100%;height:8px;display:block;border:none;border-radius:4px;overflow:hidden;margin-top:5px;background:#142b2d;color:#9dba9c;}
+.hero-meter progress::-webkit-progress-bar {background:#142b2d;}
+.hero-meter progress::-webkit-progress-value {background:linear-gradient(90deg,#59897e,#abc2a0);}
+.hero-meter.xp progress::-webkit-progress-value {background:linear-gradient(90deg,#946f43,#dcc27b);}
+.stats-table {border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;font-size:.9rem;margin:16px 0;}
+.stats-table caption {text-align:left;font-weight:700;color:#efdcb0;margin-bottom:6px;}
+.stats-table th,.stats-table td {padding:7px 3px;text-align:center;border-bottom:1px solid #9ca99136;}
+.stats-table tr>:first-child {text-align:left;}
+.stats-table thead th {font-weight:500;font-size:.77rem;color:#b5c9bb;}
+.stats-table td strong {color:#f4d7a0;}
+.points-band {padding:12px 15px;background:#2a4037;border:1px solid #a1976359;border-radius:5px;}
+.points-band b,.slot-button b {color:#f1d8a3;}
+.class-techniques {font-size:.86rem;line-height:1.65;}
+.slots-panel h3,.gear-picker h3 {font:700 1.2rem var(--serif);margin:0 0 12px;}
+.slot-row {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+.btn.slot-button,.btn.gear-tile {display:flex;align-items:center;gap:8px;text-align:left;min-width:0;padding:7px 9px;}
+.slot-button b,.slot-button small,.gear-tile b,.gear-tile small {display:block;}
+.slot-symbol,.gear-mini {display:grid;place-items:center;width:42px;height:46px;flex-shrink:0;color:#d4c69b;}
+.slot-symbol svg.gear-art,.gear-mini svg {width:100%;height:100%;}
+.skill-layout {grid-template-columns:minmax(0,1.8fr) minmax(220px,.8fr);margin-top:15px;align-items:start;}
+.constellation {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:clamp(10px,2vw,25px);background:radial-gradient(ellipse at 50% 65%,#3b5058,#1b3138 64%,#142630);position:relative;overflow:hidden;}
+.skill-branch {--rune:#e4c47e;text-align:center;}
+.branch-arcane {--rune:#cfaae8;}.branch-survival {--rune:#a5c59a;}
+.skill-branch h3 {font:1.16rem var(--serif);color:var(--rune);}
+.btn.skill-node {width:100%;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 3px;background:#142b30da;border-color:#8b9c956e;position:relative;}
+.skill-node small {font-size:.78rem;color:#bfccc0;}
+.skill-node.learned {background:#284139;border-color:#a4bf88;}
+.skill-node.available .skill-stone {box-shadow:0 0 14px #e0d59955;}
+.skill-node[aria-pressed=true] {outline:1px solid var(--rune);outline-offset:2px;}
+.skill-stone {display:grid;place-items:center;width:43px;height:43px;color:var(--rune);border:1px solid var(--rune);border-radius:45% 45% 42% 42%;background:linear-gradient(135deg,#52625b,#182f30);}
+.skill-stone svg {width:24px;height:24px;}
+.skill-link {height:26px;width:2px;margin:auto;background:var(--rune);box-shadow:0 0 6px var(--rune);}
+.respec-confirm {margin-top:12px;padding:16px;border-color:#d1b373;}
+.armory-layout {grid-template-columns:minmax(175px,.82fr) minmax(210px,1fr) minmax(240px,1.2fr);align-items:start;}
+.loadout {background:radial-gradient(at 50% 18%,#446653,#1d3333 64%);}
+.loadout-figure {height:165px;margin-bottom:6px;}
+.worn-slots,.gear-tiles {display:grid;gap:8px;}
+.gear-display {height:130px;background:radial-gradient(ellipse at center,#66887866,transparent 68%);margin-bottom:12px;}
+.gear-kicker,.rarity-tag {font-size:.8rem;}
+.rarity-tag {display:inline-block;padding:3px 7px;border:1px solid currentColor;border-radius:4px;}
+.rarity-tag.common {color:#cbd1bd;}.rarity-tag.uncommon {color:#a9cfa5;}.rarity-tag.rare {color:#a9cee5;}.rarity-tag.epic {color:#d3b2e6;}
+.rare-common{--edge:#a5ada2;}.rare-uncommon{--edge:#91b38e;}.rare-rare{--edge:#8eafcb;}.rare-epic{--edge:#b79acf;}
+.gear-detail,.gear-tile,.shop-item[class*=rare-] {border-left:3px solid var(--edge);}
+.gear-detail i {margin-top:10px;}
+.gear-comparison {border-block:1px solid #a4ab895c;padding:10px 0;margin:12px 0;}
+.gear-comparison small,.gear-comparison b {display:block;}
+.gear-comparison p {margin:3px 0;}
+.gear-comparison p span {display:block;}
+.gear-comparison small {font-size:.82rem;color:#b9ccb9;}
+.rpg-loot-reveal {border:1px solid var(--edge);background:linear-gradient(110deg,#30433c,#263a3d);padding:10px 16px;border-radius:7px;margin:16px auto;width:fit-content;}
+.rpg-loot-reveal>svg {width:58px;height:65px;}
+.rpg-loot-reveal small,.rpg-loot-reveal strong,.rpg-loot-reveal span {display:block;text-align:left;}
+.rpg-loot-reveal strong {color:#f1d9a5;font:700 1.2rem var(--serif);}
+.door-image {display:block;height:clamp(130px,15vw,192px);position:relative;overflow:hidden;}
+.door-image>.trial-room-art {position:absolute;inset:0;}
+.door-watcher {position:absolute;inset:14% 10% 1%;}
+.door-caption small,.trial-scene-label>span {font:italic .92rem Georgia,serif;color:#dbc9a7;}
+.trial-brief {align-items:center;grid-template-columns:1.5fr 1fr;}
+.trial-play {max-width:1130px;margin:auto;}
+.trial-arena {height:clamp(240px,36vh,390px);position:relative;overflow:hidden;border:1px solid #b1a4798c;border-radius:9px 9px 0 0;background:#193539;}
+.trial-arena>.trial-room-art,.trial-vignette {position:absolute;inset:0;}
+.trial-vignette {background:linear-gradient(0deg,#122329c9,transparent 25%,transparent 60%,#14242ac9);}
+.trial-fighter,.trial-guardian {position:absolute;bottom:8%;height:70%;width:32%;filter:drop-shadow(0 4px 4px #14232580);}
+.trial-fighter {left:6%;}.trial-guardian {right:5%;}
+.trial-scene-label {position:absolute;top:12px;left:18px;text-shadow:0 2px 4px #101d22;}
+.trial-scene-label h2 {margin:2px 0;color:#fff0c9;font:700 1.4rem var(--serif);}
+.seal-strip {position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;gap:10px;justify-content:flex-end;padding:6px 12px;background:#11292bbf;}
+.seal-strip b {margin-right:auto;font-size:.85rem;}
+.seal-strip>span {display:flex;gap:6px;}
+.seal-strip i {width:9px;height:9px;transform:rotate(45deg);border:1px solid #c3c69c;}
+.seal-strip i.released {background:#d0e7b9;box-shadow:0 0 8px #badac5;}
+.trial-console {border-radius:0 0 8px 8px;min-height:165px;}
+.trial-console h3 {line-height:1.5;margin:10px 0;}
+.trial-feedback>b {color:#efd498;}
+.trial-cue {padding:8px 12px;border-left:2px solid #ad9ac9;color:#e9e1f1;}
+.trial-results {max-width:850px;margin:16px auto;}
+.trial-tally {justify-content:space-between;flex-wrap:wrap;color:#ead7ab;border-block:1px solid #a99d704d;padding:12px 0;}
+.trial-recap {padding:0;list-style:none;}
+.trial-recap li {display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #96a68b50;}
+.trial-recap small,.trial-recap strong,.trial-recap span {display:block;}
+.trial-recap small {font-size:.78rem;color:#c9b78c;}
+.trial-recap p {margin:3px 0;font-size:.89rem;color:#c6d6c9;}
+@media(max-width:860px){
+ .armory-layout{grid-template-columns:1fr 1.2fr;}.loadout{grid-column:1/-1;display:flex;align-items:center;gap:16px;}.loadout-figure{height:116px;width:96px;}.worn-slots{flex:1;grid-template-columns:repeat(3,minmax(0,1fr));}
+ .skill-layout{grid-template-columns:1.5fr 1fr;}.hero-record{grid-template-columns:minmax(170px,.65fr) minmax(0,1.5fr);}
+ .slot-row .slot-button{flex-direction:column;}
+}
+@media(max-width:620px){
+ .camp-links,.rpg-nav{gap:5px;}.rpg-nav .btn,.camp-links .btn{padding:7px;min-height:44px;font-size:.84rem;}
+ .class-gallery,.trial-doors{gap:6px;}.class-stage{height:115px;}.class-caption,.door-caption{padding:8px 5px;}
+ .class-caption strong,.door-caption strong{font-size:1rem;}.class-caption small,.door-caption small{font-size:.72rem;}.class-caption i{font-size:.76rem;}
+ .class-inspector,.trial-brief,.skill-layout,.hero-record{grid-template-columns:1fr;}
+ .passives{border-left:0;padding-left:0;border-top:1px solid #9aac8559;padding-top:12px;}
+ .hero-portrait{min-height:160px;flex-direction:row;justify-content:space-around;padding:10px;}.hero-portrait>.eyebrow{display:none;}.hero-figure{height:152px;width:46%;margin:0;}.hero-identity h2{font-size:1.65rem;}
+ .stats-table{font-size:.82rem;}.armory-layout{grid-template-columns:1fr;}.loadout{padding:10px;gap:6px;}.loadout-figure{width:68px;height:100px;}.worn-slots{gap:3px;}
+ .worn-slots .slot-button{flex-direction:column;font-size:.76rem;padding:4px;}.slot-symbol{height:33px;width:34px;}
+ .gear-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;}.gear-mini{width:28px;height:34px;}
+ .gear-tile{font-size:.84rem;}.gear-display{height:94px;}.skill-branch h3{font-size:.99rem;}
+ .door-image{height:108px;}.door-caption>span{display:block;font-size:.72rem;}
+ .trial-brief{gap:10px;}.trial-arena{height:220px;}.trial-fighter,.trial-guardian{height:62%;bottom:12%;width:39%;}.trial-fighter{left:2%;}.trial-guardian{right:2%;}
+ .trial-scene-label h2{font-size:1.1rem;}.trial-tally{font-size:.9rem;}
+}
+@media(prefers-reduced-motion:reduce){.class-card,.trial-door{transition:none!important;}}

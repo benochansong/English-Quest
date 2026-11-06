@@ -5,7 +5,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const {chromium} = require('playwright');
-const {checkLayout,createOfflinePage,enterStage,ctl,click,wait,visible,rapidClick,profile,encounter} = require('./browser.cjs');
+const {checkLayout,createOfflinePage,enterStage,ctl,click,wait,visible,rapidClick,profile,encounter,continueSaved} = require('./browser.cjs');
 const pictures = process.argv.includes('--screenshots') ? path.resolve(__dirname,'../docs/screenshots') : null;
 
 function installVoiceDoubles({recognition,output}) {
@@ -46,13 +46,14 @@ async function loadMigrated(browser,options) {
   const old=JSON.parse(source);
   await page.evaluate(raw=>localStorage.setItem('EnglishQuest.v3',raw),source);
   await page.reload();
-  await click(page,'continue');
+  await continueSaved(page);
   const migrated=await profile(page);
-  assert.equal(migrated.version,4);
+  assert.equal(migrated.version,5);
   for(const key of ['level','hp','gold','xp','completed','chapterComplete','currentChapter','learning','mistakes','history','schedule','village']) {
     assert.deepEqual(migrated[key],old[key],'v0.3 migration lost '+key);
   }
-  for(const key of ['marked','achievements']) assert.deepEqual([...migrated[key]].sort(),[...old[key]].sort());
+  assert.deepEqual([...migrated.marked].sort(),[...old.marked].sort());
+  for(const id of old.achievements) assert.ok(migrated.achievements.includes(id));
   for(const [key,value] of Object.entries(old.settings)) assert.equal(migrated.settings[key],value);
   assert.equal(await page.evaluate(()=>localStorage.getItem('EnglishQuest.v3')),source);
   assert.equal(await page.evaluate(()=>voiceQa.permissionRequests),0,'no recognition on boot');
@@ -369,7 +370,7 @@ async function linkedQuest(browser) {
   try{
     const raw=await fs.readFile(path.join(__dirname,'fixtures/v02-completed.json'),'utf8');
     await page.evaluate(source=>localStorage.setItem('EnglishQuest.chapter1.v2',source),raw);
-    await page.reload();await click(page,'continue');
+    await page.reload();await continueSaved(page);
     await click(page,'chapters');await click(page,'chapter',2);await click(page,'destination','market');
     await click(page,'accept-quest',4);await click(page,'village-home');await click(page,'voice-hall');
     const before=await profile(page);
