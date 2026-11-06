@@ -7,7 +7,7 @@ const game = {
   effect: '', amount: '', pausedFrom: '', confirm: '', reviewFrom: 'MAP',
   reviewSession: null, reviewResult: null, hint: '', timer: 0, speechFallback: false,
   mapSelection: 0, flipped: new Set(), impactPending: false, displayHp: null, guarded: false,
-  battleIntent: 'normal', achievementStart: []
+  battleIntent: 'normal', achievementStart: [], location:'square', dialogue:null, dialogueResult:null, offer:null, purchaseNotice:''
 };
 const saga = [
   ['사라진 인사', '아침마다 종소리처럼 울리던 “Hello”가, 오늘은 들리지 않는군요. 숲에서 시작된 침묵이 왕국의 이름까지 지우고 있답니다.'],
@@ -20,7 +20,8 @@ const abilityInfo = {
   sword:['검격','단어의 뜻','sword'], fire:['화염 마법','문장 완성','flame'],
   guard:['수호 방패','표현의 뜻','shield'], heal:['치유 마법','단어 배열','leaf']
 };
-const stageCards = [lessons.slice(0,10), lessons.slice(8), lessons.slice(9)];
+const forestLessons = lessons.filter(l=>l.chapter!==2);
+const stageCards = [forestLessons.slice(0,10), forestLessons.slice(8), forestLessons.slice(9)];
 const koreanExamples = {hello:'안녕, 친구야.',thanks:'고마워요, 로완.',apple:'나는 사과를 좋아해요.',water:'나는 물을 마셔요.',bread:'나는 빵을 먹어요.',book:'나는 책을 가지고 있어요.',sword:'나는 검을 가지고 있어요.',forest:'숲은 조용해요.',iam:'나는 학생이에요.',ihave:'나는 책을 가지고 있어요.',ilike:'나는 사과를 좋아해요.',iwant:'물을 좀 원해요.',ieat:'나는 빵을 먹어요.',idrink:'나는 물을 마셔요.'};
 const labels = {'New':'새 표현','Learning':'익히는 중','Review Needed':'복습 필요','Familiar':'익숙한 표현'};
 const paths = {
@@ -56,7 +57,7 @@ function titleView(){
   const hasSave=game.profile.started;
   const begin=button('new',icon('sword')+' 게임 시작',{cl:hasSave?'':'primary'});
   const resume=button('continue','이어하기',{cl:hasSave?'primary':'',disabled:!hasSave});
-  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 제1장 · 속삭이는 숲</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.2</div></section>';
+  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.3</div></section>';
 }
 function introView(){
   const item=saga[game.page];
@@ -93,7 +94,7 @@ function mapView(){
     '<section class="route-column"><h3>탐험 경로</h3><div class="stages">'+routes+'</div>'+
     '<div class="stats-band"><b>모험가 Lv. '+p.level+'</b><span>경험치 '+p.xp+' / '+stats.nextXp+'</span><span>금화 '+p.gold+'</span></div>'+
     '<div class="actions journal-links">'+button('book',icon('book')+' 단어 도감')+button('review',icon('leaf')+' 복습')+
-    button('dashboard',icon('star')+' 학습 기록')+(p.chapterComplete?button('ending','챕터 결말'):'')+'</div></section></div>';
+    button('dashboard',icon('star')+' 학습 기록')+button('chapters',p.chapterComplete?'제2장 · 마을로':'장 선택')+(p.chapterComplete?button('ending','챕터 결말'):'')+'</div></section></div>';
 }
 function statBar(label,hp,max,right=false){
   return '<div class="stat '+(right?'right':'')+'"><strong>'+label+'</strong><div class="hp" role="meter" aria-label="'+label+' 체력" aria-valuenow="'+hp+'" aria-valuemin="0" aria-valuemax="'+max+'"><span style="width:'+100*hp/max+'%"></span></div><b>'+hp+' / '+max+' HP</b></div>';
@@ -104,6 +105,7 @@ function battleRibbon() {
   if(b.stage===3 && game.battleIntent==='charge')intent='왕의 마력 충전';
   if(b.stage===3 && game.battleIntent==='heavy')intent='강타 예고 · 수정핵 노출';
   let status=(b.stage===3?'왕관 '+b.bossPhase+'단계 · ':'')+intent;
+  if(b.stage>=4)status=(b.charm?'부적 방어 · ':'')+(b.training?'오답 연습':villageIntent(b));
   if(game.screen==='VICTORY')status='전투 종료 · 승리';
   if(game.screen==='DEFEAT')status='전투 종료 · 패배';
   return '<span class="combo '+(b.combo>1?'active':'')+'">'+icon('star')+' 연속 정답 <b>×'+b.combo+'</b>'+
@@ -112,23 +114,23 @@ function battleRibbon() {
 function arena(){
   const b=game.battle,n=game.stage,foe=Engine.enemies[n-1];
   return '<div class="arena" data-stage="'+n+'" data-phase="'+b.bossPhase+'" data-intent="'+game.battleIntent+'" data-fx="'+game.effect+'">'+
-    Art.forest(n)+'<div class="arena-shade"></div><div class="combatant hero">'+Art.hero()+'</div><div class="combatant enemy '+(n===3?'boss':'')+'">'+Art.slime(n)+
+    (n>3?VillageArt.scene(b.training?'square':villageQuest(n).location,true):Art.forest(n))+'<div class="arena-shade"></div><div class="combatant hero">'+Art.hero()+'</div><div class="combatant enemy '+(n===3||n===6?'boss':'')+'">'+(n>3?VillageArt.enemy(n):Art.slime(n))+
     '</div><div class="fx"></div><div class="arena-status">'+statBar('모험가 · Lv. '+game.battleLevel,b.hp,game.battleMaxHp)+statBar(foe.name,b.enemyHp,b.enemyMaxHp,true)+'</div></div>';
 }
 function abilitiesView(){
  const b=game.battle;
- const tip=Engine.charging(b)?'왕이 마력을 모읍니다. 이번 턴에는 반격이 없어요.':
+ const tip=b.stage>=4?villageTactic(b):Engine.charging(b)?'왕이 마력을 모읍니다. 이번 턴에는 반격이 없어요.':
    Engine.heavy(b)?'왕의 강타 예고! 방패로 막아 다음 공격을 강화하거나, 열린 수정핵을 노리세요.':
    b.counterReady?'반격 준비 완료 · 다음 검격 또는 화염에 피해 +12':'사용할 기술을 고르세요.';
  return '<div class="battle-title"><h2>'+tip+'</h2><span class="hint">'+b.turn+'번째 턴</span></div><div class="abilities">'+Object.entries(abilityInfo).map(([id,[name,desc,glyph]])=>{
    const swordTask=Engine.exposed(b)?'듣기 도전':b.stage>=2&&b.turn%2===0?'한국어를 영어로':'단어의 뜻';
-   const enabled=Engine.available(b,id),cd=b.cooldowns[id],note=enabled?(id==='sword'?swordTask:desc):cd?cd+'턴 후 사용':'두 번째 숲길에서 개방';
+   const enabled=Engine.available(b,id),cd=b.cooldowns[id],note=enabled?(b.stage>=4?villageAbilityTask(b,id):id==='sword'?swordTask:desc):cd?cd+'턴 후 사용':b.training?'연습은 검격으로 진행':'두 번째 숲길에서 개방';
    return button('ability',icon(glyph)+'<strong>'+name+'</strong><small>'+note+'</small>',{id,cl:'ability',disabled:!enabled});
- }).join('')+'</div>';
+ }).join('')+'</div>'+combatItemButtons(b);
 }
 function questionView(context=''){
  const q=game.task.question, order=q.type==='order', listen=q.type==='listening';
- const hint=q.type==='sentence'&&q.instruction.includes('___')?'<p>'+koreanExamples[q.tags[0]]+'</p>':'';
+ const hint=q.chapter!==2&&q.type==='sentence'&&q.instruction.includes('___')?'<p>'+koreanExamples[q.tags[0]]+'</p>':'';
  const listenUI=listen?'<div class="actions">'+button('replay',icon('sound')+' 다시 듣기',{disabled:!AudioFX.canSpeak(game.profile.settings)})+button('transcript','문장 보기')+'</div>'+(!AudioFX.canSpeak(game.profile.settings)||game.speechFallback?'<p>듣기 대체 문장 · <b lang="en">'+safe(q.phrase)+'</b></p>':''):'';
  const chosen=game.order.map(i=>game.task.choices[i]);
  const legend=context || (abilityInfo[game.battle.ability][0]+' · '+game.battle.turn+'번째 턴');
@@ -136,30 +138,30 @@ function questionView(context=''){
 }
 function expression(q){
  if(q.type==='sentence'&&q.instruction.includes('___'))return q.phrase.replace('___',q.answer);
- if(q.type==='sentence'||q.type==='order')return q.answer;
+ if(['dialogue','sentence','order'].includes(q.type))return q.answer;
  return q.phrase;
 }
 function feedbackView(q,correct){
- const translation=q.type==='sentence'?'<div>'+safe(koreanExamples[q.tags[0]])+'</div>':'';
+ const translation=q.type==='sentence'?'<div>'+safe(q.chapter===2?lessons.find(l=>l.id===q.tags[0]).ko:koreanExamples[q.tags[0]])+'</div>':'';
  return '<div class="feedback"><strong>'+(correct?'정답이에요!':'다시 익혀 볼까요?')+'</strong><h3 lang="en">'+safe(expression(q))+'</h3>'+translation+'<p>정답 · '+safe(q.answer)+'<br>'+safe(q.explanation)+'</p>'+speakButton(expression(q))+'</div>';
 }
 function battlePanel(){
  const b=game.battle, name=Engine.enemies[game.stage-1].name;
  let panel='';
  switch(game.screen){
- case 'BATTLE_READY':panel='<h2>'+name+' 등장</h2><p>'+(game.stage===1?'검격을 고르고 영어 단어의 뜻을 맞혀 보세요. 설명을 읽고 계속하면 공격합니다.':game.stage===2?'화염, 방어, 치유가 열렸습니다. 치유는 단어를 순서대로 눌러 사용하세요.':'왕이 마력을 충전한 다음 턴에는 강타를 씁니다. 방패를 맞히면 피해가 줄고 다음 공격이 강해져요. 열린 수정핵을 바로 공격해도 좋아요.')+'</p>'+button('fight','전투 시작',{cl:'primary'});break;
+ case 'BATTLE_READY':panel='<h2>'+name+' 등장</h2><p>'+(game.stage>=4?villageTactic(b):game.stage===1?'검격을 고르고 영어 단어의 뜻을 맞혀 보세요. 설명을 읽고 계속하면 공격합니다.':game.stage===2?'화염, 방어, 치유가 열렸습니다. 치유는 단어를 순서대로 눌러 사용하세요.':'왕이 마력을 충전한 다음 턴에는 강타를 씁니다. 방패를 맞히면 피해가 줄고 다음 공격이 강해져요. 열린 수정핵을 바로 공격해도 좋아요.')+'</p>'+button('fight','전투 시작',{cl:'primary'});break;
  case 'PLAYER_SELECT':panel=abilitiesView();break;
  case 'QUESTION_ACTIVE':panel=questionView();break;
- case 'ANSWER_FEEDBACK':panel=feedbackView(game.task.question,game.feedback.correct)+(game.feedback.correct&&b.combo>1?'<p class="streak-line">'+icon('star')+' 연속 정답 '+b.combo+'회'+(b.combo===4?' · 최대 보너스':'')+'</p>':'')+button('resolve','계속 · 행동 실행',{cl:'primary'});break;
+ case 'ANSWER_FEEDBACK':if(game.feedback.retry){panel=feedbackView(game.task.question,false)+'<p>문장 첫 단어는 <b>'+safe(game.task.question.choices[0])+'</b>예요. 다시 이어 보세요. 다시 시도하는 동안 골렘은 기다립니다.</p>'+button('broken-retry','문장 복원 다시 하기',{cl:'primary'});break;}panel=feedbackView(game.task.question,game.feedback.correct)+(game.feedback.correct&&b.combo>1?'<p class="streak-line">'+icon('star')+' 연속 정답 '+b.combo+'회'+(b.combo===4?' · 최대 보너스':'')+'</p>':'')+button('resolve','계속 · 행동 실행',{cl:'primary'});break;
  case 'PLAYER_ACTION':panel='<h2>'+game.message+'</h2>';break;
  case 'ENEMY_ACTION':panel='<h2>'+game.message+'</h2>';break;
- case 'VICTORY':panel='<div class="eyebrow">VICTORY</div><h2>'+name+' 격파</h2><p>숲에 목소리가 돌아옵니다.</p>'+button('rewards','보상 확인',{cl:'primary'});break;
+ case 'VICTORY':panel='<div class="eyebrow">VICTORY</div><h2>'+name+' 격파</h2><p>'+(b.training?'오답 연습을 마쳤습니다.':game.stage>=4?'마을에 말소리가 되살아납니다.':'숲에 목소리가 돌아옵니다.')+'</p>'+button('rewards','보상 확인',{cl:'primary'});break;
  case 'DEFEAT':panel='<h2>잠시 숨을 고르세요</h2><p>배운 표현은 수첩에 남아 있어요. 체력을 회복하고 다시 도전할 수 있습니다.</p><div class="actions">'+button('retry','다시 도전',{cl:'primary'})+button('review','오답 복습')+button('map','지도')+'</div>';break;
  }
  return panel;
 }
 function battleView(){
- return '<section class="battle" data-stage="'+game.stage+'"><div class="battle-heading"><span class="eyebrow">STAGE 0'+game.stage+'</span><h2>'+zones[game.stage-1]+'</h2></div>'+arena()+'<div class="battle-ribbon">'+battleRibbon()+'</div><section class="panel battle-panel" aria-live="polite">'+battlePanel()+'</section></section>';
+ return '<section class="battle" data-stage="'+game.stage+'"><div class="battle-heading"><span class="eyebrow">STAGE 0'+game.stage+'</span><h2>'+(game.stage>3?(game.battle.training?'광장 · 연습 전투':practiceNames[game.stage-4]):zones[game.stage-1])+'</h2></div>'+arena()+'<div class="battle-ribbon">'+battleRibbon()+'</div><section class="panel battle-panel" aria-live="polite">'+battlePanel()+'</section></section>';
 }
 // Keep character art and HP bars mounted throughout a fight. The turn panel changes independently.
 function updateBattle(scene){
@@ -189,6 +191,7 @@ function updateBattle(scene){
  app.querySelector('[data-act="settings"]').disabled=['PLAYER_ACTION','ENEMY_ACTION'].includes(game.screen);
 }
 function rewardView(){
+ if(game.stage>=4)return villageReward();
  const r=game.reward, stage=game.stage;
  const story=['잎끝의 물방울이 다시 숲의 이름을 속삭입니다.','샘의 물결을 따라 마지막 왕좌로 가는 길이 열렸습니다.','세 수정의 목소리가 하나로 겹쳐 숲을 깨웁니다.'];
  const earned=Engine.achievements.filter(a=>game.profile.achievements.includes(a.id)&&!game.achievementStart.includes(a.id));
@@ -200,21 +203,21 @@ function rewardView(){
    (!r.replay&&stage<3?'<p>새로 열린 길 · '+zones[stage]+'</p>':'')+button('onwards',stage===3?'로완에게 돌아가기':'지도 펼치기',{cl:'primary'})+'</section>';
 }
 function endingView(){
- return '<section class="center-card panel reward"><div class="reward-crystal">'+icon('star')+'</div>'+heading('CHAPTER COMPLETE','숲이 다시 속삭입니다')+'<div class="dialogue"><div class="portrait">'+Art.rowan()+'</div><p>“들리나요? 물가에서도, 나뭇잎에서도 말이 되살아나고 있어요. 고마워요, 모험가여. <b lang="en">Thank you.</b>”<br>— 로완</p></div><p>획득 칭호 · <strong>Word Apprentice</strong></p><div class="actions">'+button('book','단어 도감',{cl:'primary'})+button('review','오답 복습')+button('map','숲 지도')+'</div></section>';
+ return '<section class="center-card panel reward"><div class="reward-crystal">'+icon('star')+'</div>'+heading('CHAPTER COMPLETE','숲이 다시 속삭입니다')+'<div class="dialogue"><div class="portrait">'+Art.rowan()+'</div><p>“들리나요? 물가에서도, 나뭇잎에서도 말이 되살아나고 있어요. 고마워요, 모험가여. <b lang="en">Thank you.</b>”<br>— 로완</p></div><p>획득 칭호 · <strong>Word Apprentice</strong></p><div class="actions">'+button('chapters','다음 장 · 마을로',{cl:'primary'})+button('book','단어 도감')+button('review','오답 복습')+button('map','숲 지도')+'</div></section>';
 }
 function bookView(){
- return heading('FIELD JOURNAL','단어 도감','수첩에서 읽은 표현과 정답·오답 횟수를 확인하세요.')+'<section class="panel book">'+lessons.map(l=>{
+ return heading('FIELD JOURNAL','단어 도감','수첩에서 읽은 표현과 정답·오답 횟수를 확인하세요.')+'<section class="panel book">'+lessons.filter(l=>game.profile.currentChapter===2?l.chapter===2:l.chapter!==2).map(l=>{
  const r=game.profile.learning[l.id];
  return '<article class="book-row"><div><strong lang="en">'+l.en+'</strong><small>'+l.ko+'</small></div><div>'+l.example+'<small>'+labels[Engine.status(r)]+' · 정답 '+(r?.correct||0)+' / 오답 '+(r?.wrong||0)+'</small></div>'+speakButton(l.en)+'</article>';
  }).join('')+'</section><div class="actions">'+button('map','지도')+button('review','오답 복습')+'</div>';
 }
-const screens={TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView,DASHBOARD:dashboardView};
+const screens={TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView,DASHBOARD:dashboardView,CHAPTERS:chaptersView,VILLAGE:villageView,LOCATION:locationView,QUESTS:questsView,SHOP:()=>itemView(true),BAG:()=>itemView(false),DIALOGUE:dialogueView,VILLAGE_END:villageEnding};
 function render(){
  if(game.screen==='PAUSED'){showSettings();return;}
  const scene=app.querySelector('.battle');
  if(!screens[game.screen]&&scene?.dataset.stage===String(game.stage)){updateBattle(scene);return;}
  const view=(screens[game.screen]||battleView)();
- const shell='<div class="shell"><nav class="topbar" aria-label="게임 메뉴"><div class="brand">'+icon('crystal')+' English Quest</div><div class="nav-right"><span class="topmeta">제1장 · 속삭이는 숲</span>'+button('settings',icon('menu'),{cl:'iconbtn',aria:'일시 정지 및 설정',disabled:['PLAYER_ACTION','ENEMY_ACTION'].includes(game.screen)})+'</div></nav>'+view+'</div>';
+ const shell='<div class="shell"><nav class="topbar" aria-label="게임 메뉴"><div class="brand">'+icon('crystal')+' English Quest</div><div class="nav-right"><span class="topmeta">'+(game.profile.currentChapter===2?'제2장 · 목소리의 마을':'제1장 · 속삭이는 숲')+'</span>'+button('settings',icon('menu'),{cl:'iconbtn',aria:'일시 정지 및 설정',disabled:['PLAYER_ACTION','ENEMY_ACTION'].includes(game.screen)})+'</div></nav>'+view+'</div>';
  app.innerHTML='<div class="world">'+(game.screen==='TITLE'?view:shell)+(game.hint?'<p role="status" class="storage-note">'+game.hint+'</p>':'')+'</div>';
  if(game.screen==='INTRO')revealDialogue();
 }

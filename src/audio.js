@@ -2,6 +2,7 @@
 const AudioFX = (() => {
   // Effects share one short noise sample and a quiet output bus, allocated on first use.
   let context, master, noiseSample;
+  let activeSpeech = null;
   let lastUi = -Infinity;
   const aliases = {select:'ui',incorrect:'wrong',hit:'impact',magic:'fire',healing:'heal',win:'victory',
     lose:'defeat',levelUp:'level','level-up':'level',bossVictory:'bossWin',bossHit:'heavy'};
@@ -80,6 +81,24 @@ const AudioFX = (() => {
         case 'wrong': tone(350,312,at,.22,.11,'triangle'); break;
         case 'sword': noise(780,3280,at+.17,.17,.29); break;
         case 'impact': noise(1850,260,at,.13,.23); tone(188,80,at,.14,.17,'triangle'); break;
+        case 'crow':
+          noise(930,2790,at,.11,.19);
+          tone(506,242,at+.025,.14,.095,'triangle');
+          break;
+        case 'wisp':
+          bell(740,at,.31,.10);
+          bell(740,at+.12,.32,.053);
+          bell(988,at+.20,.36,.057);
+          break;
+        case 'golem':
+          tone(137,53,at,.32,.23,'triangle');
+          noise(1110,210,at,.22,.23);
+          noise(890,330,at+.09,.14,.12);
+          break;
+        case 'runeBreak':
+          arpeggio([880,659,494],at,.059,.28,.093);
+          bell(784,at+.21,.39,.089);
+          break;
         case 'fire': tone(132,485,at,.31,.1,'triangle',.06); noise(690,1850,at+.2,.32,.3); break;
         case 'guard': arpeggio([392,587,784],at,.079,.31,.1); break;
         case 'shieldHit': noise(630,1480,at,.09,.19); bell(659,at,.41,.12); bell(990,at+.024,.22,.06); break;
@@ -108,23 +127,55 @@ const AudioFX = (() => {
     } catch { return null; }
   }
   function stop() {
+    const active = activeSpeech;
+    if (active) active.finish();
     try { globalThis.speechSynthesis?.cancel(); } catch { /* optional */ }
   }
-  function speak(text, settings, onError) {
+  // The fourth argument controls a transient highlight in the calling screen.
+  // Finishing explicitly on cancel also handles engines that omit the native end event.
+  function speak(text, settings, onError, {onStart, onEnd} = {}) {
     const english = voice(settings);
-    if (!english) return false;
+    if (!english || !text) return false;
+    let playback;
     try {
       stop();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.voice = english;
       utterance.lang = english.lang;
-      utterance.rate = .83;
+      utterance.rate = settings.speechRate === 'slow' ? .71 : 1;
+      playback = {
+        utterance,
+        startTimer: null,
+        finish() {
+          if (activeSpeech !== playback) return;
+          globalThis.clearTimeout?.(playback.startTimer);
+          activeSpeech = null;
+          onEnd?.();
+        }
+      };
+      activeSpeech = playback;
+      utterance.onstart = () => {
+        if (activeSpeech !== playback) return;
+        globalThis.clearTimeout?.(playback.startTimer);
+        onStart?.();
+      };
+      utterance.onend = playback.finish;
       utterance.onerror = event => {
+        if (activeSpeech !== playback) return;
+        playback.finish();
         if (!['canceled','interrupted'].includes(event.error)) onError?.();
       };
+      playback.startTimer = globalThis.setTimeout?.(() => {
+        if (activeSpeech !== playback) return;
+        stop();
+        onError?.();
+      }, 5000);
       globalThis.speechSynthesis.speak(utterance);
       return true;
-    } catch { return false; }
+    } catch {
+      playback?.finish();
+      return false;
+    }
   }
   return {play, speak, canSpeak:settings => !!voice(settings), stop};
 })();

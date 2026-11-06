@@ -1,0 +1,76 @@
+/* The village panorama is fully local SVG. Map pins belong to the HTML controls. */
+.village-panorama,.village-portrait,.village-item-icon,.village-foe-art { display: block; width: 100%; height: 100%; }
+.v-lantern { animation: soft-lantern 3.8s ease-in-out infinite alternate; }
+.v-hearth { transform-origin: 415px 325px; animation: hearth-light 3.6s ease-in-out infinite alternate; }
+.v-water { animation: canal-drift 7s ease-in-out infinite alternate; }
+.v-pennants,.v-awning { transform-box: fill-box; transform-origin: center top; animation: village-breeze 3.8s ease-in-out infinite alternate; }
+.v-gate-mist { animation: canal-drift 11s ease-in-out infinite alternate; }
+.mill-sails { transform-origin: 0 0; animation: windmill-turn 47s linear infinite; }
+.village-portrait { max-width: 100%; }
+.arena[data-stage="4"] .enemy,.arena[data-stage="5"] .enemy { height: 65%; }
+.arena[data-stage="6"] .enemy { height: 79%; }
+.crow-flight { transform-origin: 114px 118px; animation: crow-hover 3.5s ease-in-out infinite; }
+.crow-front-wing { transform-origin: 102px 116px; animation: wingbeat 1.62s ease-in-out infinite alternate; }
+.crow-rear-wing { transform-origin: 117px 117px; animation: far-wingbeat 1.62s ease-in-out infinite alternate; }
+.v-feather-mote,.v-wisp-note,.golem-rune { animation: word-float 2.6s var(--lag,0s) ease-in-out infinite alternate; }
+.wisp-flight { animation: wisp-float 4.3s ease-in-out infinite alternate; }
+.wisp-orbit { animation: tide-pulse 2.3s ease-in-out infinite alternate; }
+.stone-trunk { transform-origin: 108px 155px; animation: stone-breath 4.8s ease-in-out infinite; }
+.stone-shoulder { transform-origin: 150px 81px; animation: stone-ready 4.8s ease-in-out infinite; }
+.golem-core { transform-origin: 109px 106px; animation: rune-glow 2.9s ease-in-out infinite alternate; }
+.arena[data-stage="4"][data-fx="enemy"] .enemy { animation: crow-dive .78s ease-in-out both; }
+.arena[data-stage="4"][data-fx="enemy"] .crow-front-wing { animation: folded-wing .78s ease-in-out both; }
+.arena[data-stage="5"][data-fx="enemy"] .enemy { animation: echo-cast .78s ease-out both; }
+.arena[data-stage="5"][data-fx="enemy"] .fx::after {
+  content: ''; position: absolute; top: 40%; right: 17%; width: 9%; height: 24%;
+  border: 2px solid #d3fff0; border-top-color: transparent; border-bottom-color: transparent;
+  border-radius: 50%; box-shadow: -4px 0 8px #a6efe37b; animation: echo-wave .4s .03s ease-in both;
+}
+.arena[data-stage="6"][data-fx="enemy"] .enemy { animation: stone-stride .8s ease-in-out both; }
+.arena[data-stage="6"]:is([data-fx="enemy"],[data-fx="heavy"]) .stone-shoulder { animation: quarry-strike .79s ease-in-out both; }
+.arena[data-stage="6"]:is([data-intent="charge"],[data-intent="broken"],[data-fx="charge"]) .golem-core { animation: activated-rune .8s ease-in-out infinite alternate; }
+.arena[data-stage="6"]:is([data-intent="charge"],[data-intent="broken"],[data-fx="charge"]) .golem-rune { filter: drop-shadow(0 0 5px #f5d788); }
+.arena[data-stage="6"][data-fx="interrupt"] .golem-core { animation: quiet-core .8s ease-out both; }
+.arena[data-stage="6"][data-fx="interrupt"] .floating-runes { animation: interrupted-runes .72s ease-out both; }
+.arena[data-stage="6"][data-fx="interrupt"] .stone-trunk { animation: broken-stance .8s ease-out both; }
+.arena:is([data-stage="4"],[data-stage="5"],[data-stage="6"])[data-fx="sword"] .village-foe-art { animation: village-hit .4s .36s ease-out both; }
+.arena:is([data-stage="4"],[data-stage="5"],[data-stage="6"])[data-fx="fire"] .village-foe-art { animation: village-hit .33s .58s ease-out both; }
+.arena[data-stage="4"][data-fx="win"] .crow-front-wing { animation: folded-wing .7s ease-out both; }
+.arena[data-stage="5"][data-fx="win"] .wisp-flight { animation: echo-fade .72s ease-in both; }
+.arena[data-stage="6"][data-fx="win"] .stone-trunk { animation: golem-falls .74s ease-in both; }
+.arena[data-stage="6"][data-fx="win"] .floating-runes { animation: interrupted-runes .72s ease-out both; }
+@keyframes soft-lantern { from { opacity: .86; } to { opacity: 1; } }
+@keyframes hearth-light { from { transform: scale(.99,.96); } to { transform: scale(1.015,1.045); } }
+@keyframes canal-drift { to { transform: translateX(8px); opacity: .72; } }
+@keyframes village-breeze { to { transform: skewX(2deg) scaleY(.96); } }
+@keyframes windmill-turn { to { transform: rotate(1turn); } }
+@media (max-width: 500px) {
+  .arena[data-stage="6"] .enemy { height: 69%; }
+}
+@keyframes crow-hover { 50% { transform: translateY(-4px) rotate(-1.5deg); } }
+@keyframes wingbeat { from { transform: rotate(-9deg) scaleX(.99); } to { transform: rotate(8deg) scaleX(1.02); } }
+@keyframes far-wingbeat { from { transform: rotate(6deg); } to { transform: rotate(-6deg); } }
+@keyframes word-float { to { transform: translate(1px,-5px) rotate(6deg); opacity: .67; } }
+@keyframes wisp-float { to { transform: translate(3px,-8px); } }
+@keyframes tide-pulse { to { opacity: .42; } }
+@keyframes stone-breath { 50% { transform: translateY(-1.5px) rotate(-1.4deg); } }
+@keyframes stone-ready { 50% { transform: rotate(3deg); } }
+@keyframes rune-glow { to { filter: brightness(1.16); } }
+@keyframes activated-rune { to { transform: scale(1.15); filter: brightness(1.34) drop-shadow(0 0 5px #b9f5df); } }
+@keyframes crow-dive { 22% { transform: translate(4%,-12%) rotate(6deg); } 47% { transform: translateX(clamp(-640px,calc(-72cqw + 125%),0px)) translateY(6%) rotate(-17deg); } 75% { transform: translate(-3%,-6%) rotate(3deg); } }
+@keyframes folded-wing { 46%,56% { transform: rotate(49deg) scale(.94,.69); } }
+@keyframes echo-cast { 28% { transform: translate(4%,-4%) scale(.95); } 48% { transform: translateX(-3%) scale(1.07); filter: brightness(1.22); } }
+@keyframes echo-wave { from { opacity: 0; transform: scale(.6); } 28% { opacity: 1; } to { opacity: 0; right: 73%; transform: scale(1.4); } }
+@keyframes stone-stride { 20% { transform: rotate(3deg) translateX(2%); } 47%,55% { transform: translateX(clamp(-650px,calc(-73cqw + 129%),0px)) rotate(-3deg); } }
+@keyframes quarry-strike { 24% { transform: rotate(-54deg) translateY(-3px); } 48%,55% { transform: rotate(46deg); } }
+@keyframes quiet-core { 30% { filter: brightness(1.5); } to { opacity: .48; } }
+@keyframes interrupted-runes { 28% { filter: brightness(1.35); } to { transform: translateY(-13px); opacity: 0; } }
+@keyframes broken-stance { 46% { transform: rotate(7deg) translateY(3px); } }
+@keyframes village-hit { 30% { transform: translateX(5%) rotate(3deg); filter: brightness(1.5); } }
+@keyframes echo-fade { to { transform: translateY(-17%) scale(.72); opacity: 0; } }
+@keyframes golem-falls { 42% { transform: rotate(4deg) translateY(2%); } to { transform: rotate(13deg) translateY(13%); } }
+@media (prefers-reduced-motion: reduce) {
+  .village-panorama *, .village-battle-bg *, .village-foe-art * {
+    animation: none !important;
+  }
+}
