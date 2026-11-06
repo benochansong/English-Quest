@@ -1,0 +1,84 @@
+#app:focus { outline: none; }
+.ui-icon { width: 1.15em; height: 1.15em; vertical-align: -.19em; flex-shrink: 0; }
+.title .title-art { position: absolute; opacity: 1; }
+.title-veil { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 44%,#0b24294d,transparent 56%),linear-gradient(0deg,#06191fbb,transparent 28%); pointer-events:none; }
+.title-frame { position:absolute; inset:clamp(13px,2.3vw,34px); border:1px solid #efce8c4d; pointer-events:none; }
+.title-frame::before,.title-frame::after { content:'◆'; color:#e7c37b; position:absolute; line-height:1; font-size:10px; top:-5px; }
+.title-frame::before { left:-5px; } .title-frame::after { right:-5px; }
+.title-content { padding:30px 15px; width:100%; }
+.crest { display:flex; justify-content:center; align-items:center; gap:16px; color:#f1d491; }
+.crest .ui-icon { width:38px;height:38px; filter:drop-shadow(0 0 9px #ffefb96b); }
+.crest::before,.crest::after { content:''; width:58px;height:1px;background:linear-gradient(90deg,transparent,#e8c779); }
+.crest::after { transform:rotate(180deg); }
+.title h1 { font-family:'Palatino Linotype',Georgia,serif; font-variant:normal; font-weight:500; letter-spacing:-.065em; max-width:100%; text-shadow:0 3px 6px #112429,0 8px 44px #091519; }
+.title-copy { font-size:.94rem; margin:16px 0 28px; color:#fff6db; letter-spacing:.15em; }
+.title-buttons { width:230px; }
+.title-buttons .btn { border-radius:4px; box-shadow:0 5px 19px #08151857; }
+.title-buttons .title-settings { width:fit-content; justify-self:center; border:0; box-shadow:none; background:transparent; color:#fbf0d5; }
+.title-foot { position:absolute; bottom:clamp(24px,4vw,52px); left:50%; transform:translateX(-50%); white-space:nowrap; color:#ecdbac; font-size:.82rem; letter-spacing:.13em; }
+.title-foot span { color:var(--gold); margin:0 8px; font-size:.55em; vertical-align:middle; }
+.nav-right,.brand { display:flex; align-items:center; gap:12px; }
+.topbar { border-bottom:1px solid #beac784a; padding-bottom:13px; }
+.brand .ui-icon { width:26px;height:26px; }
+.iconbtn.btn { padding:0; min-height:44px; background:#162d2d; }
+.brand,.screen-heading h2,.center-card h2,.battle-heading h2,.modal h2 { font-family:'Palatino Linotype','Batang',Georgia,serif; }
+.battle-heading {display:flex;align-items:center;gap:14px;margin-bottom:13px;}
+.battle-heading h2 {font-size:1.3rem;margin:0;}
+.stage .ui-icon {margin-left:auto;}
+.stats-band {display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;padding:12px 0;border-block:1px solid #af996044;font-size:.86rem;color:var(--muted);}
+.stats-band b {color:var(--gold);}
+.map-overlay {pointer-events:none;}
+.lesson {display:flex;flex-direction:column;align-items:start;gap:3px;}
+.lesson hr {width:100%;border:0;border-top:1px solid #9aaf982e;margin:8px 0;}
+.lesson small,.page-count {color:#bacbc0;}
+.btn.speak {border:0;padding:5px 8px;min-height:42px;background:transparent;font-size:.88rem;}
+.page-count {font-size:.82rem;}
+.npc,.reward h3 {color:var(--gold);}
+.dialogue-text {position:relative;}
+.dialogue-reserve {opacity:0;}
+.dialogue-ink {position:absolute;inset:0;}
+.title .title-foot {z-index:1;}
+.arena[data-fx="charge"] .enemy {filter:drop-shadow(0 0 20px #d7a7ff);animation:gold-pulse .6s alternate infinite;}
+.dialogue-text {animation:ink-in .45s ease both;}
+@keyframes ink-in { from {opacity:.15; transform:translateY(.25em);} }
+.arena-shade { position:absolute; inset:0;background:linear-gradient(180deg,#061820d9,transparent 35%);pointer-events:none; }
+.ability .ui-icon {width:24px;height:24px;color:#edd195;margin-bottom:6px;}
+.ability:nth-child(2) .ui-icon {color:#f4aa83;} .ability:nth-child(3) .ui-icon {color:#9bdcec;} .ability:nth-child(4) .ui-icon {color:#b6e09a;}
+.ability.btn:disabled {opacity:.54;}
+.choice-index { display:inline-block;color:#e9c780;margin-right:.7em;font:italic 1rem Georgia,serif; }
+.feedback h3 {margin:.45em 0;font:1.6rem Georgia,serif;}
+.feedback+.btn { margin-top:14px; }
+.float.on-hero { left:20%;right:auto; }
+.reward-crystal {color:var(--gold);}
+.reward-crystal .ui-icon {width:65px;height:65px;filter:drop-shadow(0 0 12px #ead27c66);}
+.reward .actions {justify-content:center;}
+.reward {animation:ink-in .5s ease;}
+.level-up .reward-crystal {animation:gold-pulse 1s ease-in-out 3 alternate;}
+@keyframes gold-pulse {to {filter:drop-shadow(0 0 22px gold);}}
+dialog {box-sizing:border-box;border:1px solid var(--line);border-radius:14px;background:#152a2c;color:var(--ivory);padding:0;max-width:calc(100% - 28px);box-shadow:0 12px 80px #000a;}
+dialog::backdrop {background:#031318bd;backdrop-filter:blur(3px);}
+.modal {width:430px;max-width:100%;}
+.modal .eyebrow {margin-bottom:8px;}
+.setting input[type=checkbox] {width:22px;height:22px;accent-color:var(--gold);}
+.setting input[type=range] {accent-color:var(--gold);}
+.book {padding:10px 20px;}
+.storage-note {position:fixed;bottom:0;left:10px;right:10px;padding:12px;background:#392d1c;color:#fff4d7;z-index:2;}
+@media(max-width:700px){
+ .title h1{font-size:clamp(3.25rem,12.7vw,6rem);}
+ .title .title-content{padding-inline:2px;}
+ .title .subtitle{font-size:clamp(.95rem,3vw,1.3rem);}
+ .title .title-foot{bottom:32px;}
+ .topmeta{font-size:.72rem;}
+ .brand{gap:6px;}
+ .center-card{margin:3vh auto;}
+ .portrait svg{max-width:100%;}
+ .btn {padding:11px 14px;}
+ .map-overlay{padding:18px;}
+ .stage{padding:14px;}
+ .book{padding:8px 12px;}
+ .stat strong{font-size:.82rem;}
+ .ability{padding:11px;}
+ .center-card h2{font-size:clamp(1.65rem,7vw,2.3rem);}
+}
+@media(max-height:620px){.title-foot{display:none;}.title{min-height:540px;}.title h1{margin-block:12px;}}
+@media(prefers-reduced-motion:reduce){.dialogue-text,.reward,.level-up .reward-crystal{animation:none;}}

@@ -1,0 +1,103 @@
+/* Motion is confined to the illustrated stage; the command area stays still. */
+.title { isolation: isolate; background: #142e32; }
+.title::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse 40% 59% at 50% 52%, #091b21ce 0%, #09192383 59%, transparent 100%),
+              linear-gradient(0deg, #061519aa, transparent 32%, transparent 88%, #0b141b66);
+}
+.title .title-art { opacity: 1; }
+.title .title-content { z-index: 1; }
+.title h1 { text-shadow: 0 3px 0 #413d33, 0 6px 20px #06161e, 0 0 55px #e5d39f25; }
+.combatant { transform-origin: center bottom; }
+.combatant svg { width: 100%; height: 100%; }
+.hero-art, .slime-art { display: block; }
+.portrait .rowan-art { width: 100%; display: block; }
+.arena .enemy { height: 58%; }
+.arena .enemy.boss { height: 73%; }
+.forest-mist { animation: drift-mist 20s ease-in-out infinite alternate; }
+.firefly { animation: lantern 4.8s var(--delay, 0s) ease-in-out infinite alternate; }
+.dialogue p { animation: reveal-dialogue .42s ease-out both; }
+.reward { animation: reward-rise .55s ease-out both; }
+.arena[data-fx="ready"] .enemy.boss { animation: king-arrives .75s ease-out both; }
+.arena[data-fx="sword"] .hero { animation: sword-strike .62s ease-out both; }
+.arena[data-fx="sword"] .enemy, .arena[data-fx="fire"] .enemy { animation: struck .4s .22s ease-out both; }
+.arena[data-fx="fire"] .hero { animation: casting .56s ease-in-out both; }
+.arena[data-fx="guard"] .hero { transform: translateX(-2%) rotate(-4deg); filter: drop-shadow(0 0 10px #8ae6ff); }
+.arena[data-fx="heal"] .hero { animation: recovery .64s ease-out both; }
+.arena[data-fx="enemy"] .enemy { animation: jelly-lunge .62s ease-out both; }
+.arena[data-fx="enemy"] .hero { animation: hero-hit .4s .2s ease-out both; }
+.arena[data-fx="win"] .enemy { animation: shatter .7s ease-out both; }
+.arena[data-fx="win"] .hero { animation: salute .75s ease-in-out both; }
+.arena[data-fx="lose"] .hero { animation: wounded .7s ease-out both; }
+.arena[data-fx="miss"] .hero { animation: falter .45s ease-out both; }
+.arena .fx { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.arena[data-fx="sword"] .fx::after {
+  content: ''; position: absolute; top: 35%; left: 32%; width: 45%; height: 24%;
+  border-bottom: 6px solid #fff0bb; border-radius: 50%; filter: drop-shadow(0 0 7px #ffce75);
+  animation: slash-trail .55s ease-out both;
+}
+.arena[data-fx="fire"] .fx::before {
+  content: ''; position: absolute; top: 56%; left: 29%; width: 11%; height: 7%;
+  border-radius: 90% 45% 45% 90%;
+  background: linear-gradient(90deg, transparent, #de7848 45%, #ffdb8b 83%, #fffad8);
+  filter: drop-shadow(0 0 9px #ffb350);
+  animation: fire-flight .55s ease-in both;
+}
+.arena[data-fx="fire"] .fx::after, .arena[data-fx="win"] .fx::after {
+  content: ''; position: absolute; top: 42%; right: 19%; width: 12%; aspect-ratio: 1;
+  border: 4px dotted #ffda95; border-radius: 50%; animation: impact-ring .44s .28s ease-out both;
+}
+.arena[data-fx="guard"] .fx::before {
+  content: ''; position: absolute; left: 15%; bottom: 7%; width: min(16%, 150px); height: 49%;
+  border-radius: 28% 55% 52% 37% / 18% 29% 67% 72%;
+  border: 2px solid #baf6fb; box-shadow: inset 0 0 18px #79daff77, 0 0 9px #79daff77;
+  background: linear-gradient(145deg, #acf2ff4d, #69bee41c); animation: ward .55s ease-out both;
+}
+.arena[data-fx="heal"] .fx::before, .arena[data-fx="win"] .fx::before {
+  content: ''; position: absolute; bottom: 13%; left: 18%; width: 8px; height: 8px;
+  color:#b9ffb5; background:currentColor; transform:rotate(45deg);
+  box-shadow: 17px -37px 0 -1px currentColor, -38px -19px 0 -2px currentColor, 45px -12px 0 -2px currentColor,
+              -16px -66px 0 -1px currentColor, 31px -93px 0 -2px currentColor, 58px -58px 0 -1px currentColor;
+  animation: runes-rise .7s ease-out both;
+}
+.arena[data-fx="win"] .fx::before { color: #f5d48b; }
+@keyframes drift-mist { to { transform: translateX(19px); opacity: .65; } }
+@keyframes lantern { 0%, 15% { opacity: .27; } 75%, 100% { opacity: .97; transform: translate(5px,-8px); } }
+@keyframes reveal-dialogue { from { opacity: .15; transform: translateY(3px); } }
+@keyframes reward-rise { from { opacity: .2; transform: translateY(7px); } }
+@keyframes king-arrives { from { transform: translateY(-27%) scale(.77); opacity: .1; } 72% { transform: scale(1.09,.91); } }
+@keyframes sword-strike { 0%,100% { transform: translateX(0); } 24% { transform: translateX(-8%) rotate(-5deg); } 58% { transform: translateX(27%) rotate(8deg); } }
+@keyframes struck { 25% { transform: translateX(9%) scale(.93,1.06); filter: brightness(1.75); } 75% { transform: scale(1.05,.93); } }
+@keyframes casting { 54% { transform: translateY(-5px) rotate(-4deg); filter: drop-shadow(0 0 8px #f4be7b); } }
+@keyframes recovery { 45% { filter: drop-shadow(0 0 16px #91ebb3); } }
+@keyframes jelly-lunge { 20% { transform: scale(1.12,.8); } 52% { transform: translate(-25%,-4%) scale(.95,1.05); } }
+@keyframes hero-hit { 30% { transform: translateX(-9%) rotate(-4deg); filter: brightness(1.6); } }
+@keyframes shatter { 35% { filter: brightness(1.6); transform: scale(1.08,.92); } to { opacity: 0; transform: scale(.8,.6); } }
+@keyframes salute { 60%,100% { transform: translateY(-2%) rotate(-5deg); filter: drop-shadow(0 0 6px #dfcc84); } }
+@keyframes wounded { to { transform: translateY(11%) rotate(-16deg); filter: saturate(.5); } }
+@keyframes falter { 42% { transform: rotate(-3deg); filter: saturate(.45); } }
+@keyframes slash-trail { 0% { opacity: 0; transform: rotate(-35deg) scale(.2); } 42% { opacity: 1; } 100% { opacity: 0; transform: rotate(-19deg) scale(1); } }
+@keyframes fire-flight { 0% { opacity: 0; transform: scale(.2); } 22% { opacity: 1; } 90% { opacity: 1; } to { opacity: 0; left: 70%; } }
+@keyframes impact-ring { from { opacity: 0; transform: scale(.2); } 20% { opacity: 1; } to { opacity: 0; transform: scale(1.45); } }
+@keyframes ward { from { opacity: 0; transform: scale(.75); } 75% { opacity: 1; } to { opacity: .77; } }
+@keyframes runes-rise { from { opacity: 0; } 34% { opacity: 1; } to { opacity: 0; transform: translateY(-52px) rotate(58deg); } }
+@media (max-width: 700px) {
+  /* The viewBox crops toward its centre on tall screens. Keep all four landmarks in the frame. */
+  .title-art .painted-moon { transform: translate(-180px, -44px); }
+  .title-art .painted-keep { transform: translate(-215px, 3px); }
+  .title-art .painted-traveler { transform: translate(353px, 90px); }
+  .title-art .painted-left { transform: translateX(436px); }
+  .title-art .painted-right { transform: translateX(-432px); }
+  .arena .hero { left: 5%; }
+  .arena .enemy { right: 6%; }
+  .title::after { background: radial-gradient(ellipse at 50% 48%, #081a20ba, #09192380 57%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .forest-mist,.firefly,.dialogue p,.reward,.arena .combatant,.arena .fx::after,.arena .fx::before {
+    animation-duration: .01ms !important; animation-iteration-count: 1 !important; animation-delay: 0s !important;
+  }
+}

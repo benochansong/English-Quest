@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0c2426"><title>English Quest · The Lost Kingdom of Words</title>
+<style>:root{color-scheme:dark;--ivory:#f5f0e6;--gold:#e8c779;--muted:#bacdc4;--panel:#101e24ed;--line:#b69b5d78}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,'Malgun Gothic',sans-serif;background:#09141b;color:var(--ivory)}body{min-height:100vh}button{font:inherit;color:inherit;cursor:pointer}button:focus-visible{outline:3px solid #fff5b4;outline-offset:3px}button:disabled{opacity:.4;cursor:not-allowed}.world{min-height:100vh;position:relative;overflow:hidden;background:linear-gradient(180deg,#142b32 0%,#173e39 45%,#0c201d 100%)}.world:before{content:'';position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 15%,#d9d49e38,transparent 30%),linear-gradient(110deg,#07161caa,transparent 40%,#07161c99);z-index:0}.world>*{position:relative}.title{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:28px}.title-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85}.title-content{z-index:1;text-shadow:0 3px 20px #000;max-width:680px}.eyebrow{font-size:.76rem;letter-spacing:.3em;color:var(--gold);font-weight:700}.title h1{font:small-caps 700 clamp(3.7rem,10vw,8rem)/.85 Georgia,serif;letter-spacing:-.04em;margin:22px 0 16px;color:#fff5d8}.subtitle{font:italic clamp(1rem,2.5vw,1.4rem) Georgia,serif;letter-spacing:.09em;color:#e8d8b4}.title-copy{color:#d3ddd1;margin:28px auto 32px;line-height:1.8}.title-buttons{display:grid;gap:10px;width:min(290px,100%);margin:auto}.btn{border:1px solid var(--line);border-radius:8px;background:linear-gradient(180deg,#30473f,#182b2b);padding:13px 20px;min-height:48px;transition:transform .15s,filter .15s}.btn:hover:not(:disabled){filter:brightness(1.2);transform:translateY(-2px)}.btn.primary{color:#211b10;background:linear-gradient(#f3d99b,#c49d50);border-color:#ffe4a5;font-weight:800}.btn.ghost{background:#0c1c20bb}.shell{max-width:1280px;margin:auto;padding:22px clamp(16px,4vw,48px) 38px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.brand{font:700 1.25rem Georgia,serif;color:var(--gold)}.topmeta{font-size:.78rem;color:#c4d6cb;letter-spacing:.12em}.iconbtn{border:1px solid var(--line);border-radius:50%;width:44px;height:44px;background:#102527;flex:none}.panel{background:linear-gradient(145deg,#172b2ded,#0d1b20f5);border:1px solid var(--line);border-radius:14px;box-shadow:0 16px 45px #0005,inset 0 0 0 3px #ffffff08}.screen-heading{margin:24px 0}.screen-heading h2{font:700 clamp(2rem,4vw,3.2rem) Georgia,serif;margin:8px 0}.screen-heading p{color:var(--muted);line-height:1.7}.map-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:20px}.map-illustration{min-height:420px;position:relative;overflow:hidden}.map-illustration svg{width:100%;height:100%;position:absolute;inset:0}.map-overlay{position:absolute;bottom:0;padding:32px;background:linear-gradient(transparent,#071b1be8);width:100%}.map-overlay h3{font:2rem Georgia;margin:8px 0}.stages{display:grid;gap:10px}.stage{width:100%;text-align:left;display:flex;align-items:center;gap:16px;padding:18px;background:#112a29;border:1px solid #af99605c;border-radius:10px}.stage:not(:disabled):hover{background:#22433c}.stage-number{font:1.5rem Georgia;color:var(--gold)}.stage strong,.stage small{display:block}.stage small{color:var(--muted);margin-top:5px}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.center-card{max-width:850px;margin:6vh auto;padding:clamp(24px,5vw,48px)}.center-card h2{font:2.5rem Georgia;color:#f6e6bc;margin:12px 0}.center-card p{line-height:1.8;color:#d5e2d9}.dialogue{display:flex;gap:24px;align-items:center}.portrait{width:140px;flex:none}.lesson-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:22px 0}.lesson{background:#0b1c20;border:1px solid #ffffff20;border-radius:9px;padding:15px}.lesson strong{color:#f4d595;font:1.25rem Georgia}.lesson p{margin:5px 0;font-size:.9rem}.speak{border:0;background:transparent;color:#9bdde5;padding:6px;min-height:40px}.battle{max-width:1180px;margin:auto}.arena{height:clamp(260px,40vh,390px);position:relative;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:#143f37}.arena-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.combatant{position:absolute;bottom:5%;width:clamp(125px,21vw,230px);height:72%;display:flex;align-items:end;justify-content:center;filter:drop-shadow(0 12px 9px #0008)}.combatant svg{max-width:100%;max-height:100%;overflow:visible}.hero{left:10%;animation:breathe 3s ease-in-out infinite}.enemy{right:10%;animation:bounce 2.3s ease-in-out infinite}.enemy.boss{width:clamp(170px,27vw,300px)}.hero.attack{animation:lunge .5s}.enemy.hit{animation:hit .5s}.hero.hit{animation:hit .5s}.hero.guard{filter:drop-shadow(0 0 18px #7ce4ff)}.enemy.dead{animation:vanish .7s forwards}.arena-status{position:absolute;top:15px;left:18px;right:18px;display:flex;justify-content:space-between;gap:20px}.stat{width:min(230px,43%);text-shadow:0 2px 4px #000;font-size:.85rem}.stat.right{text-align:right}.hp{height:9px;border-radius:8px;background:#090e11aa;overflow:hidden;margin:6px 0}.hp span{display:block;height:100%;background:linear-gradient(90deg,#69c5a1,#aedb87);transition:width .5s}.right .hp span{background:linear-gradient(90deg,#df6c79,#e2a08b)}.float{position:absolute;top:36%;right:22%;font:bold 2.5rem Georgia;color:#fff1b0;text-shadow:0 3px 8px #400;animation:float 1s forwards;pointer-events:none}.battle-panel{margin-top:15px;padding:clamp(18px,3vw,28px);min-height:220px}.battle-title{display:flex;justify-content:space-between;gap:12px;align-items:center}.battle-title h2{margin:0;font-size:1.18rem}.hint{font-size:.84rem;color:#adcbc0}.abilities,.choices{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.ability,.choice,.word{border:1px solid #9c936175;background:#1b3532;border-radius:8px;padding:14px;text-align:left;min-height:54px}.ability strong,.ability small{display:block}.ability small{color:#c5d0bd;margin-top:5px}.choice:hover,.word:hover,.ability:hover:not(:disabled){background:#31534a}.choices{grid-template-columns:repeat(2,1fr)}.question{font-size:clamp(1.1rem,2vw,1.45rem);line-height:1.5;margin:14px 0}.feedback{border-left:3px solid var(--gold);padding-left:18px}.feedback strong{font-size:1.2rem;color:#f6d98d}.feedback p{line-height:1.7}.words{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.word{min-height:45px;padding:8px 14px}.answer-line{min-height:50px;border-bottom:1px solid var(--line);padding:10px;color:#f2dca7}.list{display:grid;gap:10px}.book-row{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:center;padding:14px;border-bottom:1px solid #ffffff18}.book-row strong{color:#f2d79e}.book-row small{display:block;color:#bacdc4;margin-top:4px}.modal-backdrop{position:fixed;inset:0;background:#000b;z-index:20;display:grid;place-items:center;padding:18px}.modal{width:min(480px,100%);max-height:90vh;overflow:auto;padding:28px}.modal h2{font:2rem Georgia;margin:0 0 18px}.setting{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:16px 0}.setting input[type=range]{width:50%}.reward{text-align:center}.reward-number{font:3rem Georgia;color:var(--gold)}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}@keyframes breathe{50%{transform:translateY(-5px) scaleY(1.02)}}@keyframes bounce{50%{transform:translateY(-10px) scaleX(.96) scaleY(1.04)}}@keyframes lunge{50%{transform:translateX(70px) rotate(8deg)}}@keyframes hit{30%{transform:translateX(12px);filter:brightness(2)}70%{transform:translateX(-7px)}}@keyframes vanish{to{opacity:0;transform:scale(1.25)}}@keyframes float{to{transform:translateY(-65px);opacity:0}}@media(max-width:700px){.shell{padding:16px 14px 28px}.map-grid{grid-template-columns:1fr}.map-illustration{min-height:220px}.abilities{grid-template-columns:repeat(2,1fr)}.arena{height:270px}.battle-panel{min-height:260px}.dialogue{align-items:flex-start}.portrait{width:75px}.lesson-grid{grid-template-columns:1fr 1fr}.topmeta{letter-spacing:0}.book-row{grid-template-columns:1fr auto}.book-row>div:nth-child(2){grid-column:1}.screen-heading{margin:14px 0}.title h1{font-size:4rem}}@media(max-width:380px){.choices{grid-template-columns:1fr}.lesson-grid{grid-template-columns:1fr}.arena{height:230px}.combatant{width:120px}.enemy.boss{width:160px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+#app:focus { outline: none; }
+.ui-icon { width: 1.15em; height: 1.15em; vertical-align: -.19em; flex-shrink: 0; }
+.title .title-art { position: absolute; opacity: 1; }
+.title-veil { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 44%,#0b24294d,transparent 56%),linear-gradient(0deg,#06191fbb,transparent 28%); pointer-events:none; }
+.title-frame { position:absolute; inset:clamp(13px,2.3vw,34px); border:1px solid #efce8c4d; pointer-events:none; }
+.title-frame::before,.title-frame::after { content:'◆'; color:#e7c37b; position:absolute; line-height:1; font-size:10px; top:-5px; }
+.title-frame::before { left:-5px; } .title-frame::after { right:-5px; }
+.title-content { padding:30px 15px; width:100%; }
+.crest { display:flex; justify-content:center; align-items:center; gap:16px; color:#f1d491; }
+.crest .ui-icon { width:38px;height:38px; filter:drop-shadow(0 0 9px #ffefb96b); }
+.crest::before,.crest::after { content:''; width:58px;height:1px;background:linear-gradient(90deg,transparent,#e8c779); }
+.crest::after { transform:rotate(180deg); }
+.title h1 { font-family:'Palatino Linotype',Georgia,serif; font-variant:normal; font-weight:500; letter-spacing:-.065em; max-width:100%; text-shadow:0 3px 6px #112429,0 8px 44px #091519; }
+.title-copy { font-size:.94rem; margin:16px 0 28px; color:#fff6db; letter-spacing:.15em; }
+.title-buttons { width:230px; }
+.title-buttons .btn { border-radius:4px; box-shadow:0 5px 19px #08151857; }
+.title-buttons .title-settings { width:fit-content; justify-self:center; border:0; box-shadow:none; background:transparent; color:#fbf0d5; }
+.title-foot { position:absolute; bottom:clamp(24px,4vw,52px); left:50%; transform:translateX(-50%); white-space:nowrap; color:#ecdbac; font-size:.82rem; letter-spacing:.13em; }
+.title-foot span { color:var(--gold); margin:0 8px; font-size:.55em; vertical-align:middle; }
+.nav-right,.brand { display:flex; align-items:center; gap:12px; }
+.topbar { border-bottom:1px solid #beac784a; padding-bottom:13px; }
+.brand .ui-icon { width:26px;height:26px; }
+.iconbtn.btn { padding:0; min-height:44px; background:#162d2d; }
+.brand,.screen-heading h2,.center-card h2,.battle-heading h2,.modal h2 { font-family:'Palatino Linotype','Batang',Georgia,serif; }
+.battle-heading {display:flex;align-items:center;gap:14px;margin-bottom:13px;}
+.battle-heading h2 {font-size:1.3rem;margin:0;}
+.stage .ui-icon {margin-left:auto;}
+.stats-band {display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;padding:12px 0;border-block:1px solid #af996044;font-size:.86rem;color:var(--muted);}
+.stats-band b {color:var(--gold);}
+.map-overlay {pointer-events:none;}
+.lesson {display:flex;flex-direction:column;align-items:start;gap:3px;}
+.lesson hr {width:100%;border:0;border-top:1px solid #9aaf982e;margin:8px 0;}
+.lesson small,.page-count {color:#bacbc0;}
+.btn.speak {border:0;padding:5px 8px;min-height:42px;background:transparent;font-size:.88rem;}
+.page-count {font-size:.82rem;}
+.npc,.reward h3 {color:var(--gold);}
+.dialogue-text {position:relative;}
+.dialogue-reserve {opacity:0;}
+.dialogue-ink {position:absolute;inset:0;}
+.title .title-foot {z-index:1;}
+.arena[data-fx="charge"] .enemy {filter:drop-shadow(0 0 20px #d7a7ff);animation:gold-pulse .6s alternate infinite;}
+.dialogue-text {animation:ink-in .45s ease both;}
+@keyframes ink-in { from {opacity:.15; transform:translateY(.25em);} }
+.arena-shade { position:absolute; inset:0;background:linear-gradient(180deg,#061820d9,transparent 35%);pointer-events:none; }
+.ability .ui-icon {width:24px;height:24px;color:#edd195;margin-bottom:6px;}
+.ability:nth-child(2) .ui-icon {color:#f4aa83;} .ability:nth-child(3) .ui-icon {color:#9bdcec;} .ability:nth-child(4) .ui-icon {color:#b6e09a;}
+.ability.btn:disabled {opacity:.54;}
+.choice-index { display:inline-block;color:#e9c780;margin-right:.7em;font:italic 1rem Georgia,serif; }
+.feedback h3 {margin:.45em 0;font:1.6rem Georgia,serif;}
+.feedback+.btn { margin-top:14px; }
+.float.on-hero { left:20%;right:auto; }
+.reward-crystal {color:var(--gold);}
+.reward-crystal .ui-icon {width:65px;height:65px;filter:drop-shadow(0 0 12px #ead27c66);}
+.reward .actions {justify-content:center;}
+.reward {animation:ink-in .5s ease;}
+.level-up .reward-crystal {animation:gold-pulse 1s ease-in-out 3 alternate;}
+@keyframes gold-pulse {to {filter:drop-shadow(0 0 22px gold);}}
+dialog {box-sizing:border-box;border:1px solid var(--line);border-radius:14px;background:#152a2c;color:var(--ivory);padding:0;max-width:calc(100% - 28px);box-shadow:0 12px 80px #000a;}
+dialog::backdrop {background:#031318bd;backdrop-filter:blur(3px);}
+.modal {width:430px;max-width:100%;}
+.modal .eyebrow {margin-bottom:8px;}
+.setting input[type=checkbox] {width:22px;height:22px;accent-color:var(--gold);}
+.setting input[type=range] {accent-color:var(--gold);}
+.book {padding:10px 20px;}
+.storage-note {position:fixed;bottom:0;left:10px;right:10px;padding:12px;background:#392d1c;color:#fff4d7;z-index:2;}
+@media(max-width:700px){
+ .title h1{font-size:clamp(3.25rem,12.7vw,6rem);}
+ .title .title-content{padding-inline:2px;}
+ .title .subtitle{font-size:clamp(.95rem,3vw,1.3rem);}
+ .title .title-foot{bottom:32px;}
+ .topmeta{font-size:.72rem;}
+ .brand{gap:6px;}
+ .center-card{margin:3vh auto;}
+ .portrait svg{max-width:100%;}
+ .btn {padding:11px 14px;}
+ .map-overlay{padding:18px;}
+ .stage{padding:14px;}
+ .book{padding:8px 12px;}
+ .stat strong{font-size:.82rem;}
+ .ability{padding:11px;}
+ .center-card h2{font-size:clamp(1.65rem,7vw,2.3rem);}
+}
+@media(max-height:620px){.title-foot{display:none;}.title{min-height:540px;}.title h1{margin-block:12px;}}
+@media(prefers-reduced-motion:reduce){.dialogue-text,.reward,.level-up .reward-crystal{animation:none;}}
+
+/* Motion is confined to the illustrated stage; the command area stays still. */
+.title { isolation: isolate; background: #142e32; }
+.title::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse 40% 59% at 50% 52%, #091b21ce 0%, #09192383 59%, transparent 100%),
+              linear-gradient(0deg, #061519aa, transparent 32%, transparent 88%, #0b141b66);
+}
+.title .title-art { opacity: 1; }
+.title .title-content { z-index: 1; }
+.title h1 { text-shadow: 0 3px 0 #413d33, 0 6px 20px #06161e, 0 0 55px #e5d39f25; }
+.combatant { transform-origin: center bottom; }
+.combatant svg { width: 100%; height: 100%; }
+.hero-art, .slime-art { display: block; }
+.portrait .rowan-art { width: 100%; display: block; }
+.arena .enemy { height: 58%; }
+.arena .enemy.boss { height: 73%; }
+.forest-mist { animation: drift-mist 20s ease-in-out infinite alternate; }
+.firefly { animation: lantern 4.8s var(--delay, 0s) ease-in-out infinite alternate; }
+.dialogue p { animation: reveal-dialogue .42s ease-out both; }
+.reward { animation: reward-rise .55s ease-out both; }
+.arena[data-fx="ready"] .enemy.boss { animation: king-arrives .75s ease-out both; }
+.arena[data-fx="sword"] .hero { animation: sword-strike .62s ease-out both; }
+.arena[data-fx="sword"] .enemy, .arena[data-fx="fire"] .enemy { animation: struck .4s .22s ease-out both; }
+.arena[data-fx="fire"] .hero { animation: casting .56s ease-in-out both; }
+.arena[data-fx="guard"] .hero { transform: translateX(-2%) rotate(-4deg); filter: drop-shadow(0 0 10px #8ae6ff); }
+.arena[data-fx="heal"] .hero { animation: recovery .64s ease-out both; }
+.arena[data-fx="enemy"] .enemy { animation: jelly-lunge .62s ease-out both; }
+.arena[data-fx="enemy"] .hero { animation: hero-hit .4s .2s ease-out both; }
+.arena[data-fx="win"] .enemy { animation: shatter .7s ease-out both; }
+.arena[data-fx="win"] .hero { animation: salute .75s ease-in-out both; }
+.arena[data-fx="lose"] .hero { animation: wounded .7s ease-out both; }
+.arena[data-fx="miss"] .hero { animation: falter .45s ease-out both; }
+.arena .fx { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.arena[data-fx="sword"] .fx::after {
+  content: ''; position: absolute; top: 35%; left: 32%; width: 45%; height: 24%;
+  border-bottom: 6px solid #fff0bb; border-radius: 50%; filter: drop-shadow(0 0 7px #ffce75);
+  animation: slash-trail .55s ease-out both;
+}
+.arena[data-fx="fire"] .fx::before {
+  content: ''; position: absolute; top: 56%; left: 29%; width: 11%; height: 7%;
+  border-radius: 90% 45% 45% 90%;
+  background: linear-gradient(90deg, transparent, #de7848 45%, #ffdb8b 83%, #fffad8);
+  filter: drop-shadow(0 0 9px #ffb350);
+  animation: fire-flight .55s ease-in both;
+}
+.arena[data-fx="fire"] .fx::after, .arena[data-fx="win"] .fx::after {
+  content: ''; position: absolute; top: 42%; right: 19%; width: 12%; aspect-ratio: 1;
+  border: 4px dotted #ffda95; border-radius: 50%; animation: impact-ring .44s .28s ease-out both;
+}
+.arena[data-fx="guard"] .fx::before {
+  content: ''; position: absolute; left: 15%; bottom: 7%; width: min(16%, 150px); height: 49%;
+  border-radius: 28% 55% 52% 37% / 18% 29% 67% 72%;
+  border: 2px solid #baf6fb; box-shadow: inset 0 0 18px #79daff77, 0 0 9px #79daff77;
+  background: linear-gradient(145deg, #acf2ff4d, #69bee41c); animation: ward .55s ease-out both;
+}
+.arena[data-fx="heal"] .fx::before, .arena[data-fx="win"] .fx::before {
+  content: ''; position: absolute; bottom: 13%; left: 18%; width: 8px; height: 8px;
+  color:#b9ffb5; background:currentColor; transform:rotate(45deg);
+  box-shadow: 17px -37px 0 -1px currentColor, -38px -19px 0 -2px currentColor, 45px -12px 0 -2px currentColor,
+              -16px -66px 0 -1px currentColor, 31px -93px 0 -2px currentColor, 58px -58px 0 -1px currentColor;
+  animation: runes-rise .7s ease-out both;
+}
+.arena[data-fx="win"] .fx::before { color: #f5d48b; }
+@keyframes drift-mist { to { transform: translateX(19px); opacity: .65; } }
+@keyframes lantern { 0%, 15% { opacity: .27; } 75%, 100% { opacity: .97; transform: translate(5px,-8px); } }
+@keyframes reveal-dialogue { from { opacity: .15; transform: translateY(3px); } }
+@keyframes reward-rise { from { opacity: .2; transform: translateY(7px); } }
+@keyframes king-arrives { from { transform: translateY(-27%) scale(.77); opacity: .1; } 72% { transform: scale(1.09,.91); } }
+@keyframes sword-strike { 0%,100% { transform: translateX(0); } 24% { transform: translateX(-8%) rotate(-5deg); } 58% { transform: translateX(27%) rotate(8deg); } }
+@keyframes struck { 25% { transform: translateX(9%) scale(.93,1.06); filter: brightness(1.75); } 75% { transform: scale(1.05,.93); } }
+@keyframes casting { 54% { transform: translateY(-5px) rotate(-4deg); filter: drop-shadow(0 0 8px #f4be7b); } }
+@keyframes recovery { 45% { filter: drop-shadow(0 0 16px #91ebb3); } }
+@keyframes jelly-lunge { 20% { transform: scale(1.12,.8); } 52% { transform: translate(-25%,-4%) scale(.95,1.05); } }
+@keyframes hero-hit { 30% { transform: translateX(-9%) rotate(-4deg); filter: brightness(1.6); } }
+@keyframes shatter { 35% { filter: brightness(1.6); transform: scale(1.08,.92); } to { opacity: 0; transform: scale(.8,.6); } }
+@keyframes salute { 60%,100% { transform: translateY(-2%) rotate(-5deg); filter: drop-shadow(0 0 6px #dfcc84); } }
+@keyframes wounded { to { transform: translateY(11%) rotate(-16deg); filter: saturate(.5); } }
+@keyframes falter { 42% { transform: rotate(-3deg); filter: saturate(.45); } }
+@keyframes slash-trail { 0% { opacity: 0; transform: rotate(-35deg) scale(.2); } 42% { opacity: 1; } 100% { opacity: 0; transform: rotate(-19deg) scale(1); } }
+@keyframes fire-flight { 0% { opacity: 0; transform: scale(.2); } 22% { opacity: 1; } 90% { opacity: 1; } to { opacity: 0; left: 70%; } }
+@keyframes impact-ring { from { opacity: 0; transform: scale(.2); } 20% { opacity: 1; } to { opacity: 0; transform: scale(1.45); } }
+@keyframes ward { from { opacity: 0; transform: scale(.75); } 75% { opacity: 1; } to { opacity: .77; } }
+@keyframes runes-rise { from { opacity: 0; } 34% { opacity: 1; } to { opacity: 0; transform: translateY(-52px) rotate(58deg); } }
+@media (max-width: 700px) {
+  /* The viewBox crops toward its centre on tall screens. Keep all four landmarks in the frame. */
+  .title-art .painted-moon { transform: translate(-180px, -44px); }
+  .title-art .painted-keep { transform: translate(-215px, 3px); }
+  .title-art .painted-traveler { transform: translate(353px, 90px); }
+  .title-art .painted-left { transform: translateX(436px); }
+  .title-art .painted-right { transform: translateX(-432px); }
+  .arena .hero { left: 5%; }
+  .arena .enemy { right: 6%; }
+  .title::after { background: radial-gradient(ellipse at 50% 48%, #081a20ba, #09192380 57%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .forest-mist,.firefly,.dialogue p,.reward,.arena .combatant,.arena .fx::after,.arena .fx::before {
+    animation-duration: .01ms !important; animation-iteration-count: 1 !important; animation-delay: 0s !important;
+  }
+}
+</style></head><body><main id="app"></main><dialog id="pause"></dialog><noscript>게임을 실행하려면 자바스크립트를 켜 주세요.</noscript><script>
+'use strict';
+// Chapter 1 content. Each entry is also a teachable vocabulary-book card.
+const lessons = [
+ ['hello','Hello','안녕하세요','Hello, friend.'],['thanks','Thank you','감사합니다','Thank you, Rowan.'],
+ ['apple','apple','사과','I like apples.'],['water','water','물','I drink water.'],
+ ['bread','bread','빵','I eat bread.'],['book','book','책','I have a book.'],
+ ['sword','sword','검','I have a sword.'],['forest','forest','숲','The forest is quiet.'],
+ ['iam','I am','나는 ~입니다','I am a student.'],['ihave','I have','나는 ~을 가지고 있어요','I have a book.'],
+ ['ilike','I like','나는 ~을 좋아해요','I like apples.'],['iwant','I want','나는 ~을 원해요','I want some water.'],
+ ['ieat','I eat','나는 ~을 먹어요','I eat bread.'],['idrink','I drink','나는 ~을 마셔요','I drink water.']
+].map(([id,en,ko,example])=>({id,en,ko,example}));
+const Q = [];
+function add(id,stage,type,prompt,phrase,choices,answer,explanation,tags){Q.push({id,stage,type,difficulty:stage,instruction:prompt,phrase,choices,answer,explanation,tags});}
+[
+ ['hello','Hello','안녕하세요',['감사합니다','숲','물']],['thanks','Thank you','감사합니다',['안녕하세요','사과','책']],
+ ['apple','apple','사과',['바나나','빵','물']],['water','water','물',['검','책','빵']],
+ ['bread','bread','빵',['물','사과','숲']],['book','book','책',['검','물','사과']],
+ ['sword','sword','검',['숲','책','빵']],['forest','forest','숲',['물','검','책']],
+ ['iam','I am','나는 ~입니다',['나는 ~을 원해요','나는 ~을 먹어요','감사합니다']],
+ ['ihave','I have','나는 ~을 가지고 있어요',['나는 ~을 좋아해요','나는 ~을 마셔요','안녕하세요']]
+].forEach(([tag,en,ko,wrong],i)=>add('v'+i,1,'vocab',`“${en}”의 뜻은 무엇일까요?`,en,[ko,...wrong],ko,`“${en}”은 “${ko}”라는 뜻이에요.`,[tag]));
+[
+ ['I ___ a student.','am',['is','are','be'],'I와 함께 현재 상태를 나타낼 때는 am을 써요.','iam'],
+ ['I ___ water.','drink',['eat','am','book'],'drink는 마시다라는 뜻이에요.','idrink'],
+ ['I ___ bread.','eat',['drink','am','forest'],'eat은 먹다라는 뜻이에요.','ieat'],
+ ['I ___ a book.','have',['am','drink','hello'],'have는 가지고 있다는 뜻이에요.','ihave'],
+ ['I ___ apples.','like',['am','water','hello'],'like는 좋아하다는 뜻이에요.','ilike'],
+ ['I ___ some water.','want',['am','forest','hello'],'want는 원하다는 뜻이에요.','iwant'],
+ ['“나는 물을 마셔요”를 영어로 고르세요.','I drink water.',['I eat water.','I am water.','I have a book.'],'drink water는 물을 마시다라는 뜻이에요.','idrink'],
+ ['“나는 빵을 먹어요”를 영어로 고르세요.','I eat bread.',['I drink bread.','I am bread.','I like water.'],'eat bread는 빵을 먹다라는 뜻이에요.','ieat'],
+ ['“나는 책을 가지고 있어요”를 영어로 고르세요.','I have a book.',['I am a book.','I drink a book.','I like water.'],'have a book은 책을 가지고 있다는 뜻이에요.','ihave'],
+ ['“나는 사과를 좋아해요”를 영어로 고르세요.','I like apples.',['I eat bread.','I drink water.','I have a sword.'],'like apples는 사과를 좋아한다는 뜻이에요.','ilike']
+].forEach(([prompt,answer,wrong,explanation,tag],i)=>add('s'+i,2,'sentence',prompt,prompt,[answer,...wrong],answer,explanation,[tag]));
+[
+ ['I want some water.','물을 좀 원해요.','iwant'],['I have a book.','나는 책을 가지고 있어요.','ihave'],
+ ['I drink water.','나는 물을 마셔요.','idrink'],['I eat bread.','나는 빵을 먹어요.','ieat'],['I like apples.','나는 사과를 좋아해요.','ilike']
+].forEach(([answer,ko,tag],i)=>add('o'+i,2,'order',`단어를 눌러 문장을 완성하세요: ${ko}`,answer,answer.replace('.','').split(' '),answer,`“${answer}”는 “${ko}”라는 뜻이에요.`,[tag]));
+[
+ ['I like apples.','나는 사과를 좋아해요.',['나는 빵을 먹어요.','나는 물을 마셔요.','나는 책을 가지고 있어요.'],'ilike'],
+ ['I drink water.','나는 물을 마셔요.',['나는 사과를 좋아해요.','나는 빵을 먹어요.','나는 책을 가지고 있어요.'],'idrink'],
+ ['I eat bread.','나는 빵을 먹어요.',['나는 물을 마셔요.','나는 사과를 좋아해요.','나는 책을 가지고 있어요.'],'ieat'],
+ ['I have a book.','나는 책을 가지고 있어요.',['나는 빵을 먹어요.','나는 물을 마셔요.','나는 사과를 좋아해요.'],'ihave'],
+ ['I want some water.','물을 좀 원해요.',['나는 책을 가지고 있어요.','나는 빵을 먹어요.','나는 사과를 좋아해요.'],'iwant']
+].forEach(([phrase,answer,wrong,tag],i)=>add('l'+i,3,'listening','들은 문장의 뜻을 고르세요.',phrase,[answer,...wrong],answer,`“${phrase}”는 “${answer}”라는 뜻이에요.`,[tag]));
+
+;
+// A profile is the saved checkpoint. Encounter state and pending actions stay in memory.
+const Engine = (() => {
+  const saveKey = 'EnglishQuest.chapter1.v1';
+  const active = new WeakMap();
+  const enemies = [
+    {name:'숲 슬라임', en:'Forest Slime', hp:55, attack:8, defense:0, xp:35, gold:15},
+    {name:'수정 슬라임', en:'Crystal Slime', hp:85, attack:11, defense:1, xp:50, gold:25},
+    {name:'슬라임 왕', en:'Slime King', hp:150, attack:14, defense:2, xp:100, gold:75}
+  ];
+  const cooldown = {sword:0, fire:2, guard:0, heal:3};
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+  const integer = (value, fallback, max) => Number.isSafeInteger(value)
+    ? clamp(value, 0, max) : fallback;
+  const emptyRecord = () => ({seen:false, correct:0, wrong:0, streak:0});
+  function fresh() {
+    return {version:1, started:false, level:1, xp:0, gold:0, hp:100,
+      completed:[], unlocked:1, chapterComplete:false, learning:{}, mistakes:{},
+      settings:{sound:true, voice:true, volume:0.45}};
+  }
+  function stats(profile) {
+    const steps = profile.level - 1;
+    return {maxHp:100 + 12*steps, attack:12 + 2*steps, magic:18 + 3*steps,
+      defense:3, nextXp:100 + 30*steps};
+  }
+  function hydrate(raw) {
+    const profile = fresh();
+    if (!raw || raw.version !== 1) return profile;
+    profile.started = raw.started === true;
+    profile.level = Math.max(1, integer(raw.level, 1, 9999));
+    const {maxHp, nextXp} = stats(profile);
+    profile.hp = integer(raw.hp, maxHp, maxHp);
+    profile.gold = integer(raw.gold, 0, Number.MAX_SAFE_INTEGER);
+    profile.xp = integer(raw.xp, 0, nextXp - 1);
+    for (let stage = 1; stage <= 3; stage++) {
+      if (!Array.isArray(raw.completed) || !raw.completed.includes(stage)) break;
+      profile.completed.push(stage);
+    }
+    profile.unlocked = Math.min(3, profile.completed.length + 1);
+    profile.chapterComplete = profile.completed.length === 3;
+    for (const {id} of lessons) {
+      const item = raw.learning?.[id];
+      if (!item || typeof item !== 'object') continue;
+      const correct = integer(item.correct, 0, Number.MAX_SAFE_INTEGER);
+      const wrong = integer(item.wrong, 0, Number.MAX_SAFE_INTEGER);
+      profile.learning[id] = {correct, wrong, seen:item.seen === true || correct + wrong > 0,
+        streak:integer(item.streak, 0, correct)};
+    }
+    for (const {id} of Q) {
+      const count = integer(raw.mistakes?.[id], 0, Number.MAX_SAFE_INTEGER);
+      if (count) profile.mistakes[id] = count;
+    }
+    const settings = raw.settings || {};
+    for (const toggle of ['sound', 'voice']) {
+      if (typeof settings[toggle] === 'boolean') profile.settings[toggle] = settings[toggle];
+    }
+    if (Number.isFinite(settings.volume)) profile.settings.volume = clamp(settings.volume, 0, 1);
+    return profile;
+  }
+  function load() {
+    try { return hydrate(JSON.parse(localStorage.getItem(saveKey))); }
+    catch { return fresh(); }
+  }
+  function save(profile) {
+    try { localStorage.setItem(saveKey, JSON.stringify(profile)); return true; }
+    catch { return false; }
+  }
+  function teach(profile, tags) {
+    for (const id of tags) {
+      if (!lessons.some(lesson => lesson.id === id)) continue;
+      const record = profile.learning[id] ||= emptyRecord();
+      record.seen = true;
+    }
+  }
+  function record(profile, question, correct) {
+    teach(profile, question.tags);
+    for (const id of question.tags) {
+      const item = profile.learning[id];
+      if (correct) { item.correct++; item.streak++; }
+      else { item.wrong++; item.streak = 0; }
+    }
+    if (!correct) profile.mistakes[question.id] = (profile.mistakes[question.id] || 0) + 1;
+  }
+  function status(item) {
+    if (!item?.seen) return 'New';
+    if (item.wrong > 0 && item.streak < 2) return 'Review Needed';
+    if (item.streak >= 3) return 'Familiar';
+    return 'Learning';
+  }
+  function battle(profile, stage) {
+    if (!Number.isInteger(stage) || stage < 1 || stage > profile.unlocked) return null;
+    const encounter = {stage, turn:1, phase:'PLAYER_SELECT', hp:stats(profile).maxHp,
+      enemyHp:enemies[stage-1].hp, cooldowns:{sword:0,fire:0,guard:0,heal:0},
+      counts:{}, lastId:null, question:null, choices:[], ability:null, correct:false};
+    active.set(profile, encounter);
+    return encounter;
+  }
+  function inPhase(profile, encounter, phase) {
+    return !!encounter && active.get(profile) === encounter && encounter.phase === phase;
+  }
+  const exposed = encounter => encounter.stage === 3 && encounter.turn % 3 === 0;
+  const charging = encounter => encounter.stage === 3 && encounter.turn % 3 === 2;
+  function available(encounter, ability) {
+    return encounter?.phase === 'PLAYER_SELECT' && Object.hasOwn(cooldown, ability)
+      && (encounter.stage > 1 || ability === 'sword') && encounter.cooldowns[ability] === 0;
+  }
+  function shuffle(items, random = Math.random) {
+    const result = [...items];
+    for (let i = result.length - 1; i > 0; i--) {
+      const j = Math.floor(random() * (i+1));
+      [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+  }
+  function candidates(encounter, ability) {
+    const stageQuestions = Q.filter(q => q.stage <= encounter.stage);
+    if (ability === 'heal') return stageQuestions.filter(q => q.type === 'order');
+    if (ability === 'fire') return stageQuestions.filter(q => q.type === 'sentence' && q.instruction.includes('___'));
+    if (ability === 'guard') return stageQuestions.filter(q => q.type === 'vocab' && q.phrase.includes(' '));
+    if (exposed(encounter)) return stageQuestions.filter(q => q.type === 'listening');
+    if (encounter.stage >= 2 && encounter.turn % 2 === 0) {
+      return stageQuestions.filter(q => q.type === 'sentence' && !q.instruction.includes('___'));
+    }
+    return stageQuestions.filter(q => q.type === 'vocab');
+  }
+  function select(profile, encounter, ability, random = Math.random) {
+    if (!inPhase(profile, encounter,'PLAYER_SELECT') || !available(encounter,ability)) return null;
+    let pool = candidates(encounter, ability);
+    const seen = pool.filter(q => q.tags.every(tag => profile.learning[tag]?.seen));
+    if (seen.length) pool = seen;
+    const other = pool.filter(q => q.id !== encounter.lastId);
+    if (other.length) pool = other;
+    const lowest = Math.min(...pool.map(q => encounter.counts[q.id] || 0));
+    const next = pool.filter(q => (encounter.counts[q.id] || 0) === lowest);
+    const question = next[Math.floor(random()*next.length)];
+    const choices = shuffle(question.choices, random);
+    if (question.type === 'order' && choices.join(' ') === question.choices.join(' ')) {
+      choices.push(choices.shift());
+    }
+    encounter.counts[question.id] = (encounter.counts[question.id] || 0) + 1;
+    Object.assign(encounter, {ability, question, choices, lastId:question.id, phase:'QUESTION_ACTIVE'});
+    return {question, choices};
+  }
+  const normalize = text => text.trim().replace(/[.]$/, '').replace(/\s+/g,' ');
+  function answer(profile, encounter, value) {
+    if (!inPhase(profile, encounter,'QUESTION_ACTIVE') || typeof value !== 'string') return null;
+    const {question} = encounter;
+    if (question.type !== 'order' && !encounter.choices.includes(value)) return null;
+    if (question.type === 'order') {
+      const tokens = normalize(value).split(' ').sort();
+      if (tokens.join(' ') !== [...question.choices].sort().join(' ')) return null;
+    }
+    const correct = normalize(value) === normalize(question.answer);
+    Object.assign(encounter, {correct, phase:'ANSWER_FEEDBACK'});
+    record(profile, question, correct);
+    return {correct, question};
+  }
+  function playerAction(profile, encounter) {
+    if (!inPhase(profile, encounter, 'ANSWER_FEEDBACK')) return null;
+    const {ability, correct, stage} = encounter;
+    const hero = stats(profile);
+    let damage = 0, healing = 0;
+    if (correct && (ability === 'sword' || ability === 'fire')) {
+      const power = ability === 'fire' ? hero.magic : hero.attack;
+      const strike = Math.max(1, power - enemies[stage-1].defense) * (exposed(encounter) ? 2 : 1);
+      damage = Math.min(encounter.enemyHp, strike);
+      encounter.enemyHp -= damage;
+    }
+    if (correct && ability === 'heal') {
+      healing = Math.min(20, hero.maxHp - encounter.hp);
+      encounter.hp += healing;
+    }
+    const won = encounter.enemyHp === 0;
+    encounter.phase = won ? 'VICTORY' : 'ENEMY_ACTION';
+    return {damage, healing, guard:correct && ability === 'guard', won};
+  }
+  function enemyAction(profile, encounter) {
+    if (!inPhase(profile, encounter, 'ENEMY_ACTION')) return null;
+    const charge = charging(encounter);
+    const guard = encounter.correct && encounter.ability === 'guard';
+    const hit = Math.max(1, enemies[encounter.stage-1].attack - stats(profile).defense);
+    const damage = charge ? 0 : Math.min(encounter.hp, Math.max(1, Math.round(hit*(guard ? 0.4 : 1))));
+    encounter.hp -= damage;
+    const lost = encounter.hp === 0;
+    for (const id of Object.keys(cooldown)) {
+      encounter.cooldowns[id] = Math.max(0, encounter.cooldowns[id] - 1);
+    }
+    if (encounter.correct) encounter.cooldowns[encounter.ability] = cooldown[encounter.ability];
+    encounter.phase = lost ? 'DEFEAT' : 'PLAYER_SELECT';
+    if (lost) profile.hp = 0;
+    else encounter.turn++;
+    return {damage, lost, charging:charge};
+  }
+  function reward(profile, encounter) {
+    if (!inPhase(profile, encounter, 'VICTORY')) return null;
+    const {stage} = encounter;
+    const enemy = enemies[stage - 1];
+    const bonus = stage === 3 && !profile.chapterComplete ? 50 : 0;
+    const xp = enemy.xp + bonus;
+    const oldLevel = profile.level;
+    profile.xp += xp;
+    profile.gold += enemy.gold;
+    while (profile.xp >= stats(profile).nextXp) {
+      profile.xp -= stats(profile).nextXp;
+      profile.level++;
+    }
+    const levelUp = profile.level > oldLevel;
+    profile.hp = Math.min(stats(profile).maxHp, encounter.hp + (levelUp ? 30 : 0));
+    if (!profile.completed.includes(stage)) profile.completed.push(stage);
+    profile.unlocked = Math.min(3, profile.completed.length + 1);
+    profile.chapterComplete = profile.completed.length === 3;
+    encounter.phase = 'REWARD';
+    return {xp, gold:enemy.gold, levelUp, bonus};
+  }
+  return {saveKey, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
+    available, charging, exposed, shuffle, select, answer, playerAction, enemyAction, reward};
+})();
+
+;
+// Original short cues, synthesized on demand after a gesture.
+const AudioFX = (() => {
+  let context;
+  const cues = {
+    ui:      ['sine',     [392],              .06],
+    correct: ['sine',     [523, 784],         .12],
+    wrong:   ['sine',     [330, 294],         .13],
+    sword:   ['sawtooth', [420, 170, 92],      .045],
+    fire:    ['triangle', [175, 349, 587],     .085],
+    guard:   ['sine',     [392, 523],          .1],
+    enemy:   ['triangle', [147, 98],           .1],
+    heal:    ['sine',     [392, 494, 587, 784],.1],
+    victory: ['triangle', [392, 494, 587, 784],.16],
+    level:   ['sine',     [523, 659, 784,1047],.14],
+    defeat:  ['sine',     [392, 330, 262],     .18]
+  };
+  const aliases = {select:'ui', incorrect:'wrong', hit:'enemy', magic:'fire',
+    healing:'heal', win:'victory', lose:'defeat', levelUp:'level', 'level-up':'level'};
+  function play(effect, settings) {
+    if (!settings?.sound || settings.volume <= 0) return;
+    try {
+      const AudioContext = globalThis.AudioContext || globalThis.webkitAudioContext;
+      if (!AudioContext) return;
+      context ||= new AudioContext();
+      if (context.state === 'suspended') context.resume().catch(() => {});
+      const [wave, notes, duration] = cues[aliases[effect] || effect] || cues.ui;
+      const start = context.currentTime;
+      for (const [i, frequency] of notes.entries()) {
+        const at = start + i*duration;
+        const oscillator = context.createOscillator();
+        const gain = context.createGain();
+        oscillator.type = wave;
+        oscillator.frequency.setValueAtTime(frequency, at);
+        gain.gain.setValueAtTime(0.0001, at);
+        gain.gain.exponentialRampToValueAtTime(Math.max(.0002, .13*settings.volume), at+.012);
+        gain.gain.exponentialRampToValueAtTime(.0001, at+duration+.04);
+        oscillator.connect(gain);
+        gain.connect(context.destination);
+        oscillator.onended = () => { oscillator.disconnect(); gain.disconnect(); };
+        oscillator.start(at);
+        oscillator.stop(at+duration+.05);
+      }
+    } catch { /* A disabled audio device should never interrupt a turn. */ }
+  }
+  function voice(settings) {
+    if (!settings?.voice || !globalThis.SpeechSynthesisUtterance) return null;
+    try {
+      const voices = globalThis.speechSynthesis?.getVoices() || [];
+      return voices.find(v => v.localService && /^en[-_]US$/i.test(v.lang))
+        || voices.find(v => v.localService && /^en(?:[-_]|$)/i.test(v.lang)) || null;
+    } catch { return null; }
+  }
+  function stop() {
+    try { globalThis.speechSynthesis?.cancel(); } catch { /* optional */ }
+  }
+  function speak(text, settings, onError) {
+    const english = voice(settings);
+    if (!english) return false;
+    try {
+      stop();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = english;
+      utterance.lang = english.lang;
+      utterance.rate = .83;
+      utterance.onerror = event => {
+        if (!['canceled','interrupted'].includes(event.error)) onError?.();
+      };
+      globalThis.speechSynthesis.speak(utterance);
+      return true;
+    } catch { return false; }
+  }
+  return {play, speak, canSpeak:settings => !!voice(settings), stop};
+})();
+
+;
+// Original inline vector illustrations for English Quest. No asset downloads.
+const Art = (function illustrationLibrary() {
+  // Each drawing has its own paint servers, including when two portraits share a screen.
+  let serial = 0;
+  const svg = (box, body, css = '', fit = 'xMidYMid meet') =>
+    `<svg xmlns="http://www.w3.org/2000/svg" class="${css}" viewBox="${box}" preserveAspectRatio="${fit}" aria-hidden="true" focusable="false">${body}</svg>`;
+  const circle = (x,y,r,paint,extra='') => `<circle cx="${x}" cy="${y}" r="${r}" fill="${paint}" ${extra}/>`;
+  const path = (d,fill,extra='') => `<path d="${d}" fill="${fill}" ${extra}/>`;
+  const many = (count, draw) => Array.from({length:count},(_,i)=>draw(i)).join('');
+  const use = (id,transform,extra='') => `<use href="#${id}" transform="${transform}" ${extra}/>`;
+  const noise = i => {const x = Math.sin(i*17.341+0.7)*937.171;return x-Math.floor(x);};
+  const palettes = [
+    ['#111f32','#346363','#e3bb77','#526f60','#314f4b','#193d38','#0e2928','#091c20','#87ad81','#f2ce82'],
+    ['#101e38','#3e6a81','#b8d8da','#44718a','#325964','#214649','#15323b','#0c202e','#64b9c4','#a2f3ff'],
+    ['#191b35','#50496e','#d6b3a4','#6e6177','#454862','#323348','#222533','#111c2a','#b48cab','#edc3f3']
+  ];
+  function forest(stage=1,title=false){
+    const id=`land${++serial}`, [sky,mid,horizon,hill,far,wood,trunk,dark,leaf,glow] = palettes[stage-1]||palettes[0];
+    const ref=n=>`url(#${id}${n})`;
+    const tree=id+'pine';
+    const treeShape=`<g id="${tree}">${path('M-2 0 L-1 -83 L0 -114 L3 -11 L5 0Z','currentColor')}${
+      many(8,i=>{const y=-111+i*12,w=4+i*2.75;return path(`M0 ${y-4} Q${-w*.26} ${y+11} ${-w} ${y+19} Q${-w*.5} ${y+20} -3 ${y+16} L-4 ${y+21} L2 ${y+16} Q${w*.46} ${y+21} ${w+2} ${y+19} Q${w*.39} ${y+12} 0 ${y-4}Z`,'currentColor');})
+    }</g>`;
+    const branch=id+'sprig';
+    const leafSprig=`<g id="${branch}">${path('M0 0 Q38 -13 70 -7','none','stroke="#abb487" stroke-width="1.3"')}${
+      many(7,i=>{const x=7+i*9;return path(`M${x} -6 q-5 -12 -14 -13 q3 11 14 13Z M${x+4} -6 q2 9 -6 13 q1 -8 6 -13Z`,i%3===0?'#71866b':'#426456');})
+    }</g>`;
+    const defs=`<defs>
+      <linearGradient id="${id}sky" x2=".1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="${sky}"/><stop offset=".49" stop-color="${mid}"/><stop offset=".8" stop-color="${horizon}"/><stop offset="1" stop-color="${wood}"/></linearGradient>
+      <radialGradient id="${id}moon"><stop stop-color="#ffffd1" stop-opacity=".56"/><stop offset=".22" stop-color="${glow}" stop-opacity=".23"/><stop offset="1" stop-color="${glow}" stop-opacity="0"/></radialGradient>
+      <linearGradient id="${id}soil" x2="0" y2="1"><stop stop-color="${wood}"/><stop offset="1" stop-color="${dark}"/></linearGradient>
+      <linearGradient id="${id}trail" x2="0" y2="1"><stop stop-color="${glow}" stop-opacity=".56"/><stop offset="1" stop-color="${leaf}" stop-opacity=".15"/></linearGradient>
+      <linearGradient id="${id}ray" x2="0" y2="1"><stop stop-color="${glow}" stop-opacity=".19"/><stop offset="1" stop-color="${glow}" stop-opacity="0"/></linearGradient>
+      ${treeShape}${leafSprig}</defs>`;
+    const moonX=title?967:734,moonY=title?130:118;
+    const stars=many(65,i=>circle(Math.round(noise(i)*1400),Math.round(noise(i+327)*290),i%7===0?1.8:1,'#f8e8c1',`opacity="${.24+noise(i+415)*.65}"`));
+    const stars4=many(7,i=>{const x=300+i*133,y=35+noise(i)*164;return path(`M${x-4} ${y} l3 -1 1 -5 1 5 4 1 -4 1 -1 5 -1 -5Z`,glow,'opacity=".7"');});
+    // Ridgelines use graded silhouettes and exposed facets to keep the landscape legible at small sizes.
+    const ridges= path('M0 329 L65 290 125 302 243 205 276 214 322 176 385 231 429 197 506 235 595 181 653 251 709 210 782 247 869 158 923 212 992 164 1024 197 1077 183 1186 278 1273 214 1400 264 V500 H0Z',hill,'opacity=".73"')+
+      path('M184 262l59 -57 33 9 46 -38 -46 64 11 -22z M542 222l53 -41 29 34 -31 -20z M808 221l61 -63 53 54 -48 -31 -17 28 3 -17z M946 207l46 -43 32 33 -40 -19z',glow,'opacity=".22"')+
+      path('M0 338 Q90 287 173 329 T314 320 Q397 262 457 295 T610 338 Q706 259 770 295 T895 290 Q1025 223 1118 281 T1286 285 Q1345 273 1400 304 V470 H0Z',far);
+    function castle(x,y,scale){
+      const tower=(tx,ty,w,h)=>`<g transform="translate(${tx} ${ty})">${path(`M0 0 h${w} v${h} H0Z`,far)}${path(`M-4 1 L${w/2} ${-w*.98} ${w+4} 1Z`,wood)}${path(`M${w/2} ${-w*.98} l${w/2+4} ${w*.98+1} h-5Z`,glow,'opacity=".7"')}${path(`M${w*.5} ${-w*.98} v-12 l10 3 -10 4`,glow)}${path(`M${w*.36} 14 q2 -7 4 0v9h-4Z`,glow)}</g>`;
+      return `<g transform="translate(${x} ${y}) scale(${scale})">${tower(-52,-29,16,63)}${tower(30,-39,20,74)}${tower(-21,-66,25,96)}${path('M-48 1h65v32h-65z',far)}${path('M-52 2l37 -22 38 22Z',wood)}${tower(1,-12,16,47)}${tower(-69,-10,13,51)}${path('M-77 32h136v12H-77Z',wood)}${many(8,i=>path(`M${-71+i*17} 31v-7h6v7`,wood))}${path('M-31 33v-9q5 -11 10 0v9Z',glow)}</g>`;
+    }
+    const cluster=(offset,y,s,n,color,step)=>`<g color="${color}">${many(n,i=>use(tree,`translate(${Math.round(offset+i*step)} ${Math.round(y+Math.cos(i*1.33)*13)}) scale(${(s*(.58+noise(i+step)*.75)).toFixed(2)})`))}</g>`;
+    const castleX=title?1010:850;
+    const banks=path('M0 338 Q156 293 320 365 Q456 424 600 386 Q775 350 924 315 Q1092 276 1211 321 Q1300 337 1400 308 V490 H0Z',wood)+
+      cluster(-15,371,.94,24,wood,18)+cluster(827,349,.62,36,wood,16)+
+      path('M0 397 Q188 358 370 405 Q495 438 661 413 Q809 377 1011 385 Q1195 414 1400 359 V610 H0Z',ref('soil'))+
+      path('M839 370 Q762 393 689 405 Q618 419 750 427 Q833 429 763 455 Q662 488 574 510 Q497 538 534 600 H214 Q274 533 424 503 Q621 471 648 450 Q669 440 610 438 Q506 432 600 413 Q671 395 839 370Z',ref('trail'));
+    const turf=many(45,i=>{const x=Math.round(noise(i+802)*1400),y=Math.round(422+noise(i+943)*171),w=3+noise(i+190)*20;return path(`M${x} ${y} q${w} -5 ${w*2} -1 q${-w} -1 ${-w*2} 1Z`,leaf,'opacity=".19"');});
+    const foregroundTree=(x,s)=>`<g transform="translate(${x} 0) scale(${s} 1)">
+      ${path('M-10 -5 H145 Q136 70 115 139 Q145 115 192 99 Q229 80 270 39 L288 29 Q246 89 211 108 Q172 127 122 166 L96 222 Q83 311 97 395 Q106 447 145 489 L160 510 Q131 493 109 485 L123 513 Q98 500 72 491 Q64 495 39 516 L38 498 Q9 504 -9 523Z',trunk)}
+      ${path('M87 476 Q61 336 83 211 Q94 153 108 114 M16 396 Q34 318 32 265 T65 129 M128 147 Q188 112 212 100 M103 447 Q83 449 89 417','none',`stroke="${leaf}" opacity=".22" stroke-width="3"`)}
+      ${path('M0 91 Q83 114 142 89 Q179 78 218 66 L305 47 365 8 407 -10 H0Z',dark)}
+      ${many(29,i=>{const bx=Math.round(noise(i+124)*344),by=Math.round(73-bx*.2+noise(i+78)*24);return use(branch,`translate(${bx} ${by}) rotate(${Math.round(noise(i)*75-54)}) scale(${(.4+noise(i+138)*.58).toFixed(2)})`);})}
+    </g>`;
+    const herbs=(x,y,s,flip=1)=>`<g transform="translate(${x} ${y}) scale(${s*flip} ${s})">${path('M0 0 Q-10 -26 -43 -46 Q-34 -20 -4 0 Q-15 -44 -6 -70 Q7 -44 2 -3 Q20 -39 50 -50 Q38 -22 6 -2 Q39 -23 60 -19 Q46 -4 8 0Z',leaf,'opacity=".58"')}${path('M-4 -2l-25 -31 M3 -4l30 -33 M0 -4l-5 -47','none',`stroke="${dark}" stroke-width="1.5"`)}</g>`;
+    const crystal=(x,y,size)=>`<g transform="translate(${x} ${y}) scale(${size})">${path('M0 0L-6 -30 2 -45 11 -28 6 -2Z',glow)}${path('M2 -45l2 33 -4 12 -6 -30Z',leaf)}${path('M4 -12l7 -16 -5 26Z','#fff6d2','opacity=".8"')}</g>`;
+    const motes=many(19,i=>{const x=Math.round(noise(i+41)*1250+75),y=Math.round(noise(i+65)*265+215);return `<g class="firefly" style="--delay:-${i%7}s">${circle(x,y,3.5,glow,'opacity=".15"')}${circle(x,y,1.1,glow)}</g>`;});
+    const traveler=title?`<g transform="translate(226 445) scale(1.17)" fill="#0b1e23" stroke="#9cae84" stroke-width=".8">${path('M16 -61q3 -15 14 -14l7 7 -3 11 -4 3 17 14 -7 10 -6 -4 4 25 -5 8 -8 -1 -2 -22 -5 20 -5 4 -10 -1 5 -12 3 -22 -15 13 -13 -3q14 -12 17 -37l14 -8Z','#0b1e23')}${path('M37 -36l33 22 8 3 -3 -6 -33 -23z','#9bad88')}${path('M11 -52q10 -8 22 -3q-13 9 -15 28l-18 12Z','#1b3433')}</g>`:'';
+    const bottom=path('M0 456 Q89 428 166 439 T295 451 Q379 467 426 520 Q490 563 562 600 H0Z M1400 416 Q1345 435 1295 435 Q1212 430 1170 475 Q1096 549 998 600 H1400Z',dark);
+    return svg('0 0 1400 600',`${defs}<rect width="1400" height="600" fill="${ref('sky')}"/>${stars}${stars4}<g class="painted-moon">${circle(moonX,moonY,190,ref('moon'))}${circle(moonX,moonY,25,'#f2e3b1','opacity=".93"')}${circle(moonX,moonY,35,'none',`stroke="${glow}" stroke-opacity=".33" stroke-width="1"`)}</g>${ridges}<g class="painted-keep">${castle(castleX,289,.86)}</g>${banks}${turf}<g class="forest-mist">${path('M-30 361 Q220 330 437 363 T862 351 Q1057 325 1430 344 Q1138 335 895 365 T447 379 Q217 352 -30 376Z',glow,'opacity=".09"')}${path('M484 400Q711 371 874 379T1213 359Q1106 393 879 387T484 400Z',glow,'opacity=".12"')}</g>${path('M255 0h60l405 470 -90 -10Z M358 0h21l304 315Z M1044 0h32L801 409 740 448Z',ref('ray'))}${bottom}<g class="painted-traveler">${traveler}</g><g class="painted-left">${foregroundTree(0,1)}</g><g class="painted-right">${foregroundTree(1400,-.95)}</g>${herbs(90,482,1)}${herbs(1260,476,1.14,-1)}${herbs(1300,507,.67)}${crystal(title?1169:1060,455,.6)}${crystal(title?1184:1077,458,.35)}${crystal(176,472,.5)}${motes}`,title?'title-art':'arena-bg','xMidYMid slice');
+  }
+  function hero(){
+    const id=`hero${++serial}`,paint=x=>`url(#${id}${x})`;
+    const defs=`<defs><linearGradient id="${id}blue" x2="1" y2="1"><stop stop-color="#58808a"/><stop offset=".42" stop-color="#294b60"/><stop offset="1" stop-color="#112236"/></linearGradient><linearGradient id="${id}metal" x2=".8" y2="1"><stop stop-color="#ebdfaf"/><stop offset=".4" stop-color="#a0b6b2"/><stop offset=".55" stop-color="#596b70"/><stop offset="1" stop-color="#293c4b"/></linearGradient><linearGradient id="${id}cape" x2=".9" y2=".8"><stop stop-color="#294251"/><stop offset=".63" stop-color="#22786f"/><stop offset="1" stop-color="#172b39"/></linearGradient></defs>`;
+    return svg('0 0 230 264',`${defs}<ellipse cx="105" cy="255" rx="68" ry="6" fill="#071817" opacity=".48"/>
+      <g stroke-linejoin="round" stroke-linecap="round">
+      ${path('M76 86 Q54 98 51 126 Q46 152 20 170 Q42 172 47 166 Q35 181 22 186 Q60 190 83 167 L99 131Z',paint('cape'),'stroke="#162c39" stroke-width="2"')}
+      ${path('M77 98Q62 121 59 146T36 177 M73 116Q66 149 53 158','none','stroke="#72b3a0" opacity=".52" stroke-width="2"')}
+      ${path('M84 154 L112 157 120 195 135 230 129 238 119 233 99 208 91 195 72 177Z','#243440','stroke="#12222c" stroke-width="3"')}
+      ${path('M113 196l10 -4 14 34 -9 8 -12 -13z','#536168')}${path('M122 227l13 -7 6 15 12 7q3 6 -3 7l-26 -8z','#573d32','stroke="#263036" stroke-width="2"')}
+      ${path('M77 157l26 6 -7 38 -20 36 -16 -3 8 -39z',paint('blue'),'stroke="#15242a" stroke-width="3"')}
+      ${path('M71 202l18 4 -12 28 -16 -1z',paint('metal'))}${path('M62 224l18 5 -7 16 -1 9 -30 1 -1 -5 14 -8z','#503b33','stroke="#222c30" stroke-width="2"')}
+      ${path('M111 69l-1 15 13 9 -13 18 -34 -14 11 -17 7 -12Z','#ba8465')}
+      ${path('M79 87l16 -9 16 8 7 1 8 12 -9 35 6 24 -16 13 -33 -6 -8 -8 7 -28 -6 -23Z',paint('blue'),'stroke="#162d35" stroke-width="3"')}
+      ${path('M83 92l12 4 19 -5 7 9 -9 26 -17 8 -18 -13 -4 -21Z',paint('metal'),'stroke="#273f47" stroke-width="2"')}
+      ${path('M78 105l18 13 20 -9 -4 12 -17 9 -16 -11Z','#354f58')}${path('M80 101l15 10 22 -12','none','stroke="#e3cf96" stroke-width="2"')}
+      ${path('M82 82l11 5 18 -5 6 4 -8 11 -15 4 -21 -9Z','#32796f','stroke="#244a47" stroke-width="2"')}
+      ${path('M73 87Q59 88 57 102l1 9 17 4 13 -13 -1 -10Z',paint('metal'),'stroke="#293e47" stroke-width="2"')}
+      ${path('M58 105l17 5 10 -10','none','stroke="#e5c37d" stroke-width="3"')}
+      ${path('M58 111l17 3 -6 23 -6 10 -10 -3 -1 -12Z','#394e55','stroke="#1d3039" stroke-width="2"')}
+      ${path('M52 131l17 3 -5 21 -13 -3z',paint('metal'),'stroke="#31434c" stroke-width="2"')}${path('M49 148l13 2 1 11 -5 6 -10 -3 -2 -8z','#82654a')}
+      ${path('M50 140l6 -7 6 8 -6 8z','#70e0d8','stroke="#c0d4a7" stroke-width="2"')}
+      ${path('M67 142l48 -3 2 10 -48 4Z','#70513e','stroke="#352f2b" stroke-width="2"')}${path('M89 142l13 -1 1 9 -13 1Z','#b89754','stroke="#f3d595" stroke-width="1.5"')}
+      ${path('M73 149l11 1 -5 26 -9 7 -6 -5Z','#496263','stroke="#9f9a73" stroke-width="1.5"')}
+      ${path('M103 149l11 -2 5 24 -9 9 -7 -8Z','#294751','stroke="#b19b6b" stroke-width="1.5"')}
+      ${path('M117 92q12 -4 17 7l-1 11 -10 6 -11 -8Z',paint('metal'),'stroke="#263e44" stroke-width="2"')}
+      ${path('M125 109l10 -5 8 13 17 -3 4 11 -23 9 -10 -5Z','#40525b','stroke="#253642" stroke-width="2"')}
+      ${path('M144 117l15 -5 5 15 -17 5Z',paint('metal'),'stroke="#293943" stroke-width="2"')}
+      ${path('M158 113l7 -5 7 4 3 8 -9 6 -7 -2Z','#9e7956')}
+      <g class="weapon">${path('M161 126l-4 -3 16 -30 5 3Z','#584239','stroke="#d4bb81" stroke-width="1.5"')}${path('M161 94q7 1 13 6l11 -1 4 -4 -4 10 -9 2 -11 -7 -9 -1Z','#c6a459','stroke="#4b4436" stroke-width="1.6"')}${path('M173 96L207 22l16 -17 -4 23 -39 71Z','#c4d8d4','stroke="#576b76" stroke-width="1.5"')}${path('M223 5l-13 24 -34 69 4 1 39 -71Z','#8097a0')}${path('M209 28l-33 67','none','stroke="#f8f6db" stroke-width="1.4"')}</g>
+      ${path('M87 48q0 -22 20 -23 20 -1 25 20l-2 11 5 6 -6 3 -2 9 -7 5 -14 -3 -11 -10 -6 -2Z','#d5a783','stroke="#594338" stroke-width="2"')}
+      ${path('M87 55l-7 -7 3 -8 -6 2 7 -13 -4 -2 14 -5 -2 -5 17 2 11 -1 10 8 5 2 -4 11 -4 5 -6 -4 -4 -7 -5 7 -10 4 -3 14 -6 1 -2 -9z','#3b3635','stroke="#292d31" stroke-width="2"')}
+      ${path('M88 35q11 -16 30 -12 M99 37l16 -12','none','stroke="#8d7155" stroke-width="2.3"')}${path('M117 50l9 -2 M123 58l1 -4 M125 69l-7 1','none','stroke="#473a34" stroke-width="2"')}${path('M101 65q7 9 15 10l9 -3 -4 7 -11 -2Z','#8b6450')}
+      </g>`,'hero-art');
+  }
+  function slime(stage=1){
+    const id=`jelly${++serial}`,ref=k=>`url(#${id}${k})`;
+    const colors=[['#c2ed99','#67ae79','#216255','#b3f69a'],['#c2f3ed','#5ab7c9','#335275','#87f3ff'],['#dcc8f4','#a180c5','#4a4874','#bde5ff']][stage-1]||['#c2ed99','#67ae79','#216255','#b3f69a'];
+    const [shine,body,base,gem]=colors;
+    const crystal=(x,y,s)=>`<g transform="translate(${x} ${y}) scale(${s})">${path('M0 0l-11 -26 5 -29 15 19 3 23Z',gem,'stroke="#55758e" stroke-width="1.5"')}${path('M-6 -55l6 35 12 7 -3 -23Z',shine)}${path('M0 -20l-11 -6 11 26 12 -13Z',body)}</g>`;
+    const crown=`<g transform="rotate(9 123 63)">${path('M87 45l15 7 10 -22 9 16 14 -26 6 22 18 -16 -4 29 -64 11Z','#efd091','stroke="#997642" stroke-width="3"')}${path('M91 60l63 -12 2 10 -64 13Z','#be9751','stroke="#f6db99" stroke-width="2"')}${path('M120 55l5 -9 7 5 -5 9Z','#74c5ca')}${circle(112,31,3,'#fff0b9')}${circle(135,20,3,'#fff0b9')}</g>`;
+    return svg('0 0 210 191',`<defs><radialGradient id="${id}gel" cx=".35" cy=".22" r=".86"><stop stop-color="${shine}"/><stop offset=".45" stop-color="${body}"/><stop offset="1" stop-color="${base}"/></radialGradient><radialGradient id="${id}core"><stop stop-color="#faffcf"/><stop offset=".4" stop-color="${gem}" stop-opacity=".8"/><stop offset="1" stop-color="${gem}" stop-opacity="0"/></radialGradient></defs><ellipse cx="106" cy="179" rx="76" ry="7" fill="#0b1720" opacity=".5"/>
+      ${stage===2?crystal(129,81,.8)+crystal(143,87,.57):''}
+      ${path('M15 145 Q15 130 31 115 Q35 107 39 92 Q52 49 93 44 Q128 39 146 64 Q161 81 166 102 Q170 118 187 133 Q204 150 190 165 Q181 173 166 171 Q151 185 131 177 Q113 183 98 177 Q72 185 53 174 Q28 178 20 165 Q11 159 15 145Z',ref('gel'),`stroke="${body}" stroke-width="3"`)}
+      ${path('M22 149q8 18 32 15 14 11 34 6 15 7 36 1 23 8 38 -4 15 1 26 -8 -4 11 -22 12 -15 14 -35 6 -17 8 -32 0 -29 9 -45 -3 -25 5 -34 -9Z',base,'opacity=".62"')}
+      ${path('M38 112 Q51 64 88 54 Q104 51 110 54 Q85 56 67 71 Q52 83 45 105Z','#f3ffe5','opacity=".52"')}
+      ${path('M123 57q11 3 15 11 -12 -6 -18 -6Z','#f0fff4','opacity=".47"')}
+      ${circle(119,135,27,ref('core'))}
+      ${stage>1?path('M114 133l6 -11 8 8 -3 13 -8 2Z',gem,'opacity=".8"'):path('M113 135q7 -11 15 -8 -5 10 -15 8Z',gem,'opacity=".73"')}
+      <g fill="#192f35"><ellipse cx="66" cy="108" rx="${stage===3?8:7}" ry="11" transform="rotate(7 66 108)"/><ellipse cx="100" cy="106" rx="7" ry="11"/></g>
+      ${circle(64,104,2.4,'#fffbdb')}${circle(98,102,2.5,'#fffbdb')}
+      ${stage===3?path('M55 94l19 6 M92 95l18 -9','none','stroke="#49415a" stroke-width="4" stroke-linecap="round"'):''}
+      ${path(stage===3?'M76 124q6 -6 14 -3':'M77 120q6 5 12 -2','none','stroke="#33494a" stroke-width="3" stroke-linecap="round"')}
+      ${many(12,i=>{const x=142+noise(i)*19,y=103+noise(i+121)*43;return circle(x,y,1.2+noise(i+563)*2,shine,'opacity=".65"');})}
+      ${stage===1?`<g>${path('M102 46q-6 -14 -18 -18 18 -6 24 16 1 -15 16 -21 1 15 -17 23Z','#88b87c','stroke="#55836a" stroke-width="1.6"')}${path('M85 29l21 16 16 -20','none','stroke="#d3dfa2" stroke-width="1.2"')}</g>`:''}
+      ${stage===3?crown:''}${stage===2?crystal(155,157,.5)+crystal(165,159,.33):''}`,'slime-art');
+  }
+  function rowan(){
+    const id=`rowan${++serial}`;
+    return svg('0 0 140 160',`<defs><linearGradient id="${id}" x2="1" y2="1"><stop stop-color="#839578"/><stop offset=".6" stop-color="#39594e"/><stop offset="1" stop-color="#213b3c"/></linearGradient></defs>
+      <path d="M70 4Q128 12 130 76v44q-21 26 -60 36 -38 -10 -60 -36V76Q12 17 70 4Z" fill="#20383d" stroke="#bba672" stroke-width="2"/>
+      ${circle(69,67,44,'#b6ab77','opacity=".2"')}
+      ${path('M15 125q6 -23 32 -28l40 -3q33 4 40 31 -23 24 -58 30 -33 -10 -54 -30Z',`url(#${id})`)}
+      ${path('M37 106l20 -12 19 10 23 -9 12 6 -31 31 -15 20Z','#52745e','stroke="#abac78" stroke-width="2"')}
+      ${path('M44 55q-1 -28 23 -31 25 -5 34 19l-1 26 -6 17 -20 20 -20 -15 -10 -14Z','#bc9270','stroke="#6d5346" stroke-width="2"')}
+      ${path('M40 72q-8 -11 -4 -21l-5 2 6 -15q-3 -15 10 -20l10 2q10 -8 23 -4l10 6 8 1 8 12 -1 13 5 9 -8 15 -7 -6 -2 -21 -9 -13 -9 9 -15 5 -12 -3 -4 24Z','#c1beb1','stroke="#777e74" stroke-width="2"')}
+      ${path('M42 72l7 -7 6 11 8 4 10 -6 11 4 13 -11 4 -4 2 19 -7 18 -12 9 -6 17 -11 -5 -14 -8 -11 -18Z','#c9c5aa','stroke="#8d9485" stroke-width="2"')}
+      ${path('M56 72q6 -7 15 0l4 3 8 -7 10 4 -4 8 -14 4 -12 -3Z','#dcd4b9')}
+      ${path('M55 56q5 -5 13 -1 M80 54q8 -6 14 -1 M58 61q4 3 7 0 M81 61q5 3 9 -1 M74 60l-3 10 5 1 M67 84q7 3 14 -1 M49 87q4 14 13 20 M86 92l-10 20','none','stroke="#776a57" stroke-width="2.3" stroke-linecap="round"')}
+      ${path('M16 125q17 -22 29 -25l8 35 -20 -4Z','#365951')}${path('M44 106l5 -5 9 5 -3 9 -8 -1Z','#d4b56e')}
+      ${path('M106 133l5 -63 -4 -6 3 -10 10 -4 5 10 -7 14 -7 57Z','#795e43','stroke="#574435" stroke-width="2"')}${path('M110 64l0 -10 7 -9 6 10 -6 10Z','#93cfbc','stroke="#d5d393" stroke-width="1.5"')}`,'rowan-art');
+  }
+  function map(){
+    const id=`map${++serial}`;
+    const ridge=(x,y,s)=>`<g transform="translate(${x} ${y}) scale(${s})">${path('M-49 12l15 -20 7 4 17 -28 8 6 8 -14 28 41 12 2 13 14Z','#5a7567','stroke="#abae83" stroke-width="1.4"')}${path('M-10 -32l0 24 -9 9 8 -4 -5 14 -18 -1Z M6 -40l-1 22 9 10 -1 -6 15 21 5 -5Z','#2a514a')}${path('M-17 -21l7 -11 8 6 -7 -1 -2 4 -3 -1Z M-2 -26l8 -14 11 17 -9 -5 -2 2 -3 -5Z','#d2c99b')}</g>`;
+    const trees=(x,y,qty)=>many(qty,i=>{const tx=x+Math.round(noise(i+53)*80),ty=y+Math.round(i/qty*48),s=(.46+noise(i+88)*.36).toFixed(2);return `<g transform="translate(${tx} ${ty}) scale(${s})">${path('M0 -30l-5 11 3 -1 -8 12 5 -1 -8 11h11v5h4V2h11L5 -9l4 1 -7 -12 3 1Z','#234c44','stroke="#79947c" stroke-width="1"')}</g>`;});
+    const compass=`<g transform="translate(75 77)" fill="none" stroke="#ddd09a"><circle r="24" opacity=".5"/><circle r="18" opacity=".45"/>${path('M0 -34l5 28 21 6 -21 4 -5 28 -5 -27 -23 -5 22 -6Z','#9ba383','stroke="#d4c390"')}${path('M0 -34v34l5 -6Z M0 32V0l-5 5Z','#ece0aa')}${circle(0,0,3,'#f3df9e')}</g>`;
+    const dots=[[137,273],[330,192],[482,100]].map(([x,y],i)=>`<g transform="translate(${x} ${y})">${circle(0,0,12,'#263f40','stroke="#ddc68c" stroke-width="2"')}${circle(0,0,5,i===2?'#baa5cc':'#e1ca88')}</g>`).join('');
+    return svg('0 0 600 390',`<defs><radialGradient id="${id}"><stop stop-color="#547664"/><stop offset="1" stop-color="#1e413e"/></radialGradient><pattern id="${id}grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M0 36V0H36" fill="none" stroke="#d9d19e" stroke-opacity=".09"/></pattern></defs><rect width="600" height="390" fill="url(#${id})"/><rect width="600" height="390" fill="url(#${id}grid)"/>
+      ${many(6,i=>path(`M-25 ${125+i*6}q86 -48 152 -59t136 -48 M${354+i*11} 390q22 -64 100 -91t160 -78`,'none','stroke="#b4ba8c" opacity=".2" stroke-width="1.1"'))}
+      ${path('M196 -10q-21 48 30 75t24 81q-14 29 19 61t-17 65q-79 39 -118 132','none','stroke="#acc2a0" opacity=".85" stroke-width="9"')}${path('M196 -10q-21 48 30 75t24 81q-14 29 19 61t-17 65q-79 39 -118 132','none','stroke="#506e76" stroke-width="6"')}
+      ${ridge(358,53,.87)}${ridge(302,76,.76)}${ridge(379,89,.95)}${ridge(545,66,.69)}${ridge(551,132,.6)}
+      ${trees(66,174,17)}${trees(150,113,15)}${trees(286,258,21)}${trees(420,210,23)}${trees(44,332,15)}
+      ${path('M137 273Q167 239 213 242T287 216Q306 194 330 192Q382 188 385 158T431 130Q469 130 482 100','none','stroke="#2c493e" stroke-width="8" stroke-linecap="round"')}${path('M137 273Q167 239 213 242T287 216Q306 194 330 192Q382 188 385 158T431 130Q469 130 482 100','none','stroke="#dbc58c" stroke-width="2.8" stroke-dasharray="3 6" stroke-linecap="round"')}${dots}${compass}
+      <rect x="13" y="13" width="574" height="364" rx="3" fill="none" stroke="#cebb88" stroke-opacity=".5"/><path d="M19 46V19h27 M554 19h27v27 M581 344v27h-27 M46 371H19v-27" fill="none" stroke="#d5c390" stroke-width="2"/>`,'atlas-art','xMidYMid slice');
+  }
+  return Object.freeze({forest,hero,slime,map,rowan});
+})();
+
+;
+// Scene controller. Only controls from the currently rendered scene may dispatch.
+const app = document.querySelector('#app');
+const pauseDialog = document.querySelector('#pause');
+const game = {
+  profile: Engine.load() || Engine.fresh(), screen: 'TITLE', stage: 1, page: 0,
+  battle: null, task: null, order: [], feedback: null, reward: null,
+  effect: '', amount: '', pausedFrom: '', confirm: '', reviewFrom: 'MAP',
+  reviewId: '', reviewResult: null, hint: '', timer: 0, speechFallback: false
+};
+const saga = [
+  ['사라진 인사', '아침마다 종소리처럼 울리던 “Hello”가, 오늘은 들리지 않는군요. 숲에서 시작된 침묵이 왕국의 이름까지 지우고 있답니다.'],
+  ['세 조각의 수정', '슬라임들이 말의 수정을 삼켰어요. 모험가여, 숲에서 배운 말을 기억해 주세요. 바르게 떠올린 말은 그대의 검과 마법에 힘을 싣습니다.'],
+  ['첫 번째 부탁', '“Hello”는 처음 만난 이에게 건네는 인사예요. 첫 숲길에서 그 말의 빛을 찾아 주세요. 틀려도 괜찮아요. 천천히 다시 익히면 됩니다.']
+];
+const zones = ['이슬 맺힌 숲길','푸른 수정 샘','고요한 왕의 정원'];
+const stagesEN = ['Dewfall Trail','The Crystal Spring','Court of the Hollow Crown'];
+const abilityInfo = {
+  sword:['검격','단어의 뜻','sword'], fire:['화염 마법','문장 완성','flame'],
+  guard:['수호 방패','표현의 뜻','shield'], heal:['치유 마법','단어 배열','leaf']
+};
+const stageCards = [lessons.slice(0,10), lessons.slice(8), lessons.slice(9)];
+const koreanExamples = {hello:'안녕, 친구야.',thanks:'고마워요, 로완.',apple:'나는 사과를 좋아해요.',water:'나는 물을 마셔요.',bread:'나는 빵을 먹어요.',book:'나는 책을 가지고 있어요.',sword:'나는 검을 가지고 있어요.',forest:'숲은 조용해요.',iam:'나는 학생이에요.',ihave:'나는 책을 가지고 있어요.',ilike:'나는 사과를 좋아해요.',iwant:'물을 좀 원해요.',ieat:'나는 빵을 먹어요.',idrink:'나는 물을 마셔요.'};
+const labels = {'New':'새 표현','Learning':'익히는 중','Review Needed':'복습 필요','Familiar':'익숙한 표현'};
+const paths = {
+  sword:'M5 19 18 6l3-3-1 6L8 21m-5-8 8 8M3 21l4-4',
+  flame:'M12 2c2 6 7 7 7 13a7 7 0 1 1-14 0c0-4 3-7 5-9 0 4 1 5 2 5 2-3 1-6 0-9Z',
+  shield:'M12 2 3.5 5v6c0 5 4 8.6 8.5 11 4.5-2.4 8.5-6 8.5-11V5ZM12 6v11',
+  leaf:'M3 20c4-2 6-8 10-11m-8 9C1 8 13 5 21 3c-1 10-3 18-13 15',
+  crystal:'M12 2 20 9l-8 13L4 9Zm0 0-3 7 3 13 3-13Zm-8 7h16',
+  book:'M3 4q5-1 9 2 4-3 9-2v15q-5-1-9 2-4-3-9-2Zm9 2v15',
+  sound:'M3 9h4l5-4v14l-5-4H3Zm12-1c3 2 3 6 0 8m3-11c5 4 5 10 0 14',
+  menu:'M5 6h14M5 12h14M5 18h14', arrow:'m9 5 7 7-7 7', pin:'M12 22s7-8 7-13a7 7 0 0 0-14 0c0 5 7 13 7 13Zm0-16a3 3 0 1 0 0 6 3 3 0 1 0 0-6',
+  star:'m12 2 2.5 7 7 2.5-7 2.5-2.5 8-2.5-8L2 11.5 9.5 9Z'
+};
+function icon(name){return '<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+paths[name]+'"/></svg>';}
+function safe(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);}
+function button(action,label,{id='',cl='',disabled=false,aria=''}={}){
+  return '<button type="button" class="btn '+cl+'" data-act="'+action+'" data-id="'+safe(id)+'" '+(disabled?'disabled ':'')+(aria?'aria-label="'+safe(aria)+'"':'')+'>'+label+'</button>';
+}
+function save(){
+  game.hint = Engine.save(game.profile) ? '' : '이 브라우저에서 저장할 수 없어요. 창을 닫기 전까지는 계속 플레이할 수 있어요.';
+}
+function change(screen){
+  if (game.screen === 'PAUSED') pauseDialog.close();
+  AudioFX.stop(); game.screen=screen; render(); window.scrollTo(0,0);
+  if(screen !== 'TITLE') app.focus({preventScroll:true});
+}
+function heading(kicker,title,desc=''){return '<header class="screen-heading"><div class="eyebrow">'+kicker+'</div><h2>'+title+'</h2>'+(desc?'<p>'+desc+'</p>':'')+'</header>';}
+function speakButton(en){return AudioFX.canSpeak(game.profile.settings)?button('speak',icon('sound')+' 발음',{cl:'speak',id:en,aria:en+' 발음 듣기'}):'';}
+function titleView(){
+  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="crest">'+icon('crystal')+'</div><h1>English Quest</h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+button('new',icon('sword')+' 게임 시작',{cl:'primary'})+button('continue','이어하기',{disabled:!game.profile.started})+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">제1장 <span>◆</span> 속삭이는 숲</div></section>';
+}
+function introView(){
+  const item=saga[game.page];
+  return '<section class="panel center-card story">'+heading('PROLOGUE',item[0])+'<div class="dialogue"><div class="portrait">'+Art.rowan()+'</div><div><b class="npc">숲의 안내자 · 로완</b><p class="dialogue-text">'+item[1]+'</p></div></div><div class="actions">'+button('intro-next',game.page===2?'숲 지도 펼치기':'다음 이야기',{cl:'primary'})+button('intro-skip','건너뛰기')+'</div></section>';
+}
+function mapView(){
+  const p=game.profile, stats=Engine.stats(p);
+  return heading('CHAPTER I','속삭이는 숲','숲길을 따라 세 조각의 말의 수정을 되찾으세요.')+'<div class="map-grid"><section class="map-illustration panel">'+Art.map()+'<div class="map-overlay"><div class="eyebrow">THE WHISPERING FOREST</div><h3>수정 조각 '+p.completed.length+' / 3</h3></div></section><section><div class="stages">'+zones.map((zone,i)=>{
+    const n=i+1, cleared=p.completed.includes(n), locked=n>p.unlocked;
+    return button('stage','<span class="stage-number">0'+n+'</span><span><strong>'+zone+'</strong><small>'+Engine.enemies[i].name+' · '+(locked?'앞 스테이지 완료 후 개방':cleared?'완료 · 다시 도전':'도전 가능')+'</small></span>'+icon(locked?'shield':'arrow'),{id:n,cl:'stage',disabled:locked});
+  }).join('')+'</div><div class="stats-band"><b>모험가 Lv. '+p.level+'</b><span>경험치 '+p.xp+' / '+stats.nextXp+'</span><span>금화 '+p.gold+'</span></div><div class="actions">'+button('book',icon('book')+' 단어 도감')+button('review','오답 복습')+(p.chapterComplete?button('ending','챕터 결말'): '')+'</div></section></div>';
+}
+function lessonView(){
+  const cards=stageCards[game.stage-1], page=game.page, last=(page+1)*2>=cards.length;
+  return '<section class="center-card panel">'+heading('STAGE 0'+game.stage+' / '+stagesEN[game.stage-1],zones[game.stage-1],'로완의 수첩을 읽고 이번 전투에 쓸 말을 익히세요.')+'<div class="lesson-grid">'+cards.slice(page*2,page*2+2).map(l=>'<article class="lesson"><strong lang="en">'+l.en+'</strong><p>'+l.ko+'</p><hr><p lang="en">'+l.example+'</p><small>'+koreanExamples[l.id]+'</small>'+speakButton(l.en)+'</article>').join('')+'</div><div class="page-count">수첩 '+(page+1)+' / '+Math.ceil(cards.length/2)+'</div><div class="actions">'+button('lesson-next',last?'전투 준비':'다음 쪽',{cl:'primary'})+button('lesson-prev','이전 쪽',{disabled:!page})+button('map','지도')+'</div></section>';
+}
+function statBar(label,hp,max,right=false){
+  return '<div class="stat '+(right?'right':'')+'"><strong>'+label+'</strong><div class="hp" role="meter" aria-label="'+label+' 체력" aria-valuenow="'+hp+'" aria-valuemin="0" aria-valuemax="'+max+'"><span style="width:'+100*hp/max+'%"></span></div><b>'+hp+' / '+max+' HP</b></div>';
+}
+function arena(){
+  const b=game.battle,n=game.stage,foe=Engine.enemies[n-1],stats=Engine.stats(game.profile);
+  return '<div class="arena" data-fx="'+game.effect+'">'+Art.forest(n)+'<div class="arena-shade"></div><div class="combatant hero">'+Art.hero()+'</div><div class="combatant enemy '+(n===3?'boss':'')+'">'+Art.slime(n)+'</div><div class="fx"></div><div class="arena-status">'+statBar('모험가 · Lv. '+game.profile.level,b.hp,stats.maxHp)+statBar(foe.name,b.enemyHp,foe.hp,true)+'</div>'+(game.amount?'<div class="float '+(['enemy','heal'].includes(game.effect)?'on-hero':'')+'">'+game.amount+'</div>':'')+'</div>';
+}
+function abilitiesView(){
+ const b=game.battle;
+ const tip=Engine.charging(b)?'왕이 마력을 모읍니다. 이번 턴에는 반격하지 않아요.':Engine.exposed(b)?'수정핵이 열렸어요! 이번 공격은 두 배 피해를 줍니다.':'사용할 기술을 고르세요.';
+ return '<div class="battle-title"><h2>'+tip+'</h2><span class="hint">'+b.turn+'번째 턴</span></div><div class="abilities">'+Object.entries(abilityInfo).map(([id,[name,desc,glyph]])=>{
+   const swordTask=Engine.exposed(b)?'듣기 도전':b.stage>=2&&b.turn%2===0?'한국어를 영어로':'단어의 뜻';
+   const enabled=Engine.available(b,id),cd=b.cooldowns[id],note=enabled?(id==='sword'?swordTask:desc):cd?cd+'턴 후 사용':'두 번째 숲길에서 개방';
+   return button('ability',icon(glyph)+'<strong>'+name+'</strong><small>'+note+'</small>',{id,cl:'ability',disabled:!enabled});
+ }).join('')+'</div>';
+}
+function questionView(){
+ const q=game.task.question, order=q.type==='order', listen=q.type==='listening';
+ const hint=q.type==='sentence'&&q.instruction.includes('___')?'<p>'+koreanExamples[q.tags[0]]+'</p>':'';
+ const listenUI=listen?'<div class="actions">'+button('replay',icon('sound')+' 다시 듣기',{disabled:!AudioFX.canSpeak(game.profile.settings)})+button('transcript','문장 보기')+'</div>'+(!AudioFX.canSpeak(game.profile.settings)||game.speechFallback?'<p>듣기 대체 문장 · <b lang="en">'+safe(q.phrase)+'</b></p>':''):'';
+ const chosen=game.order.map(i=>game.task.choices[i]);
+ return '<span class="eyebrow">'+abilityInfo[game.battle.ability || game.ability][0]+' · '+game.battle.turn+'번째 턴</span><h2 class="question">'+safe(q.instruction)+'</h2>'+hint+listenUI+(order?'<div class="answer-line" aria-live="polite">'+(chosen.map(safe).join(' ')||'여기에 문장이 만들어져요.')+'</div><div class="words">'+game.task.choices.map((word,i)=>button('word',safe(word),{id:i,cl:'word',disabled:game.order.includes(i)})).join('')+'</div><div class="actions">'+button('submit-order','문장 확인',{cl:'primary',disabled:chosen.length!==q.choices.length})+button('undo','한 단어 되돌리기',{disabled:!chosen.length})+'</div>':'<div class="choices">'+game.task.choices.map((answer,i)=>button('choice','<span class="choice-index">'+String.fromCharCode(65+i)+'</span>'+safe(answer),{id:i,cl:'choice'})).join('')+'</div>');
+}
+function expression(q){
+ if(q.type==='sentence'&&q.instruction.includes('___'))return q.phrase.replace('___',q.answer);
+ if(q.type==='sentence'||q.type==='order')return q.answer;
+ return q.phrase;
+}
+function feedbackView(q,correct){
+ const translation=q.type==='sentence'?'<div>'+safe(koreanExamples[q.tags[0]])+'</div>':'';
+ return '<div class="feedback"><strong>'+(correct?'정답이에요!':'다시 익혀 볼까요?')+'</strong><h3 lang="en">'+safe(expression(q))+'</h3>'+translation+'<p>정답 · '+safe(q.answer)+'<br>'+safe(q.explanation)+'</p>'+speakButton(expression(q))+'</div>';
+}
+function battlePanel(){
+ const b=game.battle, name=Engine.enemies[game.stage-1].name;
+ let panel='';
+ switch(game.screen){
+ case 'BATTLE_READY':panel='<h2>'+name+' 등장</h2><p>'+(game.stage===1?'검격을 고르고 영어 단어의 뜻을 맞혀 보세요. 설명을 읽고 계속하면 공격합니다.':game.stage===2?'화염, 방어, 치유가 열렸습니다. 치유는 단어를 순서대로 눌러 사용하세요.':'왕이 힘을 모은 다음 턴에는 수정핵이 열려요. 소리를 듣거나 문장을 읽고 공격하세요.')+'</p>'+button('fight','전투 시작',{cl:'primary'});break;
+ case 'PLAYER_SELECT':panel=abilitiesView();break;
+ case 'QUESTION_ACTIVE':panel=questionView();break;
+ case 'ANSWER_FEEDBACK':panel=feedbackView(game.task.question,game.feedback.correct)+button('resolve','계속 · 행동 실행',{cl:'primary'});break;
+ case 'PLAYER_ACTION':panel='<h2>'+game.message+'</h2>';break;
+ case 'ENEMY_ACTION':panel='<h2>'+game.message+'</h2>';break;
+ case 'VICTORY':panel='<div class="eyebrow">VICTORY</div><h2>'+name+' 격파</h2><p>숲에 목소리가 돌아옵니다.</p>'+button('rewards','보상 확인',{cl:'primary'});break;
+ case 'DEFEAT':panel='<h2>잠시 숨을 고르세요</h2><p>배운 표현은 수첩에 남아 있어요. 체력을 회복하고 다시 도전할 수 있습니다.</p><div class="actions">'+button('retry','다시 도전',{cl:'primary'})+button('review','오답 복습')+button('map','지도')+'</div>';break;
+ }
+ return panel;
+}
+function battleView(){
+ return '<section class="battle" data-stage="'+game.stage+'"><div class="battle-heading"><span class="eyebrow">STAGE 0'+game.stage+'</span><h2>'+zones[game.stage-1]+'</h2></div>'+arena()+'<section class="panel battle-panel" aria-live="polite">'+battlePanel()+'</section></section>';
+}
+// Keep character art and HP bars mounted throughout a fight. The turn panel changes independently.
+function updateBattle(scene){
+ const arenaNode=scene.querySelector('.arena'), b=game.battle;
+ const max=[Engine.stats(game.profile).maxHp, Engine.enemies[b.stage-1].hp];
+ arenaNode.dataset.fx=game.effect;
+ scene.querySelectorAll('.stat').forEach((node,i)=>{
+  const hp=i===0?b.hp:b.enemyHp;
+  const bar=node.querySelector('.hp');
+  bar.setAttribute('aria-valuenow',hp);bar.setAttribute('aria-valuemax',max[i]);
+  bar.firstElementChild.style.width=(100*hp/max[i])+'%';
+  node.querySelector('b').textContent=hp+' / '+max[i]+' HP';
+  if(i===0)node.querySelector('strong').textContent='모험가 · Lv. '+game.profile.level;
+ });
+ arenaNode.querySelector('.float')?.remove();
+ if(game.amount){
+  const number=document.createElement('div');
+  number.className='float '+(['heal','enemy'].includes(game.effect)?'on-hero':'');
+  number.textContent=game.amount;arenaNode.append(number);
+ }
+ scene.querySelector('.battle-panel').innerHTML=battlePanel();
+ app.querySelector('[data-act="settings"]').disabled=['PLAYER_ACTION','ENEMY_ACTION'].includes(game.screen);
+}
+function rewardView(){
+ const r=game.reward;
+ return '<section class="center-card panel reward '+(r.levelUp?'level-up':'')+'"><div class="reward-crystal">'+icon('crystal')+'</div>'+heading('QUEST REWARD',zones[game.stage-1]+' 탐험 완료')+'<div class="reward-number">+'+r.xp+' XP</div><p>금화 +'+r.gold+(r.bonus?' · 챕터 보너스 경험치 '+r.bonus+' 포함':'')+'</p>'+(r.levelUp?'<h3>레벨 상승! 모험가 Lv. '+game.profile.level+'</h3>':'')+button('onwards',game.stage===3?'로완에게 돌아가기':'지도 펼치기',{cl:'primary'})+'</section>';
+}
+function endingView(){
+ return '<section class="center-card panel reward"><div class="reward-crystal">'+icon('star')+'</div>'+heading('CHAPTER COMPLETE','숲이 다시 속삭입니다')+'<div class="dialogue"><div class="portrait">'+Art.rowan()+'</div><p>“들리나요? 물가에서도, 나뭇잎에서도 말이 되살아나고 있어요. 고마워요, 모험가여. <b lang="en">Thank you.</b>”<br>— 로완</p></div><p>획득 칭호 · <strong>Word Apprentice</strong></p><div class="actions">'+button('book','단어 도감',{cl:'primary'})+button('review','오답 복습')+button('map','숲 지도')+'</div></section>';
+}
+function bookView(){
+ return heading('FIELD JOURNAL','단어 도감','수첩에서 읽은 표현과 정답·오답 횟수를 확인하세요.')+'<section class="panel book">'+lessons.map(l=>{
+ const r=game.profile.learning[l.id];
+ return '<article class="book-row"><div><strong lang="en">'+l.en+'</strong><small>'+l.ko+'</small></div><div>'+l.example+'<small>'+labels[Engine.status(r)]+' · 정답 '+(r?.correct||0)+' / 오답 '+(r?.wrong||0)+'</small></div>'+speakButton(l.en)+'</article>';
+ }).join('')+'</section><div class="actions">'+button('map','지도')+button('review','오답 복습')+'</div>';
+}
+function reviewView(){
+ const entries=Q.filter(q=>game.profile.mistakes[q.id]>0);
+ const q=entries.find(x=>x.id===game.reviewId);
+ return heading('FIELD JOURNAL','오답 복습','기억을 먼저 떠올린 뒤 정답과 예문을 확인하세요.')+(q?'<section class="panel center-card"><h3>'+safe(q.instruction)+'</h3>'+(q.type==='listening'?'<p>'+safe(q.phrase)+'</p>':'')+(game.reviewResult?feedbackView(q,true).replace('정답이에요!','표현 확인')+button('review-list','목록으로',{cl:'primary'}):button('reveal','정답과 해설 보기',{cl:'primary'}))+'</section>':'<div class="panel book">'+(entries.length?entries.map(q=>'<div class="book-row"><strong>'+safe(q.instruction)+'</strong><span>오답 '+game.profile.mistakes[q.id]+'회</span>'+button('review-one','복습',{id:q.id})+'</div>').join(''):'<p>아직 기록된 오답이 없어요.</p>')+'</div>')+'<div class="actions">'+button('review-back','돌아가기')+'</div>';
+}
+const screens={TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView};
+function render(){
+ if(game.screen==='PAUSED'){showSettings();return;}
+ const scene=app.querySelector('.battle');
+ if(!screens[game.screen]&&scene?.dataset.stage===String(game.stage)){updateBattle(scene);return;}
+ const view=(screens[game.screen]||battleView)();
+ const shell='<div class="shell"><nav class="topbar" aria-label="게임 메뉴"><div class="brand">'+icon('crystal')+' English Quest</div><div class="nav-right"><span class="topmeta">제1장 · 속삭이는 숲</span>'+button('settings',icon('menu'),{cl:'iconbtn',aria:'일시 정지 및 설정',disabled:['PLAYER_ACTION','ENEMY_ACTION'].includes(game.screen)})+'</div></nav>'+view+'</div>';
+ app.innerHTML='<div class="world">'+(game.screen==='TITLE'?view:shell)+(game.hint?'<p role="status" class="storage-note">'+game.hint+'</p>':'')+'</div>';
+ if(game.screen==='INTRO')revealDialogue();
+}
+
+function revealDialogue(){
+ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const paragraph=app.querySelector('.dialogue-text');
+ const fullText=paragraph.textContent;
+ const reading=document.createElement('span');
+ const ink=document.createElement('span');
+ reading.className='dialogue-reserve';
+ reading.textContent=fullText;
+ ink.className='dialogue-ink';
+ ink.setAttribute('aria-hidden','true');
+ paragraph.replaceChildren(reading,ink);
+ const start=performance.now();
+ function frame(time){
+  if(!ink.isConnected)return;
+  const count=Math.min(fullText.length,Math.ceil((time-start)/19));
+  ink.textContent=fullText.slice(0,count);
+  if(count<fullText.length)requestAnimationFrame(frame);
+ }
+ requestAnimationFrame(frame);
+}
+
+;
+// Keep modal inputs outside the scene so opening settings preserves the current question.
+function showSettings(){
+ const p=game.profile, cfg=p.settings;
+ const confirmLabel=game.confirm==='reset'?'저장 기록을 지울까요?':'새 모험으로 교체할까요?';
+ const actions=game.confirm?'<h2>'+confirmLabel+'</h2><p>현재 모험과 학습 기록이 초기화됩니다.</p><div class="actions">'+button('confirm','초기화하고 계속',{cl:'primary'})+button('cancel-confirm','취소')+'</div>':
+ '<div class="eyebrow">'+(game.pausedFrom==='TITLE'?'MAIN MENU':'PAUSED')+'</div><h2>설정</h2><label class="setting">효과음<input type="checkbox" data-setting="sound" '+(cfg.sound?'checked':'')+'></label><label class="setting">효과음 크기<input type="range" data-setting="volume" value="'+Math.round(cfg.volume*100)+'" min="0" max="100"></label><label class="setting">영어 발음<input type="checkbox" data-setting="voice" '+(cfg.voice?'checked':'')+'></label><div class="actions">'+button('close',game.pausedFrom==='TITLE'?'닫기':'계속하기',{cl:'primary'})+(game.pausedFrom!=='TITLE'?button('to-title','타이틀로'):'')+(p.started?button('reset','진행 초기화'):'')+'</div>';
+ pauseDialog.innerHTML='<section class="modal">'+actions+'</section>';
+ if(!pauseDialog.open)pauseDialog.showModal();
+ if(game.confirm)pauseDialog.querySelector('[data-act="cancel-confirm"]').focus();
+}
+function openSettings(mode=''){
+ if(['PLAYER_ACTION','ENEMY_ACTION','PAUSED'].includes(game.screen))return;
+ game.pausedFrom=game.screen;game.confirm=mode;AudioFX.stop();game.screen='PAUSED';showSettings();
+}
+function closeSettings(){
+ game.confirm='';game.screen=game.pausedFrom;pauseDialog.close();render();
+ const focusButton=app.querySelector('[data-act="settings"]');
+ if(focusButton)focusButton.focus({preventScroll:true});
+}
+function startNew(){
+ const settings={...game.profile.settings};
+ game.profile=Engine.fresh();game.profile.settings=settings;game.profile.started=true;
+ game.page=0;game.battle=null;save();change('INTRO');
+}
+function startBattle(){
+ const b=Engine.battle(game.profile,game.stage);if(!b)return;
+ game.battle=b;game.task=null;game.effect='ready';game.amount='';change('BATTLE_READY');
+}
+function listen(){
+ const q=game.task?.question;
+ if(!q||q.type!=='listening')return;
+ const fallback=()=>{if(game.screen==='QUESTION_ACTIVE'&&game.task.question===q){game.speechFallback=true;render();}};
+ if(!AudioFX.speak(q.phrase,game.profile.settings,fallback))fallback();
+}
+function selectAbility(ability){
+ const task=Engine.select(game.profile,game.battle,ability);
+ if(!task)return;
+ game.ability=ability;game.task=task;game.speechFallback=false;game.order=[];change('QUESTION_ACTIVE');
+ if(task.question.type==='listening')listen();
+}
+function submitAnswer(value){
+ const result=Engine.answer(game.profile,game.battle,value);if(!result)return;
+ game.feedback=result;save();change('ANSWER_FEEDBACK');AudioFX.play(result.correct?'correct':'wrong',game.profile.settings);
+}
+function afterEffect(fn){
+ const fast=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ game.timer=window.setTimeout(fn,fast?80:850);
+}
+function resolveTurn(){
+ const b=game.battle,p=game.profile;
+ const result=Engine.playerAction(p,b);if(!result)return;
+ game.effect=b.correct?b.ability:'miss';game.amount='';
+ if(result.damage)game.amount='−'+result.damage;
+ if(game.effect==='heal')game.amount='+'+result.healing;
+ game.message=b.correct?abilityInfo[b.ability][0]+' 발동'+(result.guard?' · 다음 피해 60% 감소':''):'말의 빛이 흩어집니다.';
+ // Claim at the same checkpoint as the killing blow. No pending reward is saved.
+ if(result.won){game.reward=Engine.reward(p,b);save();}
+ change('PLAYER_ACTION');AudioFX.play(b.correct?b.ability:'wrong',p.settings);
+ afterEffect(()=>{
+  game.amount='';
+  if(result.won){game.effect='win';change('VICTORY');AudioFX.play('victory',p.settings);return;}
+  const enemy=Engine.enemyAction(p,b);if(!enemy)return;
+  game.effect=enemy.charging?'charge':'enemy';game.amount=enemy.damage?'−'+enemy.damage:'';
+  game.message=enemy.charging?'슬라임 왕이 힘을 모읍니다. 다음 턴에 수정핵을 노리세요!':Engine.enemies[b.stage-1].name+'의 반격 · 피해 '+enemy.damage;
+  change('ENEMY_ACTION');if(!enemy.charging)AudioFX.play('enemy',p.settings);
+  afterEffect(()=>{
+   game.amount='';game.effect=enemy.lost?'lose':'';
+   if(enemy.lost){save();AudioFX.play('defeat',p.settings);}
+   change(enemy.lost?'DEFEAT':'PLAYER_SELECT');
+  });
+ });
+}
+function openReview(){
+ game.reviewFrom=game.screen;game.reviewId='';game.reviewResult=null;change('REVIEW');
+}
+function dispatch(action,id){
+ const p=game.profile;
+ // Detached controls cannot reach this function. Validate each transition as well.
+ if(action==='speak'){AudioFX.speak(id,p.settings);return;}
+ if(action==='settings'){openSettings();return;}
+ if(game.screen==='PAUSED'){
+  if(action==='close')closeSettings();
+  if(action==='reset'){game.confirm='reset';showSettings();}
+  if(action==='cancel-confirm'){if(game.confirm==='new')closeSettings();else{game.confirm='';showSettings();}}
+  if(action==='confirm'&&game.confirm){
+   const mode=game.confirm;game.confirm='';
+   if(mode==='new')startNew();
+   else{const cfg=p.settings;game.profile=Engine.fresh();game.profile.settings=cfg;game.battle=null;save();change('TITLE');}
+  }
+  if(action==='to-title'){game.battle=null;change('TITLE');}
+  return;
+ }
+ if(action==='map'&&['BOOK','DEFEAT','CHAPTER_COMPLETE','LEARNING'].includes(game.screen)){game.battle=null;change('MAP');return;}
+ if(action==='book'&&['MAP','CHAPTER_COMPLETE'].includes(game.screen)){change('BOOK');return;}
+ if(action==='review'&&['MAP','DEFEAT','BOOK','CHAPTER_COMPLETE'].includes(game.screen)){openReview();return;}
+ switch(game.screen){
+ case 'TITLE':
+  if(action==='new'){if(p.started)openSettings('new');else startNew();}
+  if(action==='continue'&&p.started)change('MAP');
+  break;
+ case 'INTRO':
+  if(action==='intro-skip'||(action==='intro-next'&&game.page===2))change('MAP');
+  else if(action==='intro-next'){game.page++;render();}
+  break;
+ case 'MAP':
+  if(action==='stage'&&Number.isInteger(+id)&&+id>=1&&+id<=p.unlocked){game.stage=+id;game.page=0;change('LEARNING');}
+  if(action==='ending'&&p.chapterComplete)change('CHAPTER_COMPLETE');
+  break;
+ case 'LEARNING':{
+  const cards=stageCards[game.stage-1];
+  if(action==='lesson-prev'&&game.page>0){game.page--;render();}
+  if(action==='lesson-next'){
+   Engine.teach(p,cards.slice(game.page*2,game.page*2+2).map(item=>item.id));save();
+   if((game.page+1)*2>=cards.length)startBattle();else{game.page++;render();}
+  }break;}
+ case 'BATTLE_READY':if(action==='fight'){game.effect='';change('PLAYER_SELECT');}break;
+ case 'PLAYER_SELECT':if(action==='ability')selectAbility(id);break;
+ case 'QUESTION_ACTIVE':{
+  const index=Number(id),choices=game.task.choices;
+  if(action==='choice'&&game.task.question.type!=='order'&&Object.hasOwn(choices,index))submitAnswer(choices[index]);
+  if(action==='word'&&game.task.question.type==='order'&&Object.hasOwn(choices,index)&&!game.order.includes(index)){game.order.push(index);render();}
+  if(action==='undo'){game.order.pop();render();}
+  if(action==='submit-order'&&game.task.question.type==='order'&&game.order.length===choices.length)submitAnswer(game.order.map(i=>choices[i]).join(' '));
+  if(action==='replay')listen();
+  if(action==='transcript'){game.speechFallback=true;render();}
+  break;}
+ case 'ANSWER_FEEDBACK':if(action==='resolve')resolveTurn();break;
+ case 'VICTORY':if(action==='rewards'){change('REWARD');if(game.reward.levelUp)AudioFX.play('level',p.settings);}break;
+ case 'REWARD':if(action==='onwards'){game.battle=null;change(game.stage===3?'CHAPTER_COMPLETE':'MAP');}break;
+ case 'DEFEAT':if(action==='retry')startBattle();break;
+ case 'REVIEW':
+  if(action==='review-one'&&p.mistakes[id]){game.reviewId=id;game.reviewResult=false;render();}
+  if(action==='reveal'){game.reviewResult=true;render();}
+  if(action==='review-list'){game.reviewId='';render();}
+  if(action==='review-back')change(game.reviewFrom);
+  break;
+ }
+}
+function handleClick(event){
+ const el=event.target.closest('button[data-act]');
+ if(!el||!el.isConnected||el.disabled||event.detail>1)return;
+ if(game.screen==='PAUSED'&&!pauseDialog.contains(el))return;
+ AudioFX.play('ui',game.profile.settings);dispatch(el.dataset.act,el.dataset.id);
+}
+app.tabIndex=-1;app.addEventListener('click',handleClick);pauseDialog.addEventListener('click',handleClick);
+pauseDialog.setAttribute('aria-label','게임 설정');
+pauseDialog.addEventListener('cancel',e=>{e.preventDefault();if(game.confirm==='reset'){game.confirm='';showSettings();}else closeSettings();});
+pauseDialog.addEventListener('change',e=>{
+ const setting=e.target.dataset.setting;
+ if(['sound','volume','voice'].includes(setting)){
+  game.profile.settings[setting]=setting==='volume'?Number(e.target.value)/100:e.target.checked;
+  if(setting==='voice'&&!e.target.checked)AudioFX.stop();save();
+ }
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!e.repeat&&game.screen!=='PAUSED'){e.preventDefault();openSettings();}});
+render();
+
+</script></body></html>
