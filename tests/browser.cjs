@@ -118,7 +118,7 @@ async function createOfflinePage(browser, options = {}) {
     });
   }
   await context.setOffline(true);
-  await page.goto(gameUrl);
+  await page.goto(options.url || gameUrl);
   await wait(page, 'new');
   return { context, page, problems, network };
 }
@@ -200,11 +200,12 @@ async function playTurn(page, ability, correct, seenTypes, checkQuestionLayout =
   return {correct, question, resolved};
 }
 
-async function chapter(page) {
+async function chapter(page, { stayAtEnding = false, onFreshMap } = {}) {
   await checkLayout(page, 'title');
   await capture(page, 'title');
   assert.ok(await ctl(page,'continue').isDisabled());
   await newGame(page);
+  if(onFreshMap) await onFreshMap(page);
   await click(page,'map-pin',3);
   assert.equal(await page.evaluate(() => document.activeElement?.dataset.id),'3');
   assert.ok(await ctl(page,'stage',3).isDisabled());
@@ -264,9 +265,11 @@ async function chapter(page) {
     assert.ok(completed.achievements.includes(id), 'missing achievement ' + id);
   }
   assert.ok(Object.keys(completed.mistakes).length >= 1);
-  await page.reload();
-  await click(page, 'continue');
-  assert.deepEqual(await profile(page),completed);
+  if (!stayAtEnding) {
+    await page.reload();
+    await click(page, 'continue');
+    assert.deepEqual(await profile(page),completed);
+  }
   return completed;
 }
 
@@ -447,4 +450,8 @@ async function main() {
     await browser.close();
   }
 }
-main().catch(error => {console.error(error);process.exitCode=1;});
+module.exports = {
+  chapter, checkLayout, ctl, click, wait, visible, rapidClick,
+  createOfflinePage, profile, encounter, attempts, answerReview, playTurn
+};
+if (require.main === module) main().catch(error => {console.error(error);process.exitCode=1;});

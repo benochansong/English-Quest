@@ -1,0 +1,105 @@
+/* The village uses amber lanterns, ink-green timber and the forest atlas's brass trim. */
+.chapter-picker,.location-panels,.village-hub,.quest-ledger,.item-shelf {display:grid;gap:clamp(14px,2.4vw,30px);align-items:start;}
+.chapter-picker {grid-template-columns:repeat(2,minmax(0,1fr));}
+.chapter-entry {overflow:hidden;}
+.chapter-scene {position:relative;height:clamp(145px,22vw,285px);overflow:hidden;background:#213f42;}
+.chapter-scene>svg,.square-scene>svg,.location-art>svg,.dialogue-setting>svg,.finale-art>svg {position:absolute;inset:0;width:100%;height:100%;display:block;}
+.chapter-body,.quest-compass,.goals,.quest-letter,.reply-panel,.quest-results,.shop-item,.receipt,.village-finale>.panel {padding:clamp(18px,2.4vw,30px);}
+.chapter-body h2,.location-title h2,.quest-letter h2,.village-finale h2,.quest-results h2,.speech-panel h2 {font-family:var(--serif);letter-spacing:-.045em;}
+.chapter-body h2 {font-size:clamp(1.65rem,3vw,2.6rem);margin:7px 0;}
+.chapter-body i {font:italic 1rem Georgia,serif;color:#e2c99b;}
+.chapter-body p,.quest-compass p,.quest-letter p,.village-finale p,.shop-item p,.receipt p,.quest-results p {line-height:1.72;color:#d1dfd3;}
+.village-hub {grid-template-columns:minmax(0,1.9fr) minmax(250px,.85fr);}
+.painted-map {overflow:hidden;}
+.painted-map>header {display:flex;align-items:center;justify-content:space-between;gap:12px;background:#233d39;border-bottom:1px solid #aa9462;padding:12px 18px;font-size:.85rem;color:#efd8a6;}
+.painted-map>header>b {font:600 1.1rem var(--serif);}
+.square-scene {position:relative;aspect-ratio:1000/560;}
+.btn.v-pin {position:absolute;display:flex;align-items:center;gap:5px;min-height:44px;padding:6px 10px;color:#fff3cf;background:linear-gradient(#304b43f2,#152b29f5);border:1px solid #d5ba79;border-radius:5px;box-shadow:0 4px 8px #0c171a8c;transform:translate(-50%,-50%);white-space:nowrap;font-size:.85rem;}
+.btn.v-pin:hover:not(:disabled) {transform:translate(-50%,-54%);}
+.btn.v-pin.available,.btn.v-pin.active,.btn.v-pin.ready {border:2px solid #ffe7a1;}
+.btn.v-pin:disabled {opacity:.85;color:#eee6d0;background:#36403dee;border-color:#aca995;}
+.pin-market {left:24%;top:62%;}.pin-inn{left:76%;top:55%;}.pin-gate{left:53%;top:30%;}.pin-board{left:50%;top:78%;}
+.quest-compass {border-top:3px solid #b99959;min-width:0;background:linear-gradient(145deg,#2d4035,#162e2c);}
+.quest-compass h3,.quest-ledger h3,.shop-item h3 {font:700 1.5rem var(--serif);margin:9px 0;}
+.quest-compass small,.stock span,.quest-letter small,.shop-item small,.summary-words small {display:block;color:#c0d2c4;font-size:.85rem;line-height:1.65;}
+.quest-compass hr {border:0;border-top:1px solid #b69e633e;margin:18px 0;}
+.purse {color:#ecd69d;font-size:.92rem;margin:10px 0;}
+.objective {border-left:2px solid #dfbf78;padding:4px 10px;color:#f4ddb0;margin:14px 0;}
+.village-nav,.field-items {display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0;}
+.village-nav .btn,.field-items .btn {min-height:44px;padding:9px 14px;}
+.location-hero {position:relative;isolation:isolate;overflow:hidden;height:clamp(190px,28vw,340px);background:#213a36;}
+.location-art,.dialogue-setting,.location-shade {position:absolute;inset:0;z-index:-1;}
+.location-shade {background:linear-gradient(90deg,#102a29d4,#0c252b22 68%),linear-gradient(0deg,#0c252ba3,transparent 70%);}
+.location-title {position:absolute;left:clamp(16px,4vw,48px);bottom:clamp(18px,3vw,34px);max-width:62%;}
+.location-title h2 {margin:6px 0;font-size:clamp(2rem,4vw,3.4rem);line-height:1.1;color:#fff2ce;}
+.location-title>span {color:#f1e4c2;}
+.location-portrait {position:absolute;right:clamp(6px,4vw,55px);bottom:-3%;height:90%;max-width:36%;}
+.location-portrait svg,.v-speaker svg {width:100%;height:100%;display:block;}
+.location-panels {grid-template-columns:1fr 1fr;margin-top:16px;}
+.quest-letter h2 {font-size:clamp(1.6rem,3vw,2.4rem);margin:9px 0;}
+.goals h3 {margin:0 0 12px;}
+.quest-lexicon>div,.summary-words>div {display:flex;gap:10px;justify-content:space-between;align-items:center;border-top:1px solid #acb79c35;padding:7px 0;}
+.quest-lexicon small {display:block;font-size:.86rem;color:#c2d1c8;}
+.spoken-word {font-family:Georgia,'Times New Roman',serif;font-size:1.08em;}
+.voice-note {color:#b4c9c1;font-size:.75rem;text-align:right;}
+.speaking {color:#ffdd8b!important;background:#5b4d2e;border-radius:3px;box-shadow:0 0 0 3px #5b4d2e;}
+.quest-ledger,.item-shelf {grid-template-columns:repeat(3,minmax(0,1fr));}
+.quest-letter {background:linear-gradient(140deg,#2b4038,#152d2b);}
+.dialogue-stage {position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(130px,.7fr) minmax(0,1.5fr);align-items:end;gap:12px;min-height:280px;padding:24px 30px 0;}
+.dialogue-setting {background:#28463f;}
+.dialogue-setting:after {content:'';position:absolute;inset:0;background:linear-gradient(0deg,#112620bd,#14292744);}
+.v-speaker {position:relative;height:clamp(180px,23vw,280px);filter:drop-shadow(0 4px 5px #101b19aa);}
+.speech-panel {position:relative;align-self:center;margin-bottom:16px;background:linear-gradient(100deg,#eee2c7f7,#fff5daf7);color:#29382c;border:1px solid #a79264;box-shadow:0 5px 22px #071a1a66;border-radius:3px 14px 14px 14px;padding:clamp(16px,2.8vw,32px);}
+.speech-panel .eyebrow {color:#6d5b39;letter-spacing:.1em;}
+.speech-panel h2 {font-size:1.05rem;margin:7px 0;}
+.speech-text {font-size:clamp(1.45rem,3vw,2.1rem);line-height:1.17;margin:9px 0 13px;}
+.speech-tools {display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:#324b3e;}
+.speech-tools .voice-note,.speech-tools .speak {color:#486350;}
+.reply-panel {margin-top:16px;}
+.dialogue-goal {margin:0 0 16px;font-size:1.04rem;}
+.dialogue-options {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;}
+.dialogue-result>b {color:#f0d299;}
+.dialogue-result p {line-height:1.65;}
+.item-art,.receipt>svg {height:110px;display:grid;place-items:center;background:radial-gradient(ellipse,#6680644a,transparent 70%);}
+.item-art svg {height:100%;width:110px;}
+.shop-item h3 {font-size:1.35rem;}
+.stock,.receipt-cost {display:flex;justify-content:space-between;gap:10px;align-items:center;margin:14px 0;}
+.stock>b,.receipt-cost b {color:#efd299;}
+.receipt {max-width:510px;margin:18px auto;}
+.receipt>svg {width:100%;}
+.receipt-cost {border-block:1px solid #af99605c;padding:10px 0;flex-wrap:wrap;}
+.quest-results {max-width:820px;margin:3vh auto;}
+.quest-results h2 {font-size:2.2rem;}
+.summary-words {display:grid;gap:0 16px;grid-template-columns:repeat(2,minmax(0,1fr));}
+.summary-words>div {flex-wrap:wrap;}
+.village-finale {max-width:880px;margin:auto;}
+.finale-art {position:relative;height:clamp(180px,25vw,280px);overflow:hidden;border:1px solid var(--line);border-radius:10px 10px 0 0;}
+.village-finale>.panel {border-radius:0 0 10px 10px;}
+.setting select {font:inherit;padding:6px 10px;min-height:44px;color:#fff1cf;background:#203832;border:1px solid #bca677;border-radius:6px;}
+.village-hub,.location-panels,.reply-panel {animation:turn-leaf .24s ease-out;}
+@media(max-width:800px){
+ .village-hub,.location-panels{grid-template-columns:1fr;}
+ .quest-ledger,.item-shelf{grid-template-columns:repeat(2,minmax(0,1fr));}
+ .dialogue-options{grid-template-columns:1fr;}
+ .village-nav .btn{flex:1 1 auto;}
+ .quest-compass{min-height:0;}
+}
+@media(max-width:600px){
+ .chapter-picker,.quest-ledger,.item-shelf,.summary-words{grid-template-columns:1fr;}
+ .chapter-scene{height:145px;}
+ .btn.v-pin{font-size:.75rem;padding:5px 6px;gap:2px;min-height:44px;}
+ .square-scene{aspect-ratio:1000/580;}
+ .pin-board{top:84%;}
+ .dialogue-stage{grid-template-columns:78px minmax(0,1fr);min-height:180px;gap:5px;padding:12px 8px 0;}
+ .v-speaker{height:150px;}
+ .speech-panel{margin:0 0 12px;padding:12px;}
+ .speech-text{font-size:1.26rem;}
+ .dialogue-options .choice{min-height:48px;}
+ .item-art{height:70px;}
+ .item-art svg{width:85px;}
+ .location-title .eyebrow{letter-spacing:.1em;}
+ .location-title{max-width:70%;}
+ .location-portrait{max-width:32%;}
+ .quest-lexicon>div{align-items:start;}
+}
+@media(prefers-reduced-motion:reduce){.village-hub,.location-panels,.reply-panel{animation:none;}}

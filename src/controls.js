@@ -3,7 +3,7 @@ function showSettings(){
  const p=game.profile, cfg=p.settings;
  const confirmLabel=game.confirm==='reset'?'저장 기록을 지울까요?':'새 모험으로 교체할까요?';
  const actions=game.confirm?'<h2>'+confirmLabel+'</h2><p>현재 모험과 학습 기록이 초기화됩니다.</p><div class="actions">'+button('confirm','초기화하고 계속',{cl:'primary'})+button('cancel-confirm','취소')+'</div>':
- '<div class="eyebrow">'+(game.pausedFrom==='TITLE'?'MAIN MENU':'PAUSED')+'</div><h2>설정</h2><label class="setting">효과음<input type="checkbox" data-setting="sound" '+(cfg.sound?'checked':'')+'></label><label class="setting">효과음 크기<input type="range" data-setting="volume" value="'+Math.round(cfg.volume*100)+'" min="0" max="100"></label><label class="setting">영어 발음<input type="checkbox" data-setting="voice" '+(cfg.voice?'checked':'')+'></label><div class="actions">'+button('close',game.pausedFrom==='TITLE'?'닫기':'계속하기',{cl:'primary'})+(game.pausedFrom!=='TITLE'?button('to-title','타이틀로'):'')+(p.started?button('reset','진행 초기화'):'')+'</div>';
+ '<div class="eyebrow">'+(game.pausedFrom==='TITLE'?'MAIN MENU':'PAUSED')+'</div><h2>설정</h2><label class="setting">효과음<input type="checkbox" data-setting="sound" '+(cfg.sound?'checked':'')+'></label><label class="setting">효과음 크기<input type="range" data-setting="volume" value="'+Math.round(cfg.volume*100)+'" min="0" max="100"></label><label class="setting">영어 발음<input type="checkbox" data-setting="voice" '+(cfg.voice?'checked':'')+'></label><label class="setting">발음 속도<select data-setting="speechRate"><option value="normal" '+(cfg.speechRate!=='slow'?'selected':'')+'>보통</option><option value="slow" '+(cfg.speechRate==='slow'?'selected':'')+'>천천히</option></select></label><div class="actions">'+button('close',game.pausedFrom==='TITLE'?'닫기':'계속하기',{cl:'primary'})+(game.pausedFrom!=='TITLE'?button('to-title','타이틀로'):'')+(p.started?button('reset','진행 초기화'):'')+'</div>';
  pauseDialog.innerHTML='<section class="modal">'+actions+'</section>';
  if(!pauseDialog.open)pauseDialog.showModal();
  if(game.confirm)pauseDialog.querySelector('[data-act="cancel-confirm"]').focus();
@@ -22,8 +22,8 @@ function startNew(){
  game.profile=Engine.fresh();game.profile.settings=settings;game.profile.started=true;
  game.page=0;game.mapSelection=0;game.battle=null;save();change('INTRO');
 }
-function startBattle(){
- const b=Engine.battle(game.profile,game.stage);if(!b)return;
+function startBattle(training=false){
+ const b=training?Engine.training(game.profile):Engine.battle(game.profile,game.stage);if(!b)return;
  game.battle=b;game.task=null;game.effect='ready';game.amount='';game.displayHp=null;
  game.guarded=false;game.battleIntent='normal';
  game.battleMaxHp=Engine.stats(game.profile).maxHp;game.battleLevel=game.profile.level;
@@ -33,7 +33,7 @@ function listen(){
  const q=game.task?.question;
  if(!q||q.type!=='listening')return;
  const fallback=()=>{if(['QUESTION_ACTIVE','REVIEW'].includes(game.screen)&&game.task?.question===q){game.speechFallback=true;render();}};
- if(!AudioFX.speak(q.phrase,game.profile.settings,fallback))fallback();
+ if(!readAloud(q.phrase,fallback))fallback();
 }
 function selectAbility(ability){
  const task=Engine.select(game.profile,game.battle,ability);
@@ -55,7 +55,8 @@ function submitAnswer(value){
  AudioFX.play(result.correct?'correct':'wrong',game.profile.settings);
 }
 function currentIntent(b){
- return Engine.charging(b)?'charge':Engine.heavy(b)?'heavy':'normal';
+ if(Engine.golemBreak(b))return 'break';
+ return Engine.charging(b)?'charge':Engine.heavy(b)||Engine.diving(b)||Engine.pulsing(b)?'heavy':'normal';
 }
 // Commit the engine result first. Only the presentation waits for the weapon to make contact.
 function animateAction(screen, effect, before, amount, message, impactSound, done){
@@ -88,24 +89,40 @@ function resolveTurn(){
  AudioFX.play(b.correct?b.ability:'wrong',p.settings);
  animateAction('PLAYER_ACTION',effect,before,amount,message,result.damage?'impact':null,()=>{
   if(result.won){
-   game.effect='win';change('VICTORY');AudioFX.play(b.stage===3?'bossWin':'victory',p.settings);return;
+   game.effect='win';change('VICTORY');AudioFX.play(b.stage===3||b.stage===6?'bossWin':'victory',p.settings);return;
   }
-  const enemyBefore=[b.hp,b.enemyHp];
-  const hit=Engine.enemyAction(p,b);
-  if(!hit)return;
-  const nextEffect=hit.charging?'charge':hit.heavy?'heavy':'enemy';
-  let message=Engine.enemies[b.stage-1].name+'의 반격 · 피해 '+hit.damage;
-  if(hit.charging)message='왕이 마력을 모읍니다. 다음 턴 강타에 대비하세요!';
-  else if(hit.guarded)message='방패로 피해 '+hit.prevented+' 감소 · 받은 피해 '+hit.damage+(hit.counterReady?' · 반격 준비 완료':'');
-  else if(hit.heavy)message='왕관 강타 · 피해 '+hit.damage;
-  if(hit.lost)save();
-  if(hit.charging)AudioFX.play('charge',p.settings);
-  animateAction('ENEMY_ACTION',nextEffect,enemyBefore,hit.damage?'−'+hit.damage:'',message,
-    hit.charging?null:hit.guarded?'shieldHit':hit.heavy?'heavy':'enemy',()=>{
-    game.effect=hit.lost?'lose':'';game.guarded=false;game.battleIntent=currentIntent(b);
-    if(hit.lost)AudioFX.play('defeat',p.settings);
-    change(hit.lost?'DEFEAT':'PLAYER_SELECT');
-   });
+  resolveEnemyTurn(b,p);
+ });
+}
+function resolveEnemyTurn(b,p){
+ const enemyBefore=[b.hp,b.enemyHp];
+ const hit=Engine.enemyAction(p,b);
+ if(!hit)return;
+ let nextEffect=hit.charging?'charge':hit.heavy||hit.dive||hit.pulse?'heavy':'enemy';
+ if(hit.interrupted)nextEffect='interrupt';
+ let message=Engine.enemies[b.stage-1].name+'의 반격 · 피해 '+hit.damage;
+ if(hit.interrupted)message='문장을 복원했습니다. 골렘의 룬이 꺼져 공격이 중단됐어요.';
+ else if(hit.charging)message='왕이 마력을 모읍니다. 다음 턴 강타에 대비하세요!';
+ else if(hit.guarded)message='방패로 피해 '+hit.prevented+' 감소 · 받은 피해 '+hit.damage+(hit.counterReady?' · 반격 준비 완료':'');
+ else if(hit.heavy||hit.dive||hit.pulse)message=(hit.dive?'그림자 급강하':hit.pulse?'메아리 파동':'왕관 강타')+' · 피해 '+hit.damage;
+ if(hit.lost)save();
+ if(hit.charging)AudioFX.play('charge',p.settings);
+ const cue=hit.interrupted?'runeBreak':hit.guarded?'shieldHit':b.stage>=4?['crow','wisp','golem'][b.stage-4]:hit.heavy?'heavy':'enemy';
+ animateAction('ENEMY_ACTION',nextEffect,enemyBefore,hit.damage?'−'+hit.damage:'',message,hit.charging?null:cue,()=>{
+   game.effect=hit.lost?'lose':'';game.guarded=false;game.battleIntent=currentIntent(b);
+   if(hit.lost)AudioFX.play('defeat',p.settings);
+   change(hit.lost?'DEFEAT':'PLAYER_SELECT');
+ });
+}
+function readAloud(text,onError){
+ const matches=[...app.querySelectorAll('[lang="en"],.spoken-word')].filter(el=>el.textContent.trim()===text);
+ if(!matches.length){
+   const player=app.querySelector('[data-act="replay"]');
+   if(player)matches.push(player);
+ }
+ return AudioFX.speak(text,game.profile.settings,onError,{
+   onStart:()=>matches.forEach(el=>el.classList.add('speaking')),
+   onEnd:()=>matches.forEach(el=>el.classList.remove('speaking'))
  });
 }
 function openReview(){
@@ -138,7 +155,7 @@ function handleQuestionControl(action,id){
 function dispatch(action,id){
  const p=game.profile;
  // Detached controls cannot reach this function. Validate each transition as well.
- if(action==='speak'){AudioFX.speak(id,p.settings);return;}
+ if(action==='speak'){readAloud(id);return;}
  if(action==='settings'){openSettings();return;}
  if(game.screen==='PAUSED'){
   if(action==='close')closeSettings();
@@ -152,13 +169,14 @@ function dispatch(action,id){
   if(action==='to-title'){game.battle=null;change('TITLE');}
   return;
  }
+ if(villageAction(action,id))return;
  if(action==='map'&&['BOOK','DEFEAT','CHAPTER_COMPLETE','LEARNING','DASHBOARD'].includes(game.screen)){game.battle=null;change('MAP');return;}
  if(action==='book'&&['MAP','CHAPTER_COMPLETE'].includes(game.screen)){change('BOOK');return;}
  if(action==='review'&&['MAP','DEFEAT','BOOK','CHAPTER_COMPLETE','DASHBOARD'].includes(game.screen)){openReview();return;}
  switch(game.screen){
  case 'TITLE':
   if(action==='new'){if(p.started)openSettings('new');else startNew();}
-  if(action==='continue'&&p.started)change('MAP');
+  if(action==='continue'&&p.started){if(p.currentChapter===2)enterVillage();else change('MAP');}
   break;
  case 'INTRO':
   if(action==='intro-skip'||(action==='intro-next'&&game.page===2))change('MAP');
@@ -189,7 +207,7 @@ function dispatch(action,id){
  case 'ANSWER_FEEDBACK':if(action==='resolve')resolveTurn();break;
  case 'VICTORY':if(action==='rewards'){change('REWARD');if(game.reward.levelUp)AudioFX.play('level',p.settings);}break;
  case 'REWARD':if(action==='onwards'){game.mapSelection=0;game.battle=null;change(game.stage===3?'CHAPTER_COMPLETE':'MAP');}break;
- case 'DEFEAT':if(action==='retry')startBattle();break;
+ case 'DEFEAT':if(action==='retry')startBattle(!!game.battle.training);break;
  case 'REVIEW':
   if(action==='review-one'&&!game.reviewSession)openReviewQuestion(id);
   else if(action==='review-list'){AudioFX.stop();game.reviewSession=null;game.reviewResult=null;render();}
@@ -200,7 +218,7 @@ function dispatch(action,id){
 }
 function handleClick(event){
  const el=event.target.closest('button[data-act]');
- if(!el||!el.isConnected||el.disabled||event.detail>1)return;
+ if(!el||!el.isConnected||el.disabled||(event.detail>1&&el.dataset.act!=='word'))return;
  if(game.screen==='PAUSED'&&!pauseDialog.contains(el))return;
  AudioFX.play('ui',game.profile.settings);dispatch(el.dataset.act,el.dataset.id);
 }
@@ -209,6 +227,7 @@ pauseDialog.setAttribute('aria-label','게임 설정');
 pauseDialog.addEventListener('cancel',e=>{e.preventDefault();if(game.confirm==='reset'){game.confirm='';showSettings();}else closeSettings();});
 pauseDialog.addEventListener('change',e=>{
  const setting=e.target.dataset.setting;
+ if(setting==='speechRate'){game.profile.settings.speechRate=e.target.value==='slow'?'slow':'normal';AudioFX.stop();save();}
  if(['sound','volume','voice'].includes(setting)){
   game.profile.settings[setting]=setting==='volume'?Number(e.target.value)/100:e.target.checked;
   if(setting==='voice'&&!e.target.checked)AudioFX.stop();save();

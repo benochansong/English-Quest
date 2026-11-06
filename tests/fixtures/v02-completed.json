@@ -1,0 +1,167 @@
+{
+  "version": 2,
+  "started": true,
+  "level": 3,
+  "xp": 5,
+  "gold": 115,
+  "hp": 65,
+  "completed": [
+    1,
+    2,
+    3
+  ],
+  "unlocked": 3,
+  "chapterComplete": true,
+  "learning": {
+    "hello": {
+      "correct": 5,
+      "wrong": 1,
+      "seen": true,
+      "streak": 5
+    },
+    "thanks": {
+      "correct": 2,
+      "wrong": 0,
+      "seen": true,
+      "streak": 2
+    },
+    "apple": {
+      "correct": 0,
+      "wrong": 0,
+      "seen": true,
+      "streak": 0
+    },
+    "water": {
+      "correct": 0,
+      "wrong": 0,
+      "seen": true,
+      "streak": 0
+    },
+    "bread": {
+      "correct": 0,
+      "wrong": 0,
+      "seen": true,
+      "streak": 0
+    },
+    "book": {
+      "correct": 1,
+      "wrong": 0,
+      "seen": true,
+      "streak": 1
+    },
+    "sword": {
+      "correct": 0,
+      "wrong": 0,
+      "seen": true,
+      "streak": 0
+    },
+    "forest": {
+      "correct": 2,
+      "wrong": 0,
+      "seen": true,
+      "streak": 2
+    },
+    "iam": {
+      "correct": 1,
+      "wrong": 0,
+      "seen": true,
+      "streak": 1
+    },
+    "ihave": {
+      "correct": 3,
+      "wrong": 0,
+      "seen": true,
+      "streak": 3
+    },
+    "ilike": {
+      "correct": 3,
+      "wrong": 0,
+      "seen": true,
+      "streak": 3
+    },
+    "iwant": {
+      "correct": 1,
+      "wrong": 0,
+      "seen": true,
+      "streak": 1
+    },
+    "ieat": {
+      "correct": 3,
+      "wrong": 0,
+      "seen": true,
+      "streak": 3
+    },
+    "idrink": {
+      "correct": 3,
+      "wrong": 0,
+      "seen": true,
+      "streak": 3
+    }
+  },
+  "mistakes": {
+    "v0": 1
+  },
+  "marked": [
+    "hello"
+  ],
+  "schedule": {
+    "v0": {
+      "step": 1,
+      "dueAt": 1794043383924
+    }
+  },
+  "history": [
+    {
+      "id": "s0",
+      "correct": true
+    },
+    {
+      "id": "s8",
+      "correct": true
+    },
+    {
+      "id": "l2",
+      "correct": true
+    },
+    {
+      "id": "s1",
+      "correct": true
+    },
+    {
+      "id": "v0",
+      "correct": true
+    },
+    {
+      "id": "l4",
+      "correct": true
+    },
+    {
+      "id": "s2",
+      "correct": true
+    },
+    {
+      "id": "s6",
+      "correct": true
+    },
+    {
+      "id": "l0",
+      "correct": true
+    },
+    {
+      "id": "v0",
+      "correct": true
+    }
+  ],
+  "achievements": [
+    "firstVictory",
+    "firstSpell",
+    "combo3",
+    "forestClear",
+    "firstReview"
+  ],
+  "settings": {
+    "sound": true,
+    "voice": true,
+    "volume": 0.45
+  }
+}
