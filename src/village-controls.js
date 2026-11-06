@@ -74,7 +74,7 @@ function villageAction(action,id){
     if(action==='accept-quest'&&+id===stage&&VillageEngine.accept(p,stage)){save();change('LOCATION');return true;}
     if(action==='talk'&&+id===stage){showTalk(stage);return true;}
     if(action==='village-fight'&&+id===stage){game.stage=stage;startBattle();return true;}
-    if(action==='shop'&&game.location==='market'){game.offer=null;game.purchaseNotice='';change('SHOP');return true;}
+    if(action==='shop'&&game.location==='market'){game.shopGear=false;game.offer=null;game.purchaseNotice='';change('SHOP');return true;}
   }
   if(s==='VILLAGE_END'&&action==='talk'&&id==='scenario'){showTalk('scenario');return true;}
   if(s==='DIALOGUE'){

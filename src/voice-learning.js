@@ -153,6 +153,7 @@ const VoiceLearning = (() => {
     open.delete(p);
     if(h.battle) Engine.voiceResult(p,h.battle,h,correct);
     note(p,a,correct,{assisted:h.assisted,aids:h.aids,mode,review:h.review,now});
+    if(h.review)RPG.refresh(p);
     const m=h.missionId && mission(h.missionId);
     if(m?.kind==='conversation' && p.currentChapter===2 && !h.replay) {
       const q=VillageData.quests.find(q=>q.npc===m.npc);

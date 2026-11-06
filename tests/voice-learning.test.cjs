@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const vm=require('node:vm');
-const source=['questions','village-data','voice-data','engine','village-engine','voice-learning']
+const source=['questions','village-data','voice-data','rpg','engine','village-engine','voice-learning']
   .map(n=>fs.readFileSync(path.join(__dirname,'../src',n+'.js'),'utf8')).join('\n');
 function setup() {
   const store=new Map();
@@ -166,15 +166,16 @@ test('Adaptation spaces recent work and successful active NPC missions advance d
   assert.equal(p.gold+p.xp,0);
   assert.ok(e.battle(p,4));
 });
-test('A completed v3 fixture migrates through v4 without replacing earlier slots or inventing audio history',()=>{
+test('A completed v3 fixture migrates through v5 without replacing earlier slots or inventing audio history',()=>{
   const {e,l,store}=setup();
   const text=fs.readFileSync(path.join(__dirname,'fixtures/v03-completed.json'),'utf8');
   const old=JSON.parse(text);
   store.set(e.v3Key,text); store.set(e.v2Key,JSON.stringify({version:2,gold:9}));
   const p=e.load();
-  assert.equal(p.version,4);
+  assert.equal(p.version,5);
   for(const [key,val] of Object.entries(old)){
     if(key==='version')continue;
+    if(key==='achievements'){assert.ok(val.every(id=>p.achievements.includes(id)));continue;}
     assert.deepEqual(JSON.parse(JSON.stringify(p[key])),key==='settings'?{...val,speechVolume:1}:val);
   }
   assert.equal(l.dashboard(p).speakingAttempts,0);

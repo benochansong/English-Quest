@@ -171,18 +171,18 @@ function dewfallGrove(id){
     const bottom=path('M0 456 Q89 428 166 439 T295 451 Q379 467 426 520 Q490 563 562 600 H0Z M1400 416 Q1345 435 1295 435 Q1212 430 1170 475 Q1096 549 998 600 H1400Z',dark);
     return svg('0 0 1400 600',`${defs}<rect width="1400" height="600" fill="${ref('sky')}"/>${title?stars+stars4:''}<g class="painted-moon">${circle(moonX,moonY,190,ref('moon'))}${circle(moonX,moonY,25,'#f2e3b1','opacity=".93"')}${circle(moonX,moonY,35,'none',`stroke="${glow}" stroke-opacity=".33" stroke-width="1"`)}</g>${ridges}<g class="painted-keep">${castle(castleX,289,.86)}</g>${banks}${turf}${title?'':dewfallGrove(id)}<g class="forest-mist">${path('M-30 361 Q220 330 437 363 T862 351 Q1057 325 1430 344 Q1138 335 895 365 T447 379 Q217 352 -30 376Z',glow,'opacity=".09"')}${path('M484 400Q711 371 874 379T1213 359Q1106 393 879 387T484 400Z',glow,'opacity=".12"')}</g>${path('M255 0h60l405 470 -90 -10Z M358 0h21l304 315Z M1044 0h32L801 409 740 448Z',ref('ray'))}${bottom}<g class="painted-traveler">${traveler}</g><g class="painted-left">${foregroundTree(0,1)}</g><g class="painted-right">${foregroundTree(1400,-.95)}</g>${herbs(90,482,1)}${herbs(1260,476,1.14,-1)}${herbs(1300,507,.67)}${crystal(title?1169:1060,455,.6)}${crystal(title?1184:1077,458,.35)}${crystal(176,472,.5)}${motes}`,title?'title-art':'arena-bg','xMidYMid slice');
   }
-  function hero(){
+  function hero(outfit={}){
     const id=`hero${++serial}`,paint=x=>`url(#${id}${x})`;
     const defs=`<defs><linearGradient id="${id}blue" x2="1" y2="1"><stop stop-color="#58808a"/><stop offset=".42" stop-color="#294b60"/><stop offset="1" stop-color="#112236"/></linearGradient><linearGradient id="${id}metal" x2=".8" y2="1"><stop stop-color="#ebdfaf"/><stop offset=".4" stop-color="#a0b6b2"/><stop offset=".55" stop-color="#596b70"/><stop offset="1" stop-color="#293c4b"/></linearGradient><linearGradient id="${id}cape" x2=".9" y2=".8"><stop stop-color="#294251"/><stop offset=".63" stop-color="#22786f"/><stop offset="1" stop-color="#172b39"/></linearGradient></defs>`;
-    return svg('0 0 230 264',`${defs}<ellipse cx="105" cy="255" rx="68" ry="6" fill="#071817" opacity=".48"/>
+    return svg('0 0 230 264',`${defs}${outfit.defs||''}${outfit.aura||''}<ellipse cx="105" cy="255" rx="68" ry="6" fill="#071817" opacity=".48"/>
       <g stroke-linejoin="round" stroke-linecap="round">
-      <g class="hero-cape">
+      <g class="hero-cape">${outfit.cape||`
       ${path('M76 86 Q54 98 51 126 Q46 152 20 170 Q42 172 47 166 Q35 181 22 186 Q60 190 83 167 L99 131Z',paint('cape'),'stroke="#162c39" stroke-width="2"')}
       ${path('M85 87q-17 -8 -33 4 -17 13 -47 6 12 16 39 13 -10 8 -27 8 26 10 48 -9l21 -10Z','#2e776d','stroke="#214b4c" stroke-width="1.3"')}
       ${path('M9 100q24 11 41 -1t34 -10 M23 118q19 5 35 -8','none','stroke="#baaa77" stroke-width="1.5"')}
       ${path('M77 98Q62 121 59 146T36 177 M73 116Q66 149 53 158','none','stroke="#72b3a0" opacity=".52" stroke-width="2"')}
       ${path('M68 108Q53 156 26 170q15 -2 28 -13 -4 13 -28 28 26 -7 46 -26Z','#34695f')}
-      ${path('M27 183q26 -6 41 -32 M69 103l-7 26','none','stroke="#d6be80" stroke-width="1.5"')}</g>
+      ${path('M27 183q26 -6 41 -32 M69 103l-7 26','none','stroke="#d6be80" stroke-width="1.5"')}`}</g>
       ${path('M84 154 L112 157 120 195 135 230 129 238 119 233 99 208 91 195 72 177Z','#243440','stroke="#12222c" stroke-width="3"')}
       ${path('M113 196l10 -4 14 34 -9 8 -12 -13z','#536168')}${path('M122 227l13 -7 6 15 12 7q3 6 -3 7l-26 -8z','#573d32','stroke="#263036" stroke-width="2"')}
       ${path('M77 157l26 6 -7 38 -20 36 -16 -3 8 -39z',paint('blue'),'stroke="#15242a" stroke-width="3"')}
@@ -204,7 +204,7 @@ function dewfallGrove(id){
       ${path('M58 111l17 3 -6 23 -6 10 -10 -3 -1 -12Z','#394e55','stroke="#1d3039" stroke-width="2"')}
       ${path('M52 131l17 3 -5 21 -13 -3z',paint('metal'),'stroke="#31434c" stroke-width="2"')}${path('M49 148l13 2 1 11 -5 6 -10 -3 -2 -8z','#82654a')}
       ${path('M50 140l6 -7 6 8 -6 8z','#70e0d8','stroke="#c0d4a7" stroke-width="2"')}
-      ${path('M50 151l10 3 -1 3 -10 -3Z','#b99f74')}</g>
+      ${path('M50 151l10 3 -1 3 -10 -3Z','#b99f74')}${outfit.offhand||''}</g>
       ${path('M67 142l48 -3 2 10 -48 4Z','#70513e','stroke="#352f2b" stroke-width="2"')}${path('M89 142l13 -1 1 9 -13 1Z','#b89754','stroke="#f3d595" stroke-width="1.5"')}
       ${path('M73 149l11 1 -5 26 -9 7 -6 -5Z','#496263','stroke="#9f9a73" stroke-width="1.5"')}
       ${path('M103 149l11 -2 5 24 -9 9 -7 -8Z','#294751','stroke="#b19b6b" stroke-width="1.5"')}
@@ -212,12 +212,13 @@ function dewfallGrove(id){
       ${path('M60 151l11 3 -3 13 -11 -3Z','#855637','stroke="#c29b66" stroke-width="1"')}
       ${path('M64 153l3 1 -3 11 -3 -1Z','#d0b478')}
       ${path('M106 150l3 17 4 4 3 -5 -2 -16Z','#477578','stroke="#bea778" stroke-width="1"')}
+      ${outfit.armor||''}
       <g class="sword-arm">
       ${path('M117 92q12 -4 17 7l-1 11 -10 6 -11 -8Z',paint('metal'),'stroke="#263e44" stroke-width="2"')}
       ${path('M125 109l10 -5 8 13 17 -3 4 11 -23 9 -10 -5Z','#40525b','stroke="#253642" stroke-width="2"')}
       ${path('M144 117l15 -5 5 15 -17 5Z',paint('metal'),'stroke="#293943" stroke-width="2"')}
       ${path('M158 113l7 -5 7 4 3 8 -9 6 -7 -2Z','#9e7956')}
-      <g class="weapon">${path('M161 126l-4 -3 16 -30 5 3Z','#584239','stroke="#d4bb81" stroke-width="1.5"')}${path('M161 94q7 1 13 6l11 -1 4 -4 -4 10 -9 2 -11 -7 -9 -1Z','#c6a459','stroke="#4b4436" stroke-width="1.6"')}${path('M173 96L207 22l16 -17 -4 23 -39 71Z','#c4d8d4','stroke="#576b76" stroke-width="1.5"')}${path('M223 5l-13 24 -34 69 4 1 39 -71Z','#8097a0')}${path('M209 28l-33 67','none','stroke="#f8f6db" stroke-width="1.4"')}${path('M176 91l9 -22 3 1 -9 23Z','#e8ebcd')}${path('M183 69l5 -6 -1 10 -5 6Z','#f4d39b')}${path('M158 101q-8 -4 -4 -12l5 7 10 1 6 4 9 -2 7 -10q2 13 -9 16l-10 2 -7 -7Z','#c7a258','stroke="#725c40" stroke-width="1"')}${path('M166 109l6 3 M164 115l5 2','none','stroke="#dbc08b" stroke-width="1.5"')}</g>
+      <g class="weapon">${outfit.weapon||`${path('M161 126l-4 -3 16 -30 5 3Z','#584239','stroke="#d4bb81" stroke-width="1.5"')}${path('M161 94q7 1 13 6l11 -1 4 -4 -4 10 -9 2 -11 -7 -9 -1Z','#c6a459','stroke="#4b4436" stroke-width="1.6"')}${path('M173 96L207 22l16 -17 -4 23 -39 71Z','#c4d8d4','stroke="#576b76" stroke-width="1.5"')}${path('M223 5l-13 24 -34 69 4 1 39 -71Z','#8097a0')}${path('M209 28l-33 67','none','stroke="#f8f6db" stroke-width="1.4"')}${path('M176 91l9 -22 3 1 -9 23Z','#e8ebcd')}${path('M183 69l5 -6 -1 10 -5 6Z','#f4d39b')}${path('M158 101q-8 -4 -4 -12l5 7 10 1 6 4 9 -2 7 -10q2 13 -9 16l-10 2 -7 -7Z','#c7a258','stroke="#725c40" stroke-width="1"')}${path('M166 109l6 3 M164 115l5 2','none','stroke="#dbc08b" stroke-width="1.5"')}`}</g>
       ${path('M154 122l-6 -3 -2 2 4 7 9 -2Z','#6b828a','stroke="#b2c5c1" stroke-width=".9"')}
       ${path('M162 124l-3 2 -3 -4 3 -4 4 1Z','#8ed1d0','stroke="#dac18a" stroke-width="1.4"')}
       </g><g class="hero-head">
@@ -228,7 +229,7 @@ function dewfallGrove(id){
       ${path('M101 57q7 7 15 6l-3 6 -10 -3Z','#c29474')}
       ${path('M119 54q4 -2 8 -1l-2 3 -5 1Z','#e8d5bb')}${circle(123.4,54.8,1.45,'#354a45')}
       ${path('M88 35q11 -16 30 -12 M99 37l16 -12','none','stroke="#8d7155" stroke-width="2.3"')}${path('M117 50l9 -2 M123 58l1 -4 M125 69l-7 1','none','stroke="#473a34" stroke-width="2"')}${path('M101 65q7 9 15 10l9 -3 -4 7 -11 -2Z','#8b6450')}
-      </g></g></g>`,'hero-art');
+      ${outfit.head||''}</g></g></g>`,outfit.id?'hero-art rpg-hero rpg-'+outfit.id:'hero-art');
   }
   function slime(stage=1){
     const id=`jelly${++serial}`,ref=k=>`url(#${id}${k})`;

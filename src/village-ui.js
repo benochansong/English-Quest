@@ -20,7 +20,7 @@ function questObjective(q){
   return '완료한 대화와 전투를 다시 연습할 수 있어요.';
 }
 function villageNav(){
-  return '<nav class="village-nav" aria-label="마을 수첩">'+
+  return rpgHubLinks()+'<nav class="village-nav" aria-label="마을 수첩">'+
     button('quests',icon('book')+' 의뢰 일지')+button('inventory',icon('shield')+' 소지품')+
     button('book',icon('leaf')+' 단어 도감')+button('review','표현 복습')+
     button('voice-hall',icon('mic')+' 메아리의 전당',{cl:'hall-link'})+button('today','오늘의 복습')+button('dashboard','학습 기록')+button('chapters','장 선택')+'</nav>';
@@ -108,17 +108,22 @@ function dialogueView(){
     '<section class="panel reply-panel">'+lines+'</section><div class="actions">'+button('village-home','광장으로')+'</div>';
 }
 function itemView(shop){
-  const p=game.profile,inv=p.village.inventory;
+  const p=game.profile;
   if(shop&&game.offer){
     const item=VillageEngine.items.find(it=>it.id===game.offer.id);
-    return heading('MERCHANT’S MARKET','구매 확인')+'<section class="panel receipt">'+VillageArt.item(item.id)+'<h2>'+item.name+'</h2><p>'+item.description+'</p>'+
+    const gear=gearInfo(item.id);
+    return heading('MERCHANT’S MARKET','구매 확인')+'<section class="panel receipt">'+(gear?RpgArt.gear(item.id):VillageArt.item(item.id))+'<h2>'+item.name+'</h2><p>'+item.description+'</p>'+
+      (gear?compareGear(p,gear):'')+
       '<div class="receipt-cost"><span>가격 <b>'+item.price+' 금화</b></span><span>구매 후 잔액 <b>'+(p.gold-item.price)+' 금화</b></span></div>'+
       '<div class="actions">'+button('buy-confirm','구매 확정',{cl:'primary'})+button('buy-cancel','취소')+'</div></section>';
   }
   return heading(shop?'MERCHANT’S MARKET':'TRAVELER’S PACK',shop?'클라라의 물품 상점':'모험가의 소지품','보유 금화 '+p.gold)+
     (game.purchaseNotice?'<p role="status" class="objective">'+safe(game.purchaseNotice)+'</p>':'')+
-    '<div class="item-shelf">'+VillageEngine.items.map(item=>{
-      const n=inv[item.id],full=n>=item.limit,poor=p.gold<item.price;
+    (shop?'<nav class="rpg-nav" aria-label="상점 분류">'+button('shop-supplies','여행용품',{pressed:!game.shopGear})+button('shop-gear','전투 장비',{pressed:!!game.shopGear})+'</nav>':
+      '<div class="actions">'+button('equipment','장비 보관함 · '+p.rpg.collection.length+'종')+'</div>')+
+    '<div class="item-shelf">'+VillageEngine.items.filter(item=>!!gearInfo(item.id)===!!(shop&&game.shopGear)).map(item=>{
+      if(gearInfo(item.id))return gearShopCard(p,gearInfo(item.id));
+      const n=VillageEngine.quantity(p,item.id),full=n>=item.limit,poor=p.gold<item.price;
       return '<article class="panel shop-item"><div class="item-art">'+VillageArt.item(item.id)+'</div><h3>'+item.name+'</h3><p>'+item.description+'</p>'+
         '<div class="stock"><b>'+item.price+' 금화</b><span>보유 '+n+' / '+item.limit+'</span></div>'+
         (shop?button('purchase',full?'보유 한도 도달':poor?'금화 부족':'구매하기',{id:item.id,cl:'primary',disabled:full||poor}):'<small>'+(item.id==='cloak'?(n?'장착 중':'구매 즉시 장착'):'전투 명령에서 사용')+'</small>')+'</article>';
@@ -132,7 +137,7 @@ function villageReward(){
   return '<section class="panel quest-results"><div class="eyebrow">'+(r.replay?'PRACTICE COMPLETE':'QUEST COMPLETE')+'</div><h2>'+title+'</h2>'+
     (r.replay?'<p>이번 답변이 학습 기록에 반영되었습니다. 연습 전투 보상은 없습니다.</p>':
     '<p>되찾은 말이 마을에 울려 퍼집니다.</p><div class="reward-tally"><strong>+'+r.xp+' XP</strong><strong>금화 +'+r.gold+'</strong></div>'+
-    (r.levelUp?'<p>레벨 상승 · Lv. '+game.profile.level+'</p>':'')+
+    (r.levelUp?'<p>레벨 상승 · Lv. '+game.profile.level+' · 사용 가능 '+game.profile.rpg.availablePoints+' SP</p>':'')+lootReveal(r.gearId)+
     '<h3>의뢰에서 연습한 표현</h3><p>대화와 전투 · 정답 '+s.correct+'회 / 오답 '+s.wrong+'회</p>'+
     '<div class="summary-words">'+heard.map(l=>'<div>'+utterance(l.en)+' <small>'+safe(l.ko)+'</small>'+audioChip(l.en)+'</div>').join('')+'</div>'+
     '<p>다시 볼 표현 · '+(s.reviewTags.length?s.reviewTags.map(nameOf).map(safe).join(' / '):'없음')+'</p>')+

@@ -94,7 +94,15 @@ async function newGame(page) {
   await page.keyboard.press('Enter');
   await ctl(page, 'intro-next').press('Space');
   await click(page, 'intro-skip');
+  await click(page,'class-preview','arcanist');
+  await click(page,'class-confirm');
   await wait(page, 'stage');
+}
+
+// Returning heroes can defer their first class choice and continue unchanged.
+async function continueSaved(page) {
+  await click(page,'continue');
+  if(await visible(page,'class-later')) await click(page,'class-later');
 }
 
 async function rapidClick(page, button) {
@@ -247,6 +255,8 @@ async function chapter(page, { stayAtEnding = false, onFreshMap } = {}) {
     await rapidClick(page, ctl(page, 'rewards'));
     await wait(page, 'onwards');
     const awarded = await profile(page);
+    assert.equal(awarded.rpg.availablePoints+awarded.rpg.spentPoints,awarded.level-1,'one skill point per earned level');
+    if(stage===3) assert.ok(awarded.rpg.collection.includes('crystalBlade'));
     assert.deepEqual(awarded.completed, Array.from({length:stage},(_,i)=>i+1));
     assert.equal(awarded.gold, [15,40,115][stage-1]);
     assert.equal(awarded.xp, [35,85,5][stage-1]);
@@ -385,7 +395,7 @@ async function checkMigration(browser) {
   try {
     await page.evaluate(save => localStorage.setItem('EnglishQuest.chapter1.v1',JSON.stringify(save)),old);
     await page.reload();
-    await click(page,'continue');
+    await continueSaved(page);
     const migrated = await page.evaluate(() => game.profile);
     for(const key of ['level','xp','gold','hp','completed','unlocked','chapterComplete']) {
       assert.deepEqual(migrated[key],old[key], 'legacy field changed: '+key);
@@ -454,7 +464,7 @@ async function main() {
   }
 }
 module.exports = {
-  chapter, enterStage, checkLayout, ctl, click, wait, visible, rapidClick,
+  chapter, enterStage, checkLayout, ctl, click, wait, visible, rapidClick, continueSaved,
   createOfflinePage, profile, encounter, attempts, answerReview, playTurn
 };
 if (require.main === module) main().catch(error => {console.error(error);process.exitCode=1;});
