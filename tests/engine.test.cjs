@@ -64,7 +64,11 @@ test('A first-time sword-only run survives all three stages and earns the chapte
   assert.equal(p.xp,5);
   const replay = e.reward(p,clear(e,p,3));
   assert.equal(replay.bonus,0);
-  assert.equal(replay.xp,100);
+  assert.equal(replay.xp,0);
+  assert.equal(replay.gold,0);
+  assert.equal(replay.replay,true);
+  assert.equal(p.xp,5);
+  assert.equal(p.gold,115);
 });
 test('Input locking, stale encounters, fair question rotation, defeat and retry', () => {
   const {Engine:e,profile:p} = setup();
@@ -104,7 +108,7 @@ test('Healing is capped, guard reduces damage, and cooldowns count whole interve
   const b = e.battle(p,2);
   assert.equal(takeTurn(e,p,b,'heal').player.healing,0);
   assert.equal(b.cooldowns.heal,3);
-  assert.equal(takeTurn(e,p,b,'fire').player.damage,17);
+  assert.equal(takeTurn(e,p,b,'fire').player.damage,18);
   assert.equal(b.cooldowns.fire,2);
   assert.equal(e.select(p,b,'fire'),null);
   assert.equal(takeTurn(e,p,b,'guard').enemy.damage,3);
@@ -134,7 +138,7 @@ test('Different encounter commands select every learning format, including boss 
   assert.equal(takeTurn(e,p,boss,'sword').enemy.damage,0);
   const turn = takeTurn(e,p,boss,'sword');
   assert.equal(turn.result.question.type,'listening');
-  assert.equal(turn.player.damage,20);
+  assert.equal(turn.player.damage,22);
 });
 test('A reviewed mistake can become familiar, and combat statistics are independent', () => {
   const {Engine:e,Q,profile:p} = setup();
@@ -171,4 +175,193 @@ test('Offline audio has a safe text fallback when voices and sound output are ab
   assert.equal(a.speak('Hello',p.settings),false);
   a.play('fire',p.settings);
   a.stop();
+});
+
+test('v1 progress migrates to a separate v2 checkpoint and never changes the legacy bytes', () => {
+  const {Engine:e,items} = setup();
+  const legacy = {version:1, started:true, level:5, xp:78, gold:844, hp:36,
+    completed:[1,2,3], unlocked:3, chapterComplete:true,
+    learning:{hello:{seen:true, correct:12, wrong:2, streak:4}}, mistakes:{v0:2},
+    settings:{sound:false, voice:true, volume:.15}};
+  const original = JSON.stringify(legacy);
+  items.set(e.legacyKey, original);
+  const profile = e.load();
+  assert.equal(profile.version,2);
+  for (const [key, value] of Object.entries(legacy)) {
+    if (key !== 'version') assert.deepEqual(JSON.parse(JSON.stringify(profile[key])), value);
+  }
+  assert.equal(profile.achievements.join(','),'firstVictory,forestClear');
+  assert.equal(e.reviewList(profile)[0].due,true);
+  assert.equal(JSON.parse(items.get(e.saveKey)).version,2);
+  profile.gold++;
+  e.save(profile);
+  assert.equal(e.load().gold,845);
+  assert.equal(items.get(e.legacyKey),original);
+  items.set(e.saveKey,'damaged');
+  assert.equal(e.load().gold,844);
+  assert.equal(items.get(e.legacyKey),original);
+  const future = JSON.stringify({version:3, gold:9999});
+  items.set(e.saveKey,future);
+  const fallback = e.load();
+  assert.equal(e.save(fallback),false);
+  assert.equal(items.get(e.saveKey),future);
+  assert.equal(items.get(e.legacyKey),original);
+});
+
+test('Bookmarks and missed questions support one answer per review with offline 1/3/7-day scheduling', () => {
+  const {Engine:e,profile:p,Q} = setup();
+  const day = 86400000;
+  const start = Date.UTC(2026,10,6,13,30);
+  const q = Q.find(item => item.id === 'o0');
+  e.record(p,q,false);
+  assert.equal(e.mark(p,'water'),true);
+  assert.equal(e.reviewList(p,start).length,2);
+  assert.equal(e.mark(p,'water'),false);
+  assert.equal(e.reviewList(p,start).length,1);
+  assert.equal(e.startReview(p,'v0'),null);
+  const stale = e.startReview(p,q.id);
+  const current = e.startReview(p,q.id);
+  assert.equal(e.answerReview(p,stale,q.answer,start),null);
+  assert.equal(e.answerReview(p,current,'I',start),null);
+  let now = start;
+  for (const [index, days] of [1,3,7,7].entries()) {
+    const session = index === 0 ? current : e.startReview(p,q.id);
+    const result = e.answerReview(p,session,q.choices.join(' '),now);
+    assert.equal(result.correct,true);
+    assert.equal(e.answerReview(p,session,q.answer,now),null);
+    assert.equal(result.dueAt,now+days*day);
+    assert.equal(e.reviewList(p,result.dueAt-1)[0].due,false);
+    assert.equal(e.reviewList(p,result.dueAt)[0].due,true);
+    now = result.dueAt;
+  }
+  const retry = e.startReview(p,q.id);
+  assert.equal(e.answerReview(p,retry,[...q.choices].reverse().join(' '),now).dueAt,now);
+  e.save(p);
+  const loaded = e.load();
+  assert.equal(loaded.learning.iwant.correct,4);
+  assert.equal(loaded.learning.iwant.wrong,2);
+  assert.equal(loaded.schedule.o0.step,0);
+  assert.equal(loaded.achievements.join(','),'firstReview');
+  assert.equal(loaded.xp+loaded.gold,0);
+});
+
+test('Combo bonuses round once, cap at four, reset on mistakes, and never exceed remaining HP', () => {
+  const {Engine:e,profile:p} = setup();
+  const b = e.battle(p,1);
+  for (const [i, damage] of [12,13,13,14].entries()) {
+    const before = b.enemyHp;
+    const turn = takeTurn(e,p,b,'sword');
+    assert.equal(b.combo,i+1);
+    assert.equal(turn.player.damage,damage);
+    assert.equal(turn.player.comboBonus,damage-12);
+    assert.equal(before-b.enemyHp,damage);
+  }
+  assert.equal(e.bonusPercent(5),15);
+  const end = takeTurn(e,p,b,'sword');
+  assert.equal(b.combo,4);
+  assert.equal(end.player.comboBonus,0);
+  assert.equal(end.player.damage,3);
+  const next = e.battle(p,1);
+  for (let i=0;i<3;i++) takeTurn(e,p,next,'sword');
+  takeTurn(e,p,next,'sword',false);
+  assert.equal(next.combo,0);
+  assert.equal(takeTurn(e,p,next,'sword').player.damage,12);
+  assert.equal(p.achievements.filter(id=>id==='combo3').length,1);
+});
+
+test('A level-one player can defeat both boss phases with no accuracy combo', () => {
+  const {Engine:e,profile:p} = setup();
+  e.reward(p,clear(e,p,1)); e.reward(p,clear(e,p,2));
+  const b = e.battle(p,3);
+  assert.equal(p.level,1);
+  const moves = ['fire','wrong','guard','wrong','fire','wrong','heal','wrong','fire',
+    'wrong','heal','wrong','sword','wrong','fire','wrong','wrong','fire'];
+  const hitPhases = new Set();
+  for (const [index, move] of moves.entries()) {
+    const turn = index + 1;
+    const phase = b.bossPhase;
+    assert.equal(e.charging(b),turn%3 === 2);
+    assert.equal(e.heavy(b),turn%3 === 0);
+    const result = takeTurn(e,p,b,move === 'wrong' ? 'sword' : move,move !== 'wrong');
+    assert.ok(b.combo <= 1);
+    if (result.enemy?.charging) assert.equal(result.enemy.damage,0);
+    if (result.enemy?.heavy) hitPhases.add(phase);
+    if (turn === 3) {
+      assert.equal(result.enemy.prevented,9);
+      assert.equal(result.enemy.damage,6);
+      assert.equal(b.counterReady,true);
+    }
+    if (turn === 5) assert.equal(result.player.counterBonus,12);
+  }
+  assert.equal(b.phase,'VICTORY');
+  assert.ok(b.hp>0);
+  assert.equal(hitPhases.size,2);
+  assert.equal(p.achievements.filter(id=>id==='firstSpell').length,1);
+});
+
+test('Adaptive selection favors a due mistake without sacrificing spacing or fresh questions', () => {
+  const {Engine:e,profile:p,Q} = setup();
+  const vocabulary = Q.filter(q => q.type === 'vocab');
+  e.teach(p,vocabulary.flatMap(q=>q.tags));
+  for (let i=0;i<4;i++) e.record(p,vocabulary[3],false);
+  e.record(p,vocabulary[0],true);
+  e.record(p,vocabulary[1],true);
+  const b=e.battle(p,1);
+  const observed=[];
+  for (let i=0;i<5;i++) {
+    const {question} = e.select(p,b,'sword',()=>0);
+    if (!i) assert.equal(question.id,vocabulary[3].id);
+    assert.ok(!observed.slice(-2).includes(question.id));
+    observed.push(question.id);
+    e.answer(p,b,question.answer);
+    e.playerAction(p,b); e.enemyAction(p,b);
+  }
+  assert.ok(new Set(observed).size>=4);
+});
+
+test('Dashboard separates in-game answer history from RPG rewards and persists the trend', () => {
+  const {Engine:e,profile:p,Q} = setup();
+  assert.equal(e.dashboard(p).accuracy,null);
+  for (const correct of [false,false,false,true,true,true,true,true,true,true]) e.record(p,Q[0],correct);
+  e.mark(p,'bread');
+  e.save(p);
+  const progress = e.dashboard(e.load());
+  assert.equal(progress.encountered,2);
+  assert.equal(progress.attempts,10);
+  assert.equal(progress.accuracy,70);
+  assert.equal(progress.recentChange,60);
+  assert.equal(progress.reviewNeeded,1);
+  assert.equal(progress.familiar,1);
+  assert.equal(progress.completedStages,0);
+});
+
+test('A migrated level-25 hero gets a scaled replay with the correct phase threshold and no new rewards', () => {
+  const {Engine:e, items} = setup();
+  const old = {version:1, started:true, level:25, xp:32, gold:9088, hp:275, completed:[1,2,3]};
+  items.set(e.legacyKey,JSON.stringify(old));
+  const p = e.load();
+  const b = e.battle(p,3);
+  assert.equal(b.enemyMaxHp,621);
+  assert.equal(b.enemyHp,b.enemyMaxHp);
+  assert.equal(takeTurn(e,p,b,'sword').enemy.damage,34);
+  assert.equal(takeTurn(e,p,b,'sword').enemy.damage,0);
+  assert.equal(takeTurn(e,p,b,'sword').enemy.damage,47);
+  assert.equal(b.bossPhase,1);
+  takeTurn(e,p,b,'sword');
+  assert.ok(b.enemyHp <= b.enemyMaxHp/2 && b.enemyHp > e.enemies[2].hp/2);
+  assert.equal(b.bossPhase,2);
+  takeTurn(e,p,b,'sword');
+  assert.equal(takeTurn(e,p,b,'guard').enemy.damage,21);
+  while (b.phase === 'PLAYER_SELECT') takeTurn(e,p,b,'sword');
+  const rewards = e.reward(p,b);
+  assert.ok(rewards.replay);
+  assert.equal(rewards.xp+rewards.gold,0);
+  e.save(p);
+  assert.equal(e.load().level,old.level);
+  assert.equal(e.load().gold,old.gold);
+  assert.equal(e.load().xp,old.xp);
+  assert.equal(items.get(e.legacyKey),JSON.stringify(old));
+  const firstAttempt = e.battle(e.hydrate({...old, completed:[1,2]}),3);
+  assert.equal(firstAttempt.enemyMaxHp,150);
+  assert.equal(firstAttempt.incomingScale,1);
 });

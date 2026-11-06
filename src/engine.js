@@ -1,7 +1,20 @@
 // A profile is the saved checkpoint. Encounter state and pending actions stay in memory.
 const Engine = (() => {
-  const saveKey = 'EnglishQuest.chapter1.v1';
+  const legacyKey = 'EnglishQuest.chapter1.v1';
+  const saveKey = 'EnglishQuest.chapter1.v2';
   const active = new WeakMap();
+  const reviews = new WeakMap();
+  const day = 86400000;
+  const achievements = [
+    {id:'firstVictory', name:'첫 승리', description:'첫 전투에서 승리하기'},
+    {id:'firstSpell', name:'불꽃의 시작', description:'화염 마법에 처음 성공하기'},
+    {id:'combo3', name:'이어지는 말', description:'한 전투에서 세 번 연속 정답 맞히기'},
+    {id:'firstReview', name:'다시 만난 표현', description:'복습 문제에 처음 답하기'},
+    {id:'forestClear', name:'숲의 목소리', description:'슬라임 왕을 물리치기'}
+  ];
+  function unlock(profile, id) {
+    if (!profile.achievements.includes(id)) profile.achievements.push(id);
+  }
   const enemies = [
     {name:'숲 슬라임', en:'Forest Slime', hp:55, attack:8, defense:0, xp:35, gold:15},
     {name:'수정 슬라임', en:'Crystal Slime', hp:85, attack:11, defense:1, xp:50, gold:25},
@@ -13,8 +26,9 @@ const Engine = (() => {
     ? clamp(value, 0, max) : fallback;
   const emptyRecord = () => ({seen:false, correct:0, wrong:0, streak:0});
   function fresh() {
-    return {version:1, started:false, level:1, xp:0, gold:0, hp:100,
+    return {version:2, started:false, level:1, xp:0, gold:0, hp:100,
       completed:[], unlocked:1, chapterComplete:false, learning:{}, mistakes:{},
+      marked:[], schedule:{}, history:[], achievements:[],
       settings:{sound:true, voice:true, volume:0.45}};
   }
   function stats(profile) {
@@ -24,7 +38,7 @@ const Engine = (() => {
   }
   function hydrate(raw) {
     const profile = fresh();
-    if (!raw || raw.version !== 1) return profile;
+    if (!raw || ![1, 2].includes(raw.version)) return profile;
     profile.started = raw.started === true;
     profile.level = Math.max(1, integer(raw.level, 1, 9999));
     const {maxHp, nextXp} = stats(profile);
@@ -54,14 +68,52 @@ const Engine = (() => {
       if (typeof settings[toggle] === 'boolean') profile.settings[toggle] = settings[toggle];
     }
     if (Number.isFinite(settings.volume)) profile.settings.volume = clamp(settings.volume, 0, 1);
+    if (raw.version === 2) {
+      profile.marked = lessons.filter(l => Array.isArray(raw.marked) && raw.marked.includes(l.id)).map(l => l.id);
+      profile.achievements = achievements.filter(a => Array.isArray(raw.achievements) && raw.achievements.includes(a.id)).map(a => a.id);
+      if (Array.isArray(raw.history)) {
+        profile.history = raw.history.slice(-10).filter(entry =>
+          entry && typeof entry.correct === 'boolean' && Q.some(q => q.id === entry.id)
+        ).map(({id, correct}) => ({id, correct}));
+      }
+      for (const {id} of Q) {
+        const timing = raw.schedule?.[id];
+        if (timing && typeof timing === 'object') profile.schedule[id] = {
+          step:integer(timing.step, 0, 3), dueAt:integer(timing.dueAt, 0, 8640000000000000)
+        };
+      }
+    }
+    // These two milestones can also be established with certainty from v1.
+    if (profile.completed.length) unlock(profile, 'firstVictory');
+    if (profile.chapterComplete) unlock(profile, 'forestClear');
     return profile;
   }
+  function stored(key) {
+    const text = localStorage.getItem(key);
+    try { return text ? JSON.parse(text) : null; }
+    catch { return null; }
+  }
   function load() {
-    try { return hydrate(JSON.parse(localStorage.getItem(saveKey))); }
+    try {
+      const current = stored(saveKey);
+      if (current?.version === 2) return hydrate(current);
+      const legacy = stored(legacyKey);
+      if (legacy?.version === 1) {
+        const profile = hydrate(legacy);
+        save(profile);
+        return profile;
+      }
+      if (current?.version === 1) return hydrate(current);
+      return fresh();
+    }
     catch { return fresh(); }
   }
   function save(profile) {
-    try { localStorage.setItem(saveKey, JSON.stringify(profile)); return true; }
+    try {
+      if (profile.version !== 2 || stored(saveKey)?.version > 2) return false;
+      localStorage.setItem(saveKey, JSON.stringify(profile));
+      return true;
+    }
     catch { return false; }
   }
   function teach(profile, tags) {
@@ -78,7 +130,12 @@ const Engine = (() => {
       if (correct) { item.correct++; item.streak++; }
       else { item.wrong++; item.streak = 0; }
     }
-    if (!correct) profile.mistakes[question.id] = (profile.mistakes[question.id] || 0) + 1;
+    profile.history.push({id:question.id, correct});
+    if (profile.history.length > 10) profile.history.shift();
+    if (!correct) {
+      profile.mistakes[question.id] = (profile.mistakes[question.id] || 0) + 1;
+      profile.schedule[question.id] = {step:0, dueAt:0};
+    }
   }
   function status(item) {
     if (!item?.seen) return 'New';
@@ -86,11 +143,52 @@ const Engine = (() => {
     if (item.streak >= 3) return 'Familiar';
     return 'Learning';
   }
+  function mark(profile, tag) {
+    if (!lessons.some(l => l.id === tag)) return false;
+    if (profile.marked.includes(tag)) {
+      profile.marked = profile.marked.filter(id => id !== tag);
+      return false;
+    }
+    teach(profile, [tag]);
+    profile.marked.push(tag);
+    return true;
+  }
+  function reviewList(profile, now = Date.now()) {
+    // A bookmark adds one introductory question per expression.
+    const bookmarkedIds = new Set(profile.marked.map(tag => Q.find(q => q.tags.includes(tag))?.id));
+    return Q.filter(q => profile.mistakes[q.id] || bookmarkedIds.has(q.id)).map(question => {
+      const misses = profile.mistakes[question.id] || 0;
+      const dueAt = profile.schedule[question.id]?.dueAt || 0;
+      return {question, misses, dueAt, due:dueAt <= now, marked:bookmarkedIds.has(question.id)};
+    }).sort((a, b) => a.dueAt - b.dueAt || b.misses - a.misses);
+  }
+  function dashboard(profile) {
+    const records = Object.values(profile.learning).filter(r => r.seen);
+    const attempts = records.reduce((total, r) => total + r.correct + r.wrong, 0);
+    const correct = records.reduce((total, r) => total + r.correct, 0);
+    const countRight = entries => entries.filter(entry => entry.correct).length;
+    let recentChange = null;
+    if (profile.history.length === 10) {
+      recentChange = 20*(countRight(profile.history.slice(5)) - countRight(profile.history.slice(0,5)));
+    }
+    return {encountered:records.length, total:lessons.length, attempts,
+      accuracy:attempts ? Math.round(100*correct/attempts) : null, recentChange,
+      reviewNeeded:lessons.filter(l => profile.marked.includes(l.id) || status(profile.learning[l.id]) === 'Review Needed').length,
+      familiar:records.filter(r => status(r) === 'Familiar').length, completedStages:profile.completed.length};
+  }
   function battle(profile, stage) {
     if (!Number.isInteger(stage) || stage < 1 || stage > profile.unlocked) return null;
-    const encounter = {stage, turn:1, phase:'PLAYER_SELECT', hp:stats(profile).maxHp,
-      enemyHp:enemies[stage-1].hp, cooldowns:{sword:0,fire:0,guard:0,heal:0},
-      counts:{}, lastId:null, question:null, choices:[], ability:null, correct:false};
+    const enemy = enemies[stage - 1];
+    const hero = stats(profile);
+    const baseline = stats({level:3});
+    const scaled = profile.level > 3 && profile.completed.includes(stage);
+    const durability = scaled ? (hero.attack - enemy.defense) / (baseline.attack - enemy.defense) : 1;
+    const enemyMaxHp = Math.round(enemy.hp * durability);
+    const encounter = {stage, turn:1, phase:'PLAYER_SELECT', hp:hero.maxHp,
+      enemyHp:enemyMaxHp, enemyMaxHp, incomingScale:scaled ? hero.maxHp / baseline.maxHp : 1,
+      cooldowns:{sword:0,fire:0,guard:0,heal:0},
+      counts:{}, lastId:null, question:null, choices:[], ability:null, correct:false,
+      combo:0, bossPhase:1, counterReady:false};
     active.set(profile, encounter);
     return encounter;
   }
@@ -99,6 +197,8 @@ const Engine = (() => {
   }
   const exposed = encounter => encounter.stage === 3 && encounter.turn % 3 === 0;
   const charging = encounter => encounter.stage === 3 && encounter.turn % 3 === 2;
+  const heavy = exposed;
+  const bonusPercent = combo => 5*clamp(combo - 1, 0, 3);
   function available(encounter, ability) {
     return encounter?.phase === 'PLAYER_SELECT' && Object.hasOwn(cooldown, ability)
       && (encounter.stage > 1 || ability === 'sword') && encounter.cooldowns[ability] === 0;
@@ -122,6 +222,24 @@ const Engine = (() => {
     }
     return stageQuestions.filter(q => q.type === 'vocab');
   }
+  function makeChoices(question, random) {
+    const choices = shuffle(question.choices, random);
+    if (question.type === 'order' && choices.join(' ') === question.choices.join(' ')) {
+      choices.push(choices.shift());
+    }
+    return choices;
+  }
+  function priority(profile, encounter, question, now) {
+    const id = question.id;
+    const timing = profile.schedule[id];
+    const misses = profile.mistakes[id] || 0;
+    const due = !timing || timing.dueAt <= now;
+    const needsPractice = question.tags.some(tag => profile.marked.includes(tag));
+    const recallWeight = due ? Math.min(6, misses * 2) + (needsPractice ? 2 : 0) : 0;
+    const unfamiliar = question.tags.some(tag => status(profile.learning[tag]) !== 'Familiar');
+    // Repetition costs eventually outweigh any review priority.
+    return recallWeight + (unfamiliar ? 1 : 0) - 4*(encounter.counts[id] || 0);
+  }
   function select(profile, encounter, ability, random = Math.random) {
     if (!inPhase(profile, encounter,'PLAYER_SELECT') || !available(encounter,ability)) return null;
     let pool = candidates(encounter, ability);
@@ -129,41 +247,80 @@ const Engine = (() => {
     if (seen.length) pool = seen;
     const other = pool.filter(q => q.id !== encounter.lastId);
     if (other.length) pool = other;
-    const lowest = Math.min(...pool.map(q => encounter.counts[q.id] || 0));
-    const next = pool.filter(q => (encounter.counts[q.id] || 0) === lowest);
+    const recentIds = profile.history.slice(-2).map(item => item.id);
+    const rested = pool.filter(q => !recentIds.includes(q.id));
+    if (rested.length) pool = rested;
+    const now = Date.now();
+    const ranked = pool.map(q => ({q, score:priority(profile,encounter,q,now)}));
+    const best = Math.max(...ranked.map(entry => entry.score));
+    const next = ranked.filter(entry => entry.score === best).map(entry => entry.q);
     const question = next[Math.floor(random()*next.length)];
-    const choices = shuffle(question.choices, random);
-    if (question.type === 'order' && choices.join(' ') === question.choices.join(' ')) {
-      choices.push(choices.shift());
-    }
+    const choices = makeChoices(question, random);
     encounter.counts[question.id] = (encounter.counts[question.id] || 0) + 1;
     Object.assign(encounter, {ability, question, choices, lastId:question.id, phase:'QUESTION_ACTIVE'});
     return {question, choices};
   }
   const normalize = text => text.trim().replace(/[.]$/, '').replace(/\s+/g,' ');
-  function answer(profile, encounter, value) {
-    if (!inPhase(profile, encounter,'QUESTION_ACTIVE') || typeof value !== 'string') return null;
-    const {question} = encounter;
-    if (question.type !== 'order' && !encounter.choices.includes(value)) return null;
+  function evaluate(task, value) {
+    if (typeof value !== 'string') return null;
+    const {question} = task;
+    if (question.type !== 'order' && !task.choices.includes(value)) return null;
     if (question.type === 'order') {
       const tokens = normalize(value).split(' ').sort();
       if (tokens.join(' ') !== [...question.choices].sort().join(' ')) return null;
     }
-    const correct = normalize(value) === normalize(question.answer);
+    return normalize(value) === normalize(question.answer);
+  }
+  function answer(profile, encounter, value) {
+    if (!inPhase(profile, encounter,'QUESTION_ACTIVE')) return null;
+    const {question} = encounter;
+    const correct = evaluate(encounter,value);
+    if (correct === null) return null;
+    encounter.combo = correct ? Math.min(4, encounter.combo + 1) : 0;
+    if (encounter.combo === 3) unlock(profile,'combo3');
     Object.assign(encounter, {correct, phase:'ANSWER_FEEDBACK'});
     record(profile, question, correct);
-    return {correct, question};
+    return {correct, question, combo:encounter.combo};
+  }
+  function startReview(profile, id, random = Math.random) {
+    const entry = reviewList(profile).find(item => item.question.id === id);
+    if (!entry) return null;
+    const question = entry.question;
+    const session = {question, choices:makeChoices(question,random), answered:false};
+    reviews.set(profile, session);
+    return session;
+  }
+  function answerReview(profile, session, value, now = Date.now()) {
+    if (!session || reviews.get(profile) !== session || session.answered) return null;
+    const correct = evaluate(session, value);
+    if (correct === null) return null;
+    const {question} = session;
+    session.answered = true;
+    reviews.delete(profile);
+    record(profile, question, correct);
+    const previous = profile.schedule[question.id]?.step || 0;
+    const step = correct ? Math.min(previous + 1, 3) : 0;
+    const dueAt = now + [0,1,3,7][step]*day;
+    profile.schedule[question.id] = {step, dueAt};
+    unlock(profile,'firstReview');
+    return {correct, question, dueAt};
   }
   function playerAction(profile, encounter) {
     if (!inPhase(profile, encounter, 'ANSWER_FEEDBACK')) return null;
     const {ability, correct, stage} = encounter;
     const hero = stats(profile);
-    let damage = 0, healing = 0;
+    let damage = 0, healing = 0, comboBonus = 0, counterBonus = 0;
     if (correct && (ability === 'sword' || ability === 'fire')) {
       const power = ability === 'fire' ? hero.magic : hero.attack;
       const strike = Math.max(1, power - enemies[stage-1].defense) * (exposed(encounter) ? 2 : 1);
-      damage = Math.min(encounter.enemyHp, strike);
+      const boosted = Math.round(strike*(100+bonusPercent(encounter.combo))/100);
+      comboBonus = Math.min(encounter.enemyHp, boosted) - Math.min(encounter.enemyHp, strike);
+      const beforeCounter = Math.min(encounter.enemyHp, boosted);
+      damage = Math.min(encounter.enemyHp, boosted + (encounter.counterReady ? 12 : 0));
+      counterBonus = damage - beforeCounter;
+      encounter.counterReady = false;
       encounter.enemyHp -= damage;
+      if (ability === 'fire') unlock(profile,'firstSpell');
     }
     if (correct && ability === 'heal') {
       healing = Math.min(20, hero.maxHp - encounter.hp);
@@ -171,14 +328,19 @@ const Engine = (() => {
     }
     const won = encounter.enemyHp === 0;
     encounter.phase = won ? 'VICTORY' : 'ENEMY_ACTION';
-    return {damage, healing, guard:correct && ability === 'guard', won};
+    return {damage, healing, guard:correct && ability === 'guard', won, comboBonus, counterBonus};
   }
   function enemyAction(profile, encounter) {
     if (!inPhase(profile, encounter, 'ENEMY_ACTION')) return null;
     const charge = charging(encounter);
+    const powerful = heavy(encounter);
     const guard = encounter.correct && encounter.ability === 'guard';
-    const hit = Math.max(1, enemies[encounter.stage-1].attack - stats(profile).defense);
+    const extraPower = powerful ? (encounter.bossPhase === 2 ? 6 : 4) : 0;
+    const rawHit = enemies[encounter.stage-1].attack + extraPower - stats(profile).defense;
+    const hit = Math.max(1, Math.round(rawHit * encounter.incomingScale));
+    const unguarded = charge ? 0 : Math.min(encounter.hp, hit);
     const damage = charge ? 0 : Math.min(encounter.hp, Math.max(1, Math.round(hit*(guard ? 0.4 : 1))));
+    if (guard && powerful) encounter.counterReady = true;
     encounter.hp -= damage;
     const lost = encounter.hp === 0;
     for (const id of Object.keys(cooldown)) {
@@ -188,17 +350,21 @@ const Engine = (() => {
     encounter.phase = lost ? 'DEFEAT' : 'PLAYER_SELECT';
     if (lost) profile.hp = 0;
     else encounter.turn++;
-    return {damage, lost, charging:charge};
+    if (encounter.stage === 3 && encounter.enemyHp <= encounter.enemyMaxHp/2) encounter.bossPhase = 2;
+    return {damage, lost, charging:charge, heavy:powerful, guarded:guard && !charge,
+      prevented:unguarded - damage, counterReady:encounter.counterReady};
   }
   function reward(profile, encounter) {
     if (!inPhase(profile, encounter, 'VICTORY')) return null;
     const {stage} = encounter;
     const enemy = enemies[stage - 1];
     const bonus = stage === 3 && !profile.chapterComplete ? 50 : 0;
-    const xp = enemy.xp + bonus;
+    const replay = profile.completed.includes(stage);
+    const xp = replay ? 0 : enemy.xp + bonus;
+    const gold = replay ? 0 : enemy.gold;
     const oldLevel = profile.level;
     profile.xp += xp;
-    profile.gold += enemy.gold;
+    profile.gold += gold;
     while (profile.xp >= stats(profile).nextXp) {
       profile.xp -= stats(profile).nextXp;
       profile.level++;
@@ -208,9 +374,12 @@ const Engine = (() => {
     if (!profile.completed.includes(stage)) profile.completed.push(stage);
     profile.unlocked = Math.min(3, profile.completed.length + 1);
     profile.chapterComplete = profile.completed.length === 3;
+    unlock(profile,'firstVictory');
+    if (profile.chapterComplete) unlock(profile,'forestClear');
     encounter.phase = 'REWARD';
-    return {xp, gold:enemy.gold, levelUp, bonus};
+    return {xp, gold, levelUp, bonus, replay};
   }
-  return {saveKey, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
+  return {saveKey, legacyKey, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
+    achievements, mark, reviewList, startReview, answerReview, dashboard, heavy, bonusPercent,
     available, charging, exposed, shuffle, select, answer, playerAction, enemyAction, reward};
 })();
