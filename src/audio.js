@@ -101,6 +101,20 @@ const AudioFX = (() => {
           break;
         case 'fire': tone(132,485,at,.31,.1,'triangle',.06); noise(690,1850,at+.2,.32,.3); break;
         case 'guard': arpeggio([392,587,784],at,.079,.31,.1); break;
+        case 'voice':
+          tone(262,392,at,.28,.085,'sine',.04);
+          bell(784,at+.19,.26,.075);
+          noise(720,1820,at+.28,.23,.14);
+          break;
+        case 'echo':
+          arpeggio([392,587,784],at,.105,.29,.085);
+          bell(587,at+.33,.33,.057);
+          break;
+        case 'burst':
+          arpeggio([330,494,659],at,.08,.29,.09);
+          tone(294,131,at+.43,.26,.092,'triangle');
+          bell(988,at+.45,.31,.085);
+          break;
         case 'shieldHit': noise(630,1480,at,.09,.19); bell(659,at,.41,.12); bell(990,at+.024,.22,.06); break;
         case 'enemy': tone(173,77,at,.16,.17,'triangle'); noise(640,240,at,.11,.12); break;
         case 'heavy': tone(125,48,at,.39,.24,'triangle'); noise(1100,140,at,.25,.25); bell(247,at+.045,.35,.09); break;
@@ -119,7 +133,7 @@ const AudioFX = (() => {
     } catch { /* Device or context unavailable: gameplay continues. */ }
   }
   function voice(settings) {
-    if (!settings?.voice || !globalThis.SpeechSynthesisUtterance) return null;
+    if (!settings?.voice || settings.speechVolume === 0 || !globalThis.SpeechSynthesisUtterance) return null;
     try {
       const voices = globalThis.speechSynthesis?.getVoices() || [];
       return voices.find(v => v.localService && /^en[-_]US$/i.test(v.lang))
@@ -133,7 +147,7 @@ const AudioFX = (() => {
   }
   // The fourth argument controls a transient highlight in the calling screen.
   // Finishing explicitly on cancel also handles engines that omit the native end event.
-  function speak(text, settings, onError, {onStart, onEnd} = {}) {
+  function speak(text, settings, onError, {onStart, onEnd, rate = settings?.speechRate} = {}) {
     const english = voice(settings);
     if (!english || !text) return false;
     let playback;
@@ -142,13 +156,17 @@ const AudioFX = (() => {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.voice = english;
       utterance.lang = english.lang;
-      utterance.rate = settings.speechRate === 'slow' ? .71 : 1;
+      utterance.rate = rate === 'slow' ? .71 : 1;
+      const volume = settings.speechVolume;
+      utterance.volume = Number.isFinite(volume) ? Math.min(1,Math.max(0,volume)) : 1;
       playback = {
         utterance,
         startTimer: null,
+        endTimer: null,
         finish() {
           if (activeSpeech !== playback) return;
           globalThis.clearTimeout?.(playback.startTimer);
+          globalThis.clearTimeout?.(playback.endTimer);
           activeSpeech = null;
           onEnd?.();
         }
@@ -157,6 +175,12 @@ const AudioFX = (() => {
       utterance.onstart = () => {
         if (activeSpeech !== playback) return;
         globalThis.clearTimeout?.(playback.startTimer);
+        const words = text.trim().split(/\s+/).length;
+        playback.endTimer = globalThis.setTimeout?.(() => {
+          if (activeSpeech !== playback) return;
+          stop();
+          onError?.();
+        }, Math.max(9000, words*1000 + 5000));
         onStart?.();
       };
       utterance.onend = playback.finish;

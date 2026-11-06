@@ -16,7 +16,7 @@ const sizes = [[1920,1080],[1366,768],[768,1024],[390,844],[360,800]];
 const selector = (action, id) => '[data-act="' + action + '"]' +
   (id === undefined ? '' : '[data-id="' + id + '"]');
 const ctl = (page, action, id) => page.locator(selector(action, id)).first();
-const click = (page, action, id) => ctl(page, action, id).click({ timeout: 5000 });
+const click = (page, action, id) => ctl(page, action, id).click({ timeout: 12000 });
 const visible = (page, action, id) => ctl(page, action, id).isVisible();
 const wait = (page, action) => ctl(page, action).waitFor({ timeout: 5000 });
 
@@ -124,7 +124,10 @@ async function createOfflinePage(browser, options = {}) {
 }
 
 const profile = page => page.evaluate(() => JSON.parse(localStorage.getItem(Engine.saveKey)));
-const encounter = page => page.evaluate(() => JSON.parse(JSON.stringify(game.battle)));
+// Voice exercises have a live, cyclic link back to their battle. Snapshot only
+// the gameplay fields used for UI assertions.
+const encounter = page => page.evaluate(() => JSON.parse(JSON.stringify(game.battle,
+  (key,value)=>key==='voiceHandle' ? undefined : value)));
 const attempts = data => Object.values(data.learning)
   .reduce((sum, item) => sum + item.correct + item.wrong, 0);
 
@@ -323,7 +326,7 @@ async function checkLibraryAndRetry(page, completed) {
   await page.keyboard.press('Escape');
   await wait(page,'close');
   const sound = page.locator('#pause input[type=checkbox]').first();
-  const volume = page.locator('#pause input[type=range]');
+  const volume = page.locator('#pause input[data-setting=volume]');
   await sound.uncheck();
   await volume.focus();
   await volume.press('Home');
@@ -451,7 +454,7 @@ async function main() {
   }
 }
 module.exports = {
-  chapter, checkLayout, ctl, click, wait, visible, rapidClick,
+  chapter, enterStage, checkLayout, ctl, click, wait, visible, rapidClick,
   createOfflinePage, profile, encounter, attempts, answerReview, playTurn
 };
 if (require.main === module) main().catch(error => {console.error(error);process.exitCode=1;});

@@ -272,7 +272,7 @@ function dewfallGrove(id){
       ${path('M40 72q-8 -11 -4 -21l-5 2 6 -15q-3 -15 10 -20l10 2q10 -8 23 -4l10 6 8 1 8 12 -1 13 5 9 -8 15 -7 -6 -2 -21 -9 -13 -9 9 -15 5 -12 -3 -4 24Z','#c1beb1','stroke="#777e74" stroke-width="2"')}
       ${path('M42 72l7 -7 6 11 8 4 10 -6 11 4 13 -11 4 -4 2 19 -7 18 -12 9 -6 17 -11 -5 -14 -8 -11 -18Z','#c9c5aa','stroke="#8d9485" stroke-width="2"')}
       ${path('M56 72q6 -7 15 0l4 3 8 -7 10 4 -4 8 -14 4 -12 -3Z','#dcd4b9')}
-      ${path('M55 56q5 -5 13 -1 M80 54q8 -6 14 -1 M58 61q4 3 7 0 M81 61q5 3 9 -1 M74 60l-3 10 5 1 M67 84q7 3 14 -1 M49 87q4 14 13 20 M86 92l-10 20','none','stroke="#776a57" stroke-width="2.3" stroke-linecap="round"')}
+      <g class="expression-rowan">${path('M55 56q5 -5 13 -1 M80 54q8 -6 14 -1 M58 61q4 3 7 0 M81 61q5 3 9 -1 M74 60l-3 10 5 1 M67 84q7 3 14 -1 M49 87q4 14 13 20 M86 92l-10 20','none','stroke="#776a57" stroke-width="2.3" stroke-linecap="round"')}</g>
       ${path('M16 125q17 -22 29 -25l8 35 -20 -4Z','#365951')}${path('M44 106l5 -5 9 5 -3 9 -8 -1Z','#d4b56e')}
       ${path('M106 133l5 -63 -4 -6 3 -10 10 -4 5 10 -7 14 -7 57Z','#795e43','stroke="#574435" stroke-width="2"')}${path('M110 64l0 -10 7 -9 6 10 -6 10Z','#93cfbc','stroke="#d5d393" stroke-width="1.5"')}`,'rowan-art');
   }

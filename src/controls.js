@@ -3,19 +3,25 @@ function showSettings(){
  const p=game.profile, cfg=p.settings;
  const confirmLabel=game.confirm==='reset'?'저장 기록을 지울까요?':'새 모험으로 교체할까요?';
  const actions=game.confirm?'<h2>'+confirmLabel+'</h2><p>현재 모험과 학습 기록이 초기화됩니다.</p><div class="actions">'+button('confirm','초기화하고 계속',{cl:'primary'})+button('cancel-confirm','취소')+'</div>':
- '<div class="eyebrow">'+(game.pausedFrom==='TITLE'?'MAIN MENU':'PAUSED')+'</div><h2>설정</h2><label class="setting">효과음<input type="checkbox" data-setting="sound" '+(cfg.sound?'checked':'')+'></label><label class="setting">효과음 크기<input type="range" data-setting="volume" value="'+Math.round(cfg.volume*100)+'" min="0" max="100"></label><label class="setting">영어 발음<input type="checkbox" data-setting="voice" '+(cfg.voice?'checked':'')+'></label><label class="setting">발음 속도<select data-setting="speechRate"><option value="normal" '+(cfg.speechRate!=='slow'?'selected':'')+'>보통</option><option value="slow" '+(cfg.speechRate==='slow'?'selected':'')+'>천천히</option></select></label><div class="actions">'+button('close',game.pausedFrom==='TITLE'?'닫기':'계속하기',{cl:'primary'})+(game.pausedFrom!=='TITLE'?button('to-title','타이틀로'):'')+(p.started?button('reset','진행 초기화'):'')+'</div>';
+ '<div class="eyebrow">'+(game.pausedFrom==='TITLE'?'MAIN MENU':'PAUSED')+'</div><h2>설정</h2><label class="setting">효과음<input type="checkbox" data-setting="sound" '+(cfg.sound?'checked':'')+'></label><label class="setting">효과음 크기<input type="range" data-setting="volume" value="'+Math.round(cfg.volume*100)+'" min="0" max="100"></label><label class="setting">영어 발음<input type="checkbox" data-setting="voice" '+(cfg.voice?'checked':'')+'></label><label class="setting">음성 크기<input type="range" data-setting="speechVolume" value="'+Math.round(cfg.speechVolume*100)+'" min="0" max="100"></label><label class="setting">발음 속도<select data-setting="speechRate"><option value="normal" '+(cfg.speechRate!=='slow'?'selected':'')+'>보통</option><option value="slow" '+(cfg.speechRate==='slow'?'selected':'')+'>천천히</option></select></label><div class="actions">'+button('close',game.pausedFrom==='TITLE'?'닫기':'계속하기',{cl:'primary'})+(game.pausedFrom!=='TITLE'?button('to-title','타이틀로'):'')+(p.started?button('reset','진행 초기화'):'')+'</div>';
  pauseDialog.innerHTML='<section class="modal">'+actions+'</section>';
  if(!pauseDialog.open)pauseDialog.showModal();
  if(game.confirm)pauseDialog.querySelector('[data-act="cancel-confirm"]').focus();
 }
 function openSettings(mode=''){
  if(['PLAYER_ACTION','ENEMY_ACTION','PAUSED'].includes(game.screen))return;
+ if(game.voice)silenceVoice();
  game.pausedFrom=game.screen;game.confirm=mode;AudioFX.stop();game.screen='PAUSED';showSettings();
 }
 function closeSettings(){
- game.confirm='';game.screen=game.pausedFrom;pauseDialog.close();render();
+ game.confirm='';game.screen=game.pausedFrom;pauseDialog.close();
+ if(!game.voice&&['QUESTION_ACTIVE','REVIEW'].includes(game.screen)&&game.task?.question.type==='listening'&&!AudioFX.canSpeak(game.profile.settings)){
+  game.speechFallback=true;markQuestionAssist('fallback');
+ }
+ render();
  const focusButton=app.querySelector('[data-act="settings"]');
  if(focusButton)focusButton.focus({preventScroll:true});
+ if(game.voice?.stage==='active'&&!game.voice.result&&isAural(game.voice.activity)&&!AudioFX.canSpeak(game.profile.settings))voiceFallback(game.voice);
 }
 function startNew(){
  const settings={...game.profile.settings};
@@ -29,27 +35,37 @@ function startBattle(training=false){
  game.battleMaxHp=Engine.stats(game.profile).maxHp;game.battleLevel=game.profile.level;
  game.achievementStart=[...game.profile.achievements];change('BATTLE_READY');
 }
-function listen(){
+function listen(rate=game.profile.settings.speechRate){
  const q=game.task?.question;
  if(!q||q.type!=='listening')return;
- const fallback=()=>{if(['QUESTION_ACTIVE','REVIEW'].includes(game.screen)&&game.task?.question===q){game.speechFallback=true;render();}};
- if(!readAloud(q.phrase,fallback))fallback();
+ const fallback=()=>{if(['QUESTION_ACTIVE','REVIEW'].includes(game.screen)&&game.task?.question===q){game.speechFallback=true;markQuestionAssist('fallback');render();}};
+ if(!readAloud(q.phrase,fallback,rate))fallback();
 }
 function selectAbility(ability){
  const task=Engine.select(game.profile,game.battle,ability);
  if(!task)return;
- game.ability=ability;game.task=task;game.speechFallback=false;game.order=[];change('QUESTION_ACTIVE');
+ game.ability=ability;game.task=task;game.speechFallback=false;game.order=[];game.questionAssists=[];game.showKo=false;
+ if(task.voiceHandle){setupVoice(task.voiceHandle,'battle');return;}
+ change('QUESTION_ACTIVE');
  if(task.question.type==='listening')listen();
+}
+function markQuestionAssist(aid){
+ if(!game.questionAssists.includes(aid))game.questionAssists.push(aid);
+}
+function questionHelp(){
+ const aids=game.questionAssists.slice();
+ if(game.task?.question.type==='listening'&&!AudioFX.canSpeak(game.profile.settings)&&!aids.includes('fallback'))aids.push('fallback');
+ return {assisted:aids.length>0,aids};
 }
 function submitAnswer(value){
  if(game.screen==='REVIEW'){
-  const result=Engine.answerReview(game.profile,game.reviewSession,value);
+  const result=Engine.answerReview(game.profile,game.reviewSession,value,Date.now(),questionHelp());
   if(!result)return;
   game.reviewResult=result;AudioFX.stop();save();render();
   AudioFX.play(result.correct?'correct':'wrong',game.profile.settings);
   return;
  }
- const result=Engine.answer(game.profile,game.battle,value);
+ const result=Engine.answer(game.profile,game.battle,value,questionHelp());
  if(!result)return;
  game.feedback=result;save();change('ANSWER_FEEDBACK');
  AudioFX.play(result.correct?'correct':'wrong',game.profile.settings);
@@ -61,7 +77,7 @@ function currentIntent(b){
 // Commit the engine result first. Only the presentation waits for the weapon to make contact.
 function animateAction(screen, effect, before, amount, message, impactSound, done){
  const fast=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- const impactTime=fast?12:({sword:360,fire:580,enemy:370,heavy:370,heal:280}[effect]||240);
+ const impactTime=fast?12:({sword:360,fire:580,enemy:370,heavy:370,heal:280,voice:480,burst:480,echo:280}[effect]||240);
  const endTime=fast?75:effect==='fire'?1050:900;
  game.displayHp=before;game.effect=effect;game.amount='';game.message=message;
  change(screen);
@@ -82,7 +98,7 @@ function resolveTurn(){
  game.guarded=result.guard;
  let message='말의 빛이 흩어집니다.';
  if(result.damage)message=abilityInfo[b.ability][0]+'이 적중했습니다!'+(result.counterBonus?' 방패 반격 보너스 발동.':'');
- if(effect==='guard')message='수호 방패를 펼쳤습니다.';
+ if(result.guard)message=effect==='echo'?'메아리 방패를 펼쳤습니다. 다음 반격 피해가 줄어듭니다.':'수호 방패를 펼쳤습니다.';
  if(effect==='heal')message='치유의 빛이 체력을 '+result.healing+' 회복합니다.';
  if(result.won)game.reward=Engine.reward(p,b);
  save();
@@ -114,24 +130,24 @@ function resolveEnemyTurn(b,p){
    change(hit.lost?'DEFEAT':'PLAYER_SELECT');
  });
 }
-function readAloud(text,onError){
+function readAloud(text,onError,rate=game.profile.settings.speechRate){
  const matches=[...app.querySelectorAll('[lang="en"],.spoken-word')].filter(el=>el.textContent.trim()===text);
  if(!matches.length){
    const player=app.querySelector('[data-act="replay"]');
    if(player)matches.push(player);
  }
  return AudioFX.speak(text,game.profile.settings,onError,{
-   onStart:()=>matches.forEach(el=>el.classList.add('speaking')),
+   rate,onStart:()=>matches.forEach(el=>el.classList.add('speaking')),
    onEnd:()=>matches.forEach(el=>el.classList.remove('speaking'))
  });
 }
 function openReview(){
- game.reviewFrom=game.screen;game.reviewSession=null;game.reviewResult=null;change('REVIEW');
+ game.dailyLegacy=false;game.reviewFrom=game.screen;game.reviewSession=null;game.reviewResult=null;change('REVIEW');
 }
 function openReviewQuestion(id){
  const session=Engine.startReview(game.profile,id);
  if(!session)return;
- game.reviewSession=session;game.reviewResult=null;game.task=session;game.order=[];game.speechFallback=false;
+ game.reviewSession=session;game.reviewResult=null;game.task=session;game.order=[];game.speechFallback=false;game.showKo=false;game.questionAssists=[];
  change('REVIEW');
  if(session.question.type==='listening')listen();
 }
@@ -149,8 +165,9 @@ function handleQuestionControl(action,id){
  }
  if(action==='undo'){game.order.pop();render();app.querySelector('[data-act="word"]:not(:disabled)')?.focus({preventScroll:true});}
  if(action==='submit-order'&&task.question.type==='order'&&game.order.length===choices.length)submitAnswer(game.order.map(i=>choices[i]).join(' '));
- if(action==='replay')listen();
- if(action==='transcript'){game.speechFallback=true;render();focusControl(action,id);}
+ if(action==='replay')listen(id==='slow'?'slow':'normal');
+ if(action==='legacy-ko'){game.showKo=true;markQuestionAssist('translation');render();focusControl(action,id);}
+ if(action==='transcript'){game.speechFallback=true;markQuestionAssist('transcript');render();focusControl(action,id);}
 }
 function dispatch(action,id){
  const p=game.profile;
@@ -169,6 +186,7 @@ function dispatch(action,id){
   if(action==='to-title'){game.battle=null;change('TITLE');}
   return;
  }
+ if(voiceAction(action,id))return;
  if(villageAction(action,id))return;
  if(action==='map'&&['BOOK','DEFEAT','CHAPTER_COMPLETE','LEARNING','DASHBOARD'].includes(game.screen)){game.battle=null;change('MAP');return;}
  if(action==='book'&&['MAP','CHAPTER_COMPLETE'].includes(game.screen)){change('BOOK');return;}
@@ -227,6 +245,7 @@ pauseDialog.setAttribute('aria-label','게임 설정');
 pauseDialog.addEventListener('cancel',e=>{e.preventDefault();if(game.confirm==='reset'){game.confirm='';showSettings();}else closeSettings();});
 pauseDialog.addEventListener('change',e=>{
  const setting=e.target.dataset.setting;
+ if(setting==='speechVolume'){game.profile.settings.speechVolume=Math.max(0,Math.min(1,Number(e.target.value)/100));AudioFX.stop();save();}
  if(setting==='speechRate'){game.profile.settings.speechRate=e.target.value==='slow'?'slow':'normal';AudioFX.stop();save();}
  if(['sound','volume','voice'].includes(setting)){
   game.profile.settings[setting]=setting==='volume'?Number(e.target.value)/100:e.target.checked;

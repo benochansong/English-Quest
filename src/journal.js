@@ -60,11 +60,12 @@ function reviewView() {
 function dashboardView() {
   const p=game.profile, d=Engine.dashboard(p);
   const recent=d.recentChange===null?'최근 10회 응답 후 표시':d.recentChange===0?'변화 없음':(d.recentChange>0?'+':'')+d.recentChange+'%p';
-  const cards=[['만난 표현',d.encountered+' / '+d.total],['누적 정답률',d.accuracy===null?'아직 기록 없음':d.accuracy+'%'],
-    ['복습할 표현',d.reviewNeeded+'개'],['익숙한 표현',d.familiar+'개']];
-  return heading('FIELD JOURNAL  /  PROGRESS','학습 기록','이 모험에서 읽고 답한 기록입니다. 실제 영어 실력을 평가하는 점수와는 다릅니다.')+
+  const voice=VoiceLearning.dashboard(p);
+  const cards=[['만난 표현',voice.encountered+' / '+voice.total],['수첩 누적 정답률',d.accuracy===null?'아직 기록 없음':d.accuracy+'%'],
+    ['복습할 표현',voice.reviewNeeded+'개'],['익숙한 수첩 표현',d.familiar+'개']];
+  return heading('FIELD JOURNAL  /  PROGRESS','나의 영어 성장 기록','이 모험에서 읽고 답한 기록입니다. 실제 영어 실력을 평가하는 점수와는 다릅니다.')+
     '<div class="metric-grid">'+cards.map(([label,value])=>'<div class="panel metric"><small>'+label+'</small><strong>'+value+'</strong></div>').join('')+'</div>'+
-    '<div class="trend panel"><div><b>최근 정답률 변화</b><small>최근 5회와 직전 5회 비교</small></div><strong>'+recent+'</strong></div>'+
+    voiceAnalytics()+'<div class="trend panel"><div><b>최근 정답률 변화</b><small>최근 5회와 직전 5회 비교</small></div><strong>'+recent+'</strong></div>'+
     '<div class="trend panel"><div><b>속삭이는 숲</b><small>챕터 진행</small></div><strong>'+d.completedStages+' / 3</strong></div>'+
     (p.chapterComplete?'<div class="trend panel"><div><b>목소리를 되찾은 마을</b><small>완료한 의뢰</small></div><strong>'+VillageData.quests.filter(q=>p.village.progress[q.stage].completed).length+' / 3</strong></div>':'')+
     '<h3 class="ledger-heading">모험 업적 <small>'+p.achievements.length+' / '+Engine.achievements.length+'</small></h3>'+
