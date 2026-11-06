@@ -8,7 +8,7 @@ function setup(storage) {
   const items = new Map();
   const localStorage = storage || {getItem:key => items.get(key) ?? null,
     setItem:(key, value) => items.set(key,value)};
-  const source = ['questions','village-data','engine','village-engine','audio'].map(name =>
+  const source = ['questions','village-data','voice-data','engine','village-engine','voice-learning','audio'].map(name =>
     fs.readFileSync(path.join(__dirname, '../src', name+'.js'),'utf8')).join('\n');
   const api = vm.runInNewContext(source+'\n;({Engine, AudioFX, Q, lessons})', {localStorage});
   return {...api, profile:api.Engine.fresh(), items};
@@ -178,7 +178,7 @@ test('Offline audio has a safe text fallback when voices and sound output are ab
   a.stop();
 });
 
-test('v1 progress migrates to a separate v3 checkpoint and never changes the legacy bytes', () => {
+test('v1 progress migrates to a separate v4 checkpoint and never changes the legacy bytes', () => {
   const {Engine:e,items} = setup();
   const legacy = {version:1, started:true, level:5, xp:78, gold:844, hp:36,
     completed:[1,2,3], unlocked:3, chapterComplete:true,
@@ -187,14 +187,14 @@ test('v1 progress migrates to a separate v3 checkpoint and never changes the leg
   const original = JSON.stringify(legacy);
   items.set(e.legacyKey, original);
   const profile = e.load();
-  assert.equal(profile.version,3);
+  assert.equal(profile.version,4);
   for (const [key, value] of Object.entries(legacy)) {
-    if (key === 'settings') assert.deepEqual(JSON.parse(JSON.stringify(profile.settings)),{...value,speechRate:'normal'});
+    if (key === 'settings') assert.deepEqual(JSON.parse(JSON.stringify(profile.settings)),{...value,speechRate:'normal',speechVolume:1});
     else if (key !== 'version') assert.deepEqual(JSON.parse(JSON.stringify(profile[key])), value);
   }
   assert.equal(profile.achievements.join(','),'firstVictory,forestClear');
   assert.equal(e.reviewList(profile)[0].due,true);
-  assert.equal(JSON.parse(items.get(e.saveKey)).version,3);
+  assert.equal(JSON.parse(items.get(e.saveKey)).version,4);
   profile.gold++;
   e.save(profile);
   assert.equal(e.load().gold,845);
@@ -202,7 +202,7 @@ test('v1 progress migrates to a separate v3 checkpoint and never changes the leg
   items.set(e.saveKey,'damaged');
   assert.equal(e.load().gold,844);
   assert.equal(items.get(e.legacyKey),original);
-  const future = JSON.stringify({version:4, gold:9999});
+  const future = JSON.stringify({version:5, gold:9999});
   items.set(e.saveKey,future);
   const fallback = e.load();
   assert.equal(e.save(fallback),false);
@@ -210,9 +210,8 @@ test('v1 progress migrates to a separate v3 checkpoint and never changes the leg
   assert.equal(items.get(e.legacyKey),original);
 });
 
-test('Bookmarks and missed questions support one answer per review with offline 1/3/7-day scheduling', () => {
+test('Bookmarks and missed questions support one answer per review with offline 1/3/7/14-day scheduling', () => {
   const {Engine:e,profile:p,Q} = setup();
-  const day = 86400000;
   const start = Date.UTC(2026,10,6,13,30);
   const q = Q.find(item => item.id === 'o0');
   e.record(p,q,false);
@@ -226,12 +225,14 @@ test('Bookmarks and missed questions support one answer per review with offline 
   assert.equal(e.answerReview(p,stale,q.answer,start),null);
   assert.equal(e.answerReview(p,current,'I',start),null);
   let now = start;
-  for (const [index, days] of [1,3,7,7].entries()) {
+  for (const [index, days] of [1,3,7,14].entries()) {
     const session = index === 0 ? current : e.startReview(p,q.id);
     const result = e.answerReview(p,session,q.choices.join(' '),now);
     assert.equal(result.correct,true);
     assert.equal(e.answerReview(p,session,q.answer,now),null);
-    assert.equal(result.dueAt,now+days*day);
+    const expected=new Date(now);
+    expected.setDate(expected.getDate()+days); expected.setHours(0,0,0,0);
+    assert.equal(result.dueAt,expected.getTime());
     assert.equal(e.reviewList(p,result.dueAt-1)[0].due,false);
     assert.equal(e.reviewList(p,result.dueAt)[0].due,true);
     now = result.dueAt;

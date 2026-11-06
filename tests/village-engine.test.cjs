@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 
-const source = ['questions','village-data','engine','village-engine']
+const source = ['questions','village-data','voice-data','engine','village-engine','voice-learning']
   .map(file => fs.readFileSync(path.join(__dirname,'../src',file+'.js'),'utf8')).join('\n');
 function setup() {
   const storage = new Map();
@@ -251,10 +251,10 @@ test('Actual v2 shape migrates ahead of v1, missing/invalid v3 fields are repair
   storage.set(e.legacyKey,JSON.stringify({version:1,gold:3}));
   storage.set(e.v2Key,bytes);
   const migrated=e.load();
-  assert.equal(migrated.version,3);
+  assert.equal(migrated.version,4);
   for (const [key,value] of Object.entries(legacy)) {
     if (key==='version') continue;
-    const expected=key==='settings' ? {...value,speechRate:'normal'} : value;
+    const expected=key==='settings' ? {...value,speechRate:'normal',speechVolume:1} : value;
     assert.deepEqual(JSON.parse(JSON.stringify(migrated[key])),expected);
   }
   assert.equal(migrated.currentChapter,1);

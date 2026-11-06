@@ -23,7 +23,7 @@ function villageNav(){
   return '<nav class="village-nav" aria-label="마을 수첩">'+
     button('quests',icon('book')+' 의뢰 일지')+button('inventory',icon('shield')+' 소지품')+
     button('book',icon('leaf')+' 단어 도감')+button('review','표현 복습')+
-    button('dashboard','학습 기록')+button('chapters','장 선택')+'</nav>';
+    button('voice-hall',icon('mic')+' 메아리의 전당',{cl:'hall-link'})+button('today','오늘의 복습')+button('dashboard','학습 기록')+button('chapters','장 선택')+'</nav>';
 }
 function chaptersView(){
   const p=game.profile;
@@ -76,6 +76,7 @@ function locationView(){
     controls.push(button('talk',place.npc+'와 '+(state==='active'?'대화하기':'대화 연습'),{id:q.stage,cl:state==='active'?'primary':''}));
     if(state==='ready'||state==='complete')controls.push(button('village-fight',villageEnemies[q.stage-4]+(state==='complete'?' · 재도전':'에게 도전'),{id:q.stage,cl:'primary'}));
   }
+  if(state!=='available')controls.push(button('voice-mission',icon('chat')+' '+place.npc+'의 회화 미션',{id:'vc-'+q.npc}));
   const next=currentQuest();
   if(state==='complete'&&next)controls.push(button('destination','다음 의뢰 · '+villagePlaces[next.location].direction,{id:next.location}));
   if(q.location==='market')controls.push(button('shop',icon('crystal')+' 물품 상점'));

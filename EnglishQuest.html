@@ -593,7 +593,221 @@ dialog::backdrop {background:#031318bd;backdrop-filter:blur(3px);}
  .quest-lexicon>div{align-items:start;}
 }
 @media(prefers-reduced-motion:reduce){.village-hub,.location-panels,.reply-panel{animation:none;}}
-</style></head><body><main id="app"></main><dialog id="pause"></dialog><noscript>게임을 실행하려면 자바스크립트를 켜 주세요.</noscript><script>
+
+/* These rings show a state and a spell. They never represent microphone amplitude. */
+.voice-medallion { position: relative; isolation: isolate; }
+.voice-medallion::after {
+  content: ''; position: absolute; pointer-events: none; inset: 3%;
+  border: 1px solid #d2bc7f66; border-radius: 48% 48% 43% 43%;
+}
+.voice-speaker:has(.voice-script) .voice-medallion > svg { transform-origin: 50% 85%; }
+.voice-trial:has(.voice-response) .voice-medallion > svg { animation: mentor-nod .52s ease-out; }
+/* A warm reply uses the portrait's existing linework, with softened brows and a smile. */
+.voice-trial:has(.voice-response) .expression-clara > path {
+  d: path('M57 63q5 -4 12 -2 M86 57q7 -5 15 -1 M61 70q3 -3 6 -1 M89 65q3 -3 6 -1 M77 66l-2 10 5 2 M71 83q10 12 20 -3');
+}
+.voice-trial:has(.voice-response) .expression-thomas > path {
+  d: path('M54 59q7 -6 17 -3 M88 55q7 -5 16 -1 M58 68q6 -5 11 -2 M90 64q5 -4 10 -1 M79 61l-3 11 7 2 M70 94q12 14 24 -4');
+}
+.voice-trial:has(.voice-response) .expression-elena > path {
+  d: path('M59 63q6 -4 12 -1 M88 59q6 -3 12 1 M63 70l6 -1 M90 67l7 -1 M80 66l-2 10 5 1 M73 84q8 8 16 -3');
+}
+.voice-trial:has(.voice-response) .expression-rowan > path {
+  d: path('M55 54q5 -5 13 -1 M80 53q8 -6 14 -1 M58 61q4 -4 7 0 M81 61q5 -4 9 -1 M74 60l-3 10 5 1 M65 82q10 11 19 -1 M49 87q4 14 13 20 M86 92l-10 20');
+}
+.mic-panel[data-mic-state="listening"] .mic-state i {
+  box-shadow: 0 0 0 3px #77c4ac36; animation: state-ring 2.2s ease-out infinite;
+}
+.mic-panel[data-mic-state="processing"] .mic-state i { box-shadow: 0 0 0 2px #d2b67555; }
+.listen-sigil { position: relative; isolation: isolate; }
+.listen-sigil::before,.listen-sigil::after {
+  content: ''; position: absolute; left: 50%; top: 50%; width: 1.6em; height: 1.6em;
+  border: 1px solid #b8cfb977; border-radius: 50%; transform: translate(-50%,-50%); pointer-events: none;
+}
+.listen-sigil::after { width: 2.05em; height: 2.05em; border-color: #d8c18355; }
+.arena:is([data-fx="voice"],[data-fx="burst"]) .hero-torso { animation: invocation .84s ease-out both; }
+.arena:is([data-fx="voice"],[data-fx="burst"]) .spell-arm { animation: cast-arm .82s ease-in-out both; }
+.arena:is([data-fx="voice"],[data-fx="burst"]) .sword-arm { animation: lower-blade .82s ease-in-out both; }
+.arena[data-fx="voice"] .fx::before {
+  content: '·   A   ·   E   ·'; position: absolute; left: 22%; bottom: 34%;
+  color: #e2fbe6; font: italic 700 clamp(.82rem,1.6vw,1.35rem) Georgia,serif; letter-spacing: .25em;
+  text-shadow: 0 0 8px #8eecdd,0 0 15px #689d9d;
+  animation: spoken-runes .66s ease-in-out both;
+}
+.arena[data-fx="voice"] .fx::after {
+  content: ''; position: absolute; top: 46%; left: 25%; width: 9%; height: 23%;
+  border: 3px double #c6f7df; border-left-color: transparent; border-radius: 50%;
+  filter: drop-shadow(0 0 7px #92d9d0); animation: voice-surge .58s ease-in both;
+}
+.arena[data-fx="echo"] .hero-torso { animation: none; transform: rotate(-7deg) translateY(3px); }
+.arena[data-fx="echo"] .spell-arm { transform: rotate(-51deg); }
+.arena[data-fx="echo"] .fx::before,.arena[data-fx="echo"] .fx::after {
+  content: ''; position: absolute; bottom: 9%; left: 12%; width: 20%; height: 49%;
+  border: 2px solid #a5dbd4; border-radius: 55% 55% 46% 46% / 65% 65% 39% 39%;
+  box-shadow: inset 0 0 13px #a3cfda55,0 0 7px #96d5cc70; animation: echo-vault .64s ease-out both;
+}
+.arena[data-fx="echo"] .fx::after { left: 13%; width: 18%; height: 46%; border: 1px dashed #f2d89b; animation-delay: .07s; }
+.arena[data-fx="burst"] .fx::before {
+  content: ''; position: absolute; width: 42%; height: 3px; top: 58%; left: 29%;
+  transform-origin: left center; background: linear-gradient(90deg,transparent,#e4c4ea 36%,#f1dd97);
+  box-shadow: 0 0 9px #d9b7f1; animation: dialogue-thread .57s ease-out both;
+}
+.arena[data-fx="burst"] .fx::after {
+  content: ''; position: absolute; top: 40%; right: 12%; width: 23%; aspect-ratio: 1.3;
+  border: 4px dotted #f0d39c; border-radius: 50%; box-shadow: inset 0 0 14px #bd9de7,0 0 14px #c8a4e2;
+  animation: dialogue-flower .4s .46s ease-out both;
+}
+.arena[data-fx="voice"] :is(.gel-body,.village-foe-art),.arena[data-fx="burst"] :is(.gel-body,.village-foe-art) {
+  animation: village-hit .34s .48s ease-out both;
+}
+@keyframes mentor-nod { 42% { transform: rotate(-2deg) translateY(1px); } }
+@keyframes state-ring { from { box-shadow: 0 0 0 2px #77c4ac5a; } to { box-shadow: 0 0 0 6px #77c4ac00; } }
+@keyframes spoken-runes { from { opacity: 0; transform: translate(-5px,11px); } 34% { opacity: 1; } to { opacity: 0; transform: translate(10px,-16px); } }
+@keyframes voice-surge { 0% { opacity: 0; transform: scale(.35); } 34% { opacity: .9; } 86% { opacity: 1; } to { left: 71%; opacity: 0; transform: scale(1.3); } }
+@keyframes echo-vault { from { opacity: 0; transform: scale(.66); } 62% { opacity: 1; } to { opacity: .85; } }
+@keyframes dialogue-thread { 0%,18% { opacity: 0; transform: scaleX(0); } 75% { opacity: .95; } to { transform: scaleX(1); opacity: 0; } }
+@keyframes dialogue-flower { from { transform: scale(.22) rotate(-12deg); opacity: 0; } 30% { opacity: .95; } to { transform: scale(1.18) rotate(18deg); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .mic-panel .mic-state i,.voice-medallion > svg,.arena:is([data-fx="voice"],[data-fx="echo"],[data-fx="burst"]) :is(.hero-torso,.sword-arm,.spell-arm,.slime-art,.village-foe-art),
+  .arena:is([data-fx="voice"],[data-fx="echo"],[data-fx="burst"]) .fx::before,
+  .arena:is([data-fx="voice"],[data-fx="echo"],[data-fx="burst"]) .fx::after { animation: none !important; }
+}
+
+/* Copper, teal glass and a parchment reading surface distinguish the echo hall. */
+.hall-banner,.voice-trial,.voice-stats,.daily-summary {border-color:#baaa805c;}
+.hall-banner {position:relative;isolation:isolate;overflow:hidden;min-height:228px;display:flex;align-items:center;background:#233d3b;}
+.hall-landscape,.hall-light {position:absolute;inset:0;z-index:-1;pointer-events:none;}
+.hall-landscape svg.title-art {width:100%;height:100%;position:absolute;inset:0;opacity:.76;}
+.hall-light {background:linear-gradient(90deg,#112d30f5,#1a3939bd 48%,#2d5e5940);}
+.hall-welcome {position:relative;max-width:76%;padding:clamp(20px,3.6vw,46px);}
+.voice-script {font:italic 1.05rem Georgia,serif;color:#e0c493;}
+.hall-welcome h2 {font:700 clamp(2rem,3.7vw,3.45rem) var(--serif);color:#f9eac7;letter-spacing:-.06em;margin:6px 0 12px;}
+.hall-welcome p {color:#dae7df;line-height:1.6;margin:0;}
+.hall-welcome .btn {background:#173934e6;}
+.hall-rowan {position:absolute;right:5%;bottom:-4%;height:99%;width:24%;display:grid;align-items:end;pointer-events:none;filter:drop-shadow(0 6px 16px #102121aa);}
+.hall-rowan>svg {width:100%;height:100%;}
+.hall-tabs {display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid #a39770;margin:20px 0 0;}
+.btn.hall-tab {border:0;border-bottom:3px solid transparent;border-radius:3px 3px 0 0;background:transparent;min-height:46px;color:#c4d7ce;}
+.hall-tab[aria-pressed=true] {border-color:#e6c88c;color:#fff1cb;background:#365044;}
+.hall-section {display:flex;justify-content:space-between;align-items:center;gap:12px;margin:15px 0 10px;}
+.hall-section h3 {font:700 1.35rem var(--serif);margin:0;}
+.btn.study-link {min-height:44px;padding:6px 10px;border:0;color:#e9cd8d;background:transparent;}
+.hall-catalog {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+.btn.hall-entry,.btn.daily-row {display:flex;align-items:center;gap:14px;width:100%;text-align:left;min-height:80px;background:linear-gradient(112deg,#28453f,#1c3432);border:1px solid #a99c6e74;}
+.hall-entry>.ui-icon,.daily-row>.ui-icon {margin-left:auto;width:16px;}
+.entry-copy {flex:1;min-width:0;}
+.entry-copy>* {display:block;}
+.entry-copy strong {font:600 1.14rem var(--serif);color:#fff2d7;line-height:1.45;}
+.entry-copy>span,.entry-copy small,.daily-row small {color:#c8d7cd;font-size:.85rem;}
+.entry-stone {display:grid;place-items:center;flex:none;width:39px;height:46px;border:1px solid #a7bf9b80;border-radius:45% 45% 40% 40%;background:radial-gradient(at 30% 25%,#6e978382,#324f47);color:#f4d8a3;}
+.entry-portrait {flex:none;width:50px;height:63px;}
+.entry-portrait svg {width:100%;height:100%;display:block;}
+.voice-trial {max-width:980px;margin:clamp(10px,3vh,28px) auto;padding:clamp(15px,2.8vw,34px);background:linear-gradient(145deg,#29453e,#192f32 70%);border-top:3px solid #cdb47c;box-shadow:0 12px 34px #06151a52;}
+.voice-trial-head,.voice-speaker,.mic-controls,.voice-playback,.typed-answer>div,.voice-end,.resonance-skills,.daily-summary,.analytics-row,.hint-actions {display:flex;align-items:center;gap:12px;}
+.voice-trial-head {justify-content:space-between;border-bottom:1px solid #a8a58265;padding-bottom:12px;margin-bottom:18px;}
+.voice-trial-head h2 {font:700 clamp(1.4rem,2.4vw,2rem) var(--serif);margin:3px 0 0;color:#ffecca;}
+.voice-trial-head>span,.npc-signature>span {font-size:.82rem;color:#bcd2c4;}
+.voice-speaker {position:relative;gap:clamp(12px,2.8vw,32px);align-items:center;background:linear-gradient(110deg,#25423d,#354b3e);padding:14px;border:1px solid #aaa77a63;border-radius:6px;}
+.voice-medallion {flex:0 0 clamp(78px,12vw,150px);align-self:center;aspect-ratio:3/4;display:grid;align-items:end;}
+.voice-medallion svg {width:100%;height:100%;display:block;}
+.voice-prompt {flex:1;min-width:0;padding:clamp(14px,2vw,24px);background:linear-gradient(120deg,#f8efd8,#e8dcc0);color:#263d35;border:1px solid #c8b88e;border-radius:4px 10px 10px 10px;}
+.npc-signature {font-size:.87rem;color:#3d5949;font-weight:700;}
+.npc-signature>span {color:#596a59;}
+.voice-prompt .voice-script {color:#715832;margin-top:10px;font-size:.85rem;}
+.voice-prompt h3 {font:600 clamp(1.3rem,2.65vw,2.05rem)/1.26 var(--serif);margin:6px 0 8px;color:#233d31;overflow-wrap:anywhere;}
+.voice-prompt p {line-height:1.65;color:#394c40;margin:7px 0;}
+.voice-playback,.hint-actions {flex-wrap:wrap;gap:6px;margin-top:12px;}
+.voice-playback .btn,.hint-actions .btn {font-size:.88rem;color:#314839;background:#f6eed9;border-color:#97a38d;min-height:42px;padding:6px 11px;}
+.hint-actions .btn {background:transparent;}
+.voice-playback small {color:#526451;font-size:.8rem;}
+.voice-playback .btn.speaking {background:#345747;color:#fff3c8!important;border-color:#546a46;box-shadow:0 0 0 2px #799270;}
+.speech-mixer {margin:7px 0;color:#405945;font-size:.84rem;}
+.speech-mixer summary {cursor:pointer;min-height:36px;align-content:center;}
+.speech-mixer label {display:flex;align-items:center;gap:12px;}
+.speech-mixer input {accent-color:#406951;min-height:32px;max-width:65%;}
+.listen-sigil {color:#496f5d;margin:7px 0;}
+.listen-sigil .ui-icon {width:25px;height:25px;}
+.voice-prompt .assist-notice {font-weight:600;font-size:.84rem;}
+.audio-clue {border-left:2px solid #9da181;padding-left:9px;font-size:.95rem;}
+.voice-input {padding-top:16px;}
+.voice-input>h3 {font-size:1.04rem;margin:4px 0 12px;}
+.trial-instruction,.voice-input small,.talk-history,.adaptive-hint {color:#cddecf;line-height:1.65;}
+.key-expressions {border-left:2px solid #c5ac6c;padding-left:10px;color:#f5dfb0;}
+.voice-choices {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:14px;}
+.voice-choices .choice {display:flex;align-items:center;}
+.mic-panel {margin:12px 0;padding:15px 18px;background:linear-gradient(105deg,#173431,#24423e);border:1px solid #9eae8a77;border-radius:6px;}
+.mic-controls {flex-wrap:wrap;margin-bottom:9px;}
+.btn.mic-start,.btn.mic-stop {display:inline-flex;gap:8px;align-items:center;min-height:48px;background:linear-gradient(130deg,#d9cb93,#ead19d);border-color:#f8e3aa;color:#24392f;font-weight:700;}
+.btn.mic-stop {background:#415855;color:white;}
+.mic-state {display:inline-flex;align-items:center;gap:7px;color:#dbebdf;font-size:.88rem;}
+.mic-state i {width:9px;height:9px;border:1px solid #9eb8a1;border-radius:50%;background:#506458;}
+[data-mic-state=listening] .mic-state i {background:#bde2bc;animation:mic-lantern 1.7s ease-out infinite;}
+@keyframes mic-lantern {50%{box-shadow:0 0 0 4px #b3d7ad3a;}}
+.mic-panel>small {display:block;max-width:76ch;font-size:.83rem;}
+.heard-text {border-left:2px solid #e7c887;background:#192f2d;padding:9px 12px;margin:13px 0;overflow-wrap:anywhere;}
+.heard-text small,.heard-text span {display:block;}
+.mic-note,.voice-response strong {color:#f5d68c;}
+.typed-answer label {display:block;font-weight:650;margin-bottom:6px;}
+.typed-answer>div {align-items:stretch;gap:6px;}
+.typed-answer input {min-width:0;flex:1;min-height:46px;padding:9px 12px;font:1.05rem system-ui;background:#fbf1da;color:#193529;border:1px solid #d7c28d;border-radius:4px;}
+.typed-answer>small {display:block;margin-top:5px;}
+.voice-response {border-left:3px solid #c9b67a;padding:3px 14px;margin-bottom:14px;}
+.voice-response p {line-height:1.6;margin:6px 0;}
+.mission-seal {color:#f2d79f;}
+.voice-end {margin-top:12px;}
+.talk-history,.voice-stats details {margin:14px 0;padding:8px 12px;border-block:1px solid #94a3884d;}
+.talk-history summary,.voice-stats summary {cursor:pointer;min-height:38px;align-content:center;}
+.talk-history p {margin:4px 0;}
+.voice-trial.in-battle {margin:0;padding:0;background:transparent;border:0;box-shadow:none;}
+.in-battle .voice-medallion {flex-basis:70px;}
+.in-battle .voice-prompt {padding:12px;}
+.in-battle .voice-trial-head {margin-bottom:10px;}
+.in-battle .voice-prompt h3 {font-size:1.35rem;}
+.in-battle .voice-speaker {padding:8px 12px;}
+.resonance-skills {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px;}
+.btn.rune-skill {display:flex;align-items:center;gap:10px;justify-content:flex-start;text-align:left;min-height:50px;padding:8px 12px;background:linear-gradient(115deg,#284946,#203836);border-color:#8fad976f;}
+.rune-skill .ui-icon {color:#c5dfc6;}
+.rune-skill strong,.rune-skill small {display:block;}
+.rune-skill small {font-size:.76rem;color:#cdd9ce;margin-top:3px;}
+.daily-summary {justify-content:space-around;flex-wrap:wrap;padding:17px;margin:15px 0;background:#24403a;}
+.daily-summary b {color:var(--gold);margin-left:.5em;}
+.daily-list {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+.daily-row small,.daily-row strong {display:block;}
+.voice-stats {padding:clamp(14px,2.5vw,28px);margin:14px 0;}
+.voice-stats h3 {margin:0 0 6px;}
+.voice-stats p,.voice-stats small {color:#c1d4c8;}
+.analytics-row {padding:10px 0;border-top:1px solid #8ea58a45;gap:12px;}
+.analytics-row>div:first-child {flex:1;}
+.analytics-row b,.analytics-row small {display:block;}
+.learning-bar {width:23%;height:8px;border-radius:8px;background:#0b2224;overflow:hidden;}
+.learning-bar i {display:block;height:100%;background:linear-gradient(90deg,#679c88,#c3cc93);}
+.analytics-row>strong {width:3.5em;text-align:right;color:#ead49e;}
+.voice-stats details ul {padding-left:18px;line-height:1.8;}
+.adaptive-hint {padding:10px 14px;border-left:2px solid #d5be81;margin-top:14px;}
+@media(max-width:700px){
+ .hall-welcome{padding:19px;max-width:81%;}
+ .hall-rowan{right:-2%;width:23%;height:75%;opacity:.86;}
+ .hall-banner{min-height:180px;}
+ .hall-catalog,.daily-list{grid-template-columns:1fr;}
+ .hall-tabs{gap:0;}
+ .btn.hall-tab{flex:1 1 40%;padding:8px;}
+ .voice-speaker{gap:8px;padding:8px;}
+ .voice-medallion{flex-basis:64px;}
+ .voice-trial-head{margin-bottom:10px;}
+ .voice-prompt{padding:11px;}
+ .voice-choices{grid-template-columns:1fr;}
+ .mic-panel{padding:12px;}
+ .resonance-skills{grid-template-columns:repeat(2,minmax(0,1fr));}
+ .resonance-skills>.btn:last-child{grid-column:1/-1;}
+ .in-battle .voice-medallion{flex-basis:42px;}
+ .voice-playback{gap:4px;}
+ .voice-playback .btn,.hint-actions .btn{min-height:44px;}
+ .analytics-row{gap:5px;}
+ .learning-bar{width:15%;}
+}
+@media(max-width:400px){.voice-trial{padding:12px;}.voice-prompt h3{font-size:1.2rem;}.voice-medallion{flex-basis:48px;}.typed-answer>div{flex-wrap:wrap;}.typed-answer input{flex-basis:100%;}}
+@media(prefers-reduced-motion:reduce){.mic-state i{animation:none!important;}}
+</style></head><body><main id="app"></main><div id="voice-live" class="sr-only" role="status" aria-live="polite"></div><dialog id="pause"></dialog><noscript>게임을 실행하려면 자바스크립트를 켜 주세요.</noscript><script>
 'use strict';
 // Chapter 1 content. Each entry is also a teachable vocabulary-book card.
 const lessons = [
@@ -804,14 +1018,459 @@ const VillageData = (() => {
 })();
 
 ;
+// Authored exercises for the Hall of Voices. Korean answers and English replies are intentional.
+const VoiceData = (function voiceCollection() {
+  const activities = [];
+  const missions = [];
+  const spoken = [
+    ['greet','rowan',1,'친구를 반갑게 맞이하기','Hello, my friend.','안녕, 친구야.',['Hi, my friend.'],'friend는 친구예요. 가까운 사이에서는 Hello나 Hi로 인사할 수 있어요.','greeting','Hello, Rowan.'],
+    ['seat','thomas',2,'빈자리인지 물어보기','Is this seat taken?','이 자리에 누가 앉나요?',[],'seat는 자리예요. Is this seat taken?은 앉기 전에 이미 쓰는 자리인지 물을 때 써요.','seat','No, you can sit here.'],
+    ['price','clara',1,'물건 하나의 가격 묻기','How much is this?','이것은 얼마인가요?',[],'How much로 가격을 물어요. this는 가리키는 물건 하나예요.','price','It is five gold.'],
+    ['water','thomas',1,'물을 공손하게 요청하기','I would like some water, please.','물 좀 부탁합니다.',["I'd like some water, please.","Some water, please."],'I would like은 공손한 요청이에요. 줄여서 I’d like이라고 해도 좋아요.','ordering','Here is your water.'],
+    ['locate','elena',2,'마을 문 위치 묻기','Where is the village gate?','마을 문은 어디인가요?',["Where's the village gate?"],'Where is 뒤에 찾는 장소를 붙이면 위치를 물을 수 있어요.','directions','The gate is near the inn.'],
+    ['repeat','rowan',2,'못 들은 말을 다시 부탁하기','Could you say that again?','다시 한 번 말씀해 주시겠어요?',['Could you repeat that?'],'again은 다시라는 뜻이에요. Could you로 정중하게 부탁해요.','repeat','Of course. Go straight.'],
+    ['pay','clara',3,'카드로 결제할 수 있는지 묻기','Can I pay by card?','카드로 결제해도 되나요?',['Can I pay with a card?'],'pay by card는 카드로 결제하다예요. Can I로 가능한지 물어보세요.','payment','Yes, you can pay by card.'],
+    ['thanks','elena',2,'도움을 받은 뒤 감사 인사하기','Thank you for your help.','도와주셔서 감사합니다.',['Thanks for your help.'],'Thank you for 다음에 감사한 이유를 말할 수 있어요.','thanks',"You're welcome."]
+  ];
+  for (const [key,npc,difficulty,objective,english,ko,alternatives,explanation,tag,example] of spoken) {
+    activities.push({id:'vs-'+key,kind:'speak',mode:'repeat',npc,difficulty,objective,english,ko,
+      answer:english,alternatives,choices:[],explanation,tags:[tag],example,requiredInput:'repeat-or-type',
+      fallback:'한국어 뜻을 보고 영어로 입력하세요. 도움이 필요하면 예문을 다시 확인하세요.'});
+  }
+  const listening = [
+    ['inn','elena','meaning',1,'장소를 묻는 말 알아듣기','Where is the inn?','여관은 어디인가요?','여관은 어디인가요?',['여관은 언제 여나요?','이건 얼마인가요?'],'Where는 어디를 물어요. inn은 여관이에요.','directions'],
+    ['change','clara','meaning',2,'거스름돈을 줄 때 하는 말 알아듣기',"Here's your change.",'여기 거스름돈입니다.','여기 거스름돈입니다.',['계산은 어디서 하나요?','이것은 제 가방이에요.'],'계산을 마친 상황에서 change는 거스름돈을 뜻해요.','payment'],
+    ['across','elena','meaning',3,'길 건너편이라는 뜻 알아듣기',"It's across the street.",'그곳은 길 건너편에 있어요.','그곳은 길 건너편에 있어요.',['그곳은 길 끝에 있어요.','그곳은 문 바로 옆에 있어요.'],'across the street는 길을 건넌 맞은편을 말해요.','directions'],
+    ['morning','rowan','identify',1,'들린 아침 인사를 영어로 찾기','Good morning.','좋은 아침이에요.','Good morning.',['Good evening.','Good night.'],'morning은 아침이에요. 아침에 만난 사람에게 건네는 인사예요.','greeting'],
+    ['right','elena','identify',1,'들린 방향 지시를 영어로 찾기','Turn right.','오른쪽으로 도세요.','Turn right.',['Turn left.','Go straight.'],'right는 오른쪽, left는 왼쪽이에요.','directions'],
+    ['bag','clara','identify',2,'봉투가 필요한지 묻는 표현 찾기','Do you need a bag?','봉투가 필요하세요?','Do you need a bag?',['Do you have a card?','Do you want a receipt?'],'need는 필요하다는 뜻이에요. a bag은 봉투 하나예요.','shopping'],
+    ['drink','thomas','respond',1,'음료 질문을 듣고 물 주문하기','What would you like to drink?','무엇을 마시고 싶으세요?', "I'd like some water.",["I'd like some bread.","The gate is near the inn."],'drink를 물었으니 원하는 음료를 말해요.','ordering'],
+    ['company','rowan','respond',2,'자리를 권할 때 기꺼이 수락하기','Would you like to sit here?','여기 앉으시겠어요?','Yes, thank you.',['No, thank you.','It is my book.'],'앉겠다는 뜻을 전할 때는 Yes, thank you.가 자연스러워요.','seat']
+  ];
+  for (const [key,npc,mode,difficulty,objective,english,ko,answer,others,explanation,tag] of listening) {
+    const fallback = mode==='identify'
+      ? '한국어 뜻을 읽고 이에 맞는 영어 표현을 고르세요.'
+      : mode==='meaning' ? '영어 문장을 읽고 뜻을 고르세요.' : '영어 질문을 읽고 상황에 맞는 대답을 고르세요.';
+    activities.push({id:'vl-'+key,kind:'listen',mode,npc,difficulty,objective,english,ko,answer,
+      alternatives:[],choices:[answer,...others],explanation,tags:[tag],requiredInput:'listen-or-read-and-choose',fallback});
+  }
+  function mission(id,npc,name,location,objective,kind) {
+    const value={id,npc,name,location,objective,kind,ids:[]};
+    missions.push(value);
+    return value;
+  }
+  // Each branch includes the character's actual response and specific guidance for that choice.
+  function turn(m,difficulty,objective,english,ko,tag,branches,explanation,options={}) {
+    const step=m.ids.length;
+    const id=m.id+'-'+(step+1);
+    const answer=branches[0][0];
+    const replies=Object.fromEntries(branches.map(([choice,says,translation,why])=>[choice,{english:says,ko:translation,why:why||explanation}]));
+    activities.push({id,kind:m.kind,mode:options.mode||'respond',missionId:m.id,step,npc:m.npc,
+      objective,difficulty,english,ko,answer,alternatives:options.alternatives||[],
+      choices:branches.map(row=>row[0]),explanation,replies,tags:[tag],
+      requiredInput:options.mode==='route'?'choose-route':options.mode==='meaning'?'listen-or-read-and-choose':'choose-or-say-response',
+      fallback:options.mode==='route'?'길 안내 문장을 읽고 알맞은 경로를 선택하세요.':options.mode==='meaning'?'안내 문장을 읽고 먼저 할 행동을 고르세요.':'대화와 상황을 읽고 영어 대답을 선택하세요.'});
+    m.ids.push(id);
+  }
+  const rowan=mission('vc-rowan','rowan','로완과의 첫 만남','숲길 쉼터','가상의 여행자 Alex가 되어 이름과 인사를 주고받으세요.','conversation');
+  turn(rowan,1,'여행자 이름 Alex로 자신을 소개하기','Hello! What is your name?','안녕하세요! 이름이 무엇인가요?','introduction',[
+    ['My name is Alex.','Nice to meet you, Alex.','만나서 반가워요, 알렉스.'],
+    ['I am at the inn.','I see. And your name?','그렇군요. 이름은요?','at the inn은 있는 장소예요. 이름을 소개해 보세요.'],
+    ['Good night.','Leaving already? I was asking your name.','벌써 가나요? 이름을 물었어요.','Good night은 밤에 헤어지거나 잠들기 전 하는 인사예요.']
+  ],'My name is 뒤에 이름을 붙여요. 여기서는 가상의 이름 Alex를 써요.',{alternatives:["I'm Alex.","I am Alex."]});
+  turn(rowan,1,'만나서 반갑다는 인사에 화답하기','Nice to meet you, Alex.','만나서 반가워요, 알렉스.','greeting',[
+    ['Nice to meet you, too.','Welcome to our village.','우리 마을에 온 걸 환영해요.'],
+    ['How much is this?','Are you looking for the market?','시장을 찾고 있나요?','그 표현은 가격을 묻는 말이에요. 지금은 첫인사에 답하세요.'],
+    ['No, thank you.','Oh, I was just saying hello.','아, 그냥 인사를 건넨 거예요.','제안을 거절하는 말이에요. 여기서는 반가움을 전해요.']
+  ],'too를 덧붙여 나도 반갑다는 마음을 전해요.');
+  turn(rowan,1,'마을에 처음 왔다고 답하기','Is this your first visit?','이곳에 처음 오셨나요?','introduction',[
+    ["Yes, it's my first visit.","Then let me show you around.",'그럼 제가 안내해 드릴게요.'],
+    ["No, I've been here before.",'Oh, you know this place already.','아, 이미 아는 곳이군요.','자연스러운 답이지만 전에 와 봤다는 뜻이에요. 오늘은 첫 방문이에요.'],
+    ['My name is Alex.','Yes, Alex. Have you visited us before?','네, 알렉스. 전에 우리 마을에 온 적이 있나요?','이름은 이미 소개했어요. 첫 방문인지 답하세요.']
+  ],'first visit은 첫 방문이에요.',{alternatives:['Yes, this is my first visit.']});
+  const clara=mission('vc-clara','clara','클라라의 빵 가게','상인의 시장','빵을 부탁하고 가격을 물은 뒤 물건을 받으세요.','conversation');
+  turn(clara,1,'빵을 사고 싶다고 말하기','Hello! Can I help you?','안녕하세요! 무엇을 도와드릴까요?','shopping',[
+    ["Yes, I'd like some bread.",'This loaf is fresh.','이 빵은 갓 구웠어요.'],
+    ["No, I'm just looking.",'Take your time.','천천히 둘러보세요.','구경만 한다는 뜻이에요. 이번에는 빵을 사겠다고 말해요.'],
+    ['Where is the gate?','The gate is up the road.','문은 이 길 위쪽에 있어요.','길을 묻는 표현이에요. 지금 필요한 물건은 빵이에요.']
+  ],'I’d like 다음에 원하는 물건을 붙여요.',{alternatives:['Yes, I would like some bread.']});
+  turn(clara,2,'가리킨 빵 한 덩이의 가격 묻기','This loaf is fresh.','이 빵은 갓 구웠어요.','price',[
+    ['How much is it?',"It's three gold.",'3골드예요.'],
+    ['Where is the inn?','Near the square. What about the bread?','광장 근처예요. 빵은 어떻게 할까요?','Where는 위치를 묻는 말이에요. 가격은 How much로 물어요.'],
+    ['What time is it?',"It's nearly noon.",'거의 정오예요.','시간을 물었어요. 빵 값을 물으려면 How much를 써요.']
+  ],'앞에서 말한 빵을 it으로 가리킬 수 있어요.',{alternatives:['How much is this?']});
+  turn(clara,1,'클라라가 건네는 빵을 받으며 감사하기','Here is your bread.','여기 주문한 빵이에요.','thanks',[
+    ['Thank you.','You’re welcome. Enjoy it!','천만에요. 맛있게 드세요!'],
+    ['I do not need any bread.','Would you like me to put it back?','도로 놓아 드릴까요?','빵이 필요 없다는 뜻이에요. 물건을 받을 때는 감사 인사를 건네요.'],
+    ['I am looking for the inn.','I can show you after this.','이 일이 끝나면 알려 드릴게요.','다른 화제로 넘어갔어요. 먼저 빵을 건넨 사람에게 감사해요.']
+  ],'물건을 받을 때 Thank you.로 고마움을 표현해요.',{alternatives:['Thanks.','Thank you very much.']});
+  const thomas=mission('vc-thomas','thomas','토머스의 저녁 식탁','등불 여관','수프와 물을 주문하고 식탁에서 요청하세요.','conversation');
+  turn(thomas,1,'저녁으로 수프 주문하기','What would you like to eat?','무엇을 드시겠어요?','ordering',[
+    ["I'd like some soup, please.",'A bowl of soup. Of course.','수프 한 그릇이요. 물론이죠.'],
+    ["I'd like some tea.",'Tea to drink. What would you like to eat?','마시는 차군요. 무엇을 드실 건가요?','eat는 먹는 것을 물어요. 이 식사에서는 수프를 주문해요.'],
+    ["I'm just looking.",'Take a look at the menu.','메뉴를 살펴보세요.','잠깐 둘러보겠다는 말이에요. 지금은 주문할 음식을 말해요.']
+  ],'some soup는 수프를 뜻해요. please를 붙이면 더 정중해요.',{alternatives:['I would like some soup, please.']});
+  turn(thomas,1,'물도 함께 부탁하기','Would you like anything to drink?','마실 것도 필요하세요?','ordering',[
+    ['Yes, some water, please.','I’ll bring your water.','물을 가져다드릴게요.'],
+    ['No, thank you.','All right, just the soup.','네, 수프만 드릴게요.','정중한 거절이에요. 이번에는 물을 달라고 해요.'],
+    ['A spoon, please.','A spoon, certainly. Anything to drink?','숟가락이요, 물론이죠. 마실 것은요?','식기와 음료는 달라요. water를 말해 보세요.']
+  ],'some water, please는 물을 부탁할 때 쓰는 짧은 표현이에요.');
+  turn(thomas,2,'수프를 먹을 숟가락 하나 부탁하기','Here is your soup. Do you need anything else?','여기 수프예요. 더 필요한 게 있나요?','request',[
+    ['Could I have a spoon, please?','Of course. Here is a spoon.','물론이죠. 여기 숟가락이에요.'],
+    ['Could I have the bill, please?','Are you ready to pay?','계산하시겠어요?','bill은 계산서예요. 아직 수프를 먹을 숟가락이 필요해요.'],
+    ['No, that is all.','Enjoy your meal.','맛있게 드세요.','더 필요한 게 없다는 뜻이에요. 이번에는 숟가락을 요청해요.']
+  ],'Could I have a spoon?은 숟가락을 정중히 부탁하는 말이에요.',{alternatives:['May I have a spoon, please?','A spoon, please.']});
+  const elena=mission('vc-elena','elena','엘레나의 이정표','북쪽 마을 문','찾는 장소를 말하고 방향을 확인하세요.','conversation');
+  turn(elena,2,'마을 문이 어디인지 정중하게 묻기','You look lost. Can I help?','길을 잃으신 것 같네요. 도와드릴까요?','directions',[
+    ['Yes. Where is the village gate?','Go straight and turn left.','곧장 가다가 왼쪽으로 도세요.'],
+    ['Yes. Where is the market?','The market is near the bridge.','시장은 다리 근처예요.','market은 시장이에요. 목적지는 village gate예요.'],
+    ['No, I know the way.','All right. Safe travels!','네. 조심히 가세요!','길을 안다고 했어요. 이번에는 안내를 부탁해요.']
+  ],'Where is 뒤에 가려는 장소를 붙여요.');
+  turn(elena,2,'안내받은 왼쪽 방향 다시 확인하기','Go straight and turn left.','곧장 가다가 왼쪽으로 도세요.','directions',[
+    ['Turn left?','That’s right. The gate is on your left.','맞아요. 문은 왼쪽에 있어요.'],
+    ['Turn right?','No, turn left.','아니요, 왼쪽으로 도세요.','right는 오른쪽이에요. 이번에는 left를 확인해요.'],
+    ['Go back?','No, keep going straight first.','아니요. 먼저 곧장 가세요.','Go back은 돌아가라는 말이에요. 안내받은 회전 방향을 확인해요.']
+  ],'상대가 말한 방향을 짧은 질문으로 되물을 수 있어요.');
+  turn(elena,1,'길을 알려 준 사람에게 감사하기','You’ll see the gate on your left.','왼쪽에 문이 보일 거예요.','thanks',[
+    ['Thank you for your help.','You’re welcome. Have a good trip!','천만에요. 좋은 여행 되세요!'],
+    ['Do you need help?','I’m all right, thanks.','저는 괜찮아요, 고마워요.','도움을 주겠다는 말이에요. 여기서는 안내받은 데 감사해요.'],
+    ['Nice to meet you.','It was nice meeting you as well.','저도 만나서 반가웠어요.','첫인사도 가능하지만, 길을 알려 준 데 대한 감사를 직접 전해요.']
+  ],'for your help로 어떤 도움에 고마운지 말할 수 있어요.',{alternatives:['Thanks for your help.']});
+  const cafe=mission('vp-cafe','thomas','카페에서 한 잔','등불 여관','아침에 따뜻한 차를 주문해 매장에서 마시세요.','scenario');
+  turn(cafe,1,'아침에 카페 직원에게 인사하기','Good morning! Welcome in.','좋은 아침이에요! 어서 오세요.','greeting',[
+    ['Good morning!','What can I get for you?','무엇을 드릴까요?'],
+    ['Good evening!','It’s still morning here.','여긴 아직 아침이에요.','evening은 저녁이에요. 시간에 맞는 인사를 골라요.'],
+    ['Good night!','Are you leaving already?','벌써 가시나요?','Good night은 보통 밤에 작별할 때 쓰는 말이에요.']
+  ],'아침에 만나면 Good morning!으로 인사해요.');
+  turn(cafe,1,'따뜻한 차 한 잔 주문하기','What can I get for you?','무엇을 드릴까요?','ordering',[
+    ['A hot tea, please.','One hot tea.','따뜻한 차 한 잔이요.'],
+    ['An iced tea, please.','An iced tea?','아이스티 한 잔이요?','iced는 차갑다는 뜻이에요. 오늘은 hot tea를 주문해요.'],
+    ['A coffee, please.','One coffee?','커피 한 잔이요?','coffee는 커피예요. 오늘 주문할 음료는 차예요.']
+  ],'A hot tea는 가게에서 따뜻한 차 한 잔을 주문하는 자연스러운 표현이에요.',{alternatives:["I'd like a hot tea, please."]});
+  turn(cafe,2,'차를 매장에서 마시겠다고 답하기','For here or to go?','매장에서 드시나요, 가져가시나요?','ordering',[
+    ['For here, please.','Take a seat. I’ll bring it over.','앉으세요. 가져다드릴게요.'],
+    ['To go, please.','I’ll put it in a takeaway cup.','포장 컵에 담아 드릴게요.','to go는 포장이라는 뜻이에요. 매장에서 마실 때는 for here예요.'],
+    ['Hot, please.','Of course. Will you stay here?','네. 여기서 드시나요?','온도는 이미 말했어요. 이번에는 마실 장소를 답해요.']
+  ],'For here는 매장에서, to go는 가지고 간다는 뜻이에요.');
+  turn(cafe,1,'차를 받은 뒤 감사하기','Here is your tea.','주문하신 차 나왔어요.','thanks',[
+    ['Thank you very much.','You’re welcome. Enjoy your tea.','천만에요. 차 맛있게 드세요.'],
+    ['I would like a menu.','I can bring a menu as well.','메뉴도 가져다드릴 수 있어요.','지금은 더 주문하는 상황이 아니에요. 받은 차에 대한 감사를 전해요.'],
+    ['No tea, please.','Would you like me to take it back?','다시 가져갈까요?','차를 원하지 않는다는 말이에요. 주문한 차를 받는 상황이에요.']
+  ],'음료를 받을 때 Thank you라고 말하면 충분해요.',{alternatives:['Thank you.','Thanks.']});
+  const route=mission('vp-route','elena','다리를 건너 시장으로','마을 광장','길을 물어 다리 건너편 시장까지 가세요.','scenario');
+  turn(route,2,'시장이 어디인지 물어보기','Can I help you find something?','찾는 곳이 있나요?','directions',[
+    ['Where is the market?','Cross the bridge and turn right.','다리를 건너 오른쪽으로 도세요.'],
+    ['Where is the inn?','The inn is beside the square.','여관은 광장 옆에 있어요.','inn은 여관이에요. 오늘 찾는 곳은 market이에요.'],
+    ['When does the market open?','It opens at nine.','아홉 시에 열어요.','When은 시간을 물어요. 위치를 알려면 Where를 써요.']
+  ],'Where is the market?은 시장이 어디인지 묻는 말이에요.');
+  turn(route,2,'길 안내에서 먼저 할 행동 알아듣기','First, cross the bridge. Then turn right.','먼저 다리를 건너세요. 그런 다음 오른쪽으로 도세요.','directions',[
+    ['먼저 다리를 건넌다.','Yes. Cross the bridge first.','맞아요. 먼저 다리를 건너요.'],
+    ['먼저 오른쪽으로 돈다.','Turn right after you cross.','건넌 다음에 오른쪽으로 도세요.','First는 먼저, then은 그다음이에요. 순서를 확인해요.'],
+    ['먼저 광장으로 되돌아간다.','Stay on the road to the bridge.','다리로 가는 길을 따라가세요.','돌아가라는 안내는 없어요. cross the bridge에 귀 기울여요.']
+  ],'cross the bridge는 다리를 건너라는 뜻이에요.',{mode:'meaning'});
+  turn(route,2,'다리를 건넌 뒤 이어지는 올바른 경로 선택하기','At the end of the bridge, turn right.','다리를 다 건너면 오른쪽으로 도세요.','directions',[
+    ['다리 끝 → 오른쪽 길','That’s the road to the market.','맞아요. 그 길이 시장으로 가는 길이에요.'],
+    ['다리 끝 → 왼쪽 길','The left road goes to the inn.','왼쪽 길은 여관으로 가요.','right는 오른쪽이에요. 시장은 다리 끝에서 오른쪽에 있어요.'],
+    ['다리 앞 → 왼쪽 길','Cross the bridge before you turn.','돌기 전에 다리를 건너세요.','at the end는 다리 끝이에요. 다리 앞에서 돌면 안 돼요.']
+  ],'다리를 건너 끝에서 오른쪽 길을 고르면 돼요.',{mode:'route'});
+  turn(route,2,'도착할 시장 위치를 확인하기','You’ll see the market just past the bridge, on the right.','다리를 지나면 바로 오른쪽에 시장이 보여요.','directions',[
+    ['Just past the bridge, on the right?','Exactly. You’ve found it!','정확해요. 잘 찾아왔어요!'],
+    ['Before the bridge, on the left?','Past the bridge, on the right.','다리를 지나서 오른쪽이에요.','before는 전, past는 지난 뒤예요. 두 장소를 구분해요.'],
+    ['Inside the inn?','No, the market is outside.','아니요, 시장은 밖에 있어요.','inside는 안쪽이에요. 안내받은 위치를 되짚어 보세요.']
+  ],'장소 정보를 짧게 되풀이하면 이해한 내용이 맞는지 확인할 수 있어요.');
+  const market=mission('vp-shop','clara','시장에서 지도 사기','상인의 시장','작은 지도의 가격을 확인하고 한 장을 구입하는 대화를 연습하세요.','scenario');
+  turn(market,2,'작은 지도 한 장의 가격 묻기','These small maps are for sale.','이 작은 지도들을 판매하고 있어요.','price',[
+    ['How much is a small map?','A small map is two gold.','작은 지도 한 장은 2골드예요.'],
+    ['Where is the map?','It’s right here on the table.','바로 여기 탁자 위에 있어요.','Where는 위치를 물어요. 가격을 묻는 How much를 써요.'],
+    ['Do you have bread?','Bread is at the next stall.','빵은 옆 가판대에 있어요.','지금 살 물건은 지도예요. 지도 한 장의 가격을 물어요.']
+  ],'How much is a small map?은 작은 지도 한 장의 가격을 묻는 말이에요.');
+  turn(market,1,'두 크기 중 작은 지도 선택하기','Would you like the small map or the large one?','작은 지도와 큰 지도 중 어느 것을 드릴까요?','shopping',[
+    ['The small map, please.','Here is the small map.','여기 작은 지도예요.'],
+    ['The large map, please.','Here is the large one.','여기 큰 지도예요.','large는 크다는 뜻이에요. 찾는 물건은 작은 지도예요.'],
+    ['Both, please.','One of each?','하나씩 다 드릴까요?','both는 둘 다예요. 한 장만 골라요.']
+  ],'small은 작은, large는 큰이라는 뜻이에요.');
+  turn(market,2,'보여 준 지도를 사겠다고 결정하기','This one is two gold. Would you like it?','이건 2골드예요. 이걸로 하시겠어요?','purchase',[
+    ["Yes, I'll take it.",'Great. Let me wrap it for you.','좋아요. 포장해 드릴게요.'],
+    ["No, I'll think about it.",'Of course. Take your time.','물론이죠. 천천히 생각하세요.','생각해 보겠다는 말이에요. 지금 구매를 결정해요.'],
+    ['Could I see a different one?','I can show you another map.','다른 지도도 보여드릴게요.','다른 물건을 보는 요청이에요. 이미 고른 지도를 사겠다고 말해요.']
+  ],'I’ll take it.은 가게에서 이걸 사겠다고 말할 때 쓰는 표현이에요.',{alternatives:['Yes, I will take it.']});
+  turn(market,1,'장을 마치고 정중히 작별하기','Here you are. Have a good day!','여기 있어요. 좋은 하루 보내세요!','farewell',[
+    ['Thank you. You too!','Goodbye!','안녕히 가세요!'],
+    ['How much is the large map?','Would you like to keep shopping?','쇼핑을 계속하시겠어요?','새로운 물건을 묻는 말이에요. 지금은 대화를 마쳐요.'],
+    ['Can you show me another map?','Certainly. What size?','물론이죠. 어떤 크기로요?','다른 지도를 요청하는 말이에요. 마무리 인사를 골라요.']
+  ],'상대방이 좋은 하루를 빌어 줄 때 You too!로 화답해요.',{alternatives:['Thanks. You too!']});
+  // Link existing notebook cards only when their expression is useful for this exact turn.
+  const notebookLinks = {
+    'vs-greet':['hello'], 'vs-price':['village-price'], 'vs-water':['village-water'],
+    'vs-locate':['village-inn'], 'vs-repeat':['village-repeat'], 'vs-thanks':['village-thanks'],
+    'vl-inn':['village-inn'], 'vl-morning':['village-morning'], 'vl-right':['village-right'],
+    'vl-drink':['village-water'], 'vc-rowan-1':['hello'], 'vc-clara-1':['village-bread'],
+    'vc-clara-2':['village-price'], 'vc-clara-3':['village-thanks'], 'vc-thomas-2':['village-water'],
+    'vc-elena-1':['village-inn'], 'vc-elena-2':['village-left','village-straight'],
+    'vc-elena-3':['village-thanks'], 'vp-cafe-1':['village-morning'], 'vp-cafe-4':['village-thanks'],
+    'vp-route-1':['village-inn'], 'vp-route-3':['village-right'], 'vp-route-4':['village-right'],
+    'vp-shop-1':['village-price'], 'vp-shop-3':['village-buy'], 'vp-shop-4':['village-thanks']
+  };
+  for (const activity of activities) activity.tags.push(...(notebookLinks[activity.id] || []));
+  return Object.freeze({activities,missions});
+})();
+
+;
+// Only authored identifiers, counters, flags and civil dates enter the save.
+// The open exercise and any recognized/typed words stay in memory.
+const VoiceLearning = (() => {
+  const open = new WeakMap();
+  const replay = new WeakMap();
+  const intervals = [0,1,3,7,14];
+  const categories = ['vocab','sentence','listening','order','speaking'];
+  const knownKinds = {vocab:'vocab', sentence:'sentence', dialogue:'sentence', order:'order',
+    listening:'listening', speak:'speaking', listen:'listening', conversation:'sentence', scenario:'sentence'};
+  const category = item => knownKinds[item.kind || item.type];
+  const activity = id => VoiceData.activities.find(a => a.id === id);
+  const mission = id => VoiceData.missions.find(m => m.id === id);
+  const question = id => Q.find(q => q.id === id);
+  const whole = n => Number.isSafeInteger(n) ? Math.max(0,n) : 0;
+  const validDay = day => typeof day === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(day)
+    && localDay(new Date(day+'T12:00:00')) === day;
+  function localDay(now = Date.now(), delta = 0) {
+    const d = new Date(now);
+    d.setDate(d.getDate()+delta);
+    return [d.getFullYear(), String(d.getMonth()+1).padStart(2,'0'), String(d.getDate()).padStart(2,'0')].join('-');
+  }
+  function nextDay(now, step) { return localDay(now, intervals[step]); }
+  function blank() {
+    return {correct:0,wrong:0,assistedCorrect:0,assistedWrong:0,spoken:0,text:0,
+      transcript:0,translation:0,fallback:0,
+      step:0,lastDay:'',dueDay:'',reviewDay:''};
+  }
+  function fresh() {
+    return {introduced:[], records:{}, recent:[], missions:{}, speechAttempts:0};
+  }
+  function hydrate(raw) {
+    const data=fresh();
+    if (!raw || typeof raw !== 'object') return data;
+    data.speechAttempts=whole(raw.speechAttempts);
+    data.introduced=VoiceData.activities.filter(a=>Array.isArray(raw.introduced)&&raw.introduced.includes(a.id)).map(a=>a.id);
+    for (const m of VoiceData.missions) {
+      const step=Math.min(m.ids.length,whole(raw.missions?.[m.id]));
+      if(step) data.missions[m.id]=step;
+    }
+    for (const {id} of [...Q,...VoiceData.activities]) {
+      const saved=raw.records?.[id];
+      if (!saved || typeof saved !== 'object') continue;
+      const r=blank();
+      for(const key of ['correct','wrong','spoken','text','transcript','translation','fallback']) r[key]=whole(saved[key]);
+      r.assistedCorrect=Math.min(r.correct,whole(saved.assistedCorrect));
+      r.assistedWrong=Math.min(r.wrong,whole(saved.assistedWrong));
+      r.step=Math.min(4,whole(saved.step));
+      for(const key of ['lastDay','dueDay','reviewDay']) if(validDay(saved[key])) r[key]=saved[key];
+      data.records[id]=r;
+    }
+    if(Array.isArray(raw.recent)) {
+      for(const entry of raw.recent.slice(-20)) {
+        if (!entry || !data.records[entry.id] || !validDay(entry.day) || typeof entry.correct!=='boolean') continue;
+        data.recent.push({id:entry.id, day:entry.day, correct:entry.correct, assisted:entry.assisted===true});
+      }
+    }
+    return data;
+  }
+  function normalize(value) {
+    if (typeof value !== 'string') return '';
+    return value.normalize('NFKC').toLowerCase().replace(/[‘’]/g,"'")
+      .replace(/\bi'd(?=\s+like\b)/g,'i would').replace(/\bi'm\b/g,'i am')
+      .replace(/\byou're\b/g,'you are').replace(/\bit's\b/g,'it is')
+      .replace(/\bthat's\b/g,'that is').replace(/\bi'll\b/g,'i will')
+      .replace(/\bcan't\b/g,'cannot').replace(/\bdon't\b/g,'do not')
+      .replace(/[.,!?;:…“”"]/g,' ').replace(/\s+/g,' ').trim();
+  }
+  function matches(a,value) {
+    const normalized=normalize(value);
+    return !!normalized && [a.answer,...a.alternatives].some(s=>normalize(s)===normalized);
+  }
+  function introduce(p,id) {
+    const a=activity(id);
+    if(!a) return false;
+    if(!p.voice.introduced.includes(id)) p.voice.introduced.push(id);
+    Engine.teach(p,lessonTags(a));
+    return true;
+  }
+  function lessonTags(a) {
+    const forms=[normalize(a.english),normalize(a.answer)];
+    return lessons.filter(l=>a.tags.includes(l.id) || forms.includes(normalize(l.en))).map(l=>l.id);
+  }
+  function note(p,item,correct,{assisted=false,aids=[],mode='choice',review=false,now=Date.now()}={}) {
+    const r=p.voice.records[item.id] ||= {...blank(),step:p.schedule[item.id]?.step || 0};
+    r[correct?'correct':'wrong']++;
+    if(assisted) r[correct?'assistedCorrect':'assistedWrong']++;
+    for(const reason of ['transcript','translation','fallback']) if(aids.includes(reason)) r[reason]++;
+    if(mode==='speech') r.spoken++;
+    if(mode==='text' || (mode==='choice' && item.kind==='speak')) r.text++;
+    r.lastDay=localDay(now);
+    if(!correct || assisted || !r.dueDay || r.dueDay<=r.lastDay) {
+      r.step=correct ? (assisted ? 1 : Math.min(r.step+1,4)) : 0;
+      r.dueDay=nextDay(now,r.step);
+    }
+    if(review && correct) r.reviewDay=r.lastDay;
+    p.voice.recent.push({id:item.id,day:r.lastDay,correct,assisted:!!assisted});
+    if(p.voice.recent.length>20) p.voice.recent.shift();
+    return r;
+  }
+  function missionStep(p,id) {return p.voice.missions[id] || 0;}
+  function start(p,id,options={}) {
+    const a=activity(id);
+    if(!a) return null;
+    const m=options.mission && mission(options.mission);
+    if(options.mission && !m) return null;
+    const progress=m ? missionStep(p,m.id) : 0;
+    const isReplay=!!m && progress===m.ids.length;
+    const cursor=replay.get(p);
+    const step=isReplay ? (cursor?.id===m.id ? cursor.step : 0) : progress;
+    if(m && m.ids[step]!==id) return null;
+    introduce(p,id);
+    const h={activity:a, choices:Engine.shuffle(a.choices), answered:false,assisted:false,
+      aids:[],missionId:m?.id || '',step,replay:isReplay,review:!!options.review};
+    Object.defineProperty(h,'battle',{value:options.battle||null});
+    open.set(p,h);
+    return h;
+  }
+  function startMission(p,id) {
+    const m=mission(id);
+    if(!m) return null;
+    const cursor=replay.get(p);
+    const index=missionStep(p,id)===m.ids.length ? (cursor?.id===id ? cursor.step : 0) : missionStep(p,id);
+    return start(p,m.ids[index],{mission:id});
+  }
+  function assist(p,h,reason) {
+    if (!h || open.get(p)!==h || h.answered || !['transcript','translation','fallback'].includes(reason)) return false;
+    if (!h.aids.includes(reason)) h.aids.push(reason);
+    h.assisted=true;
+    return true;
+  }
+  function finishStep(p,h,correct) {
+    if (!h.missionId || !correct) return false;
+    const m=mission(h.missionId), next=h.step+1, done=next===m.ids.length;
+    if(h.replay) replay.set(p,{id:m.id,step:done?0:next});
+    else p.voice.missions[m.id]=next;
+    if(done && m.kind==='conversation' && p.currentChapter===2) {
+      const q=VillageData.quests.find(q=>q.npc===m.npc);
+      if(q && VillageEngine.status(p,q.stage)==='active') p.village.progress[q.stage].step=VillageData.dialogues[q.npc].length;
+    }
+    return done;
+  }
+  function submit(p,h,value,{mode='choice',now=Date.now()}={}) {
+    if(!h || h!==open.get(p) || h.answered || !['text','choice','speech'].includes(mode)) return null;
+    const a=h.activity;
+    if(h.battle && !Engine.voicePending(p,h.battle,h)) return null;
+    if(typeof value!=='string' || !value.trim()) return null;
+    if(mode==='choice' && !h.choices.includes(value)) return null;
+    if(mode==='speech' && !/[a-z]/i.test(a.answer)) return null;
+    const correct=mode==='choice' ? value===a.answer : matches(a,value);
+    if(mode==='speech' && !h.speechTried) {p.voice.speechAttempts++; h.speechTried=true;}
+    if(mode==='speech' && !correct) return {correct:false,activity:a,retrySpeech:true,done:false};
+    h.answered=true;
+    open.delete(p);
+    if(h.battle) Engine.voiceResult(p,h.battle,h,correct);
+    note(p,a,correct,{assisted:h.assisted,aids:h.aids,mode,review:h.review,now});
+    const m=h.missionId && mission(h.missionId);
+    if(m?.kind==='conversation' && p.currentChapter===2 && !h.replay) {
+      const q=VillageData.quests.find(q=>q.npc===m.npc);
+      if(q && VillageEngine.status(p,q.stage)==='active') VillageEngine.track(p,q.stage,{tags:lessonTags(a)},correct);
+    }
+    const done=finishStep(p,h,correct);
+    const reply=a.replies && Object.hasOwn(a.replies,value) ? a.replies[value] : (correct ? a.replies?.[a.answer] : null);
+    return {correct,activity:a,question:h.battle?.question,reply,
+      combo:h.battle?.combo || 0, done, retrySpeech:false};
+  }
+  function recommend(p,kind,filter=()=>true,now=Date.now()) {
+    const pool=VoiceData.activities.filter(a=>(!kind || a.kind===kind) && filter(a));
+    if(!pool.length) return null;
+    const known=pool.filter(a=>p.voice.introduced.includes(a.id));
+    const recent=p.voice.recent.slice(-5);
+    const successes=recent.filter(r=>r.correct && !r.assisted).length;
+    const target=successes===5 && p.voice.recent.length>=10 ? 3 : successes>=4 ? 2 : 1;
+    // An unseen activity always opens with a briefing. Step up one level at a time.
+    const entryLevel=Math.min(...pool.map(a=>a.difficulty));
+    const eligible=pool.filter(a=>known.includes(a) || a.difficulty<=Math.max(entryLevel,target));
+    const previous=p.voice.recent.at(-1);
+    function priority(a) {
+      const r=p.voice.records[a.id], practiced=!!r;
+      const due=practiced && r.dueDay<=localDay(now);
+      let score=due?12:0;
+      if(practiced && r.wrong>r.correct) score+=6;
+      if(!practiced) score+=5;
+      if(known.includes(a)) score+=2;
+      if(lessonTags(a).some(tag=>p.learning[tag]?.seen)) score+=1;
+      score-=Math.abs(a.difficulty-target)*3;
+      if(a.id===previous?.id) score-=35;
+      if(recent.some(entry=>entry.id===a.id)) score-=8;
+      if(previous && activity(previous.id)?.kind===a.kind) score-=1;
+      return score;
+    }
+    return eligible.sort((a,b)=>priority(b)-priority(a)||a.id.localeCompare(b.id))[0];
+  }
+  function today(p,now=Date.now()) {
+    const date=localDay(now), due=[], ids=new Set();
+    let completed=0;
+    function add(item,source,dueDay) {
+      if(ids.has(item.id) || dueDay>date) return;
+      ids.add(item.id);
+      due.push({id:item.id,source,kind:item.kind||item.type,day:dueDay,label:item.objective||item.instruction});
+    }
+    for(const [id,r] of Object.entries(p.voice.records)) {
+      const a=activity(id),q=question(id);
+      if(r.reviewDay===date && r.dueDay>date) completed++;
+      if(r.dueDay && (a||q)) add(a||q,a?'activity':'question',r.dueDay);
+    }
+    for(const entry of Engine.reviewList(p,now)) {
+      if(!p.voice.records[entry.question.id]?.dueDay && entry.due) add(entry.question,'question',entry.dueAt?localDay(entry.dueAt):date);
+    }
+    due.sort((a,b)=>a.day.localeCompare(b.day)||a.id.localeCompare(b.id));
+    return {due,count:due.length,completed,date};
+  }
+  function dashboard(p) {
+    const totals=Object.fromEntries(categories.map(k=>[k,blank()]));
+    for(const [id,r] of Object.entries(p.voice.records)) {
+      const item=activity(id)||question(id), row=item && totals[category(item)];
+      if(!row) continue;
+      for(const key of ['correct','wrong','assistedCorrect','assistedWrong','spoken','text','transcript','translation','fallback']) row[key]+=r[key];
+    }
+    const recent=p.voice.recent.slice(-8).map(e=>({...e,kind:category(activity(e.id)||question(e.id))}));
+    const weak=p.voice.recent.filter(e=>!e.correct && !e.assisted && p.voice.records[e.id].step===0);
+    let recommendation=null;
+    if(weak.length>=2) {
+      const id=weak.at(-1).id, a=activity(id);
+      recommendation={id,source:a?'activity':'question',kind:category(a||question(id))};
+    }
+    const encountered = new Set(lessons.filter(l=>p.learning[l.id]?.seen).map(l=>normalize(l.en)));
+    for(const id of p.voice.introduced) encountered.add(normalize(activity(id).english));
+    const expressions = new Set([...lessons.map(l=>normalize(l.en)),...VoiceData.activities.map(a=>normalize(a.english))]);
+    const pending=new Set(lessons.filter(l=>p.marked.includes(l.id)||Engine.status(p.learning[l.id])==='Review Needed')
+      .map(l=>normalize(l.en)));
+    for(const entry of today(p).due) {
+      if(entry.source==='activity') pending.add(normalize(activity(entry.id).english));
+      else for(const tag of question(entry.id).tags) {
+        const l=lessons.find(l=>l.id===tag);
+        if(l) pending.add(normalize(l.en));
+      }
+    }
+    return {categories:totals,encountered:encountered.size,total:expressions.size,reviewNeeded:pending.size,
+      missionsCompleted:VoiceData.missions.filter(m=>missionStep(p,m.id)===m.ids.length).length,
+      speakingAttempts:p.voice.speechAttempts,recent,recommendation};
+  }
+  function cancel(p) {open.delete(p);}
+  return {fresh,hydrate,normalize,matches,introduce,lessonTags,localDay,nextDay,note,start,startMission,missionStep,
+    assist,submit,cancel,recommend,today,dashboard};
+})();
+
+;
 // A profile is the saved checkpoint. Encounter state and pending actions stay in memory.
 const Engine = (() => {
   const legacyKey = 'EnglishQuest.chapter1.v1';
   const v2Key = 'EnglishQuest.chapter1.v2';
-  const saveKey = 'EnglishQuest.v3';
+  const v3Key = 'EnglishQuest.v3';
+  const saveKey = 'EnglishQuest.v4';
   const active = new WeakMap();
   const reviews = new WeakMap();
-  const day = 86400000;
   const achievements = [
     {id:'firstVictory', name:'첫 승리', description:'첫 전투에서 승리하기'},
     {id:'firstSpell', name:'불꽃의 시작', description:'화염 마법에 처음 성공하기'},
@@ -831,16 +1490,18 @@ const Engine = (() => {
     {name:'메아리 정령', en:'Echo Wisp', hp:105, attack:12, defense:1},
     {name:'문장 골렘', en:'Sentence Golem', hp:165, attack:15, defense:3}
   ];
-  const cooldown = {sword:0, fire:2, guard:0, heal:3};
+  const cooldown = {sword:0, fire:2, guard:0, heal:3, voice:1, echo:1, burst:3};
+  const voiceSkills = ['voice','echo','burst'];
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
   const integer = (value, fallback, max) => Number.isSafeInteger(value)
     ? clamp(value, 0, max) : fallback;
   const emptyRecord = () => ({seen:false, correct:0, wrong:0, streak:0});
   function fresh() {
-    return {version:3, started:false, currentChapter:1, level:1, xp:0, gold:0, hp:100,
+    return {version:4, started:false, currentChapter:1, level:1, xp:0, gold:0, hp:100,
       completed:[], unlocked:1, chapterComplete:false, learning:{}, mistakes:{},
       marked:[], schedule:{}, history:[], achievements:[], village:VillageEngine.fresh(),
-      settings:{sound:true, voice:true, volume:0.45, speechRate:'normal'}};
+      voice:VoiceLearning.fresh(),
+      settings:{sound:true, voice:true, volume:0.45, speechRate:'normal',speechVolume:1}};
   }
   function stats(profile) {
     const steps = profile.level - 1;
@@ -849,7 +1510,7 @@ const Engine = (() => {
   }
   function hydrate(raw) {
     const profile = fresh();
-    if (!raw || ![1, 2, 3].includes(raw.version)) return profile;
+    if (!raw || ![1, 2, 3, 4].includes(raw.version)) return profile;
     profile.started = raw.started === true;
     profile.level = Math.max(1, integer(raw.level, 1, 9999));
     profile.gold = integer(raw.gold, 0, Number.MAX_SAFE_INTEGER);
@@ -859,10 +1520,11 @@ const Engine = (() => {
     }
     profile.unlocked = Math.min(3, profile.completed.length + 1);
     profile.chapterComplete = profile.completed.length === 3;
-    if (raw.version === 3) {
+    if (raw.version >= 3) {
       profile.village = VillageEngine.hydrate(raw.village, profile.chapterComplete);
       if (profile.chapterComplete && raw.currentChapter === 2) profile.currentChapter = 2;
     }
+    if (raw.version === 4) profile.voice=VoiceLearning.hydrate(raw.voice);
     const {maxHp, nextXp} = stats(profile);
     profile.hp = integer(raw.hp, maxHp, maxHp);
     profile.xp = integer(raw.xp, 0, nextXp - 1);
@@ -884,6 +1546,7 @@ const Engine = (() => {
     }
     if (Number.isFinite(settings.volume)) profile.settings.volume = clamp(settings.volume, 0, 1);
     if (settings.speechRate === 'slow') profile.settings.speechRate = 'slow';
+    if (Number.isFinite(settings.speechVolume)) profile.settings.speechVolume=clamp(settings.speechVolume,0,1);
     if (raw.version >= 2) {
       profile.marked = lessons.filter(l => Array.isArray(raw.marked) && raw.marked.includes(l.id)).map(l => l.id);
       profile.achievements = achievements.filter(a => Array.isArray(raw.achievements) && raw.achievements.includes(a.id)).map(a => a.id);
@@ -895,7 +1558,7 @@ const Engine = (() => {
       for (const {id} of Q) {
         const timing = raw.schedule?.[id];
         if (timing && typeof timing === 'object') profile.schedule[id] = {
-          step:integer(timing.step, 0, 3), dueAt:integer(timing.dueAt, 0, 8640000000000000)
+          step:integer(timing.step, 0, 4), dueAt:integer(timing.dueAt, 0, 8640000000000000)
         };
       }
     }
@@ -913,9 +1576,9 @@ const Engine = (() => {
   function load() {
     try {
       const current = stored(saveKey);
-      if (current?.version === 3) return hydrate(current);
-      for (const legacy of [stored(v2Key),stored(legacyKey),current]) {
-        if (![1,2].includes(legacy?.version)) continue;
+      if (current?.version === 4) return hydrate(current);
+      for (const legacy of [stored(v3Key),stored(v2Key),stored(legacyKey),current]) {
+        if (![1,2,3].includes(legacy?.version)) continue;
         const profile = hydrate(legacy);
         save(profile);
         return profile;
@@ -926,7 +1589,7 @@ const Engine = (() => {
   }
   function save(profile) {
     try {
-      if (profile.version !== 3 || stored(saveKey)?.version > 3) return false;
+      if (profile.version !== 4 || stored(saveKey)?.version > 4) return false;
       localStorage.setItem(saveKey, JSON.stringify(profile));
       return true;
     }
@@ -939,7 +1602,8 @@ const Engine = (() => {
       record.seen = true;
     }
   }
-  function record(profile, question, correct) {
+  function record(profile, question, correct, options={}) {
+    VoiceLearning.note(profile,question,correct,options);
     teach(profile, question.tags);
     for (const id of question.tags) {
       const item = profile.learning[id];
@@ -974,8 +1638,10 @@ const Engine = (() => {
     const bookmarkedIds = new Set(profile.marked.map(tag => Q.find(q => q.tags.includes(tag))?.id));
     return Q.filter(q => profile.mistakes[q.id] || bookmarkedIds.has(q.id)).map(question => {
       const misses = profile.mistakes[question.id] || 0;
-      const dueAt = profile.schedule[question.id]?.dueAt || 0;
-      return {question, misses, dueAt, due:dueAt <= now, marked:bookmarkedIds.has(question.id)};
+      const date=profile.voice.records[question.id]?.dueDay;
+      const dueAt = date ? new Date(date+'T00:00:00').getTime() : (profile.schedule[question.id]?.dueAt || 0);
+      const due=date ? date<=VoiceLearning.localDay(now) : (!dueAt || VoiceLearning.localDay(dueAt)<=VoiceLearning.localDay(now));
+      return {question, misses, dueAt, due, marked:bookmarkedIds.has(question.id)};
     }).sort((a, b) => a.dueAt - b.dueAt || b.misses - a.misses);
   }
   function dashboard(profile) {
@@ -1012,7 +1678,7 @@ const Engine = (() => {
     const enemyMaxHp = training ? 3*Math.max(1,hero.attack-enemy.defense) : Math.round(enemy.hp * durability);
     const encounter = {stage, training, turn:1, phase:'PLAYER_SELECT', hp:hero.maxHp,
       enemyHp:enemyMaxHp, enemyMaxHp, incomingScale:scaled ? hero.maxHp / baseline.maxHp : 1,
-      cooldowns:{sword:0,fire:0,guard:0,heal:0},
+      cooldowns:Object.fromEntries(Object.keys(cooldown).map(id=>[id,0])),
       counts:{}, lastId:null, question:null, choices:[], ability:null, correct:false,
       combo:0, bossPhase:1, counterReady:false, charm:false};
     active.set(profile, encounter);
@@ -1031,7 +1697,8 @@ const Engine = (() => {
   function available(encounter, ability) {
     return encounter?.phase === 'PLAYER_SELECT' && Object.hasOwn(cooldown, ability)
       && (!encounter.training || ability === 'sword')
-      && (encounter.stage > 1 || ability === 'sword') && encounter.cooldowns[ability] === 0;
+      && !(golemBreak(encounter) && voiceSkills.includes(ability))
+      && (encounter.stage > 1 || ability === 'sword' || voiceSkills.includes(ability)) && encounter.cooldowns[ability] === 0;
   }
   function shuffle(items, random = Math.random) {
     const result = [...items];
@@ -1080,10 +1747,20 @@ const Engine = (() => {
   }
   function select(profile, encounter, ability, random = Math.random) {
     if (!inPhase(profile, encounter,'PLAYER_SELECT') || !available(encounter,ability)) return null;
+    if (voiceSkills.includes(ability)) {
+      const kind={voice:'speak',echo:'listen',burst:'conversation'}[ability];
+      const a=VoiceLearning.recommend(profile,kind,item=>ability!=='echo'||item.mode==='meaning');
+      if(!a) return null;
+      const voiceHandle=VoiceLearning.start(profile,a.id,{battle:encounter});
+      const question={id:a.id,type:a.kind,chapter:0,instruction:a.objective,phrase:a.english,answer:a.answer,
+        explanation:a.explanation,tags:VoiceLearning.lessonTags(a),choices:a.choices};
+      Object.assign(encounter,{ability,question,choices:voiceHandle.choices,voiceHandle,phase:'QUESTION_ACTIVE'});
+      return {voiceHandle,question,choices:voiceHandle.choices};
+    }
     let pool = encounter.training ? Q.filter(q => profile.mistakes[q.id]) : candidates(encounter, ability);
     if (!pool.length) return null;
     const seen = pool.filter(q => q.tags.every(tag => profile.learning[tag]?.seen));
-    if (seen.length && encounter.stage <= 3) pool = seen;
+    if (seen.length) pool = seen;
     const other = pool.filter(q => q.id !== encounter.lastId);
     if (other.length) pool = other;
     const recentIds = profile.history.slice(-2).map(item => item.id);
@@ -1096,7 +1773,7 @@ const Engine = (() => {
     const question = next[Math.floor(random()*next.length)];
     const choices = makeChoices(question, random);
     encounter.counts[question.id] = (encounter.counts[question.id] || 0) + 1;
-    Object.assign(encounter, {ability, question, choices, lastId:question.id, phase:'QUESTION_ACTIVE'});
+    Object.assign(encounter, {ability, question, choices, lastId:question.id, voiceHandle:null,phase:'QUESTION_ACTIVE'});
     return {question, choices};
   }
   const normalize = text => text.trim().replace(/[.?!]$/, '').trim().replace(/\s+/g,' ');
@@ -1113,16 +1790,27 @@ const Engine = (() => {
     }
     return normalize(value) === normalize(question.answer);
   }
-  function answer(profile, encounter, value) {
-    if (!inPhase(profile, encounter,'QUESTION_ACTIVE')) return null;
-    const {question} = encounter;
-    const correct = evaluate(encounter,value);
-    if (correct === null) return null;
+  function settleAnswer(profile, encounter, correct) {
     encounter.combo = correct ? Math.min(4, encounter.combo + 1) : 0;
     if (encounter.combo === 3) unlock(profile,'combo3');
     Object.assign(encounter, {correct, phase:'ANSWER_FEEDBACK'});
-    record(profile, question, correct);
-    if (!encounter.training && encounter.stage >= 4) VillageEngine.track(profile,encounter.stage,question,correct);
+    if (!encounter.training && encounter.stage >= 4) VillageEngine.track(profile,encounter.stage,encounter.question,correct);
+  }
+  function voicePending(profile, encounter, handle) {
+    return inPhase(profile,encounter,'QUESTION_ACTIVE') && encounter.voiceHandle===handle;
+  }
+  function voiceResult(profile,encounter,handle,correct) {
+    if(!voicePending(profile,encounter,handle) || !handle.answered) return null;
+    settleAnswer(profile,encounter,correct);
+    return {correct,question:encounter.question,combo:encounter.combo};
+  }
+  function answer(profile, encounter, value, options={}) {
+    if (!inPhase(profile, encounter,'QUESTION_ACTIVE') || encounter.voiceHandle) return null;
+    const {question} = encounter;
+    const correct = evaluate(encounter,value);
+    if (correct === null) return null;
+    settleAnswer(profile,encounter,correct);
+    record(profile, question, correct, options);
     return {correct, question, combo:encounter.combo, retry:!correct && golemBreak(encounter)};
   }
   function retryBroken(profile, encounter) {
@@ -1132,23 +1820,22 @@ const Engine = (() => {
   }
   function startReview(profile, id, random = Math.random) {
     const entry = reviewList(profile).find(item => item.question.id === id);
-    if (!entry) return null;
-    const question = entry.question;
+    const question = entry?.question || (profile.voice.records[id] && Q.find(q=>q.id===id));
+    if (!question) return null;
     const session = {question, choices:makeChoices(question,random), answered:false};
     reviews.set(profile, session);
     return session;
   }
-  function answerReview(profile, session, value, now = Date.now()) {
+  function answerReview(profile, session, value, now = Date.now(), options={}) {
     if (!session || reviews.get(profile) !== session || session.answered) return null;
     const correct = evaluate(session, value);
     if (correct === null) return null;
     const {question} = session;
     session.answered = true;
     reviews.delete(profile);
-    record(profile, question, correct);
-    const previous = profile.schedule[question.id]?.step || 0;
-    const step = correct ? Math.min(previous + 1, 3) : 0;
-    const dueAt = now + [0,1,3,7][step]*day;
+    record(profile,question,correct,{...options,now,review:true});
+    const timing=profile.voice.records[question.id], step=timing.step;
+    const dueAt=new Date(timing.dueDay+'T00:00:00').getTime();
     profile.schedule[question.id] = {step, dueAt};
     unlock(profile,'firstReview');
     return {correct, question, dueAt};
@@ -1159,8 +1846,8 @@ const Engine = (() => {
     const {ability, correct, stage} = encounter;
     const hero = stats(profile);
     let damage = 0, healing = 0, comboBonus = 0, counterBonus = 0;
-    if (correct && (ability === 'sword' || ability === 'fire')) {
-      const power = ability === 'fire' ? hero.magic : hero.attack;
+    if (correct && ['sword','fire','voice','burst'].includes(ability)) {
+      const power = {sword:hero.attack,fire:hero.magic,voice:hero.attack+3,burst:hero.magic+4}[ability];
       const strike = Math.max(1, power - enemies[stage-1].defense) * (exposed(encounter) ? 2 : 1);
       const boosted = Math.round(strike*(100+bonusPercent(encounter.combo))/100);
       comboBonus = Math.min(encounter.enemyHp, boosted) - Math.min(encounter.enemyHp, strike);
@@ -1177,7 +1864,7 @@ const Engine = (() => {
     }
     const won = encounter.enemyHp === 0;
     encounter.phase = won ? 'VICTORY' : 'ENEMY_ACTION';
-    return {damage, healing, guard:correct && ability === 'guard', won, comboBonus, counterBonus};
+    return {damage, healing, guard:correct && ['guard','echo'].includes(ability), won, comboBonus, counterBonus};
   }
   function useItem(profile, encounter, id) {
     if (!inPhase(profile,encounter,'PLAYER_SELECT') || golemBreak(encounter) || encounter.training) return null;
@@ -1194,14 +1881,15 @@ const Engine = (() => {
     if (!inPhase(profile, encounter, 'ENEMY_ACTION')) return null;
     const charge = charging(encounter);
     const powerful = heavy(encounter);
-    const guard = encounter.correct && encounter.ability === 'guard';
+    const guard = encounter.correct && ['guard','echo'].includes(encounter.ability);
     const dive = diving(encounter), pulse = pulsing(encounter), interrupted = golemBreak(encounter) && encounter.correct;
     const extraPower = powerful ? (encounter.bossPhase === 2 ? 6 : 4) : dive ? 4 : pulse ? 2 : 0;
     const rawHit = enemies[encounter.stage-1].attack + extraPower - stats(profile).defense;
     const hit = Math.max(1, Math.round(rawHit * encounter.incomingScale) - (encounter.charm ? 3 : 0));
     const stopped = charge || interrupted;
     const unguarded = stopped ? 0 : Math.min(encounter.hp, hit);
-    const damage = stopped ? 0 : Math.min(encounter.hp, Math.max(1, Math.round(hit*(guard ? 0.4 : 1))));
+    const factor=guard ? (encounter.ability==='echo' ? .3 : .4) : 1;
+    const damage = stopped ? 0 : Math.min(encounter.hp, Math.max(1, Math.round(hit*factor)));
     if (guard && powerful) encounter.counterReady = true;
     encounter.hp -= damage;
     const lost = encounter.hp === 0;
@@ -1243,9 +1931,9 @@ const Engine = (() => {
     encounter.phase = 'REWARD';
     return {xp, gold, levelUp, bonus, replay};
   }
-  return {saveKey, legacyKey, v2Key, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
+  return {saveKey, legacyKey, v2Key, v3Key, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
     achievements, mark, reviewList, startReview, answerReview, dashboard, heavy, bonusPercent,
-    training, golemBreak, diving, pulsing, retryBroken, useItem,
+    training, golemBreak, diving, pulsing, retryBroken, useItem,voicePending,voiceResult,
     available, charging, exposed, shuffle, select, answer, playerAction, enemyAction, reward};
 })();
 
@@ -1499,6 +2187,20 @@ const AudioFX = (() => {
           break;
         case 'fire': tone(132,485,at,.31,.1,'triangle',.06); noise(690,1850,at+.2,.32,.3); break;
         case 'guard': arpeggio([392,587,784],at,.079,.31,.1); break;
+        case 'voice':
+          tone(262,392,at,.28,.085,'sine',.04);
+          bell(784,at+.19,.26,.075);
+          noise(720,1820,at+.28,.23,.14);
+          break;
+        case 'echo':
+          arpeggio([392,587,784],at,.105,.29,.085);
+          bell(587,at+.33,.33,.057);
+          break;
+        case 'burst':
+          arpeggio([330,494,659],at,.08,.29,.09);
+          tone(294,131,at+.43,.26,.092,'triangle');
+          bell(988,at+.45,.31,.085);
+          break;
         case 'shieldHit': noise(630,1480,at,.09,.19); bell(659,at,.41,.12); bell(990,at+.024,.22,.06); break;
         case 'enemy': tone(173,77,at,.16,.17,'triangle'); noise(640,240,at,.11,.12); break;
         case 'heavy': tone(125,48,at,.39,.24,'triangle'); noise(1100,140,at,.25,.25); bell(247,at+.045,.35,.09); break;
@@ -1517,7 +2219,7 @@ const AudioFX = (() => {
     } catch { /* Device or context unavailable: gameplay continues. */ }
   }
   function voice(settings) {
-    if (!settings?.voice || !globalThis.SpeechSynthesisUtterance) return null;
+    if (!settings?.voice || settings.speechVolume === 0 || !globalThis.SpeechSynthesisUtterance) return null;
     try {
       const voices = globalThis.speechSynthesis?.getVoices() || [];
       return voices.find(v => v.localService && /^en[-_]US$/i.test(v.lang))
@@ -1531,7 +2233,7 @@ const AudioFX = (() => {
   }
   // The fourth argument controls a transient highlight in the calling screen.
   // Finishing explicitly on cancel also handles engines that omit the native end event.
-  function speak(text, settings, onError, {onStart, onEnd} = {}) {
+  function speak(text, settings, onError, {onStart, onEnd, rate = settings?.speechRate} = {}) {
     const english = voice(settings);
     if (!english || !text) return false;
     let playback;
@@ -1540,13 +2242,17 @@ const AudioFX = (() => {
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.voice = english;
       utterance.lang = english.lang;
-      utterance.rate = settings.speechRate === 'slow' ? .71 : 1;
+      utterance.rate = rate === 'slow' ? .71 : 1;
+      const volume = settings.speechVolume;
+      utterance.volume = Number.isFinite(volume) ? Math.min(1,Math.max(0,volume)) : 1;
       playback = {
         utterance,
         startTimer: null,
+        endTimer: null,
         finish() {
           if (activeSpeech !== playback) return;
           globalThis.clearTimeout?.(playback.startTimer);
+          globalThis.clearTimeout?.(playback.endTimer);
           activeSpeech = null;
           onEnd?.();
         }
@@ -1555,6 +2261,12 @@ const AudioFX = (() => {
       utterance.onstart = () => {
         if (activeSpeech !== playback) return;
         globalThis.clearTimeout?.(playback.startTimer);
+        const words = text.trim().split(/\s+/).length;
+        playback.endTimer = globalThis.setTimeout?.(() => {
+          if (activeSpeech !== playback) return;
+          stop();
+          onError?.();
+        }, Math.max(9000, words*1000 + 5000));
         onStart?.();
       };
       utterance.onend = playback.finish;
@@ -1576,6 +2288,126 @@ const AudioFX = (() => {
     }
   }
   return {play, speak, canSpeak:settings => !!voice(settings), stop};
+})();
+
+;
+// Browser-owned optional recognition. Transcripts live only in the caller for one attempt.
+const SpeechInput = (function recognitionAdapter() {
+  // No constructor, permission prompt or audio access until the user explicitly starts a turn.
+  const permissionWindow = 12000;
+  const listeningWindow = 16000;
+  const processingWindow = 5500;
+  let active = null;
+  let generation = 0;
+
+  function constructorForBrowser() {
+    try { return globalThis.SpeechRecognition || globalThis.webkitSpeechRecognition; }
+    catch { return null; }
+  }
+  function available() { return typeof constructorForBrowser() === 'function'; }
+
+  function release(session, abort) {
+    globalThis.clearTimeout(session.timer);
+    const recognizer = session.recognizer;
+    if (!recognizer) return;
+    for (const event of ['start','audiostart','speechstart','speechend','audioend','result','error','nomatch','end']) {
+      recognizer['on'+event] = null;
+    }
+    if (abort) {
+      try { recognizer.abort(); } catch { /* The browser may already have released its capture. */ }
+    }
+  }
+
+  function cancel() {
+    generation++;
+    const session = active;
+    active = null;
+    if (session) release(session,true);
+  }
+
+  function stop() {
+    const session = active;
+    cancel();
+    session?.onState?.('ready','stopped');
+  }
+
+  function errorState(code) {
+    if (['not-allowed','service-not-allowed','NotAllowedError','SecurityError'].includes(code)) return 'denied';
+    if (code === 'no-speech') return 'timeout';
+    if (code === 'aborted' || code === 'no-match') return 'ready';
+    return 'unavailable';
+  }
+
+  function start({onState, onResult, lang='en-US'} = {}) {
+    if (active) return false;
+    const Recognition = constructorForBrowser();
+    if (typeof Recognition !== 'function') {
+      onState?.('unavailable','unsupported');
+      return false;
+    }
+    const session = {onState,recognizer:null,timer:null,state:'',generation:++generation};
+    active = session;
+    const current = () => session === active && session.generation === generation;
+
+    function finish(state, reason, abort=true, text='') {
+      if (!current()) return;
+      active = null;
+      release(session,abort);
+      onState?.(state,reason);
+      // The state callback can close this screen or begin another exercise.
+      if (state === 'result' && generation === session.generation) onResult?.(text);
+    }
+    function phase(state, duration) {
+      if (!current() || state === session.state) return;
+      session.state = state;
+      globalThis.clearTimeout(session.timer);
+      session.timer = globalThis.setTimeout(()=>finish('timeout',state),duration);
+      onState?.(state,'');
+    }
+    function listen() {
+      if (session.state === 'requesting') phase('listening',listeningWindow);
+    }
+    function process() {
+      if (session.state === 'requesting' || session.state === 'listening') phase('processing',processingWindow);
+    }
+    try {
+      const recognizer = session.recognizer = new Recognition();
+      recognizer.lang = lang;
+      recognizer.continuous = false;
+      recognizer.interimResults = false;
+      recognizer.maxAlternatives = 1;
+      // The service starting doesn't by itself establish that the microphone is capturing.
+      recognizer.onaudiostart = listen;
+      recognizer.onspeechstart = listen;
+      recognizer.onspeechend = process;
+      recognizer.onaudioend = process;
+      recognizer.onresult = event => {
+        if (!current()) return;
+        const chunks = [];
+        for (const result of Array.from(event?.results || [])) {
+          const text = result?.[0]?.transcript;
+          if (result?.isFinal === true && typeof text === 'string' && text.trim()) chunks.push(text.trim());
+        }
+        if (chunks.length) finish('result','',true,chunks.join(' ').slice(0,320));
+      };
+      recognizer.onerror = event => {
+        const code = typeof event?.error === 'string' ? event.error : 'service-error';
+        finish(errorState(code),code);
+      };
+      recognizer.onnomatch = () => finish('ready','no-match');
+      recognizer.onend = () => finish('ready','no-match',false);
+      phase('requesting',permissionWindow);
+      if (!current()) return false;
+      recognizer.start();
+      return true;
+    } catch (error) {
+      const code = error?.name || 'start-failed';
+      finish(errorState(code),code);
+      return false;
+    }
+  }
+
+  return Object.freeze({available,start,stop,cancel});
 })();
 
 ;
@@ -1853,7 +2685,7 @@ function dewfallGrove(id){
       ${path('M40 72q-8 -11 -4 -21l-5 2 6 -15q-3 -15 10 -20l10 2q10 -8 23 -4l10 6 8 1 8 12 -1 13 5 9 -8 15 -7 -6 -2 -21 -9 -13 -9 9 -15 5 -12 -3 -4 24Z','#c1beb1','stroke="#777e74" stroke-width="2"')}
       ${path('M42 72l7 -7 6 11 8 4 10 -6 11 4 13 -11 4 -4 2 19 -7 18 -12 9 -6 17 -11 -5 -14 -8 -11 -18Z','#c9c5aa','stroke="#8d9485" stroke-width="2"')}
       ${path('M56 72q6 -7 15 0l4 3 8 -7 10 4 -4 8 -14 4 -12 -3Z','#dcd4b9')}
-      ${path('M55 56q5 -5 13 -1 M80 54q8 -6 14 -1 M58 61q4 3 7 0 M81 61q5 3 9 -1 M74 60l-3 10 5 1 M67 84q7 3 14 -1 M49 87q4 14 13 20 M86 92l-10 20','none','stroke="#776a57" stroke-width="2.3" stroke-linecap="round"')}
+      <g class="expression-rowan">${path('M55 56q5 -5 13 -1 M80 54q8 -6 14 -1 M58 61q4 3 7 0 M81 61q5 3 9 -1 M74 60l-3 10 5 1 M67 84q7 3 14 -1 M49 87q4 14 13 20 M86 92l-10 20','none','stroke="#776a57" stroke-width="2.3" stroke-linecap="round"')}</g>
       ${path('M16 125q17 -22 29 -25l8 35 -20 -4Z','#365951')}${path('M44 106l5 -5 9 5 -3 9 -8 -1Z','#d4b56e')}
       ${path('M106 133l5 -63 -4 -6 3 -10 10 -4 5 10 -7 14 -7 57Z','#795e43','stroke="#574435" stroke-width="2"')}${path('M110 64l0 -10 7 -9 6 10 -6 10Z','#93cfbc','stroke="#d5d393" stroke-width="1.5"')}`,'rowan-art');
   }
@@ -2154,7 +2986,7 @@ function courtyard(id) {
       ${path('M42 64q-7 -24 3 -38 10 -18 32 -19 25 2 42 30 -20 -16 -39 -10 -24 4 -38 37Z','#bc7363','stroke="#724b43" stroke-width="2"')}
       ${path('M47 44q23 -26 53 -19l14 9 -17 -3q-29 -1 -50 20Z','#e4b37d')}
       ${path('M107 27l16 -8 10 -15q-1 21 -9 29l11 6 -17 3Z','#bb7361')}
-      ${line('M57 64q5 -5 12 -2 M86 57q7 -5 15 0 M61 70l6 -1 M89 65l6 -1 M77 66l-2 10 5 2 M73 85q9 4 16 -3','#5b433b',2.2)}
+      <g class="expression-clara">${line('M57 64q5 -5 12 -2 M86 57q7 -5 15 0 M61 70l6 -1 M89 65l6 -1 M77 66l-2 10 5 2 M73 85q9 4 16 -3','#5b433b',2.2)}</g>
       ${dot(54,80,4.2,'#dfbe79')}${dot(105,72,3.8,'#e2c387')}${dot(80,139,5,'#d5ae72')}
       ${line('M47 121l-8 19 M109 122l9 11 M52 73q-4 9 1 17','#8f6651',1.5)}`;
   }
@@ -2168,7 +3000,7 @@ function courtyard(id) {
       ${path('M46 49q-5 -18 9 -32 16 -10 37 -6l19 5 3 11q-21 -12 -41 -5l-19 12Z','#dbd7bf','stroke="#a89f89" stroke-width="2"')}
       ${path('M50 80q7 8 14 5l8 -6 9 4 10 -5 10 1 7 -7 -3 22 -14 16 -11 4 -16 -3 -16 -16Z','#715a49')}
       ${path('M58 83q7 -8 17 -6l6 4 6 -5 12 -1 5 5 -7 6 -12 -1 -5 3 -10 -2 -13 5Z','#55493f')}
-      ${line('M54 60q7 -6 17 -3 M88 56q7 -5 16 -1 M58 68q6 3 11 -2 M90 64q5 4 10 -1 M79 61l-3 11 7 2 M72 95l10 4 10 -6','#715948',2.3)}
+      <g class="expression-thomas">${line('M54 60q7 -6 17 -3 M88 56q7 -5 16 -1 M58 68q6 3 11 -2 M90 64q5 4 10 -1 M79 61l-3 11 7 2 M72 95l10 4 10 -6','#715948',2.3)}</g>
       ${path('M44 136l13 8 -3 14 -13 -6Z','#d3b88d')}${dot(64,135,2.6,'#d9bb87')}${dot(93,135,2.6,'#d9bb87')}
       ${line('M67 146h24l-2 12 -21 -1 M65 101l7 6 M84 108l5 -5','#b29373',1.5)}`;
   }
@@ -2185,7 +3017,7 @@ function courtyard(id) {
       ${path('M44 64q-7 -20 5 -32 11 -18 34 -16 22 2 29 24l2 17 -13 -16 -6 -7q-8 13 -26 19l8 -9q-18 6 -19 24l-5 8Z','#454246')}
       ${path('M44 48q3 -23 15 -33L82 7l18 8 15 24 -5 5q-15 -14 -29 -12 -19 0 -37 16Z',swatch(id+'steel'),'stroke="#4e5961" stroke-width="2"')}
       ${path('M40 49q26 -23 46 -22 18 1 33 14l-4 9q-18 -14 -32 -13 -21 2 -40 18Z','#939c9b','stroke="#535f65" stroke-width="1.6"')}${path('M72 32l8 -15 8 12 -7 9Z','#dec486')}
-      ${line('M59 65l12 -3 M88 60l12 1 M63 70l6 -1 M90 67l7 -1 M80 66l-2 10 5 1 M74 86l13 -3','#55423c',2.1)}
+      <g class="expression-elena">${line('M59 65l12 -3 M88 60l12 1 M63 70l6 -1 M90 67l7 -1 M80 66l-2 10 5 1 M74 86l13 -3','#55423c',2.1)}</g>
       ${line('M95 74l6 -7 M105 85l-4 9 M45 64l-2 15','#c7a18a',1.4)}
       ${path('M109 159l4 -30 8 -4 4 6 -4 24Z','#6b5846','stroke="#bfaa75" stroke-width="2"')}`;
   }
@@ -2292,6 +3124,7 @@ function courtyard(id) {
 const app = document.querySelector('#app');
 const pauseDialog = document.querySelector('#pause');
 const game = {
+  voice:null, voiceTab:'speak', dailyLegacy:false, questionAssists:[], showKo:false,
   profile: Engine.load() || Engine.fresh(), screen: 'TITLE', stage: 1, page: 0,
   battle: null, task: null, order: [], feedback: null, reward: null,
   effect: '', amount: '', pausedFrom: '', confirm: '', reviewFrom: 'MAP',
@@ -2307,6 +3140,7 @@ const saga = [
 const zones = ['이슬 맺힌 숲길','푸른 수정 샘','고요한 왕의 정원'];
 const stagesEN = ['Dewfall Trail','The Crystal Spring','Court of the Hollow Crown'];
 const abilityInfo = {
+  voice:['언어의 일격','모델 표현 따라 말하기','mic'], echo:['메아리 방패','듣고 뜻 고르기','ear'], burst:['대화의 폭발','상황에 맞게 답하기','chat'],
   sword:['검격','단어의 뜻','sword'], fire:['화염 마법','문장 완성','flame'],
   guard:['수호 방패','표현의 뜻','shield'], heal:['치유 마법','단어 배열','leaf']
 };
@@ -2317,6 +3151,11 @@ const labels = {'New':'새 표현','Learning':'익히는 중','Review Needed':'�
 const paths = {
   lock:'M6 10h12v11H6Zm3 0V7a3 3 0 0 1 6 0v3',
   crown:'m3 7 5 4 4-7 4 7 5-4-2 12H5Zm2 9h14',
+  mic:'M9 6a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0Zm-3 5v1a6 6 0 0 0 12 0v-1m-6 7v4m-4 0h8',
+  ear:'M6 10a7 7 0 1 1 13 3c-1 3-5 3-6 6-1 4-6 3-6 0m3-9a3 3 0 1 1 5 3',
+  chat:'M3 4h18v13H9l-5 4v-4H3Zm4 5h10m-10 4h6',
+  compass:'m12 2 9 10-9 10-9-10Zm4 5-2 7-6 3 2-7Z',
+  pen:'m4 16 11-11 4 4L8 20H4Zm9-9 4 4',
   check:'m4 12 5 5L20 6',
   sword:'M5 19 18 6l3-3-1 6L8 21m-5-8 8 8M3 21l4-4',
   flame:'M12 2c2 6 7 7 7 13a7 7 0 1 1-14 0c0-4 3-7 5-9 0 4 1 5 2 5 2-3 1-6 0-9Z',
@@ -2337,6 +3176,7 @@ function save(){
   game.hint = Engine.save(game.profile) ? '' : '이 브라우저에서 저장할 수 없어요. 창을 닫기 전까지는 계속 플레이할 수 있어요.';
 }
 function change(screen){
+  if(game.voice && !['VOICE_PRACTICE','QUESTION_ACTIVE','ANSWER_FEEDBACK','PAUSED'].includes(screen))discardVoice();
   if (game.screen === 'PAUSED') pauseDialog.close();
   AudioFX.stop(); game.screen=screen; render(); window.scrollTo(0,0);
   if(screen !== 'TITLE') app.focus({preventScroll:true});
@@ -2347,7 +3187,7 @@ function titleView(){
   const hasSave=game.profile.started;
   const begin=button('new',icon('sword')+' 게임 시작',{cl:hasSave?'':'primary'});
   const resume=button('continue','이어하기',{cl:hasSave?'primary':'',disabled:!hasSave});
-  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.3</div></section>';
+  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.4</div></section>';
 }
 function introView(){
   const item=saga[game.page];
@@ -2384,7 +3224,7 @@ function mapView(){
     '<section class="route-column"><h3>탐험 경로</h3><div class="stages">'+routes+'</div>'+
     '<div class="stats-band"><b>모험가 Lv. '+p.level+'</b><span>경험치 '+p.xp+' / '+stats.nextXp+'</span><span>금화 '+p.gold+'</span></div>'+
     '<div class="actions journal-links">'+button('book',icon('book')+' 단어 도감')+button('review',icon('leaf')+' 복습')+
-    button('dashboard',icon('star')+' 학습 기록')+button('chapters',p.chapterComplete?'제2장 · 마을로':'장 선택')+(p.chapterComplete?button('ending','챕터 결말'):'')+'</div></section></div>';
+    button('voice-hall',icon('mic')+' 메아리의 전당',{cl:'hall-link'})+button('today','오늘의 복습')+button('dashboard',icon('star')+' 학습 기록')+button('chapters',p.chapterComplete?'제2장 · 마을로':'장 선택')+(p.chapterComplete?button('ending','챕터 결말'):'')+'</div></section></div>';
 }
 function statBar(label,hp,max,right=false){
   return '<div class="stat '+(right?'right':'')+'"><strong>'+label+'</strong><div class="hp" role="meter" aria-label="'+label+' 체력" aria-valuenow="'+hp+'" aria-valuemin="0" aria-valuemax="'+max+'"><span style="width:'+100*hp/max+'%"></span></div><b>'+hp+' / '+max+' HP</b></div>';
@@ -2412,16 +3252,20 @@ function abilitiesView(){
  const tip=b.stage>=4?villageTactic(b):Engine.charging(b)?'왕이 마력을 모읍니다. 이번 턴에는 반격이 없어요.':
    Engine.heavy(b)?'왕의 강타 예고! 방패로 막아 다음 공격을 강화하거나, 열린 수정핵을 노리세요.':
    b.counterReady?'반격 준비 완료 · 다음 검격 또는 화염에 피해 +12':'사용할 기술을 고르세요.';
- return '<div class="battle-title"><h2>'+tip+'</h2><span class="hint">'+b.turn+'번째 턴</span></div><div class="abilities">'+Object.entries(abilityInfo).map(([id,[name,desc,glyph]])=>{
+ return '<div class="battle-title"><h2>'+tip+'</h2><span class="hint">'+b.turn+'번째 턴</span></div><div class="abilities">'+Object.entries(abilityInfo).filter(([id])=>!['voice','echo','burst'].includes(id)).map(([id,[name,desc,glyph]])=>{
    const swordTask=Engine.exposed(b)?'듣기 도전':b.stage>=2&&b.turn%2===0?'한국어를 영어로':'단어의 뜻';
    const enabled=Engine.available(b,id),cd=b.cooldowns[id],note=enabled?(b.stage>=4?villageAbilityTask(b,id):id==='sword'?swordTask:desc):cd?cd+'턴 후 사용':b.training?'연습은 검격으로 진행':'두 번째 숲길에서 개방';
    return button('ability',icon(glyph)+'<strong>'+name+'</strong><small>'+note+'</small>',{id,cl:'ability',disabled:!enabled});
- }).join('')+'</div>'+combatItemButtons(b);
+ }).join('')+'</div>'+voiceSpellButtons(b)+combatItemButtons(b);
 }
 function questionView(context=''){
  const q=game.task.question, order=q.type==='order', listen=q.type==='listening';
  const hint=q.chapter!==2&&q.type==='sentence'&&q.instruction.includes('___')?'<p>'+koreanExamples[q.tags[0]]+'</p>':'';
- const listenUI=listen?'<div class="actions">'+button('replay',icon('sound')+' 다시 듣기',{disabled:!AudioFX.canSpeak(game.profile.settings)})+button('transcript','문장 보기')+'</div>'+(!AudioFX.canSpeak(game.profile.settings)||game.speechFallback?'<p>듣기 대체 문장 · <b lang="en">'+safe(q.phrase)+'</b></p>':''):'';
+ const listenUI=listen?'<div class="actions">'+button('replay',icon('sound')+' 다시 듣기',{id:'normal',disabled:!AudioFX.canSpeak(game.profile.settings)})+
+    button('replay','천천히 듣기',{id:'slow',disabled:!AudioFX.canSpeak(game.profile.settings)})+
+    button('transcript','문장 보기')+button('legacy-ko','뜻 보기')+'</div>'+
+    (!AudioFX.canSpeak(game.profile.settings)||game.speechFallback?'<p>듣기 대체 문장 · <b lang="en">'+safe(q.phrase)+'</b></p>':'')+
+    (game.showKo?'<p>한국어 뜻 · '+safe(q.answer)+'</p>':''):'';
  const chosen=game.order.map(i=>game.task.choices[i]);
  const legend=context || (abilityInfo[game.battle.ability][0]+' · '+game.battle.turn+'번째 턴');
  return '<span class="eyebrow">'+legend+'</span><h2 class="question">'+safe(q.instruction)+'</h2>'+hint+listenUI+(order?'<div class="answer-line" aria-live="polite">'+(chosen.map(safe).join(' ')||'여기에 문장이 만들어져요.')+'</div><div class="words">'+game.task.choices.map((word,i)=>button('word',safe(word),{id:i,cl:'word',disabled:game.order.includes(i)})).join('')+'</div><div class="actions">'+button('submit-order','문장 확인',{cl:'primary',disabled:chosen.length!==q.choices.length})+button('undo','한 단어 되돌리기',{disabled:!chosen.length})+'</div>':'<div class="choices">'+game.task.choices.map((answer,i)=>button('choice','<span class="choice-index">'+String.fromCharCode(65+i)+'</span>'+safe(answer),{id:i,cl:'choice'})).join('')+'</div>');
@@ -2436,6 +3280,7 @@ function feedbackView(q,correct){
  return '<div class="feedback"><strong>'+(correct?'정답이에요!':'다시 익혀 볼까요?')+'</strong><h3 lang="en">'+safe(expression(q))+'</h3>'+translation+'<p>정답 · '+safe(q.answer)+'<br>'+safe(q.explanation)+'</p>'+speakButton(expression(q))+'</div>';
 }
 function battlePanel(){
+ if(game.voice?.origin==='battle'&&['QUESTION_ACTIVE','ANSWER_FEEDBACK'].includes(game.screen))return voicePracticeView();
  const b=game.battle, name=Engine.enemies[game.stage-1].name;
  let panel='';
  switch(game.screen){
@@ -2501,7 +3346,7 @@ function bookView(){
  return '<article class="book-row"><div><strong lang="en">'+l.en+'</strong><small>'+l.ko+'</small></div><div>'+l.example+'<small>'+labels[Engine.status(r)]+' · 정답 '+(r?.correct||0)+' / 오답 '+(r?.wrong||0)+'</small></div>'+speakButton(l.en)+'</article>';
  }).join('')+'</section><div class="actions">'+button('map','지도')+button('review','오답 복습')+'</div>';
 }
-const screens={TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView,DASHBOARD:dashboardView,CHAPTERS:chaptersView,VILLAGE:villageView,LOCATION:locationView,QUESTS:questsView,SHOP:()=>itemView(true),BAG:()=>itemView(false),DIALOGUE:dialogueView,VILLAGE_END:villageEnding};
+const screens={VOICE_HALL:hallView,VOICE_PRACTICE:voicePracticeView,TODAY:todayView,TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView,DASHBOARD:dashboardView,CHAPTERS:chaptersView,VILLAGE:villageView,LOCATION:locationView,QUESTS:questsView,SHOP:()=>itemView(true),BAG:()=>itemView(false),DIALOGUE:dialogueView,VILLAGE_END:villageEnding};
 function render(){
  if(game.screen==='PAUSED'){showSettings();return;}
  const scene=app.querySelector('.battle');
@@ -2596,11 +3441,12 @@ function reviewView() {
 function dashboardView() {
   const p=game.profile, d=Engine.dashboard(p);
   const recent=d.recentChange===null?'최근 10회 응답 후 표시':d.recentChange===0?'변화 없음':(d.recentChange>0?'+':'')+d.recentChange+'%p';
-  const cards=[['만난 표현',d.encountered+' / '+d.total],['누적 정답률',d.accuracy===null?'아직 기록 없음':d.accuracy+'%'],
-    ['복습할 표현',d.reviewNeeded+'개'],['익숙한 표현',d.familiar+'개']];
-  return heading('FIELD JOURNAL  /  PROGRESS','학습 기록','이 모험에서 읽고 답한 기록입니다. 실제 영어 실력을 평가하는 점수와는 다릅니다.')+
+  const voice=VoiceLearning.dashboard(p);
+  const cards=[['만난 표현',voice.encountered+' / '+voice.total],['수첩 누적 정답률',d.accuracy===null?'아직 기록 없음':d.accuracy+'%'],
+    ['복습할 표현',voice.reviewNeeded+'개'],['익숙한 수첩 표현',d.familiar+'개']];
+  return heading('FIELD JOURNAL  /  PROGRESS','나의 영어 성장 기록','이 모험에서 읽고 답한 기록입니다. 실제 영어 실력을 평가하는 점수와는 다릅니다.')+
     '<div class="metric-grid">'+cards.map(([label,value])=>'<div class="panel metric"><small>'+label+'</small><strong>'+value+'</strong></div>').join('')+'</div>'+
-    '<div class="trend panel"><div><b>최근 정답률 변화</b><small>최근 5회와 직전 5회 비교</small></div><strong>'+recent+'</strong></div>'+
+    voiceAnalytics()+'<div class="trend panel"><div><b>최근 정답률 변화</b><small>최근 5회와 직전 5회 비교</small></div><strong>'+recent+'</strong></div>'+
     '<div class="trend panel"><div><b>속삭이는 숲</b><small>챕터 진행</small></div><strong>'+d.completedStages+' / 3</strong></div>'+
     (p.chapterComplete?'<div class="trend panel"><div><b>목소리를 되찾은 마을</b><small>완료한 의뢰</small></div><strong>'+VillageData.quests.filter(q=>p.village.progress[q.stage].completed).length+' / 3</strong></div>':'')+
     '<h3 class="ledger-heading">모험 업적 <small>'+p.achievements.length+' / '+Engine.achievements.length+'</small></h3>'+
@@ -2636,7 +3482,7 @@ function villageNav(){
   return '<nav class="village-nav" aria-label="마을 수첩">'+
     button('quests',icon('book')+' 의뢰 일지')+button('inventory',icon('shield')+' 소지품')+
     button('book',icon('leaf')+' 단어 도감')+button('review','표현 복습')+
-    button('dashboard','학습 기록')+button('chapters','장 선택')+'</nav>';
+    button('voice-hall',icon('mic')+' 메아리의 전당',{cl:'hall-link'})+button('today','오늘의 복습')+button('dashboard','학습 기록')+button('chapters','장 선택')+'</nav>';
 }
 function chaptersView(){
   const p=game.profile;
@@ -2689,6 +3535,7 @@ function locationView(){
     controls.push(button('talk',place.npc+'와 '+(state==='active'?'대화하기':'대화 연습'),{id:q.stage,cl:state==='active'?'primary':''}));
     if(state==='ready'||state==='complete')controls.push(button('village-fight',villageEnemies[q.stage-4]+(state==='complete'?' · 재도전':'에게 도전'),{id:q.stage,cl:'primary'}));
   }
+  if(state!=='available')controls.push(button('voice-mission',icon('chat')+' '+place.npc+'의 회화 미션',{id:'vc-'+q.npc}));
   const next=currentQuest();
   if(state==='complete'&&next)controls.push(button('destination','다음 의뢰 · '+villagePlaces[next.location].direction,{id:next.location}));
   if(q.location==='market')controls.push(button('shop',icon('crystal')+' 물품 상점'));
@@ -2882,24 +3729,459 @@ function villageAction(action,id){
 }
 
 ;
+// Views for the resonance hall. Portraits and stage navigation belong to the existing world.
+const voiceNpcs = {
+  rowan:{name:'로완',place:'속삭이는 숲',scene:'forest'},
+  clara:{name:'클라라',place:'상인의 시장',scene:'market'},
+  thomas:{name:'토머스',place:'등불 여관',scene:'inn'},
+  elena:{name:'엘레나',place:'마을 북문',scene:'gate'}
+};
+const voiceTabs={speak:'말하기',listen:'듣기',conversation:'주민 대화',scenario:'실전 영어 미션'};
+const voiceGlyphs={speak:'mic',listen:'ear',conversation:'chat',scenario:'compass'};
+const skillNames={voice:'언어의 일격',echo:'메아리 방패',burst:'대화의 폭발'};
+// Short cues introduce a listening topic without printing the line to be heard.
+const listeningCues={
+  directions:'where · 어디 / across · 건너편 / bridge · 다리',
+  ordering:'drink · 마실 것 / eat · 먹다 / please · 부탁할 때 쓰는 말',
+  greeting:'morning · 아침 / evening · 저녁 / night · 밤',
+  shopping:'bag · 봉투 / receipt · 영수증 / price · 가격',
+  payment:'pay · 지불하다 / change · 거스름돈',
+  seat:'seat · 자리 / sit · 앉다'
+};
+const scenarioNotes={
+  'vp-cafe':'음료를 주문하고 “For here”로 매장에서 마시겠다고 답했어요. 포장이라면 “To go”라고 할 수 있어요.',
+  'vp-route':'“First”와 “then”을 구분해 다리를 먼저 건너고, 그다음 지시한 방향으로 이동했어요.',
+  'vp-shop':'가격을 묻고 물건을 고른 뒤 계산과 인사까지 마쳤어요. 실제 게임 물품은 시장의 물품 상점에서 구매할 수 있어요.'
+};
+const micLabels={ready:'준비됨',requesting:'권한 요청 중',listening:'듣는 중',processing:'인식 처리 중',result:'인식 결과 도착',unavailable:'인식 사용 불가',denied:'마이크 권한 거부됨',timeout:'시간 초과'};
+function voicePortrait(npc){
+  return npc==='rowan'?Art.rowan():VillageArt.npc(npc);
+}
+function voiceActivity(id){return VoiceData.activities.find(a=>a.id===id);}
+function voiceMission(id){return VoiceData.missions.find(m=>m.id===id);}
+function isAural(a){return a.kind==='listen'||['meaning','route','identify'].includes(a.mode);}
+function isSpeakingTurn(a){return !isAural(a)&&['speak','conversation','scenario'].includes(a.kind);}
+function voiceSpellButtons(b){
+  const tasks={voice:'말하기 또는 글로 따라 쓰기',echo:'듣고 뜻 찾기',burst:'대화에 답하기'};
+  const glyph={voice:'mic',echo:'ear',burst:'chat'};
+  if(b.training)return '';
+  return '<div class="resonance-skills">'+Object.entries(skillNames).map(([id,name])=>{
+    const ready=Engine.available(b,id);
+    const hint=ready?tasks[id]:Engine.golemBreak(b)?'문장 복원 중':b.cooldowns[id]+'턴 후 사용';
+    return button('ability',icon(glyph[id])+'<span><strong>'+name+'</strong><small>'+hint+'</small></span>',{id,cl:'rune-skill',disabled:!ready});
+  }).join('')+'</div>';
+}
+function signedTitle(en,ko){return '<span class="voice-script" lang="en">'+safe(en)+'</span><h2>'+safe(ko)+'</h2>';}
+function hallView(){
+  const p=game.profile,tab=game.voiceTab||'speak';
+  const today=VoiceLearning.today(p);
+  const suggested=VoiceLearning.recommend(p,tab==='listen'?'listen':'speak');
+  const tabs=Object.entries(voiceTabs).map(([id,label])=>button('voice-tab',icon(voiceGlyphs[id])+' '+label,{id,cl:'hall-tab',pressed:tab===id})).join('');
+  const missions=tab==='conversation'||tab==='scenario';
+  const catalog=missions?VoiceData.missions.filter(m=>m.kind===tab):VoiceData.activities.filter(a=>a.kind===tab);
+  const entries=catalog.map((entry,i)=>{
+    const n=voiceNpcs[entry.npc];
+    const completed=missions?VoiceLearning.missionStep(p,entry.id):0;
+    const heading=missions?entry.name:entry.kind==='speak'?entry.english:entry.objective;
+    const description=missions?entry.objective:entry.kind==='speak'?entry.ko:({meaning:'듣고 한국어 뜻 고르기',identify:'들은 영어 표현 찾기',respond:'듣고 영어로 답하기'}[entry.mode]||'듣고 답하기');
+    const detail=missions?(completed>=entry.ids.length?'완료 · 다시 연습':completed+' / '+entry.ids.length+'차례'):n.name+' · '+n.place;
+    const art=missions?'<span class="entry-portrait">'+voicePortrait(entry.npc)+'</span>':'<span class="entry-stone">'+icon(voiceGlyphs[tab])+'</span>';
+    return button(missions?'voice-mission':'voice-lesson',art+'<span class="entry-copy"><small>'+safe(detail)+'</small><strong>'+safe(heading)+'</strong><span>'+safe(description)+'</span></span>'+icon('arrow'),{id:entry.id,cl:'hall-entry',aria:heading+' 연습'});
+  }).join('');
+  return '<section class="hall-banner panel"><div class="hall-landscape">'+Art.forest(1,true)+'</div><div class="hall-light"></div><div class="hall-welcome">'+signedTitle('The Power of Spoken Words','메아리의 전당')+
+    '<p>로완에게 한마디를 배우고, 마을 사람들과 주고받아 보세요.</p><div class="actions">'+
+    button('today',icon('book')+' 오늘의 영어 복습'+(today.count?' · '+today.count+'개':''))+
+    button('dashboard',icon('star')+' 나의 영어 성장 기록')+'</div></div><div class="hall-rowan">'+Art.rowan()+'</div></section>'+
+    '<nav class="hall-tabs" aria-label="전당 연습 종류">'+tabs+'</nav><div class="hall-section"><h3>'+voiceTabs[tab]+'</h3>'+
+    (!missions&&suggested?button('voice-lesson','맞춤 연습 시작 '+icon('arrow'),{id:suggested.id,cl:'study-link'}):'')+'</div>'+
+    '<div class="hall-catalog">'+entries+'</div><div class="actions">'+button('voice-home',p.currentChapter===2?'광장으로':'숲 지도로')+'</div>';
+}
+function voicePlayback(){
+  const noVoice=!AudioFX.canSpeak(game.profile.settings);
+  return '<div class="voice-playback">'+button('voice-play',icon('sound')+' 보통 속도',{id:'normal',disabled:noVoice})+
+    button('voice-play','천천히 듣기',{id:'slow',disabled:noVoice})+
+    (noVoice?'<small>영어 음성 없이 글로 연습합니다.</small>':'')+'</div>'+
+    '<details class="speech-mixer"><summary>음성 크기</summary><label>모델 음성 <input type="range" data-speech-volume min="0" max="100" value="'+Math.round(game.profile.settings.speechVolume*100)+'"></label></details>';
+}
+function audioClues(v){
+  const a=v.activity,available=AudioFX.canSpeak(game.profile.settings);
+  const canHear=available&&!v.noAudio;
+  let text=v.transcriptHint?'<p class="audio-clue"><b>영어 원문</b> '+utterance(a.english)+'</p>':'';
+  if(v.translationHint)text+='<p class="audio-clue"><b>한국어 뜻</b> '+safe(a.ko)+'</p>';
+  return '<div class="listen-sigil">'+icon('ear')+'</div><h3>'+safe(a.objective)+'</h3>'+
+    (!canHear?'<p class="assist-notice">글 읽기 대체 연습 · 음성 없이도 계속할 수 있어요.</p>':'')+
+    voicePlayback()+'<div class="hint-actions">'+button('voice-transcript','영어 원문 보기',{pressed:v.transcriptHint})+button('voice-translation','한국어 뜻 보기',{pressed:v.translationHint})+'</div>'+text;
+}
+function speakerCard(v){
+  const a=v.activity,n=voiceNpcs[a.npc];
+  let prompt;
+  if(v.stage==='brief'){
+    prompt='<div class="voice-script">Lesson</div><h3>'+safe(a.objective)+'</h3><p>'+safe(a.kind==='speak'?a.ko:a.kind==='listen'?'먼저 듣고 답해 보세요. 필요하면 원문과 뜻을 펼칠 수 있어요.':v.mission?.objective||a.fallback)+'</p>';
+  }else if(v.result){
+    const reply=v.result.reply;
+    prompt='<div class="voice-script">'+(reply?'Reply':'Expression')+'</div><h3 lang="en">'+safe(reply?.english||a.english)+'</h3>'+
+      '<p>'+safe(reply?.ko||a.ko)+'</p>'+voicePlayback();
+  }else if(isAural(a)){
+    prompt=audioClues(v);
+  }else{
+    prompt='<div class="voice-script">'+(a.kind==='speak'?'Model expression':'Conversation')+'</div><h3 class="spoken-word" lang="en">'+safe(a.english)+'</h3><p>'+safe(a.ko)+'</p>'+voicePlayback();
+  }
+  return '<div class="voice-speaker"><div class="voice-medallion">'+voicePortrait(a.npc)+'</div>'+
+    '<div class="voice-prompt"><div class="npc-signature">'+safe(n.name)+' <span>· '+safe(n.place)+'</span></div>'+prompt+'</div></div>';
+}
+function voiceTrialHead(v){
+  const a=v.activity,mission=v.mission;
+  const title=v.origin==='battle'?skillNames[game.battle.ability]:mission?mission.name:voiceTabs[a.kind]+' 연습';
+  const step=mission?' · '+(mission.ids.indexOf(a.id)+1)+' / '+mission.ids.length:'';
+  return '<header class="voice-trial-head"><div><span class="eyebrow">'+(v.origin==='battle'?'BATTLE ART':'ECHO HALL')+'</span><h2>'+safe(title)+'</h2></div><span>'+safe(voiceTabs[a.kind]+step)+'</span></header>';
+}
+function micPanel(v){
+  const state=v.micState,active=['requesting','listening','processing'].includes(state);
+  const text=v.transcript;
+  const micButton=active?button('mic-stop','마이크 중지',{cl:'mic-stop'}):button('mic-start',icon('mic')+' '+(state==='result'||v.micTried?'다시 말하기':'마이크로 말하기'),{cl:'mic-start',disabled:!SpeechInput.available()});
+  const reason=v.micMessage||(state==='unavailable'?'이 환경에서는 텍스트로 연습할 수 있어요.':state==='denied'?'권한이 없어도 같은 문제를 글로 풀 수 있어요.':state==='timeout'?'응답 시간이 지났어요. 다시 시도하거나 글로 답해 보세요.':'');
+  return '<section class="mic-panel" data-mic-state="'+safe(state)+'"><div class="mic-controls">'+micButton+
+    '<span class="mic-state" role="status"><i aria-hidden="true"></i>'+safe(micLabels[state]||state)+'</span></div>'+
+    '<small>누르면 브라우저의 음성 인식이 시작됩니다. 브라우저가 외부 서비스에서 음성을 처리할 수 있어요. 게임은 녹음과 인식 문장을 저장하지 않습니다.</small>'+
+    (reason?'<p class="mic-note" role="status">'+safe(reason)+'</p>':'')+
+    (text?'<div class="heard-text" aria-live="polite"><small>브라우저가 인식한 말</small><span lang="en">'+safe(text)+'</span></div><div class="actions">'+
+      button('mic-confirm','이 말로 답하기',{cl:'primary',disabled:v.mismatch})+button('mic-dispute','인식이 잘못됐어요')+'</div>':'')+'</section>';
+}
+function textPanel(v){
+  if(!v.textMode)return button('voice-text',icon('pen')+' 텍스트로 연습',{cl:'text-mode'});
+  return '<div class="typed-answer"><label for="voice-answer">영어로 답하기</label><div><input id="voice-answer" lang="en" type="text" maxlength="240" autocomplete="off" autocapitalize="none" spellcheck="false" value="'+safe(v.draft)+'">'+
+    button('voice-submit','답 확인',{cl:'primary'})+'</div><small>'+safe(v.activity.fallback)+'</small></div>';
+}
+function answerOptions(v){
+  const indices=v.handle.choices||[];
+  if(!indices.length||v.activity.kind==='speak')return '';
+  return '<div class="voice-choices">'+indices.map((c,i)=>button('voice-choice','<span class="choice-index">'+String.fromCharCode(65+i)+'</span>'+safe(c),{id:i,cl:'choice'})).join('')+'</div>';
+}
+function voiceHistory(v){
+  if(!v.history?.length)return '';
+  return '<details class="talk-history"><summary>주고받은 대화 · '+v.history.length+'차례</summary>'+v.history.map(h=>
+    '<p><b>'+safe(voiceNpcs[h.npc].name)+'</b> '+safe(h.prompt)+'</p><p><b>모험가</b> '+safe(h.answer)+'</p><p><b>'+safe(voiceNpcs[h.npc].name)+'</b> '+safe(h.reply)+'</p>'
+  ).join('')+'</details>';
+}
+function voicePracticeView(){
+  const v=game.voice,a=v.activity,battle=v.origin==='battle';
+  let control='';
+  if(v.stage==='brief'){
+    const keywords=isAural(a)?[]:VoiceLearning.lessonTags(a).map(id=>lessons.find(l=>l.id===id)).filter(Boolean);
+    const cue=isAural(a)?a.tags.map(tag=>listeningCues[tag]).find(Boolean):null;
+    control='<p class="trial-instruction">'+safe(a.fallback)+'</p>'+
+      (cue?'<p class="key-expressions">먼저 익힐 낱말 · '+safe(cue)+'</p>':'')+
+      (keywords.length?'<p class="key-expressions">관련 표현 · '+keywords.map(l=>safe(l.en)+' <small>'+safe(l.ko)+'</small>').join('　')+'</p>':'')+
+      button('voice-begin',battle?'기술 연습 시작':'연습 시작',{cl:'primary'});
+  }else if(v.result){
+    const r=v.result;
+    const status=r.correct?(v.answerMode==='speech'?'문장이 잘 인식되었어요!':v.answerMode==='text'?'텍스트 연습을 마쳤어요.':'알맞게 답했어요!'):'이 표현으로 다시 익혀 보세요.';
+    control='<div class="voice-response" aria-live="polite"><strong>'+safe(status)+'</strong>'+
+      '<p>연습 답 · '+safe(a.answer)+'</p><p>'+safe(r.reply?.why||a.explanation)+'</p>'+
+      (v.mission&&r.done?'<p class="mission-seal">'+icon('star')+' 미션 완료 · '+safe(v.mission.name)+'</p>'+
+        (scenarioNotes[v.mission.id]?'<p>'+safe(scenarioNotes[v.mission.id])+'</p>':''):'')+'</div>'+
+      (battle?button('resolve','계속 · 행동 실행',{cl:'primary'}):v.mission&&r.done?button('voice-exit','연습 마치기',{cl:'primary'}):
+        button('voice-next',!r.correct?'다시 풀기':v.mission?'다음 대화':v.origin==='today'?'오늘의 복습으로':'연습 목록으로',{cl:'primary'}))+
+      (r.done&&v.mission?.id==='vp-shop'&&game.profile.currentChapter===2?' '+button('voice-market','클라라의 물품 상점으로'):'');
+  }else{
+    const canSpeak=isSpeakingTurn(a);
+    control=(a.kind==='speak'?'<h3>모델 표현을 영어로 말하거나 입력하세요.</h3>':isAural(a)?'':'<h3>'+safe(a.objective)+'</h3>')+
+      answerOptions(v)+(canSpeak?micPanel(v)+textPanel(v):'');
+    const previous=game.profile.voice.records[a.id];
+    if(previous?.wrong>previous?.correct&&!isAural(a))control+='<aside class="adaptive-hint">'+
+      '<b>로완의 도움말</b><p>'+safe(a.explanation)+'</p>'+(a.example?'<p lang="en">'+safe(a.example)+'</p>':'')+'</aside>';
+  }
+  return '<section class="voice-trial '+(battle?'in-battle':'panel')+'">'+voiceTrialHead(v)+speakerCard(v)+
+    '<div class="voice-input">'+control+'</div>'+voiceHistory(v)+(!battle&&!(v.mission&&v.result?.done)?'<div class="voice-end">'+button('voice-exit','돌아가기')+'</div>':'')+'</section>';
+}
+function todayView(){
+  const t=VoiceLearning.today(game.profile);
+  const rows=t.due.map(entry=>button('daily-review','<div><small>'+safe(learningCategory(entry.kind))+'</small><strong>'+safe(entry.label||entry.id)+'</strong></div>'+icon('arrow'),{id:entry.id,cl:'daily-row'})).join('');
+  return heading('FIELD JOURNAL  /  TODAY','오늘의 영어 복습')+
+    '<div class="daily-summary panel"><div>'+icon('book')+' 오늘 풀 문제 <b>'+t.count+'</b></div><div>오늘 복습한 문제 <b>'+t.completed+'</b></div></div>'+
+    (rows?'<div class="daily-list">'+rows+'</div>':'<div class="empty-journal panel">'+icon('leaf')+'<p>오늘 예정된 복습을 모두 마쳤거나 아직 예정된 표현이 없어요.</p></div>')+
+    '<div class="actions">'+button('voice-hall','말하기 연습',{id:'speak'})+button('voice-hall','듣기 연습',{id:'listen'})+button('voice-home','지도로')+'</div>';
+}
+function learningCategory(kind){
+  return ({vocab:'어휘 인식',sentence:'문장 이해',listening:'듣기 이해',listen:'듣기 이해',order:'문장 배열',speaking:'말하기 연습',speak:'말하기 연습',conversation:'주민 대화',scenario:'실전 영어 미션',dialogue:'대화 이해'})[kind]||'표현 복습';
+}
+function voiceAnalytics(){
+  const d=VoiceLearning.dashboard(game.profile);
+  const meters=['vocab','sentence','order','listening'].map(kind=>{
+    const c=d.categories[kind];
+    const right=c.correct-c.assistedCorrect,wrong=c.wrong-c.assistedWrong,total=right+wrong;
+    const percent=total?Math.round(100*right/total):null;
+    const helpTotal=c.assistedCorrect+c.assistedWrong;
+    return '<div class="analytics-row"><div><b>'+learningCategory(kind)+'</b><small>도움 없이 '+right+' / '+total+'회 정답'+(helpTotal?' · 도움 사용 '+c.assistedCorrect+' / '+helpTotal+'회 정답':'')+'</small></div>'+
+      '<div class="learning-bar" aria-hidden="true"><i style="width:'+(percent||0)+'%"></i></div><strong>'+(percent===null?'—':percent+'%')+'</strong></div>';
+  }).join('');
+  const rec=d.recommendation;
+  const recent=d.recent.slice(-5).reverse().map(x=>'<li><time>'+safe(x.day)+'</time> '+learningCategory(x.kind)+' · '+(x.correct?'완료':'재연습')+(x.assisted?' · 도움 사용':'')+'</li>').join('');
+  return '<section class="panel voice-stats"><h3>활동별 연습 기록</h3><p>0.4에서 기록한 답변을 기준으로 계산해요.</p>'+meters+
+    '<p class="spoken-totals">인식 결과를 확인한 말하기 시도 <b>'+d.speakingAttempts+'회</b> · 글로 한 말하기 연습 <b>'+d.categories.speaking.text+'회</b> · 완료한 미션 <b>'+d.missionsCompleted+'개</b></p>'+
+    '<small>말하기 횟수는 연습량입니다. 브라우저가 받아쓴 단어로 발음 점수를 매기지 않아요.</small>'+
+    (recent?'<details><summary>최근 학습 활동</summary><ul>'+recent+'</ul></details>':'')+
+    '<div class="actions">'+(rec?button('recommended-review',learningCategory(rec.kind)+' 다시 연습',{cl:'primary'}):'')+button('today','오늘의 영어 복습')+button('voice-hall','메아리의 전당')+'</div></section>';
+}
+
+;
+// Recognition belongs to a single open activity. A transcript is never put on the profile.
+function voiceContextScreen(){
+  return ['VOICE_PRACTICE','QUESTION_ACTIVE','ANSWER_FEEDBACK'].includes(game.screen);
+}
+function voiceReturnHome(){return game.profile.currentChapter===2?'VILLAGE':'MAP';}
+function silenceVoice(clearInput=true){
+  SpeechInput.cancel();AudioFX.stop();
+  const v=game.voice;
+  if(!v)return;
+  v.micState=SpeechInput.available()?'ready':'unavailable';
+  v.micMessage='';v.transcript='';v.mismatch=false;
+  if(clearInput)v.draft='';
+}
+function discardVoice(){
+  silenceVoice();
+  VoiceLearning.cancel(game.profile);
+  game.voice=null;
+}
+function setupVoice(handle,origin,mission=null,history=[]){
+  if(!handle)return false;
+  SpeechInput.cancel();AudioFX.stop();
+  if(mission&&handle.step>0&&!history.length){
+    history=mission.ids.slice(0,handle.step).map(id=>{
+      const a=voiceActivity(id);
+      return {npc:a.npc,prompt:a.english,answer:a.answer,reply:a.replies[a.answer].english};
+    });
+  }
+  game.voice={handle,activity:handle.activity,origin,mission,history,stage:'brief',result:null,
+    micState:SpeechInput.available()?'ready':'unavailable',micTried:false,mismatch:false,micMessage:'',
+    transcript:'',textMode:false,draft:'',noAudio:false,transcriptHint:false,translationHint:false};
+  save();
+  change(origin==='battle'?'QUESTION_ACTIVE':'VOICE_PRACTICE');
+  return true;
+}
+function voiceFallback(v){
+  if(v!==game.voice||!voiceContextScreen()||v.stage!=='active'||v.result)return;
+  v.noAudio=true;
+  VoiceLearning.assist(game.profile,v.handle,'fallback');
+  if(v.activity.mode==='identify')v.translationHint=true;
+  else v.transcriptHint=true;
+  render();
+}
+function voicePlay(rate='normal'){
+  const v=game.voice;
+  if(!v||!voiceContextScreen())return;
+  if(['requesting','listening','processing'].includes(v.micState)){
+    SpeechInput.stop();
+  }
+  const spoken=v.result?(v.result.reply?.english||v.activity.english):v.activity.english;
+  const nodes=[...app.querySelectorAll('.voice-prompt [lang="en"],.voice-playback button')]
+    .filter(el=>el.textContent.trim()===spoken||el.dataset.id===rate);
+  const ok=AudioFX.speak(spoken,game.profile.settings,()=>{if(isAural(v.activity))voiceFallback(v);},{
+    rate,onStart:()=>nodes.forEach(el=>el.classList.add('speaking')),onEnd:()=>nodes.forEach(el=>el.classList.remove('speaking'))
+  });
+  if(!ok&&isAural(v.activity))voiceFallback(v);
+}
+function beginVoice(){
+  const v=game.voice;
+  if(!v||v.stage!=='brief')return;
+  v.stage='active';
+  if(isAural(v.activity)&&!AudioFX.canSpeak(game.profile.settings))voiceFallback(v);
+  else {
+    render();
+    if(isAural(v.activity))voicePlay(game.profile.settings.speechRate);
+  }
+  app.querySelector('.voice-input button:not(:disabled)')?.focus({preventScroll:true});
+}
+function voiceMicStart(){
+  const v=game.voice;
+  if(!v||v.stage!=='active'||v.result||!isSpeakingTurn(v.activity))return;
+  if(['requesting','listening','processing'].includes(v.micState))return;
+  AudioFX.stop();v.transcript='';v.micMessage='';v.mismatch=false;v.micTried=true;
+  const current=()=>game.voice===v&&voiceContextScreen()&&v.stage==='active'&&!v.result;
+  SpeechInput.start({
+    onState(state,reason){
+      if(!current())return;
+      v.micState=state;
+      v.micMessage=({'audio-capture':'마이크를 찾을 수 없어요. 글로 답하거나 연결 후 다시 시도하세요.',
+        network:'브라우저 음성 서비스에 연결하지 못했어요. 글로 계속할 수 있어요.',
+        'no-match':'단어를 인식하지 못했어요. 다시 말하거나 글로 답해 주세요.',
+        'no-speech':'음성이 들리지 않았어요. 다시 시도하거나 글로 답해 주세요.',
+        stopped:'마이크를 중지했어요.'})[reason]||'';
+      // Keep the prompt, typed response and keyboard focus intact on async status updates.
+      const panel=app.querySelector('.mic-panel');
+      const hadFocus=panel?.contains(document.activeElement);
+      if(panel)panel.outerHTML=micPanel(v);
+      const live=document.getElementById('voice-live');
+      if(live)live.textContent=(micLabels[state]||state)+' '+v.micMessage;
+      if(hadFocus)app.querySelector('[data-act="mic-stop"],[data-act="mic-start"]')?.focus({preventScroll:true});
+    },
+    onResult(transcript){
+      if(!current())return;
+      v.transcript=transcript.slice(0,360);v.micState='result';v.mismatch=false;
+      const panel=app.querySelector('.mic-panel');
+      if(panel)panel.outerHTML=micPanel(v);
+      app.querySelector('[data-act="mic-confirm"]')?.focus({preventScroll:true});
+    }
+  });
+}
+function submitVoice(value,mode){
+  const v=game.voice,p=game.profile;
+  if(!v||v.stage!=='active'||v.result||typeof value!=='string'||!value.trim())return;
+  SpeechInput.cancel();AudioFX.stop();
+  const r=VoiceLearning.submit(p,v.handle,value,{mode});
+  if(!r)return;
+  save();
+  if(r.retrySpeech){
+    v.mismatch=true;v.micMessage='일부 단어가 다르게 인식되었어요. 천천히 다시 말하거나 글로 답해 보세요.';
+    render();return;
+  }
+  v.result=r;v.stage='feedback';v.answerMode=mode;v.draft='';v.transcript='';
+  if(v.mission){
+    // History is constructed from authored lines, never from raw speech or free text.
+    const authoredAnswer=mode==='choice'?value:r.correct?v.activity.answer:'다시 연습';
+    v.history.push({npc:v.activity.npc,prompt:v.activity.english,answer:authoredAnswer,
+      reply:r.reply?.english||v.activity.answer});
+    if(v.history.length>20)v.history.shift();
+  }
+  if(v.origin==='battle'){
+    game.feedback=r;change('ANSWER_FEEDBACK');
+  }else change('VOICE_PRACTICE');
+  AudioFX.play(r.correct?'correct':'wrong',p.settings);
+}
+function exitVoice(){
+  const origin=game.voice?.origin;
+  if(origin==='battle')return;
+  discardVoice();
+  change(origin==='today'?'TODAY':origin==='location'?'LOCATION':origin==='dashboard'?'DASHBOARD':'VOICE_HALL');
+}
+function voiceNext(){
+  const v=game.voice;
+  if(!v?.result||v.origin==='battle')return;
+  if(v.mission&&!v.result.done){
+    const handle=VoiceLearning.startMission(game.profile,v.mission.id);
+    if(setupVoice(handle,v.origin,v.mission,v.history))beginVoice();
+  }else if(!v.result.correct){
+    if(setupVoice(VoiceLearning.start(game.profile,v.activity.id,{review:v.origin==='today'}),v.origin))beginVoice();
+  }else exitVoice();
+}
+function launchReviewEntry(id,origin='today'){
+  const a=voiceActivity(id);
+  if(a){setupVoice(VoiceLearning.start(game.profile,id,{review:true}),origin);return;}
+  game.reviewFrom=origin==='today'?'TODAY':'DASHBOARD';
+  game.dailyLegacy=true;
+  openReviewQuestion(id);
+}
+function voiceAction(action,id){
+  const s=game.screen,p=game.profile,v=game.voice;
+  const menuScreens=['MAP','VILLAGE','DASHBOARD','VOICE_HALL','TODAY','LOCATION','REVIEW','BOOK','CHAPTER_COMPLETE','VILLAGE_END'];
+  if(action==='voice-hall'&&menuScreens.includes(s)){
+    game.voiceTab=Object.hasOwn(voiceTabs,id)?id:'speak';change('VOICE_HALL');return true;
+  }
+  if(action==='today'&&menuScreens.includes(s)){change('TODAY');return true;}
+  if(action==='voice-home'&&['VOICE_HALL','TODAY'].includes(s)){change(voiceReturnHome());return true;}
+  if(action==='dashboard'&&['VOICE_HALL','TODAY'].includes(s)){change('DASHBOARD');return true;}
+  if(s==='VOICE_HALL'){
+    if(action==='voice-tab'&&Object.hasOwn(voiceTabs,id)){game.voiceTab=id;render();focusControl(action,id);return true;}
+    if(action==='voice-lesson'&&voiceActivity(id)){setupVoice(VoiceLearning.start(p,id),'hall');return true;}
+  }
+  if(action==='voice-mission'&&['VOICE_HALL','LOCATION'].includes(s)){
+    const m=voiceMission(id);
+    if(m)setupVoice(VoiceLearning.startMission(p,id),s==='LOCATION'?'location':'hall',m);
+    return true;
+  }
+  if(s==='TODAY'&&action==='daily-review'){
+    if(VoiceLearning.today(p).due.some(entry=>entry.id===id))launchReviewEntry(id);
+    return true;
+  }
+  if(s==='DASHBOARD'&&action==='recommended-review'){
+    const recommendation=VoiceLearning.dashboard(p).recommendation;
+    if(recommendation)launchReviewEntry(recommendation.id,'dashboard');
+    return true;
+  }
+  if(s==='REVIEW'&&game.dailyLegacy&&['review-list','review-back'].includes(action)){
+    game.dailyLegacy=false;game.reviewSession=null;change(game.reviewFrom);return true;
+  }
+  if(!voiceContextScreen()||!v)return false;
+  if(action==='voice-market'&&v.result?.done&&v.mission?.id==='vp-shop'&&p.currentChapter===2){
+    discardVoice();game.location='market';game.offer=null;game.purchaseNotice='';change('SHOP');return true;
+  }
+  if(action==='voice-exit'){exitVoice();return true;}
+  if(action==='voice-begin'){beginVoice();return true;}
+  if(action==='voice-next'){voiceNext();return true;}
+  if(action==='voice-play'&&['normal','slow'].includes(id)){voicePlay(id);return true;}
+  if(v.result||v.stage!=='active')return false;
+  switch(action){
+  case 'mic-start':voiceMicStart();break;
+  case 'mic-stop':SpeechInput.stop();break;
+  case 'mic-confirm':if(v.micState==='result'&&!v.mismatch)submitVoice(v.transcript,'speech');break;
+  case 'mic-dispute':
+    silenceVoice(false);v.textMode=true;render();document.getElementById('voice-answer')?.focus();break;
+  case 'voice-text':
+    silenceVoice(false);v.textMode=true;render();document.getElementById('voice-answer')?.focus();break;
+  case 'voice-submit':submitVoice(document.getElementById('voice-answer')?.value,'text');break;
+  case 'voice-choice':submitVoice(v.handle.choices[Number(id)],'choice');break;
+  case 'voice-transcript':
+    v.transcriptHint=!v.transcriptHint;
+    if(v.transcriptHint)VoiceLearning.assist(p,v.handle,'transcript');
+    render();focusControl(action,id);break;
+  case 'voice-translation':
+    v.translationHint=!v.translationHint;
+    if(v.translationHint)VoiceLearning.assist(p,v.handle,'translation');
+    render();focusControl(action,id);break;
+  default:return false;
+  }
+  return true;
+}
+function leaveWhenHidden(){
+  if(game.voice){
+    silenceVoice();
+    if(voiceContextScreen())render();
+  }
+}
+app.addEventListener('input',event=>{
+  if(event.target.id==='voice-answer'&&game.voice)game.voice.draft=event.target.value;
+});
+app.addEventListener('change',event=>{
+  if(!event.target.hasAttribute('data-speech-volume'))return;
+  game.profile.settings.speechVolume=Math.max(0,Math.min(1,Number(event.target.value)/100));
+  save();
+  if(!game.profile.settings.speechVolume)AudioFX.stop();
+  if(game.voice?.stage==='active'&&isAural(game.voice.activity)&&!AudioFX.canSpeak(game.profile.settings))voiceFallback(game.voice);
+  else if(game.voice&&voiceContextScreen())render();
+  const mixer=app.querySelector('.speech-mixer');
+  if(mixer){mixer.open=true;mixer.querySelector('input').focus({preventScroll:true});}
+});
+app.addEventListener('keydown',event=>{
+  if(event.target.id==='voice-answer'&&event.key==='Enter'&&!event.isComposing){event.preventDefault();submitVoice(event.target.value,'text');}
+});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)leaveWhenHidden();});
+window.addEventListener('pagehide',leaveWhenHidden);
+
+;
 // Keep modal inputs outside the scene so opening settings preserves the current question.
 function showSettings(){
  const p=game.profile, cfg=p.settings;
  const confirmLabel=game.confirm==='reset'?'저장 기록을 지울까요?':'새 모험으로 교체할까요?';
  const actions=game.confirm?'<h2>'+confirmLabel+'</h2><p>현재 모험과 학습 기록이 초기화됩니다.</p><div class="actions">'+button('confirm','초기화하고 계속',{cl:'primary'})+button('cancel-confirm','취소')+'</div>':
- '<div class="eyebrow">'+(game.pausedFrom==='TITLE'?'MAIN MENU':'PAUSED')+'</div><h2>설정</h2><label class="setting">효과음<input type="checkbox" data-setting="sound" '+(cfg.sound?'checked':'')+'></label><label class="setting">효과음 크기<input type="range" data-setting="volume" value="'+Math.round(cfg.volume*100)+'" min="0" max="100"></label><label class="setting">영어 발음<input type="checkbox" data-setting="voice" '+(cfg.voice?'checked':'')+'></label><label class="setting">발음 속도<select data-setting="speechRate"><option value="normal" '+(cfg.speechRate!=='slow'?'selected':'')+'>보통</option><option value="slow" '+(cfg.speechRate==='slow'?'selected':'')+'>천천히</option></select></label><div class="actions">'+button('close',game.pausedFrom==='TITLE'?'닫기':'계속하기',{cl:'primary'})+(game.pausedFrom!=='TITLE'?button('to-title','타이틀로'):'')+(p.started?button('reset','진행 초기화'):'')+'</div>';
+ '<div class="eyebrow">'+(game.pausedFrom==='TITLE'?'MAIN MENU':'PAUSED')+'</div><h2>설정</h2><label class="setting">효과음<input type="checkbox" data-setting="sound" '+(cfg.sound?'checked':'')+'></label><label class="setting">효과음 크기<input type="range" data-setting="volume" value="'+Math.round(cfg.volume*100)+'" min="0" max="100"></label><label class="setting">영어 발음<input type="checkbox" data-setting="voice" '+(cfg.voice?'checked':'')+'></label><label class="setting">음성 크기<input type="range" data-setting="speechVolume" value="'+Math.round(cfg.speechVolume*100)+'" min="0" max="100"></label><label class="setting">발음 속도<select data-setting="speechRate"><option value="normal" '+(cfg.speechRate!=='slow'?'selected':'')+'>보통</option><option value="slow" '+(cfg.speechRate==='slow'?'selected':'')+'>천천히</option></select></label><div class="actions">'+button('close',game.pausedFrom==='TITLE'?'닫기':'계속하기',{cl:'primary'})+(game.pausedFrom!=='TITLE'?button('to-title','타이틀로'):'')+(p.started?button('reset','진행 초기화'):'')+'</div>';
  pauseDialog.innerHTML='<section class="modal">'+actions+'</section>';
  if(!pauseDialog.open)pauseDialog.showModal();
  if(game.confirm)pauseDialog.querySelector('[data-act="cancel-confirm"]').focus();
 }
 function openSettings(mode=''){
  if(['PLAYER_ACTION','ENEMY_ACTION','PAUSED'].includes(game.screen))return;
+ if(game.voice)silenceVoice();
  game.pausedFrom=game.screen;game.confirm=mode;AudioFX.stop();game.screen='PAUSED';showSettings();
 }
 function closeSettings(){
- game.confirm='';game.screen=game.pausedFrom;pauseDialog.close();render();
+ game.confirm='';game.screen=game.pausedFrom;pauseDialog.close();
+ if(!game.voice&&['QUESTION_ACTIVE','REVIEW'].includes(game.screen)&&game.task?.question.type==='listening'&&!AudioFX.canSpeak(game.profile.settings)){
+  game.speechFallback=true;markQuestionAssist('fallback');
+ }
+ render();
  const focusButton=app.querySelector('[data-act="settings"]');
  if(focusButton)focusButton.focus({preventScroll:true});
+ if(game.voice?.stage==='active'&&!game.voice.result&&isAural(game.voice.activity)&&!AudioFX.canSpeak(game.profile.settings))voiceFallback(game.voice);
 }
 function startNew(){
  const settings={...game.profile.settings};
@@ -2913,27 +4195,37 @@ function startBattle(training=false){
  game.battleMaxHp=Engine.stats(game.profile).maxHp;game.battleLevel=game.profile.level;
  game.achievementStart=[...game.profile.achievements];change('BATTLE_READY');
 }
-function listen(){
+function listen(rate=game.profile.settings.speechRate){
  const q=game.task?.question;
  if(!q||q.type!=='listening')return;
- const fallback=()=>{if(['QUESTION_ACTIVE','REVIEW'].includes(game.screen)&&game.task?.question===q){game.speechFallback=true;render();}};
- if(!readAloud(q.phrase,fallback))fallback();
+ const fallback=()=>{if(['QUESTION_ACTIVE','REVIEW'].includes(game.screen)&&game.task?.question===q){game.speechFallback=true;markQuestionAssist('fallback');render();}};
+ if(!readAloud(q.phrase,fallback,rate))fallback();
 }
 function selectAbility(ability){
  const task=Engine.select(game.profile,game.battle,ability);
  if(!task)return;
- game.ability=ability;game.task=task;game.speechFallback=false;game.order=[];change('QUESTION_ACTIVE');
+ game.ability=ability;game.task=task;game.speechFallback=false;game.order=[];game.questionAssists=[];game.showKo=false;
+ if(task.voiceHandle){setupVoice(task.voiceHandle,'battle');return;}
+ change('QUESTION_ACTIVE');
  if(task.question.type==='listening')listen();
+}
+function markQuestionAssist(aid){
+ if(!game.questionAssists.includes(aid))game.questionAssists.push(aid);
+}
+function questionHelp(){
+ const aids=game.questionAssists.slice();
+ if(game.task?.question.type==='listening'&&!AudioFX.canSpeak(game.profile.settings)&&!aids.includes('fallback'))aids.push('fallback');
+ return {assisted:aids.length>0,aids};
 }
 function submitAnswer(value){
  if(game.screen==='REVIEW'){
-  const result=Engine.answerReview(game.profile,game.reviewSession,value);
+  const result=Engine.answerReview(game.profile,game.reviewSession,value,Date.now(),questionHelp());
   if(!result)return;
   game.reviewResult=result;AudioFX.stop();save();render();
   AudioFX.play(result.correct?'correct':'wrong',game.profile.settings);
   return;
  }
- const result=Engine.answer(game.profile,game.battle,value);
+ const result=Engine.answer(game.profile,game.battle,value,questionHelp());
  if(!result)return;
  game.feedback=result;save();change('ANSWER_FEEDBACK');
  AudioFX.play(result.correct?'correct':'wrong',game.profile.settings);
@@ -2945,7 +4237,7 @@ function currentIntent(b){
 // Commit the engine result first. Only the presentation waits for the weapon to make contact.
 function animateAction(screen, effect, before, amount, message, impactSound, done){
  const fast=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- const impactTime=fast?12:({sword:360,fire:580,enemy:370,heavy:370,heal:280}[effect]||240);
+ const impactTime=fast?12:({sword:360,fire:580,enemy:370,heavy:370,heal:280,voice:480,burst:480,echo:280}[effect]||240);
  const endTime=fast?75:effect==='fire'?1050:900;
  game.displayHp=before;game.effect=effect;game.amount='';game.message=message;
  change(screen);
@@ -2966,7 +4258,7 @@ function resolveTurn(){
  game.guarded=result.guard;
  let message='말의 빛이 흩어집니다.';
  if(result.damage)message=abilityInfo[b.ability][0]+'이 적중했습니다!'+(result.counterBonus?' 방패 반격 보너스 발동.':'');
- if(effect==='guard')message='수호 방패를 펼쳤습니다.';
+ if(result.guard)message=effect==='echo'?'메아리 방패를 펼쳤습니다. 다음 반격 피해가 줄어듭니다.':'수호 방패를 펼쳤습니다.';
  if(effect==='heal')message='치유의 빛이 체력을 '+result.healing+' 회복합니다.';
  if(result.won)game.reward=Engine.reward(p,b);
  save();
@@ -2998,24 +4290,24 @@ function resolveEnemyTurn(b,p){
    change(hit.lost?'DEFEAT':'PLAYER_SELECT');
  });
 }
-function readAloud(text,onError){
+function readAloud(text,onError,rate=game.profile.settings.speechRate){
  const matches=[...app.querySelectorAll('[lang="en"],.spoken-word')].filter(el=>el.textContent.trim()===text);
  if(!matches.length){
    const player=app.querySelector('[data-act="replay"]');
    if(player)matches.push(player);
  }
  return AudioFX.speak(text,game.profile.settings,onError,{
-   onStart:()=>matches.forEach(el=>el.classList.add('speaking')),
+   rate,onStart:()=>matches.forEach(el=>el.classList.add('speaking')),
    onEnd:()=>matches.forEach(el=>el.classList.remove('speaking'))
  });
 }
 function openReview(){
- game.reviewFrom=game.screen;game.reviewSession=null;game.reviewResult=null;change('REVIEW');
+ game.dailyLegacy=false;game.reviewFrom=game.screen;game.reviewSession=null;game.reviewResult=null;change('REVIEW');
 }
 function openReviewQuestion(id){
  const session=Engine.startReview(game.profile,id);
  if(!session)return;
- game.reviewSession=session;game.reviewResult=null;game.task=session;game.order=[];game.speechFallback=false;
+ game.reviewSession=session;game.reviewResult=null;game.task=session;game.order=[];game.speechFallback=false;game.showKo=false;game.questionAssists=[];
  change('REVIEW');
  if(session.question.type==='listening')listen();
 }
@@ -3033,8 +4325,9 @@ function handleQuestionControl(action,id){
  }
  if(action==='undo'){game.order.pop();render();app.querySelector('[data-act="word"]:not(:disabled)')?.focus({preventScroll:true});}
  if(action==='submit-order'&&task.question.type==='order'&&game.order.length===choices.length)submitAnswer(game.order.map(i=>choices[i]).join(' '));
- if(action==='replay')listen();
- if(action==='transcript'){game.speechFallback=true;render();focusControl(action,id);}
+ if(action==='replay')listen(id==='slow'?'slow':'normal');
+ if(action==='legacy-ko'){game.showKo=true;markQuestionAssist('translation');render();focusControl(action,id);}
+ if(action==='transcript'){game.speechFallback=true;markQuestionAssist('transcript');render();focusControl(action,id);}
 }
 function dispatch(action,id){
  const p=game.profile;
@@ -3053,6 +4346,7 @@ function dispatch(action,id){
   if(action==='to-title'){game.battle=null;change('TITLE');}
   return;
  }
+ if(voiceAction(action,id))return;
  if(villageAction(action,id))return;
  if(action==='map'&&['BOOK','DEFEAT','CHAPTER_COMPLETE','LEARNING','DASHBOARD'].includes(game.screen)){game.battle=null;change('MAP');return;}
  if(action==='book'&&['MAP','CHAPTER_COMPLETE'].includes(game.screen)){change('BOOK');return;}
@@ -3111,6 +4405,7 @@ pauseDialog.setAttribute('aria-label','게임 설정');
 pauseDialog.addEventListener('cancel',e=>{e.preventDefault();if(game.confirm==='reset'){game.confirm='';showSettings();}else closeSettings();});
 pauseDialog.addEventListener('change',e=>{
  const setting=e.target.dataset.setting;
+ if(setting==='speechVolume'){game.profile.settings.speechVolume=Math.max(0,Math.min(1,Number(e.target.value)/100));AudioFX.stop();save();}
  if(setting==='speechRate'){game.profile.settings.speechRate=e.target.value==='slow'?'slow':'normal';AudioFX.stop();save();}
  if(['sound','volume','voice'].includes(setting)){
   game.profile.settings[setting]=setting==='volume'?Number(e.target.value)/100:e.target.checked;

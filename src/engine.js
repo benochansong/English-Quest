@@ -2,10 +2,10 @@
 const Engine = (() => {
   const legacyKey = 'EnglishQuest.chapter1.v1';
   const v2Key = 'EnglishQuest.chapter1.v2';
-  const saveKey = 'EnglishQuest.v3';
+  const v3Key = 'EnglishQuest.v3';
+  const saveKey = 'EnglishQuest.v4';
   const active = new WeakMap();
   const reviews = new WeakMap();
-  const day = 86400000;
   const achievements = [
     {id:'firstVictory', name:'첫 승리', description:'첫 전투에서 승리하기'},
     {id:'firstSpell', name:'불꽃의 시작', description:'화염 마법에 처음 성공하기'},
@@ -25,16 +25,18 @@ const Engine = (() => {
     {name:'메아리 정령', en:'Echo Wisp', hp:105, attack:12, defense:1},
     {name:'문장 골렘', en:'Sentence Golem', hp:165, attack:15, defense:3}
   ];
-  const cooldown = {sword:0, fire:2, guard:0, heal:3};
+  const cooldown = {sword:0, fire:2, guard:0, heal:3, voice:1, echo:1, burst:3};
+  const voiceSkills = ['voice','echo','burst'];
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
   const integer = (value, fallback, max) => Number.isSafeInteger(value)
     ? clamp(value, 0, max) : fallback;
   const emptyRecord = () => ({seen:false, correct:0, wrong:0, streak:0});
   function fresh() {
-    return {version:3, started:false, currentChapter:1, level:1, xp:0, gold:0, hp:100,
+    return {version:4, started:false, currentChapter:1, level:1, xp:0, gold:0, hp:100,
       completed:[], unlocked:1, chapterComplete:false, learning:{}, mistakes:{},
       marked:[], schedule:{}, history:[], achievements:[], village:VillageEngine.fresh(),
-      settings:{sound:true, voice:true, volume:0.45, speechRate:'normal'}};
+      voice:VoiceLearning.fresh(),
+      settings:{sound:true, voice:true, volume:0.45, speechRate:'normal',speechVolume:1}};
   }
   function stats(profile) {
     const steps = profile.level - 1;
@@ -43,7 +45,7 @@ const Engine = (() => {
   }
   function hydrate(raw) {
     const profile = fresh();
-    if (!raw || ![1, 2, 3].includes(raw.version)) return profile;
+    if (!raw || ![1, 2, 3, 4].includes(raw.version)) return profile;
     profile.started = raw.started === true;
     profile.level = Math.max(1, integer(raw.level, 1, 9999));
     profile.gold = integer(raw.gold, 0, Number.MAX_SAFE_INTEGER);
@@ -53,10 +55,11 @@ const Engine = (() => {
     }
     profile.unlocked = Math.min(3, profile.completed.length + 1);
     profile.chapterComplete = profile.completed.length === 3;
-    if (raw.version === 3) {
+    if (raw.version >= 3) {
       profile.village = VillageEngine.hydrate(raw.village, profile.chapterComplete);
       if (profile.chapterComplete && raw.currentChapter === 2) profile.currentChapter = 2;
     }
+    if (raw.version === 4) profile.voice=VoiceLearning.hydrate(raw.voice);
     const {maxHp, nextXp} = stats(profile);
     profile.hp = integer(raw.hp, maxHp, maxHp);
     profile.xp = integer(raw.xp, 0, nextXp - 1);
@@ -78,6 +81,7 @@ const Engine = (() => {
     }
     if (Number.isFinite(settings.volume)) profile.settings.volume = clamp(settings.volume, 0, 1);
     if (settings.speechRate === 'slow') profile.settings.speechRate = 'slow';
+    if (Number.isFinite(settings.speechVolume)) profile.settings.speechVolume=clamp(settings.speechVolume,0,1);
     if (raw.version >= 2) {
       profile.marked = lessons.filter(l => Array.isArray(raw.marked) && raw.marked.includes(l.id)).map(l => l.id);
       profile.achievements = achievements.filter(a => Array.isArray(raw.achievements) && raw.achievements.includes(a.id)).map(a => a.id);
@@ -89,7 +93,7 @@ const Engine = (() => {
       for (const {id} of Q) {
         const timing = raw.schedule?.[id];
         if (timing && typeof timing === 'object') profile.schedule[id] = {
-          step:integer(timing.step, 0, 3), dueAt:integer(timing.dueAt, 0, 8640000000000000)
+          step:integer(timing.step, 0, 4), dueAt:integer(timing.dueAt, 0, 8640000000000000)
         };
       }
     }
@@ -107,9 +111,9 @@ const Engine = (() => {
   function load() {
     try {
       const current = stored(saveKey);
-      if (current?.version === 3) return hydrate(current);
-      for (const legacy of [stored(v2Key),stored(legacyKey),current]) {
-        if (![1,2].includes(legacy?.version)) continue;
+      if (current?.version === 4) return hydrate(current);
+      for (const legacy of [stored(v3Key),stored(v2Key),stored(legacyKey),current]) {
+        if (![1,2,3].includes(legacy?.version)) continue;
         const profile = hydrate(legacy);
         save(profile);
         return profile;
@@ -120,7 +124,7 @@ const Engine = (() => {
   }
   function save(profile) {
     try {
-      if (profile.version !== 3 || stored(saveKey)?.version > 3) return false;
+      if (profile.version !== 4 || stored(saveKey)?.version > 4) return false;
       localStorage.setItem(saveKey, JSON.stringify(profile));
       return true;
     }
@@ -133,7 +137,8 @@ const Engine = (() => {
       record.seen = true;
     }
   }
-  function record(profile, question, correct) {
+  function record(profile, question, correct, options={}) {
+    VoiceLearning.note(profile,question,correct,options);
     teach(profile, question.tags);
     for (const id of question.tags) {
       const item = profile.learning[id];
@@ -168,8 +173,10 @@ const Engine = (() => {
     const bookmarkedIds = new Set(profile.marked.map(tag => Q.find(q => q.tags.includes(tag))?.id));
     return Q.filter(q => profile.mistakes[q.id] || bookmarkedIds.has(q.id)).map(question => {
       const misses = profile.mistakes[question.id] || 0;
-      const dueAt = profile.schedule[question.id]?.dueAt || 0;
-      return {question, misses, dueAt, due:dueAt <= now, marked:bookmarkedIds.has(question.id)};
+      const date=profile.voice.records[question.id]?.dueDay;
+      const dueAt = date ? new Date(date+'T00:00:00').getTime() : (profile.schedule[question.id]?.dueAt || 0);
+      const due=date ? date<=VoiceLearning.localDay(now) : (!dueAt || VoiceLearning.localDay(dueAt)<=VoiceLearning.localDay(now));
+      return {question, misses, dueAt, due, marked:bookmarkedIds.has(question.id)};
     }).sort((a, b) => a.dueAt - b.dueAt || b.misses - a.misses);
   }
   function dashboard(profile) {
@@ -206,7 +213,7 @@ const Engine = (() => {
     const enemyMaxHp = training ? 3*Math.max(1,hero.attack-enemy.defense) : Math.round(enemy.hp * durability);
     const encounter = {stage, training, turn:1, phase:'PLAYER_SELECT', hp:hero.maxHp,
       enemyHp:enemyMaxHp, enemyMaxHp, incomingScale:scaled ? hero.maxHp / baseline.maxHp : 1,
-      cooldowns:{sword:0,fire:0,guard:0,heal:0},
+      cooldowns:Object.fromEntries(Object.keys(cooldown).map(id=>[id,0])),
       counts:{}, lastId:null, question:null, choices:[], ability:null, correct:false,
       combo:0, bossPhase:1, counterReady:false, charm:false};
     active.set(profile, encounter);
@@ -225,7 +232,8 @@ const Engine = (() => {
   function available(encounter, ability) {
     return encounter?.phase === 'PLAYER_SELECT' && Object.hasOwn(cooldown, ability)
       && (!encounter.training || ability === 'sword')
-      && (encounter.stage > 1 || ability === 'sword') && encounter.cooldowns[ability] === 0;
+      && !(golemBreak(encounter) && voiceSkills.includes(ability))
+      && (encounter.stage > 1 || ability === 'sword' || voiceSkills.includes(ability)) && encounter.cooldowns[ability] === 0;
   }
   function shuffle(items, random = Math.random) {
     const result = [...items];
@@ -274,10 +282,20 @@ const Engine = (() => {
   }
   function select(profile, encounter, ability, random = Math.random) {
     if (!inPhase(profile, encounter,'PLAYER_SELECT') || !available(encounter,ability)) return null;
+    if (voiceSkills.includes(ability)) {
+      const kind={voice:'speak',echo:'listen',burst:'conversation'}[ability];
+      const a=VoiceLearning.recommend(profile,kind,item=>ability!=='echo'||item.mode==='meaning');
+      if(!a) return null;
+      const voiceHandle=VoiceLearning.start(profile,a.id,{battle:encounter});
+      const question={id:a.id,type:a.kind,chapter:0,instruction:a.objective,phrase:a.english,answer:a.answer,
+        explanation:a.explanation,tags:VoiceLearning.lessonTags(a),choices:a.choices};
+      Object.assign(encounter,{ability,question,choices:voiceHandle.choices,voiceHandle,phase:'QUESTION_ACTIVE'});
+      return {voiceHandle,question,choices:voiceHandle.choices};
+    }
     let pool = encounter.training ? Q.filter(q => profile.mistakes[q.id]) : candidates(encounter, ability);
     if (!pool.length) return null;
     const seen = pool.filter(q => q.tags.every(tag => profile.learning[tag]?.seen));
-    if (seen.length && encounter.stage <= 3) pool = seen;
+    if (seen.length) pool = seen;
     const other = pool.filter(q => q.id !== encounter.lastId);
     if (other.length) pool = other;
     const recentIds = profile.history.slice(-2).map(item => item.id);
@@ -290,7 +308,7 @@ const Engine = (() => {
     const question = next[Math.floor(random()*next.length)];
     const choices = makeChoices(question, random);
     encounter.counts[question.id] = (encounter.counts[question.id] || 0) + 1;
-    Object.assign(encounter, {ability, question, choices, lastId:question.id, phase:'QUESTION_ACTIVE'});
+    Object.assign(encounter, {ability, question, choices, lastId:question.id, voiceHandle:null,phase:'QUESTION_ACTIVE'});
     return {question, choices};
   }
   const normalize = text => text.trim().replace(/[.?!]$/, '').trim().replace(/\s+/g,' ');
@@ -307,16 +325,27 @@ const Engine = (() => {
     }
     return normalize(value) === normalize(question.answer);
   }
-  function answer(profile, encounter, value) {
-    if (!inPhase(profile, encounter,'QUESTION_ACTIVE')) return null;
-    const {question} = encounter;
-    const correct = evaluate(encounter,value);
-    if (correct === null) return null;
+  function settleAnswer(profile, encounter, correct) {
     encounter.combo = correct ? Math.min(4, encounter.combo + 1) : 0;
     if (encounter.combo === 3) unlock(profile,'combo3');
     Object.assign(encounter, {correct, phase:'ANSWER_FEEDBACK'});
-    record(profile, question, correct);
-    if (!encounter.training && encounter.stage >= 4) VillageEngine.track(profile,encounter.stage,question,correct);
+    if (!encounter.training && encounter.stage >= 4) VillageEngine.track(profile,encounter.stage,encounter.question,correct);
+  }
+  function voicePending(profile, encounter, handle) {
+    return inPhase(profile,encounter,'QUESTION_ACTIVE') && encounter.voiceHandle===handle;
+  }
+  function voiceResult(profile,encounter,handle,correct) {
+    if(!voicePending(profile,encounter,handle) || !handle.answered) return null;
+    settleAnswer(profile,encounter,correct);
+    return {correct,question:encounter.question,combo:encounter.combo};
+  }
+  function answer(profile, encounter, value, options={}) {
+    if (!inPhase(profile, encounter,'QUESTION_ACTIVE') || encounter.voiceHandle) return null;
+    const {question} = encounter;
+    const correct = evaluate(encounter,value);
+    if (correct === null) return null;
+    settleAnswer(profile,encounter,correct);
+    record(profile, question, correct, options);
     return {correct, question, combo:encounter.combo, retry:!correct && golemBreak(encounter)};
   }
   function retryBroken(profile, encounter) {
@@ -326,23 +355,22 @@ const Engine = (() => {
   }
   function startReview(profile, id, random = Math.random) {
     const entry = reviewList(profile).find(item => item.question.id === id);
-    if (!entry) return null;
-    const question = entry.question;
+    const question = entry?.question || (profile.voice.records[id] && Q.find(q=>q.id===id));
+    if (!question) return null;
     const session = {question, choices:makeChoices(question,random), answered:false};
     reviews.set(profile, session);
     return session;
   }
-  function answerReview(profile, session, value, now = Date.now()) {
+  function answerReview(profile, session, value, now = Date.now(), options={}) {
     if (!session || reviews.get(profile) !== session || session.answered) return null;
     const correct = evaluate(session, value);
     if (correct === null) return null;
     const {question} = session;
     session.answered = true;
     reviews.delete(profile);
-    record(profile, question, correct);
-    const previous = profile.schedule[question.id]?.step || 0;
-    const step = correct ? Math.min(previous + 1, 3) : 0;
-    const dueAt = now + [0,1,3,7][step]*day;
+    record(profile,question,correct,{...options,now,review:true});
+    const timing=profile.voice.records[question.id], step=timing.step;
+    const dueAt=new Date(timing.dueDay+'T00:00:00').getTime();
     profile.schedule[question.id] = {step, dueAt};
     unlock(profile,'firstReview');
     return {correct, question, dueAt};
@@ -353,8 +381,8 @@ const Engine = (() => {
     const {ability, correct, stage} = encounter;
     const hero = stats(profile);
     let damage = 0, healing = 0, comboBonus = 0, counterBonus = 0;
-    if (correct && (ability === 'sword' || ability === 'fire')) {
-      const power = ability === 'fire' ? hero.magic : hero.attack;
+    if (correct && ['sword','fire','voice','burst'].includes(ability)) {
+      const power = {sword:hero.attack,fire:hero.magic,voice:hero.attack+3,burst:hero.magic+4}[ability];
       const strike = Math.max(1, power - enemies[stage-1].defense) * (exposed(encounter) ? 2 : 1);
       const boosted = Math.round(strike*(100+bonusPercent(encounter.combo))/100);
       comboBonus = Math.min(encounter.enemyHp, boosted) - Math.min(encounter.enemyHp, strike);
@@ -371,7 +399,7 @@ const Engine = (() => {
     }
     const won = encounter.enemyHp === 0;
     encounter.phase = won ? 'VICTORY' : 'ENEMY_ACTION';
-    return {damage, healing, guard:correct && ability === 'guard', won, comboBonus, counterBonus};
+    return {damage, healing, guard:correct && ['guard','echo'].includes(ability), won, comboBonus, counterBonus};
   }
   function useItem(profile, encounter, id) {
     if (!inPhase(profile,encounter,'PLAYER_SELECT') || golemBreak(encounter) || encounter.training) return null;
@@ -388,14 +416,15 @@ const Engine = (() => {
     if (!inPhase(profile, encounter, 'ENEMY_ACTION')) return null;
     const charge = charging(encounter);
     const powerful = heavy(encounter);
-    const guard = encounter.correct && encounter.ability === 'guard';
+    const guard = encounter.correct && ['guard','echo'].includes(encounter.ability);
     const dive = diving(encounter), pulse = pulsing(encounter), interrupted = golemBreak(encounter) && encounter.correct;
     const extraPower = powerful ? (encounter.bossPhase === 2 ? 6 : 4) : dive ? 4 : pulse ? 2 : 0;
     const rawHit = enemies[encounter.stage-1].attack + extraPower - stats(profile).defense;
     const hit = Math.max(1, Math.round(rawHit * encounter.incomingScale) - (encounter.charm ? 3 : 0));
     const stopped = charge || interrupted;
     const unguarded = stopped ? 0 : Math.min(encounter.hp, hit);
-    const damage = stopped ? 0 : Math.min(encounter.hp, Math.max(1, Math.round(hit*(guard ? 0.4 : 1))));
+    const factor=guard ? (encounter.ability==='echo' ? .3 : .4) : 1;
+    const damage = stopped ? 0 : Math.min(encounter.hp, Math.max(1, Math.round(hit*factor)));
     if (guard && powerful) encounter.counterReady = true;
     encounter.hp -= damage;
     const lost = encounter.hp === 0;
@@ -437,8 +466,8 @@ const Engine = (() => {
     encounter.phase = 'REWARD';
     return {xp, gold, levelUp, bonus, replay};
   }
-  return {saveKey, legacyKey, v2Key, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
+  return {saveKey, legacyKey, v2Key, v3Key, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
     achievements, mark, reviewList, startReview, answerReview, dashboard, heavy, bonusPercent,
-    training, golemBreak, diving, pulsing, retryBroken, useItem,
+    training, golemBreak, diving, pulsing, retryBroken, useItem,voicePending,voiceResult,
     available, charging, exposed, shuffle, select, answer, playerAction, enemyAction, reward};
 })();
