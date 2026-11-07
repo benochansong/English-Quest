@@ -1,0 +1,99 @@
+{
+  "expected": 500,
+  "actual": 500,
+  "units": [
+    {
+      "id": "u01",
+      "count": 45,
+      "target": 45
+    },
+    {
+      "id": "u02",
+      "count": 45,
+      "target": 45
+    },
+    {
+      "id": "u03",
+      "count": 45,
+      "target": 45
+    },
+    {
+      "id": "u04",
+      "count": 45,
+      "target": 45
+    },
+    {
+      "id": "u05",
+      "count": 45,
+      "target": 45
+    },
+    {
+      "id": "u06",
+      "count": 45,
+      "target": 45
+    },
+    {
+      "id": "u07",
+      "count": 45,
+      "target": 45
+    },
+    {
+      "id": "u08",
+      "count": 45,
+      "target": 45
+    },
+    {
+      "id": "u09",
+      "count": 45,
+      "target": 45
+    },
+    {
+      "id": "u10",
+      "count": 45,
+      "target": 45
+    },
+    {
+      "id": "u11",
+      "count": 25,
+      "target": 25
+    },
+    {
+      "id": "u12",
+      "count": 25,
+      "target": 25
+    }
+  ],
+  "skills": {
+    "vocabulary": 135,
+    "grammar": 118,
+    "reading": 22,
+    "listening": 73,
+    "order": 88,
+    "conversation": 64
+  },
+  "tiers": [
+    {
+      "tier": 1,
+      "count": 197
+    },
+    {
+      "tier": 2,
+      "count": 242
+    },
+    {
+      "tier": 3,
+      "count": 61
+    }
+  ],
+  "expressions": 151,
+  "diagnostics": 2,
+  "missions": 4,
+  "errors": [],
+  "warnings": [],
+  "repeatedStimuli": [
+    [
+      "u02-002",
+      "u02-022"
+    ]
+  ]
+}

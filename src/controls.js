@@ -9,6 +9,8 @@ function showSettings(){
  if(game.confirm)pauseDialog.querySelector('[data-act="cancel-confirm"]').focus();
 }
 function openSettings(mode=''){
+ if(game.screen==='ACADEMY_BACKUP'&&typeof academyCancelImport==='function')academyCancelImport(false);
+ if(game.screen.startsWith('ACADEMY')&&typeof academySilence==='function')academySilence();
  if(['PLAYER_ACTION','ENEMY_ACTION','PAUSED'].includes(game.screen))return;
  if(game.voice)silenceVoice();
  if(typeof ExploreView!=='undefined')ExploreView.unmount();
@@ -16,6 +18,12 @@ function openSettings(mode=''){
 }
 function closeSettings(){
  game.confirm='';game.screen=game.pausedFrom;pauseDialog.close();
+ if(game.screen==='ACADEMY_RUN'){
+  const h=Academy.current(game.profile);
+  if(h?.phase==='question'&&h.activity.skill==='listening'&&!AudioFX.canSpeak(game.profile.settings)){
+   Academy.assist(game.profile,h,'fallback');AcademyUI.transcript=true;
+  }
+ }
  if(game.screen==='TRIAL_RUN'&&game.trial?.question.type==='listening'&&!AudioFX.canSpeak(game.profile.settings)){
   Trials.assist(game.profile,game.trial,'fallback');
  }
@@ -190,6 +198,7 @@ function dispatch(action,id){
   if(action==='to-title'){game.battle=null;change('TITLE');}
   return;
  }
+ if(typeof academyAction==='function'&&academyAction(action,id))return;
  if(typeof exploreAction==='function'&&exploreAction(action,id))return;
  if(rpgAction(action,id))return;
  if(voiceAction(action,id))return;
@@ -242,7 +251,7 @@ function dispatch(action,id){
 }
 function handleClick(event){
  const el=event.target.closest('button[data-act]');
- if(!el||!el.isConnected||el.disabled||(event.detail>1&&!['word','trial-tile','explore-word'].includes(el.dataset.act)))return;
+ if(!el||!el.isConnected||el.disabled||(event.detail>1&&!['word','trial-tile','explore-word','academy-word'].includes(el.dataset.act)))return;
  if(game.screen==='PAUSED'&&!pauseDialog.contains(el))return;
  AudioFX.play('ui',game.profile.settings);dispatch(el.dataset.act,el.dataset.id);
 }

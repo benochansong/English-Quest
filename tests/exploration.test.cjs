@@ -223,11 +223,11 @@ test('Authentic v5 migration preserves existing state and slots; fresh explorati
   const c=setup(false),{e,storage}=c;
   const old=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/v05-completed.json'),'utf8'));
   const text=JSON.stringify(old);storage.set(e.v5Key,text);const migrated=e.load();
-  assert.equal(migrated.version,7);assert.equal(storage.get(e.v5Key),text);
+  assert.equal(migrated.version,8);assert.equal(storage.get(e.v5Key),text);
   for(const key of ['level','xp','gold','hp','currentChapter','chapterComplete'])assert.equal(migrated[key],old[key],key);
   for(const key of ['rpg','village','voice','learning','settings'])assert.deepEqual(copy(migrated[key]),old[key],key);
   assert.equal(migrated.exploration.area,'forest');assert.equal(migrated.exploration.completed.length,0);assert.ok(c.x.available(migrated));
-  storage.set(e.saveKey,JSON.stringify({version:8,marker:'future'}));assert.equal(e.save(migrated),false);assert.equal(JSON.parse(storage.get(e.saveKey)).marker,'future');
+  storage.set(e.saveKey,JSON.stringify({version:9,marker:'future'}));assert.equal(e.save(migrated),false);assert.equal(JSON.parse(storage.get(e.saveKey)).marker,'future');
 });
 
 test('All exploration misses survive shared hydration and can be reviewed by the original notebook without world progression',()=>{

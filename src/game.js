@@ -55,7 +55,10 @@ function save(){
   game.hint = Engine.save(game.profile) ? '' : '이 브라우저에서 저장할 수 없어요. 창을 닫기 전까지는 계속 플레이할 수 있어요.';
 }
 function change(screen){
+  if(typeof academyCancelImport==='function'&&(game.screen==='ACADEMY_BACKUP'||game.screen==='PAUSED'&&game.pausedFrom==='ACADEMY_BACKUP')&&!['ACADEMY_BACKUP','PAUSED'].includes(screen))academyCancelImport();
+  if(game.screen.startsWith('ACADEMY')&&screen!==game.screen&&typeof academySilence==='function')academySilence();
   if(typeof ExploreView!=='undefined')ExploreView.beforeChange(screen);
+  if(typeof Academy!=='undefined'&&game.screen==='ACADEMY_RUN'&&!['ACADEMY_RUN','PAUSED'].includes(screen))Academy.close(game.profile);
   if(game.trial&&!['TRIAL_RUN','TRIAL_RESULTS','PAUSED'].includes(screen)){Trials.leave(game.profile);game.trial=null;}
   if(game.voice && !['VOICE_PRACTICE','QUESTION_ACTIVE','ANSWER_FEEDBACK','PAUSED'].includes(screen))discardVoice();
   if (game.screen === 'PAUSED') pauseDialog.close();
@@ -68,7 +71,7 @@ function titleView(){
   const hasSave=game.profile.started;
   const begin=button('new',icon('sword')+' 게임 시작',{cl:hasSave?'':'primary'});
   const resume=button('continue','이어하기',{cl:hasSave?'primary':'',disabled:!hasSave});
-  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.7 · The Forgotten Path</div></section>';
+  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.8 · The Academy of Words</div></section>';
 }
 function introView(){
   const item=saga[game.page];
@@ -227,7 +230,7 @@ function bookView(){
  return '<article class="book-row"><div><strong lang="en">'+l.en+'</strong><small>'+l.ko+'</small></div><div>'+l.example+'<small>'+labels[Engine.status(r)]+' · 정답 '+(r?.correct||0)+' / 오답 '+(r?.wrong||0)+'</small></div>'+speakButton(l.en)+'</article>';
  }).join('')+'</section><div class="actions">'+button('map','지도')+button('review','오답 복습')+'</div>';
 }
-const screens={CLASSES:classView,PROFILE:profileView,SKILLS:skillView,EQUIPMENT:equipmentView,TRIALS:trialList,TRIAL_RUN:trialView,TRIAL_RESULTS:trialResults,VOICE_HALL:hallView,VOICE_PRACTICE:voicePracticeView,TODAY:todayView,TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView,DASHBOARD:dashboardView,CHAPTERS:chaptersView,VILLAGE:villageView,LOCATION:locationView,QUESTS:questsView,SHOP:()=>itemView(true),BAG:()=>itemView(false),DIALOGUE:dialogueView,VILLAGE_END:villageEnding};
+const screens={ACADEMY:academyView,ACADEMY_RUN:academyRunView,ACADEMY_UNIT:academyUnitView,ACADEMY_PROGRESS:academyProgressView,ACADEMY_BACKUP:academyBackupView,CLASSES:classView,PROFILE:profileView,SKILLS:skillView,EQUIPMENT:equipmentView,TRIALS:trialList,TRIAL_RUN:trialView,TRIAL_RESULTS:trialResults,VOICE_HALL:hallView,VOICE_PRACTICE:voicePracticeView,TODAY:todayView,TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView,DASHBOARD:dashboardView,CHAPTERS:chaptersView,VILLAGE:villageView,LOCATION:locationView,QUESTS:questsView,SHOP:()=>itemView(true),BAG:()=>itemView(false),DIALOGUE:dialogueView,VILLAGE_END:villageEnding};
 function render(){
  if(typeof ExploreView!=='undefined')ExploreView.unmount();
  if(game.screen==='PAUSED'){showSettings();return;}

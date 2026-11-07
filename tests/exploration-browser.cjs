@@ -93,7 +93,7 @@ async function pathTo(page,id){
       for(let t=0;t<=n;t++)if(!Exploration.walkable(p,s.area,from.x+(to.x-from.x)*t/(n||1),from.y+(to.y-from.y)*t/(n||1)))return false;
       return true;
     };
-    if(Math.hypot(s.x-target.x,s.y-target.y)<48)return [];
+    if(Math.hypot(s.x-target.x,s.y-target.y)<56)return [];
     let start=null,best=Infinity;
     for(let y=0;y<rows;y++)for(let x=0;x<columns;x++){
       const pt=pos(x,y),d=Math.hypot(s.x-pt.x,s.y-pt.y);
@@ -212,7 +212,7 @@ async function loadV5(page){
   assert.equal(old.version,5);
   await page.evaluate(value=>localStorage.setItem('EnglishQuest.v5',value),raw);
   await page.reload();await click(page,'continue');await wait(page,'explore-enter');
-  const current=await profile(page);assert.equal(current.version,7);
+  const current=await profile(page);assert.equal(current.version,8);
   for(const key of ['level','xp','hp','gold','unlocked','completed','chapterComplete','currentChapter','village','learning','mistakes','history','schedule','voice','settings','rpg'])assert.deepEqual(current[key],old[key],'migration changed '+key);
   for(const id of old.achievements)assert.ok(current.achievements.includes(id));
   assert.equal(await page.evaluate(()=>localStorage.getItem('EnglishQuest.v5')),raw);

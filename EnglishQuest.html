@@ -1025,6 +1025,7 @@ dialog::backdrop {background:#031318bd;backdrop-filter:blur(3px);}
 @media(min-width:821px) and (max-height:850px){.eq-location-card{display:none}.eq-heading{margin-bottom:10px}.eq-card{padding:13px}}
 .eq-reward-reveal{width:170px;height:110px;margin:10px auto;background:radial-gradient(ellipse,#dcca7c22,transparent 68%)}.eq-reward-reveal svg{width:100%;height:100%}.eq-reward-reveal .eq-chest-lid{animation:eq-unseal .6s ease-out both}@keyframes eq-unseal{from{transform:translateY(0) rotate(0)}to{transform:translateY(-8px) rotate(-13deg)}}
 @media(prefers-reduced-motion:reduce){.exploration *,.eq-modal-shade *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+#eq-hero,#eq-follower{pointer-events:none}
 
 /* The renderer translates actor wrappers; these animations touch only their local joints. */
 .eq-actor-art { pointer-events:none; }
@@ -1086,8 +1087,1328 @@ dialog::backdrop {background:#031318bd;backdrop-filter:blur(3px);}
   .eq-chest-lid, .eq-chest-treasure, .eq-door-leaf, .eq-switch-lever { transition:none !important; }
   .eq-sense .eq-sense-ring { opacity:.65; }
 }
+
+.academy-hero{position:relative;overflow:hidden;min-height:330px;border:1px solid #a8996a66;border-radius:22px;background:#142c37;margin:22px 0}.academy-art{display:block;width:100%;height:360px;object-fit:cover}.academy-hero-copy{position:absolute;inset:auto 0 0;padding:70px 30px 24px;background:linear-gradient(transparent,#0c2426f5)}.academy-hero h2{font-size:clamp(26px,4vw,42px);margin:5px 0;color:#fae7b9}.academy-hero p{margin:4px 0;color:#d4e1dc}.academy-nav{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.academy-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.academy-room,.academy-card{background:linear-gradient(135deg,#1e373c,#132b32);border:1px solid #8da79a40;border-radius:16px;padding:22px;min-width:0}.academy-room>span{color:#d1bb85;font-size:12px;letter-spacing:2px}.academy-room h3{margin:14px 0 8px}.academy-room p{color:#b6cbc5;min-height:48px}.academy-room .btn{width:100%;text-align:left}.academy-strip{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px;margin:20px 0;border:1px solid #b9a47470;background:#233b3d;border-radius:16px}.academy-strip strong{font-size:25px;color:#f3ddb0}.academy-strip p{margin:6px 0;color:#c5d4ce}.academy-map{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;padding:10px 0;counter-reset:unit}.academy-map li{position:relative;min-width:0}.academy-map li:after{content:'';position:absolute;right:-18px;top:35px;width:18px;height:1px;background:#9fae8980}.academy-map li:nth-child(4n):after{display:none}.academy-map .btn{width:100%;min-height:115px;text-align:left;display:flex;flex-direction:column;align-items:start;justify-content:center;gap:8px;background:#1c353b}.academy-map small{font-weight:400;color:#becdc6}.academy-map .unit-number{color:#d5b980;font-size:11px;letter-spacing:2px}.academy-map .complete{border-color:#b6cf9b}.academy-tiers{display:flex;gap:8px;flex-wrap:wrap}.academy-tiers .btn[aria-pressed=true]{background:#e1c78f;color:#182e32}.academy-session{max-width:850px;margin:24px auto}.academy-question{padding:28px;border-radius:18px;background:#183239;border:1px solid #9caf9566}.academy-question h3{font-size:24px;line-height:1.6}.academy-context{border-left:3px solid #bcab7d;padding:12px 18px;background:#d8bd7b0d;color:#d2dfd8}.academy-choices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}.academy-choices .btn{min-height:60px;text-align:left;justify-content:flex-start;white-space:normal}.academy-words{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}.academy-answer{min-height:62px;padding:16px;background:#0d242b;border:1px dashed #a7b899;border-radius:10px}.academy-feedback{padding:20px;border-radius:12px;margin:18px 0;background:#3c4741;border-left:4px solid #e8c991}.academy-feedback.correct{background:#203f38;border-color:#b0d0a3}.academy-meta{display:flex;gap:15px;justify-content:space-between;margin:12px 0;color:#b8cfc8}.academy-progressbar{width:100%;height:6px;accent-color:#c9b886}.academy-expressions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.academy-expressions article{border:1px solid #8ca99b44;padding:16px;border-radius:10px;background:#102d33}.academy-expressions b{display:block;font-size:19px;color:#f0d8aa;margin-bottom:5px}.academy-muted{color:#b7cac4;font-size:14px;line-height:1.8}.academy-table{width:100%;border-collapse:collapse}.academy-table th,.academy-table td{padding:12px 8px;text-align:left;border-bottom:1px solid #78918544}.academy-table-wrap{overflow:auto}.academy-catalog{padding-left:0;list-style:none;display:grid;gap:7px}.academy-catalog .btn{width:100%;text-align:left;display:flex;gap:12px;justify-content:space-between;white-space:normal}.academy-file{display:block;padding:18px;border:1px dashed #aebda0;border-radius:10px;margin:15px 0}.academy-file input{display:block;margin-top:10px;max-width:100%}.academy-message{padding:15px;background:#304344;border-radius:10px}.academy-missions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}.academy-missions .btn{white-space:normal;min-height:65px}.academy-session .actions{flex-wrap:wrap}.academy-floating-book{animation:academy-float 6s ease-in-out infinite}@keyframes academy-float{50%{transform:translateY(-7px)}}
+@media(max-width:800px){.academy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.academy-map{grid-template-columns:repeat(3,minmax(0,1fr))}.academy-map li:nth-child(4n):after{display:block}.academy-map li:nth-child(3n):after{display:none}.academy-strip{align-items:start;flex-direction:column}.academy-art{height:330px}}
+@media(max-width:500px){.academy-grid,.academy-expressions,.academy-choices,.academy-missions{grid-template-columns:1fr}.academy-map{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.academy-map li:after{display:none!important}.academy-hero-copy{padding:60px 18px 20px}.academy-question{padding:18px}.academy-room{padding:18px}.academy-art{width:150%;max-width:none;margin-left:-25%}.academy-table{font-size:13px}.academy-tiers .btn{flex:1;padding:10px 7px}.academy-meta{font-size:13px}.academy-catalog .btn{align-items:start;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){.academy-floating-book{animation:none}}
+.academy-card input[type=text]{display:block;width:100%;box-sizing:border-box;margin:10px 0;padding:13px;border:1px solid #a0b9a0;border-radius:8px;background:#0d242b;color:#f4e7c8;font:inherit}.academy-card summary{cursor:pointer;padding:8px 0}.academy-card small{color:#b7cbc4}.academy-map .complete{box-shadow:inset 0 0 24px #acd59815,0 0 12px #b7cf8d10}.academy-expressions .btn{margin-top:10px}.academy-question .academy-card{margin-top:18px}
+.academy-npc{display:flex;align-items:center;gap:16px}.academy-npc p{margin:6px 0}.academy-npc-portrait{width:70px;min-width:70px}.academy-npc-portrait svg{display:block;width:100%;height:auto}
 </style></head><body><main id="app"></main><div id="voice-live" class="sr-only" role="status" aria-live="polite"></div><dialog id="pause"></dialog><noscript>게임을 실행하려면 자바스크립트를 켜 주세요.</noscript><script>
 'use strict';
+// Authored academy content is deliberately separate from the adventure question pool.
+const Curriculum = (() => {
+  const skills=['vocabulary','grammar','reading','listening','order','conversation'];
+  const skillNames={vocabulary:'표현의 뜻 이해',grammar:'문장 형태 선택',reading:'짧은 글의 정보 이해',listening:'짧은 말의 정보 이해',order:'문장 순서 구성',conversation:'상황에 맞게 응답'};
+  const themes=[
+    ['인사와 공손한 표현','Greetings and Politeness','상황에 맞게 인사하고 감사·사과·부탁을 전해요.'],
+    ['자기소개','Introductions','이름, 출신, 사는 곳과 직업을 소개해요.'],
+    ['하루의 일과','Daily Routines','매일 하는 일과 습관을 설명해요.'],
+    ['음식과 카페','Food and Cafés','음식과 음료를 공손하게 주문해요.'],
+    ['쇼핑과 돈','Shopping and Money','물건, 가격, 크기와 결제 방법을 확인해요.'],
+    ['길 찾기와 교통','Directions and Transport','길 안내를 이해하고 대중교통 정보를 물어요.'],
+    ['시간과 일정','Time and Schedules','요일, 날짜와 약속 시간을 확인해요.'],
+    ['여행과 호텔','Travel and Hotels','숙박과 여행에 필요한 정보를 주고받아요.'],
+    ['직장 영어','Workplace English','일터에서 소개하고 부탁과 지시를 확인해요.'],
+    ['건강과 일상의 필요','Health and Daily Needs','몸 상태와 필요한 도움을 간단히 표현해요.'],
+    ['짧은 대화','Short Conversations','앞뒤 말을 살피며 자연스럽게 대화를 이어 가요.'],
+    ['실전 영어 미션','Practical Missions','카페, 길 찾기, 시장과 일터의 일을 영어로 해결해요.']
+  ];
+  const units=themes.map(([name,en,description],i)=>({id:`u${String(i+1).padStart(2,'0')}`,name,en,description,order:i+1,targetCount:i<10?45:25,objectives:skills.map(s=>`u${String(i+1).padStart(2,'0')}.${s}`)}));
+  const objectives=units.flatMap(u=>skills.map(skill=>({id:`${u.id}.${skill}`,unitId:u.id,skill,name:`${u.name} · ${skillNames[skill]}`,description:`${u.description} ${skillNames[skill]}을 연습합니다.`})));
+  const activities=[],expressions=[],diagnostics=[],missions=[];
+  let cached;
+  function register(pack) {
+    const targets={units,objectives,activities,expressions,diagnostics,missions};
+    for(const [key,target] of Object.entries(targets)) {
+      const ids=new Set(target.map(x=>x.id));
+      for(const entry of pack[key]||[]) {if(!entry?.id||ids.has(entry.id))throw new Error(`Curriculum duplicate or missing ${key} ID: ${entry?.id}`);ids.add(entry.id);}
+    }
+    for(const [key,target] of Object.entries(targets))target.push(...(pack[key]||[]));
+    cached=undefined;
+  }
+  function index() {
+    if(!cached)cached=Object.fromEntries(Object.entries({units,objectives,activities,expressions,diagnostics,missions}).map(([key,list])=>[key,Object.assign(Object.create(null),Object.fromEntries(list.map(x=>[x.id,x])))]));
+    return cached;
+  }
+  const get=id=>index().activities[id];
+  // Each row is a single authored task, never a template expanded into numerical variants.
+  // code | expression key(s) | tier | English stimulus | Korean task | answer | distractors/tokens | explanation | hint | optional accepted responses
+  const codes={V:'vocabulary',G:'grammar',R:'reading',L:'listening',O:'order',C:'conversation'};
+  function definePack(unitId,expressionText,rowText,start=1) {
+    const ex=expressionText.trim()?expressionText.trim().split(/\r?\n/).filter(Boolean).map(row=>{const [id,english,ko]=row.split('|');return {id:`${unitId}.${id}`,unitId,english,ko};}):[];
+    const rows=rowText.trim().split(/\r?\n/).filter(Boolean).map((row,i)=>{
+      const [code,keys,tier,english,instruction,answer,options,explanation,hint,accepted='']=row.split('|');
+      if(!codes[code]||hint===undefined)throw new Error(`Malformed authored row ${unitId}:${start+i}`);
+      const skill=codes[code],type=code==='O'?'order':'choice',expressionIds=keys.split(',').map(k=>k.includes('.')?k:`${unitId}.${k}`);
+      return {id:`${unitId}-${String(start+i).padStart(3,'0')}`,unitId,objectiveId:`${unitId}.${skill}`,objective:instruction,skill,tier:Number(tier),type,english,instruction,answer,
+        alternatives:accepted?accepted.split('~'):[],choices:type==='order'?options.split('~'):[answer,...options.split('~')],distractors:type==='order'?[]:options.split('~'),
+        explanation,expressionIds,audioText:skill==='listening'?english:'',fallback:skill==='listening'?{type:'text',text:english}:null,hint,contentVersion:1};
+    });
+    register({expressions:ex,activities:rows});
+  }
+  return {units,activities,expressions,objectives,diagnostics,missions,skills,register,index,get,definePack};
+})();
+
+;
+Curriculum.definePack('u01',`
+hello|Hello.|안녕하세요.
+morning|Good morning.|좋은 아침이에요.
+afternoon|Good afternoon.|안녕하세요. (오후 인사)
+evening|Good evening.|안녕하세요. (저녁 인사)
+night|Good night.|안녕히 주무세요.
+thanks|Thank you.|감사합니다.
+welcome|You're welcome.|천만에요.
+excuse|Excuse me.|실례합니다.
+please|Please.|부탁해요. (공손한 부탁에 쓰는 말)
+sorry|I'm sorry.|미안합니다.
+bye|Goodbye.|안녕히 가세요. / 안녕히 계세요.
+later|See you later.|나중에 봐요.
+help|Can you help me?|도와주시겠어요?
+fine|I'm fine, thank you.|잘 지내요, 고마워요.
+repeat|Could you say that again?|다시 말씀해 주시겠어요?
+`, `
+V|hello|1|Hello.|처음 건네는 인사의 뜻을 고르세요.|안녕하세요.|죄송합니다.~잘 자요.|Hello는 사람을 만났을 때 쓰는 기본 인사예요.|만났을 때 하는 말이에요.
+V|morning|1|Good morning.|이 인사를 주로 하는 때를 고르세요.|아침|한밤중~오후 늦게|morning은 아침이므로 아침에 만났을 때 써요.|하루를 시작하는 시간이에요.
+V|afternoon|1|Good afternoon.|afternoon의 뜻을 고르세요.|오후|새벽~자정|afternoon은 정오 이후의 오후예요.|점심시간 이후를 떠올려 보세요.
+V|evening|1|You meet a friend in the evening.|퇴근 후 저녁에 만났을 때 하는 인사를 고르세요.|Good evening.|Good night.~Good morning.|Good evening은 저녁에 만날 때, Good night는 주로 헤어지거나 잠들 때 써요.|만나는 인사와 잠자리 인사를 구분해요.
+V|night|1|Good night.|잠자리에 들기 전에 하는 말의 뜻을 고르세요.|안녕히 주무세요.|점심 맛있게 드세요.~처음 뵙겠습니다.|Good night는 잠자리에 들 때 쓰는 인사예요.|night는 밤이에요.
+V|thanks|1|Thank you.|도움을 받은 뒤 하는 말의 뜻을 고르세요.|감사합니다.|어서 오세요.~실례합니다.|Thank you는 고마움을 전하는 표현이에요.|고마운 마음을 표현해요.
+V|welcome|1|You're welcome.|상대의 감사에 답하는 말의 뜻을 고르세요.|천만에요.|죄송해요.~안녕히 주무세요.|You're welcome은 Thank you에 대한 흔한 답이에요.|감사에 답하는 표현이에요.
+V|excuse|1|Excuse me.|길을 물으려고 말을 걸 때의 뜻을 고르세요.|실례합니다.|수고했어요.~축하해요.|Excuse me는 공손하게 주의를 끌 때 쓸 수 있어요.|아직 상대가 나를 보지 않고 있어요.
+V|please|1|Please.|부탁을 공손하게 만드는 말을 고르세요.|부탁해요.|어제~안녕|please를 부탁 문장에 덧붙이면 더 공손하게 들려요.|명령이나 요청을 부드럽게 해요.
+V|sorry|1|I'm sorry.|실수에 대해 하는 말의 뜻을 고르세요.|미안합니다.|반갑습니다.~고맙습니다.|I'm sorry는 사과할 때 쓰는 표현이에요.|내 실수로 불편을 줬어요.
+V|bye|1|Goodbye.|헤어질 때 하는 인사의 뜻을 고르세요.|안녕히 가세요.|어서 오세요.~잘 먹겠습니다.|Goodbye는 헤어질 때 쓰는 인사예요.|지금 대화를 마쳐요.
+V|later|1|See you later.|다시 만날 것을 기대하는 인사의 뜻을 고르세요.|나중에 봐요.|다시 말해 주세요.~여기서 기다려요.|later는 나중에라는 뜻이에요.|지금 이후의 만남이에요.
+G|thanks|1|Thank ___ for your help.|도와준 상대에게 감사하는 문장을 완성하세요.|you|your~yours|Thank 뒤에는 감사의 대상인 you를 써요. your는 뒤에 명사가 필요해요.|상대를 가리키는 목적어가 필요해요.
+G|welcome|1|You ___ welcome.|감사에 답하는 문장을 완성하세요.|are|am~is|You와 함께 쓰는 be동사는 are예요.|주어는 You예요.
+G|sorry|1|I ___ sorry.|사과 문장을 완성하세요.|am|are~is|I에는 be동사 am을 써요.|I와 짝이 되는 be동사를 찾아요.
+G|afternoon|1|Good ___, Ms. Kim. It is two in the afternoon.|오후 2시에 만난 사람에게 인사하세요.|afternoon|morning~night|오후에 만났으므로 Good afternoon이 맞아요.|인사하는 시간대가 afternoon이에요.
+G|help|2|Can you ___ me?|도움을 부탁하는 문장을 완성하세요.|help|helps~helping|Can 뒤에는 동사원형 help를 써요.|Can 다음에는 동사원형이 와요.
+G|repeat|2|Could you ___ that again?|다시 말해 달라는 문장을 완성하세요.|say|says~said|Could you 뒤에는 동사원형 say를 써요.|과거형을 쓰지 않아요.
+G|please|2|Please ___ here.|여기 앉아 달라는 부탁을 완성하세요.|sit|sits~sitting|부탁이나 지시의 문장은 동사원형 sit으로 시작할 수 있어요.|앉다라는 동사원형이에요.
+G|later|2|See ___ tomorrow.|내일 다시 보자는 인사를 완성하세요.|you|your~yours|See you tomorrow.는 내일 보자는 말이에요. see 뒤의 사람은 you예요.|보는 대상인 상대를 가리켜요.
+O|morning|1|Good morning, everyone.|모두에게 아침 인사를 하도록 단어를 이으세요.|Good morning, everyone.|everyone.~Good~morning,|Good morning 뒤에 everyone을 붙여 모두에게 인사해요.|아침 인사 다음에 사람들을 불러요.
+O|thanks|1|Thank you very much.|깊이 감사하는 문장을 만드세요.|Thank you very much.|much.~you~Thank~very|very much는 감사의 정도를 더해 줘요.|Thank you 뒤에 정도를 덧붙여요.
+O|help|2|Can you help me, please?|공손하게 도움을 청하는 문장을 만드세요.|Can you help me, please?|help~please?~Can~me,~you|Can you help me? 뒤에 please를 덧붙인 부탁이에요.|Can you로 질문을 시작해요.
+O|sorry|2|I am sorry about that.|그 일에 대해 사과하는 문장을 만드세요.|I am sorry about that.|that.~sorry~I~about~am|sorry about은 어떤 일에 대해 미안하다는 뜻이에요.|I am sorry 다음에 이유를 연결해요.
+O|fine|2|I am fine, thank you.|안부에 답하고 감사하는 문장을 만드세요.|I am fine, thank you.|thank~am~you.~fine,~I|I am fine은 잘 지낸다는 답이고 thank you는 감사를 더해요.|자신의 상태부터 답해요.
+O|repeat|3|Could you say that again, please?|못 들은 말을 다시 부탁하는 문장을 만드세요.|Could you say that again, please?|again,~you~please?~that~Could~say|say that again은 그것을 다시 말하다는 뜻이에요.|Could you 다음에 부탁할 행동을 놓아요.
+O|evening|1|Good evening, Mr. Brown.|저녁에 브라운 씨를 만나 인사하세요.|Good evening, Mr. Brown.|Brown.~Good~Mr.~evening,|Good evening은 저녁에 만났을 때 하는 인사예요. Mr. Brown으로 상대를 불러요.|저녁 만남의 인사를 먼저 이어요.
+O|bye|2|Goodbye, and have a nice day.|작별 인사와 좋은 하루를 바라는 말을 이으세요.|Goodbye, and have a nice day.|day.~have~Goodbye,~nice~a~and|have a nice day는 좋은 하루 보내라는 인사예요.|작별 인사 다음에 and로 소망을 덧붙여요.
+L|morning|1|Good morning, Mina. Your tea is ready.|언제 하는 인사를 들었나요?|아침 인사|저녁 인사~잠자리 인사|Good morning이라는 첫말이 아침 인사임을 알려 줘요.|처음 두 단어를 들어 보세요.
+L|thanks|1|Thank you for the book.|무엇을 받아 감사하나요?|책|우산~물|for the book은 책에 대해 감사한다는 뜻이에요.|book을 들어 보세요.
+L|excuse|2|Excuse me. Is this seat free?|화자는 무엇을 확인하나요?|자리가 비어 있는지|가방이 무거운지~문이 잠겼는지|seat는 자리, free는 이 문장에서 비어 있는 상태예요.|seat는 앉는 자리예요.
+L|repeat|2|I'm sorry. Could you repeat your name?|무엇을 다시 말해 달라고 하나요?|이름|주소~가격|repeat your name은 이름을 다시 말해 달라는 뜻이에요.|your name을 들어 보세요.
+L|later|2|See you on Friday, not Thursday.|다시 만나는 날은 언제인가요?|금요일|목요일~화요일|on Friday가 만나는 날이고 not Thursday는 목요일이 아니라고 정정해요.|not 뒤의 날은 제외해요.
+L|please|2|Please close the window. It is cold.|어떤 행동을 부탁하나요?|창문 닫기|문 열기~불 켜기|close the window는 창문을 닫으라는 뜻이에요.|close와 window를 연결해요.
+L|sorry|3|I'm sorry I'm late. The bus was slow.|늦은 이유는 무엇인가요?|버스가 느려서|기차를 놓쳐서~길을 몰라서|The bus was slow.가 늦은 이유를 설명해요.|두 번째 문장에서 이유를 찾아요.
+R|night|2|Jin leaves a friend's house at ten at night. He says, “Good night. See you tomorrow.”|진은 지금 무엇을 하나요?|집을 나서며 작별해요.|아침에 처음 만나요.~점심을 주문해요.|leaves와 See you tomorrow가 지금 헤어지는 상황임을 알려 줘요.|만나는 장면인지 헤어지는 장면인지 살펴요.
+R|thanks|3|A neighbor carries two heavy bags for Hana. Hana wants to show that she appreciates the help.|하나가 이웃에게 할 말로 알맞은 것은 무엇인가요?|Thank you for your help.|Good night, everyone.~Excuse me, where is Hana?|도움을 받은 상황이므로 그 도움에 감사하는 답이 알맞아요.|appreciates는 고마워한다는 뜻이에요.
+C|welcome|1|A friend says, “Thank you for the pen.”|감사에 자연스럽게 답하세요.|You're welcome.|I'm sorry I'm late.~Good morning, doctor.|친구가 고마워하므로 You're welcome으로 받아 줘요.|감사 인사에 답하고 있어요.|My pleasure.~No problem.
+C|sorry|2|You accidentally step on someone's foot.|실수에 바로 사과하세요.|I'm sorry.|See you later.~You're welcome.|발을 밟은 실수에는 사과가 필요해요.|불편을 준 상황이에요.|Sorry.~I am so sorry.
+C|excuse|2|A stranger is blocking the doorway. You need to pass.|정중하게 지나가겠다는 뜻을 전하세요.|Excuse me, may I get through?|Thank you for the gift.~Good night, sleep well.|Excuse me로 주의를 끌고 지나가도 되는지 물어요.|get through는 통과하다라는 뜻이에요.|Excuse me, can I get through?~Excuse me, may I pass?
+C|fine|2|Your friend asks, “How are you today?”|오늘 상태가 괜찮다고 답하세요.|I'm fine, thanks.|It is my bag.~Yes, you can turn left.|How are you?는 상태를 묻기 때문에 I'm fine이 맞아요.|물건이나 길이 아니라 안부를 물어요.|I am doing well, thanks.~I am well, thank you.
+C|repeat|3|A receptionist speaks too softly, and you do not hear the room number.|못 들은 방 번호를 다시 부탁하세요.|Could you say the room number again?|Thank you, the room is clean.~Goodbye, I enjoyed my stay.|내용을 못 들었으므로 번호를 다시 말해 달라고 구체적으로 부탁해요.|say ... again을 써요.|Could you repeat the room number, please?
+C|bye|2|You are leaving work. You will see your coworkers tomorrow.|내일 다시 만날 동료들에게 인사하세요.|See you tomorrow.|Nice to meet you for the first time.~Good morning, welcome in.|이미 아는 동료와 헤어지므로 내일 보자는 인사가 자연스러워요.|내일은 tomorrow예요.|I will see you tomorrow.
+C|hello|2|You enter a small shop in the afternoon. The clerk says, “Hello!”|상점 직원의 인사에 답하세요.|Hello!|Good night!~I'm sorry about your bag.|Hello는 시간대에 크게 구애받지 않고 인사에 답할 수 있어요.|직원이 먼저 인사를 했어요.|Hi!~Good afternoon!
+C|please|3|A coworker offers you some water. You would like a glass.|제안을 공손하게 받아들이세요.|Yes, please.|No, thank you.~I'm sorry, I cannot come.|원하는 제안에는 Yes, please.라고 답해요. No, thank you는 거절이에요.|물을 받고 싶다는 조건을 확인해요.|I would love some, thank you.~A glass of water would be great, thanks.
+`);
+
+;
+Curriculum.definePack('u02',`
+name|My name is Hana.|제 이름은 하나예요.
+from|Where are you from?|어디 출신이세요?
+live|I live in Seoul.|저는 서울에 살아요.
+job|What do you do?|무슨 일을 하세요?
+teacher|I am a teacher.|저는 교사예요.
+nurse|She is a nurse.|그녀는 간호사예요.
+student|I am a student.|저는 학생이에요.
+meet|Nice to meet you.|만나서 반가워요.
+spell|How do you spell your name?|이름의 철자를 어떻게 쓰나요?
+age|I am thirty years old.|저는 서른 살이에요.
+work|I work as a designer.|저는 디자이너로 일해요.
+language|I speak Korean.|저는 한국어를 해요.
+friend|This is my friend, Alex.|이쪽은 제 친구 알렉스예요.
+family|I have two sisters.|저는 여자 형제가 두 명 있어요.
+hobby|I like reading.|저는 독서를 좋아해요.
+`, `
+V|name|1|My name is Hana.|자기소개 문장의 뜻을 고르세요.|제 이름은 하나예요.|제 고향은 하나예요.~제 직업은 하나예요.|My name is 뒤에 자신의 이름을 말해요.|name은 이름이에요.
+V|from|1|Where are you from?|무엇을 묻는 질문인가요?|출신지|전화번호~좋아하는 음식|be from은 어느 곳 출신이라는 뜻이에요.|from은 출신의 출발점을 가리켜요.
+V|live|1|I live in Seoul.|현재 어디에 산다는 뜻인가요?|서울|학교~기차역|live in 뒤의 Seoul이 사는 곳이에요.|Seoul은 도시 이름이에요.
+V|job|2|What do you do?|처음 만난 사람에게 이 질문을 할 때 보통 무엇을 묻나요?|직업|지금 시각~오늘 날씨|소개 상황의 What do you do?는 직업을 묻는 표현이에요.|자기소개 중의 질문이에요.
+V|teacher|1|teacher|직업 이름의 뜻을 고르세요.|교사|요리사~운전기사|teacher는 다른 사람을 가르치는 사람이에요.|teach는 가르치다예요.
+V|nurse|1|nurse|직업 이름의 뜻을 고르세요.|간호사|회사원~작가|nurse는 환자를 돌보는 간호사예요.|병원에서 일하는 직업이에요.
+V|student|1|student|학교나 교육기관에서 배우는 사람을 고르세요.|학생|가수~판매원|student는 배우는 사람인 학생을 뜻해요.|study와 관련된 사람이에요.
+V|meet|1|Nice to meet you.|처음 만났을 때 하는 말의 뜻을 고르세요.|만나서 반가워요.|내일 보아요.~늦어서 미안해요.|Nice to meet you는 처음 소개받을 때 하는 인사예요.|처음 만난 순간이에요.
+V|spell|2|How do you spell your name?|상대에게 무엇을 알려 달라고 하나요?|이름의 철자|이름의 뜻~이름을 바꾼 이유|spell은 단어를 이루는 글자를 말하거나 쓰는 것이에요.|알파벳을 순서대로 알려 줘요.
+V|age|1|I am thirty years old.|말한 나이는 몇 살인가요?|서른 살|열세 살~마흔 살|thirty는 30이고 thirteen은 13이에요.|thirty와 thirteen을 구분해요.
+V|language|1|I speak Korean.|어떤 언어를 할 수 있다고 말하나요?|한국어|일본어~영어|Korean은 이 문장에서 한국어를 뜻해요.|speak 뒤에 언어가 와요.
+V|hobby|1|I like reading.|좋아하는 활동은 무엇인가요?|독서|수영~요리|reading은 책이나 글을 읽는 활동이에요.|read는 읽다예요.
+G|name|1|My name ___ Minho.|이름을 소개하는 문장을 완성하세요.|is|am~are|My name은 단수 주어이므로 is를 써요.|주어는 I가 아니라 My name이에요.
+G|teacher|1|I am ___ teacher.|교사라는 직업을 소개하도록 완성하세요.|a|an~two|teacher는 셀 수 있는 단수 명사이며 자음 소리로 시작해 a를 써요.|단수 직업명 앞에는 관사가 필요해요.
+G|work|2|She works ___ an engineer.|엔지니어로 일한다는 문장을 완성하세요.|as|on~by|work as 뒤에는 직업을 말해요.|~로서 일한다는 뜻이에요.
+G|student|2|My sister and I are ___ at a language school.|두 사람이 언어 학교의 학생이라는 문장을 완성하세요.|students|student~student's|두 사람을 가리키므로 학생은 복수형 students로 써요.|주어가 한 명이 아니에요.
+G|from|1|I am ___ Canada.|캐나다 출신이라는 문장을 완성하세요.|from|to~at|be from 뒤에 출신지를 말해요.|출신을 나타내는 전치사를 찾아요.
+G|language|2|He ___ English and Korean.|그가 두 언어를 한다는 문장을 완성하세요.|speaks|speak~speaking|He 뒤의 현재형 일반동사에는 보통 s를 붙여요.|주어가 He예요.
+G|friend|2|This is ___ friend, Leo.|나의 친구 레오를 소개하세요.|my|I~me|명사 friend 앞에는 소유를 나타내는 my가 필요해요.|친구가 누구의 친구인지 나타내요.
+G|family|2|I have two ___.|여자 형제가 두 명이라는 문장을 완성하세요.|sisters|sister~sister's|two 뒤에는 복수형 sisters를 써요.|두 명이므로 복수예요.
+O|name|1|My name is Jisoo.|이름 소개 문장을 만드세요.|My name is Jisoo.|is~Jisoo.~name~My|My name is 다음에 이름을 말해요.|My name을 먼저 묶어요.
+O|from|1|Where are you from?|출신지를 묻는 문장을 만드세요.|Where are you from?|from?~you~Where~are|Where are you from?은 출신지를 묻는 어순이에요.|Where로 장소를 물어요.
+O|live|2|I live near the station.|역 근처에 산다는 문장을 만드세요.|I live near the station.|the~live~station.~I~near|near the station은 역 근처에라는 뜻이에요.|주어와 동사 뒤에 장소를 놓아요.
+O|work|2|I work as a chef.|요리사로 일한다는 문장을 만드세요.|I work as a chef.|chef.~as~I~a~work|work as 뒤에 직업 a chef를 이어 줘요.|as 뒤에 직업을 놓아요.
+O|meet|1|It is nice to meet you.|처음 만난 반가움을 전하는 문장을 만드세요.|It is nice to meet you.|meet~is~you.~It~to~nice|It is nice to meet you는 만나서 반갑다는 완전한 문장이에요.|It is nice로 시작해요.
+O|spell|3|Could you spell your surname?|성의 철자를 공손하게 물어보세요.|Could you spell your surname?|your~Could~surname?~spell~you|surname은 성이에요. Could you spell...?로 철자를 부탁해요.|Could you 다음은 동사원형이에요.
+O|hobby|2|I enjoy cooking on weekends.|주말에 요리를 즐긴다는 문장을 만드세요.|I enjoy cooking on weekends.|weekends.~cooking~I~on~enjoy|enjoy 뒤에는 활동을 나타내는 cooking을 쓰고 주말은 on weekends예요.|enjoy와 cooking을 연결해요.
+O|friend|2|This is my colleague, Sara.|동료 사라를 소개하는 문장을 만드세요.|This is my colleague, Sara.|colleague,~is~Sara.~This~my|This is로 옆 사람을 소개할 수 있어요. colleague는 직장 동료예요.|This is로 소개를 시작해요.
+L|name|1|Hello. My name is Nora.|화자의 이름은 무엇인가요?|Nora|Laura~Mina|My name is 뒤에서 이름 Nora를 들을 수 있어요.|이름을 소개하는 부분을 들어요.
+L|from|1|I'm from Japan, but I live in Korea.|출신 국가는 어디인가요?|일본|한국~캐나다|from Japan은 일본 출신, live in Korea는 한국에 산다는 뜻이에요.|출신과 현재 사는 곳을 구분해요.
+L|work|2|I work at a bakery. I make bread every morning.|화자가 만드는 것은 무엇인가요?|빵|옷~책|make bread는 빵을 만든다는 뜻이에요. bakery는 빵집이에요.|두 번째 문장에서 만드는 물건을 찾아요.
+L|age|2|My brother is twenty, and I am twenty-four.|화자는 몇 살인가요?|24세|20세~40세|I am twenty-four가 화자 자신의 나이예요.|brother의 나이와 구분해요.
+L|family|2|I have one brother and two sisters.|화자에게 여자 형제는 몇 명 있나요?|두 명|한 명~세 명|two sisters가 여자 형제 두 명을 뜻해요.|sisters 앞의 수를 들어요.
+L|live|3|I used to live in Seoul. Now I live in Daegu.|화자가 지금 사는 도시는 어디인가요?|대구|서울~부산|Now I live in Daegu가 현재 사는 곳을 알려 줘요.|now는 지금이라는 뜻이에요.
+L|spell|2|My name is Ben. That's B, E, N.|이름의 철자를 고르세요.|BEN|BEM~PEN|들은 글자 B, E, N을 순서대로 이으면 BEN이에요.|마지막 글자를 주의해 들어요.
+R|job,nurse|1|Yuri is a nurse. Her husband is a teacher. They both work in the city.|유리의 직업은 무엇인가요?|간호사|교사~운전기사|Yuri is a nurse.가 유리의 직업을 알려 줘요. 교사는 남편이에요.|누구에 대한 설명인지 구분해요.
+R|hobby|3|Min is an office worker. He reads novels on the train and grows vegetables on weekends.|민이 기차에서 하는 일은 무엇인가요?|소설 읽기|채소 기르기~업무 회의|reads novels on the train이 기차 안의 활동이에요.|주말 활동과 이동 중 활동을 구분해요.
+R|from|3|Anna was born in Canada. She now lives in Busan and teaches English there.|안나에 대한 설명으로 맞는 것은 무엇인가요?|지금 부산에서 영어를 가르쳐요.|지금 캐나다에서 일해요.~부산에서 태어났어요.|now lives in Busan과 teaches English there를 연결하면 현재 부산에서 가르친다는 뜻이에요.|there는 앞에 나온 부산을 가리켜요.
+C|meet|1|A new classmate says, “I'm Daniel. Nice to meet you.”|처음 만난 반가움을 답하세요.|Nice to meet you, too.|See you next year.~No, I don't need a bag.|상대의 첫인사에는 Nice to meet you, too.로 반가움을 돌려줘요.|too는 나도라는 뜻이에요.|It is nice to meet you, too.~Likewise.
+C|from|2|Someone asks, “Where are you from?” You are from Korea.|출신지를 정확히 답하세요.|I'm from Korea.|I work at a bank.~My name is Korea.|출신을 물었으므로 I'm from 뒤에 국가를 말해요.|직업이나 이름을 묻지 않았어요.|I come from Korea.
+C|job|2|A neighbor asks what you do. You repair cars for a living.|자신의 직업을 답하세요.|I'm a mechanic.|I'm a passenger.~I'm a customer.|mechanic은 자동차 같은 기계를 수리하는 사람이에요.|자동차 수리 직업을 떠올려요.|I repair cars for a living.
+C|spell|2|A receptionist asks, “Could you spell Lee?”|L-E-E라는 철자를 답하세요.|L, E, E.|It's my first name.~I'm from Seoul.|spell을 요청했으므로 뜻이나 출신 대신 글자를 말해요.|알파벳을 순서대로 답해요.
+C|live|2|A coworker asks, “Do you live nearby?” Your home is a five-minute walk away.|가까이 산다고 답하세요.|Yes, just five minutes away.|No, it takes four hours.~Yes, I am a teacher.|도보 5분 거리는 가까운 곳이므로 긍정하고 거리를 설명해요.|nearby는 가까이에예요.|Yes, I live a five-minute walk away.
+C|language|3|You speak a little English. A traveler asks, “Do you speak English?”|자신의 능력을 과장하지 않고 답하세요.|A little. Please speak slowly.|Yes, I'm completely fluent.~No, this is not my suitcase.|a little은 조금이라는 뜻이고 천천히 말해 달라는 부탁을 더할 수 있어요.|조금 할 수 있다는 조건을 살펴요.|Yes, a little. Could you speak slowly?
+C|family|2|You want to introduce your sister, Yuna, to a friend.|유나를 여자 형제라고 소개하세요.|This is my sister, Yuna.|Her name is my brother.~I live with your teacher.|This is my sister로 소개하는 사람과 관계를 알려 줘요.|my sister가 관계를 나타내요.|This is Yuna, my sister.~Meet my sister, Yuna.
+`);
+
+;
+Curriculum.definePack('u03',`
+wake|I wake up at seven.|저는 7시에 잠에서 깨요.
+breakfast|I eat breakfast.|저는 아침을 먹어요.
+work|I go to work by bus.|저는 버스로 출근해요.
+study|I study English every day.|저는 매일 영어를 공부해요.
+exercise|I exercise after work.|저는 퇴근 후에 운동해요.
+home|I go home at six.|저는 6시에 집에 가요.
+bed|I go to bed at eleven.|저는 11시에 잠자리에 들어요.
+shower|I take a shower.|저는 샤워를 해요.
+brush|I brush my teeth.|저는 이를 닦아요.
+usually|I usually cook dinner.|저는 보통 저녁을 요리해요.
+`, `
+V|wake|1|wake up|하루의 시작에 하는 행동의 뜻을 고르세요.|잠에서 깨다|잠자리에 들다~일하러 가다|wake up은 잠에서 깨어나는 행동이에요.|수면이 끝나는 순간이에요.
+V|breakfast|1|breakfast|보통 아침에 먹는 식사를 고르세요.|아침 식사|점심 식사~저녁 식사|breakfast는 하루의 아침 식사예요.|morning에 먹는 식사예요.
+V|work|1|go to work|일과 표현의 뜻을 고르세요.|출근하다|퇴근하다~장보다|go to work는 일하러 가다, 출근하다라는 뜻이에요.|일하는 장소로 이동해요.
+V|study|1|study English|어떤 활동을 뜻하나요?|영어 공부하기|음악 듣기~신문 배달하기|study는 공부하다, English는 영어예요.|배우는 대상이 영어예요.
+V|exercise|1|exercise|건강을 위해 몸을 움직이는 활동을 고르세요.|운동|수면~식사|일과를 말할 때 exercise는 운동을 뜻해요.|몸을 움직이는 활동이에요.
+V|home|1|go home|퇴근 뒤 집으로 향하는 표현의 뜻을 고르세요.|집에 가다|학교에 가다~시장에 가다|go home은 집에 가다예요. home 앞에는 보통 to를 넣지 않아요.|목적지가 자기 집이에요.
+V|bed|1|go to bed|밤에 하루를 마칠 때 하는 행동을 고르세요.|잠자리에 들다|아침을 먹다~출근하다|go to bed는 잠자리에 들어 잠을 청하는 행동이에요.|bed는 침대예요.
+V|shower|1|take a shower|몸을 씻는 일과 표현의 뜻을 고르세요.|샤워하다|설거지하다~빨래하다|take a shower는 샤워를 하다는 표현이에요.|자신의 몸을 씻어요.
+V|brush|1|brush my teeth|이 표현에서 닦는 것은 무엇인가요?|나의 이|나의 신발~나의 책상|teeth는 tooth의 복수형으로 이를 뜻해요.|양치질할 때 하는 행동이에요.
+V|usually|2|usually|습관의 빈도를 나타내는 말의 뜻을 고르세요.|보통|절대로 안~딱 한 번|usually는 자주 반복되는 보통의 습관을 설명해요.|항상보다는 약한 빈도예요.
+`);
+Curriculum.definePack('u03',`
+lunch|I have lunch at noon.|저는 정오에 점심을 먹어요.
+clean|I clean my room on Sundays.|저는 일요일마다 방을 청소해요.
+`, `
+V|lunch|1|have lunch|낮에 하는 식사 활동의 뜻을 고르세요.|점심을 먹다|장을 보다~식기를 닦다|have lunch에서 have는 식사를 먹는다는 뜻이에요.|lunch는 점심이에요.
+V|clean|1|clean my room|이 표현에서 하는 일을 고르세요.|방 청소하기|방 예약하기~방 불 끄기|clean은 깨끗하게 하다, 청소하다예요.|방을 깨끗하게 만들어요.
+G|wake|1|I ___ up at six every day.|매일 6시에 깬다는 문장을 완성하세요.|wake|wakes~waking|I 뒤의 현재 습관은 동사원형 wake로 표현해요.|주어는 I예요.
+G|breakfast|1|She ___ breakfast at home.|그녀가 집에서 아침을 먹는다고 말하세요.|eats|eat~eating|주어 She에 맞춰 현재형 eat에 s를 붙여요.|한 사람의 반복 습관이에요.
+G|work|2|He ___ to work by train.|기차로 출근하는 습관을 완성하세요.|goes|go~going|He 뒤에서 go의 현재형은 goes예요.|go에는 es를 붙여요.
+G|home|1|I go ___ after work.|퇴근 후 집에 간다는 문장을 완성하세요.|home|to home~at home|go home에서는 home이 방향을 나타내므로 to를 쓰지 않아요.|go와 home을 바로 이어요.
+G|study|2|Do you ___ English in the evening?|저녁에 영어를 공부하는지 물어보세요.|study|studies~studying|Do you 뒤에는 동사원형 study를 써요.|Do가 이미 질문 형태를 만들어요.
+G|exercise|2|She does not ___ on Mondays.|월요일에는 운동하지 않는다고 말하세요.|exercise|exercises~exercising|does not 뒤에는 동사원형이 와요.|does가 있으므로 동사에 s를 붙이지 않아요.
+G|usually|2|I ___ drink coffee before breakfast.|항상 그러지는 않지만 보통 그러는 습관을 완성하세요.|usually|never~once|usually는 보통, never는 전혀 ~않다는 뜻이에요.|보통이라는 빈도를 나타내요.
+G|bed|2|What time ___ he go to bed?|그가 자는 시각을 묻는 질문을 완성하세요.|does|do~is|일반동사 go를 묻고 주어가 he이므로 does를 써요.|he에 맞는 질문 조동사예요.
+G|shower|2|I take a shower ___ breakfast.|아침을 먹기 전에 샤워한다는 뜻으로 완성하세요.|before|after~during|before는 ~전에, after는 ~후에예요.|한국어의 ‘전에’를 확인해요.
+G|clean|3|My brother and I ___ the kitchen together.|두 사람이 함께 청소하는 문장을 완성하세요.|clean|cleans~is cleaning|My brother and I는 복수 주어이므로 clean을 써요.|주어가 한 명이 아니에요.
+O|wake|1|I wake up early.|일찍 깬다는 문장을 만드세요.|I wake up early.|early.~up~I~wake|wake up을 한 덩어리로 이어 행동을 나타내요.|I 다음에 wake up을 놓아요.
+O|breakfast|1|We eat breakfast together.|함께 아침을 먹는다는 문장을 만드세요.|We eat breakfast together.|together.~breakfast~We~eat|We eat 뒤에 식사와 함께한다는 말을 이어요.|누가 무엇을 먹는지 순서대로 말해요.
+O|work|2|I take the bus to work.|버스를 타고 출근한다는 문장을 만드세요.|I take the bus to work.|bus~work.~take~I~to~the|take the bus는 버스를 타다, to work는 일터로예요.|교통수단 다음에 목적지를 말해요.
+O|study|2|I study English for twenty minutes.|20분 동안 영어를 공부한다는 문장을 만드세요.|I study English for twenty minutes.|twenty~for~study~minutes.~I~English|for 뒤의 시간 길이는 그동안 행동한다는 뜻이에요.|공부하는 대상 다음에 기간을 붙여요.
+O|brush|2|I brush my teeth after dinner.|저녁 식사 뒤에 양치한다는 문장을 만드세요.|I brush my teeth after dinner.|after~teeth~I~dinner.~my~brush|brush my teeth 뒤에 after dinner로 시점을 덧붙여요.|양치 행동을 먼저 말해요.
+O|bed|2|I usually go to bed at ten.|보통 10시에 잔다는 문장을 만드세요.|I usually go to bed at ten.|to~usually~ten.~I~at~go~bed|usually는 일반동사 go 앞에 놓고 시각에는 at을 써요.|I 다음에 보통이라는 말을 놓아요.
+O|exercise|3|Do you exercise before or after work?|출근 전인지 퇴근 후인지 묻는 문장을 만드세요.|Do you exercise before or after work?|or~you~work?~before~Do~after~exercise|before or after work는 일하기 전인지 후인지 선택을 물어요.|Do you로 질문을 시작해요.
+O|clean|2|We clean the house every Saturday.|토요일마다 집을 청소한다는 문장을 만드세요.|We clean the house every Saturday.|house~Saturday.~clean~We~every~the|every Saturday는 매주 토요일이라는 반복 시점이에요.|청소하는 대상 뒤에 반복 시점을 붙여요.
+L|wake|1|I wake up at seven and leave home at eight.|잠에서 깨는 시각은 언제인가요?|7시|8시~9시|wake up at seven이 기상 시각이에요. eight는 집을 나서는 시각이에요.|첫 행동의 시각을 들어요.
+L|breakfast|1|For breakfast, I have eggs and toast.|아침 식사로 무엇을 먹나요?|달걀과 토스트|수프와 밥~샐러드와 생선|eggs and toast가 아침 메뉴예요.|두 음식의 이름을 들어요.
+L|work|2|I walk to work when the weather is nice.|날씨가 좋을 때 어떻게 출근하나요?|걸어서|버스로~택시로|walk to work는 걸어서 출근한다는 뜻이에요.|walk가 이동 방법을 알려 줘요.
+L|study|2|I study English on Tuesday and Thursday evenings.|언제 영어를 공부하나요?|화요일과 목요일 저녁|월요일과 수요일 아침~매일 점심|Tuesday and Thursday evenings가 공부하는 시점이에요.|요일과 시간대를 함께 들어요.
+L|exercise|2|I used to run every day. Now I swim twice a week.|지금 하는 운동은 무엇인가요?|수영|달리기~자전거 타기|Now I swim이 현재 하는 운동을 알려 줘요.|과거의 run과 현재의 swim을 구분해요.
+L|lunch|2|Lunch starts at twelve, but I usually eat at half past twelve.|화자는 보통 몇 시에 점심을 먹나요?|12시 30분|12시~1시 30분|half past twelve는 12시 30분이에요. 식사 시작 가능 시각과 개인 습관은 달라요.|usually eat 뒤에 주목해요.
+L|home|3|I finish work at five. The train ride home takes thirty minutes.|퇴근 후 집으로 가는 기차 시간은 얼마나 걸리나요?|30분|5분~1시간|takes thirty minutes는 30분 걸린다는 뜻이에요.|시각과 소요 시간을 구분해요.
+R|bed|1|Mina gets up at six. She goes to bed at ten.|미나가 잠자리에 드는 시각은 언제인가요?|10시|6시~8시|goes to bed at ten이 취침 시각이에요.|gets up은 잠에서 일어나는 행동이에요.
+R|clean|2|On Sundays, Jun washes his clothes in the morning and cleans his room in the afternoon.|준이 오후에 하는 일은 무엇인가요?|방 청소|빨래~아침 요리|in the afternoon과 연결된 행동은 cleans his room이에요.|오전과 오후의 활동을 나누어 읽어요.
+R|usually|3|Sora usually cycles to work. Today it is raining, so she takes the bus instead.|소라가 오늘 버스를 타는 이유는 무엇인가요?|비가 와서|자전거가 고장 나서~직장이 이사해서|Today it is raining이 평소와 다른 교통수단을 택한 이유예요.|usually와 today를 비교해요.
+C|wake|2|A friend asks when you get up. You get up at seven.|기상 시각을 답하세요.|I get up at seven.|I eat toast.~I work in a shop.|when에 대한 답으로 기상 시각을 말해요.|at 뒤에 시각을 써요.|I wake up at seven.
+C|study|2|Someone asks, “Do you study every day?” You study only on weekends.|실제 공부 습관을 답하세요.|No, only on weekends.|Yes, every morning.~No, I never study.|매일은 아니지만 주말에는 하므로 No, only on weekends가 맞아요.|never는 전혀 하지 않는다는 뜻이에요.|I study on weekends, not every day.
+C|lunch|2|A coworker asks, “Would you like to have lunch together?” You want to join.|함께 점심을 먹자는 제안을 받아들이세요.|Yes, I'd like that.|No, I have already eaten.~I leave home at six.|함께하고 싶으므로 긍정적인 수락 표현이 맞아요.|수락한다는 조건을 확인해요.|Sure, let's have lunch together.~That sounds good.
+C|exercise|3|You exercise after work. A friend asks, “Do you exercise before work?”|운동하는 때를 바로잡으세요.|No, I exercise after work.|Yes, before breakfast.~No, I work at a gym.|before가 아니라 after라고 시점을 정정해야 해요.|질문은 직업이 아니라 운동 시점이에요.|Actually, I exercise after work.
+C|home|2|A coworker asks, “Are you going home now?” You still have a meeting.|지금은 갈 수 없다고 답하세요.|Not yet. I have a meeting.|Yes, I'm already at home.~Good morning, everyone.|Not yet는 아직 아니라는 뜻이에요. 남은 회의가 이유예요.|아직 할 일이 남아 있어요.|No, I still have a meeting.
+`,11);
+
+;
+Curriculum.definePack('u04',`
+coffee|I'd like a coffee.|커피 한 잔 주세요.
+water|Can I have some water?|물 좀 주시겠어요?
+bread|a slice of bread|빵 한 조각
+menu|Could I see the menu?|메뉴를 볼 수 있을까요?
+bill|Can I have the bill?|계산서 주세요.
+hot|hot tea|뜨거운 차
+iced|iced coffee|아이스커피
+milk|without milk|우유 없이
+sugar|no sugar|설탕 없이
+lunch|I'd like the lunch special.|점심 특별 메뉴 주세요.
+vegetarian|a vegetarian meal|채식 식사
+takeaway|to go|포장해서
+`, `
+V|coffee|1|coffee|음료의 뜻을 고르세요.|커피|주스~수프|coffee는 커피예요.|카페에서 흔히 주문하는 음료예요.
+V|water|1|a glass of water|무엇 한 잔을 뜻하나요?|물|우유~차|water는 물이고 a glass of는 한 잔을 나타내요.|마시는 물이에요.
+V|bread|1|a slice of bread|빵의 양을 어떻게 말하고 있나요?|한 조각|한 자루~한 병|slice는 얇게 자른 조각이에요.|빵을 썰어 놓은 모습을 떠올려요.
+V|menu|1|menu|주문 전에 음식 목록을 보는 물건을 고르세요.|메뉴|영수증~수하물 표|menu에는 음식 이름과 가격 등이 적혀 있어요.|무엇을 먹을지 고를 때 봐요.
+V|bill|1|the bill|식사 후 금액을 확인하려고 요청하는 것을 고르세요.|계산서|요리법~예약 명단|식당에서 bill은 지불할 금액을 적은 계산서예요.|식사를 마친 뒤 결제할 때 필요해요.
+V|hot|1|hot tea|차의 온도는 어떤가요?|뜨거워요.|차가워요.~미지근하다고 했어요.|hot은 온도가 높다는 뜻이에요.|차의 색이 아니라 온도예요.
+V|iced|1|iced coffee|어떤 커피인가요?|얼음을 넣은 커피|우유 없는 커피~설탕 없는 커피|iced는 얼음을 넣어 차게 한 것을 뜻해요.|ice는 얼음이에요.
+V|milk|1|without milk|음료에 무엇을 빼 달라는 뜻인가요?|우유|얼음~설탕|without은 ~없이, milk는 우유예요.|without 뒤의 재료를 빼요.
+V|sugar|1|no sugar|이 주문에서 넣지 않는 재료를 고르세요.|설탕|소금~후추|sugar는 설탕이고 no sugar는 설탕 없이예요.|단맛을 내는 재료예요.
+V|lunch|2|the lunch special|어떤 메뉴를 가리키나요?|점심 특별 메뉴|저녁 예약~아침 영수증|lunch special은 식당에서 따로 제공하는 점심 특별 메뉴예요.|lunch가 시간대를 알려 줘요.
+V|vegetarian|2|a vegetarian sandwich|어떤 샌드위치인가요?|고기가 없는 채식 샌드위치|고기를 추가한 샌드위치~아주 뜨거운 샌드위치|vegetarian은 고기를 먹지 않는 식사와 관련된 말이에요. 유제품 포함 여부는 별도로 확인할 수 있어요.|고기 포함 여부를 떠올려요.
+V|takeaway|1|to go|음식을 어떻게 받겠다는 뜻인가요?|포장해서|매장에서 먹도록~주문을 취소하도록|음식 주문에서 to go는 가져가도록 포장해 달라는 뜻이에요.|음식을 가지고 나가요.
+G|coffee|1|I'd ___ a small coffee.|커피 한 잔을 공손하게 주문하세요.|like|likes~liking|I'd는 I would의 줄임말이며 뒤에는 동사원형 like를 써요.|would 뒤에는 동사원형이에요.
+G|water|1|Can I have ___ water?|물의 양을 막연히 말하며 부탁하세요.|some|a~an|water는 보통 셀 수 없는 명사로 some water라고 해요.|물을 개수로 세지 않고 조금 달라고 해요.
+G|bread|2|I'd like two ___ of bread.|빵 두 조각을 주문하는 문장을 완성하세요.|slices|slice~slicing|two 뒤의 양 단위 slice는 복수형 slices가 돼요.|조각을 두 개 세어요.
+G|menu|2|Could I ___ the menu, please?|메뉴를 보여 달라는 부탁을 완성하세요.|see|sees~seeing|Could I 뒤에는 동사원형 see가 와요.|동사원형을 고르세요.
+G|milk|2|I want my tea ___ milk.|우유 없이 차를 마시고 싶다는 문장을 완성하세요.|without|with~inside|without milk는 우유 없이예요. with milk는 우유를 넣어서예요.|‘없이’라는 조건을 확인해요.
+G|sugar|2|How ___ sugar would you like?|설탕의 양을 묻는 문장을 완성하세요.|much|many~long|sugar는 셀 수 없는 명사이므로 양을 물을 때 much를 써요.|개수보다 양을 물어요.
+G|coffee|2|How ___ cups of coffee do we need?|필요한 커피 잔 수를 물어보세요.|many|much~often|cups는 셀 수 있는 복수 명사이므로 many를 써요.|coffee가 아니라 cups를 세고 있어요.
+G|vegetarian|2|Does this soup ___ meat?|수프에 고기가 들어 있는지 확인하세요.|contain|contains~containing|Does로 시작하는 질문의 본동사는 원형 contain이에요.|contain은 포함하다는 뜻이에요.
+G|bill|3|Could you bring ___ the bill?|우리에게 계산서를 가져다 달라고 부탁하세요.|us|we~our|bring 뒤에는 받는 대상인 목적격 us를 써요.|‘우리에게’라는 뜻의 대명사예요.
+G|takeaway|2|I'd like a sandwich ___ go.|샌드위치를 포장해 달라는 문장을 완성하세요.|to|for~at|to go는 음식을 포장해서 가져간다는 정해진 표현이에요.|포장 주문 표현을 떠올려요.
+O|coffee|1|I would like a coffee.|커피를 주문하는 문장을 만드세요.|I would like a coffee.|coffee.~would~a~I~like|I would like는 공손하게 원하는 것을 말해요.|I would like부터 이어요.
+O|water|1|Can I have some water, please?|물 좀 달라는 문장을 만드세요.|Can I have some water, please?|some~please?~Can~have~water,~I|Can I have 뒤에 원하는 물을 말하고 please를 붙여요.|Can I로 질문을 시작해요.
+O|menu|2|Could we see the dessert menu?|후식 메뉴를 보겠다는 문장을 만드세요.|Could we see the dessert menu?|dessert~we~menu?~see~Could~the|dessert menu는 후식 메뉴예요.|Could we see 뒤에 대상을 말해요.
+O|milk|2|I would like tea without milk.|우유 없는 차를 주문하세요.|I would like tea without milk.|milk.~would~tea~I~without~like|tea without milk가 원하는 음료와 제외할 재료예요.|음료를 먼저, 빼는 재료를 나중에 말해요.
+O|bill|2|May I have the bill, please?|공손하게 계산서를 부탁하세요.|May I have the bill, please?|bill,~have~please?~I~the~May|May I have...?는 공손하게 물건을 부탁할 때 쓸 수 있어요.|May I로 시작해요.
+O|hot|2|Is the soup still hot?|수프가 아직 뜨거운지 물으세요.|Is the soup still hot?|hot?~the~still~Is~soup|still hot은 아직 뜨겁다는 상태를 나타내요.|Is로 상태를 질문해요.
+O|vegetarian|3|Do you have any vegetarian dishes?|채식 요리가 있는지 물어보세요.|Do you have any vegetarian dishes?|vegetarian~any~you~dishes?~Do~have|질문에서 any를 써서 채식 요리가 있는지 물어요.|Do you have 다음에 물건을 말해요.
+O|takeaway|2|Can I get this to go?|이 음식을 포장해 달라고 요청하세요.|Can I get this to go?|to~Can~go?~this~I~get|get this to go는 이것을 포장해서 받겠다는 뜻이에요.|to go를 마지막에 묶어요.
+L|coffee|1|A small coffee, please.|주문한 커피의 크기는 무엇인가요?|작은 크기|큰 크기~중간 크기|small이 주문한 크기를 알려 줘요.|음료 앞의 크기 말을 들어요.
+L|iced|1|I'd like iced tea, not hot tea.|원하는 차는 어떤 차인가요?|차가운 차|뜨거운 차~우유를 넣은 차|iced tea를 원하고 not hot tea라고 구분했어요.|not 뒤의 선택은 원하지 않아요.
+L|milk|2|One coffee with milk and one without, please.|우유 없는 커피는 몇 잔인가요?|한 잔|두 잔~세 잔|one without은 우유 없는 한 잔이라는 뜻이에요.|with와 without을 구분해요.
+L|lunch|2|The lunch special is chicken with rice. It comes with a small salad.|점심 특별 메뉴에 곁들여 나오는 것은 무엇인가요?|작은 샐러드|큰 수프~과일 주스|comes with a small salad는 작은 샐러드가 함께 나온다는 뜻이에요.|두 번째 문장의 곁들임을 들어요.
+L|takeaway|2|Will you eat here or take it away? I'd like it to go.|손님은 어디에서 먹겠다고 하나요?|가져가서 먹어요.|가게 안에서 먹어요.~음식을 원하지 않아요.|to go는 포장해서 가져가는 선택이에요.|손님의 마지막 답을 들어요.
+L|sugar|2|Two teas, please. No sugar in mine.|화자의 차에는 무엇을 넣지 않나요?|설탕|물~찻잎|No sugar in mine은 자신의 차에는 설탕을 빼 달라는 뜻이에요.|mine은 나의 것을 가리켜요.
+L|bill|3|The meal is twelve dollars, and the drink is three dollars.|식사와 음료의 합계는 얼마인가요?|15달러|12달러~9달러|식사 12달러와 음료 3달러를 더하면 15달러예요.|두 가격을 더해요.
+R|menu|1|Today's soup is tomato soup. Bread is included.|오늘 수프의 종류는 무엇인가요?|토마토 수프|닭고기 수프~버섯 수프|tomato soup가 오늘의 수프예요.|첫 문장의 음식 이름을 봐요.
+R|vegetarian|3|The menu lists a beef burger and a bean burger. The bean burger contains no meat.|고기가 없는 메뉴는 무엇인가요?|콩 버거|소고기 버거~두 메뉴 모두 고기가 있어요.|bean burger contains no meat라는 설명이 채식 선택을 알려 줘요.|no meat는 고기가 없다는 뜻이에요.
+R|bill|3|Lunch costs ten dollars. Add soup for two dollars or juice for three dollars. Mina orders lunch and soup.|미나의 주문 금액은 얼마인가요?|12달러|13달러~15달러|점심 10달러에 선택한 수프 2달러를 더해요. 주스는 주문하지 않았어요.|실제로 선택한 항목만 더해요.
+C|coffee|1|The barista asks what you would like. You want a latte.|원하는 음료를 주문하세요.|I'd like a latte, please.|I'd like the bill now.~No, I lost my ticket.|주문을 묻는 상황에는 원하는 음료를 구체적으로 말해요.|latte라는 음료를 주문해요.|Can I have a latte, please?~A latte, please.
+C|takeaway|2|The clerk asks, “For here or to go?” You want to sit in the café.|매장에서 마시겠다고 답하세요.|For here, please.|To go, please.~No sugar, please.|for here는 여기서 먹거나 마시겠다는 뜻이에요.|가게 안에 앉으려는 조건이에요.|I will have it here, please.
+C|milk|2|You cannot have milk. A server offers coffee with milk.|우유 없이 부탁하세요.|Could I have it without milk?|More milk, please.~Yes, extra cream, please.|without milk로 우유를 빼 달라고 요청해요.|제외할 재료를 구체적으로 말해요.|No milk, please.~I would like it without milk, please.
+C|bill|2|You have finished your meal and want to pay.|계산서를 요청하세요.|Could we have the bill, please?|Could we order more soup?~Could we see the breakfast menu?|식사를 끝내고 지불하려면 bill을 요청해요.|추가 주문이 아니라 결제할 때예요.|Can we have the check, please?~The bill, please.
+C|bread|3|You ordered bread, but the server brings rice.|주문을 공손하게 바로잡으세요.|Excuse me, I ordered bread, not rice.|Thank you, this is exactly right.~I would like more rice.|잘못 나온 음식 대신 실제 주문한 bread를 밝혀야 해요.|I ordered로 원래 주문을 말해요.|Sorry, I asked for bread, not rice.
+`);
+
+;
+Curriculum.definePack('u05',`
+price|How much is this?|이것은 얼마인가요?
+buy|I'd like to buy this.|이것을 사고 싶어요.
+cheap|This one is cheaper.|이것이 더 저렴해요.
+expensive|That is too expensive.|그것은 너무 비싸요.
+size|Do you have a larger size?|더 큰 사이즈가 있나요?
+color|Do you have it in blue?|이것의 파란색이 있나요?
+pay|Where can I pay?|어디에서 결제하나요?
+cash|Can I pay in cash?|현금으로 결제해도 되나요?
+card|Do you accept cards?|카드 결제가 가능한가요?
+receipt|Could I have a receipt?|영수증을 주시겠어요?
+try|Can I try this on?|이것을 입어 봐도 되나요?
+return|Can I return this?|이것을 반품할 수 있나요?
+`, `
+V|price|1|price|물건을 사는 데 드는 금액을 나타내는 말을 고르세요.|가격|크기~무게|price는 물건의 가격이에요.|얼마인지 알려 주는 수치예요.
+V|buy|1|buy a bag|가방과 관련해 하는 행동을 고르세요.|가방 사기|가방 빌리기~가방 잃어버리기|buy는 돈을 주고 사다는 뜻이에요.|돈을 지불하고 소유하게 돼요.
+V|cheap|1|cheap|가격을 설명하는 말의 뜻을 고르세요.|저렴한|비싼~무거운|가격에 대해 cheap이라고 하면 저렴하다는 뜻이에요.|값이 적게 들어요.
+V|expensive|1|expensive|물건의 가격이 어떤가요?|비싸요.|싸요.~무료예요.|expensive는 비용이 많이 드는 비싼 상태예요.|cheap의 반대예요.
+V|size|1|size|옷의 S, M, L과 관련된 말의 뜻을 고르세요.|크기|색깔~상표|size는 크기나 치수를 뜻해요.|옷이 몸에 맞는지와 관련돼요.
+V|color|1|blue|옷의 색을 고르세요.|파란색|빨간색~검은색|blue는 파란색이에요.|하늘의 색을 떠올려요.
+V|pay|1|pay|계산대에서 하는 행동의 뜻을 고르세요.|지불하다|기다리다~갈아입다|pay는 물건이나 서비스의 값을 지불하다예요.|돈을 내는 행동이에요.
+V|cash|1|cash|지폐나 동전으로 내는 결제 수단을 고르세요.|현금|신용카드~영수증|cash는 지폐와 동전 같은 현금이에요.|실물 돈을 사용해요.
+V|card|1|credit card|이 결제 수단의 뜻을 고르세요.|신용카드|명함~교통 안내도|credit card는 신용으로 결제하는 카드예요.|물건값을 결제할 수 있는 카드예요.
+V|receipt|1|receipt|결제 후 구매 내역을 확인하는 종이를 고르세요.|영수증|메뉴~여권|receipt는 결제 내역이 적힌 영수증이에요.|무엇을 얼마에 샀는지 기록돼요.
+V|try|2|try on|옷을 사기 전에 하는 행동의 뜻을 고르세요.|입어 보다|포장하다~반품하다|try on은 옷이나 신발 등을 착용해 보는 것이에요.|몸에 맞는지 확인해요.
+V|return|2|return an item|가게에 물건을 되돌려주는 행동을 고르세요.|반품하기|새로 주문하기~선물 포장하기|쇼핑에서 return an item은 상품을 반품한다는 뜻이에요.|샀던 물건을 가게로 돌려줘요.
+G|price|1|How much ___ this hat?|모자 하나의 가격을 물으세요.|is|are~am|this hat은 단수이므로 is를 써요.|모자가 하나예요.
+G|price|2|How much ___ these shoes?|이 신발의 가격을 물으세요.|are|is~am|these shoes는 복수 표현이므로 are를 써요.|these에 맞는 be동사를 골라요.
+G|size|2|Do you have a ___ size? This shirt is too small.|너무 작은 셔츠보다 큰 크기를 부탁하세요.|larger|smaller~shortest|too small이므로 더 큰 larger size가 필요해요.|small의 반대 방향으로 바꿔요.
+G|color|1|Do you have this ___ red?|빨간색 상품이 있는지 물으세요.|in|on~under|상품 색상은 have this in red처럼 in으로 말할 수 있어요.|색상을 지정할 때 쓰는 전치사예요.
+G|cash|2|Can I pay ___ cash?|현금 결제가 되는지 물으세요.|in|on~at|현금 결제는 pay in cash라는 표현을 써요.|in cash를 한 덩어리로 기억해요.
+G|card|2|Do you ___ debit cards?|직불카드를 받는지 물으세요.|accept|accepts~accepting|Do you 뒤에는 동사원형 accept를 써요.|accept는 받아들이다예요.
+G|cheap|2|This bag is ___ than that one.|이 가방이 저것보다 저렴하다는 문장을 완성하세요.|cheaper|cheap~cheapest|than과 함께 두 가격을 비교하므로 비교급 cheaper를 써요.|둘을 비교하고 있어요.
+G|buy|2|I would like ___ this jacket.|재킷을 사려는 문장을 완성하세요.|to buy|buying~buys|would like 뒤에 행동을 이어 말할 때 to와 동사원형을 써요.|would like to를 연결해요.
+G|try|2|May I try ___ on?|이 신발들을 신어 봐도 되는지 물으세요.|them|they~their|try와 on 사이에는 목적격 대명사 them을 써요.|여러 물건을 가리키는 목적어예요.
+G|return|3|I bought this yesterday, but it ___ fit.|지금도 맞지 않는 옷을 설명하세요.|does not|do not~not|주어 it의 현재 부정문에는 does not과 동사원형 fit을 써요.|주어가 it이고 지금 맞지 않아요.
+O|price|1|How much is this shirt?|셔츠 가격을 묻는 문장을 만드세요.|How much is this shirt?|this~much~shirt?~How~is|How much is this...?로 물건 하나의 가격을 물어요.|How much를 먼저 이어요.
+O|buy|1|I want to buy these socks.|이 양말들을 사고 싶다는 문장을 만드세요.|I want to buy these socks.|buy~these~I~socks.~to~want|want to buy는 사고 싶다는 뜻이에요.|I want 뒤에 행동을 to로 연결해요.
+O|size|2|Do you have this in medium?|중간 크기 상품이 있는지 물으세요.|Do you have this in medium?|in~this~Do~medium?~have~you|in medium은 중간 사이즈로라는 뜻이에요.|Do you have 뒤에 상품과 사이즈를 말해요.
+O|expensive|2|This coat is too expensive for me.|내게 너무 비싸다는 문장을 만드세요.|This coat is too expensive for me.|for~coat~expensive~This~me.~is~too|too expensive는 너무 비싼, for me는 나에게예요.|물건의 상태를 먼저 설명해요.
+O|receipt|2|Could I have a receipt, please?|영수증을 부탁하는 문장을 만드세요.|Could I have a receipt, please?|receipt,~Could~please?~a~have~I|Could I have...?로 물건을 공손하게 요청해요.|영수증 앞에는 a를 써요.
+O|card|2|Can I pay by card?|카드로 결제해도 되는지 물으세요.|Can I pay by card?|card?~pay~by~Can~I|by card는 카드로라는 결제 방법이에요.|Can I pay 뒤에 수단을 말해요.
+O|try|2|May I try this coat on, please?|이 코트를 입어 봐도 되는지 물으세요.|May I try this coat on, please?|coat~May~please?~try~this~I~on,|try this coat on은 이 코트를 입어 보다라는 뜻이에요.|May I로 허락을 물어요.
+O|return|3|Can I return this with the receipt?|영수증을 가지고 반품할 수 있는지 물으세요.|Can I return this with the receipt?|the~this~Can~receipt?~with~return~I|with the receipt는 영수증을 함께 가지고라는 뜻이에요.|반품할 물건 뒤에 영수증 조건을 덧붙여요.
+L|price|1|This notebook is four dollars.|공책 가격은 얼마인가요?|4달러|5달러~14달러|four dollars는 4달러예요.|four와 fourteen을 구분해요.
+L|color|1|I'd like the green scarf, please.|원하는 스카프 색은 무엇인가요?|초록색|회색~갈색|green이 원하는 색을 알려 줘요.|scarf 앞의 색을 들어요.
+L|size|2|This medium shirt is too tight. Do you have a large?|손님이 새로 원하는 크기는 무엇인가요?|큰 크기|중간 크기~작은 크기|현재 medium이 꽉 끼므로 large를 요청했어요.|마지막 질문의 크기를 들어요.
+L|cheap|2|The blue bag is twenty dollars. The black bag is thirty dollars.|더 저렴한 가방은 어느 것인가요?|파란 가방|검은 가방~둘의 가격이 같아요.|20달러가 30달러보다 적으므로 파란 가방이 저렴해요.|두 가격을 비교해요.
+L|cash|2|The card machine is broken today. Please pay in cash.|오늘 가능한 결제 방법으로 안내한 것은 무엇인가요?|현금|카드~휴대전화 결제|Please pay in cash가 현금으로 내 달라는 안내예요.|고장 난 기계보다 마지막 부탁에 주목해요.
+L|receipt|2|Keep your receipt if you want to exchange the item.|교환을 위해 보관해야 하는 것은 무엇인가요?|영수증|광고 전단~주소록|Keep your receipt는 영수증을 보관하라는 뜻이에요.|keep 뒤의 물건을 들어요.
+L|price|3|The apples are two dollars each. I'll take three.|사과 세 개의 총액은 얼마인가요?|6달러|3달러~5달러|each는 하나에라는 뜻이므로 2달러씩 세 개는 6달러예요.|단가와 개수를 곱해요.
+R|color|1|Sale: red gloves, five dollars. Blue gloves, eight dollars.|5달러인 장갑의 색은 무엇인가요?|빨간색|파란색~검은색|red gloves 옆의 가격이 five dollars예요.|같은 줄의 물건과 가격을 연결해요.
+R|return|3|Please return unused items within seven days. Bring your receipt. Sale items cannot be returned.|반품할 수 없는 물건은 무엇인가요?|할인 상품|영수증이 있는 미사용 일반 상품~어제 산 미사용 일반 상품|Sale items cannot be returned.가 할인 상품의 반품 제한을 알려 줘요.|cannot은 할 수 없다는 뜻이에요.
+R|buy|3|A shop sells notebooks for three dollars and pens for two dollars. Jo buys two notebooks and one pen.|조가 내야 할 돈은 얼마인가요?|8달러|5달러~10달러|공책 두 권은 6달러, 펜 하나는 2달러여서 합계 8달러예요.|각 물건의 수량을 먼저 계산해요.
+C|price|1|You like a hat, but there is no price tag.|모자 가격을 물으세요.|How much is this hat?|What time does the train leave?~Where is my passport?|가격표가 없으므로 How much is...?로 가격을 물어요.|얼마인지를 묻는 표현이에요.|What is the price of this hat?
+C|size|2|The shoes feel too small. The clerk asks whether they fit.|더 큰 신발이 필요하다고 답하세요.|They're too small. Do you have a larger size?|They're perfect. I'll take them.~They're too large. I need smaller ones.|너무 작으므로 더 큰 사이즈가 필요해요.|현재 크기의 문제와 원하는 변경을 함께 말해요.|These are too small. Could I try a larger size?
+C|buy|2|You have chosen a blue bag and want to purchase it.|이 가방을 사겠다고 말하세요.|I'll take the blue bag.|I'm just looking, thanks.~Could you return my ticket?|I'll take...는 물건을 고르고 구매하겠다는 자연스러운 말이에요.|색과 물건을 함께 말해요.|I would like to buy the blue bag.
+C|pay|2|A clerk says, “Cash or card?” You want to use your card.|카드로 내겠다고 답하세요.|By card, please.|In cash, please.~In a large size, please.|질문은 결제 방법을 묻고 있으므로 card로 답해요.|원하는 수단을 확인해요.|I will pay by card.~Card, please.
+C|receipt|3|You paid, but the clerk did not give you a receipt. You need one.|빠진 영수증을 공손하게 요청하세요.|Could I have my receipt, please?|Could I try a different color?~Could I see the menu?|결제를 마쳤고 내역이 필요하므로 영수증을 요청해요.|receipt가 필요한 서류예요.|May I have a receipt, please?
+`);
+
+;
+Curriculum.definePack('u06',`
+left|Turn left.|왼쪽으로 도세요.
+right|Turn right.|오른쪽으로 도세요.
+straight|Go straight.|곧장 가세요.
+where|Where is the bank?|은행은 어디에 있나요?
+bus|Take the bus.|버스를 타세요.
+train|The train leaves at nine.|기차는 9시에 출발해요.
+station|at the station|역에서
+airport|the airport|공항
+near|The hotel is near the station.|호텔은 역 근처에 있어요.
+far|Is it far from here?|여기서 먼가요?
+ticket|ticket|표
+change|Change trains here.|여기에서 기차를 갈아타세요.
+`, `
+V|left|1|Turn left.|어느 방향으로 돌아야 하나요?|왼쪽|오른쪽~뒤쪽|left는 왼쪽이에요.|right의 반대 방향이에요.
+V|right|1|Turn right.|어느 방향으로 돌아야 하나요?|오른쪽|왼쪽~제자리|right는 길 안내에서 오른쪽을 뜻해요.|left와 반대예요.
+V|straight|1|Go straight.|어떻게 이동해야 하나요?|곧장 가요.|왼쪽으로 돌아요.~돌아가요.|straight는 방향을 바꾸지 않고 곧장이라는 뜻이에요.|현재 방향을 계속 유지해요.
+V|where|1|Where is the bank?|무엇을 묻는 질문인가요?|은행의 위치|은행의 요금~은행의 직원 수|Where is...?는 장소의 위치를 물어요.|where는 어디예요.
+V|bus|1|bus stop|어떤 장소인가요?|버스 정류장|기차 승강장~공항 입구|bus stop은 버스가 서서 승객을 태우는 정류장이에요.|버스를 기다리는 곳이에요.
+V|train|1|train|어떤 교통수단인가요?|기차|택시~비행기|train은 철로 위를 달리는 기차예요.|철로를 이용해요.
+V|station|1|station|기차를 타고 내리는 장소를 고르세요.|역|식당~병원|기차 안내에서 station은 역을 뜻해요.|train과 함께 쓰이는 장소예요.
+V|airport|1|airport|비행기를 타러 가는 장소를 고르세요.|공항|항구~서점|airport는 비행기가 출발하고 도착하는 공항이에요.|air와 관련된 교통시설이에요.
+V|near|1|near the library|도서관과의 위치 관계는 어떤가요?|도서관 근처|도서관에서 아주 멀리~도서관 안|near는 ~근처에라는 뜻이에요.|반드시 안쪽이라는 뜻은 아니에요.
+V|far|1|far from here|이곳에서 거리가 어떤가요?|멀어요.|바로 옆이에요.~같은 곳이에요.|far from은 ~에서 멀리라는 뜻이에요.|near의 반대예요.
+V|ticket|2|a one-way ticket|어떤 표를 뜻하나요?|편도 표|왕복 표~입장 시간표|one-way는 한 방향으로 한 번 가는 편도예요.|돌아오는 여정은 포함하지 않아요.
+V|change|2|Change trains.|교통 안내에서 해야 할 행동을 고르세요.|기차를 갈아타기|기차를 수리하기~표를 찢기|change trains는 다른 기차로 옮겨 탄다는 뜻이에요.|환승하는 행동이에요.
+G|left|1|___ left at the corner.|모퉁이에서 왼쪽으로 돌라는 안내를 완성하세요.|Turn|Turns~Turning|지시는 동사원형 Turn으로 시작해요.|행동을 바로 지시하는 문장이에요.
+G|where|1|Where ___ the nearest bus stop?|가장 가까운 정류장 위치를 물으세요.|is|are~am|the nearest bus stop은 단수 장소이므로 is를 써요.|정류장 하나의 위치예요.
+G|near|2|The café is ___ the bank.|카페가 은행 근처에 있다는 문장을 완성하세요.|near|nearly~nearness|장소 앞의 near는 ~근처에라는 뜻이에요. nearly는 거의, nearness는 가까움이라는 명사예요.|장소를 바로 연결할 수 있는 near를 써요.
+G|bus|2|How do I ___ to the bus station?|버스터미널로 가는 방법을 물으세요.|get|gets~getting|How do I get to...?는 가는 방법을 묻는 표현이에요.|do 뒤의 동사는 원형이에요.
+G|train|2|Does this train ___ at City Hall?|시청역에 정차하는지 물으세요.|stop|stops~stopping|Does 뒤의 본동사는 원형 stop을 써요.|정차하다는 stop이에요.
+G|far|2|How ___ is the museum from here?|박물관까지의 거리를 물으세요.|far|many~much|How far는 얼마나 먼지, 거리를 물어요.|시간이 아니라 거리예요.
+G|airport|2|We are going ___ the airport.|공항으로 가는 방향을 나타내세요.|to|on~under|go to 뒤에 목적지를 말해요.|이동의 목적지예요.
+G|straight|2|Go straight ___ two blocks.|두 블록 동안 곧장 가라는 안내를 완성하세요.|for|with~from|for two blocks는 두 블록의 거리만큼이라는 뜻이에요.|이동하는 길이를 나타내요.
+G|ticket|2|I'd like two ___ to Oxford.|옥스퍼드행 표 두 장을 부탁하세요.|tickets|ticket~ticket's|two 뒤에는 복수형 tickets를 써요.|표가 두 장이에요.
+G|change|3|You need ___ at the next station.|다음 역에서 갈아타야 한다고 말하세요.|to change|changing~changes|need to 뒤에 필요한 행동을 동사원형으로 말해요.|need to change를 묶어요.
+O|right|1|Turn right at the traffic lights.|신호등에서 오른쪽으로 돌라는 안내를 만드세요.|Turn right at the traffic lights.|the~right~lights.~at~Turn~traffic|at the traffic lights는 방향을 바꿀 지점을 알려 줘요.|Turn right 다음에 기준 장소를 말해요.
+O|straight|1|Go straight past the bank.|은행을 지나 곧장 가라는 문장을 만드세요.|Go straight past the bank.|bank.~past~Go~the~straight|past the bank는 은행을 지나서라는 뜻이에요.|Go straight를 먼저 이어요.
+O|where|2|Where is the nearest train station?|가장 가까운 기차역 위치를 물으세요.|Where is the nearest train station?|nearest~station?~Where~train~the~is|the nearest train station은 가장 가까운 기차역이에요.|Where is 뒤에 찾는 장소를 말해요.
+`);
+Curriculum.definePack('u06','duration|How long does it take?|얼마나 걸리나요?',`
+O|bus|2|Which bus goes to the hospital?|병원에 가는 버스를 물으세요.|Which bus goes to the hospital?|goes~hospital?~Which~the~bus~to|Which bus로 여러 버스 중 어느 것인지 물어요.|Which bus를 먼저 묶어요.
+O|ticket|2|I need a return ticket to York.|요크행 왕복 표가 필요하다고 말하세요.|I need a return ticket to York.|York.~return~need~to~I~a~ticket|return ticket은 왕복 표예요.|표의 종류 다음에 목적지를 말해요.
+O|near|2|The hotel is near the station.|호텔이 역 근처에 있다는 문장을 만드세요.|The hotel is near the station.|station.~near~is~The~the~hotel|near는 ~근처에라는 위치 표현이에요.|호텔의 위치를 역을 기준으로 말해요.
+O|duration|3|How long does it take to walk there?|걸어가는 데 걸리는 시간을 물으세요.|How long does it take to walk there?|walk~take~How~there?~does~to~long~it|How long does it take...?는 소요 시간을 물어요.|How long을 먼저 이어 주세요.
+O|change|2|Change trains at the next stop.|다음 정거장에서 갈아타라는 문장을 만드세요.|Change trains at the next stop.|next~trains~stop.~at~Change~the|at the next stop이 환승하는 지점이에요.|갈아타라는 행동부터 말해요.
+L|left|1|Turn left after the bridge.|다리를 지난 뒤 어느 방향으로 가나요?|왼쪽|오른쪽~뒤쪽|Turn left가 회전 방향을 알려 줘요.|after the bridge는 방향을 바꿀 지점이에요.
+L|right|1|The bank is on your right.|은행은 어느 쪽에 있나요?|오른쪽|왼쪽~뒤쪽|on your right는 오른쪽에라는 뜻이에요.|right를 들어 보세요.
+L|bus|2|Take bus number twelve, not number twenty.|타야 할 버스 번호는 무엇인가요?|12번|20번~2번|number twelve가 탈 버스이고 twenty는 아니라고 했어요.|twelve와 twenty를 구분해요.
+L|train|2|The train to the airport leaves from platform three.|공항행 열차는 어느 승강장에서 출발하나요?|3번|2번~13번|platform three가 승강장 번호예요.|platform 뒤의 수를 들어요.
+L|near|2|The pharmacy is near the bank, but far from the café.|약국과 가까운 곳은 어디인가요?|은행|카페~학교|near the bank는 은행 근처라는 뜻이에요. 카페와는 멀다고 했어요.|near와 far from을 구분해요.
+L|duration|3|It's a ten-minute walk or a three-minute bus ride.|걸어서 가면 얼마나 걸리나요?|10분|3분~13분|ten-minute walk가 도보 소요 시간이에요.|버스 시간과 구분해요.
+L|change|3|Stay on this train for two stops, then change to the blue line.|언제 갈아타야 하나요?|두 정거장 뒤|바로 다음 정거장~갈아탈 필요가 없어요.|for two stops 뒤에 then change라고 했어요.|then은 그다음에라는 뜻이에요.
+R|straight|1|Go straight. The library is beside the park.|도서관은 무엇 옆에 있나요?|공원|병원~공항|beside the park는 공원 옆이라는 뜻이에요.|둘째 문장의 기준 장소를 보세요.
+R|station|2|The east entrance is closed today. Please use the west entrance to reach the station.|오늘 이용해야 할 입구는 어디인가요?|서쪽 입구|동쪽 입구~두 입구 모두 폐쇄|use the west entrance가 이용할 입구를 알려 줘요.|closed와 use를 구분해요.
+R|ticket|3|A single bus ticket costs two dollars. A day pass costs five dollars and allows unlimited rides.|오늘 네 번 탄다면 더 저렴한 선택은 무엇인가요?|하루 이용권|편도 표 네 장~두 선택의 비용이 같아요.|편도 네 번은 8달러이고 하루 이용권은 5달러예요.|오늘 총 이용 횟수를 계산해요.
+C|where|1|You need to find the nearest bank.|가장 가까운 은행 위치를 물으세요.|Where is the nearest bank?|How much is the bag?~When is your birthday?|Where is로 찾는 장소를 구체적으로 물어요.|bank는 은행이에요.|Could you tell me where the nearest bank is?
+C|left|2|A guide says, “Turn left at the bank.” You want to confirm the direction.|왼쪽이라는 안내를 확인하세요.|Left at the bank, right?|So I turn right at the café?~Is the bank open tomorrow?|들은 방향과 기준 장소를 그대로 확인해야 해요. 끝의 right?는 맞죠라는 뜻이에요.|방향 left와 확인 right?는 역할이 달라요.|So I turn left at the bank?
+C|far|2|A traveler asks whether the museum is far. It is only a two-minute walk.|가깝다는 뜻을 구체적으로 답하세요.|No, it's only a two-minute walk.|Yes, about three hours away.~It costs ten dollars.|2분 도보 거리이므로 멀지 않다고 답해요.|거리와 가격을 구분해요.|It is very close, just two minutes on foot.
+C|ticket|2|At a ticket office, you want to go to Bath and come back.|바스행 왕복 표를 요청하세요.|A return ticket to Bath, please.|A single ticket from Bath, please.~A map of the airport, please.|갔다가 돌아오므로 return ticket이 맞아요.|single은 편도예요.|I would like a round-trip ticket to Bath.
+C|change|3|You did not understand where to change trains.|환승 역을 다시 물어보세요.|Which station should I change at?|How much does the coat cost?~Where did you buy this book?|which station으로 환승할 역을 구체적으로 확인해요.|change는 여기서 환승하다예요.|Where do I need to change trains?
+`,26);
+
+;
+Curriculum.definePack('u07',`
+number|twenty-one|스물하나
+day|Monday|월요일
+week|next week|다음 주
+month|in April|4월에
+time|What time is it?|몇 시인가요?
+appointment|I have an appointment.|저는 약속이 있어요.
+today|today|오늘
+tomorrow|tomorrow|내일
+yesterday|yesterday|어제
+late|I'm late.|저는 늦었어요.
+early|We arrived early.|우리는 일찍 도착했어요.
+minute|ten minutes|10분
+hour|two hours|두 시간
+date|What is the date today?|오늘은 며칠인가요?
+weekend|on weekends|주말에
+`, `
+V|number|1|twenty-one|숫자를 고르세요.|21|12~201|twenty는 20이고 one을 이어 21을 말해요.|20에 1을 더해요.
+V|day|1|Monday|요일의 뜻을 고르세요.|월요일|목요일~일요일|Monday는 월요일이에요.|보통 한 주의 평일이 시작되는 날이에요.
+V|week|1|next week|언제를 뜻하나요?|다음 주|지난주~이번 달|next는 다음의라는 뜻이에요.|현재 주 다음이에요.
+V|month|1|April|몇 월인가요?|4월|8월~12월|April은 4월이에요.|March 다음 달이에요.
+V|time|1|half past three|몇 시인가요?|3시 30분|2시 30분~3시 15분|half past는 해당 시각에서 30분 지난 때예요.|three에 30분을 더해요.
+V|appointment|2|appointment|미리 정한 만남이나 방문 시간을 뜻하는 말을 고르세요.|약속|방향~가격|appointment는 미리 예약하거나 정한 약속이에요.|시간을 미리 정해 두었어요.
+V|today|1|today|현재 하루를 가리키는 말의 뜻을 고르세요.|오늘|내일~어제|today는 지금 이 날인 오늘이에요.|지금 날짜를 가리켜요.
+V|tomorrow|1|tomorrow|오늘 다음 날을 고르세요.|내일|어제~지난주|tomorrow는 내일이에요.|오늘에서 하루 뒤예요.
+V|yesterday|1|yesterday|오늘 바로 전날을 고르세요.|어제|내일~다음 달|yesterday는 어제예요.|오늘에서 하루 전이에요.
+V|late|1|late|정해진 시각보다 뒤에 도착한 상태를 고르세요.|늦은|이른~정확히 제시간인|late는 늦은 상태를 뜻해요.|약속 시간보다 늦었어요.
+V|early|1|early|정해진 시각보다 앞선 때를 고르세요.|일찍|늦게~다음 주에|early는 예상이나 기준보다 일찍이라는 뜻이에요.|late의 반대예요.
+V|minute|1|fifteen minutes|시간의 길이를 고르세요.|15분|50분~15시간|fifteen minutes는 15분이에요.|fifteen과 fifty를 구분해요.
+V|hour|1|two hours|시간의 길이를 고르세요.|두 시간|두 분~이틀|hour는 시간의 단위이고 two hours는 두 시간이에요.|minutes보다 긴 단위예요.
+V|date|2|the third of May|날짜를 고르세요.|5월 3일|3월 5일~5월 30일|May는 5월이고 third는 3일을 나타내요.|월 이름과 서수를 나눠 읽어요.
+V|weekend|1|weekend|주로 토요일과 일요일을 가리키는 말은 무엇인가요?|주말|평일~한 달|weekend는 주말이에요.|week의 끝부분이에요.
+G|time|1|The class starts ___ nine.|수업 시작 시각을 완성하세요.|at|on~in|정확한 시각 앞에는 at을 써요.|nine은 시각이에요.
+G|day|1|The meeting is ___ Tuesday.|회의 요일을 완성하세요.|on|at~in|요일 앞에는 on을 써요.|Tuesday는 요일이에요.
+G|month|2|My birthday is ___ June.|생일이 있는 달을 말하세요.|in|at~on|월만 말할 때는 in June처럼 in을 써요.|특정 날짜 없이 월만 나와요.
+G|date|2|The event is ___ July 12.|행사 날짜를 완성하세요.|on|in~at|구체적인 날짜에는 on을 써요.|July만이 아니라 12일까지 있어요.
+G|tomorrow|1|I will see you ___ tomorrow.|내일 보자는 문장에서 필요한 말을 고르세요.|빈칸에 아무 말도 넣지 않아요.|on~at|tomorrow 앞에는 보통 at이나 on을 쓰지 않아요.|See you tomorrow라고 해요.
+G|hour|2|The trip takes two ___.|여행 소요 시간을 완성하세요.|hours|hour~hour's|two 뒤에는 복수형 hours를 써요.|두 시간은 복수예요.
+G|appointment|2|I ___ an appointment at ten.|10시에 약속이 있다고 말하세요.|have|has~having|I와 함께 현재 상태를 말할 때 have를 써요.|주어는 I예요.
+G|yesterday|2|Yesterday, I ___ at home.|어제 집에 있었다고 말하세요.|was|am~are|yesterday는 과거이므로 I was를 써요.|과거의 be동사예요.
+G|late|2|Please do not ___ late.|늦지 말라는 부탁을 완성하세요.|be|is~are|do not 뒤에는 동사원형 be가 와요.|late는 상태를 설명해요.
+G|week|2|We meet ___ a week, on Tuesday and Friday.|일주일에 두 번 만난다는 문장을 완성하세요.|twice|once~never|Tuesday와 Friday 두 번이므로 twice가 맞아요.|만나는 요일을 세어 보세요.
+G|minute|3|How ___ minutes do we have left?|남은 분 수를 물으세요.|many|much~long|minutes는 셀 수 있는 복수 단위이므로 many를 써요.|분을 개수로 세고 있어요.
+G|early|2|The bus arrived ___ than usual.|평소보다 일찍 도착했다고 말하세요.|earlier|early~earliest|than으로 비교하므로 earlier를 써요.|두 시점을 비교해요.
+O|time|1|What time does the shop open?|가게 여는 시각을 물으세요.|What time does the shop open?|shop~does~open?~What~the~time|What time으로 시각을 물어요.|What time을 먼저 이어요.
+O|today|1|Today is Wednesday.|오늘 요일을 말하세요.|Today is Wednesday.|Wednesday.~Today~is|Today is 다음에 요일을 말해요.|오늘부터 말해요.
+O|tomorrow|2|Can we meet tomorrow afternoon?|내일 오후에 만날 수 있는지 물으세요.|Can we meet tomorrow afternoon?|afternoon?~we~tomorrow~Can~meet|tomorrow afternoon은 내일 오후예요.|Can we meet 다음에 시점을 말해요.
+O|appointment|2|I have a dentist appointment on Friday.|금요일 치과 약속을 말하세요.|I have a dentist appointment on Friday.|Friday.~dentist~I~on~have~a~appointment|dentist appointment는 치과 방문 약속이에요.|약속 내용 다음에 요일을 붙여요.
+O|month|2|The course begins in September.|과정이 시작되는 달을 말하세요.|The course begins in September.|September.~begins~course~in~The|월 앞에는 in을 써요.|주어와 시작 동사를 먼저 놓아요.
+O|late|2|Sorry, I am ten minutes late.|10분 늦은 것을 사과하세요.|Sorry, I am ten minutes late.|late.~am~Sorry,~minutes~I~ten|ten minutes late는 10분 늦었다는 뜻이에요.|사과한 뒤 늦은 시간을 말해요.
+O|weekend|2|Are you free this weekend?|이번 주말에 시간이 있는지 물으세요.|Are you free this weekend?|this~free~weekend?~Are~you|free는 여기서 시간이 있는 상태예요.|Are you free로 질문해요.
+O|appointment|3|Could we move the appointment to Monday?|약속을 월요일로 옮기자고 부탁하세요.|Could we move the appointment to Monday?|appointment~we~Monday?~Could~to~the~move|move ... to Monday는 일정을 월요일로 바꾸는 것이에요.|Could we move 뒤에 바꿀 약속을 놓아요.
+L|time|1|The film starts at six thirty.|영화 시작 시각은 언제인가요?|6시 30분|6시 13분~7시 30분|six thirty는 6시 30분이에요.|시와 분을 차례로 들어요.
+L|day|1|The library is closed on Sunday.|도서관이 쉬는 요일은 언제인가요?|일요일|토요일~월요일|closed on Sunday가 휴관일을 알려 줘요.|closed 뒤의 요일을 들어요.
+L|appointment|2|Your appointment was at two. We have moved it to three.|바뀐 약속 시간은 언제인가요?|3시|2시~5시|moved it to three가 새 시간이에요.|이전 시간이 아니라 변경된 시간을 찾아요.
+L|number|2|There are twenty-five people in the class.|반 인원은 몇 명인가요?|25명|52명~15명|twenty-five는 25예요.|twenty와 five를 연결해요.
+L|minute|2|The bus leaves in fifteen minutes.|버스 출발까지 얼마나 남았나요?|15분|50분~5분|in fifteen minutes는 지금부터 15분 뒤예요.|fifteen을 주의해 들어요.
+L|today|2|Today is Thursday, so the meeting is tomorrow, on Friday.|회의는 무슨 요일인가요?|금요일|목요일~토요일|tomorrow, on Friday가 회의 날이에요.|오늘과 회의 날을 구분해요.
+L|hour|3|The workshop starts at nine and finishes at eleven thirty.|워크숍은 얼마나 진행되나요?|2시간 30분|1시간 30분~3시간|9시부터 11시 30분까지는 2시간 30분이에요.|끝 시각에서 시작 시각을 빼요.
+R|weekend|3|The museum opens at ten on weekdays and at nine on weekends. It closes at five every day.|토요일에 가장 일찍 입장할 수 있는 시각은 언제인가요?|9시|10시~5시|Saturday는 weekend이므로 주말 개관 시각인 9시를 적용해요.|토요일이 평일인지 주말인지 살펴요.
+C|appointment|2|You cannot attend a meeting at ten. You are available at eleven.|11시로 바꿀 수 있는지 물으세요.|Could we meet at eleven instead?|Ten is perfect for me.~I was there yesterday.|instead로 기존 시간 대신 가능한 새 시간을 제안해요.|가능한 시각이 eleven이에요.|Would eleven work instead?
+C|early|2|A friend asks if you can arrive ten minutes early. You can.|조금 일찍 오겠다고 답하세요.|Sure, I can come ten minutes early.|Sorry, I can only be late.~No, I missed the bus yesterday.|요청에 응할 수 있으므로 일찍 오겠다고 긍정해요.|미래의 약속을 답해요.|Yes, I can be there ten minutes early.
+`);
+
+;
+Curriculum.definePack('u08',`
+checkin|I'd like to check in.|체크인하고 싶어요.
+reservation|I have a reservation.|예약했어요.
+passport|Here is my passport.|여기 제 여권이 있어요.
+ticket|boarding pass|탑승권
+luggage|Where is my luggage?|제 짐은 어디에 있나요?
+help|Could you help me with this bag?|이 가방을 드는 것을 도와주시겠어요?
+checkout|What time is check-out?|체크아웃은 몇 시인가요?
+room|room|객실
+key|room key|객실 열쇠
+breakfast|Is breakfast included?|아침 식사가 포함되어 있나요?
+wifi|What is the Wi-Fi password?|와이파이 비밀번호가 무엇인가요?
+available|Do you have any rooms available?|이용 가능한 방이 있나요?
+cancel|I'd like to cancel my booking.|예약을 취소하고 싶어요.
+stay|for two nights|이틀 밤 동안
+lift|Where is the lift?|엘리베이터는 어디에 있나요?
+`, `
+V|checkin|1|check in|호텔에 도착해 하는 절차의 뜻을 고르세요.|입실 등록하기|식사 계산하기~표 환불하기|check in은 호텔 등에서 도착 사실을 알리고 등록하는 것이에요.|숙박을 시작하는 절차예요.
+V|reservation|1|reservation|미리 자리를 확보한 상태를 나타내는 말을 고르세요.|예약|출국~수하물|reservation은 방이나 좌석 등의 예약이에요.|가기 전에 미리 정해 두었어요.
+V|passport|1|passport|국제 여행에서 신분과 국적을 확인하는 문서를 고르세요.|여권|메뉴~영수증|passport는 여권이에요.|국경을 넘는 여행에 쓰는 문서예요.
+V|ticket|2|boarding pass|비행기에 탑승할 때 제시하는 것을 고르세요.|탑승권|명함~호텔 지도|boarding pass는 탑승권으로 좌석과 탑승 정보가 표시돼요.|board는 탑승하다예요.
+V|luggage|1|luggage|여행할 때 가져가는 물건들을 뜻하는 말을 고르세요.|짐|일정~가격표|luggage는 여행 짐을 통틀어 말해요.|가방과 여행 물건을 떠올려요.
+V|help|1|Could you help me with this bag?|무엇을 부탁하는 말인가요?|가방에 관한 도움|방 청소 취소~새 여권 발급|help me with this bag은 이 가방을 다루는 일을 도와 달라는 뜻이에요.|help와 bag을 연결해요.
+V|checkout|1|check out|호텔에서 숙박을 마칠 때 하는 절차를 고르세요.|퇴실 수속|입실 등록~방 예약|호텔에서 check out은 떠나며 퇴실 수속을 하는 것이에요.|숙박의 마지막 단계예요.
+V|room|1|a single room|보통 누구를 위한 객실인가요?|한 사람|네 사람~단체 회의|single room은 보통 한 사람이 쓰도록 마련된 방이에요.|single은 하나의라는 뜻이에요.
+V|key|1|room key|무엇을 여는 데 쓰나요?|객실 문|여권~항공권|room key는 객실 열쇠예요.|room은 방이에요.
+V|breakfast|2|Breakfast is included.|아침 식사 비용에 대해 어떤 뜻인가요?|기본 요금에 포함돼요.|반드시 별도로 내요.~제공하지 않아요.|included는 이미 포함되어 있다는 뜻이에요.|추가 비용이라는 말이 아니에요.
+V|wifi|1|password|와이파이에 연결할 때 입력하는 정보의 뜻을 고르세요.|비밀번호|우편번호~객실 수|password는 접근을 허용받기 위해 입력하는 비밀번호예요.|연결 권한을 확인하는 정보예요.
+V|available|2|available rooms|객실 상태는 어떤가요?|이용 가능한 방|이미 모두 사용 중인 방~청소가 금지된 방|available은 쓸 수 있거나 이용 가능하다는 뜻이에요.|예약할 수 있는 상태예요.
+V|cancel|2|cancel a booking|예약을 어떻게 하겠다는 뜻인가요?|취소하기|연장하기~확인하기|cancel은 예정된 일을 취소하다는 뜻이에요.|기존 계획을 하지 않기로 해요.
+V|stay|1|for two nights|숙박 기간은 얼마인가요?|이틀 밤|두 시간~두 달|호텔 숙박은 nights로 밤 수를 세요.|nights의 수를 확인해요.
+V|lift|1|lift|호텔에서 층을 오르내리는 시설을 고르세요.|엘리베이터|프런트 데스크~식당|영국 영어의 lift는 미국 영어의 elevator와 같은 시설이에요.|계단 대신 이용할 수 있어요.
+G|reservation|1|I ___ a reservation under Kim.|김이라는 이름으로 예약했다고 말하세요.|have|has~having|I have a reservation은 예약이 있다는 기본 표현이에요.|주어 I에 맞춰요.
+G|room|1|I'd like ___ single room.|1인실 하나를 요청하세요.|a|an~two|single은 자음 소리로 시작하고 방 하나이므로 a를 써요.|single 앞의 관사를 고르세요.
+G|stay|2|We are staying ___ three nights.|사흘 밤의 기간을 말하세요.|for|at~on|for는 이어지는 기간을 나타내요.|밤 수는 기간이에요.
+G|checkin|2|I'd like to ___ in, please.|입실 수속을 시작하겠다고 말하세요.|check|checks~checking|would like to 뒤에는 동사원형 check를 써요.|to 뒤에 원형을 놓아요.
+G|checkout|2|What time ___ we need to check out?|퇴실해야 하는 시각을 물으세요.|do|does~are|일반동사 need와 주어 we에는 조동사 do를 써요.|we에 맞는 질문 형태예요.
+G|breakfast|2|___ breakfast included in the price?|아침 식사 포함 여부를 물으세요.|Is|Are~Do|Breakfast is included를 질문으로 바꾸면 Is breakfast included?가 돼요.|breakfast는 여기서 단수 취급해요.
+G|luggage|2|My luggage ___ missing.|짐이 보이지 않는다고 말하세요.|is|are~be|luggage는 보통 셀 수 없는 명사로 단수 동사를 써요.|가방 수가 많아도 luggage는 단수 취급해요.
+G|passport|2|Here ___ my passport.|여권 하나를 건네며 말하세요.|is|are~am|뒤에 오는 my passport가 단수라 Here is를 써요.|여권은 하나예요.
+G|available|2|Do you have ___ rooms for tonight?|오늘 밤 빈방이 있는지 물으세요.|any|a~an|복수 rooms의 유무를 물을 때 any를 쓸 수 있어요.|하나의 방이 아니라 이용 가능 여부를 물어요.
+G|wifi|2|Could you ___ down the password?|비밀번호를 적어 달라고 부탁하세요.|write|writes~writing|Could you 뒤에는 동사원형 write가 와요.|write down은 적다예요.
+G|cancel|3|I need to cancel ___ reservation.|내 예약을 취소한다고 말하세요.|my|me~I|reservation 앞에는 소유를 나타내는 my를 써요.|누구의 예약인지 나타내요.
+G|help|2|Could you help ___ with these bags?|우리의 짐을 도와 달라고 부탁하세요.|us|we~our|help 뒤에는 도움받는 대상을 나타내는 us가 와요.|‘우리에게’라는 목적어예요.
+O|reservation|1|I have a booking under Lee.|예약자 이름을 알려 주세요.|I have a booking under Lee.|under~booking~Lee.~I~a~have|under Lee는 Lee라는 이름으로라는 예약 표현이에요.|예약이 있다는 말부터 해요.
+O|passport|1|Here is my passport.|여권을 건네는 문장을 만드세요.|Here is my passport.|my~Here~passport.~is|Here is로 물건을 건넬 수 있어요.|Here is를 먼저 이어요.
+O|room|2|Could I have a quiet room?|조용한 객실을 부탁하세요.|Could I have a quiet room?|quiet~room?~Could~a~have~I|quiet room은 조용한 방이에요.|Could I have 뒤에 원하는 방을 말해요.
+O|key|2|My room key does not work.|열쇠가 작동하지 않는다고 알리세요.|My room key does not work.|not~room~work.~My~does~key|does not work는 제대로 작동하지 않는다는 뜻이에요.|주어는 My room key예요.
+O|wifi|2|What is the password for the Wi-Fi?|와이파이 비밀번호를 물으세요.|What is the password for the Wi-Fi?|for~password~the~What~Wi-Fi?~is~the|password for the Wi-Fi는 와이파이용 비밀번호예요.|What is 뒤에 알고 싶은 정보를 놓아요.
+O|lift|2|The lift is next to the stairs.|엘리베이터 위치를 설명하세요.|The lift is next to the stairs.|the~next~lift~stairs.~The~is~to|next to the stairs는 계단 옆이라는 뜻이에요.|next to를 함께 이어요.
+O|stay|3|Can we stay for one more night?|하룻밤 더 머물 수 있는지 물으세요.|Can we stay for one more night?|night?~stay~Can~more~we~one~for|one more night는 하룻밤 더라는 뜻이에요.|Can we stay 뒤에 연장 기간을 말해요.
+O|ticket|2|Where can I print my boarding pass?|탑승권 인쇄 장소를 물으세요.|Where can I print my boarding pass?|boarding~Where~print~pass?~I~my~can|boarding pass를 print하는 장소를 Where로 물어요.|Where can I 다음에 행동을 말해요.
+L|room|1|Your room is number two hundred and four.|객실 번호는 무엇인가요?|204호|240호~214호|two hundred and four는 204예요.|hundred 뒤의 수를 확인해요.
+L|breakfast|1|Breakfast is served from seven to nine.|아침 식사는 몇 시에 끝나나요?|9시|7시~10시|from seven to nine은 7시부터 9시까지예요.|to 뒤가 끝 시각이에요.
+L|checkout|2|Check-out is at eleven. You may leave your bags with us after that.|짐은 체크아웃 후에 어떻게 할 수 있나요?|호텔에 맡길 수 있어요.|반드시 버려야 해요.~객실로만 가져가야 해요.|leave your bags with us는 직원에게 짐을 맡길 수 있다는 뜻이에요.|after that은 체크아웃 뒤예요.
+L|reservation|2|I booked a double room for two nights, starting on Friday.|언제 숙박을 시작하나요?|금요일|토요일~일요일|starting on Friday가 입실일을 알려 줘요.|기간 two nights와 시작 요일을 구분해요.
+L|lift|2|The lift is out of order. Please use the stairs.|지금 이용하라는 시설은 무엇인가요?|계단|엘리베이터~수영장|out of order는 고장 난 상태이며 stairs 이용을 부탁했어요.|Please use 뒤를 들어요.
+L|available|3|We have no single rooms, but a double room is available.|지금 이용 가능한 객실은 무엇인가요?|2인실|1인실~모든 객실이 없어요.|but 뒤에서 double room은 가능하다고 설명해요.|no single과 available double을 구분해요.
+L|help|2|Could you call a taxi for six tomorrow morning?|택시를 요청한 시각은 언제인가요?|내일 아침 6시|오늘 저녁 6시~내일 정오|six tomorrow morning이 날짜와 시간대를 알려 줘요.|tomorrow morning을 놓치지 마세요.
+R|cancel|3|You can cancel without a fee until Monday. Cancellations on Tuesday or later cost twenty dollars.|무료 취소가 가능한 마지막 날은 언제인가요?|월요일|화요일~수요일|until Monday와 Tuesday or later를 비교하면 월요일까지 무료예요.|무료와 유료의 경계를 읽어요.
+C|checkin|1|You arrive at a hotel and already have a booking under Park.|예약자 이름을 말하며 체크인하세요.|I'd like to check in. I have a booking under Park.|I'd like to check out. I stayed last week.~I need a train ticket to Park.|도착했으므로 check in을 하고 예약 이름을 알려 줘요.|퇴실은 check out이에요.|I have a reservation under Park. May I check in?
+C|key|2|Your room key will not open the door.|프런트에 문제를 알리고 도움을 청하세요.|My key doesn't work. Could you help me?|My key works well, thank you.~Could I order another breakfast?|작동하지 않는 열쇠라는 문제를 구체적으로 말해요.|doesn't work가 고장이나 작동 실패를 나타내요.|I cannot open my door with this key. Could you help?
+`);
+
+;
+Curriculum.definePack('u09',`
+job|I work in sales.|저는 영업 부서에서 일해요.
+introduce|I'm new here.|저는 여기 신입이에요.
+meeting|a team meeting|팀 회의
+request|Could you send me the file?|파일을 보내 주시겠어요?
+email|email address|이메일 주소
+attach|Please attach the document.|문서를 첨부해 주세요.
+deadline|deadline|마감일
+clarify|What do you mean?|무슨 뜻인가요?
+repeat|Could you repeat the instructions?|지시를 다시 말해 주시겠어요?
+confirm|Let me check.|확인해 볼게요.
+document|document|문서
+print|Print two copies.|두 부 인쇄하세요.
+send|Send it by email.|이메일로 보내세요.
+break|take a break|잠깐 쉬다
+finish|I have finished the report.|보고서를 끝냈어요.
+`, `
+V|job|1|sales team|어떤 팀인가요?|영업 팀|청소 팀~의료 팀|sales는 판매나 영업을 뜻해요.|상품이나 서비스를 판매하는 업무예요.
+V|introduce|1|I'm new here.|일터에서 이 말은 어떤 뜻인가요?|저는 여기 신입이에요.|저는 여기를 떠나요.~저는 여기 주인이에요.|new here는 이곳에 새로 왔다는 뜻이에요.|아직 새로 합류한 사람이에요.
+V|meeting|1|team meeting|어떤 일정을 뜻하나요?|팀 회의|혼자 하는 운동~점심 메뉴|meeting은 사람들이 모여 의논하는 회의예요.|업무를 함께 논의해요.
+V|request|1|Could you send me the file?|무엇을 부탁하나요?|파일 보내기|파일 삭제하기~파일 숨기기|send me the file은 나에게 파일을 보내 달라는 뜻이에요.|send는 보내다예요.
+V|email|1|email address|이메일을 보낼 때 필요한 정보를 고르세요.|이메일 주소|옷 치수~좌석 번호|email address는 메시지를 보낼 전자우편 주소예요.|받는 사람의 전자우편 위치예요.
+V|attach|2|attach a document|이메일에서 하는 행동의 뜻을 고르세요.|문서를 첨부하다|문서를 찢다~문서를 번역하다|attach는 파일 등을 메시지에 첨부하다는 뜻이에요.|파일을 이메일에 함께 넣어요.
+V|deadline|2|deadline|일을 마쳐야 하는 마지막 시점을 고르세요.|마감 시점|출근 경로~회의 참석자|deadline은 끝내거나 제출해야 하는 기한이에요.|언제까지 해야 하는지와 관련돼요.
+V|clarify|2|What do you mean?|상대에게 무엇을 묻나요?|말의 뜻|점심값~주소의 철자|What do you mean?은 무슨 뜻으로 말했는지 확인해요.|이해하지 못한 뜻을 물어요.
+V|repeat|1|repeat the instructions|어떤 부탁인가요?|지시를 다시 말하기|지시를 취소하기~지시를 비밀로 하기|repeat는 한 번 더 말하거나 하는 것이에요.|같은 정보를 다시 들어요.
+V|confirm|2|Let me check.|상대가 무엇을 하겠다는 뜻인가요?|확인해 보겠어요.|확인하지 않겠어요.~지금 떠나겠어요.|Let me check는 내가 확인해 보겠다는 말이에요.|정확한지 살펴보려 해요.
+V|document|1|document|글이나 정보가 기록된 자료의 뜻을 고르세요.|문서|접시~열쇠|document는 문서예요.|업무에서 읽거나 작성하는 자료예요.
+V|print|1|print two copies|결과물은 몇 부가 필요한가요?|두 부|한 부~열두 부|two copies는 같은 문서 두 부예요.|copies 앞의 수를 확인해요.
+V|send|1|send by email|어떤 방법으로 보내나요?|이메일로|우편으로~택시로|by email은 전송 방법을 말해요.|by 뒤가 방법이에요.
+V|break|1|take a break|업무 중 어떤 행동인가요?|잠깐 쉬기|물건 부수기~장기 퇴사하기|take a break는 일을 잠시 멈추고 쉬는 표현이에요.|break가 항상 부수다라는 뜻은 아니에요.
+V|finish|1|finish the report|보고서 작업을 어떻게 한다는 뜻인가요?|끝내다|시작하다~숨기다|finish는 하고 있던 일을 끝내다예요.|start의 반대 행동이에요.
+G|job|1|I work ___ the sales department.|영업 부서에서 일한다고 말하세요.|in|under~onto|부서 소속은 work in the department로 표현할 수 있어요.|소속 부서를 말해요.
+G|introduce|1|This ___ my first day.|첫 출근 날이라고 말하세요.|is|are~am|This는 단수 주어이므로 is와 함께 써요.|this에 맞는 동사를 고르세요.
+G|meeting|2|The meeting ___ at ten every Monday.|반복되는 회의 시작을 말하세요.|starts|start~starting|주어 The meeting은 단수라 starts를 써요.|매주 반복하는 현재 습관이에요.
+G|request|2|Could you ___ me the updated file?|업데이트한 파일을 보내 달라고 부탁하세요.|send|sends~sending|Could you 뒤에는 동사원형 send를 써요.|동사에 s나 ing를 붙이지 않아요.
+G|attach|2|Please ___ the photo to your email.|사진 첨부 지시를 완성하세요.|attach|attaches~attached|지시문에서는 동사원형 attach를 써요.|Please 다음에 행동을 말해요.
+G|deadline|2|Please finish this ___ Friday.|금요일까지 끝내라는 기한을 나타내세요.|by|under~throughout|by Friday는 늦어도 금요일까지라는 기한이에요.|마감 기한을 나타내요.
+G|document|2|These documents ___ important.|여러 문서가 중요하다고 말하세요.|are|is~am|These documents는 복수 주어이므로 are를 써요.|documents가 여러 개예요.
+G|print|2|How many copies ___ you need?|필요한 부수를 물으세요.|do|does~is|주어 you와 일반동사 need에는 do를 써서 질문해요.|you에 맞는 조동사를 고르세요.
+G|email|2|Please send it to ___ email address.|나의 이메일 주소로 보내 달라고 말하세요.|my|me~I|email address 앞에는 소유를 나타내는 my를 써요.|주소가 누구의 것인지 말해요.
+G|break|2|Let's ___ a short break.|짧게 쉬자고 제안하세요.|take|takes~taking|Let's 뒤에는 동사원형 take를 써요.|Let's take를 연결해요.
+G|finish|3|I have ___ the report.|보고서를 완료했다고 말하세요.|finished|finish~finishing|have 뒤에 과거분사 finished를 써서 완료를 표현해요.|have finished라는 형태예요.
+G|clarify|3|Do you mean I ___ send both files?|두 파일 모두 보내야 한다는 뜻인지 확인하세요.|should|am~was|should send는 보내야 한다는 뜻이에요.|필요한 행동을 확인하고 있어요.
+O|introduce|1|I am the new assistant.|새 보조 직원임을 소개하세요.|I am the new assistant.|new~am~assistant.~I~the|the new assistant로 새로 온 역할을 설명해요.|I am 뒤에 역할을 말해요.
+O|meeting|1|When is the next meeting?|다음 회의 시점을 물으세요.|When is the next meeting?|next~meeting?~When~the~is|When is...?로 언제인지 물어요.|When을 먼저 놓아요.
+O|request|2|Could you send me the schedule?|일정표를 보내 달라고 부탁하세요.|Could you send me the schedule?|schedule?~send~Could~the~you~me|send me the schedule은 나에게 일정표를 보내 달라는 뜻이에요.|누구에게 무엇을 보낼지 순서대로 말해요.
+O|repeat|2|Could you explain that again?|설명을 다시 부탁하세요.|Could you explain that again?|again?~explain~you~Could~that|explain that again은 그 내용을 다시 설명하다는 뜻이에요.|Could you 다음에 행동을 놓아요.
+O|confirm|2|Let me check the room number.|회의실 번호를 확인하겠다고 말하세요.|Let me check the room number.|room~check~Let~number.~the~me|Let me check로 확인하겠다는 뜻을 전해요.|Let me 뒤에 동사원형을 놓아요.
+O|print|2|Please print this on both sides.|양면 인쇄를 부탁하세요.|Please print this on both sides.|both~Please~on~sides.~this~print|on both sides는 양쪽 면에라는 뜻이에요.|인쇄 대상 뒤에 방법을 덧붙여요.
+O|attach|3|I have attached the updated document.|수정 문서를 첨부했다고 말하세요.|I have attached the updated document.|updated~attached~I~document.~have~the|have attached는 첨부를 완료했다는 뜻이에요.|I have attached부터 연결해요.
+O|deadline|2|When do you need this by?|언제까지 필요한지 물으세요.|When do you need this by?|this~need~When~by?~you~do|끝의 by가 마감 기한을 묻는 역할을 해요.|When do you need로 시작해요.
+L|meeting|1|The meeting is in room five.|회의실 번호는 무엇인가요?|5번|9번~15번|room five가 장소를 알려 줘요.|room 뒤의 번호를 들어요.
+L|print|1|Please print three copies of the agenda.|몇 부를 인쇄하나요?|세 부|두 부~서른 부|three copies가 필요한 부수예요.|agenda는 회의 안건이에요.
+L|deadline|2|Please send the report by four today.|보고서를 언제까지 보내야 하나요?|오늘 4시|내일 4시~오늘 5시|by four today가 마감 시각과 날짜예요.|by와 today를 함께 들어요.
+L|email|2|Send the invoice to Mina, not to me.|청구서를 누구에게 보내나요?|미나|말하는 사람~모든 직원|to Mina라고 지정하고 not to me로 제외했어요.|not 뒤의 사람은 수신자가 아니에요.
+L|document|2|Use the new file. The old one has the wrong address.|새 파일을 사용해야 하는 이유는 무엇인가요?|옛 파일의 주소가 틀려서|새 파일에 사진이 없어서~옛 파일이 비어 있어서|old one has the wrong address가 이유예요.|wrong address는 잘못된 주소예요.
+L|break|2|Let's take a ten-minute break and return at two fifteen.|쉬는 시간은 얼마나 되나요?|10분|15분~2시간|ten-minute break가 쉬는 길이예요. two fifteen은 돌아올 시각이에요.|기간과 시각을 구분해요.
+L|finish|3|I finished the slides, but the report still needs one more page.|아직 끝내지 않은 것은 무엇인가요?|보고서|발표 슬라이드~둘 다 완료|report still needs가 보고서에 남은 일이 있음을 알려 줘요.|finished와 still needs를 비교해요.
+R|confirm|3|Email: Please bring your laptop to Monday's workshop. We will provide paper and pens. No printed notes are needed.|직접 가져와야 하는 것은 무엇인가요?|노트북|종이와 펜~인쇄한 노트|bring your laptop이 필요한 준비물이고 다른 물건은 제공되거나 필요 없어요.|bring과 provide의 주체를 구분해요.
+C|clarify|2|A supervisor asks for “the final version.” You are unsure which file that is.|어느 파일인지 확인하세요.|Which file is the final version?|Yes, I deleted every file.~The meeting was very nice.|대상을 모르면 파일을 구체적으로 확인하는 질문이 필요해요.|Which file로 선택을 물어요.|Could you tell me which file you mean?
+C|request|2|A coworker asks you to send the notes today. You can do it.|오늘 보내겠다고 답하세요.|Sure, I'll send them today.|Sorry, I threw them away.~I will send them next week.|가능한 부탁에는 수락하고 오늘 할 행동을 말해요.|미래 행동은 I'll로 말할 수 있어요.|Yes, I can send the notes today.
+`);
+
+;
+Curriculum.definePack('u10',`
+sick|I feel sick.|몸이 아파요.
+help|I need help.|도움이 필요해요.
+headache|I have a headache.|머리가 아파요.
+tired|I'm tired.|피곤해요.
+appointment|I'd like to make an appointment.|진료 예약을 하고 싶어요.
+hospital|Where is the hospital?|병원은 어디에 있나요?
+pharmacy|Where is the pharmacy?|약국은 어디에 있나요?
+water|water|물
+rest|I need to rest.|쉬어야 해요.
+cold|I have a cold.|감기에 걸렸어요.
+fever|I have a fever.|열이 있어요.
+pain|My back hurts.|허리가 아파요.
+allergy|I am allergic to peanuts.|저는 땅콩 알레르기가 있어요.
+dizzy|I feel dizzy.|어지러워요.
+emergency|Please call an ambulance.|구급차를 불러 주세요.
+`, `
+V|sick|1|I feel sick.|몸 상태 표현의 뜻을 고르세요.|몸이 아파요.|배가 고파요.~기분이 신나요.|feel sick은 몸이 안 좋거나 아프다는 일반적인 표현이에요.|상태를 말할 뿐 병을 진단하는 말은 아니에요.
+V|help|1|I need help.|무엇이 필요하다고 하나요?|도움|휴가 사진~할인 쿠폰|need help는 도움이 필요하다는 뜻이에요.|help는 도움을 뜻해요.
+V|headache|1|headache|어느 부위의 통증인가요?|머리|발~손|headache는 두통이에요.|head는 머리예요.
+V|tired|1|tired|몸 상태의 뜻을 고르세요.|피곤한|배고픈~목마른|tired는 기운이 없고 쉬고 싶은 피곤한 상태예요.|휴식이 필요한 느낌이에요.
+V|appointment|2|make an appointment|병원에 가기 전 어떤 일을 하나요?|진료 시간을 예약해요.|병원을 새로 지어요.~약 이름을 바꿔요.|make an appointment는 방문 시간을 예약하다는 뜻이에요.|날짜와 시간을 미리 정해요.
+V|hospital|1|hospital|어떤 장소인가요?|병원|호텔~공항|hospital은 병원이에요.|hotel과 철자가 비슷하지만 다른 장소예요.
+V|pharmacy|1|pharmacy|어떤 장소인가요?|약국|도서관~우체국|pharmacy는 약국이에요.|약사가 일하는 곳이에요.
+V|water|2|still water|음료를 고를 때 이 말은 어떤 물인가요?|탄산이 없는 물|탄산수~과일 주스|음료 선택에서 still water는 탄산이 없는 물이에요. sparkling water는 탄산수예요.|이때 still은 물에 탄산이 없다는 뜻이에요.
+V|rest|1|rest|몸을 쉬게 하는 행동을 고르세요.|휴식|달리기~이사|rest는 쉬거나 휴식하는 것이에요.|활동을 잠시 멈추는 말이에요.
+V|cold|1|I have a cold.|이 문장은 무슨 뜻인가요?|감기에 걸렸어요.|단순히 춥다고 말해요.~찬물을 가지고 있어요.|have a cold에서 a cold는 감기예요. I am cold는 춥다는 뜻이에요.|have a cold와 am cold를 구분해요.
+V|fever|1|fever|어떤 몸 상태를 말하나요?|열|배고픔~졸음|fever는 열이 나는 상태를 가리켜요.|증상을 표현하는 단어예요.
+V|pain|1|My back hurts.|아픈 부위는 어디인가요?|등이나 허리|손가락~귀|back은 몸의 뒤쪽인 등이나 허리를 뜻해요.|hurts는 아프다는 뜻이에요.
+V|allergy|2|allergic to peanuts|무엇에 알레르기가 있나요?|땅콩|생선~우유|peanuts는 땅콩이고 allergic to는 ~에 알레르기가 있다는 뜻이에요.|to 뒤의 대상을 읽어요.
+V|dizzy|2|dizzy|어떤 느낌인가요?|어지러운|배부른~지루한|dizzy는 어지럽다는 뜻이에요.|머리가 빙 도는 느낌을 표현해요.
+V|emergency|2|ambulance|어떤 차량인가요?|구급차|택시~배달차|ambulance는 응급 환자를 이송하는 구급차예요.|응급 상황의 도움과 관련돼요.
+G|sick|1|I ___ sick today.|오늘 몸이 안 좋다고 말하세요.|feel|feels~feeling|I 뒤에는 현재형 feel을 써요.|상태를 느낀다는 동사예요.
+G|headache|1|I have ___ headache.|두통이 있다고 말하세요.|a|an~two|headache는 이 표현에서 셀 수 있는 단수 명사라 a를 써요.|a headache로 묶어요.
+G|tired|1|She ___ very tired.|그녀가 매우 피곤하다고 말하세요.|is|has~does|tired는 형용사이므로 be동사 is로 상태를 말해요.|have tired라고 하지 않아요.
+G|fever|2|He ___ a fever.|그에게 열이 있다고 말하세요.|has|have~having|He에 맞는 have의 현재형은 has예요.|주어가 He예요.
+G|allergy|2|I am allergic ___ eggs.|달걀 알레르기를 알리세요.|to|at~with|알레르기 대상은 allergic to 뒤에 말해요.|to 뒤에 대상이 와요.
+G|pain|2|My feet ___.|양쪽 발이 아프다고 말하세요.|hurt|hurts~hurting|feet는 foot의 복수형이므로 동사는 hurt예요.|발이 둘인 복수 주어예요.
+G|appointment|2|I'd like ___ an appointment.|진료 예약을 원한다고 말하세요.|to make|making~makes|would like 뒤에 행동은 to make로 연결해요.|would like to를 떠올려요.
+G|hospital|1|Where ___ the nearest hospital?|가장 가까운 병원 위치를 물으세요.|is|are~do|hospital 하나의 위치를 묻기 때문에 is를 써요.|단수 장소예요.
+G|rest|2|I need ___ for a while.|잠시 쉬어야 한다고 말하세요.|to rest|resting~rests|need 뒤의 행동은 to rest로 표현해요.|need to 다음에는 동사원형이 와요.
+G|water|2|Could I have ___ water, please?|물을 조금 요청하세요.|some|a~an|water는 보통 셀 수 없으므로 some을 써요.|한 개라는 관사를 바로 쓰지 않아요.
+G|cold|2|I ___ cold. Could you close the window?|춥다고 말하며 창문 닫기를 부탁하세요.|am|have~do|춥다는 상태는 I am cold라고 해요. I have a cold는 감기예요.|뒤의 부탁이 온도와 관련돼요.
+G|dizzy|3|I felt dizzy ___ I stood up.|일어났을 때 어지러웠다고 말하세요.|when|who~which|when은 ~할 때라는 시간 관계를 연결해요.|시간을 이어 주는 말을 고르세요.
+O|help|1|I need some help.|도움이 필요하다는 문장을 만드세요.|I need some help.|help.~some~I~need|need some help는 도움이 조금 필요하다는 뜻이에요.|I need 뒤에 필요한 것을 놓아요.
+O|headache|1|I have a bad headache.|심한 두통을 말하세요.|I have a bad headache.|bad~headache.~I~a~have|bad headache는 심한 두통이라는 표현이에요.|I have 뒤에 증상을 놓아요.
+O|appointment|2|Can I make an appointment for tomorrow?|내일 진료 예약이 가능한지 물으세요.|Can I make an appointment for tomorrow?|for~I~tomorrow?~an~make~Can~appointment|make an appointment for tomorrow는 내일로 예약한다는 뜻이에요.|예약 요청 뒤에 날짜를 말해요.
+O|pharmacy|2|Is there a pharmacy near here?|근처 약국이 있는지 물으세요.|Is there a pharmacy near here?|pharmacy~near~Is~here?~a~there|Is there...?는 존재 여부를 묻고 near here는 이 근처예요.|Is there부터 연결해요.
+O|pain|2|My knee hurts when I walk.|걸을 때 무릎이 아프다고 말하세요.|My knee hurts when I walk.|walk.~knee~I~My~when~hurts|when I walk는 아픈 시점을 설명해요.|아픈 부위와 상태를 먼저 말해요.
+O|allergy|2|I am allergic to this medicine.|이 약에 알레르기가 있다고 말하세요.|I am allergic to this medicine.|medicine.~allergic~I~this~to~am|allergic to 뒤에 구체적인 대상을 말해요.|I am allergic to를 묶어요.
+O|emergency|2|Please call an ambulance now.|지금 구급차를 불러 달라고 요청하세요.|Please call an ambulance now.|now.~ambulance~Please~an~call|call an ambulance는 구급차를 부르다는 표현이에요.|공손한 요청 뒤에 행동을 말해요.
+O|rest|3|I need to rest because I do not feel well.|몸이 안 좋아서 쉬어야 한다고 말하세요.|I need to rest because I do not feel well.|well.~rest~I~because~not~need~feel~to~I~do|need to rest는 쉬어야 한다는 뜻이고 because로 이유를 연결해요.|쉬어야 한다는 말 다음에 이유를 붙여요.
+L|headache|1|I have a headache, but my stomach is fine.|어디가 아프다고 하나요?|머리|배~무릎|headache가 아픈 증상이고 stomach is fine은 배는 괜찮다는 말이에요.|but 뒤는 다른 부위 상태예요.
+L|appointment|1|Your appointment is on Monday at ten.|예약은 언제인가요?|월요일 10시|화요일 10시~월요일 2시|Monday at ten이 요일과 시각이에요.|요일과 숫자를 함께 들어요.
+L|tired|2|I'm tired because I worked late last night.|피곤한 이유는 무엇인가요?|어젯밤 늦게 일해서|아침을 많이 먹어서~기차가 빨라서|because 뒤의 worked late last night가 이유예요.|because는 이유를 연결해요.
+L|allergy|2|I can eat bread, but I am allergic to milk.|알레르기가 있는 것은 무엇인가요?|우유|빵~쌀|allergic to milk가 알레르기 대상을 알려 줘요.|먹을 수 있는 것과 구분해요.
+L|pharmacy|2|The pharmacy is beside the hospital, across from the bus stop.|약국 바로 옆에는 무엇이 있나요?|병원|버스 정류장~호텔|beside the hospital은 병원 옆이라는 뜻이에요.|맞은편 정류장과 구분해요.
+L|water|2|Could I have water instead of juice?|주스 대신 무엇을 원하나요?|물|차~우유|water instead of juice는 주스 대신 물이라는 뜻이에요.|instead of 뒤의 것은 바꾸려는 대상이에요.
+L|sick|3|I felt fine this morning, but I started feeling sick after lunch.|언제부터 몸이 안 좋아졌나요?|점심 후|아침 전~어젯밤|started feeling sick after lunch가 시작 시점을 알려 줘요.|started 뒤의 상태와 시간을 들어요.
+R|appointment|3|Clinic notice: Arrive ten minutes before your appointment. Bring your ID and a list of your medicines. Your appointment is at eleven.|안내에 따르면 몇 시에 도착해야 하나요?|10시 50분|11시 10분~11시 30분|11시 약속보다 10분 일찍이므로 10시 50분이에요. 이 문항은 안내문 이해 연습이에요.|before는 그 시각보다 앞이에요.
+C|help|1|You feel unwell and want a nearby staff member to help.|도움을 요청하세요.|Excuse me, I need help.|No thanks, I am perfectly fine.~Could I buy a blue shirt?|도움이 필요하다는 상황을 직접 전달하는 표현이 맞아요.|help가 필요한 것을 알려 줘요.|Could you help me, please?
+C|appointment|2|A receptionist offers Tuesday at nine. You are free then and want to accept.|그 예약 시간을 받아들이세요.|Tuesday at nine is fine, thank you.|I can't come on Tuesday.~Where did you buy the desk?|제안한 시간이 가능하므로 그 시간을 확인하고 수락해요.|날짜와 시각을 함께 확인해요.|Yes, Tuesday at nine works for me.
+`);
+
+;
+Curriculum.definePack('u11',`
+greet|How have you been?|어떻게 지냈어요?
+order|What would you like?|무엇을 원하세요?
+shopping|I'm just looking, thanks.|그냥 둘러보고 있어요, 고마워요.
+direction|Could you show me on the map?|지도에서 보여 주시겠어요?
+introduce|Have we met before?|전에 만난 적 있나요?
+offer|Would you like some tea?|차 좀 드시겠어요?
+clarify|Do you mean this one?|이것을 말씀하시는 건가요?
+permission|May I sit here?|여기 앉아도 되나요?
+invite|Would you like to join us?|함께하시겠어요?
+problem|There is a problem with my order.|제 주문에 문제가 있어요.
+`, `
+G|greet|3|A: How have you ___? B: Very well, thanks.|최근 어떻게 지냈는지 묻는 질문을 완성하세요.|been|be~being|How have you been?은 최근 어떻게 지냈는지 묻는 안부 표현이에요.|have 뒤에는 과거분사 been을 써요.
+G|order|1|A: What would you like? B: I ___ like tea.|차를 주문하는 대답을 완성하세요.|would|am~does|I would like로 원하는 것을 공손하게 말해요.|상대 질문의 would like를 활용해요.
+G|shopping|2|A: Can I help you? B: I'm just ___, thanks.|그냥 둘러본다는 대답을 완성하세요.|looking|look~looks|I'm just looking은 구경 중이라는 쇼핑 표현이에요.|am 뒤에는 ing형이에요.
+G|direction|2|A: Is the café far? B: No, it is ___ here.|카페가 가까운 곳이라는 답을 완성하세요.|near|inside~under|near here는 이 근처라는 뜻이에요.|멀지 않다는 말과 연결해요.
+G|introduce|2|A: Where do you work? B: I ___ at a bank.|직장을 답하는 문장을 완성하세요.|work|works~working|I와 현재형 일반동사 work를 써요.|주어는 I예요.
+G|offer|2|A: Tea or coffee? B: Tea ___ milk, please.|우유를 넣은 차를 요청하세요.|with|without~before|with milk는 우유를 넣어서라는 뜻이에요.|‘넣은’이라는 조건을 확인해요.
+G|clarify|2|A: Send it to Lee. B: ___ you mean Anna Lee?|어느 이 씨인지 확인하세요.|Do|Are~Is|Do you mean...?은 ~을 뜻하나요라는 질문이에요.|mean은 일반동사예요.
+G|permission|2|A: May I sit here? B: Yes, you ___.|앉아도 된다고 허락하세요.|may|not~does|May I...?에 Yes, you may.로 허락할 수 있어요.|질문에 쓰인 may로 답해요.
+G|invite|3|A: Would you like to join us? B: I'd love ___.|초대를 기쁘게 받아들이세요.|to|for~at|I'd love to는 그러고 싶다는 자연스러운 수락이에요.|앞의 행동을 반복하지 않아도 돼요.
+G|problem|3|A: Is everything okay? B: The soup is ___ cold.|너무 차가운 수프에 대해 말하세요.|too|to~two|too cold는 지나치게 차갑다는 뜻이에요.|정도가 지나침을 나타내요.
+O|greet|3|How have you been since we last met?|지난 만남 이후 어떻게 지냈는지 물으세요.|How have you been since we last met?|last~you~met?~have~since~How~we~been|How have you been은 어떻게 지냈는지 묻고 since we last met은 마지막 만남 이후라는 뜻이에요.|How have you been 다음에 기간의 시작을 말해요.
+O|direction|2|Could you show me on the map?|지도에서 길을 보여 달라고 부탁하세요.|Could you show me on the map?|on~Could~me~map?~show~the~you|show me on the map은 지도에서 보여 달라는 뜻이에요.|Could you show me를 먼저 만들어요.
+O|clarify|2|Do you mean the blue one?|파란 물건을 뜻하는지 확인하세요.|Do you mean the blue one?|blue~mean~one?~Do~the~you|one은 앞에 나온 물건을 대신할 수 있어요.|Do you mean 다음에 대상을 말해요.
+O|permission|2|Is it okay if I open the window?|창문을 열어도 되는지 물으세요.|Is it okay if I open the window?|if~the~okay~window?~Is~open~it~I|Is it okay if...?는 어떤 행동을 해도 괜찮은지 묻는 표현이에요.|Is it okay 다음에 할 행동을 붙여요.
+O|problem|3|There is a problem with my booking.|예약에 문제가 있다고 알리세요.|There is a problem with my booking.|booking.~a~There~my~with~problem~is|a problem with는 ~에 관한 문제라는 뜻이에요.|There is로 문제의 존재를 말해요.
+C|greet|3|An old friend asks, “How have you been?”|지난번 만난 뒤 잘 지냈다고 답하세요.|I've been well, thanks.|We have never met before.~Could I pay by card?|How have you been?에는 최근 지낸 상태를 답해요. I have been well은 잘 지냈다는 뜻이에요.|현재 인사뿐 아니라 그동안의 안부를 물어요.|I have been doing well, thank you.
+C|order|2|A server says, “Would you like soup or salad?” You prefer salad.|샐러드를 선택하세요.|Salad, please.|Soup, please.~The bill was wrong yesterday.|주어진 두 메뉴 중 원하는 샐러드를 말해요.|선호 메뉴를 확인해요.|I'd like the salad, please.
+C|shopping|2|A clerk asks whether you need help. You want to browse alone for now.|지금은 둘러보겠다고 공손히 답하세요.|I'm just looking, thank you.|Please find me a larger size.~I am ready to pay for this.|당장 도움이 필요하지 않으므로 구경 중이라고 말해요.|for now는 지금은이라는 뜻이에요.|I'm only browsing, thanks.
+C|direction|2|A traveler asks where the station is. It is across the street.|길 건너편이라고 알려 주세요.|It's across the street.|It leaves at ten.~It's twenty dollars.|where에 대한 답으로 위치를 알려 줘요.|across는 건너편이에요.|The station is just across the road.
+C|introduce|2|Someone asks if you have met before. You remember meeting at a conference.|어디에서 만났는지 답하세요.|Yes, we met at the conference.|No, I've never seen you before.~I live near a conference room.|기억하는 만남이 있으므로 긍정하고 장소를 말해요.|met은 meet의 과거형이에요.|Yes, at the conference.
+C|offer|2|A host offers tea. You do not want any.|차를 공손히 거절하세요.|No, thank you.|Yes, please.~More tea, please.|원하지 않는 제안에는 No, thank you로 정중히 답해요.|거절하라는 조건이에요.|No thanks, I'm fine.
+C|clarify|3|A coworker says, “Bring the papers.” There are two piles, and you are unsure which one.|어느 서류인지 확인하세요.|Which papers do you mean?|I already know which ones.~I will throw them all away.|종류가 불분명하므로 Which papers로 대상을 확인해요.|추측하지 않고 구체적으로 물어요.|Could you tell me which papers to bring?
+C|permission|2|You ask to open a window. The host says, “Of course. Go ahead.”|허락을 받아 이제 창문을 열겠다고 답하세요.|Thanks, I will open it now.|Thanks, I will keep it closed.~Please print three copies.|Go ahead는 요청한 행동을 해도 된다는 허락이에요. 감사를 전하고 허락받은 행동을 하겠다고 답해요.|허락받은 행동은 창문 열기예요.|Thank you. I will open the window.
+C|invite|3|A friend invites you to dinner tonight. You would like to go but must work.|이유를 말하며 초대를 거절하세요.|I'd love to, but I have to work.|Yes, I will be there at seven.~No, dinner is always bad.|가고 싶지만 일이 있어 못 간다는 조건을 모두 반영해야 해요.|but로 사정이 다름을 설명해요.|Thank you, but I have to work tonight.
+C|problem|3|A cashier charges for two coffees, but you ordered only one.|수량 오류를 공손히 바로잡으세요.|Excuse me, I ordered one coffee, not two.|Thank you, both coffees were great.~I'd like two more coffees.|실제 주문 한 잔과 계산된 두 잔의 차이를 알려야 해요.|one과 two를 비교해요.|Sorry, I only ordered one coffee.
+`);
+
+;
+Curriculum.definePack('u12',`
+care|Handle with care.|조심히 다루세요.
+stock|out of stock|품절인
+`, `
+C|u01.morning|1|Thomas: Good morning! Welcome to the Lantern Café.|카페 주인에게 아침 인사로 답하세요.|Good morning, Thomas.|Good night, Thomas.~Sorry, I missed the train.|아침에 만나는 장면이므로 Good morning으로 인사를 돌려줘요.|주인의 인사 시간대를 확인해요.|Good morning!~Good morning. It's nice to see you.
+C|u04.coffee,u04.iced|1|Thomas: What would you like to drink today?|작은 아이스커피 한 잔을 주문하세요.|A small iced coffee, please.|A large hot tea, please.~Two orange juices, please.|크기 small, 온도 iced, 음료 coffee를 모두 맞춰 주문해요.|세 가지 주문 조건을 함께 확인해요.|I'd like a small iced coffee, please.~Can I have a small iced coffee?
+L|u04.milk|2|Would you like your coffee without milk?|주인이 제안한 커피는 어떤 커피인가요?|우유를 넣지 않은 커피|우유를 추가한 커피~얼음을 뺀 커피|without milk는 우유를 넣지 않은 상태를 뜻해요.|without 뒤의 재료가 빠져 있어요.
+C|u04.milk|2|Thomas: Shall I add milk, or would you prefer it without milk?|주문한 커피에 우유를 넣지 말아 달라고 답하세요.|No milk, please.|Extra milk, please.~Yes, two more coffees.|우유를 빼겠다는 요청에는 No milk 또는 without milk를 써요.|커피의 수량을 바꾸는 질문이 아니에요.|Without milk, please.~I'd prefer it without milk.
+C|u01.thanks|1|Thomas: Here is your small iced coffee without milk. Enjoy!|감사하고 좋은 하루를 빌며 주문을 마무리하세요.|Thank you. Have a nice day.|Excuse me, where is the airport?~I'd like to cancel my hotel room.|주문이 완성되었으므로 감사와 작별 인사로 마무리해요.|원한 음료를 받은 상황이에요.|Thanks! Have a good day.~Thank you, and have a lovely day.
+C|u06.where|2|Rowan: You look lost. Can I help?|로완에게 도서관 가는 길을 물으세요.|Could you tell me how to get to the library?|Could you tell me the price of tea?~Could you spell your surname?|목적지가 도서관이므로 how to get to the library로 경로를 물어요.|장소의 철자보다 가는 길이 필요해요.|How do I get to the library?~Could you show me the way to the library?
+L|u06.left|2|Go straight to the bank. Turn left there. The library is the next building.|은행에 도착하면 어느 방향으로 돌아야 하나요?|왼쪽|오른쪽~다시 돌아가요.|Turn left there에서 there는 앞의 은행을 가리켜요.|there가 어떤 장소를 대신하는지 들어요.
+R|u06.left,u06.straight|2|Rowan's note: Walk straight to the bank, then turn left. The library is next door.|안내와 일치하는 경로를 고르세요.|직진 → 은행 → 좌회전 → 도서관|직진 → 은행 → 우회전 → 도서관~도서관 → 우회전 → 은행|은행까지 직진한 다음 왼쪽으로 돌아야 해요. 행동 순서를 함께 읽어야 해요.|then은 그다음 행동을 이어요.
+C|u06.near|2|Rowan: Turn left at the bank. The library is very near the bank.|도서관이 은행 근처에 있는지 확인하세요.|So the library is near the bank?|So I should go to the airport?~So the bank is inside the library?|library가 은행 근처에 있다는 위치 관계를 확인해요.|near는 가까운 곳이라는 뜻이에요.|The library is close to the bank, right?
+C|u05.price|1|Clara: Welcome to the market. Which scarf do you like?|파란 스카프의 가격을 물으세요.|How much is the blue scarf?|Where is the blue bus?~When does the library close?|물건을 선택하기 전에 How much로 그 스카프의 가격을 물어요.|색과 물건 이름을 함께 말해요.|What is the price of the blue scarf?
+V|u06.left|1|Clara: The blue scarf is on the left. The red one is on the right. Both cost ten gold.|파란 스카프가 있는 쪽을 고르세요.|왼쪽|오른쪽~색 설명이 없어요.|blue scarf와 on the left가 연결돼요. 가격은 두 물건이 같아요.|가격 대신 위치를 묻고 있어요.
+O|u05.buy|2|I would like to buy that scarf.|앞에서 찾은 스카프를 구매하겠다는 문장을 만드세요.|I would like to buy that scarf.|that~would~scarf.~I~buy~to~like|would like to buy로 공손하게 구매 의사를 말해요.|I would like 다음에 사고 싶다는 행동을 붙여요.
+C|u01.thanks|1|Clara: Here is your blue scarf and your receipt. Thank you!|물건과 영수증을 받았으니 감사 인사로 답하세요.|Thank you. Goodbye!|No, I ordered a train ticket.~Please bring a different customer.|구매가 마무리되었으므로 감사하고 작별할 수 있어요.|받은 상품은 선택했던 파란 스카프예요.|Thanks. Have a nice day.~Thank you very much.
+C|u02.job,u02.name|1|Elena: Welcome to the office. Could you introduce yourself?|이름이 민이고 새 보조 직원이라고 소개하세요.|I'm Min, the new assistant.|I'm Mina, the hotel manager.~This is your old receipt.|이름 Min과 역할 new assistant를 모두 정확히 말해야 해요.|이름과 역할 두 가지를 알려 주세요.|My name is Min. I'm the new assistant.~I'm the new assistant, Min.
+L|u09.document|2|Please print two copies of the meeting agenda and bring them to room three.|인쇄해야 하는 문서는 무엇인가요?|회의 안건|카페 메뉴~객실 예약 확인서|meeting agenda가 인쇄할 문서예요. room three는 가져갈 장소예요.|무엇과 어디를 구분해요.
+C|u09.clarify|2|Elena: Use the final agenda. There are two versions in the folder.|최종본 파일이 어느 것인지 확인하세요.|Which file is the final agenda?|How many cafés are nearby?~Should I throw away both files?|두 버전 중 어느 파일이 최종 안건인지 물어야 해요.|Which file로 구체적인 대상을 확인해요.|Could you show me the final agenda file?
+C|u09.print|2|Elena: The file called Agenda Final is the right one. Please bring two copies to room three.|확인한 지시를 정확히 되말하세요.|I'll print two copies and bring them to room three.|I'll print three copies for room two.~I'll send one copy to the hotel.|부수 two와 장소 room three를 모두 유지해 확인해요.|수량과 회의실 번호를 바꾸지 않아요.|I will bring two printed copies to room three.
+V|care|2|Handle with care.|소포에 적힌 주의 문구의 뜻을 고르세요.|조심히 다루세요.|즉시 버리세요.~빠르게 흔드세요.|handle with care는 깨지거나 손상되지 않게 조심히 다루라는 뜻이에요.|care는 여기서 주의를 뜻해요.
+V|stock|2|This item is out of stock.|상품의 현재 상태를 고르세요.|품절이에요.|무료예요.~새 색상이 나왔어요.|out of stock은 판매할 재고가 없다는 뜻이에요.|당장 살 수 있는 수량이 없어요.
+G|stock|2|The blue scarf is ___ of stock today.|오늘 파란 스카프가 품절이라고 말하세요.|out|off~under|out of stock은 판매할 재고가 없다는 정해진 표현이에요.|out of stock을 한 덩어리로 기억해요.
+G|care|2|Please ___ this glass bottle carefully.|유리병을 조심히 다루라는 부탁을 완성하세요.|handle|handles~handling|Please 뒤의 지시는 동사원형 handle로 말해요. carefully는 조심스럽게라는 뜻이에요.|지시문에는 동사원형을 써요.
+G|u06.where|3|Could you show me ___ the library is on this map?|지도에서 도서관의 위치를 보여 달라고 물으세요.|where|who~when|위치를 묻기 때문에 where를 써요. who는 사람, when은 시점을 물어요.|알고 싶은 것은 장소예요.
+G|u06.where|3|Could you tell me where the station ___?|간접적으로 역 위치를 물으세요.|is|does~are|Could you tell me 뒤의 간접 질문은 where the station is 순서예요.|station은 단수 장소예요.
+O|care|2|Please handle this glass bottle with care.|유리병을 조심히 다루라는 안내를 만드세요.|Please handle this glass bottle with care.|glass~Please~care.~this~with~bottle~handle|handle with care는 조심히 다루다는 뜻이에요. this glass bottle이 다룰 대상이에요.|행동, 물건, 조심히라는 말을 이어요.
+O|u09.send|2|I will send the document by email.|문서를 이메일로 보내겠다고 말하세요.|I will send the document by email.|the~will~email.~I~document~by~send|will send는 앞으로 보내겠다는 뜻이고 by email은 보낼 방법이에요.|할 행동과 전송 방법을 차례로 이어요.
+`);
+(() => {
+  const missions=[
+    {id:'cafe',unitId:'u12',name:'등불 카페에서 주문하기',npc:'thomas',scene:'cafe',context:'아침에 등불 카페에 들렀습니다. 작은 아이스커피 한 잔을 우유 없이 주문하고 공손히 마무리하세요.',ids:[1,2,3,4,5]},
+    {id:'directions',unitId:'u12',name:'길 잃은 여행자',npc:'rowan',scene:'crossroads',context:'낯선 마을에서 도서관을 찾습니다. 로완의 안내를 듣고 은행을 기준으로 길을 확인하세요.',ids:[6,7,8,9]},
+    {id:'market',unitId:'u12',name:'마을 시장의 파란 스카프',npc:'clara',scene:'market',context:'클라라의 가게에서 파란 스카프를 사려고 합니다. 가격과 위치를 확인한 뒤 구매를 마무리하세요.',ids:[10,11,12,13]},
+    {id:'work',unitId:'u12',name:'첫 출근의 작은 업무',npc:'elena',scene:'office',context:'새 보조 직원 민의 첫 출근입니다. 자신을 소개하고 회의 안건 두 부를 3번 방으로 가져가는 지시를 확인하세요.',ids:[14,15,16,17]}
+  ];
+  for(const mission of missions){
+    mission.activityIds=mission.ids.map(n=>`u12-${String(n).padStart(3,'0')}`);delete mission.ids;
+    mission.activityIds.forEach((id,step)=>Object.assign(Curriculum.get(id),{missionId:mission.id,step,npc:mission.npc,scene:mission.scene,context:mission.context}));
+    mission.objective=mission.context;
+  }
+  Curriculum.register({missions});
+})();
+
+;
+// Two deliberately selected alternate forms. Each has6items per assessed skill and
+// the same internal difficulty mix (9foundation,10beginner,5developing).
+// These are designated curriculum items, not extra items counted toward500.
+(() => {
+  const forms=[
+    {id:'placement-a',name:'출발점 찾기 · A',activityIds:[
+      'u01-001','u02-005','u03-002','u04-011','u05-011','u06-011',
+      'u01-013','u02-014','u03-017','u04-018','u05-019','u06-022',
+      'u03-038','u05-038','u01-036','u02-037','u03-040','u04-040',
+      'u01-029','u02-029','u03-033','u04-034','u05-034','u03-037'
+    ]},
+    {id:'placement-b',name:'출발점 찾기 · B',activityIds:[
+      'u01-006','u02-007','u03-010','u04-009','u05-012','u06-012',
+      'u01-015','u02-013','u03-018','u04-019','u05-017','u05-022',
+      'u04-038','u02-036','u03-039','u01-037','u02-038','u05-039',
+      'u01-030','u02-030','u03-034','u04-035','u05-035','u05-037'
+    ]}
+  ];
+  for(const form of forms){
+    form.activityIds.sort((a,b)=>Curriculum.get(a).tier-Curriculum.get(b).tier);
+    form.skillScope=['vocabulary','grammar','reading','listening'];
+    form.description='시간 제한 없이 풀고 학습 출발점을 추천받아요. 공식 영어 등급 시험이 아닙니다.';
+    form.listeningNote='원문을 보거나 음성을 이용하지 못한 문항은 듣기 능력의 근거로 해석하지 않습니다.';
+  }
+  Curriculum.register({diagnostics:forms});
+})();
+
+;
+// Complete reviewed order sentences supply examples where available. These rows fill
+// the remaining gaps with authored contextual examples; they are NOT extra activities.
+(() => {
+  const authored=`
+u01.hello|Hello, I'm your new neighbor.|안녕하세요, 저는 새로 이사 온 이웃이에요.
+u01.afternoon|Good afternoon, everyone. Welcome to the workshop.|여러분, 안녕하세요. 오후 워크숍에 오신 것을 환영해요.
+u01.night|Good night, Dad. Sleep well.|아빠, 안녕히 주무세요. 푹 주무세요.
+u01.welcome|You're welcome. I'm glad I could help.|천만에요. 도울 수 있어서 기뻐요.
+u01.excuse|Excuse me, is anyone sitting here?|실례합니다, 여기 누가 앉아 있나요?
+u01.please|Please wait here for a moment.|여기서 잠시 기다려 주세요.
+u01.later|See you later, after class.|수업이 끝난 뒤 나중에 봐요.
+u02.job|What do you do for work?|무슨 일을 하세요?
+u02.teacher|I'm a teacher at a primary school.|저는 초등학교 교사예요.
+u02.nurse|My sister is a nurse at the city hospital.|제 여자 형제는 도시에 있는 병원의 간호사예요.
+u02.student|We are students at the same language school.|우리는 같은 언어 학교의 학생들이에요.
+u02.age|My father is sixty years old.|제 아버지는 예순 살이세요.
+u02.language|I speak Korean and a little English.|저는 한국어와 약간의 영어를 해요.
+u02.family|I have two sisters and one brother.|저는 여자 형제가 두 명, 남자 형제가 한 명 있어요.
+u03.home|I go home after my English class.|저는 영어 수업 후에 집에 가요.
+u03.shower|I take a shower before breakfast.|저는 아침 식사 전에 샤워해요.
+u03.usually|I usually cook dinner, but today I am eating out.|저는 보통 저녁을 요리하지만 오늘은 외식해요.
+u03.lunch|We have lunch together on Fridays.|우리는 금요일마다 함께 점심을 먹어요.
+u04.bread|Could I have two slices of bread?|빵 두 조각 주시겠어요?
+u04.iced|I'd like an iced coffee without sugar.|설탕 없는 아이스커피 한 잔 주세요.
+u04.sugar|No sugar in my tea, please.|제 차에는 설탕을 넣지 말아 주세요.
+u04.lunch|What is today's lunch special?|오늘의 점심 특별 메뉴는 무엇인가요?
+u05.cheap|The green bag is cheaper than the red one.|초록 가방이 빨간 가방보다 저렴해요.
+u05.color|Do you have these shoes in blue?|이 신발의 파란색이 있나요?
+u05.pay|Can I pay at this counter?|이 계산대에서 결제해도 되나요?
+u05.cash|I would like to pay in cash.|현금으로 결제하고 싶어요.
+u06.left|Turn left when you reach the bridge.|다리에 도착하면 왼쪽으로 도세요.
+u06.train|The next train leaves in ten minutes.|다음 기차는 10분 뒤에 출발해요.
+u06.station|Let's meet outside the station.|역 밖에서 만나요.
+u06.airport|How do I get to the airport by bus?|버스로 공항에 어떻게 가나요?
+u06.far|Is the museum far from here?|박물관이 여기에서 먼가요?
+u07.number|We need twenty-one chairs for the class.|수업에 의자 스물한 개가 필요해요.
+u07.day|The office is open on Monday.|사무실은 월요일에 문을 열어요.
+u07.week|I'm going to Busan next week.|저는 다음 주에 부산에 가요.
+u07.yesterday|I called you yesterday afternoon.|어제 오후에 전화했어요.
+u07.early|Please arrive five minutes early.|5분 일찍 도착해 주세요.
+u07.minute|The train will arrive in ten minutes.|기차가 10분 뒤에 도착해요.
+u07.hour|The journey takes two hours.|그 여정은 두 시간이 걸려요.
+u07.date|What is the date of the next meeting?|다음 회의 날짜는 언제인가요?
+u08.checkin|I'd like to check in. My name is Song.|체크인하고 싶어요. 제 이름은 송이에요.
+u08.luggage|Can I leave my luggage here until three?|3시까지 여기에 짐을 맡겨도 되나요?
+u08.help|Could you help me carry this suitcase?|이 여행 가방을 드는 것을 도와주시겠어요?
+u08.checkout|What time do we need to check out tomorrow?|내일 몇 시에 체크아웃해야 하나요?
+u08.breakfast|Breakfast is included in the room price.|객실 요금에 아침 식사가 포함되어 있어요.
+u08.available|Is a double room available for tonight?|오늘 밤 이용할 수 있는 2인실이 있나요?
+u08.cancel|I need to cancel my booking for Friday.|금요일 예약을 취소해야 해요.
+u09.job|I work in sales, and Mina works in design.|저는 영업 부서에서 일하고 미나는 디자인 부서에서 일해요.
+u09.email|Could you check my email address?|제 이메일 주소를 확인해 주시겠어요?
+u09.clarify|What do you mean by the final version?|최종본이라는 말은 어떤 것을 뜻하나요?
+u09.document|Please read this document before the meeting.|회의 전에 이 문서를 읽어 주세요.
+u09.break|Let's take a break after this task.|이 일을 마친 뒤 잠깐 쉬어요.
+u09.finish|I have finished the report, but I haven't sent it yet.|보고서는 끝냈지만 아직 보내지는 않았어요.
+u10.sick|I feel sick and need to sit down.|몸이 안 좋아서 앉아야겠어요.
+u10.tired|I'm tired after the long journey.|긴 여행 후라 피곤해요.
+u10.hospital|Could you show me the nearest hospital on the map?|지도에서 가장 가까운 병원을 보여 주시겠어요?
+u10.water|Could I have a glass of still water?|탄산이 없는 물 한 잔 주시겠어요?
+u10.cold|I have a cold, so I cannot join you today.|감기에 걸려서 오늘 함께할 수 없어요.
+u10.fever|I have a fever and would like to make an appointment.|열이 있어서 진료 예약을 하고 싶어요.
+u10.dizzy|I feel dizzy when I stand up.|일어설 때 어지러워요.
+u11.order|What would you like for lunch?|점심으로 무엇을 드시겠어요?
+u11.shopping|I'm just looking at the coats, thanks.|코트를 그냥 둘러보고 있어요, 고마워요.
+u11.introduce|Have we met before, perhaps at the workshop?|전에 만난 적 있나요? 혹시 워크숍에서요?
+u11.offer|Would you like some tea with your cake?|케이크와 함께 차 좀 드시겠어요?
+u11.invite|Would you like to join us for dinner?|저녁 식사에 함께하시겠어요?
+u12.stock|The blue notebook is out of stock, but we have green ones.|파란 공책은 품절이지만 초록 공책은 있어요.
+`.trim().split('\n').map(row=>row.split('|'));
+  const authoredMap=Object.fromEntries(authored.map(([id,example,exampleKo])=>[id,{example,exampleKo,exampleSource:'authored-context'}]));
+  for(const expression of Curriculum.expressions){
+    const order=Curriculum.activities.find(a=>a.type==='order'&&a.expressionIds.includes(expression.id));
+    if(order)Object.assign(expression,{example:order.answer,exampleSource:order.id});
+    else if(authoredMap[expression.id])Object.assign(expression,authoredMap[expression.id]);
+    else throw new Error('Missing authored expression example: '+expression.id);
+  }
+})();
+
+;
+// Curriculum learning is independent from character levels and chapter flags.
+// Answers, interaction locks and reward settlement live in private, profile-bound sessions.
+const Academy = (() => {
+  const skills=['vocabulary','grammar','reading','listening','order','conversation'];
+  const intervals=[0,1,3,7,14,30], runs=new WeakMap();
+  const modes={vocabulary:['vocabulary'],grammar:['grammar','order'],listening:['listening'],conversation:['conversation'],mixed:skills};
+  const aidNames=['hint','translation','transcript','fallback'];
+  const get=id=>Curriculum.get(id),unit=id=>Curriculum.units.find(u=>u.id===id),mission=id=>Curriculum.missions.find(m=>m.id===id);
+  const integer=(n,max=1000000)=>Number.isSafeInteger(n)?Math.max(0,Math.min(max,n)):0;
+  const add=(array,value)=>{if(!array.includes(value))array.push(value);};
+  function day(now=Date.now(),delta=0){const d=new Date(now);d.setDate(d.getDate()+delta);return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');}
+  const validDay=s=>typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s)&&day(new Date(s+'T12:00:00'))===s;
+  const normal=s=>typeof s==='string'?s.normalize('NFKC').toLowerCase().replace(/[‘’]/g,"'").replace(/[.!?,;:]/g,' ').replace(/\s+/g,' ').trim():'';
+  const blank=()=>({correct:0,wrong:0,assistedCorrect:0,assistedWrong:0,independentCorrect:0,independentWrong:0,comprehensionCorrect:0,
+    hint:0,translation:0,transcript:0,fallback:0,audioCorrect:0,audioWrong:0,readingAssisted:0,lastDay:'',streak:0});
+  const expressionBlank=()=>({...blank(),seen:false,step:0,dueDay:'',days:[],formats:[]});
+  function fresh(){return {tier:1,tierMode:'auto',records:{},expressions:{},recent:[],units:{},missions:{},diagnostics:[],
+    diagnosticRuns:0,rewarded:[],badges:[],sessions:0,evidenceCount:0,adjustedAt:0,speechAttempts:0};}
+  function recordShape(raw){
+    const r=blank();if(!raw||typeof raw!=='object')return r;
+    for(const k of Object.keys(r))if(k!=='lastDay')r[k]=integer(raw[k]);
+    r.assistedCorrect=Math.min(r.assistedCorrect,r.correct);r.assistedWrong=Math.min(r.assistedWrong,r.wrong);
+    r.independentCorrect=Math.min(r.independentCorrect,r.correct-r.assistedCorrect);r.independentWrong=Math.min(r.independentWrong,r.wrong-r.assistedWrong);
+    r.comprehensionCorrect=Math.max(r.independentCorrect,Math.min(r.comprehensionCorrect,r.correct));
+    r.audioCorrect=Math.min(r.audioCorrect,r.independentCorrect);r.audioWrong=Math.min(r.audioWrong,r.independentWrong);
+    for(const key of [...aidNames,'readingAssisted'])r[key]=Math.min(r[key],r.correct+r.wrong);
+    r.streak=Math.min(r.streak,r.independentCorrect);if(validDay(raw.lastDay))r.lastDay=raw.lastDay;
+    return r;
+  }
+  function hydrate(raw){
+    const s=fresh();if(!raw||typeof raw!=='object')return s;
+    if([1,2,3].includes(raw.tier))s.tier=raw.tier;s.tierMode=raw.tierMode==='manual'?'manual':'auto';
+    for(const a of Curriculum.activities)if(raw.records?.[a.id])s.records[a.id]=recordShape(raw.records[a.id]);
+    for(const e of Curriculum.expressions){
+      const v=raw.expressions?.[e.id];if(!v||typeof v!=='object')continue;
+      const r={...expressionBlank(),...recordShape(v)};r.seen=v.seen===true||r.correct+r.wrong>0;r.step=integer(v.step,5);
+      r.dueDay=validDay(v.dueDay)?v.dueDay:r.lastDay;
+      r.days=Array.isArray(v.days)?[...new Set(v.days.filter(validDay))].sort().slice(-Math.min(30,r.independentCorrect)):[];
+      const possibleFormats=Curriculum.activities.filter(a=>a.expressionIds.includes(e.id)).map(a=>a.skill+':'+a.type);
+      r.formats=Array.isArray(v.formats)?[...new Set(v.formats.filter(f=>possibleFormats.includes(f)))].slice(0,r.independentCorrect):[];
+      if(!r.independentCorrect){r.days=[];r.formats=[];}s.expressions[e.id]=r;
+    }
+    if(Array.isArray(raw.recent))for(const row of raw.recent.slice(-80)){
+      if(!get(row?.id)||typeof row.correct!=='boolean'||!validDay(row.day))continue;
+      s.recent.push({id:row.id,correct:row.correct,assisted:row.assisted===true,first:row.first===true,audio:row.audio===true,
+        day:row.day,tier:[1,2,3].includes(row.tier)?row.tier:1});
+    }
+    for(const u of Curriculum.units){
+      const saved=raw.units?.[u.id],solved=Curriculum.activities.filter(a=>a.unitId===u.id&&s.records[a.id]?.correct).length;
+      if(saved&&solved)s.units[u.id]={lessons:integer(saved.lessons),rewarded:saved.rewarded===true};
+    }
+    for(const m of Curriculum.missions){
+      const saved=raw.missions?.[m.id];if(!saved)continue;
+      let step=0;while(step<Math.min(integer(saved.step),m.activityIds.length)&&s.records[m.activityIds[step]]?.correct)step++;
+      s.missions[m.id]={step,completed:step===m.activityIds.length,rewarded:saved.rewarded===true&&step===m.activityIds.length,
+        independentIds:m.activityIds.filter(id=>Array.isArray(saved.independentIds)&&saved.independentIds.includes(id)&&s.records[id]?.independentCorrect>0),
+        rewardEligibleIds:m.activityIds.filter(id=>(Array.isArray(saved.rewardEligibleIds)?saved.rewardEligibleIds:Array.isArray(saved.independentIds)?saved.independentIds:[]).includes(id)&&s.records[id]?.comprehensionCorrect>0)};
+    }
+    const rewardIds=[...Curriculum.units.map(u=>'unit-'+u.id),...Curriculum.missions.map(m=>'mission-'+m.id)];
+    s.rewarded=rewardIds.filter(id=>Array.isArray(raw.rewarded)&&raw.rewarded.includes(id));
+    for(const [id,u] of Object.entries(s.units))if(u.rewarded)add(s.rewarded,'unit-'+id);
+    for(const [id,m] of Object.entries(s.missions))if(m.rewarded)add(s.rewarded,'mission-'+id);
+    s.badges=[...s.rewarded,...(Array.isArray(raw.badges)&&raw.badges.includes('first-review')?['first-review']:[])];
+    s.sessions=integer(raw.sessions);s.diagnosticRuns=integer(raw.diagnosticRuns);s.speechAttempts=integer(raw.speechAttempts);
+    s.evidenceCount=Object.values(s.records).reduce((n,r)=>n+r.independentCorrect+r.independentWrong,0);s.adjustedAt=Math.min(s.evidenceCount,integer(raw.adjustedAt));
+    if(Array.isArray(raw.diagnostics))for(const saved of raw.diagnostics.slice(-6)){
+      const form=Curriculum.diagnostics.find(d=>d.id===saved?.formId);
+      if(!form||!validDay(saved.date)||!Array.isArray(saved.rows)||saved.rows.length!==form.activityIds.length)continue;
+      if(saved.rows.some((r,i)=>r.id!==form.activityIds[i]||typeof r.correct!=='boolean'))continue;
+      const rows=saved.rows.map(r=>({id:r.id,correct:r.correct,assisted:r.assisted===true,audio:r.audio===true,readingAssisted:r.readingAssisted===true}));
+      s.diagnostics.push(diagnosticResult(form.id,rows,saved.date));
+    }
+    s.diagnosticRuns=Math.max(s.diagnosticRuns,s.diagnostics.length);return s;
+  }
+  function state(p){return p.academy;}
+  function usable(p){return !!p?.started&&!!state(p);}
+  function setTier(p,tier,mode='manual'){
+    if(!usable(p)||![1,2,3].includes(tier)||!['manual','auto'].includes(mode))return false;
+    state(p).tier=tier;state(p).tierMode=mode;state(p).adjustedAt=state(p).evidenceCount;return true;
+  }
+  function expressionStatus(p,id){
+    const r=state(p).expressions[id];if(!r?.seen)return 'New';
+    if(r.wrong&&r.streak<2)return 'Review Needed';
+    if(r.independentCorrect>=6&&r.streak>=4&&r.days.length>=3&&r.formats.length>=2&&r.assistedCorrect<=r.correct/4)return 'Consistently Correct';
+    if(r.independentCorrect>=3&&r.streak>=2&&r.days.length>=2&&r.formats.length>=2)return 'Familiar';
+    return 'Learning';
+  }
+  function markSeen(p,ids,now){for(const id of ids){const r=state(p).expressions[id] ||= expressionBlank();r.seen=true;if(!r.dueDay)r.dueDay=day(now);}}
+  function evidence(p){return state(p).recent.filter(r=>r.first&&!r.assisted&&(get(r.id).skill!=='listening'||r.audio)).slice(-10);}
+  function recommendation(p){
+    const s=state(p),rows=evidence(p),distinct=new Set(rows.map(r=>r.id)).size,categories=new Set(rows.map(r=>get(r.id).skill)).size;
+    const correct=rows.filter(r=>r.correct).length;
+    if(rows.length<10||distinct<8||categories<2||s.evidenceCount-s.adjustedAt<10)return {tier:s.tier,reason:'서로 다른 문제와 영역에서 새 독립 답변 10회를 모으면 난이도를 제안해요.',evidence:rows.length,distinct,correct,limited:true};
+    const by=Object.fromEntries(skills.map(k=>[k,rows.filter(r=>get(r.id).skill===k)]));
+    const stable=Object.values(by).filter(r=>r.length>=2).every(r=>r.filter(x=>x.correct).length/r.length>=.75);
+    const atCurrent=rows.filter(r=>get(r.id).tier>=s.tier).length;
+    const tier=correct>=9&&stable&&atCurrent>=8?Math.min(3,s.tier+1):correct<=5?Math.max(1,s.tier-1):s.tier;
+    return {tier,reason:tier>s.tier?'최근 독립 답변 10회 중 9회 이상 맞혔고, 8회 이상이 현재 난이도 이상의 활동이에요. 두 번 이상 연습한 영역도 75% 이상이에요.':tier<s.tier?'최근 독립 답변 10회에서 다섯 번 이상 어려움이 있었어요. 짧은 표현을 다시 연습해 보세요.':correct>=9&&atCurrent<8?
+      '쉬운 표현을 되짚는 연습은 난이도를 올리지 않아요. 최근 10회 중 현재 난이도 이상의 활동이 '+atCurrent+'회이며, 8회 이상 필요해요.':'최근 답변을 바탕으로 현재 난이도를 유지하며 연습해요.',evidence:rows.length,distinct,correct,atCurrent,limited:false};
+  }
+  function adjust(p){const s=state(p);if(s.tierMode!=='auto'||s.evidenceCount-s.adjustedAt<10)return;
+    const rec=recommendation(p);if(rec.limited||rec.tier===s.tier)return;s.tier=rec.tier;s.adjustedAt=s.evidenceCount;}
+  function ranked(p,pool,now,selected=[],target=state(p).tier){
+    const s=state(p),today=day(now),recent=s.recent.slice(-8);
+    function score(a){
+      const r=s.records[a.id],expressions=a.expressionIds.map(id=>s.expressions[id]);
+      return (expressions.some(e=>e?.dueDay&&e.dueDay<=today)?14:0)+(r&&r.wrong>r.independentCorrect?8:0)+(!r?3:0)
+        -(recent.some(e=>e.id===a.id)?24:0)-Math.abs(a.tier-target)*4-selected.filter(id=>get(id).skill===a.skill).length*3;
+    }
+    return [...pool].filter(a=>!selected.includes(a.id)).sort((a,b)=>score(b)-score(a)||a.id.localeCompare(b.id));
+  }
+  function select(p,options={}){
+    const mode=options.mode||'mixed',allowed=modes[mode];if(!allowed)return [];
+    const tier=options.tier||state(p).tier;
+    const available=Curriculum.activities.filter(a=>(!options.unitId||a.unitId===options.unitId)&&allowed.includes(a.skill));
+    const threshold=available.some(a=>a.tier<=tier)?tier:Math.min(...available.map(a=>a.tier));
+    const pool=available.filter(a=>a.tier<=threshold);
+    const chosen=[],count=Math.min(6,pool.length),preferred=mode==='mixed'?['vocabulary','grammar','order','listening','conversation','reading']:[];
+    for(let i=0;i<count;i++){
+      const target=preferred[i],filtered=target?pool.filter(a=>a.skill===target&&!chosen.includes(a.id)):[];
+      const best=ranked(p,filtered.length?filtered:pool,options.now,chosen,tier)[0];if(best)chosen.push(best.id);
+    }
+    return chosen;
+  }
+  function shuffle(values,seed){const a=[...values];let n=seed+1;for(let i=a.length-1;i>0;i--){n=(n*1664525+1013904223)>>>0;const j=n%(i+1);[a[i],a[j]]=[a[j],a[i]];}return a;}
+  function stage(m,index){if(m.kind==='diagnostic')return 'diagnostic';if(m.kind==='review')return 'review';if(m.kind==='mission')return 'application';
+    return m.kind==='unit'?(index<2?'guided':index<4?'independent':'application'):'independent';}
+  function publish(m){
+    const h=m.h;h.phase=m.phase;h.stage=m.phase==='preview'?'preview':m.phase==='results'?'review':stage(m,m.index);
+    h.index=m.index;h.activity=get(m.ids[m.index])||null;h.assisted=m.aids.size>0||(m.phase==='feedback'?m.attempts>1:m.attempts>0);h.aids=[...m.aids];
+    h.results=m.rows.map(r=>({...r}));return h;
+  }
+  function prepare(m){
+    m.phase='question';m.attempts=0;m.heard=false;m.speechTried=false;m.aids=new Set();m.h.feedback=null;
+    const a=get(m.ids[m.index]);m.h.choices=shuffle(a.choices,m.serial+m.index);m.h.words=a.type==='order'?[...m.h.choices]:[];
+    if(a.type==='order'&&normal(m.h.words.join(' '))===normal(a.answer))m.h.words.push(m.h.words.shift());
+    if(a.type==='order')m.h.choices=[...m.h.words];
+    if(stage(m,m.index)==='guided')m.aids.add('hint');publish(m);
+  }
+  function start(p,kind,ids,options={}){
+    if(!usable(p)||!ids.length||ids.some(id=>!get(id))||options.now!==undefined&&!Number.isFinite(new Date(options.now).getTime()))return null;
+    const s=state(p);s.sessions=Math.min(1000000,s.sessions+1);
+    const expressionIds=[...new Set(ids.flatMap(id=>get(id).expressionIds))];
+    const h={kind,phase:'preview',stage:'preview',unitId:options.unitId||null,missionId:options.missionId||null,
+      formId:options.formId||null,activityIds:[...ids],index:0,total:ids.length,activity:get(ids[0]),choices:[],words:[],
+      preview:kind==='diagnostic'?[]:expressionIds.map(id=>Curriculum.expressions.find(e=>e.id===id)),feedback:null,results:[],assisted:false,aids:[]};
+    const m={h,kind,ids:[...ids],index:0,phase:'preview',rows:[],aids:new Set(),attempts:0,serial:s.sessions,now:options.now,
+      unitId:options.unitId,missionId:options.missionId,formId:options.formId,missionReplay:options.missionReplay===true,reward:null};
+    if(kind!=='diagnostic')markSeen(p,expressionIds,options.now);runs.set(p,m);return h;
+  }
+  function startUnit(p,id,options={}){if(!usable(p)||!unit(id))return null;return start(p,'unit',select(p,{...options,unitId:id}),{...options,unitId:id});}
+  function startMode(p,mode,options={}){if(!usable(p)||!modes[mode])return null;return start(p,'mode',select(p,{...options,mode}),options);}
+  function startExact(p,id,options={}){return get(id)?start(p,'exact',[id],options):null;}
+  function startMission(p,id,options={}){
+    const m=mission(id);if(!usable(p)||!m)return null;const s=state(p).missions[id];
+    return start(p,'mission',m.activityIds.slice(s?.completed?0:s?.step||0),{...options,missionId:id,missionReplay:!!s?.completed});
+  }
+  function today(p,now=Date.now()){
+    const date=day(now),due=[];
+    for(const e of Curriculum.expressions){const r=state(p).expressions[e.id];if(!r?.dueDay||r.dueDay>date)continue;
+      const pool=Curriculum.activities.filter(a=>a.expressionIds.includes(e.id)),a=ranked(p,pool,now)[0];
+      if(a)due.push({expressionId:e.id,english:e.english||e.en,ko:e.ko,dueDay:r.dueDay,activityId:a.id,status:expressionStatus(p,e.id)});
+    }
+    due.sort((a,b)=>a.dueDay.localeCompare(b.dueDay)||a.expressionId.localeCompare(b.expressionId));
+    return {date,count:due.length,due,activityIds:[...new Set(due.map(r=>r.activityId))],estimatedMinutes:due.length?Math.max(1,Math.ceil(Math.min(due.length,6)*.75)):0};
+  }
+  function startReview(p,options={}){if(!usable(p))return null;return start(p,'review',today(p,options.now).activityIds.slice(0,6),options);}
+  function startDiagnostic(p,options={}){
+    if(!usable(p)||!Curriculum.diagnostics.length)return null;
+    const form=Curriculum.diagnostics[state(p).diagnosticRuns%Curriculum.diagnostics.length];
+    return start(p,'diagnostic',form.activityIds,{...options,formId:form.id});
+  }
+  function current(p){return runs.get(p)?.h||null;}
+  function close(p){return runs.delete(p);}
+  function valid(p,h,phases){const m=runs.get(p);return usable(p)&&m?.h===h&&phases.includes(m.phase)?m:null;}
+  function assist(p,h,reason){const m=valid(p,h,['question']);if(!m||!aidNames.includes(reason))return false;m.aids.add(reason);publish(m);return true;}
+  function hear(p,h){const m=valid(p,h,['question']);if(!m||get(m.ids[m.index]).skill!=='listening')return false;m.heard=true;return true;}
+  function updateRecord(r,correct,assisted,aids,audio,reading,now,independent){
+    r[correct?'correct':'wrong']++;if(assisted)r[correct?'assistedCorrect':'assistedWrong']++;
+    if(independent)r[correct?'independentCorrect':'independentWrong']++;
+    for(const aid of aids)if(aidNames.includes(aid))r[aid]++;
+    if(audio)r[correct?'audioCorrect':'audioWrong']++;if(reading)r.readingAssisted++;
+    r.lastDay=day(now);if(!correct)r.streak=0;else if(independent)r.streak++;
+  }
+  function note(p,m,a,correct,now){
+    const s=state(p),assisted=m.aids.size>0||m.attempts>0,first=m.attempts===0,
+      reading=a.skill==='listening'&&(m.aids.has('transcript')||m.aids.has('fallback')||m.aids.has('translation')),
+      audio=a.skill==='listening'&&m.heard&&!assisted,independent=first&&!assisted&&(a.skill!=='listening'||audio),
+      rewardEligible=correct&&first&&!m.aids.has('hint')&&!m.aids.has('translation')
+        &&(a.skill!=='listening'||m.heard||m.aids.has('transcript')||m.aids.has('fallback'));
+    const r=s.records[a.id] ||= blank();updateRecord(r,correct,assisted,[...m.aids],audio,reading,now,independent);
+    if(rewardEligible)r.comprehensionCorrect++;
+    for(const id of a.expressionIds){
+      const e=s.expressions[id] ||= expressionBlank();e.seen=true;
+      updateRecord(e,correct,assisted,[...m.aids],audio,reading,now,independent);
+      if(rewardEligible)e.comprehensionCorrect++;
+      const date=day(now);
+      if(!correct){e.step=0;e.dueDay=date;}
+      else if(assisted||!independent){e.step=Math.min(e.step,1);e.dueDay=day(now,1);}
+      else if(!e.dueDay||e.dueDay<=date){e.step=Math.min(5,e.step+1);e.dueDay=day(now,intervals[e.step]);}
+      if(correct&&independent){add(e.days,date);e.days=e.days.sort().slice(-30);add(e.formats,a.skill+':'+a.type);}
+    }
+    const row={id:a.id,correct,assisted,first,audio,day:day(now),tier:a.tier};s.recent.push(row);if(s.recent.length>80)s.recent.shift();
+    if(independent)s.evidenceCount++;adjust(p);
+    return {assisted,first,audio,readingAssisted:reading,independent,rewardEligible};
+  }
+  function claim(p,id,gold){
+    const s=state(p);if(s.rewarded.includes(id))return {gold:0,badge:null};
+    s.rewarded.push(id);add(s.badges,id);const paid=Math.min(gold,Number.MAX_SAFE_INTEGER-p.gold);p.gold+=paid;
+    return {gold:paid,badge:id};
+  }
+  function settle(p,m,now){
+    if(m.reward)return;
+    const s=state(p);m.reward={gold:0,badge:null};
+    if(m.kind==='unit'){
+      const u=s.units[m.unitId] ||= {lessons:0,rewarded:false};u.lessons=Math.min(1000000,u.lessons+1);
+      if(m.ids.length>=6&&m.rows.filter(r=>r.rewardEligible).length>=3){m.reward=claim(p,'unit-'+m.unitId,5);u.rewarded=s.rewarded.includes('unit-'+m.unitId);}
+    }
+    if(m.kind==='mission'){
+      const definition=mission(m.missionId),progress=s.missions[m.missionId];
+      if(progress.completed&&definition.activityIds.every(id=>progress.rewardEligibleIds.includes(id))){m.reward=claim(p,'mission-'+m.missionId,3);progress.rewarded=true;}
+    }
+    if(m.kind==='review'){const first=!s.badges.includes('first-review');add(s.badges,'first-review');if(first)m.reward.badge='first-review';}
+    if(m.kind==='diagnostic'){
+      const rows=m.rows.map(r=>({id:r.id,correct:r.firstCorrect,assisted:r.assisted,audio:r.audio,readingAssisted:r.readingAssisted}));
+      const result=diagnosticResult(m.formId,rows,day(now));s.diagnostics.push(result);if(s.diagnostics.length>6)s.diagnostics.shift();
+      s.diagnosticRuns=Math.min(1000000,s.diagnosticRuns+1);m.diagnostic=result;
+      if(s.tierMode==='auto'){s.tier=result.recommendedTier;s.adjustedAt=s.evidenceCount;}
+    }
+  }
+  function answer(p,h,value,options={}){
+    const m=valid(p,h,['question']);if(!m||typeof value!=='string'||!value.trim())return null;
+    const a=get(m.ids[m.index]),mode=options.mode||'choice',now=options.now??m.now??Date.now();
+    if(!['choice','text','speech'].includes(mode)||!Number.isFinite(new Date(now).getTime()))return null;
+    if(a.type==='order'){
+      if(mode==='speech'||normal(value).split(' ').sort().join('|')!==a.choices.map(normal).sort().join('|'))return null;
+    }else if(mode==='choice'&&!a.choices.includes(value))return null;
+    else if(mode!=='choice'&&a.skill!=='conversation')return null;
+    const correct=[a.answer,...a.alternatives].some(answer=>normal(answer)===normal(value));
+    if(mode==='speech'){
+      if(!m.speechTried){state(p).speechAttempts++;m.speechTried=true;}
+      if(!correct)return {correct:false,retrySpeech:true};
+    }
+    const result=note(p,m,a,correct,now);
+    let row=m.rows[m.index];
+    if(!row){row={id:a.id,firstCorrect:correct,independent:result.independent,assisted:result.assisted,audio:result.audio,
+      readingAssisted:result.readingAssisted,rewardEligible:result.rewardEligible,attempts:0,solved:false};m.rows[m.index]=row;}
+    row.attempts++;row.solved ||= correct;row.assisted ||= result.assisted;m.attempts++;m.correct=correct;m.phase='feedback';
+    if(m.kind==='mission'&&correct){
+      const definition=mission(m.missionId),progress=state(p).missions[m.missionId] ||= {step:0,completed:false,rewarded:false,independentIds:[],rewardEligibleIds:[]};
+      if(result.independent)add(progress.independentIds,a.id);
+      if(result.rewardEligible)add(progress.rewardEligibleIds,a.id);
+      if(!m.missionReplay&&definition.activityIds[progress.step]===a.id)progress.step++;
+      progress.completed=progress.step===definition.activityIds.length;
+    }
+    const final=m.index===m.ids.length-1&&(correct||m.kind==='diagnostic');if(final)settle(p,m,now);
+    h.feedback={correct,explanation:a.explanation,answer:a.answer,ko:a.ko,assisted:result.assisted,audioEvidence:result.audio,
+      readingAssisted:result.readingAssisted,reward:final?{...m.reward}:null,final};publish(m);return h.feedback;
+  }
+  function retry(p,h){const m=valid(p,h,['feedback']);if(!m||m.correct||m.kind==='diagnostic')return false;m.phase='question';m.aids.add('correction');publish(m);return true;}
+  function advance(p,h){
+    const m=valid(p,h,['preview','feedback']);if(!m)return false;
+    if(m.phase==='preview'){prepare(m);return true;}
+    if(!m.correct&&m.kind!=='diagnostic')return false;
+    if(m.index===m.ids.length-1){m.phase='results';publish(m);return true;}
+    m.index++;prepare(m);return true;
+  }
+  function diagnosticResult(formId,rows,date){
+    const bySkill={};
+    for(const skill of ['vocabulary','grammar','reading','listening']){
+      const list=rows.filter(r=>get(r.id).skill===skill),eligible=list.filter(r=>!r.assisted&&(skill!=='listening'||r.audio));
+      bySkill[skill]={total:list.length,correct:list.filter(r=>r.correct).length,independentAnswered:eligible.length,
+        independentCorrect:eligible.filter(r=>r.correct).length,readingAssisted:list.filter(r=>r.readingAssisted).length};
+    }
+    const audio=bySkill.listening,limited=audio.independentAnswered<audio.total||Object.values(bySkill).some(r=>r.independentAnswered<r.total);
+    const assessed=Object.entries(bySkill).filter(([key])=>key!=='listening'||audio.independentAnswered>=4).map(([,r])=>r);
+    const score=assessed.reduce((n,r)=>n+r.independentCorrect,0),total=assessed.reduce((n,r)=>n+r.total,0);
+    let recommendedTier=1;
+    if(assessed.length>=3&&assessed.every(r=>r.independentCorrect>=Math.ceil(r.total*.5))&&score>=Math.ceil(total*.6))recommendedTier=2;
+    if(!limited&&assessed.length===4&&assessed.every(r=>r.independentCorrect>=Math.ceil(r.total*.8))&&score>=Math.ceil(total*.875))recommendedTier=3;
+    return {formId,date,rows,bySkill,total:rows.length,correct:rows.filter(r=>r.correct).length,
+      independentCorrect:Object.values(bySkill).reduce((n,r)=>n+r.independentCorrect,0),recommendedTier,limited,
+      reason:limited?'도움 또는 소리 없이 푼 항목은 독립 듣기 근거에서 제외했어요. 읽기 중심의 잠정 추천이며 원하는 난이도를 직접 고를 수 있어요.':
+        '영역별 독립 정답 비율을 함께 사용한 게임 안의 시작점 추천이에요. 공식 영어 능력 인증이 아니에요.'};
+  }
+  function summary(p,h){
+    const m=valid(p,h,['feedback','results']);if(!m)return null;
+    return {kind:m.kind,total:m.ids.length,solved:m.rows.filter(r=>r.solved).length,firstCorrect:m.rows.filter(r=>r.firstCorrect).length,
+      independentCorrect:m.rows.filter(r=>r.firstCorrect&&r.independent).length,attempts:m.rows.reduce((n,r)=>n+r.attempts,0),
+      comprehensionCorrect:m.rows.filter(r=>r.rewardEligible).length,
+      assisted:m.rows.filter(r=>r.assisted).length,expressionIds:[...new Set(m.ids.flatMap(id=>get(id).expressionIds))],
+      reviewExpressionIds:[...new Set(m.rows.filter(r=>!r.firstCorrect||r.assisted).flatMap(r=>get(r.id).expressionIds))],
+      reward:m.reward?{...m.reward}:null,diagnostic:m.diagnostic||null,recommendation:recommendation(p)};
+  }
+  function unitProgress(p,id,now=Date.now()){
+    const pool=Curriculum.activities.filter(a=>a.unitId===id),s=state(p),expressions=[...new Set(pool.flatMap(a=>a.expressionIds))];
+    const attempted=pool.filter(a=>s.records[a.id]?.correct+s.records[a.id]?.wrong>0).length,completed=pool.filter(a=>s.records[a.id]?.correct>0).length;
+    return {unitId:id,total:pool.length,attempted,completed,percent:pool.length?Math.round(100*completed/pool.length):0,
+      reviewNeeded:expressions.filter(id=>expressionStatus(p,id)==='Review Needed').length,
+      dueCount:expressions.filter(id=>s.expressions[id]?.dueDay&&s.expressions[id].dueDay<=day(now)).length,
+      lessons:s.units[id]?.lessons||0,rewarded:s.rewarded.includes('unit-'+id)};
+  }
+  function aggregate(records){
+    const total=records.reduce((n,r)=>n+r.correct+r.wrong,0),correct=records.reduce((n,r)=>n+r.correct,0),
+      independentCorrect=records.reduce((n,r)=>n+r.independentCorrect,0),independentAnswered=records.reduce((n,r)=>n+r.independentCorrect+r.independentWrong,0),
+      assistedCorrect=records.reduce((n,r)=>n+r.assistedCorrect,0),assistedAnswered=records.reduce((n,r)=>n+r.assistedCorrect+r.assistedWrong,0);
+    return {total,correct,accuracy:total?Math.round(correct*100/total):null,independentCorrect,independentAnswered,
+      independentAccuracy:independentAnswered?Math.round(independentCorrect*100/independentAnswered):null,assistedCorrect,assistedAnswered,
+      assistedAccuracy:assistedAnswered?Math.round(assistedCorrect*100/assistedAnswered):null,
+      audioCorrect:records.reduce((n,r)=>n+r.audioCorrect,0),audioAnswered:records.reduce((n,r)=>n+r.audioCorrect+r.audioWrong,0),
+      readingAssisted:records.reduce((n,r)=>n+r.readingAssisted,0),hints:records.reduce((n,r)=>n+r.hint+r.translation,0),
+      fallback:records.reduce((n,r)=>n+r.fallback,0),transcript:records.reduce((n,r)=>n+r.transcript,0)};
+  }
+  function dashboard(p,now=Date.now()){
+    const s=state(p),records=Object.values(s.records),bySkill=Object.fromEntries(skills.map(skill=>[skill,aggregate(Curriculum.activities
+      .filter(a=>a.skill===skill&&s.records[a.id]).map(a=>s.records[a.id]))]));
+    const weak=skills.filter(skill=>bySkill[skill].independentAnswered>=4&&bySkill[skill].independentAccuracy<60)
+      .sort((a,b)=>bySkill[a].independentAccuracy-bySkill[b].independentAccuracy)[0];
+    const due=today(p,now),recommendationText=weak?weak+' 영역의 독립 답변 '+bySkill[weak].independentAnswered+'회 중 정답 비율이 '+bySkill[weak].independentAccuracy+'%예요. 짧은 표현을 복습해 보세요.':
+      due.count?'복습할 표현 '+due.count+'개가 있어요. 오늘의 복습에서 다시 만나 보세요.':records.length?'현재 난이도로 여러 표현과 문제 형식을 고르게 연습해 보세요.':'원하는 단원을 골라 첫 학습을 시작하세요.';
+    return {totalActivities:Curriculum.activities.length,totalAttempts:records.reduce((n,r)=>n+r.correct+r.wrong,0),
+      uniqueAttempted:records.filter(r=>r.correct+r.wrong>0).length,uniqueCompleted:records.filter(r=>r.correct>0).length,
+      overall:aggregate(records),bySkill,expressions:Curriculum.expressions.length,seenExpressions:Object.values(s.expressions).filter(r=>r.seen).length,
+      statuses:Object.fromEntries(['New','Learning','Review Needed','Familiar','Consistently Correct'].map(name=>[name,Curriculum.expressions.filter(e=>expressionStatus(p,e.id)===name).length])),
+      dueCount:due.count,units:Curriculum.units.map(u=>unitProgress(p,u.id,now)),missionsCompleted:Object.values(s.missions).filter(m=>m.completed).length,
+      recent:s.recent.slice(-12).map(r=>({...r,skill:get(r.id).skill})),recommendation:{skill:weak||null,text:recommendationText},tier:recommendation(p),
+      latestDiagnostic:s.diagnostics.at(-1)||null};
+  }
+  return {skills,intervals,day,normal,fresh,hydrate,setTier,expressionStatus,recommendation,select,startUnit,startMode,startExact,startMission,
+    today,startReview,startDiagnostic,current,close,assist,hear,answer,retry,advance,summary,unitProgress,dashboard};
+})();
+
+;
+// Local backup import is a preview followed by an explicitly confirmed, verified transaction.
+const Backup = (() => {
+  const maxBytes=2*1024*1024,handles=new WeakMap(),versions=[1,2,3,4,5,7,8];
+  const stagingKey='EnglishQuest.import.pending.v1',recoveryKey='EnglishQuest.import.recovery.v1';
+  const object=value=>!!value&&typeof value==='object'&&!Array.isArray(value);
+  function bytes(text){let size=0;for(const character of text){const n=character.codePointAt(0);size+=n<=0x7f?1:n<=0x7ff?2:n<=0xffff?3:4;}return size;}
+  function structure(p){
+    if(!object(p)||!versions.includes(p.version))return '지원하는 저장 버전이 아니에요.';
+    if(typeof p.started!=='boolean'||!Number.isSafeInteger(p.level)||p.level<1||!Array.isArray(p.completed)
+      ||p.completed.some(n=>!Number.isInteger(n)||n<1||n>3))return '게임 진행 정보의 형식이 올바르지 않아요.';
+    for(const key of ['xp','gold','hp'])if(!Number.isSafeInteger(p[key])||p[key]<0)return '능력치와 금화는 올바른 정수여야 해요.';
+    for(const key of ['learning','mistakes','settings','schedule','village','voice','rpg'])if(p[key]!==undefined&&!object(p[key]))return key+' 정보의 형식이 올바르지 않아요.';
+    for(const key of ['exploration','academy'])if(p[key]!=null&&!object(p[key]))return key+' 정보의 형식이 올바르지 않아요.';
+    for(const key of ['marked','history','achievements'])if(p[key]!==undefined&&!Array.isArray(p[key]))return key+' 목록의 형식이 올바르지 않아요.';
+    const maps=[[p.academy,'records'],[p.academy,'expressions'],[p.academy,'units'],[p.academy,'missions'],
+      [p.voice,'records'],[p.voice,'missions'],[p.village,'progress'],[p.village,'inventory'],[p.rpg,'equipped'],[p.rpg,'dungeons']];
+    for(const [container,key] of maps)if(container?.[key]!==undefined&&!object(container[key]))return key+' 저장 구조를 확인해 주세요.';
+    for(const key of ['recent','diagnostics','rewarded','badges'])if(p.academy?.[key]!==undefined&&!Array.isArray(p.academy[key]))return '아카데미 목록의 형식이 올바르지 않아요.';
+    return '';
+  }
+  function describe(p){return {version:p.version,level:p.level,gold:p.gold,currentChapter:p.currentChapter,
+    chapters:{forest:p.chapterComplete,village:!!p.village.progress[6].completed,exploration:!!p.exploration?.completedChapter},
+    academyAttempts:p.academy?Object.values(p.academy.records).reduce((n,r)=>n+r.correct+r.wrong,0):0,
+    academyCompleted:p.academy?Object.values(p.academy.records).filter(r=>r.correct>0).length:0,
+    expressions:p.academy?Object.values(p.academy.expressions).filter(r=>r.seen).length:0};}
+  function exportBackup(profile,now=Date.now()){
+    if(structure(profile))return null;
+    const safe=Engine.hydrate(profile),date=new Date(now);
+    if(safe.version!==8||!Number.isFinite(date.getTime()))return null;
+    const envelope={format:'EnglishQuestBackup',schemaVersion:1,saveVersion:8,exportedAt:date.toISOString(),profile:safe};
+    const text=JSON.stringify(envelope,null,2);if(bytes(text)>maxBytes)return null;
+    return {filename:'EnglishQuest-backup-'+date.toISOString().slice(0,10)+'.json',text,summary:describe(safe)};
+  }
+  function preview(text){
+    if(typeof text!=='string'||!text.trim())return {ok:false,error:'내용이 있는 JSON 백업 파일을 선택해 주세요.'};
+    if(bytes(text)>maxBytes)return {ok:false,error:'백업 파일은 2 MiB 이하여야 해요.'};
+    let parsed;try{parsed=JSON.parse(text);}catch{return {ok:false,error:'JSON 파일을 읽을 수 없어요. 원본 백업 파일을 확인해 주세요.'};}
+    let candidate=parsed;
+    if(object(parsed)&&Object.hasOwn(parsed,'format')){
+      if(parsed.format!=='EnglishQuestBackup'||parsed.schemaVersion!==1||!versions.includes(parsed.saveVersion)
+        ||!object(parsed.profile)||parsed.profile.version!==parsed.saveVersion)return {ok:false,error:'알 수 없거나 맞지 않는 백업 형식이에요.'};
+      candidate=parsed.profile;
+    }
+    const invalid=structure(candidate);if(invalid)return {ok:false,error:invalid};
+    try{
+      const profile=Engine.hydrate(candidate);if(profile.version!==8)return {ok:false,error:'현재 게임 버전으로 변환할 수 없어요.'};
+      const baseline=localStorage.getItem(Engine.saveKey),serialized=JSON.stringify(profile),handle=Object.freeze({});
+      handles.set(handle,{serialized,baseline});
+      return {ok:true,handle,profile:JSON.parse(serialized),summary:describe(profile),
+        warnings:candidate.version!==8?['이전 버전의 기록을 버전 8로 변환합니다. 원래 저장 슬롯은 유지됩니다.']:[]};
+    }catch{return {ok:false,error:'백업을 검증할 수 없어요. 현재 기록은 바뀌지 않았어요.'};}
+  }
+  function clean(){for(const key of [stagingKey,recoveryKey])try{localStorage.removeItem(key);}catch{/* Cleanup does not determine commit success. */}}
+  function cancel(handle){return !!handle&&handles.delete(handle);}
+  function commit(handle,options={}){
+    const pending=handle&&handles.get(handle);if(!pending)return {ok:false,error:'유효한 가져오기 미리보기를 먼저 열어 주세요.'};
+    if(options.confirm!==true)return {ok:false,error:'현재 기록을 바꾸려면 명시적으로 확인해 주세요.'};
+    handles.delete(handle);
+    let before;
+    try{
+      before=localStorage.getItem(Engine.saveKey);
+      if(before!==pending.baseline)return {ok:false,error:'미리보기 후 현재 기록이 바뀌었어요. 파일을 다시 검토해 주세요.'};
+      if(before){try{if(JSON.parse(before)?.version>8)return {ok:false,error:'더 새로운 버전의 기록은 덮어쓸 수 없어요.'};}catch{/* A validated import can replace a malformed current slot. */}}
+      // Stage and verify before touching the active checkpoint. Keep an exact rollback copy until verification succeeds.
+      localStorage.setItem(stagingKey,pending.serialized);
+      if(localStorage.getItem(stagingKey)!==pending.serialized)throw Error('stage');
+      localStorage.setItem(recoveryKey,JSON.stringify({key:Engine.saveKey,previous:before}));
+      if(localStorage.getItem(recoveryKey)!==JSON.stringify({key:Engine.saveKey,previous:before}))throw Error('recovery');
+      const profile=JSON.parse(pending.serialized);
+      if(!Engine.save(profile)||localStorage.getItem(Engine.saveKey)!==pending.serialized)throw Error('verify');
+      clean();return {ok:true,profile};
+    }catch{
+      let restored=false;
+      try{
+        if(localStorage.getItem(Engine.saveKey)!==before){
+          if(before===null)localStorage.removeItem(Engine.saveKey);else if(before!==undefined)localStorage.setItem(Engine.saveKey,before);
+        }
+        restored=before!==undefined&&localStorage.getItem(Engine.saveKey)===before;
+      }catch{/* Keep the recovery copy if storage itself cannot restore the prior slot. */}
+      if(restored)clean();
+      return {ok:false,error:restored?'가져온 기록의 저장을 확인할 수 없어 이전 기록을 유지했어요.':
+        '저장 공간을 사용할 수 없어 가져오기를 마치지 못했어요. 남아 있는 이전 기록과 복구 사본을 보존했어요.'};
+    }
+  }
+  return {maxBytes,export:exportBackup,preview,commit,cancel};
+})();
+
+;
 // Chapter 1 content. Each entry is also a teachable vocabulary-book card.
 const lessons = [
  ['hello','Hello','안녕하세요','Hello, friend.'],['thanks','Thank you','감사합니다','Thank you, Rowan.'],
@@ -2108,7 +3429,8 @@ const Engine = (() => {
   const v3Key = 'EnglishQuest.v3';
   const v4Key = 'EnglishQuest.v4';
   const v5Key = 'EnglishQuest.v5';
-  const saveKey = 'EnglishQuest.v7';
+  const v7Key = 'EnglishQuest.v7';
+  const saveKey = 'EnglishQuest.v8';
   const active = new WeakMap();
   const reviews = new WeakMap();
   const achievements = [
@@ -2138,9 +3460,10 @@ const Engine = (() => {
     ? clamp(value, 0, max) : fallback;
   const emptyRecord = () => ({seen:false, correct:0, wrong:0, streak:0});
   function fresh() {
-    return {version:7, started:false, currentChapter:1, level:1, xp:0, gold:0, hp:100,rpg:RPG.fresh(),
+    return {version:8, started:false, currentChapter:1, level:1, xp:0, gold:0, hp:100,rpg:RPG.fresh(),
       completed:[], unlocked:1, chapterComplete:false, learning:{}, mistakes:{},
       marked:[], schedule:{}, history:[], achievements:[], village:VillageEngine.fresh(),
+      academy:typeof Academy!=='undefined'?Academy.fresh():null,
       voice:VoiceLearning.fresh(), exploration:typeof Exploration!=='undefined'?Exploration.fresh():null,
       settings:{sound:true, voice:true, volume:0.45, speechRate:'normal',speechVolume:1}};
   }
@@ -2149,7 +3472,7 @@ const Engine = (() => {
   }
   function hydrate(raw) {
     const profile = fresh();
-    if (!raw || ![1, 2, 3, 4, 5, 7].includes(raw.version)) return profile;
+    if (!raw || ![1, 2, 3, 4, 5, 7, 8].includes(raw.version)) return profile;
     profile.started = raw.started === true;
     profile.level = Math.max(1, integer(raw.level, 1, 9999));
     profile.gold = integer(raw.gold, 0, Number.MAX_SAFE_INTEGER);
@@ -2166,7 +3489,7 @@ const Engine = (() => {
     if (raw.version >= 4) profile.voice=VoiceLearning.hydrate(raw.voice);
     RPG.hydrate(profile,raw.version>=5?raw.rpg:null);
     if(typeof Exploration!=='undefined'){
-      profile.exploration=Exploration.hydrate(raw.version===7?raw.exploration:null,profile);
+      profile.exploration=Exploration.hydrate(raw.version>=7?raw.exploration:null,profile);
       if(raw.currentChapter===3&&Exploration.available(profile))profile.currentChapter=3;
     }
     const {maxHp, nextXp} = stats(profile);
@@ -2210,6 +3533,7 @@ const Engine = (() => {
     if (profile.completed.length) unlock(profile, 'firstVictory');
     if (profile.chapterComplete) unlock(profile, 'forestClear');
     if (profile.village.scenarioComplete) unlock(profile,'villageVoice');
+    if(typeof Academy!=='undefined')profile.academy=Academy.hydrate(raw.version===8?raw.academy:null);
     RPG.refresh(profile);
     return profile;
   }
@@ -2221,9 +3545,9 @@ const Engine = (() => {
   function load() {
     try {
       const current = stored(saveKey);
-      if (current?.version === 7) return hydrate(current);
-      for (const legacy of [stored(v5Key),stored(v4Key),stored(v3Key),stored(v2Key),stored(legacyKey),current]) {
-        if (![1,2,3,4,5].includes(legacy?.version)) continue;
+      if (current?.version === 8) return hydrate(current);
+      for (const legacy of [stored(v7Key),stored(v5Key),stored(v4Key),stored(v3Key),stored(v2Key),stored(legacyKey),current]) {
+        if (![1,2,3,4,5,7].includes(legacy?.version)) continue;
         const profile = hydrate(legacy);
         save(profile);
         return profile;
@@ -2234,7 +3558,7 @@ const Engine = (() => {
   }
   function save(profile) {
     try {
-      if (profile.version !== 7 || stored(saveKey)?.version > 7) return false;
+      if (profile.version !== 8 || stored(saveKey)?.version > 8) return false;
       localStorage.setItem(saveKey, JSON.stringify(profile));
       return true;
     }
@@ -2584,7 +3908,7 @@ const Engine = (() => {
     encounter.phase = 'REWARD';
     return {xp, gold, levelUp, bonus, replay,gearId};
   }
-  return {saveKey, legacyKey, v2Key, v3Key, v4Key, v5Key, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
+  return {saveKey, legacyKey, v2Key, v3Key, v4Key, v5Key, v7Key, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
     achievements, mark, reviewList, startReview, answerReview, dashboard, heavy, bonusPercent,
     training, golemBreak, diving, pulsing, retryBroken, useItem,voicePending,voiceResult,
     available, charging, exposed, shuffle, select, answer, playerAction, enemyAction, reward};
@@ -4906,7 +6230,10 @@ function save(){
   game.hint = Engine.save(game.profile) ? '' : '이 브라우저에서 저장할 수 없어요. 창을 닫기 전까지는 계속 플레이할 수 있어요.';
 }
 function change(screen){
+  if(typeof academyCancelImport==='function'&&(game.screen==='ACADEMY_BACKUP'||game.screen==='PAUSED'&&game.pausedFrom==='ACADEMY_BACKUP')&&!['ACADEMY_BACKUP','PAUSED'].includes(screen))academyCancelImport();
+  if(game.screen.startsWith('ACADEMY')&&screen!==game.screen&&typeof academySilence==='function')academySilence();
   if(typeof ExploreView!=='undefined')ExploreView.beforeChange(screen);
+  if(typeof Academy!=='undefined'&&game.screen==='ACADEMY_RUN'&&!['ACADEMY_RUN','PAUSED'].includes(screen))Academy.close(game.profile);
   if(game.trial&&!['TRIAL_RUN','TRIAL_RESULTS','PAUSED'].includes(screen)){Trials.leave(game.profile);game.trial=null;}
   if(game.voice && !['VOICE_PRACTICE','QUESTION_ACTIVE','ANSWER_FEEDBACK','PAUSED'].includes(screen))discardVoice();
   if (game.screen === 'PAUSED') pauseDialog.close();
@@ -4919,7 +6246,7 @@ function titleView(){
   const hasSave=game.profile.started;
   const begin=button('new',icon('sword')+' 게임 시작',{cl:hasSave?'':'primary'});
   const resume=button('continue','이어하기',{cl:hasSave?'primary':'',disabled:!hasSave});
-  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.7 · The Forgotten Path</div></section>';
+  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.8 · The Academy of Words</div></section>';
 }
 function introView(){
   const item=saga[game.page];
@@ -5078,7 +6405,7 @@ function bookView(){
  return '<article class="book-row"><div><strong lang="en">'+l.en+'</strong><small>'+l.ko+'</small></div><div>'+l.example+'<small>'+labels[Engine.status(r)]+' · 정답 '+(r?.correct||0)+' / 오답 '+(r?.wrong||0)+'</small></div>'+speakButton(l.en)+'</article>';
  }).join('')+'</section><div class="actions">'+button('map','지도')+button('review','오답 복습')+'</div>';
 }
-const screens={CLASSES:classView,PROFILE:profileView,SKILLS:skillView,EQUIPMENT:equipmentView,TRIALS:trialList,TRIAL_RUN:trialView,TRIAL_RESULTS:trialResults,VOICE_HALL:hallView,VOICE_PRACTICE:voicePracticeView,TODAY:todayView,TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView,DASHBOARD:dashboardView,CHAPTERS:chaptersView,VILLAGE:villageView,LOCATION:locationView,QUESTS:questsView,SHOP:()=>itemView(true),BAG:()=>itemView(false),DIALOGUE:dialogueView,VILLAGE_END:villageEnding};
+const screens={ACADEMY:academyView,ACADEMY_RUN:academyRunView,ACADEMY_UNIT:academyUnitView,ACADEMY_PROGRESS:academyProgressView,ACADEMY_BACKUP:academyBackupView,CLASSES:classView,PROFILE:profileView,SKILLS:skillView,EQUIPMENT:equipmentView,TRIALS:trialList,TRIAL_RUN:trialView,TRIAL_RESULTS:trialResults,VOICE_HALL:hallView,VOICE_PRACTICE:voicePracticeView,TODAY:todayView,TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView,DASHBOARD:dashboardView,CHAPTERS:chaptersView,VILLAGE:villageView,LOCATION:locationView,QUESTS:questsView,SHOP:()=>itemView(true),BAG:()=>itemView(false),DIALOGUE:dialogueView,VILLAGE_END:villageEnding};
 function render(){
  if(typeof ExploreView!=='undefined')ExploreView.unmount();
  if(game.screen==='PAUSED'){showSettings();return;}
@@ -5907,7 +7234,7 @@ const classInfo=id=>RPG.classes.find(c=>c.id===id);
 const gearInfo=id=>RPG.gear.find(g=>g.id===id);
 const signed=n=>n>0?'+'+n:String(n);
 function rpgHubLinks(){
-  return '<nav class="camp-links" aria-label="모험가 성장과 시련">'+button('profile',icon('hero')+' 영웅 기록')+button('trials',icon('crystal')+' 언어 수정의 시련')+(Exploration.available(game.profile)?button('explore-enter',icon('compass')+' 제3장 · 잊혀진 길',{cl:'primary'}):'')+'</nav>';
+  return '<nav class="camp-links" aria-label="모험가 성장과 시련">'+button('profile',icon('hero')+' 영웅 기록')+button('academy-enter',icon('book')+' 말의 아카데미')+button('trials',icon('crystal')+' 언어 수정의 시련')+(Exploration.available(game.profile)?button('explore-enter',icon('compass')+' 제3장 · 잊혀진 길',{cl:'primary'}):'')+'</nav>';
 }
 function bonusText(bonuses){
   return Object.entries(statNames).filter(([k])=>bonuses[k]).map(([k,label])=>label+' '+signed(bonuses[k])).join(' · ')||'변화 없음';
@@ -6240,7 +7567,7 @@ function exploreView(){
  const companion=s.activeCompanion;
  const modal=ExploreUI.panel;
  return '<section class="exploration"><div class="eq-main" '+(modal?'inert':'')+'><header class="eq-heading"><div><span class="eyebrow">CHAPTER III · THE FORGOTTEN PATH</span><h2>'+safe(a.name)+'</h2><p>말을 읽고, 길을 발견하세요.</p></div><div class="eq-vitals"><b>Lv. '+p.level+'</b> <span>HP '+p.hp+' / '+stats.maxHp+'</span><br>금화 '+p.gold+'</div></header><div class="eq-layout"><div>'+eqWorld()+
- '<div class="eq-controlbar"><div class="eq-pad" role="group" aria-label="터치 또는 마우스 이동"><button class="btn" data-move="up" aria-label="위로 이동">↑</button><button class="btn" data-move="left" aria-label="왼쪽으로 이동">←</button><button class="btn" data-move="down" aria-label="아래로 이동">↓</button><button class="btn" data-move="right" aria-label="오른쪽으로 이동">→</button></div><div><div id="eq-nearby" class="eq-nearby">가까운 물체를 찾아보세요.</div>'+eqButton('interact','E · 상호작용',{cl:'primary eq-interact'})+'<p>WASD / 방향키 · E 상호작용 · Esc 일시 정지</p></div></div><p class="eq-status" id="eq-status" role="status">'+safe(ExploreUI.notice)+'</p></div><aside class="eq-side"><section class="eq-card"><span class="eyebrow">CURRENT QUEST</span><h3>'+safe(q.title)+'</h3><p>'+safe(q.text)+'</p><div class="eq-progress" aria-label="완료 의뢰">'+Exploration.questStatus(p).map(t=>'<i class="'+(t.status==='complete'?'done':'')+'"></i>').join('')+'</div>'+eqButton('journal',icon('book')+' 탐험 일지')+'</section><section class="eq-card eq-companion-summary"><span class="eyebrow">TRAVELING WITH</span>'+(companion?'<div class="eq-small-portrait">'+ExploreArt.portrait(companion)+'</div>':'')+'<h3>'+eqName(companion)+'</h3><p>'+(companion==='mira'?'미라는 어려운 표현을 이해하도록 단서를 줍니다.':companion==='bram'?'브람은 가까운 숨은 물체의 기척을 알아챕니다.':'숲에 있는 두 여행자에게 말을 걸어 보세요.')+'</p>'+eqButton('companions','동료와 이야기')+'</section><section class="eq-card eq-location-card"><span class="eyebrow">THE ANCIENT MAP</span><ol class="eq-area-list">'+Object.values(ExplorationData.areas).filter(t=>['forest','ruins','cavern'].includes(t.id)||s.discovered.includes(t.id)).map(t=>'<li class="'+(s.area===t.id?'current':'')+'">'+safe(t.name)+(s.discovered.includes(t.id)?'':' · 미발견')+'</li>').join('')+'</ol></section></aside></div><nav class="eq-toolbar" aria-label="탐험 메뉴">'+eqButton('notes',icon('book')+' 영어 수첩')+eqButton('bag',icon('shield')+' 소지품')+eqButton('companions',icon('chat')+' 동료')+eqButton('instructions','조작 안내')+eqButton('chapters','장 선택')+(Exploration.current(p)?.phase==='seek'?eqButton('reread','진행 중인 단서',{cl:'primary'}):'')+'</nav></div>'+(modal?eqPanel():'')+'</section>';
+ '<div class="eq-controlbar"><div class="eq-pad" role="group" aria-label="터치 또는 마우스 이동"><button class="btn" data-move="up" aria-label="위로 이동">↑</button><button class="btn" data-move="left" aria-label="왼쪽으로 이동">←</button><button class="btn" data-move="down" aria-label="아래로 이동">↓</button><button class="btn" data-move="right" aria-label="오른쪽으로 이동">→</button></div><div><div id="eq-nearby" class="eq-nearby">가까운 물체를 찾아보세요.</div>'+eqButton('interact','E · 상호작용',{cl:'primary eq-interact'})+'<p>WASD / 방향키 · E 상호작용 · Esc 일시 정지</p></div></div><p class="eq-status" id="eq-status" role="status">'+safe(ExploreUI.notice)+'</p></div><aside class="eq-side"><section class="eq-card"><span class="eyebrow">CURRENT QUEST</span><h3>'+safe(q.title)+'</h3><p>'+safe(q.text)+'</p><div class="eq-progress" aria-label="완료 의뢰">'+Exploration.questStatus(p).map(t=>'<i class="'+(t.status==='complete'?'done':'')+'"></i>').join('')+'</div>'+eqButton('journal',icon('book')+' 탐험 일지')+'</section><section class="eq-card eq-companion-summary"><span class="eyebrow">TRAVELING WITH</span>'+(companion?'<div class="eq-small-portrait">'+ExploreArt.portrait(companion)+'</div>':'')+'<h3>'+eqName(companion)+'</h3><p>'+(companion==='mira'?'미라는 어려운 표현을 이해하도록 단서를 줍니다.':companion==='bram'?'브람은 가까운 숨은 물체의 기척을 알아챕니다.':'숲에 있는 두 여행자에게 말을 걸어 보세요.')+'</p>'+eqButton('companions','동료와 이야기')+'</section><section class="eq-card eq-location-card"><span class="eyebrow">THE ANCIENT MAP</span><ol class="eq-area-list">'+Object.values(ExplorationData.areas).filter(t=>['forest','ruins','cavern'].includes(t.id)||s.discovered.includes(t.id)).map(t=>'<li class="'+(s.area===t.id?'current':'')+'">'+safe(t.name)+(s.discovered.includes(t.id)?'':' · 미발견')+'</li>').join('')+'</ol></section></aside></div><nav class="eq-toolbar" aria-label="탐험 메뉴">'+button('academy-enter',icon('book')+' 말의 아카데미')+eqButton('notes',icon('book')+' 영어 수첩')+eqButton('bag',icon('shield')+' 소지품')+eqButton('companions',icon('chat')+' 동료')+eqButton('instructions','조작 안내')+eqButton('chapters','장 선택')+(Exploration.current(p)?.phase==='seek'?eqButton('reread','진행 중인 단서',{cl:'primary'}):'')+'</nav></div>'+(modal?eqPanel():'')+'</section>';
 }
 function eqPanelShell(title,content,kicker='FIELD JOURNAL'){
  return '<div class="eq-modal-shade"><section class="eq-dialog" role="dialog" aria-modal="true" aria-labelledby="eq-dialog-title" tabindex="-1"><div class="eq-dialog-top"><span class="eyebrow">'+safe(kicker)+'</span>'+eqButton('close','×',{aria:'탐험으로 돌아가기'})+'</div><h2 id="eq-dialog-title">'+safe(title)+'</h2>'+content+'</section></div>';
@@ -6494,6 +7821,122 @@ function exploreAction(action,id){
 }
 
 ;
+// Original inline illustration: no fonts, images, or network requests.
+const AcademyArt={hall(){
+ const shelf=(x)=>'<g transform="translate('+x+' 130)"><path d="M0 230V50Q70-25 140 50V230Z" fill="#132d39" stroke="#a78b58" stroke-width="3"/>'+[65,120,175].map((y,j)=>'<path d="M10 '+(y+43)+'H130" stroke="#b69c67" stroke-width="5"/>'+Array.from({length:9},(_,i)=>'<rect x="'+(14+i*13)+'" y="'+(y+(i*7+j*11)%18)+'" width="9" height="'+(40-(i*7+j*11)%18)+'" rx="1" fill="'+['#ae735a','#6f9290','#9b8a67','#546c87'][i%4]+'"/>').join('')).join('')+'</g>';
+ return '<svg class="academy-art" viewBox="0 0 1000 420" role="img" aria-label="달빛이 드는 아카데미 도서관, 빛나는 책과 여섯 개의 학습 별자리"><defs><linearGradient id="ac-night" x2="0" y2="1"><stop stop-color="#102331"/><stop offset="1" stop-color="#28464a"/></linearGradient><radialGradient id="ac-glow"><stop stop-color="#c5ddcc" stop-opacity=".45"/><stop offset="1" stop-color="#9ec5d3" stop-opacity="0"/></radialGradient></defs><path fill="url(#ac-night)" d="M0 0h1000v420H0z"/><ellipse cx="500" cy="190" rx="360" ry="260" fill="url(#ac-glow)"/><path d="M370 310V140Q500-75 630 140V310Z" fill="#182f48" stroke="#b7a97a" stroke-width="6"/><path d="M500 28V310M370 170H630M400 92L600 290M600 92L400 290" stroke="#8c9d8d" stroke-width="3"/><circle cx="500" cy="126" r="47" fill="#f2ddb0"/><path d="M511 80a47 47 0 0 0 12 88 47 47 0 0 1-12-88" fill="#fff4d2"/>'+shelf(60)+shelf(800)+'<path d="M0 375L500 300l500 75v45H0" fill="#183239"/><path d="M500 300L220 420M500 300L780 420M0 396H1000" stroke="#58706a" opacity=".5"/><ellipse cx="500" cy="370" rx="150" ry="22" fill="#081b24" opacity=".6"/><path d="M439 340h122l20 27H419Z" fill="#8e7950"/><path d="M455 370h90v45h-90" fill="#40555a"/><g class="academy-floating-book"><path d="M500 312q-43-35-94-21v-72q50-10 94 21 44-31 94-21v72q-51-14-94 21" fill="#e7d6aa" stroke="#bda171" stroke-width="4"/><path d="M500 241v69M420 238q32 0 65 18m-65-3q32 0 65 18m30-15q33-18 65-18m-65 33q33-18 65-18" fill="none" stroke="#8a8668" stroke-width="2"/></g>'+[[290,77],[690,68],[315,220],[700,220],[242,320],[758,320]].map(([x,y],i)=>'<g transform="translate('+x+' '+y+')"><circle r="20" fill="#28494e" stroke="#c0b686"/><path d="M0-10L5 0 0 10-5 0Z" fill="'+['#e8c69a','#add4be','#bcb3dc'][i%3]+'"/></g>').join('')+'</svg>';
+}};
+
+;
+const AcademyUI={draft:'',micState:'ready',micNotice:'',unitId:'u01',words:[],hint:false,translation:false,transcript:false,notice:'',backup:null,importBusy:false,returnTo:'MAP'};
+const academySkills={vocabulary:'어휘',grammar:'문법',reading:'읽기',listening:'듣기',order:'어순',conversation:'대화'};
+const academyTiers={1:'왕초보',2:'초급',3:'초중급'};
+const academyStatuses={New:'새 표현',Learning:'익히는 중','Review Needed':'복습 필요',Familiar:'익숙한 표현','Consistently Correct':'꾸준히 정답'};
+function acButton(action,label,options={}){return button('academy-'+action,label,options);}
+function acNav(){return '<nav class="academy-nav" aria-label="아카데미 메뉴">'+acButton('home',icon('book')+' 아카데미')+acButton('progress',icon('star')+' 학습 관측소')+acButton('backup','기록 백업')+acButton('exit','모험으로 돌아가기')+'</nav>';}
+function acTier(){const p=game.profile;return '<div class="academy-tiers" role="group" aria-label="학습 난이도">'+[1,2,3].map(n=>acButton('tier',academyTiers[n],{id:n,pressed:p.academy.tier===n})).join('')+acButton('auto-tier','자동 추천 사용',{pressed:p.academy.tierMode==='auto'})+'</div><p class="academy-muted">영어 학습 난이도는 RPG 레벨과 별개입니다. 언제든 직접 바꿀 수 있어요.</p>';}
+function academyView(){
+ const p=game.profile,t=Academy.today(p),r=Academy.recommendation(p);
+ const rooms=[['01 · ASSESSMENT HALL','출발점 진단실','시간 제한 없는 24문항. 건너뛰거나 다시 진단할 수 있어요.','diagnostic','진단 시작 / 다시 하기',''],['02 · VOCABULARY LIBRARY','단어의 도서관','생활 속 단어와 표현을 읽고 뜻을 연결해요.','mode','어휘 연습','vocabulary'],['03 · GRAMMAR WORKSHOP','문장의 공방','문장을 완성하고 단어를 바른 순서로 놓아요.','mode','문법 · 어순 연습','grammar'],['04 · LISTENING CHAMBER','메아리의 교실','영어를 듣고 이해해요. 소리가 없으면 원문으로 연습해요.','mode','듣기 연습','listening'],['05 · CONVERSATION GARDEN','대화의 정원','상황과 상대의 말에 어울리는 응답을 골라요.','mode','대화 연습','conversation'],['06 · REVIEW OBSERVATORY','기억의 관측소','복습할 표현과 실제 연습 기록을 살펴봐요.','progress','학습 기록 보기','']];
+ return acNav()+'<section class="academy-hero">'+AcademyArt.hall()+'<div class="academy-hero-copy"><div class="eyebrow">THE ACADEMY OF WORDS</div><h2>말의 아카데미</h2><p>작은 표현 하나가, 다음 모험의 문을 엽니다.</p></div></section><section class="academy-strip"><div><span class="eyebrow">YOUR NEXT SMALL STEP</span><p><strong>오늘의 영어 복습 '+(t.count||0)+'개</strong></p><p>'+safe(t.count?t.estimatedMinutes:0)+'분 안팎 · 놓친 날에 대한 벌점은 없어요.</p></div><div class="actions">'+acButton('review','오늘의 영어 복습 시작',{cl:'primary',disabled:!t.count})+acButton('mode','맞춤 종합 연습',{id:'mixed'})+'</div></section><section class="academy-card"><h3>나의 학습 출발점</h3><p>추천 · '+academyTiers[r.tier]+' — '+safe(r.reason||'활동을 시작하면 기록을 바탕으로 추천해요.')+'</p>'+acTier()+'<p class="academy-muted">진단은 선택 사항이며 공인 영어 등급이나 숙련도 인증이 아닙니다.</p>'+acButton('skip','진단 없이 첫 단원 시작',{id:'u01'})+'</section><h3>여섯 개의 배움터</h3><div class="academy-grid">'+rooms.map(([n,title,desc,act,label,id])=>'<article class="academy-room"><span>'+n+'</span><h3>'+title+'</h3><p>'+desc+'</p>'+acButton(act,label,{id})+'</article>').join('')+'</div><section><h3>나의 영어 성장 지도 · 열두 개의 배움길</h3><p class="academy-muted">기초 단원은 언제나 열려 있어요. 모든 '+Curriculum.activities.length+'개 활동은 단원 안의 활동 목록에서도 직접 시작할 수 있습니다.</p><ol class="academy-map">'+Curriculum.units.map((u,i)=>{const v=Academy.unitProgress(p,u.id);return '<li>'+acButton('unit','<span class="unit-number">UNIT '+String(i+1).padStart(2,'0')+'</span><b>'+safe(u.name)+'</b><small>'+safe(u.description)+'</small><small>'+(v.attempted?'연습 중':'시작 전')+' · '+ (v.completed||0)+' / '+(v.total||Curriculum.activities.filter(a=>a.unitId===u.id).length)+' 활동 완료 · 복습 '+(v.dueCount||0)+'</small>',{id:u.id,cl:v.total&&v.completed===v.total?'complete':''})+'</li>';}).join('')+'</ol></section><h3>실전 영어 의뢰</h3><div class="academy-missions">'+Curriculum.missions.map(m=>acButton('mission',icon('chat')+safe(m.name)+' · '+(p.academy.missions[m.id]?.step||0)+' / '+m.activityIds.length+'단계',{id:m.id})).join('')+'</div>'+(AcademyUI.notice?'<p class="academy-message" role="status">'+safe(AcademyUI.notice)+'</p>':'');
+}
+function academyUnitView(){const u=Curriculum.units.find(u=>u.id===AcademyUI.unitId);if(!u)return academyView();const p=game.profile,v=Academy.unitProgress(p,u.id),activities=Curriculum.activities.filter(a=>a.unitId===u.id);return acNav()+heading('CURRICULUM · '+u.id.toUpperCase(),safe(u.name),safe(u.description||u.en||''))+'<section class="academy-card"><p>'+safe((u.objectives||[]).map(o=>typeof o==='string'?(Curriculum.index().objectives[o]?.name||o):o.description||o.name||'').join(' · '))+'</p><p>완료 '+(v.completed||0)+' / '+activities.length+' · 복습 '+(v.dueCount||0)+'</p>'+acTier()+'<div class="actions">'+acButton('lesson','이 단원 수업 시작',{id:u.id,cl:'primary'})+'</div><p class="academy-muted">표현 미리 보기 → 도움을 받는 연습 → 혼자 풀기 → 상황에 적용 → 결과 확인</p></section><h3>활동 전체 목록</h3><p class="academy-muted">수업의 자동 선택과 관계없이 모든 활동을 직접 열 수 있어요.</p><ul class="academy-catalog">'+activities.map(a=>'<li>'+acButton('exact','<span>'+safe(a.instruction)+'</span><small>'+safe(a.id)+' · '+academySkills[a.skill]+' · '+academyTiers[a.tier]+'</small>',{id:a.id})+'</li>').join('')+'</ul>';}
+function academyRunView(){
+ const p=game.profile,h=Academy.current(p);if(!h)return acNav()+heading('ACADEMY','연습을 선택해 주세요.');
+ if(h.phase==='results')return academyResultsView(h);
+ const progress='<div class="academy-meta"><span>'+({unit:'단원 수업',mode:'맞춤 연습',exact:'활동 연습',review:'오늘의 영어 복습',mission:'실전 의뢰',diagnostic:'출발점 진단'})[h.kind]+' · '+({preview:'미리 보기',guided:'도움과 함께',independent:'혼자 풀기',application:'상황에 적용',review:'기억 되살리기',diagnostic:'출발점 진단'})[h.stage]+'</span><span>'+(h.index+1)+' / '+h.total+'</span></div><progress class="academy-progressbar" value="'+h.index+'" max="'+h.total+'" aria-label="수업 진행"></progress>';
+ if(h.phase==='preview')return acNav()+'<section class="academy-session">'+heading(h.kind==='diagnostic'?'STARTING POINT':'PREVIEW',h.kind==='diagnostic'?'나의 영어 출발점 찾기':'오늘 만날 표현',h.kind==='diagnostic'?'어휘·문법·읽기·듣기 각 6문항입니다. 시간 제한 없이 답하세요. 건너뛰어도 모든 단원을 사용할 수 있어요.':'먼저 뜻을 읽어 보세요. 준비가 되면 시작합니다.')+'<div class="academy-expressions">'+(h.preview||[]).map(e=>'<article><b lang="en">'+safe(e.english)+'</b><p>'+safe(e.ko)+'</p><small>'+safe(academyStatuses[Academy.expressionStatus(p,e.id)])+'</small>'+academyExample(e)+speakButton(e.english)+'</article>').join('')+'</div><div class="actions">'+acButton('next','연습 시작',{cl:'primary'})+'</div></section>';
+ const a=h.activity,listen=a.skill==='listening',isOrder=a.type==='order',feedback=h.phase==='feedback';
+ const heard=listen?'<div class="actions">'+acButton('listen',icon('sound')+' 듣기',{id:'normal',disabled:feedback||!AudioFX.canSpeak(p.settings)})+acButton('listen','천천히 듣기',{id:'slow',disabled:feedback||!AudioFX.canSpeak(p.settings)})+acButton('transcript','원문 보기',{disabled:feedback})+'</div>':'';
+ const rawVisible=isOrder?feedback:(!listen||AcademyUI.transcript||!AudioFX.canSpeak(p.settings)||feedback);
+ const choices=isOrder?'<div class="academy-answer" aria-live="polite" lang="en">'+(AcademyUI.words.map(i=>safe(h.choices[i])).join(' ')||'아래 단어를 순서대로 눌러 주세요.')+'</div><div class="academy-words">'+h.choices.map((w,i)=>acButton('word',safe(w),{id:i,disabled:feedback||AcademyUI.words.includes(i)})).join('')+'</div><div class="actions">'+acButton('undo','한 단어 지우기',{disabled:feedback||!AcademyUI.words.length})+acButton('submit','문장 확인',{disabled:feedback||AcademyUI.words.length!==h.choices.length,cl:'primary'})+'</div>':'<div class="academy-choices">'+h.choices.map((c,i)=>acButton('answer',safe(c),{id:i,disabled:feedback})).join('')+'</div>';
+ return acNav()+'<section class="academy-session">'+progress+'<div class="academy-question" data-activity-id="'+safe(a.id)+'">'+academyContext(a)+'<span class="eyebrow">'+academySkills[a.skill]+' · '+academyTiers[a.tier]+'</span><h3>'+safe(a.instruction)+'</h3>'+heard+(rawVisible?'<p class="academy-context" lang="en">'+safe(listen?a.audioText:a.english)+'</p>':listen?'<p class="academy-muted">먼저 듣기를 눌러 영어를 들어 보세요.</p>':'')+(listen&&(AcademyUI.transcript||!AudioFX.canSpeak(p.settings))?'<p class="academy-muted">원문을 이용한 읽기 보조 활동으로 기록됩니다.</p>':'')+choices+(a.skill==='conversation'?academyConversationInput(a,feedback):'')+'<div class="actions">'+acButton('hint','힌트',{disabled:feedback})+acButton('translation','뜻 · 설명 보기',{disabled:feedback})+'</div>'+((AcademyUI.hint||h.stage==='guided')?'<p class="academy-context">힌트 · '+safe(a.hint)+'</p>':'')+(AcademyUI.translation?'<p class="academy-context">뜻과 설명 · '+safe(a.ko||a.explanation)+'</p>':'')+(feedback?'<section class="academy-feedback '+(h.feedback.correct?'correct':'')+'" role="status"><h3>'+(h.feedback.correct?'잘했어요. 표현을 기억해 주세요.':'괜찮아요. 함께 다시 살펴봐요.')+'</h3><p lang="en"><b>'+safe(a.answer)+'</b></p><p>'+safe(a.explanation)+'</p><p class="academy-muted">'+(h.assisted?'도움을 사용한 연습입니다.':'첫 응답과 도움 사용 여부를 따로 기록합니다.')+'</p><div class="actions">'+(!h.feedback.correct&&h.kind!=='diagnostic'?acButton('retry','다시 풀어 보기',{cl:'primary'}):acButton('next',h.index+1===h.total?'학습 결과 보기':'다음 활동',{cl:'primary'}))+'</div></section>':'')+'</div><p class="academy-muted">시간 제한은 없어요. 단원 중 나가도 이미 답한 학습 기록은 남습니다. 실전 의뢰는 다음 단계부터 이어집니다.</p></section>';
+}
+function academyResultsView(h){const s=Academy.summary(game.profile,h)||{},r=s.diagnostic?{tier:s.diagnostic.recommendedTier,reason:s.diagnostic.reason}:Academy.recommendation(game.profile);return acNav()+'<section class="academy-session">'+heading('LESSON COMPLETE','오늘의 말이 기억에 남았습니다.')+'<div class="academy-card"><h3>'+ (h.kind==='diagnostic'?'출발점 진단 결과':'학습 결과')+'</h3>'+academyResultDetail(s)+''+(h.kind==='diagnostic'?'<p>추천 난이도 · '+academyTiers[r.tier]+'</p><p>'+safe(r.reason)+'</p><p class="academy-muted">읽기 보조를 사용한 듣기 문항은 독립적인 듣기 평가에서 제외합니다. 공인 등급이 아닌 다음 연습을 위한 참고예요.</p>':'<p>'+h.total+'개 활동의 연습을 마쳤어요.</p>')+'<div class="academy-expressions">'+[...new Set(h.activityIds.flatMap(id=>Curriculum.get(id)?.expressionIds||[]))].map(id=>Curriculum.expressions.find(e=>e.id===id)).filter(Boolean).map(e=>'<article><b lang="en">'+safe(e.english)+'</b><span>'+safe(e.ko)+'</span></article>').join('')+'</div>'+academyNextLesson()+'<div class="actions">'+acButton('progress','정확한 학습 기록 보기',{cl:'primary'})+acButton('home','아카데미로')+'</div></div></section>';}
+function academyProgressView(){const p=game.profile,d=Academy.dashboard(p),t=Academy.today(p);return acNav()+heading('LEARNING OBSERVATORY','나의 영어 학습 기록','아카데미 활동의 기록입니다. 기존 모험 기록은 각 장의 학습 기록에서 볼 수 있어요. 영어 능력 전체를 측정한 점수는 아닙니다.')+''+academyAnalytics(d)+academyBadges()+'<section class="academy-strip"><div><strong>복습할 표현 '+(t.count||0)+'개</strong><p>약 '+(t.count?t.estimatedMinutes:0)+'분 · 0 / 1 / 3 / 7 / 14 / 30일 간격</p></div>'+acButton('review','오늘의 영어 복습',{cl:'primary',disabled:!t.count})+'</section>'+academyDueList(t)+'<section class="academy-card"><h3>다음 연습 추천</h3><p>'+safe(d.recommendation.text)+'</p>'+acButton('mode','추천으로 종합 연습',{id:'mixed'})+'</section><h3>표현별 기억 기록</h3><p class="academy-muted">한 번 맞혔다고 숙달로 표시하지 않습니다. ‘꾸준히 정답’은 여러 날짜와 활동 형식에서 독립적으로 맞힌 기록이 필요합니다.</p><div class="academy-expressions">'+Curriculum.expressions.filter(e=>p.academy.expressions?.[e.id]).map(e=>{const status=Academy.expressionStatus(p,e.id);return '<article><b lang="en">'+safe(e.english)+'</b><p>'+safe(e.ko)+'</p><small>'+safe(academyStatuses[status]||status)+'</small></article>';}).join('')+'</div>';}
+function academyBackupView(){const b=AcademyUI.backup;return acNav()+heading('KEEP YOUR JOURNEY','모험과 학습 기록 백업','이 기기에 JSON 파일로 저장하고, 나중에 다시 불러올 수 있어요.')+'<section class="academy-card">'+acButton('export','현재 기록 파일로 저장',{cl:'primary'})+'<p class="academy-muted">세 장의 진행, 영웅 성장, 아카데미 기록과 설정을 함께 저장합니다. 음성 녹음이나 인식 원문은 저장하지 않습니다.</p><label class="academy-file">백업 파일 선택 (최대 2 MiB)<input id="academy-import-file" type="file" accept=".json,application/json" '+(AcademyUI.importBusy?'disabled':'')+'></label>'+(b?'<div class="academy-message"><h3>가져올 기록 확인</h3><p>'+safe(academyBackupSummary(b.summary))+'</p><p>'+safe((b.warnings||[]).join(' '))+'</p><p>확인하면 현재 기록이 이 파일의 기록으로 교체됩니다. 먼저 현재 기록을 내보내 두는 것을 권장해요.</p><div class="actions">'+acButton('import-confirm','이 기록으로 교체',{cl:'primary'})+acButton('import-cancel','취소')+'</div></div>':'')+(AcademyUI.notice?'<p role="status" class="academy-message">'+safe(AcademyUI.notice)+'</p>':'')+'</section>';}
+function academyBackupSummary(s){return '모험가 Lv. '+s.level+' · 금화 '+s.gold+' · 현재 제'+s.currentChapter+'장 · 완료한 장 '+Object.entries(s.chapters).filter(([,done])=>done).map(([key])=>({forest:'숲',village:'마을',exploration:'잊혀진 길'})[key]).join(', ')+' · 아카데미 응답 '+s.academyAttempts+'회 / 완료 활동 '+s.academyCompleted+'개 / 만난 표현 '+s.expressions+'개';}
+function acRatio(correct,total){return total?correct+' / '+total+' ('+Math.round(correct*100/total)+'%)':'— (아직 없음)';}
+function academyContext(a){if(!a.context)return '';const npc=voiceNpcs[a.npc];return '<div class="academy-context academy-npc">'+(npc?'<div class="academy-npc-portrait" aria-hidden="true">'+(a.npc==='rowan'?Art.rowan():VillageArt.npc(a.npc))+'</div>':'')+'<div>'+(npc?'<b>'+safe(npc.name)+'</b>':'')+'<p>'+safe(a.context)+'</p></div></div>';}
+function academyExample(e){return e.example?'<p class="academy-muted">사용 예 · <span lang="en">'+safe(e.example)+'</span>'+(e.exampleKo?'<br>'+safe(e.exampleKo):'')+'</p>':'';}
+function academyDueList(t){return t.count?'<h3>오늘 다시 만날 표현</h3><div class="academy-expressions">'+t.due.slice(0,6).map(e=>'<article><b lang="en">'+safe(e.english)+'</b><p>'+safe(e.ko)+'</p><small>복습일 '+safe(e.dueDay)+'</small>'+acButton('exact','이 표현 연습',{id:e.activityId})+'</article>').join('')+'</div>':'';}
+function academyNextLesson(){const u=Curriculum.units.find(u=>{const p=Academy.unitProgress(game.profile,u.id);return p.total&&p.completed<p.total;})||Curriculum.units[0];return '<h3>다음 작은 목표</h3><p>'+safe(u.name)+' · '+safe(u.description)+'</p>'+acButton('unit','이 단원 계속 살펴보기',{id:u.id});}
+function academyBadges(){const ids=game.profile.academy.badges;if(!ids.length)return '';return '<section class="academy-card"><h3>배움의 기념 배지</h3><p>'+ids.map(id=>icon('star')+' '+safe(id==='first-review'?'첫 기억 되살리기':id.startsWith('unit-')?(Curriculum.units.find(u=>u.id===id.slice(5))?.name||'단원')+' 첫 수업':(Curriculum.missions.find(m=>m.id===id.slice(8))?.name||'실전 의뢰')+' 완료')).join(' · ')+'</p><p class="academy-muted">학습 참여를 기념하는 배지입니다. 영어 능력 인증은 아닙니다.</p></section>';}
+function academyConversationInput(a,disabled){return '<details class="academy-card"><summary>직접 쓰거나 말해 보기 (선택)</summary><p class="academy-muted">위 보기로도 모두 진행할 수 있어요. 직접 입력은 이 상황에 저작된 답변과만 비교하며 자유로운 영어 문장을 채점하지 않습니다.</p><label>나의 영어 답변<input id="academy-text-answer" type="text" maxlength="240" autocomplete="off" value="'+safe(AcademyUI.draft)+'" '+(disabled?'disabled':'')+'></label><div class="actions">'+acButton('text-submit','쓴 답변 확인',{disabled})+(SpeechInput.available()?acButton('mic-start','말로 답하기',{disabled})+acButton('mic-stop','마이크 중지',{disabled}):'')+'</div><p class="academy-muted">말하기는 브라우저의 선택 기능이며 인터넷이나 마이크 권한이 필요할 수 있습니다. 음성·인식 문장은 저장하지 않습니다.</p><p id="academy-mic-status" role="status">'+safe(AcademyUI.micNotice)+'</p></details>';}
+function academyDiagnosticDetail(d){return '<h3>영역별 진단</h3><p>추천 · '+academyTiers[d.recommendedTier]+' · '+safe(d.reason)+'</p><div class="academy-table-wrap"><table class="academy-table"><thead><tr><th>영역</th><th>전체 정답</th><th>독립 정답 / 독립 응답</th></tr></thead><tbody>'+Object.entries(d.bySkill).map(([k,r])=>'<tr><th>'+academySkills[k]+'</th><td>'+acRatio(r.correct,r.total)+'</td><td>'+acRatio(r.independentCorrect,r.independentAnswered)+'</td></tr>').join('')+'</tbody></table></div><p class="academy-muted">듣기의 읽기 보조 응답 '+d.bySkill.listening.readingAssisted+'회. 응답 수가 적거나 도움을 썼다면 추천의 근거가 제한됩니다. 총점만으로 어려운 단계로 올리지 않습니다.</p>';}
+function academyResultDetail(s){return '<p>첫 응답 정답 <b>'+s.firstCorrect+' / '+s.total+'</b> · 독립 첫 정답 '+s.independentCorrect+' / '+s.total+'</p><p>재시도 포함 '+s.attempts+'회 응답 · 도움을 사용한 활동 '+s.assisted+'개</p>'+(s.reward?.badge?'<p>첫 완료 보상 · '+(s.reward.gold?'금화 '+s.reward.gold+' · ':'')+'기념 배지</p>':'<p class="academy-muted">반복 연습은 추가 금화 없이 학습 기록만 남습니다.</p>')+(s.diagnostic?academyDiagnosticDetail(s.diagnostic):'')+(s.reviewExpressionIds?.length?'<h3>다시 만나면 좋은 표현</h3><ul>'+s.reviewExpressionIds.map(id=>Curriculum.expressions.find(e=>e.id===id)).filter(Boolean).map(e=>'<li><b lang="en">'+safe(e.english)+'</b> · '+safe(e.ko)+'</li>').join('')+'</ul>':'<p>이번 활동의 표현을 다음 복습일에 다시 만나세요.</p>');}
+function academyAnalytics(d){return '<section class="academy-strip"><div><strong>'+d.uniqueCompleted+' / '+d.totalActivities+' 활동 완료</strong><p>서로 다른 활동 '+d.uniqueAttempted+'개 시도 · 재시도 포함 전체 응답 '+d.totalAttempts+'회</p></div><div><b>독립 정답 '+acRatio(d.overall.independentCorrect,d.overall.independentAnswered)+'</b><p>도움 사용 정답 '+acRatio(d.overall.assistedCorrect,d.overall.assistedAnswered)+'</p></div></section><section class="academy-card"><h3>영역별 실제 기록</h3><div class="academy-table-wrap"><table class="academy-table"><thead><tr><th>영역</th><th>전체 정답 / 응답</th><th>독립 정답 / 응답</th><th>도움 사용 정답 / 응답</th></tr></thead><tbody>'+Object.entries(d.bySkill).map(([k,r])=>'<tr><th>'+academySkills[k]+'</th><td>'+acRatio(r.correct,r.total)+'</td><td>'+acRatio(r.independentCorrect,r.independentAnswered)+'</td><td>'+acRatio(r.assistedCorrect,r.assistedAnswered)+'</td></tr>').join('')+'</tbody></table></div><p class="academy-muted">듣기 소리를 실제 재생한 독립 정답 '+acRatio(d.bySkill.listening.audioCorrect,d.bySkill.listening.audioAnswered)+' · 듣기 원문/뜻 보조 '+d.bySkill.listening.readingAssisted+'회. 원문을 보지 않고 소리도 듣지 않은 응답은 독립 듣기에서 제외합니다. 완료는 한 번 이상 해결한 활동 수이며 숙달을 뜻하지 않습니다.</p></section><h3>실전 적용</h3><p>완료한 실전 의뢰 '+d.missionsCompleted+' / '+Curriculum.missions.length+'</p><h3>표현의 상태</h3><p>'+Object.entries(d.statuses).map(([k,n])=>academyStatuses[k]+' '+n).join(' · ')+'</p>'+(d.latestDiagnostic?'<section class="academy-card">'+academyDiagnosticDetail(d.latestDiagnostic)+'</section>':'')+'<h3>최근 학습</h3><ul class="academy-catalog">'+d.recent.slice().reverse().map(r=>'<li class="academy-card">'+safe(r.day)+' · '+academySkills[r.skill]+' · '+safe(Curriculum.get(r.id).instruction)+'<br><small>'+(r.correct?'정답':'오답')+' · '+(r.assisted?'도움 사용':'도움 없음')+' · '+(r.first?'첫 응답':'재시도')+'</small></li>').join('')+'</ul>';}
+
+;
+function academyResetQuestion(){academySilence();AcademyUI.words=[];AcademyUI.hint=false;AcademyUI.translation=false;AcademyUI.transcript=false;AudioFX.stop();const h=Academy.current(game.profile);if(h?.phase==='question'&&h.activity.skill==='listening'&&!AudioFX.canSpeak(game.profile.settings)){AcademyUI.transcript=true;Academy.assist(game.profile,h,'fallback');}}
+function academySilence(){SpeechInput.cancel();AcademyUI.draft='';AcademyUI.micState='ready';AcademyUI.micNotice='';const input=document.getElementById('academy-text-answer'),status=document.getElementById('academy-mic-status');if(input)input.value='';if(status)status.textContent='';}
+function academyFocus(selector='.academy-question h3,.academy-session .screen-heading h2'){const el=app.querySelector(selector);if(el){el.tabIndex=-1;el.focus({preventScroll:true});el.scrollIntoView({block:'start'});}}
+function academyStart(h){if(!h){AcademyUI.notice='지금 선택할 활동이 없어요. 다른 단원이나 난이도를 선택해 주세요.';render();return;}AcademyUI.notice='';academyResetQuestion();save();change('ACADEMY_RUN');}
+function academyCancelImport(dropPreview=true){AcademyUI.importEpoch=(AcademyUI.importEpoch||0)+1;AcademyUI.importBusy=false;if(AcademyUI.notice==='백업 내용을 검사하고 있어요.')AcademyUI.notice='파일 읽기를 취소했어요.';if(dropPreview){if(AcademyUI.backup)Backup.cancel(AcademyUI.backup.handle);AcademyUI.backup=null;}}
+function academyAction(action,id){
+ if(!action.startsWith('academy-'))return false;
+ const p=game.profile,h=Academy.current(p),a=action.slice(8);
+ if(a==='enter'){if(!p.started)return true;AcademyUI.returnTo=game.screen;AcademyUI.notice='';change('ACADEMY');return true;}
+ if(!game.screen.startsWith('ACADEMY'))return true;
+ if(a==='home'){change(p.started?'ACADEMY':'TITLE');return true;}
+ if(a==='exit'){if(p.started)rpgHub();else change('TITLE');return true;}
+ if(a==='progress'){change('ACADEMY_PROGRESS');return true;}
+ if(a==='backup'){AcademyUI.notice='';change('ACADEMY_BACKUP');return true;}
+ if(a==='tier'){Academy.setTier(p,Number(id),'manual');save();render();return true;}
+ if(a==='auto-tier'){Academy.setTier(p,Academy.recommendation(p).tier,'auto');save();render();return true;}
+ if(a==='unit'){if(Curriculum.units.some(u=>u.id===id)){AcademyUI.unitId=id;change('ACADEMY_UNIT');}return true;}
+ if(a==='lesson'||a==='skip'){academyStart(Academy.startUnit(p,id));return true;}
+ if(a==='mode'){academyStart(Academy.startMode(p,id));return true;}
+ if(a==='exact'){academyStart(Academy.startExact(p,id));return true;}
+ if(a==='diagnostic'){academyStart(Academy.startDiagnostic(p));return true;}
+ if(a==='mission'){academyStart(Academy.startMission(p,id));return true;}
+ if(a==='review'){academyStart(Academy.startReview(p));return true;}
+ if(a==='export'&&game.screen==='ACADEMY_BACKUP'){
+  try{const out=Backup.export(p),url=URL.createObjectURL(new Blob([out.text],{type:'application/json'})),link=document.createElement('a');link.href=url;link.download=out.filename;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);AcademyUI.notice='백업 파일 다운로드를 요청했어요. 브라우저의 다운로드 목록을 확인해 주세요.';}catch{AcademyUI.notice='백업 파일을 만들지 못했어요. 기존 기록은 유지됩니다.';}render();return true;
+ }
+ if(a==='import-cancel'){academyCancelImport();AcademyUI.notice='가져오기를 취소했어요. 현재 기록은 그대로입니다.';render();return true;}
+ if(a==='import-confirm'&&game.screen==='ACADEMY_BACKUP'&&AcademyUI.backup){const result=Backup.commit(AcademyUI.backup.handle,{confirm:true});academyCancelImport();if(result.ok){Academy.close(p);game.profile=result.profile;game.battle=null;game.task=null;game.voice=null;game.trial=null;AcademyUI.notice='기록을 가져왔고 저장된 내용까지 확인했어요.';}else AcademyUI.notice=result.error;render();return true;}
+ if(game.screen!=='ACADEMY_RUN'||!h)return true;
+ if(a==='next'){if(Academy.advance(p,h)){academyResetQuestion();save();render();academyFocus();}return true;}
+ if(a==='retry'){if(Academy.retry(p,h)){academyResetQuestion();render();academyFocus();}return true;}
+ if(h.phase!=='question')return true;
+ if(a==='mic-stop'){SpeechInput.stop();AcademyUI.micState='ready';AcademyUI.micNotice='마이크를 중지했어요.';render();return true;}
+ if(a==='mic-start'&&h.activity.skill==='conversation'){
+  if(['requesting','listening','processing'].includes(AcademyUI.micState))return true;
+  AudioFX.stop();
+  const current=()=>game.screen==='ACADEMY_RUN'&&Academy.current(p)===h&&h.phase==='question';
+  SpeechInput.start({onState(state){if(!current())return;AcademyUI.micState=state;AcademyUI.micNotice=({requesting:'마이크 권한을 기다리고 있어요.',listening:'말씀해 주세요.',processing:'음성을 확인하고 있어요.',denied:'마이크 권한이 없어요. 보기나 글로 답할 수 있어요.',unavailable:'음성을 사용할 수 없어요. 보기나 글로 답해 주세요.',timeout:'음성이 들리지 않았어요. 다시 시도할 수 있어요.'})[state]||'';const el=document.getElementById('academy-mic-status');if(el)el.textContent=AcademyUI.micNotice;},onResult(text){if(!current())return;const result=Academy.answer(p,h,text.slice(0,240),{mode:'speech'});if(result?.retrySpeech){AcademyUI.micNotice='저작된 답변과 일치하지 않았어요. 오답으로 기록하지 않았습니다. 다시 말하거나 보기를 사용해 주세요.';render();}else if(result){academySilence();save();render();academyFocus('.academy-feedback h3');AudioFX.play(result.correct?'correct':'wrong',p.settings);}}});return true;
+ }
+ if(a==='text-submit'&&h.activity.skill==='conversation'){
+  const value=document.getElementById('academy-text-answer')?.value?.trim();if(!value)return true;
+  const result=Academy.answer(p,h,value,{mode:'text'});if(result){academySilence();save();render();academyFocus('.academy-feedback h3');AudioFX.play(result.correct?'correct':'wrong',p.settings);}return true;
+ }
+ if(['hint','translation','transcript'].includes(a)){Academy.assist(p,h,a);AcademyUI[a]=true;render();app.querySelector('[data-act="'+action+'"]')?.focus();return true;}
+ if(a==='listen'&&h.activity.skill==='listening'){
+  const fallback=()=>{if(Academy.current(p)===h&&h.phase==='question'){Academy.assist(p,h,'fallback');AcademyUI.transcript=true;render();}};
+  if(!AudioFX.speak(h.activity.audioText,p.settings,fallback,{rate:id,onStart:()=>{if(Academy.current(p)===h)Academy.hear(p,h);}}))fallback();return true;
+ }
+ if(a==='word'&&h.activity.type==='order'){const i=Number(id);if(Number.isInteger(i)&&i>=0&&i<h.choices.length&&!AcademyUI.words.includes(i)){AcademyUI.words.push(i);render();app.querySelector('[data-act="academy-word"]:not(:disabled),[data-act="academy-submit"]:not(:disabled)')?.focus();}return true;}
+ if(a==='undo'){const index=AcademyUI.words.pop();render();app.querySelector('[data-act="academy-word"][data-id="'+index+'"]')?.focus();return true;}
+ let value;
+ if(a==='answer'&&h.activity.type!=='order'){const i=Number(id);if(Number.isInteger(i)&&i>=0&&i<h.choices.length)value=h.choices[i];}
+ if(a==='submit'&&h.activity.type==='order'&&AcademyUI.words.length===h.choices.length)value=AcademyUI.words.map(i=>h.choices[i]).join(' ');
+ if(value!==undefined){const result=Academy.answer(p,h,value);if(result){academySilence();AudioFX.stop();save();render();academyFocus('.academy-feedback h3');AudioFX.play(result.correct?'correct':'wrong',p.settings);}}
+ return true;
+}
+document.addEventListener('input',event=>{if(event.target.id==='academy-text-answer')AcademyUI.draft=event.target.value.slice(0,240);});
+document.addEventListener('change',async event=>{
+ const input=event.target;if(input.id!=='academy-import-file'||game.screen!=='ACADEMY_BACKUP')return;
+ const file=input.files?.[0];if(!file)return;
+ academyCancelImport();const epoch=AcademyUI.importEpoch,profile=game.profile;
+ if(file.size>2*1024*1024){AcademyUI.notice='파일이 너무 커요. 2 MiB 이하의 English Quest 백업을 선택해 주세요.';render();return;}
+ AcademyUI.importBusy=true;AcademyUI.notice='백업 내용을 검사하고 있어요.';render();
+ try{const text=await file.text();if(game.screen!=='ACADEMY_BACKUP'||epoch!==AcademyUI.importEpoch||profile!==game.profile)return;const preview=Backup.preview(text);if(preview.ok){AcademyUI.backup=preview;AcademyUI.notice='아래 내용을 확인한 뒤 가져오기를 선택해 주세요.';}else AcademyUI.notice=preview.error;}catch{if(epoch===AcademyUI.importEpoch)AcademyUI.notice='파일을 읽지 못했어요. 현재 기록은 그대로입니다.';}finally{if(epoch===AcademyUI.importEpoch){AcademyUI.importBusy=false;if(game.screen==='ACADEMY_BACKUP')render();}}
+});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&game.screen.startsWith('ACADEMY')){academySilence();AudioFX.stop();}});
+window.addEventListener('pagehide',()=>{if(game.screen.startsWith('ACADEMY')){academySilence();AudioFX.stop();}});
+
+;
 // Keep modal inputs outside the scene so opening settings preserves the current question.
 function showSettings(){
  const p=game.profile, cfg=p.settings;
@@ -6505,6 +7948,8 @@ function showSettings(){
  if(game.confirm)pauseDialog.querySelector('[data-act="cancel-confirm"]').focus();
 }
 function openSettings(mode=''){
+ if(game.screen==='ACADEMY_BACKUP'&&typeof academyCancelImport==='function')academyCancelImport(false);
+ if(game.screen.startsWith('ACADEMY')&&typeof academySilence==='function')academySilence();
  if(['PLAYER_ACTION','ENEMY_ACTION','PAUSED'].includes(game.screen))return;
  if(game.voice)silenceVoice();
  if(typeof ExploreView!=='undefined')ExploreView.unmount();
@@ -6512,6 +7957,12 @@ function openSettings(mode=''){
 }
 function closeSettings(){
  game.confirm='';game.screen=game.pausedFrom;pauseDialog.close();
+ if(game.screen==='ACADEMY_RUN'){
+  const h=Academy.current(game.profile);
+  if(h?.phase==='question'&&h.activity.skill==='listening'&&!AudioFX.canSpeak(game.profile.settings)){
+   Academy.assist(game.profile,h,'fallback');AcademyUI.transcript=true;
+  }
+ }
  if(game.screen==='TRIAL_RUN'&&game.trial?.question.type==='listening'&&!AudioFX.canSpeak(game.profile.settings)){
   Trials.assist(game.profile,game.trial,'fallback');
  }
@@ -6686,6 +8137,7 @@ function dispatch(action,id){
   if(action==='to-title'){game.battle=null;change('TITLE');}
   return;
  }
+ if(typeof academyAction==='function'&&academyAction(action,id))return;
  if(typeof exploreAction==='function'&&exploreAction(action,id))return;
  if(rpgAction(action,id))return;
  if(voiceAction(action,id))return;
@@ -6738,7 +8190,7 @@ function dispatch(action,id){
 }
 function handleClick(event){
  const el=event.target.closest('button[data-act]');
- if(!el||!el.isConnected||el.disabled||(event.detail>1&&!['word','trial-tile','explore-word'].includes(el.dataset.act)))return;
+ if(!el||!el.isConnected||el.disabled||(event.detail>1&&!['word','trial-tile','explore-word','academy-word'].includes(el.dataset.act)))return;
  if(game.screen==='PAUSED'&&!pauseDialog.contains(el))return;
  AudioFX.play('ui',game.profile.settings);dispatch(el.dataset.act,el.dataset.id);
 }

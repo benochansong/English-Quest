@@ -331,7 +331,7 @@ async function migration(browser) {
     const source = await loadLegacyProfile(page);
     const old = JSON.parse(source);
     const migrated = await page.evaluate(() => game.profile);
-    assert.equal(migrated.version,7);
+    assert.equal(migrated.version,8);
     for(const field of ['level','xp','hp','gold','completed','chapterComplete','mistakes','learning','history','schedule']) {
       assert.deepEqual(migrated[field],old[field],'v0.2 '+field+' was changed');
     }
