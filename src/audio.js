@@ -72,6 +72,13 @@ const AudioFX = (() => {
       if (!prepare(settings)) return;
       const at=context.currentTime+.003;
       switch (aliases[effect]||effect) {
+        case 'footstep': noise(210,120,at,.075,.032); break;
+        case 'forestAir': noise(840,380,at,.38,.022); tone(1760,1320,at+.12,.24,.008); break;
+        case 'caveAir': bell(294,at,.8,.018); bell(440,at+.21,.65,.012); break;
+        case 'treasure': arpeggio([523,659,784,1047],at,.07,.5,.085); break;
+        case 'doorOpen': noise(260,120,at,.32,.065); bell(392,at+.15,.3,.043); break;
+        case 'companionJoin': arpeggio([440,554,659],at,.12,.43,.07); break;
+        case 'puzzleSolve': arpeggio([587,740,880],at,.095,.36,.08); break;
         case 'ui':
           if (at-lastUi<.06) return;
           lastUi=at;

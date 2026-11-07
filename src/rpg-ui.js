@@ -7,7 +7,7 @@ const classInfo=id=>RPG.classes.find(c=>c.id===id);
 const gearInfo=id=>RPG.gear.find(g=>g.id===id);
 const signed=n=>n>0?'+'+n:String(n);
 function rpgHubLinks(){
-  return '<nav class="camp-links" aria-label="모험가 성장과 시련">'+button('profile',icon('hero')+' 영웅 기록')+button('trials',icon('crystal')+' 언어 수정의 시련')+'</nav>';
+  return '<nav class="camp-links" aria-label="모험가 성장과 시련">'+button('profile',icon('hero')+' 영웅 기록')+button('trials',icon('crystal')+' 언어 수정의 시련')+(Exploration.available(game.profile)?button('explore-enter',icon('compass')+' 제3장 · 잊혀진 길',{cl:'primary'}):'')+'</nav>';
 }
 function bonusText(bonuses){
   return Object.entries(statNames).filter(([k])=>bonuses[k]).map(([k,label])=>label+' '+signed(bonuses[k])).join(' · ')||'변화 없음';

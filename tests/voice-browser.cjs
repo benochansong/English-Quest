@@ -48,7 +48,7 @@ async function loadMigrated(browser,options) {
   await page.reload();
   await continueSaved(page);
   const migrated=await profile(page);
-  assert.equal(migrated.version,5);
+  assert.equal(migrated.version,7);
   for(const key of ['level','hp','gold','xp','completed','chapterComplete','currentChapter','learning','mistakes','history','schedule','village']) {
     assert.deepEqual(migrated[key],old[key],'v0.3 migration lost '+key);
   }

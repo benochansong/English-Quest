@@ -19,7 +19,8 @@ const Trials = (() => {
       explanation:activity.explanation, voiceActivity:activity, difficulty:activity.difficulty};
   }
   function deck(p,id,random){
-    const questions=Q.filter(q=>q.chapter!==2||p.chapterComplete);
+    const questions=Q.filter(q=>(q.chapter!==2||p.chapterComplete)
+      &&(q.chapter!==3||p.exploration?.observed.includes(q.id)));
     const familiar=q=>q.tags.some(t=>p.learning[t]?.seen);
     const last=p.rpg.dungeons[id].lastIds||[];
     const selected=[];

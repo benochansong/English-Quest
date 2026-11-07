@@ -11,6 +11,7 @@ function showSettings(){
 function openSettings(mode=''){
  if(['PLAYER_ACTION','ENEMY_ACTION','PAUSED'].includes(game.screen))return;
  if(game.voice)silenceVoice();
+ if(typeof ExploreView!=='undefined')ExploreView.unmount();
  game.pausedFrom=game.screen;game.confirm=mode;AudioFX.stop();game.screen='PAUSED';showSettings();
 }
 function closeSettings(){
@@ -189,6 +190,7 @@ function dispatch(action,id){
   if(action==='to-title'){game.battle=null;change('TITLE');}
   return;
  }
+ if(typeof exploreAction==='function'&&exploreAction(action,id))return;
  if(rpgAction(action,id))return;
  if(voiceAction(action,id))return;
  if(villageAction(action,id))return;
@@ -240,7 +242,7 @@ function dispatch(action,id){
 }
 function handleClick(event){
  const el=event.target.closest('button[data-act]');
- if(!el||!el.isConnected||el.disabled||(event.detail>1&&!['word','trial-tile'].includes(el.dataset.act)))return;
+ if(!el||!el.isConnected||el.disabled||(event.detail>1&&!['word','trial-tile','explore-word'].includes(el.dataset.act)))return;
  if(game.screen==='PAUSED'&&!pauseDialog.contains(el))return;
  AudioFX.play('ui',game.profile.settings);dispatch(el.dataset.act,el.dataset.id);
 }
@@ -256,5 +258,5 @@ pauseDialog.addEventListener('change',e=>{
   if(setting==='voice'&&!e.target.checked)AudioFX.stop();save();
  }
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!e.repeat&&game.screen!=='PAUSED'){e.preventDefault();openSettings();}});
+document.addEventListener('keydown',e=>{if(e.defaultPrevented)return;if(e.key==='Escape'&&!e.repeat&&game.screen!=='PAUSED'){e.preventDefault();openSettings();}});
 render();

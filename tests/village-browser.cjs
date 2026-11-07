@@ -331,7 +331,7 @@ async function migration(browser) {
     const source = await loadLegacyProfile(page);
     const old = JSON.parse(source);
     const migrated = await page.evaluate(() => game.profile);
-    assert.equal(migrated.version,5);
+    assert.equal(migrated.version,7);
     for(const field of ['level','xp','hp','gold','completed','chapterComplete','mistakes','learning','history','schedule']) {
       assert.deepEqual(migrated[field],old[field],'v0.2 '+field+' was changed');
     }
@@ -355,7 +355,7 @@ async function migration(browser) {
     assert.equal(rates.length,2);
     assert.ok(rates[0]>rates[1] && rates[1]>0);
     assert.deepEqual(problems,[]); assert.deepEqual(network,[]);
-    console.log('actual v0.2 checkpoint → v0.5 and Chapter 2 entry passed, original bytes preserved');
+    console.log('actual v0.2 checkpoint → current version and Chapter 2 entry passed, original bytes preserved');
   } finally { await context.close(); }
 }
 

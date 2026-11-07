@@ -22,7 +22,7 @@ const abilityInfo = {
   sword:['검격','단어의 뜻','sword'], fire:['화염 마법','문장 완성','flame'],
   guard:['수호 방패','표현의 뜻','shield'], heal:['치유 마법','단어 배열','leaf']
 };
-const forestLessons = lessons.filter(l=>l.chapter!==2);
+const forestLessons = lessons.filter(l=>l.chapter!==2&&l.chapter!==3);
 const stageCards = [forestLessons.slice(0,10), forestLessons.slice(8), forestLessons.slice(9)];
 const koreanExamples = {hello:'안녕, 친구야.',thanks:'고마워요, 로완.',apple:'나는 사과를 좋아해요.',water:'나는 물을 마셔요.',bread:'나는 빵을 먹어요.',book:'나는 책을 가지고 있어요.',sword:'나는 검을 가지고 있어요.',forest:'숲은 조용해요.',iam:'나는 학생이에요.',ihave:'나는 책을 가지고 있어요.',ilike:'나는 사과를 좋아해요.',iwant:'물을 좀 원해요.',ieat:'나는 빵을 먹어요.',idrink:'나는 물을 마셔요.'};
 const labels = {'New':'새 표현','Learning':'익히는 중','Review Needed':'복습 필요','Familiar':'익숙한 표현'};
@@ -55,6 +55,7 @@ function save(){
   game.hint = Engine.save(game.profile) ? '' : '이 브라우저에서 저장할 수 없어요. 창을 닫기 전까지는 계속 플레이할 수 있어요.';
 }
 function change(screen){
+  if(typeof ExploreView!=='undefined')ExploreView.beforeChange(screen);
   if(game.trial&&!['TRIAL_RUN','TRIAL_RESULTS','PAUSED'].includes(screen)){Trials.leave(game.profile);game.trial=null;}
   if(game.voice && !['VOICE_PRACTICE','QUESTION_ACTIVE','ANSWER_FEEDBACK','PAUSED'].includes(screen))discardVoice();
   if (game.screen === 'PAUSED') pauseDialog.close();
@@ -67,7 +68,7 @@ function titleView(){
   const hasSave=game.profile.started;
   const begin=button('new',icon('sword')+' 게임 시작',{cl:hasSave?'':'primary'});
   const resume=button('continue','이어하기',{cl:hasSave?'primary':'',disabled:!hasSave});
-  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.5</div></section>';
+  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.7 · The Forgotten Path</div></section>';
 }
 function introView(){
   const item=saga[game.page];
@@ -221,20 +222,22 @@ function endingView(){
  return '<section class="center-card panel reward"><div class="reward-crystal">'+icon('star')+'</div>'+heading('CHAPTER COMPLETE','숲이 다시 속삭입니다')+'<div class="dialogue"><div class="portrait">'+Art.rowan()+'</div><p>“들리나요? 물가에서도, 나뭇잎에서도 말이 되살아나고 있어요. 고마워요, 모험가여. <b lang="en">Thank you.</b>”<br>— 로완</p></div><p>획득 칭호 · <strong>Word Apprentice</strong></p><div class="actions">'+button('chapters','다음 장 · 마을로',{cl:'primary'})+button('book','단어 도감')+button('review','오답 복습')+button('map','숲 지도')+'</div></section>';
 }
 function bookView(){
- return heading('FIELD JOURNAL','단어 도감','수첩에서 읽은 표현과 정답·오답 횟수를 확인하세요.')+'<section class="panel book">'+lessons.filter(l=>game.profile.currentChapter===2?l.chapter===2:l.chapter!==2).map(l=>{
+ return heading('FIELD JOURNAL','단어 도감','수첩에서 읽은 표현과 정답·오답 횟수를 확인하세요.')+'<section class="panel book">'+lessons.filter(l=>game.profile.currentChapter===2?l.chapter===2:game.profile.currentChapter===3?l.chapter===3:l.chapter!==2&&l.chapter!==3).map(l=>{
  const r=game.profile.learning[l.id];
  return '<article class="book-row"><div><strong lang="en">'+l.en+'</strong><small>'+l.ko+'</small></div><div>'+l.example+'<small>'+labels[Engine.status(r)]+' · 정답 '+(r?.correct||0)+' / 오답 '+(r?.wrong||0)+'</small></div>'+speakButton(l.en)+'</article>';
  }).join('')+'</section><div class="actions">'+button('map','지도')+button('review','오답 복습')+'</div>';
 }
 const screens={CLASSES:classView,PROFILE:profileView,SKILLS:skillView,EQUIPMENT:equipmentView,TRIALS:trialList,TRIAL_RUN:trialView,TRIAL_RESULTS:trialResults,VOICE_HALL:hallView,VOICE_PRACTICE:voicePracticeView,TODAY:todayView,TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView,DASHBOARD:dashboardView,CHAPTERS:chaptersView,VILLAGE:villageView,LOCATION:locationView,QUESTS:questsView,SHOP:()=>itemView(true),BAG:()=>itemView(false),DIALOGUE:dialogueView,VILLAGE_END:villageEnding};
 function render(){
+ if(typeof ExploreView!=='undefined')ExploreView.unmount();
  if(game.screen==='PAUSED'){showSettings();return;}
  const scene=app.querySelector('.battle');
  if(!screens[game.screen]&&scene?.dataset.stage===String(game.stage)){updateBattle(scene);return;}
  const view=(screens[game.screen]||battleView)();
- const shell='<div class="shell"><nav class="topbar" aria-label="게임 메뉴"><div class="brand">'+icon('crystal')+' English Quest</div><div class="nav-right"><span class="topmeta">'+(game.profile.currentChapter===2?'제2장 · 목소리의 마을':'제1장 · 속삭이는 숲')+'</span>'+button('settings',icon('menu'),{cl:'iconbtn',aria:'일시 정지 및 설정',disabled:['PLAYER_ACTION','ENEMY_ACTION'].includes(game.screen)})+'</div></nav>'+view+'</div>';
+ const shell='<div class="shell"><nav class="topbar" aria-label="게임 메뉴"><div class="brand">'+icon('crystal')+' English Quest</div><div class="nav-right"><span class="topmeta">'+(game.profile.currentChapter===3?'제3장 · 잊혀진 길':game.profile.currentChapter===2?'제2장 · 목소리의 마을':'제1장 · 속삭이는 숲')+'</span>'+button('settings',icon('menu'),{cl:'iconbtn',aria:'일시 정지 및 설정',disabled:['PLAYER_ACTION','ENEMY_ACTION'].includes(game.screen)})+'</div></nav>'+view+'</div>';
  app.innerHTML='<div class="world">'+(game.screen==='TITLE'?view:shell)+(game.hint?'<p role="status" class="storage-note">'+game.hint+'</p>':'')+'</div>';
  if(game.screen==='INTRO')revealDialogue();
+ if(game.screen==='EXPLORE')ExploreView.mount();
 }
 
 function revealDialogue(){
