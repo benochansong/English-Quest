@@ -172,7 +172,7 @@ test('A completed v3 fixture migrates through v5 without replacing earlier slots
   const old=JSON.parse(text);
   store.set(e.v3Key,text); store.set(e.v2Key,JSON.stringify({version:2,gold:9}));
   const p=e.load();
-  assert.equal(p.version,5);
+  assert.equal(p.version,7);
   for(const [key,val] of Object.entries(old)){
     if(key==='version')continue;
     if(key==='achievements'){assert.ok(val.every(id=>p.achievements.includes(id)));continue;}

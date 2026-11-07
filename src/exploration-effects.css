@@ -1,0 +1,60 @@
+/* The renderer translates actor wrappers; these animations touch only their local joints. */
+.eq-actor-art { pointer-events:none; }
+.eq-portrait { display:block; width:100%; height:100%; }
+.eq-actor-art .eq-leg-left { transform-origin:-5px -12px; }
+.eq-actor-art .eq-leg-right { transform-origin:5px -12px; }
+.eq-actor-art .eq-arm-left { transform-origin:-8px -28px; }
+.eq-actor-art .eq-arm-right { transform-origin:8px -28px; }
+.eq-actor-art .eq-cape { transform-origin:0 -31px; }
+.eq-actor-art .eq-head { transform-origin:0 -32px; }
+.eq-idle .eq-actor-art .eq-body,.eq-actor-art.eq-idle .eq-body { animation:eq-breathe 3.5s ease-in-out infinite alternate; }
+.eq-idle .eq-actor-art .eq-cape,.eq-actor-art.eq-idle .eq-cape { animation:eq-cloak-idle 4s ease-in-out infinite alternate; }
+.eq-walking .eq-actor-art .eq-leg-left,.eq-actor-art.eq-walking .eq-leg-left { animation:eq-stride .44s linear infinite; }
+.eq-walking .eq-actor-art .eq-leg-right,.eq-actor-art.eq-walking .eq-leg-right { animation:eq-stride .44s -.22s linear infinite; }
+.eq-walking .eq-actor-art .eq-arm-left,.eq-actor-art.eq-walking .eq-arm-left { animation:eq-arm-swing .44s -.22s linear infinite; }
+.eq-walking .eq-actor-art .eq-arm-right,.eq-actor-art.eq-walking .eq-arm-right { animation:eq-arm-swing .44s linear infinite; }
+.eq-walking .eq-actor-art .eq-body,.eq-actor-art.eq-walking .eq-body { animation:eq-walk-bob .22s ease-in-out infinite alternate; }
+.eq-walking .eq-actor-art .eq-cape,.eq-actor-art.eq-walking .eq-cape { animation:eq-cloak-walk .44s ease-in-out infinite alternate; }
+.eq-staff,.eq-rune-glow,.eq-crystal-light { animation:eq-magic-light 3.8s ease-in-out infinite alternate; }
+.eq-ambient-mote { animation:eq-mote-drift var(--duration,5s) var(--delay,0s) ease-in-out infinite alternate; }
+.eq-water-line { animation:eq-water-shimmer 4.2s var(--delay,0s) ease-in-out infinite alternate; }
+.eq-firelight { animation:eq-firelight 2.8s ease-in-out infinite alternate; }
+.eq-chest-lid { transform-origin:0 -15px; }
+.eq-open .eq-chest-lid { transform:translateY(-8px) rotate(-13deg); transition:transform .38s ease-out; }
+.eq-open .eq-chest-treasure { opacity:1; }
+.eq-chest-treasure { opacity:0; transition:opacity .3s ease-out; }
+.eq-solved .eq-object-glow,.eq-open .eq-object-glow { opacity:.65; }
+.eq-solved .eq-object-runes { fill:#c9eac6; }
+.eq-door-leaf { transform-origin:0 0; transition:opacity .5s ease-out,transform .5s ease-out; }
+.eq-open .eq-door-leaf,.eq-solved .eq-door-leaf { opacity:.13; transform:scaleX(.12); }
+.eq-open .eq-door-sigil,.eq-solved .eq-door-sigil { opacity:.3; }
+.eq-sense .eq-sense-ring { opacity:1; animation:eq-sense-ring 2.2s ease-out infinite; }
+.eq-sense-ring { opacity:0; transform-origin:0 0; }
+.eq-solved .eq-switch-lever { transform:rotate(22deg); }
+.eq-switch-lever { transform-origin:0 -5px; transition:transform .24s ease-out; }
+.eq-solved .eq-bridge-gap,.eq-open .eq-bridge-gap { opacity:0; }
+.eq-bridge-whole { opacity:0; }
+.eq-solved .eq-bridge-whole,.eq-open .eq-bridge-whole { opacity:1; animation:eq-bridge-form .7s ease-out both; }
+.eq-object-unavailable { opacity:.65; }
+.eq-restored-crystal .eq-crystal-light { animation:eq-restored-light 4s ease-in-out infinite alternate; }
+@keyframes eq-breathe { to { transform:translateY(-.65px); } }
+@keyframes eq-cloak-idle { to { transform:rotate(1.5deg); } }
+@keyframes eq-stride { 0%,100% { transform:translateY(-1px) rotate(-11deg); } 50% { transform:translateY(1px) rotate(11deg); } }
+@keyframes eq-arm-swing { 0%,100% { transform:rotate(7deg); } 50% { transform:rotate(-7deg); } }
+@keyframes eq-walk-bob { to { transform:translateY(-1.2px); } }
+@keyframes eq-cloak-walk { from { transform:rotate(-3deg) scaleY(.97); } to { transform:rotate(3deg) scaleY(1.03); } }
+@keyframes eq-magic-light { from { opacity:.75; } to { opacity:1; } }
+@keyframes eq-mote-drift { from { opacity:.22; transform:translate(-2px,2px); } to { opacity:.76; transform:translate(3px,-5px); } }
+@keyframes eq-water-shimmer { from { opacity:.18; } to { opacity:.48; } }
+@keyframes eq-firelight { from { opacity:.55; } to { opacity:.8; } }
+@keyframes eq-sense-ring { from { opacity:.7; transform:scale(.8); } to { opacity:0; transform:scale(1.35); } }
+@keyframes eq-bridge-form { from { opacity:.2; } to { opacity:1; } }
+@keyframes eq-restored-light { to { opacity:1; filter:brightness(1.2); } }
+@media (prefers-reduced-motion:reduce) {
+  .eq-actor-art *, .eq-ambient-mote, .eq-water-line, .eq-firelight, .eq-rune-glow, .eq-crystal-light,
+  .eq-sense .eq-sense-ring, .eq-bridge-whole, .eq-restored-crystal .eq-crystal-light {
+    animation:none !important;
+  }
+  .eq-chest-lid, .eq-chest-treasure, .eq-door-leaf, .eq-switch-lever { transition:none !important; }
+  .eq-sense .eq-sense-ring { opacity:.65; }
+}

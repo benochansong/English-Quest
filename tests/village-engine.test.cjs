@@ -251,7 +251,7 @@ test('Actual v2 shape migrates ahead of v1, missing/invalid v3 fields are repair
   storage.set(e.legacyKey,JSON.stringify({version:1,gold:3}));
   storage.set(e.v2Key,bytes);
   const migrated=e.load();
-  assert.equal(migrated.version,5);
+  assert.equal(migrated.version,7);
   for (const [key,value] of Object.entries(legacy)) {
     if (key==='version') continue;
     const expected=key==='settings' ? {...value,speechRate:'normal',speechVolume:1} : value;

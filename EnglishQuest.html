@@ -1006,6 +1006,86 @@ dialog::backdrop {background:#031318bd;backdrop-filter:blur(3px);}
     animation:none !important;
   }
 }
+
+/* The map is persistent between frames; only actor transforms and proximity labels change. */
+.exploration {--eq-accent:#a9deef;--eq-gold:#efd198;position:relative;margin:0 auto;max-width:1240px}
+.eq-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:10px 0 14px}
+.eq-heading h2{font-size:clamp(20px,3vw,30px);margin:4px 0}.eq-heading p{margin:0;color:var(--muted);font-size:13px}.eq-vitals{text-align:right;font-size:13px;line-height:1.8}.eq-vitals b{color:var(--eq-gold)}
+.eq-layout{display:grid;grid-template-columns:minmax(0,1fr) 238px;gap:15px;align-items:start}.eq-stage{position:relative;overflow:hidden;border:1px solid #517585;border-radius:15px;background:#10232b;box-shadow:0 15px 50px #0007;isolation:isolate}.eq-stage:focus-visible{outline:3px solid #c3e8f7;outline-offset:3px}.eq-world{width:100%;height:auto;display:block;aspect-ratio:3/2;touch-action:pan-y}.eq-object{cursor:pointer}.eq-object:focus-visible{outline:none}.eq-object:focus-visible .eq-focus-ring{stroke:#fff;opacity:1}.eq-focus-ring{fill:none;stroke:#e9cf89;stroke-width:2;opacity:0}.eq-object.eq-near .eq-focus-ring{opacity:1}.eq-label{font:600 13px system-ui,sans-serif;fill:#f0ecd7;paint-order:stroke;stroke:#10232b;stroke-width:5px;stroke-linejoin:round;text-anchor:middle;pointer-events:none}.eq-object.eq-near .eq-label{fill:#ffe4aa}.eq-map-tag{position:absolute;top:12px;left:12px;background:#0c2029df;border:1px solid #7b9aaa55;border-radius:7px;padding:7px 10px;color:#cbdfe3;font-size:11px;letter-spacing:.12em;pointer-events:none}.eq-compass{position:absolute;right:16px;top:12px;width:34px;height:43px;color:#bfdbd9;text-align:center;font-family:Georgia,serif;pointer-events:none}.eq-compass:after{content:'✧';display:block;font-size:28px;line-height:28px}
+.eq-side{display:grid;gap:12px}.eq-card{background:linear-gradient(140deg,#19323a,#10252c);border:1px solid #537b824d;border-radius:12px;padding:16px}.eq-card h3{margin:7px 0 10px;font-size:17px;color:#f1dcad}.eq-card p{font-size:13px;line-height:1.7;margin:7px 0}.eq-card .btn{width:100%;margin:5px 0 0}.eq-area-list{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:8px;font-size:12px}.eq-area-list li{display:flex;align-items:center;gap:8px;color:#9db6b9}.eq-area-list li:before{content:'◇';color:#6d929c}.eq-area-list li.current{color:#fff0c5}.eq-area-list li.current:before{content:'◆';color:#edcf87}.eq-small-portrait{float:left;width:48px;height:60px;margin:2px 10px 4px 0}.eq-small-portrait svg{width:100%;height:100%}.eq-status{font-size:12px;color:#bed9d6;min-height:1.5em;margin:6px 0}.eq-toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.eq-toolbar .btn{padding:9px 13px;min-height:42px;font-size:13px}
+.eq-controlbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 3px}.eq-controlbar>div:last-child{flex:1;max-width:340px;text-align:right}.eq-controlbar p{font-size:12px;color:#b5c9c8;margin:4px 0 8px}.eq-pad{display:grid;grid-template-columns:45px 45px 45px;grid-template-rows:42px 42px;gap:5px;touch-action:none}.eq-pad button{padding:0;min-height:42px;border-radius:9px;touch-action:none;user-select:none}.eq-pad button[data-move="up"]{grid-column:2}.eq-pad button[data-move="left"]{grid-column:1;grid-row:2}.eq-pad button[data-move="down"]{grid-column:2;grid-row:2}.eq-pad button[data-move="right"]{grid-column:3;grid-row:2}.eq-pad button.is-held{background:#3f6f77;border-color:#d4dda4}.eq-interact{width:100%;min-height:49px!important}.eq-nearby{min-height:1.5em;font-size:13px;color:#f0d89c}
+.eq-modal-shade{position:fixed;inset:0;background:#06131bd9;z-index:35;display:grid;place-items:center;padding:20px;backdrop-filter:blur(5px)}.eq-dialog{width:min(700px,100%);max-height:90dvh;overflow:auto;background:linear-gradient(140deg,#203a44,#122a33 55%,#152832);border:1px solid #a6b5a17a;border-radius:18px;padding:28px;box-shadow:0 20px 100px #000b}.eq-dialog h2{margin:8px 0 12px;font-size:25px;color:#f6e2ba}.eq-dialog p{line-height:1.85}.eq-dialog-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.eq-dialog-top .btn{min-width:40px;min-height:40px;padding:5px 10px}.eq-dialog .actions{flex-wrap:wrap}.eq-dialog .actions .btn{min-height:44px}.eq-english{font-family:Georgia,'Times New Roman',serif;font-size:clamp(20px,3vw,30px);line-height:1.6;color:#e8eee6;border-left:3px solid #a4ced7;padding:12px 0 12px 20px;margin:17px 0}.eq-hint{background:#bacecf0d;border:1px dashed #8ca8ae70;padding:13px;border-radius:8px;font-size:14px}.eq-feedback{padding:16px;background:#28433d;border:1px solid #93c9a96e;border-radius:12px;margin:12px 0}.eq-feedback.wrong{background:#4c3032;border-color:#e6bc8f55}.eq-options{display:grid;gap:9px;margin:16px 0}.eq-options .btn{text-align:left;white-space:normal;justify-content:flex-start;min-height:49px}.eq-wordbank{display:flex;flex-wrap:wrap;gap:8px;margin:15px 0}.eq-sentence{min-height:62px;border:1px solid #9dc7d85c;padding:16px;border-radius:10px;background:#061e2866;font-family:Georgia,serif;font-size:23px;line-height:1.5}.eq-wordbank .btn{min-height:45px;padding:10px 15px}.eq-dialog .eq-explanation{font-size:14px;color:#c5dcd7}.eq-dialog-portrait{float:right;width:100px;height:120px;margin:0 0 10px 20px}.eq-dialog-portrait svg{width:100%;height:100%}.eq-dialog .eyebrow{font-size:11px;letter-spacing:.15em}.eq-quest-row{padding:12px 0;border-bottom:1px solid #8eaba42d}.eq-quest-row h3{font-size:16px;margin:0 0 6px}.eq-quest-row p{font-size:13px;margin:0}.eq-lesson-row{padding:12px 0;border-bottom:1px solid #8eaba42d}.eq-lesson-row strong{display:block;color:#e5e6cf}.eq-lesson-row p{font-size:13px;margin:5px 0}.eq-lesson-row small{display:block;color:#a8c5c4}.eq-lesson-row .btn{font-size:12px;margin:6px 5px 0 0}.eq-companion-card{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid #8eaba42d}.eq-companion-card>div:first-child{width:78px;flex:none}.eq-companion-card svg{width:100%;height:110px}.eq-companion-card h3{margin:2px 0}.eq-companion-card p{font-size:13px;margin:6px 0}.eq-progress{display:flex;gap:5px;margin:12px 0}.eq-progress i{height:4px;background:#35535b;flex:1;border-radius:2px}.eq-progress i.done{background:#dfca8f}.eq-reward{color:#f4d898;font-size:20px;font-family:Georgia,serif}.eq-tutorial-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.eq-tutorial-grid p{font-size:13px;margin:0;padding:13px;border:1px solid #bad2c22f;border-radius:9px}.eq-tutorial-grid b{display:block;color:#e6d2a6}.eq-dialog kbd{display:inline-block;padding:0 5px;background:#304b54;border:1px solid #728d92;border-radius:4px}
+@media(min-width:1400px){.exploration{max-width:1270px}.eq-layout{grid-template-columns:minmax(0,1fr) 250px}}
+@media(max-width:820px){.eq-layout{grid-template-columns:1fr}.eq-side{grid-template-columns:1fr 1fr}.eq-side .eq-location-card{display:none}.eq-card{padding:12px}.eq-card h3{font-size:15px}.eq-card p{font-size:12px}.eq-controlbar{padding-bottom:4px}.eq-heading{margin-top:2px}.eq-heading .eyebrow{font-size:10px}.eq-vitals{font-size:12px}.eq-toolbar{gap:6px}.eq-toolbar .btn{padding:8px 10px}.eq-map-tag{font-size:9px;left:8px;top:8px;padding:5px 7px}.eq-compass{right:8px;top:8px;font-size:11px}.eq-modal-shade{padding:12px}.eq-dialog{padding:20px;max-height:92dvh}.eq-dialog h2{font-size:22px}.eq-dialog-portrait{width:74px;height:96px}}
+@media(max-width:460px){.eq-heading p{font-size:11px}.eq-heading h2{font-size:21px}.eq-controlbar{gap:10px}.eq-controlbar p{font-size:10px}.eq-pad{grid-template-columns:42px 42px 42px;grid-template-rows:42px 42px;gap:4px}.eq-side{grid-template-columns:1fr}.eq-side .eq-companion-summary{display:none}.eq-nearby{font-size:11px}.eq-toolbar .btn{flex:1 1 28%;font-size:12px}.eq-tutorial-grid{grid-template-columns:1fr}.eq-dialog{padding:16px}.eq-dialog .actions .btn{flex:1 1 40%}.eq-english{font-size:22px;padding-left:12px}.eq-vitals span{display:block}.eq-controlbar>div:last-child{min-width:0}.eq-world{min-height:230px;aspect-ratio:3/2}.eq-stage{overflow-x:hidden}}
+.eq-label{opacity:0}.eq-object.eq-near .eq-label,.eq-object:focus-visible .eq-label{opacity:1}
+.eq-object{pointer-events:visiblePainted}
+.eq-world{height:clamp(300px,calc(100dvh - 360px),640px);aspect-ratio:auto}
+@media(max-width:820px){.eq-world{height:auto;aspect-ratio:3/2}}
+@media(min-width:821px) and (max-height:850px){.eq-location-card{display:none}.eq-heading{margin-bottom:10px}.eq-card{padding:13px}}
+.eq-reward-reveal{width:170px;height:110px;margin:10px auto;background:radial-gradient(ellipse,#dcca7c22,transparent 68%)}.eq-reward-reveal svg{width:100%;height:100%}.eq-reward-reveal .eq-chest-lid{animation:eq-unseal .6s ease-out both}@keyframes eq-unseal{from{transform:translateY(0) rotate(0)}to{transform:translateY(-8px) rotate(-13deg)}}
+@media(prefers-reduced-motion:reduce){.exploration *,.eq-modal-shade *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* The renderer translates actor wrappers; these animations touch only their local joints. */
+.eq-actor-art { pointer-events:none; }
+.eq-portrait { display:block; width:100%; height:100%; }
+.eq-actor-art .eq-leg-left { transform-origin:-5px -12px; }
+.eq-actor-art .eq-leg-right { transform-origin:5px -12px; }
+.eq-actor-art .eq-arm-left { transform-origin:-8px -28px; }
+.eq-actor-art .eq-arm-right { transform-origin:8px -28px; }
+.eq-actor-art .eq-cape { transform-origin:0 -31px; }
+.eq-actor-art .eq-head { transform-origin:0 -32px; }
+.eq-idle .eq-actor-art .eq-body,.eq-actor-art.eq-idle .eq-body { animation:eq-breathe 3.5s ease-in-out infinite alternate; }
+.eq-idle .eq-actor-art .eq-cape,.eq-actor-art.eq-idle .eq-cape { animation:eq-cloak-idle 4s ease-in-out infinite alternate; }
+.eq-walking .eq-actor-art .eq-leg-left,.eq-actor-art.eq-walking .eq-leg-left { animation:eq-stride .44s linear infinite; }
+.eq-walking .eq-actor-art .eq-leg-right,.eq-actor-art.eq-walking .eq-leg-right { animation:eq-stride .44s -.22s linear infinite; }
+.eq-walking .eq-actor-art .eq-arm-left,.eq-actor-art.eq-walking .eq-arm-left { animation:eq-arm-swing .44s -.22s linear infinite; }
+.eq-walking .eq-actor-art .eq-arm-right,.eq-actor-art.eq-walking .eq-arm-right { animation:eq-arm-swing .44s linear infinite; }
+.eq-walking .eq-actor-art .eq-body,.eq-actor-art.eq-walking .eq-body { animation:eq-walk-bob .22s ease-in-out infinite alternate; }
+.eq-walking .eq-actor-art .eq-cape,.eq-actor-art.eq-walking .eq-cape { animation:eq-cloak-walk .44s ease-in-out infinite alternate; }
+.eq-staff,.eq-rune-glow,.eq-crystal-light { animation:eq-magic-light 3.8s ease-in-out infinite alternate; }
+.eq-ambient-mote { animation:eq-mote-drift var(--duration,5s) var(--delay,0s) ease-in-out infinite alternate; }
+.eq-water-line { animation:eq-water-shimmer 4.2s var(--delay,0s) ease-in-out infinite alternate; }
+.eq-firelight { animation:eq-firelight 2.8s ease-in-out infinite alternate; }
+.eq-chest-lid { transform-origin:0 -15px; }
+.eq-open .eq-chest-lid { transform:translateY(-8px) rotate(-13deg); transition:transform .38s ease-out; }
+.eq-open .eq-chest-treasure { opacity:1; }
+.eq-chest-treasure { opacity:0; transition:opacity .3s ease-out; }
+.eq-solved .eq-object-glow,.eq-open .eq-object-glow { opacity:.65; }
+.eq-solved .eq-object-runes { fill:#c9eac6; }
+.eq-door-leaf { transform-origin:0 0; transition:opacity .5s ease-out,transform .5s ease-out; }
+.eq-open .eq-door-leaf,.eq-solved .eq-door-leaf { opacity:.13; transform:scaleX(.12); }
+.eq-open .eq-door-sigil,.eq-solved .eq-door-sigil { opacity:.3; }
+.eq-sense .eq-sense-ring { opacity:1; animation:eq-sense-ring 2.2s ease-out infinite; }
+.eq-sense-ring { opacity:0; transform-origin:0 0; }
+.eq-solved .eq-switch-lever { transform:rotate(22deg); }
+.eq-switch-lever { transform-origin:0 -5px; transition:transform .24s ease-out; }
+.eq-solved .eq-bridge-gap,.eq-open .eq-bridge-gap { opacity:0; }
+.eq-bridge-whole { opacity:0; }
+.eq-solved .eq-bridge-whole,.eq-open .eq-bridge-whole { opacity:1; animation:eq-bridge-form .7s ease-out both; }
+.eq-object-unavailable { opacity:.65; }
+.eq-restored-crystal .eq-crystal-light { animation:eq-restored-light 4s ease-in-out infinite alternate; }
+@keyframes eq-breathe { to { transform:translateY(-.65px); } }
+@keyframes eq-cloak-idle { to { transform:rotate(1.5deg); } }
+@keyframes eq-stride { 0%,100% { transform:translateY(-1px) rotate(-11deg); } 50% { transform:translateY(1px) rotate(11deg); } }
+@keyframes eq-arm-swing { 0%,100% { transform:rotate(7deg); } 50% { transform:rotate(-7deg); } }
+@keyframes eq-walk-bob { to { transform:translateY(-1.2px); } }
+@keyframes eq-cloak-walk { from { transform:rotate(-3deg) scaleY(.97); } to { transform:rotate(3deg) scaleY(1.03); } }
+@keyframes eq-magic-light { from { opacity:.75; } to { opacity:1; } }
+@keyframes eq-mote-drift { from { opacity:.22; transform:translate(-2px,2px); } to { opacity:.76; transform:translate(3px,-5px); } }
+@keyframes eq-water-shimmer { from { opacity:.18; } to { opacity:.48; } }
+@keyframes eq-firelight { from { opacity:.55; } to { opacity:.8; } }
+@keyframes eq-sense-ring { from { opacity:.7; transform:scale(.8); } to { opacity:0; transform:scale(1.35); } }
+@keyframes eq-bridge-form { from { opacity:.2; } to { opacity:1; } }
+@keyframes eq-restored-light { to { opacity:1; filter:brightness(1.2); } }
+@media (prefers-reduced-motion:reduce) {
+  .eq-actor-art *, .eq-ambient-mote, .eq-water-line, .eq-firelight, .eq-rune-glow, .eq-crystal-light,
+  .eq-sense .eq-sense-ring, .eq-bridge-whole, .eq-restored-crystal .eq-crystal-light {
+    animation:none !important;
+  }
+  .eq-chest-lid, .eq-chest-treasure, .eq-door-leaf, .eq-switch-lever { transition:none !important; }
+  .eq-sense .eq-sense-ring { opacity:.65; }
+}
 </style></head><body><main id="app"></main><div id="voice-live" class="sr-only" role="status" aria-live="polite"></div><dialog id="pause"></dialog><noscript>게임을 실행하려면 자바스크립트를 켜 주세요.</noscript><script>
 'use strict';
 // Chapter 1 content. Each entry is also a teachable vocabulary-book card.
@@ -1412,6 +1492,166 @@ const VoiceData = (function voiceCollection() {
   };
   for (const activity of activities) activity.tags.push(...(notebookLinks[activity.id] || []));
   return Object.freeze({activities,missions});
+})();
+
+;
+// Chapter 3 is authored offline. Coordinates and collision geometry share the 960 × 640 world.
+const ExplorationData = (() => {
+  const activities=[];
+  function activity(id,area,kind,english,ko,objective,answer,choices,explanation,hint,extra={}) {
+    activities.push({id,chapter:3,stage:7,area,kind,type:kind==='listening'?'listening':kind==='order'?'order':'sentence',
+      difficulty:area==='forest'||area==='grove'?1:2,english,ko,objective,answer,choices,explanation,hint,
+      alternatives:[],tags:['explore-'+id],...extra});
+  }
+  function order(id,area,en,ko,explanation,extra={}) {
+    activity(id,area,'order',en,ko,'단어 조각을 순서대로 이어 문장을 완성하세요.',en,[],explanation,
+      '명령문은 보통 행동을 나타내는 동사로 시작해요.',{words:en.replace(/[.!?]/g,'').split(' '),...extra});
+  }
+  activity('f-map','forest','reading','Look at the map.','지도를 보세요.','낡은 지도에 적힌 첫 안내를 읽으세요.','지도를 보세요.',
+    ['지도를 보세요.','지도를 덮으세요.','강에서 기다리세요.'],'look at은 ~을 보라는 뜻이에요. 지도에는 숲, 유적, 동굴이 이어져 있어요.','map은 길을 찾을 때 보는 물건이에요.');
+  activity('f-rowan','forest','response','Can you find the old bridge?','오래된 다리를 찾을 수 있나요?','로완에게 다리를 찾아보겠다고 답하세요.','Yes, I can.',
+    ['Yes, I can.','No, thank you.','It is a book.'],'Can you ...?로 가능 여부를 물으면 Yes, I can.으로 답할 수 있어요.','질문에 쓰인 can을 답에도 쓸 수 있어요.',{requires:['f-map']});
+  activity('f-directions','forest','direction','Go north to the old tree.','오래된 나무가 있는 북쪽으로 가세요.','화면 위쪽이 북쪽이에요. 안내를 읽고 북쪽 표식까지 걸어가세요.','f-north',
+    ['f-north','f-south'],'north는 북쪽이에요. 이 지도에서는 화면 위쪽으로 이동해요.','방향 표식 N은 north를 줄인 글자예요.',{requires:['f-rowan']});
+  activity('f-mira','forest','response','Can you help me read this map?','이 지도를 읽는 것을 도와주시겠어요?','지도 읽기를 도와주겠다고 답하면 미라가 동료가 됩니다.',"Yes, let's read it together.",
+    ["Yes, let's read it together.",'No, I cannot help.','The water is cold.'],"Let's ... together.는 함께 ~하자고 제안하는 말이에요. 미라는 글을 읽을 때 작은 힌트를 줄 수 있어요.",'help는 도와주다, together는 함께라는 뜻이에요.',{requires:['f-directions'],recruit:'mira'});
+  activity('f-bram','forest','locate','Look behind the old tree.','오래된 나무 뒤를 보세요.','브람의 안내를 읽고 발자국 표식을 찾아 상호작용하세요.','f-tracks',
+    ['f-tracks','f-tree-front'],'behind는 ~뒤에라는 뜻이에요. 큰 나무 위쪽의 발자국을 찾으면 브람이 합류해요.','나무 앞과 뒤를 비교해 보세요. 지도에서 뒤는 나무 위쪽이에요.',{requires:['f-directions'],recruit:'bram'});
+  activity('f-moon','forest','listening','Follow the blue lights.','파란 불빛을 따라가세요.','소리를 듣거나 글을 읽고 달빛 길의 불빛 표식까지 이동하세요.','f-blue-lights',
+    ['f-blue-lights','f-amber-lights'],'blue lights는 파란 불빛이에요. 표식에는 색 이름도 함께 적혀 있어요.','lights는 여러 개의 불빛이에요.',{choice:'crossroad'});
+  order('f-stone','forest','Follow the stone road.','돌길을 따라가세요.','follow는 따라가다, stone road는 돌길이에요.',{choice:'crossroad'});
+  order('f-bridge','forest','Cross the bridge.','다리를 건너세요.','Cross the bridge.는 다리를 건너라는 뜻이에요. 문장이 완성되면 다리가 이어집니다.',{gate:'bridge'});
+  activity('f-secret','forest','locate','Touch the mushroom beside the river.','강 옆의 버섯을 만지세요.','문장을 읽고 안내에 맞는 버섯 표식을 찾아보세요.','f-river-mushroom',
+    ['f-river-mushroom','f-path-mushroom'],'beside는 바로 옆이라는 뜻이에요. 강 옆 버섯의 작은 장치가 비밀 숲길을 열었어요.','river는 지도 가운데의 물길이에요.',{requires:['f-directions']});
+  activity('f-camp','forest','reading','Wait here.','여기서 기다리세요.','캠프 표지판이 부탁하는 행동을 고르세요.','여기서 기다리기',
+    ['여기서 기다리기','다리를 건너기','나무를 찾기'],'wait는 기다리다, here는 여기예요.','here는 말하는 사람이 있는 이곳을 가리켜요.');
+  activity('f-river','forest','reading','The water is cold.','물이 차가워요.','강가 기록에 쓰인 물의 상태를 읽으세요.','물이 차가워요.',
+    ['물이 차가워요.','물이 따뜻해요.','물이 없어요.'],'cold는 차가운, 추운이라는 뜻이에요.','물의 온도를 설명하는 문장이에요.');
+  order('f-together','forest',"Let's go together.",'함께 가요.',"Let's 뒤에 동사를 놓아 함께 할 일을 제안해요.");
+
+  order('g-order','grove','We found the treasure.','우리는 보물을 찾았어요.','found는 find의 과거형이에요. 보물을 이미 찾았을 때 쓰는 말이에요.');
+  activity('g-listen','grove','listening','Touch the small stone.','작은 돌을 만지세요.','안내를 듣거나 읽고 두 돌 중 알맞은 표식까지 걸어가세요.','g-small',
+    ['g-small','g-large'],'small은 작은, large는 큰이라는 뜻이에요. 돌 이름에도 크기가 적혀 있어요.','크기를 나타내는 말을 들어 보세요.');
+  activity('g-read','grove','reading','The forest is quiet.','숲이 조용해요.','비밀 숲의 분위기를 설명하는 뜻을 고르세요.','숲이 조용해요.',
+    ['숲이 조용해요.','숲이 시끄러워요.','숲이 밝아요.'],'quiet는 조용한이라는 뜻이에요.','소리가 거의 없는 상태를 떠올려 보세요.');
+
+  order('r-gate','ruins','Open the ancient gate.','고대의 문을 여세요.','open은 열다, ancient는 아주 오래된이라는 뜻이에요. 완성한 말이 유적의 안쪽 문을 엽니다.');
+  activity('r-inscription','ruins','locate','The key is behind the statue.','열쇠는 조각상 뒤에 있어요.','비문을 읽고 열쇠의 위치를 찾아보세요.','r-key',
+    ['r-key','r-front'],'behind the statue는 조각상 뒤에라는 뜻이에요. 찾아낸 열쇠로 다음 문의 질문에 답할 수 있어요.','statue는 사람 모양의 돌 조각이에요. 뒤는 지도 위쪽이에요.',{requires:['r-gate']});
+  activity('r-door','ruins','response','Where is the key?','열쇠는 어디에 있나요?','방금 열쇠를 찾은 위치를 문에게 알려 주세요.','It is behind the statue.',
+    ['It is behind the statue.','It is under the water.','It is in the forest.'],'Where is ...?는 장소나 위치를 묻는 질문이에요. It is ...로 답할 수 있어요.','조각상에서 열쇠를 찾은 위치를 떠올려 보세요.',{requires:['r-inscription']});
+  activity('r-fragment','ruins','reading','The crystal is inside the chest.','수정은 상자 안에 있어요.','상자에 적힌 수정 조각의 위치를 읽으세요.','상자 안에 있어요.',
+    ['상자 안에 있어요.','상자 위에 있어요.','상자 뒤에 있어요.'],'inside는 ~안에라는 뜻이에요. 상자를 열어 잃어버린 수정 조각을 얻었어요.','상자 겉과 안을 구분해 보세요.',{requires:['r-door']});
+  activity('r-vault','ruins','locate','Press the switch between the two pillars.','두 기둥 사이의 스위치를 누르세요.','비문을 읽고 알맞은 위치의 작은 장치를 찾으세요.','r-middle',
+    ['r-middle','r-outside'],'between A and B 또는 between the two ...는 둘 사이를 뜻해요. 지하 보관실 길이 열렸어요.','기둥 두 개를 먼저 찾고 그 사이를 살펴보세요.',{requires:['r-gate']});
+  order('r-book','ruins','Look at the old door.','오래된 문을 보세요.','look at 뒤에 보는 대상을 놓아요. old door는 오래된 문이에요.');
+  activity('r-open','ruins','reading','The door is open.','문이 열려 있어요.','문에 대한 설명을 읽으세요.','문이 열려 있어요.',
+    ['문이 열려 있어요.','문이 닫혀 있어요.','문이 작아요.'],'여기서 open은 열린 상태를 설명해요. Open the door.와 형태를 비교해 보세요.','is 뒤의 open은 상태를 나타내요.');
+  activity('r-help','ruins','response','I cannot read this. Can you help me?','이것을 읽을 수 없어요. 도와주시겠어요?','기록을 읽으려는 여행자에게 도움을 제안하세요.',"Of course. Let's read it.",
+    ["Of course. Let's read it.",'No, I cannot help.','It is a red crystal.'],'Of course.는 물론이죠라는 뜻이에요. 이어서 함께 읽자고 제안해요.','도움을 기꺼이 주겠다고 답해 보세요.');
+  activity('r-listen','ruins','listening','Walk to the left pillar.','왼쪽 기둥으로 걸어가세요.','화면을 바라보는 방향을 기준으로 안내에 맞는 기둥 표식까지 이동하세요.','r-left-pillar',
+    ['r-left-pillar','r-right-pillar'],'left는 왼쪽이에요. 길을 안내할 때 기준 방향을 확인하면 좋아요.','두 기둥 중 화면 왼쪽의 것을 찾아보세요.');
+  activity('r-near','ruins','reading','The bridge is near the river.','다리는 강 근처에 있어요.','안내문의 두 장소 사이 관계를 읽으세요.','다리가 강 근처에 있어요.',
+    ['다리가 강 근처에 있어요.','다리가 강에서 멀리 있어요.','강이 다리 안에 있어요.'],'near는 ~근처에라는 뜻이에요.','near의 반대는 far from(~에서 멀리)이에요.');
+
+  order('v-order','vault','Put the key on the table.','열쇠를 탁자 위에 놓으세요.','put은 놓다, on the table은 탁자 위에라는 뜻이에요.');
+  activity('v-read','vault','reading','Keep the book dry.','책이 젖지 않게 하세요.','보관실 책을 돌보는 방법을 읽으세요.','책이 젖지 않게 하기',
+    ['책이 젖지 않게 하기','책을 물에 넣기','책을 바닥에 버리기'],'dry는 마른 상태예요. Keep ... dry.는 젖지 않도록 유지하라는 뜻이에요.','dry는 wet(젖은)의 반대예요.');
+  activity('v-response','vault','response','May I look at this book?','이 책을 봐도 될까요?','책을 보아도 좋다고 허락하세요.','Yes, you may.',
+    ['Yes, you may.','No, you may not.','It is cold.'],'May I ...?로 허락을 구하면 Yes, you may.로 허락할 수 있어요.','상대의 may를 답에도 쓸 수 있어요.');
+
+  activity('c-listen','cavern','listening','Find the red crystal.','빨간 수정을 찾으세요.','말을 듣거나 글을 읽고 색 이름이 적힌 수정까지 걸어가세요.','c-red',
+    ['c-red','c-blue','c-green'],'red는 빨간색이에요. 소리를 듣지 않아도 영문 안내와 색 이름으로 해결할 수 있어요.','수정 아래의 영문 색 이름도 읽어 보세요.');
+  order('c-door','cavern','Open the crystal door.','수정 문을 여세요.','Open 뒤에 여는 대상을 놓아요. crystal door는 수정 문이에요.',{requires:['c-listen']});
+  activity('c-switch','cavern','locate','The switch is under the lamp.','스위치는 등불 아래에 있어요.','안쪽 기록을 읽고 알맞은 위치의 장치까지 이동하세요.','c-under-lamp',
+    ['c-under-lamp','c-over-lamp'],'under는 ~아래에라는 뜻이에요. 숨은 장치가 마지막 수정 받침을 밝혀 줍니다.','등불의 위와 아래를 비교해 보세요.',{requires:['c-door']});
+  order('c-final-mira','cavern','Bring the words together.','말들을 하나로 모으세요.','bring은 가져오다, together는 함께라는 뜻이에요. 미라와 비문을 완성하여 수정의 말을 되살렸어요.',{final:'mira',requires:['c-switch']});
+  activity('c-final-bram','cavern','locate','Press the switch beside the blue crystal.','파란 수정 옆의 스위치를 누르세요.','브람의 안내를 읽고 장치를 찾아 잊혀진 길을 복원하세요.','c-blue-switch',
+    ['c-blue-switch','c-far-switch'],'beside는 바로 옆이에요. 브람과 찾은 장치가 수정 조각을 하나로 이어 줬어요.','blue crystal의 바로 옆에 있는 스위치를 찾아보세요.',{final:'bram',requires:['c-switch']});
+  activity('c-quiet','cavern','reading','Please be quiet.','조용히 해 주세요.','동굴 입구의 정중한 부탁을 읽으세요.','조용히 해 주세요.',
+    ['조용히 해 주세요.','빨리 달려 주세요.','크게 말해 주세요.'],'Please를 붙이면 부탁을 좀 더 정중하게 말할 수 있어요.','quiet는 소리가 작은 상태예요.');
+  activity('c-tall','cavern','listening','Stand beside the tall crystal.','높은 수정 옆에 서세요.','수정의 높이를 비교하여 안내에 맞는 수정 표식까지 걸어가세요.','c-tall-target',
+    ['c-tall-target','c-short-target'],'tall은 높이가 높은 것을 뜻해요. beside는 옆이에요.','tall과 short는 높이를 비교하는 말이에요.');
+  activity('c-response','cavern','response','We found all the pieces!','우리는 조각을 모두 찾았어요!','이제 수정을 복원하자고 제안하세요.',"Let's restore the crystal.",
+    ["Let's restore the crystal.","Let's leave the pieces here.",'The water is cold.'],'restore는 원래 모습으로 되돌리다는 뜻이에요. 모두 모은 조각을 하나로 이어 봐요.','찾은 조각으로 할 다음 행동을 말해 보세요.');
+  activity('c-read','cavern','reading','The light is bright.','불빛이 밝아요.','수정의 빛에 대한 설명을 읽으세요.','불빛이 밝아요.',
+    ['불빛이 밝아요.','불빛이 어두워요.','불빛이 없어요.'],'bright는 밝은이라는 뜻이에요.','dark(어두운)의 반대말이에요.');
+
+  const object=(id,type,name,x,y,extra={})=>({id,type,name,x,y,radius:64,...extra});
+  const source=(id,type,name,x,y,extra={})=>object(id,type,name,x,y,{activityId:id,...extra});
+  const target=(id,type,name,x,y,extra={})=>object(id,type,name,x,y,{target:true,...extra});
+  const areas={
+    forest:{id:'forest',name:'달빛 숲',en:'Moonlit Forest',spawn:{x:100,y:450},
+      obstacles:[{x:70,y:75,w:210,h:95},{x:610,y:55,w:220,h:95},{x:40,y:560,w:240,h:35},{x:700,y:495,w:150,h:100},
+        {x:470,y:0,w:36,h:475},{x:470,y:565,w:36,h:75},{x:470,y:475,w:36,h:90,requires:'f-bridge'}],
+      objects:[source('f-map','quest','낡은 지도',90,440),source('f-rowan','npc','로완',200,455,{npc:'rowan'}),
+        source('f-directions','sign','북쪽 안내',290,420),target('f-north','sign','N · 북쪽 나무 표식',175,205),target('f-south','sign','S · 남쪽 캠프 표식',325,545),
+        source('f-mira','npc','미라',145,265,{npc:'mira'}),source('f-bram','npc','브람',315,200,{npc:'bram'}),
+        target('f-tracks','quest','나무 뒤 발자국',175,40),target('f-tree-front','quest','나무 앞 돌무더기',245,200),
+        object('f-crossroad','sign','잊혀진 갈림길',270,330,{choiceId:'crossroad'}),
+        source('f-moon','crystal','달빛 길의 메아리',330,265,{color:'blue'}),target('f-blue-lights','crystal','Blue · 파란 불빛',405,195,{color:'blue'}),target('f-amber-lights','crystal','Amber · 호박색 불빛',405,280,{color:'amber'}),
+        source('f-stone','book','돌길의 글 조각',115,350),source('f-bridge','door','끊어진 문장 다리',420,520,{appearance:'bridge'}),
+        source('f-secret','book','강가의 작은 글',350,95),target('f-river-mushroom','switch','강 옆 버섯',415,385,{hidden:true,appearance:'mushroom'}),target('f-path-mushroom','switch','길 옆 버섯',335,385,{appearance:'mushroom'}),
+        source('f-camp','sign','캠프 안내',100,520),source('f-river','book','강가 기록',590,425),source('f-together','book','여행자의 쪽지',600,525),
+        object('f-cache','chest','달빛 보급 상자',365,575,{requires:['f-rowan'],reward:{gold:10,potions:1}}),
+        object('f-grove','door','나뭇잎 사이 통로',420,95,{to:'grove',requires:['f-secret']}),
+        object('f-ruins','door','기억의 유적으로',875,315,{to:'ruins',requires:['f-bridge']})]},
+    ruins:{id:'ruins',name:'기억의 유적',en:'Ruins of Memory',spawn:{x:95,y:330},
+      obstacles:[{x:450,y:0,w:35,h:245},{x:450,y:400,w:35,h:240},{x:450,y:245,w:35,h:155,requires:'r-gate'},
+        {x:600,y:190,w:60,h:60},{x:160,y:105,w:40,h:50},{x:310,y:105,w:40,h:50},{x:665,y:435,w:35,h:60},{x:800,y:435,w:35,h:60}],
+      objects:[object('r-forest','door','달빛 숲으로',55,330,{to:'forest',spawn:{x:810,y:315}}),source('r-gate','door','고대의 문',405,315),
+        source('r-inscription','book','조각상의 비문',545,300),target('r-key','quest','조각상 뒤 열쇠',630,150),target('r-front','quest','조각상 앞 자갈',630,290),
+        source('r-door','door','열쇠의 질문',820,170),source('r-fragment','chest','수정 조각 상자',820,310,{reward:{gold:20}}),
+        source('r-vault','book','두 기둥의 기록',555,415),target('r-middle','switch','두 기둥 사이 장치',750,465,{hidden:true}),target('r-outside','switch','기둥 바깥 장치',580,485),
+        source('r-book','book','오래된 문 기록',240,430),source('r-open','sign','열린 문의 말',300,535),source('r-help','npc','길을 잃은 기록관',120,455,{npc:'scribe'}),
+        source('r-listen','crystal','기둥의 메아리',255,240),target('r-left-pillar','quest','Left · 왼쪽 기둥 표식',180,180),target('r-right-pillar','quest','Right · 오른쪽 기둥 표식',330,180),
+        source('r-near','sign','옛길 안내',120,555),object('r-vault-door','door','지하 보관실로',875,550,{to:'vault',requires:['r-vault']}),
+        object('r-cavern','door','수정 동굴로',885,65,{to:'cavern',requires:['r-fragment']})]},
+    cavern:{id:'cavern',name:'수정 동굴',en:'Crystal Cavern',spawn:{x:95,y:540},
+      obstacles:[{x:0,y:245,w:420,h:35},{x:540,y:245,w:420,h:35},{x:420,y:245,w:120,h:35,requires:'c-door'},
+        {x:60,y:70,w:70,h:110},{x:570,y:380,w:70,h:85},{x:860,y:340,w:60,h:90}],
+      objects:[object('c-ruins','door','기억의 유적으로',55,545,{to:'ruins',spawn:{x:820,y:90}}),source('c-listen','crystal','색의 목소리',195,445),
+        target('c-blue','crystal','Blue · 파란 수정',190,330,{color:'blue'}),target('c-red','crystal','Red · 빨간 수정',330,330,{color:'red'}),target('c-green','crystal','Green · 초록 수정',475,350,{color:'green'}),
+        source('c-door','door','수정 문',480,305),source('c-switch','book','등불 기록',195,155),target('c-under-lamp','switch','등불 아래 장치',330,195,{appearance:'lamp-below'}),target('c-over-lamp','switch','등불 위 장치',330,90,{appearance:'lamp-above'}),
+        object('c-choice','quest','고대의 말 수정',540,145,{choiceId:'restoration'}),source('c-final-mira','book','미라의 복원 비문',660,95,{npc:'mira'}),source('c-final-bram','switch','브람의 기계 기록',660,200,{npc:'bram'}),
+        target('c-blue-switch','switch','파란 수정 옆 장치',815,190,{color:'blue'}),target('c-far-switch','switch','파란 수정에서 먼 장치',815,65),
+        source('c-quiet','sign','조용한 동굴 안내',100,430),source('c-tall','crystal','높이의 목소리',680,555),target('c-tall-target','crystal','Tall · 높은 수정',735,430,{size:'tall'}),target('c-short-target','crystal','Short · 낮은 수정',835,510,{size:'small'}),
+        source('c-response','book','수정 수집가의 말',300,550),source('c-read','book','빛의 기록',415,585),
+        object('c-cache','chest','성소의 보급 상자',160,70,{requires:['c-switch'],reward:{gold:15,potions:1}})]},
+    grove:{id:'grove',name:'숨은 반딧불 숲',en:'Secret Grove',spawn:{x:100,y:500},
+      obstacles:[{x:70,y:65,w:240,h:120},{x:650,y:70,w:200,h:120},{x:420,y:280,w:80,h:160}],
+      objects:[object('g-forest','door','달빛 숲으로',55,500,{to:'forest',spawn:{x:365,y:130}}),source('g-order','chest','반딧불 보물',730,300,{reward:{gold:12,potions:1,note:'grove-scroll'}}),
+        source('g-listen','crystal','작은 돌의 노래',230,325),target('g-small','quest','Small · 작은 돌',350,225,{size:'small'}),target('g-large','quest','Large · 큰 돌',580,225,{size:'large'}),source('g-read','book','고요한 숲 기록',610,510)]},
+    vault:{id:'vault',name:'잊힌 수정 보관실',en:'Hidden Crystal Vault',spawn:{x:100,y:480},
+      obstacles:[{x:250,y:130,w:75,h:170},{x:640,y:130,w:75,h:170},{x:410,y:410,w:130,h:60}],
+      objects:[object('v-ruins','door','기억의 유적으로',55,480,{to:'ruins',spawn:{x:860,y:500}}),source('v-order','book','탁자의 글 조각',475,340),
+        source('v-read','book','책 보관 안내',165,190),source('v-response','npc','보관실의 기록 정령',790,215,{npc:'spirit'}),
+        object('v-cache','chest','학자의 오래된 보물',780,480,{requires:['v-order','v-read','v-response'],reward:{gold:18,gearId:'scholarAmulet'}})]}
+  };
+  const companions=[
+    {id:'mira',name:'미라',en:'Mira',role:'견습 마법사',ability:'Arcane Insight',description:'선택한 퍼즐의 영어를 이해하도록 작은 힌트를 줍니다.',
+      english:'Look at the old door.',ko:'오래된 문을 보세요.',cosmetic:'runeGlow',cosmeticName:'룬빛 수정'},
+    {id:'bram',name:'브람',en:'Bram',role:'숲의 정찰자',ability:"Explorer's Sense",description:'주변의 숨은 장치에 작은 표시를 보여 줍니다.',
+      english:'Look near the river.',ko:'강 근처를 살펴보세요.',cosmetic:'leafGlow',cosmeticName:'잎빛 수정'}
+  ];
+  const quests=[
+    {id:'map',title:'고대의 지도',objective:'낡은 지도를 읽고 로완과 대화한 뒤 북쪽 나무를 찾으세요.',reward:{gold:5}},
+    {id:'companions',title:'두 명의 동료',objective:'미라의 부탁에 답하고 브람의 발자국을 찾아 두 동료를 맞이하세요.',reward:{gold:5}},
+    {id:'bridge',title:'끊어진 다리',objective:'갈림길에서 길을 선택하고 해당 도전을 마친 뒤 문장 다리를 복원하세요.',reward:{gold:10}},
+    {id:'fragments',title:'숨겨진 수정',objective:'유적의 문, 비문, 열쇠 질문을 풀고 상자에서 수정 조각을 찾으세요.',reward:{gold:10}},
+    {id:'path',title:'잊혀진 길',objective:'동굴의 소리와 문장을 이해하고 동료와 함께 말 수정을 복원하세요.',reward:{gold:20}}
+  ];
+  const objects=Object.values(areas).flatMap(area=>area.objects.map(o=>{o.area=area.id;return o;}));
+  for(const a of activities){
+    a.sourceId=objects.find(o=>o.activityId===a.id).id;
+    a.physical=['direction','locate','listening'].includes(a.kind);
+    a.reviewChoices=a.physical?a.choices.map(id=>objects.find(o=>o.id===id).name):[...a.choices];
+    a.reviewAnswer=a.physical?objects.find(o=>o.id===a.answer).name:a.answer;
+    lessons.push({id:a.tags[0],chapter:3,stage:7,en:a.english,ko:a.ko,example:a.english,exampleKo:a.ko,note:a.explanation});
+    Q.push({id:a.id,chapter:3,stage:7,type:a.type,difficulty:a.difficulty,instruction:a.physical?'안내에 맞는 장소나 표식을 고르세요.':a.objective,
+      phrase:a.english,pronunciation:a.english,choices:a.kind==='order'?[...a.words]:a.reviewChoices,answer:a.reviewAnswer,explanation:a.explanation,tags:a.tags});
+  }
+  return {width:960,height:640,playerRadius:14,speed:180,areas,activities,objects,companions,quests};
 })();
 
 ;
@@ -1867,7 +2107,8 @@ const Engine = (() => {
   const v2Key = 'EnglishQuest.chapter1.v2';
   const v3Key = 'EnglishQuest.v3';
   const v4Key = 'EnglishQuest.v4';
-  const saveKey = 'EnglishQuest.v5';
+  const v5Key = 'EnglishQuest.v5';
+  const saveKey = 'EnglishQuest.v7';
   const active = new WeakMap();
   const reviews = new WeakMap();
   const achievements = [
@@ -1897,10 +2138,10 @@ const Engine = (() => {
     ? clamp(value, 0, max) : fallback;
   const emptyRecord = () => ({seen:false, correct:0, wrong:0, streak:0});
   function fresh() {
-    return {version:5, started:false, currentChapter:1, level:1, xp:0, gold:0, hp:100,rpg:RPG.fresh(),
+    return {version:7, started:false, currentChapter:1, level:1, xp:0, gold:0, hp:100,rpg:RPG.fresh(),
       completed:[], unlocked:1, chapterComplete:false, learning:{}, mistakes:{},
       marked:[], schedule:{}, history:[], achievements:[], village:VillageEngine.fresh(),
-      voice:VoiceLearning.fresh(),
+      voice:VoiceLearning.fresh(), exploration:typeof Exploration!=='undefined'?Exploration.fresh():null,
       settings:{sound:true, voice:true, volume:0.45, speechRate:'normal',speechVolume:1}};
   }
   function stats(profile) {
@@ -1908,7 +2149,7 @@ const Engine = (() => {
   }
   function hydrate(raw) {
     const profile = fresh();
-    if (!raw || ![1, 2, 3, 4, 5].includes(raw.version)) return profile;
+    if (!raw || ![1, 2, 3, 4, 5, 7].includes(raw.version)) return profile;
     profile.started = raw.started === true;
     profile.level = Math.max(1, integer(raw.level, 1, 9999));
     profile.gold = integer(raw.gold, 0, Number.MAX_SAFE_INTEGER);
@@ -1923,7 +2164,11 @@ const Engine = (() => {
       if (profile.chapterComplete && raw.currentChapter === 2) profile.currentChapter = 2;
     }
     if (raw.version >= 4) profile.voice=VoiceLearning.hydrate(raw.voice);
-    RPG.hydrate(profile,raw.version===5?raw.rpg:null);
+    RPG.hydrate(profile,raw.version>=5?raw.rpg:null);
+    if(typeof Exploration!=='undefined'){
+      profile.exploration=Exploration.hydrate(raw.version===7?raw.exploration:null,profile);
+      if(raw.currentChapter===3&&Exploration.available(profile))profile.currentChapter=3;
+    }
     const {maxHp, nextXp} = stats(profile);
     profile.hp = integer(raw.hp, maxHp, maxHp);
     profile.xp = integer(raw.xp, 0, nextXp - 1);
@@ -1976,9 +2221,9 @@ const Engine = (() => {
   function load() {
     try {
       const current = stored(saveKey);
-      if (current?.version === 5) return hydrate(current);
-      for (const legacy of [stored(v4Key),stored(v3Key),stored(v2Key),stored(legacyKey),current]) {
-        if (![1,2,3,4].includes(legacy?.version)) continue;
+      if (current?.version === 7) return hydrate(current);
+      for (const legacy of [stored(v5Key),stored(v4Key),stored(v3Key),stored(v2Key),stored(legacyKey),current]) {
+        if (![1,2,3,4,5].includes(legacy?.version)) continue;
         const profile = hydrate(legacy);
         save(profile);
         return profile;
@@ -1989,7 +2234,7 @@ const Engine = (() => {
   }
   function save(profile) {
     try {
-      if (profile.version !== 5 || stored(saveKey)?.version > 5) return false;
+      if (profile.version !== 7 || stored(saveKey)?.version > 7) return false;
       localStorage.setItem(saveKey, JSON.stringify(profile));
       return true;
     }
@@ -2339,7 +2584,7 @@ const Engine = (() => {
     encounter.phase = 'REWARD';
     return {xp, gold, levelUp, bonus, replay,gearId};
   }
-  return {saveKey, legacyKey, v2Key, v3Key, v4Key, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
+  return {saveKey, legacyKey, v2Key, v3Key, v4Key, v5Key, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
     achievements, mark, reviewList, startReview, answerReview, dashboard, heavy, bonusPercent,
     training, golemBreak, diving, pulsing, retryBroken, useItem,voicePending,voiceResult,
     available, charging, exposed, shuffle, select, answer, playerAction, enemyAction, reward};
@@ -2499,6 +2744,320 @@ const VillageEngine = (() => {
 })();
 
 ;
+// Authoritative exploration rules. Pending interactions and followers are never saved.
+const Exploration = (() => {
+  const D=ExplorationData, sessions=new WeakMap(),followers=new WeakMap();
+  const area=id=>D.areas[id], activity=id=>D.activities.find(a=>a.id===id),object=id=>D.objects.find(o=>o.id===id);
+  const has=(s,id)=>s.completed.includes(id), all=(s,ids)=>ids.every(id=>has(s,id));
+  const normalize=s=>s.toLowerCase().replace(/[.!?]/g,'').replace(/\s+/g,' ').trim();
+  const add=(items,id)=>{if(!items.includes(id))items.push(id);};
+  const blankReward=()=>({gold:0,gearId:null,potions:0,cosmetic:null,note:null});
+  function fresh(){return {area:'forest',x:100,y:450,direction:'down',completed:[],observed:[],opened:[],
+    discovered:['forest'],recruited:[],activeCompanion:null,choices:{crossroad:null,restoration:null},
+    quests:{map:'active',companions:'locked',bridge:'locked',fragments:'locked',path:'locked'},
+    completedChapter:false,cosmetics:[],notes:[],rewarded:[],tutorialSeen:false};}
+  function available(p){return !!p?.started&&p.chapterComplete&&[4,5,6].every(n=>p.village?.progress[n]?.completed);}
+  function areaUnlocked(s,id){return id==='forest'||id==='ruins'&&has(s,'f-bridge')||id==='cavern'&&has(s,'r-fragment')
+    ||id==='grove'&&has(s,'f-secret')||id==='vault'&&has(s,'r-vault');}
+  function ready(s,a){
+    if(!a||!areaUnlocked(s,a.area)||!all(s,a.requires||[]))return false;
+    if(a.choice&&!s.choices[a.choice])return false;
+    if(a.gate==='bridge'&&(!all(s,['f-mira','f-bram'])||!s.choices.crossroad||!has(s,'f-'+s.choices.crossroad)))return false;
+    if(a.final&&(!s.choices.restoration||(!s.completedChapter&&s.choices.restoration!==a.final)))return false;
+    return true;
+  }
+  function derive(s){
+    s.recruited=D.companions.filter(c=>has(s,'f-'+c.id)).map(c=>c.id);
+    if(!s.recruited.includes(s.activeCompanion))s.activeCompanion=s.recruited[0]||null;
+    s.completedChapter=!!s.choices.restoration&&has(s,'c-final-'+s.choices.restoration);
+    const complete=[all(s,['f-map','f-rowan','f-directions']),all(s,['f-mira','f-bram']),
+      has(s,'f-bridge')&&s.discovered.includes('ruins'),has(s,'r-fragment'),s.completedChapter];
+    let previous=true;
+    D.quests.forEach((q,i)=>{s.quests[q.id]=previous?(complete[i]?'complete':'active'):'locked';previous=previous&&complete[i];});
+    if(s.completedChapter)add(s.cosmetics,s.choices.restoration==='mira'?'runeGlow':'leafGlow');
+  }
+  function solids(p,id){return (area(id)?.obstacles||[]).filter(r=>!r.requires||!has(p.exploration,r.requires));}
+  function walkable(p,id,x,y){
+    const r=D.playerRadius;
+    return !!area(id)&&Number.isFinite(x)&&Number.isFinite(y)&&x>=r&&x<=D.width-r&&y>=r&&y<=D.height-r
+      &&!solids(p,id).some(o=>x+r>o.x&&x-r<o.x+o.w&&y+r>o.y&&y-r<o.y+o.h);
+  }
+  function safePosition(p,id,x,y){
+    const s=p.exploration;
+    if(!walkable(p,id,x,y))return false;
+    // A valid point must also be on the reachable side of an unopened physical gate.
+    if(id==='forest'&&!has(s,'f-bridge')&&x>456)return false;
+    if(id==='ruins'&&!has(s,'r-gate')&&x>436)return false;
+    if(id==='cavern'&&!has(s,'c-door')&&y<294)return false;
+    return true;
+  }
+  function hydrate(raw,p){
+    const s=fresh();
+    if(!available(p)||!raw||typeof raw!=='object')return s;
+    const valid=id=>Array.isArray(raw.completed)&&raw.completed.includes(id);
+    const candidates=D.activities.filter(a=>valid(a.id));
+    // Establish only causally valid completions; an imported late flag cannot open an earlier gate.
+    for(let pass=0;pass<D.activities.length;pass++){
+      if(all(s,['f-mira','f-bram'])&&['moon','stone'].includes(raw.choices?.crossroad))s.choices.crossroad=raw.choices.crossroad;
+      if(has(s,'c-switch')&&all(s,['f-mira','f-bram'])&&['mira','bram'].includes(raw.choices?.restoration))s.choices.restoration=raw.choices.restoration;
+      let changed=false;
+      for(const a of candidates)if(!has(s,a.id)&&ready(s,a)){add(s.completed,a.id);changed=true;derive(s);}
+      if(!changed)break;
+    }
+    s.observed=D.activities.filter(a=>Array.isArray(raw.observed)&&raw.observed.includes(a.id)||has(s,a.id)).map(a=>a.id);
+    s.discovered=Object.keys(D.areas).filter(id=>id==='forest'||Array.isArray(raw.discovered)&&raw.discovered.includes(id)&&areaUnlocked(s,id));
+    if(has(s,'r-gate')||has(s,'r-fragment'))add(s.discovered,'ruins');
+    if(has(s,'c-listen'))add(s.discovered,'cavern');
+    s.opened=D.objects.filter(o=>o.type==='chest'&&areaUnlocked(s,o.area)&&all(s,o.requires||[])
+      &&(o.activityId?has(s,o.activityId):Array.isArray(raw.opened)&&raw.opened.includes(o.id))).map(o=>o.id);
+    s.activeCompanion=raw.activeCompanion;derive(s);
+    // Hydration never credits currency. Completion itself consumes the corresponding one-time claim.
+    if(s.opened.includes('g-order'))s.notes=['grove-scroll'];
+    s.tutorialSeen=raw.tutorialSeen===true;
+    s.area=Object.hasOwn(D.areas,raw.area)&&areaUnlocked(s,raw.area)?raw.area:'forest';
+    add(s.discovered,s.area);derive(s);
+    s.rewarded=[...D.quests.filter(q=>s.quests[q.id]==='complete').map(q=>'quest-'+q.id),...s.opened.map(id=>'chest-'+id)];
+    const temporary={...p,exploration:s};
+    const point=safePosition(temporary,s.area,raw.x,raw.y)?raw:area(s.area).spawn;
+    s.x=point.x;s.y=point.y;
+    s.direction=['up','down','left','right'].includes(raw.direction)?raw.direction:'down';
+    return s;
+  }
+  function playable(p){return available(p)&&p.currentChapter===3&&!!p.exploration&&areaUnlocked(p.exploration,p.exploration.area);}
+  function enter(p){
+    if(!available(p))return false;
+    if(!p.exploration)p.exploration=fresh();
+    p.currentChapter=3;close(p);
+    const s=p.exploration;
+    if(!areaUnlocked(s,s.area))s.area='forest';
+    if(!safePosition(p,s.area,s.x,s.y))Object.assign(s,area(s.area).spawn);
+    add(s.discovered,s.area);derive(s);return true;
+  }
+  function current(p){return sessions.get(p)?.h||null;}
+  function close(p){const existed=sessions.delete(p);return existed;}
+  function inRange(p,o){return !!o&&p.exploration.area===o.area&&Math.hypot(p.exploration.x-o.x,p.exploration.y-o.y)<=o.radius;}
+  function move(p,dx,dy,dt){
+    if(!playable(p)||!Number.isFinite(dx)||!Number.isFinite(dy)||!Number.isFinite(dt)||dt<=0)return false;
+    const pending=sessions.get(p);
+    if(pending&&pending.phase!=='seek')return false;
+    const length=Math.hypot(dx,dy);if(!length)return false;
+    dx/=Math.max(1,length);dy/=Math.max(1,length);dt=Math.min(dt,.1);
+    const s=p.exploration,steps=Math.max(1,Math.ceil(D.speed*dt/4)),x=s.x,y=s.y;
+    s.direction=Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up';
+    for(let i=0;i<steps;i++){
+      const nx=s.x+dx*D.speed*dt/steps,ny=s.y+dy*D.speed*dt/steps;
+      if(walkable(p,s.area,nx,s.y))s.x=nx;
+      if(walkable(p,s.area,s.x,ny))s.y=ny;
+    }
+    return x!==s.x||y!==s.y;
+  }
+  function requirementsText(p,o){
+    const s=p.exploration,a=activity(o.activityId);
+    if(o.choiceId==='crossroad'&&!all(s,['f-mira','f-bram']))return '먼저 미라와 브람의 부탁을 마치고 두 동료를 맞이하세요.';
+    if(o.choiceId==='restoration'&&!has(s,'c-switch'))return '먼저 수정 문의 문장을 완성하고 등불 아래 장치를 찾아보세요.';
+    if(a?.gate==='bridge'&&!ready(s,a))return !all(s,['f-mira','f-bram'])?'미라와 브람을 모두 만난 뒤 갈림길로 가세요.':
+      !s.choices.crossroad?'갈림길에서 달빛 길 또는 돌길을 선택하세요.':'선택한 '+(s.choices.crossroad==='moon'?'달빛 길의 불빛':'돌길의 문장')+' 도전을 먼저 해결하세요.';
+    if(a?.final&&!ready(s,a))return !s.choices.restoration?'고대의 말 수정에서 복원을 도와줄 동료를 선택하세요.':'이번 복원은 '+(s.choices.restoration==='mira'?'미라의 비문':'브람의 장치')+'에서 이어집니다. 완성한 뒤 다른 도전도 살펴볼 수 있어요.';
+    const missing=[...(o.requires||[]),...(a?.requires||[])].find(id=>!has(s,id));
+    if(missing)return '먼저 '+object(activity(missing)?.sourceId)?.name+'에서 안내를 해결하세요.';
+    if(a?.choice&&!s.choices[a.choice])return '두 동료를 맞이한 뒤 갈림길에서 먼저 길을 선택하세요.';
+    return '';
+  }
+  function objectState(p,o){
+    o=typeof o==='string'?object(o):o;
+    if(!o)return {visible:false,locked:true,complete:false,text:''};
+    const s=p.exploration,a=activity(o.activityId),text=requirementsText(p,o);
+    return {visible:true,locked:!!text||!!a&&!ready(s,a),complete:s.opened.includes(o.id)||!!a&&has(s,a.id)
+      ||!!o.choiceId&&!!s.choices[o.choiceId]||!!o.to&&s.discovered.includes(o.to),text};
+  }
+  function nearby(p){return playable(p)?area(p.exploration.area).objects.filter(o=>inRange(p,o)).sort((a,b)=>
+    Math.hypot(p.exploration.x-a.x,p.exploration.y-a.y)-Math.hypot(p.exploration.x-b.x,p.exploration.y-b.y)):[];}
+  function baseHandle(o,phase){return {phase,objectId:o?.id||null,name:o?.name||'표현 연습',text:'',activity:null,
+    choices:[],words:[],feedback:null,assisted:false,practice:false};}
+  function install(p,h,extra={}){sessions.set(p,{h,phase:h.phase,area:p.exploration.area,objectId:h.objectId,attempts:0,aids:[],...extra});return h;}
+  function info(p,o,text){const h=baseHandle(o,'info');h.text=text;return install(p,h);}
+  function begin(p,a,o,practice=false){
+    Engine.teach(p,a.tags);add(p.exploration.observed,a.id);
+    const h=baseHandle(o,a.physical&&!practice?'seek':'question');
+    h.activity=a;h.name=o?.name||a.english;h.text=a.objective;h.practice=practice;
+    h.choices=Engine.shuffle(a.physical&&practice?a.reviewChoices:a.choices);
+    h.words=Engine.shuffle(a.words||[]);
+    return install(p,h,{activityId:a.id,practice});
+  }
+  function award(p,key,prize){
+    const reward=blankReward(),s=p.exploration;
+    if(s.rewarded.includes(key))return reward;
+    add(s.rewarded,key);
+    reward.gold=Math.max(0,Math.min(prize?.gold||0,Number.MAX_SAFE_INTEGER-p.gold));p.gold+=reward.gold;
+    if(prize?.gearId&&RPG.grant(p,prize.gearId))reward.gearId=prize.gearId;
+    if(prize?.potions){reward.potions=Math.max(0,Math.min(prize.potions,3-p.village.inventory.potion));p.village.inventory.potion+=reward.potions;}
+    if(prize?.note&&!s.notes.includes(prize.note)){add(s.notes,prize.note);reward.note=prize.note;}
+    return reward;
+  }
+  function mergeReward(a,b){a.gold+=b.gold;a.potions+=b.potions;for(const key of ['gearId','cosmetic','note'])if(b[key])a[key]=b[key];return a;}
+  function questRewards(p){
+    derive(p.exploration);const reward=blankReward();
+    for(const q of D.quests)if(p.exploration.quests[q.id]==='complete')mergeReward(reward,award(p,'quest-'+q.id,q.reward));
+    return reward;
+  }
+  function complete(p,a,o){
+    const s=p.exploration,reward=blankReward(),first=!has(s,a.id);
+    if(!first)return {reward,recruited:null};
+    add(s.completed,a.id);
+    if(o?.type==='chest'){add(s.opened,o.id);mergeReward(reward,award(p,'chest-'+o.id,o.reward));}
+    const recruited=a.recruit&&!s.recruited.includes(a.recruit)?a.recruit:null;
+    if(recruited&&!s.activeCompanion)s.activeCompanion=recruited;
+    const alreadyComplete=s.completedChapter;derive(s);
+    if(s.completedChapter&&!alreadyComplete)reward.cosmetic=s.choices.restoration==='mira'?'runeGlow':'leafGlow';
+    mergeReward(reward,questRewards(p));return {reward,recruited};
+  }
+  function validSession(p,h,phases){const m=sessions.get(p);return playable(p)&&m&&m.h===h&&m.area===p.exploration.area
+    &&phases.includes(m.phase)?m:null;}
+  function settle(p,m,correct){
+    const a=activity(m.activityId),h=m.h;
+    m.attempts++;m.phase='feedback';m.correct=correct;h.phase='feedback';
+    const assisted=m.aids.length>0||m.attempts>1;
+    Engine.record(p,Q.find(q=>q.id===a.id),correct,{assisted,aids:[...m.aids],review:m.practice,mode:'choice'});
+    if(m.practice)RPG.refresh(p);
+    const outcome=correct&&!m.practice?complete(p,a,object(m.objectId)):{reward:blankReward(),recruited:null};
+    h.feedback={correct,explanation:a.explanation,...outcome,completedChapter:p.exploration.completedChapter};
+    return h.feedback;
+  }
+  function interact(p,id){
+    if(!playable(p))return null;
+    const o=object(id);if(!inRange(p,o))return null;
+    const pending=sessions.get(p);
+    if(pending){
+      const a=activity(pending.activityId);
+      if(pending.phase==='seek'&&a?.choices.includes(o.id)){settle(p,pending,o.id===a.answer);return pending.h;}
+      return null;
+    }
+    const state=objectState(p,o);
+    if(state.locked)return info(p,o,state.text||'먼저 현재 퀘스트의 안내를 따라가세요.');
+    if(o.to){
+      const reward=transition(p,o.id);
+      return reward?{...baseHandle(o,'transition'),area:p.exploration.area,feedback:{correct:true,reward}}:null;
+    }
+    if(o.choiceId){
+      const s=p.exploration;
+      if(s.choices[o.choiceId])return info(p,o,'이미 선택한 길: '+(s.choices[o.choiceId]==='moon'?'달빛 길':s.choices[o.choiceId]==='stone'?'돌길':s.choices[o.choiceId]==='mira'?'미라의 비문':'브람의 장치')+'. 다른 도전은 탐험과 복습으로 다시 만날 수 있어요.');
+      const h=baseHandle(o,'choice');h.choiceId=o.choiceId;
+      h.options=o.choiceId==='crossroad'?[{id:'moon',name:'달빛 길',english:'Follow the blue lights.',ko:'파란 불빛을 따라가세요.'},
+        {id:'stone',name:'고대의 돌길',english:'Follow the stone road.',ko:'돌길을 따라가세요.'}]:
+        [{id:'mira',name:'미라와 비문 읽기',english:'Bring the words together.',ko:'말들을 하나로 모으세요.'},{id:'bram',name:'브람과 장치 찾기',english:'Look beside the blue crystal.',ko:'파란 수정 옆을 보세요.'}];
+      h.choices=h.options.map(option=>option.id);h.text=o.choiceId==='crossroad'?'두 길은 다리 앞에서 다시 만나요. 선택한 길의 도전을 먼저 해결하세요.':'두 동료 모두 방법을 제안합니다. 원하는 동료와 수정을 복원하세요.';
+      return install(p,h,{choiceId:o.choiceId});
+    }
+    const a=activity(o.activityId);
+    if(a)return begin(p,a,o,has(p.exploration,a.id));
+    if(o.type==='chest'){
+      if(p.exploration.opened.includes(o.id))return info(p,o,'이미 연 보물 상자예요. 보상은 한 번만 받을 수 있어요.');
+      add(p.exploration.opened,o.id);const reward=award(p,'chest-'+o.id,o.reward);
+      const h=baseHandle(o,'reward');h.text='보물 상자를 열었어요.';h.feedback={correct:true,reward,explanation:h.text};return install(p,h);
+    }
+    return info(p,o,o.hidden?'작은 장치가 보여요. 주변 기록에서 단서를 찾아보세요.':'주변 안내를 읽으면 이 표식의 의미를 알 수 있어요.');
+  }
+  function answer(p,h,value){
+    const m=validSession(p,h,['question']);if(!m||typeof value!=='string')return null;
+    const a=activity(m.activityId);if(!a||!m.practice&&!inRange(p,object(m.objectId)))return null;
+    const expected=m.practice&&a.physical?a.reviewAnswer:a.answer;
+    if(a.kind==='order'){
+      const tokens=normalize(value).split(' ').sort(),required=a.words.map(w=>normalize(w)).sort();
+      if(tokens.length!==required.length||tokens.some((token,i)=>token!==required[i]))return null;
+    }else if(!(m.practice&&a.physical?a.reviewChoices:a.choices).includes(value))return null;
+    return settle(p,m,normalize(value)===normalize(expected));
+  }
+  function retry(p,h){
+    const m=validSession(p,h,['feedback']);if(!m||m.correct||!m.activityId)return false;
+    m.phase=activity(m.activityId).physical&&!m.practice?'seek':'question';h.phase=m.phase;h.feedback=null;h.assisted=true;
+    return true;
+  }
+  function assist(p,h,reason='transcript'){
+    const m=validSession(p,h,['question','seek']);
+    if(!m||!m.activityId||!['transcript','fallback','translation'].includes(reason))return false;
+    if(!m.aids.includes(reason))m.aids.push(reason);h.assisted=true;return true;
+  }
+  function hint(p,h){
+    if(!assist(p,h,'translation'))return null;
+    const a=activity(sessions.get(p).activityId);
+    return (p.exploration.activeCompanion==='mira'?'미라: ':'힌트: ')+a.hint;
+  }
+  function choose(p,h,id){
+    const m=validSession(p,h,['choice']),s=p.exploration;
+    if(!m||!inRange(p,object(m.objectId))||s.choices[m.choiceId]||!(m.choiceId==='crossroad'?['moon','stone']:['mira','bram']).includes(id))return null;
+    if(m.choiceId==='crossroad'&&!all(s,['f-mira','f-bram'])||m.choiceId==='restoration'&&(!has(s,'c-switch')||!s.recruited.includes(id)))return null;
+    s.choices[m.choiceId]=id;if(m.choiceId==='restoration')s.activeCompanion=id;
+    m.phase='feedback';h.phase='feedback';h.feedback={correct:true,reward:blankReward(),
+      explanation:m.choiceId==='crossroad'?(id==='moon'?'파란 불빛의 메아리를 찾아 달빛 길을 탐험하세요.':'돌길의 글 조각을 찾아 문장을 완성하세요.'):
+        (id==='mira'?'미라: I can read the words. 비문에서 말들을 하나로 이어 봐요.':'브람: I can find the switch. 파란 수정 옆 장치를 찾아봐요.')};
+    return h;
+  }
+  function transition(p,objectId){
+    if(!playable(p)||sessions.has(p))return false;
+    const o=object(objectId),s=p.exploration;
+    if(!o?.to||!inRange(p,o)||!all(s,o.requires||[])||!areaUnlocked(s,o.to))return false;
+    s.area=o.to;Object.assign(s,o.spawn||area(o.to).spawn);
+    if(!safePosition(p,s.area,s.x,s.y))Object.assign(s,area(s.area).spawn);
+    s.direction='down';add(s.discovered,s.area);followers.delete(p);
+    return questRewards(p);
+  }
+  function practice(p,id){
+    const a=activity(id);if(!playable(p)||!a||sessions.has(p))return null;
+    return begin(p,a,null,true);
+  }
+  function selectCompanion(p,id){
+    if(!playable(p)||!p.exploration.recruited.includes(id)||sessions.has(p)&&sessions.get(p).phase!=='seek')return false;
+    p.exploration.activeCompanion=id;followers.delete(p);return true;
+  }
+  function follow(p,dt){
+    const s=p.exploration;
+    if(!playable(p)||!s.activeCompanion){followers.delete(p);return null;}
+    let f=followers.get(p);
+    const offsets={up:[0,36],down:[0,-36],left:[36,0],right:[-36,0]},[dx,dy]=offsets[s.direction];
+    const target=walkable(p,s.area,s.x+dx,s.y+dy)?{x:s.x+dx,y:s.y+dy}:{x:s.x,y:s.y};
+    if(!f||f.area!==s.area||f.id!==s.activeCompanion||Math.hypot(f.x-s.x,f.y-s.y)>150||!walkable(p,s.area,f.x,f.y)){
+      f={...target,id:s.activeCompanion,area:s.area,direction:s.direction};followers.set(p,f);
+    }else{
+      const t=Number.isFinite(dt)?1-Math.exp(-Math.max(0,Math.min(dt,.1))*8):0;
+      const x=f.x+(target.x-f.x)*t,y=f.y+(target.y-f.y)*t;
+      if(walkable(p,s.area,x,y)){f.x=x;f.y=y;}else Object.assign(f,target);
+      f.direction=s.direction;
+    }
+    return {...f};
+  }
+  function sense(p){return playable(p)&&p.exploration.activeCompanion==='bram'?area(p.exploration.area).objects
+    .filter(o=>o.hidden&&Math.hypot(p.exploration.x-o.x,p.exploration.y-o.y)<=160).map(o=>o.id):[];}
+  function companionDialogue(p,id=p.exploration.activeCompanion){
+    const c=D.companions.find(c=>c.id===id);if(!c||!p.exploration.recruited.includes(id))return null;
+    const s=p.exploration;
+    if(s.completedChapter)return {...c,english:'We found the forgotten path.',ko:'우리는 잊혀진 길을 찾았어요.'};
+    if(s.area==='cavern')return {...c,english:id==='mira'?'Listen to the crystal.':'Look beside the blue crystal.',ko:id==='mira'?'수정의 말을 들어 보세요.':'파란 수정 옆을 보세요.'};
+    if(s.area==='ruins'||s.area==='vault')return {...c,english:id==='mira'?'Can I help you read?':'Look behind the statue.',ko:id==='mira'?'읽는 것을 도와줄까요?':'조각상 뒤를 살펴보세요.'};
+    return {...c};
+  }
+  function questStatus(p){return D.quests.map(q=>({...q,status:p.exploration.quests[q.id]}));}
+  function objective(p){
+    const s=p.exploration,m=sessions.get(p);
+    const q=D.quests.find(q=>s.quests[q.id]==='active')||D.quests.at(-1);
+    const result={questId:q.id,title:q.title,text:q.objective,targetId:null,area:s.area};
+    if(m?.phase==='seek'){result.text=activity(m.activityId).objective;return result;}
+    let target;
+    if(q.id==='map')target=['f-map','f-rowan','f-directions'].find(id=>!has(s,id));
+    if(q.id==='companions')target=['f-mira','f-bram'].find(id=>!has(s,id));
+    if(q.id==='bridge')target=!s.choices.crossroad?'f-crossroad':!has(s,'f-'+s.choices.crossroad)?'f-'+s.choices.crossroad:!has(s,'f-bridge')?'f-bridge':'f-ruins';
+    if(q.id==='fragments')target=['r-gate','r-inscription','r-door','r-fragment'].find(id=>!has(s,id));
+    if(q.id==='path')target=s.completedChapter?null:!s.discovered.includes('cavern')?'r-cavern':
+      ['c-listen','c-door','c-switch'].find(id=>!has(s,id))||(!s.choices.restoration?'c-choice':'c-final-'+s.choices.restoration);
+    if(target){const o=object(target);result.targetId=target;result.area=o.area;result.text=o.name+'에서 다음 안내를 확인하세요.';}
+    else result.text='말 수정을 복원했어요. 다른 길과 비밀 장소에서 남은 표현을 찾아보세요.';
+    return result;
+  }
+  function dismissTutorial(p){if(!p.exploration)return false;p.exploration.tutorialSeen=true;return true;}
+  return {fresh,hydrate,available,enter,move,walkable,solids,nearby,interact,answer,retry,hint,assist,close,current,
+    choose,transition,practice,selectCompanion,follow,sense,companionDialogue,objectState,questStatus,objective,dismissTutorial};
+})();
+
+;
 // Trial rooms use authored questions from the same dictionaries as story battles.
 const Trials = (() => {
   const rooms = [
@@ -2520,7 +3079,8 @@ const Trials = (() => {
       explanation:activity.explanation, voiceActivity:activity, difficulty:activity.difficulty};
   }
   function deck(p,id,random){
-    const questions=Q.filter(q=>q.chapter!==2||p.chapterComplete);
+    const questions=Q.filter(q=>(q.chapter!==2||p.chapterComplete)
+      &&(q.chapter!==3||p.exploration?.observed.includes(q.id)));
     const familiar=q=>q.tags.some(t=>p.learning[t]?.seen);
     const last=p.rpg.dungeons[id].lastIds||[];
     const selected=[];
@@ -2690,6 +3250,13 @@ const AudioFX = (() => {
       if (!prepare(settings)) return;
       const at=context.currentTime+.003;
       switch (aliases[effect]||effect) {
+        case 'footstep': noise(210,120,at,.075,.032); break;
+        case 'forestAir': noise(840,380,at,.38,.022); tone(1760,1320,at+.12,.24,.008); break;
+        case 'caveAir': bell(294,at,.8,.018); bell(440,at+.21,.65,.012); break;
+        case 'treasure': arpeggio([523,659,784,1047],at,.07,.5,.085); break;
+        case 'doorOpen': noise(260,120,at,.32,.065); bell(392,at+.15,.3,.043); break;
+        case 'companionJoin': arpeggio([440,554,659],at,.12,.43,.07); break;
+        case 'puzzleSolve': arpeggio([587,740,880],at,.095,.36,.08); break;
         case 'ui':
           if (at-lastUi<.06) return;
           lastUi=at;
@@ -4005,6 +4572,283 @@ const RpgArt = (function crystalGallery() {
 })();
 
 ;
+// Original vector environments and small articulated actors. Coordinates are world units.
+// Art is decorative; all labels, hit targets, puzzle rules and collision belong to the renderer/engine.
+const ExploreArt = (() => {
+  let serial = 0;
+  const p = (d, fill, extra = '') => `<path d="${d}" fill="${fill}" ${extra}/>`;
+  const l = (d, color, w = 1, alpha = 1) => p(d, 'none', `stroke="${color}" stroke-width="${w}" opacity="${alpha}" stroke-linecap="round" stroke-linejoin="round"`);
+  const c = (x, y, r, fill, alpha = 1) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" opacity="${alpha}"/>`;
+  const e = (x, y, rx, ry, fill, extra = '') => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${fill}" ${extra}/>`;
+  const r = (x, y, w, h, fill, rx = 0) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${fill}"/>`;
+  const g = (x, y, body, scale = 1, angle = 0) => `<g transform="translate(${x} ${y}) rotate(${angle}) scale(${scale})">${body}</g>`;
+  const many = (n, fn) => Array.from({length:n}, (_, i) => fn(i)).join('');
+  const ink = '#182c37', gold = '#cfb886', cream = '#e9e5c8';
+  const rim = (color = ink, w = 1.3) => `stroke="${color}" stroke-width="${w}" stroke-linejoin="round"`;
+  const grad = (id, a, b, d) => `<linearGradient id="${id}" x1="0" y1="0" x2=".6" y2="1"><stop stop-color="${a}"/><stop offset=".55" stop-color="${b}"/><stop offset="1" stop-color="${d}"/></linearGradient>`;
+  const halo = (id, color) => `<radialGradient id="${id}"><stop stop-color="${color}" stop-opacity=".38"/><stop offset=".5" stop-color="${color}" stop-opacity=".12"/><stop offset="1" stop-color="${color}" stop-opacity="0"/></radialGradient>`;
+  const url = id => `url(#${id})`;
+  const palette = {
+    vanguard:{cape:'#356386', fold:'#24405d', rim:'#91bfd3', armor:'#aabac0', skin:'#d7aa85', hair:'#60453a', gem:'#a2dfe4'},
+    arcanist:{cape:'#63578c', fold:'#393c66', rim:'#b4a2d8', armor:'#776b9e', skin:'#d7aa85', hair:'#60453a', gem:'#c5b7f2'},
+    pathfinder:{cape:'#4d7458', fold:'#2b5145', rim:'#a4bd8b', armor:'#896e51', skin:'#d7aa85', hair:'#60453a', gem:'#c7db9a'},
+    mira:{cape:'#6864a3', fold:'#354d7c', rim:'#aebfea', armor:'#537caa', skin:'#e3b99a', hair:'#303d62', gem:'#a3e0f5'},
+    bram:{cape:'#587c55', fold:'#2c4e42', rim:'#b5c894', armor:'#8b704e', skin:'#c8946b', hair:'#6c4f34', gem:'#c7dd9c'}
+  };
+
+  function crystal(x, y, scale = 1, color = 'blue', tilt = 0) {
+    const colors = {blue:['#a2e9ee','#4aa3bf','#2e627e'],green:['#b7e5b9','#61a88a','#35645f'],red:['#f5bcb4','#c9708b','#764d75'],violet:['#dbcbf5','#9b83c7','#585881'],gold:['#f9e5a8','#bdac66','#77724d'],amber:['#f6dca1','#bd9159','#6e6653']};
+    const k = colors[color] || colors.blue;
+    return g(x,y,`${p('M-10 -5l-2 -24 10 -16 11 13 4 24L3 2Z',k[1],rim(k[2],1))}${p('M-2 -45l1 33 4 14 -13 -7 -2 -24Z',k[0])}${p('M-1 -12l10 -20 4 24L3 2Z',k[2])}${l('M-2 -44l1 32 13 4 M-11 -29l10 17 -8 7',k[0],.8,.9)}`,scale,tilt);
+  }
+  function mushrooms(x,y,scale=1) {
+    return g(x,y,`${p('M-7 1l1 -10 3 -1 -1 11 M5 1l-1 -6 2 -1 1 7Z','#c7d8b8')}${p('M-13 -8q6 -15 14 -1 -7 4 -14 1Z','#8bc6bb',rim('#3f756e',.7))}${p('M0 -5q6 -10 10 0 -6 3 -10 0Z','#b0dbd0',rim('#3f756e',.7))}${c(-8,-10,1.2,'#dce9be')}${c(5,-7,.8,'#e7f6d8')}` ,scale);
+  }
+  function tuft(x,y,scale=1,color='#4c7868') {
+    return g(x,y,p('M-10 3q3 -9 2 -13 8 6 8 11 0 -11 4 -15 1 8 -1 13 5 -8 10 -8 -3 8 -8 12Z',color),scale);
+  }
+  function stone(x,y,scale=1,color='#60767b') {
+    return g(x,y,`${e(0,3,19,8,'#102d37','opacity=".38"')}${p('M-18 1l5 -15 17 -4 15 11 -5 12 -21 2Z',color,rim('#354d58',.8))}${p('M-13 -14l17 -4 15 11 -20 2Z','#879a99','opacity=".55"')}${l('M-12 -13l10 9 -5 10 M-2 -4l19 -3','#c3c8ac',1,.4)}`,scale);
+  }
+  function tree(x,y,scale=1,variant=0) {
+    const tint = variant%2 ? ['#254b51','#386267','#547d79'] : ['#214550','#315862','#507578'];
+    return g(x,y,`${e(5,7,43,15,'#0a1c2b','opacity=".48"')}${p('M-25 5l13 -10 3 -37 -11 -24 9 8 9 14 7 -21 10 -9 -11 28 7 37 18 17 -26 -6 -9 10 -5 -8Z','#42575a',rim('#1c373f',1.4))}${l('M-6 -41l1 31 -6 12 M6 -34l3 25 10 12 M-13 -16l6 7','#7a8981',1.5,.65)}
+      ${p('M-40 -45q-19 -10 -9 -29 -13 -21 9 -30 -4 -21 21 -24 15 -24 34 -6 29 -5 33 20 24 3 22 25 13 14 -1 30 -4 22 -31 20 -22 18 -43 -2Z',tint[0],rim('#183844',1.1))}
+      ${p('M-46 -75q-6 -16 14 -24 -5 -20 17 -23 17 -20 31 -4 23 -7 27 19 20 1 20 21 -18 -4 -27 6 -15 -13 -33 0 -27 -7 -49 5Z',tint[1])}
+      ${p('M-36 -94q6 -13 24 -11 2 -17 23 -17 12 0 17 15 -20 -9 -29 8 -13 -5 -35 5Z',tint[2])}
+      ${l('M-42 -70q12 -12 25 -5 M4 -58q15 -10 27 -5 M30 -92q8 -4 16 1 M-25 -112q8 -4 13 0','#91b6a1',1.3,.4)}
+      ${many(5,i=>e(-27+i*13,-75+(i%2)*20,4,1.5,'#7ca6a0','opacity=".36"'))}`,scale);
+  }
+  function column(x,y,scale=1,broken=false) {
+    return g(x,y,`${e(0,4,24,9,'#162b39','opacity=".5"')}${p('M-23 0v-7l20 -7 26 7v8L0 9Z','#6d7d82',rim('#344d5a'))}${p('M-15 -9v-58l15 -7 15 7v58L0 -3Z','#8b9b9c',rim('#3e5664'))}${p('M0 -73l15 6v58L0 -3Z','#5a717d')}${l('M-10 -16v-48 M-5 -12v-52 M5 -14v-51','#c1c4b0',1,.6)}${broken?p('M-17 -64l4 -10 8 5 6 -13 6 7 11 3 -2 9 -16 5Z','#a7b1a9',rim('#45616b')):p('M-21 -68v-12l22 -7 20 7v12L0 -61Z','#9baaa5',rim('#45616b'))}${p('M-17 -20q9 -17 10 -30l5 -9 -2 22 -7 20Z','#476f62')}`,scale);
+  }
+
+  function actor(id, direction = 'down') {
+    id=Object.hasOwn(palette,id)?id:'vanguard';
+    const k=palette[id], mage=id==='mira'||id==='arcanist', ranger=id==='bram'||id==='pathfinder';
+    const dir=['up','down','left','right'].includes(direction)?direction:'down', side=dir==='left'||dir==='right', back=dir==='up';
+    const legs=`<g class="eq-leg-left">${p('M-7 -13l5 1 -1 10 -6 1 -1 -3Z','#40505b',rim(ink,.7))}${p('M-8 -4l5 0 1 4 -8 0Z','#393c3c',rim(ink,.7))}</g><g class="eq-leg-right">${p('M2 -12l5 -1 2 10 -6 1Z','#40505b',rim(ink,.7))}${p('M3 -4l5 -1 3 4 -8 1Z','#393c3c',rim(ink,.7))}</g>`;
+    const staff=mage?`<g class="eq-staff">${l('M15 -2L14 -39','#d4b584',2.3)}${p('M10 -37l-1 -7 5 -6 6 6 -2 7 -4 2Z',k.rim,rim('#3c4d68',.8))}${c(14,-43,3.5,k.gem)}${l('M14 -48v10 M10 -43h8','#edf7e9',.7)}</g>`:'';
+    const bow=ranger?`${l('M13 -34q18 17 1 32','#bba779',2.4)}${l('M13 -34l1 32','#dcd5b0',.6)}${p('M10 -32l-3 -7 4 0 3 7Z','#c1cfb2')}`:'';
+    const sword=!mage&&!ranger?`${p('M14 -9l-1 -22 3 -5 3 5 -2 22Z','#b7c9ca',rim('#3c5967',.6))}${l('M16 -32v22','#e3e8d4',.7)}${l('M11 -10h10 M16 -9v7',gold,2)}`:'';
+    const backGear=ranger?`${p('M-11 -32l5 -2 10 23 -6 3Z','#78613e',rim(ink,.8))}${l('M-6 -29l-6 -11 M-3 -29l-5 -12','#dfcdb0',1.1)}${p('M-13 -39l-1 -5 4 3 M-9 -40l0 -5 3 4Z','#a8b98a')}`:'';
+    const cape=side?'M-5 -34q-8 10 -6 24l11 -4 5 -15Z':'M-10 -32q-3 10 -5 22l14 3 15 -4 -5 -21Z';
+    const body=side?'M-7 -31l12 -2 5 20 -15 2Z':'M-8 -31l15 0 4 19 -21 0Z';
+    const face=side?`${e(1,-38,7.2,8.1,k.skin,rim(ink,.8))}${p('M-6 -39q-3 -11 7 -10 9 0 7 8l-5 -2 -3 4Z',k.hair)}${p('M7 -39l3 4 -3 1Z',k.skin)}${l('M5 -39h1',ink,1.2)}${l('M5 -33h2','#9e6e59',.7)}`:`${e(0,-39,8,8.8,k.skin,rim(ink,.9))}${p('M-8 -38q-3 -13 7 -13 12 0 10 13l-4 -7 -5 3 -4 -1Z',k.hair)}${l('M-4 -39h1 M3 -39h1',ink,1.4)}${l('M-2 -34q2 2 4 0','#a57563',.7)}`;
+    const hood=mage||ranger?`${p(side?'M-7 -38q-4 -14 6 -16 13 3 10 16l-5 -9 -9 2Z':'M-10 -36q-4 -15 10 -19 14 4 11 19l-5 -10 -7 -1 -6 6Z',k.cape,rim(k.fold,.8))}${l(side?'M-5 -46q6 -7 10 1':'M-6 -45l6 -5 7 6',k.rim,.8,.7)}`:`${p(side?'M-7 -41q-1 -12 8 -11 10 2 9 12l-5 -5 -11 4Z':'M-9 -40q-2 -13 9 -14 12 1 11 14l-10 -5Z','#a4b8c1',rim('#365166',1))}${p(side?'M-1 -52l1 -5 3 1 2 6Z':'M-2 -54l2 -4 3 4 -1 10Z',k.rim)}${l('M-7 -42l7 -5 8 5','#e1e5d4',.8)}`;
+    const head=back?`${p('M-10 -36q-3 -15 10 -19 13 3 11 19l-11 6Z',mage||ranger?k.cape:'#94aebb',rim(k.fold,.9))}${l('M0 -51v19',k.rim,1,.5)}`:`${face}${hood}`;
+    const offhand=!mage&&!ranger&&!back?`${p('M-16 -29l9 -2 6 5 -4 13 -7 -3Z','#729bac',rim('#c0c9b7',1))}${l('M-10 -28l1 11 M-13 -23l7 -1','#d8d7b5',1.1)}`:'';
+    const inner=`${backGear}<g class="eq-cape">${p(cape,k.cape,rim(k.fold,.9))}${l(side?'M-7 -29l-1 16':'M-7 -27l-3 16 M6 -26l4 14',k.rim,.8,.5)}</g>${legs}<g class="eq-body">${p(body,k.armor,rim(ink,.9))}${mage?p('M-8 -24l-4 14 22 0 -4 -16Z',k.cape,rim(k.fold,.7)):''}${l('M-7 -18l15 0',gold,1.4)}${p('M-1 -21h4v5h-4Z',gold)}${!back?l('M-5 -29l4 6 6 -6',k.rim,1):''}<g class="eq-arm-left">${p('M-10 -29l-4 10 3 4 4 -4 3 -9Z',k.cape,rim(ink,.7))}${c(-11,-16,2.6,k.skin)}${offhand}</g><g class="eq-arm-right">${p('M9 -28l5 9 -2 4 -4 -2 -3 -10Z',k.cape,rim(ink,.7))}${c(12,-16,2.6,k.skin)}${staff}${bow}${sword}</g><g class="eq-head">${head}</g>${!back?c(0,-29,1.7,k.gem):''}</g>`;
+    return `<g class="eq-actor-art eq-${id in palette?id:'vanguard'} eq-facing-${dir}">${e(0,1,13,5,'#081c28','opacity=".44"')}<g${dir==='left'?' transform="scale(-1 1)"':''}>${inner}</g></g>`;
+  }
+
+  function portrait(name) {
+    const id=name==='bram'?'bram':'mira', k=palette[id], uid=`eqp${++serial}`, mage=id==='mira';
+    const face= mage ?
+      `${p('M60 87q-15 -47 9 -58 33 -24 57 6 11 14 5 49l-18 21 -48 -5Z',k.hair,rim('#24304d',1.8))}${p('M72 59q10 -21 34 -11l14 17 -3 27q-7 20 -22 21 -20 -4 -26 -23Z',k.skin,rim('#886b6c',1))}${p('M68 73q-9 -17 6 -33 26 -20 45 8l4 24 -12 -19q-11 14 -33 12Z',k.hair)}${p('M61 60q0 34 12 43l-12 21 -7 -34Z','#3c4971')}${p('M118 64q-2 32 7 49l10 -17 -6 -36Z','#3c4971')}${l('M76 77q7 -5 12 0 M100 77q7 -4 12 1','#4e4965',2)}${e(83,80,2.8,3.8,'#526f94')}${e(106,80,2.8,3.8,'#526f94')}${c(83.5,79,1,cream)}${c(106.5,79,1,cream)}${l('M96 82l-2 9 4 1','#b98278',1)}${l('M85 98q9 6 18 -1','#a96d76',1.8)}${e(77,89,5,2,'#da9c91','opacity=".55"')}${e(110,89,5,2,'#da9c91','opacity=".55"')}` :
+      `${p('M61 57q-2 -24 25 -29 31 -9 43 20l-4 39 -12 19 -49 -11Z',k.hair,rim('#3b4237',1.5))}${p('M71 57l38 -6 14 17 -5 31 -18 16 -24 -9 -12 -24Z',k.skin,rim('#8d684c',1))}${p('M64 71q-9 -18 11 -31 22 -13 40 1l9 23 -14 -10 -13 10 -13 -5 -13 16Z',k.hair)}${p('M71 86l7 17 20 8 18 -12 -1 -10 -9 9 -18 0 -8 -9Z','#71523d','opacity=".65"')}${l('M76 76q6 -4 12 -1 M101 73q7 -4 13 0','#674b36',2.5)}${e(83,79,2.7,3,'#364c42')}${e(108,77,2.7,3,'#364c42')}${c(83.5,78,.8,cream)}${c(108.5,76,.8,cream)}${l('M96 80l-2 10 5 0','#986a4a',1.2)}${l('M86 97q8 5 17 -2','#704a38',1.7)}`;
+    const prop=mage?`${l('M155 182L156 54','#bdad7c',6)}${l('M154 177L154 58','#eee0ae',1.5)}${p('M146 55l-8 -17 18 -22 16 22 -9 19 -8 5Z','#7f92c4',rim('#c7c9e1',1.8))}${p('M155 20l-7 20 7 15 8 -18Z','#b4e5ec')}${c(155,39,20,url(uid+'light'))}${l('M144 37l22 2 M155 22l-1 30','#f0f0d4',.9)}`:`${l('M151 169q41 -65 4 -127','#bdab77',5)}${l('M155 42l-4 127','#e6d9ad',1)}${l('M149 80L137 34 M143 80l-9 -46','#c8b794',2)}${p('M135 37l-9 -11 7 1 5 10 M140 37l-1 -15 6 7 -2 10Z','#a6bf94')}`;
+    return `<svg xmlns="http://www.w3.org/2000/svg" class="eq-portrait eq-portrait-${id}" viewBox="0 0 200 200" role="img" aria-label="${mage?'미라 — 푸른 로브의 견습 마법사':'브람 — 초록 망토의 숲 순찰자'}"><defs>${grad(uid+'sky',mage?'#253e61':'#2b4a48',mage?'#3f4b71':'#405b4d','#172c3a')}${grad(uid+'cloth',k.rim,k.cape,k.fold)}${halo(uid+'light',k.gem)}<clipPath id="${uid}clip"><rect x="3" y="3" width="194" height="194" rx="24"/></clipPath></defs><g clip-path="url(#${uid}clip)">${r(0,0,200,200,url(uid+'sky'))}${c(98,88,79,'none')}${l('M98 9a79 79 0 1 0 .1 0 M98 17a71 71 0 1 0 .1 0',k.rim,.7,.25)}${many(9,i=>c(19+(i*37)%167,17+(i*51)%151,1+(i%2)*.4,k.gem,.45))}${mage?l('M32 44l5 -8 5 8 -5 9Z M159 99l4 8 -4 8 -4 -8Z M29 123l7 -4 6 5 -6 7Z','#b4bde3',1,.6):`${l('M-4 155Q15 80 37 28 M20 115l-10 -16 M26 89l13 -16 M183 154q-1 -52 -6 -80','#a2b799',2,.35)}`}${p('M19 207l10 -58q7 -24 45 -29l7 -18 30 0 8 19q41 9 47 36l14 50Z',url(uid+'cloth'),rim(k.fold,2))}${p('M79 107l-7 30 21 30 24 -34 -6 -26Z',k.skin)}${p('M72 120l23 42 -16 40 -35 -2 -9 -57Z',k.cape)}${p('M118 120l-22 42 8 40 50 -1 -4 -57Z',k.fold)}${p('M49 140l20 -15 26 37 -15 20Z',k.cape,rim(k.rim,1.2))}${p('M142 140l-25 -16 -22 38 24 16Z',k.cape,rim(k.rim,1.2))}${mage?`${l('M57 151l16 38 M65 145l16 41 M130 147l-12 41',gold,1,.8)}${p('M90 160l7 -7 8 9 -9 10Z',k.gem,rim(gold,1.8))}`:`${p('M58 136l13 -5 67 72 -18 0Z','#8d7751',rim('#bba57b',1.2))}${p('M86 159l10 -8 11 13 -10 9Z',gold)}${p('M90 160l6 -4 6 8 -6 5Z','#55634a')}`}${face}${prop}${mage?`${p('M147 133q-7 -12 -10 -6 -1 7 5 12l-1 7 10 6 6 -7 -1 -14 -5 -3Z',k.skin,rim('#886b6c',.8))}`:''}</g><rect x="3" y="3" width="194" height="194" rx="24" fill="none" stroke="${k.rim}" stroke-opacity=".55" stroke-width="1.4"/></svg>`;
+  }
+
+  function bridge(open) {
+    const boards=many(8,i=>`${p(`M${-32+i*8} -24l8 -2 0 44 -8 2Z`,i%2?'#849795':'#9caaa0',rim('#445e66',.8))}${l(`M${-29+i*8} -19v32`,'#c3c4a8',.7,.6)}`);
+    return `<g class="${open?'eq-solved':''}">${e(0,4,43,14,'#0d2632','opacity=".38"')}<g class="eq-bridge-whole">${boards}${l('M-38 -25l76 -5 M-38 22l76 -5','#bdc5af',3)}${[-33,33].map(x=>`${l(`M${x} -27v-14 M${x} 22V9`,'#5e777d',4)}${c(x,-42,3,'#c3ceb8')}${c(x,8,3,'#c3ceb8')}`).join('')}</g><g class="eq-bridge-gap">${p('M-36 -25l17 -1 6 17 -9 9 9 19 -23 3Z','#82948e',rim('#435c62'))}${p('M36 -29l-16 1 -4 14 9 10 -11 20 22 3Z','#82948e',rim('#435c62'))}${l('M-33 -20v32 M31 -21v30','#c4c7ac',1,.5)}${c(0,-5,3,'#a7e2e7',.75)}${c(-5,11,1.5,'#a7e2e7',.5)}${c(5,-20,1.5,'#a7e2e7',.5)}</g></g>`;
+  }
+  function worldObject(obj,state) {
+    const oid=String(obj.id||''), type=obj.type||'quest', uid=`eqo${++serial}`;
+    const solved=!!(state.solved||state.complete||state.completed), open=!!(state.open||state.opened), k=solved?'#c1e2bd':'#a2d8e6';
+    const base=`<defs>${halo(uid+'glow',k)}</defs><ellipse class="eq-sense-ring" cx="0" cy="0" rx="30" ry="17" fill="none" stroke="#dbc68e" stroke-width="1.5"/>`;
+    let body='';
+    if(type==='npc') {
+      const who=obj.npc||obj.companion||(['mira','bram'].find(x=>oid.includes(x)));
+      body=who==='mira'||who==='bram'?actor(who,'down'):who==='spirit'?`${e(0,0,19,7,'#1c354b')}<g class="eq-ambient-mote">${c(0,-25,37,url(uid+'glow'))}${p('M-13 -4q5 -9 1 -23 -2 -19 13 -20 15 1 14 18 -4 15 4 23l-10 -3 -9 8 -7 -9Z','#a0bccc','opacity=".75"')}${l('M-5 -31h2 M5 -31h2 M-3 -25q4 3 7 0','#334b6b',1.6)}${p('M-15 -17l15 3 15 -5 0 13 -15 5 -15 -3Z','#cdd3b5',rim('#68818d',.7))}</g>`:`<g class="eq-idle">${actor('arcanist','down')}${who==='rowan'?`${p('M-7 -35q7 4 14 0l-2 12 -5 5 -5 -6Z','#c3cbc4',rim('#5b7179',.7))}${l('M-3 -32l1 8 M3 -32l-1 10','#e0e0ce',.6)}`:`${p('M-11 -20l11 -2 11 2v10l-11 -2 -11 2Z','#c8d1b1',rim('#566f77',.7))}`}</g>`;
+    } else if(oid.includes('bridge')||obj.appearance==='bridge') {
+      body=`${g(68,0,`<g transform="scale(1 1.8)">${bridge(solved||open)}</g>`)}${p('M-15 1l3 -25 23 -2 5 27Z','#718b8c',rim('#395966',1))}${l('M-7 -17l6 -6 7 6 M-7 -9h14 M-6 -3h12',k,1.3)}${l('M15 -5h20',k,1,.4)}`;
+    } else if(oid==='r-gate'||oid==='c-door') {
+      const vertical=oid==='r-gate';
+      body=`${e(0,2,20,7,'#112b3a')}${p('M-15 1l4 -24 22 0 5 24Z','#79909a',rim('#3f586c',1))}${l('M-7 -16l7 -5 7 5 -7 7Z',k,1.3)}${g(vertical?62:0,vertical?0:-43,`<g class="eq-door-leaf">${r(vertical?-17:-60,vertical?-70:-17,vertical?35:120,vertical?155:35,'#6d91a2',2)}${r(vertical?-13:-58,vertical?-70:-13,vertical?27:116,vertical?155:27,'#83bec7',2)}${many(6,i=>l(vertical?`M-10 ${-58+i*25}l10 7 10 -7 -10 -7Z`:`M${-51+i*19} -10l6 10 -6 10 -6 -10Z`,'#c7e9e4',1.2,.8))}${c(0,0,66,url(uid+'glow'))}</g>${vertical?`${l('M-23 -70h45 M-23 85h45','#c3d0b9',4)}`:`${l('M-60 -24v48 M60 -24v48','#c3d0b9',4)}`}`)}`;
+    } else if(type==='chest') {
+      body=`${e(0,2,25,9,'#0a202a','opacity=".45"')}<g class="eq-chest-treasure">${c(0,-23,38,url(uid+'glow'))}${crystal(-4,-8,.46,'gold',-12)}${c(8,-13,5,'#d7be75')}${c(12,-6,4,'#eddb97')}</g>${p('M-21 -17l42 -2 -1 24 -18 7 -22 -6Z','#705542',rim('#292e32',1.5))}${p('M1 -14l20 -5 -1 24 -18 7Z','#4c4341')}${p('M-17 -15l5 0 0 23 -5 -2 M11 -17l5 -1 -1 25 -5 2Z',gold)}${l('M-19 1l18 4 21 -6','#a1845c',1.1)}<g class="eq-chest-lid">${p('M-21 -18q1 -15 20 -15 19 -1 22 14l-20 7Z','#8d6a48',rim('#29343b',1.5))}${p('M1 -33q16 1 20 14l-20 7Z','#6e5542')}${p('M-17 -23q1 -6 5 -7l1 14 -6 -2 M11 -31q4 2 5 5l0 12 -5 2Z',gold)}${l('M-20 -18l21 6 20 -7','#e3c88e',1.5)}</g>${p('M-3 -17h8v11h-8Z','#c3aa70',rim('#74684e',.7))}${c(1,-12,1.3,'#34404a')}`;
+    } else if(type==='door') {
+      const secret=oid.includes('grove')||oid.includes('vault')||obj.to==='grove'||obj.to==='vault';
+      body=`${e(0,4,36,12,'#0a202a','opacity=".5"')}${p('M-31 2v-42q1 -23 31 -34 30 11 31 34V2l-10 5 -2 -43Q16 -49 0 -57q-16 8 -19 21v43Z',secret?'#547571':'#77878e',rim('#2c4758',1.4))}${p('M-19 3v-40q3 -12 19 -20 17 9 19 20V3Z','#122a3b')}${l('M-26 -2v-36q1 -22 26 -30 26 9 26 30V0','#b3bca7',1.3,.75)}${l('M-29 -35l10 -2 M-23 -54l9 6 M-6 -70l3 12 M16 -62l-6 9 M29 -37l-10 0','#3f5866',1.8)}<g class="eq-door-leaf">${p('M-17 1v-37q2 -11 17 -18 16 9 17 18V1Z',secret?'#365b61':'#4c5b75',rim('#9bb4b6',.8))}${l('M0 -52V0 M-15 -35h30 M-16 -11h32',gold,1,.65)}${p('M-9 -29l9 -12 9 12 -9 12Z','#233f57',rim('#a3bfc5',1))}</g><g class="eq-door-sigil eq-rune-glow">${l('M-6 -28l6 -8 6 8 -6 7Z M0 -36v16',k,1.5)}${c(0,-28,17,url(uid+'glow'))}</g>${secret?`${tuft(-26,4,1.25)}${tuft(28,2,.8)}`:''}`;
+    } else if(type==='sign') {
+      const cross=oid.includes('cross')||obj.choiceId==='crossroad';
+      body=`${e(0,2,20,7,'#0a202a','opacity=".4"')}${p('M-3 -30l6 -1 -1 33 -5 0Z','#8e8266',rim('#344850',.8))}${p(cross?'M-26 -40h41l10 8 -10 8h-41Z':'M-27 -40l49 -2 5 27 -49 2Z','#647878',rim('#b1bc9e',1))}${l('M-18 -31h28 M-16 -25h18','#dce2bd',1.5,.85)}${cross?`${p('M-21 -19h44v14h-44l-9 -7Z','#566e70',rim('#a6b398',.8))}${l('M-15 -12h31','#cfd9b9',1)}`:''}${tuft(-12,5,.6)}`;
+    } else if(type==='crystal'||oid==='c-choice') {
+      const color=obj.color||(['red','green','blue','violet'].find(x=>oid.includes(x)))||'blue';
+      const big=oid.includes('final')||oid.includes('word')||oid.includes('restore')||oid==='c-choice';
+      const size=obj.size==='tall'?1.7:obj.size==='small'?.55:1;
+      const shape={red:'M-5 -23l5 -8 5 8Z',green:'M-5 -29h10v10h-10Z',blue:'M0 -32l6 8 -6 8 -6 -8Z',violet:'M-6 -24h12 M0 -30v12',amber:'M-5 -29h10l-2 10h-6Z'}[color]||'M0 -32l6 8 -6 8 -6 -8Z';
+      body=`${e(0,3,big?38:23,big?13:8,'#0a202a','opacity=".4"')}${p(big?'M-29 -3l10 -15 36 0 13 15 -9 13 -43 0Z':'M-17 0l7 -11 21 0 7 11 -8 6 -21 0Z','#5e7281',rim('#314b5d',1))}<g class="eq-crystal-light">${c(0,-22,big?65:40,url(uid+'glow'))}</g>${big?`${crystal(-20,-7,.7,'violet',-18)}${crystal(19,-5,.8,'blue',18)}${crystal(0,0,1.45,color)}`:crystal(0,0,size,color)}${g(0,0,p(shape,'none',`stroke="#f0edd2" stroke-width="1.5" stroke-linejoin="round"`),size)}${big?l('M-36 8q36 22 72 0 M-28 15q28 14 56 0',k,1,.5):''}`;
+    } else if(type==='book') {
+      const tablet=oid.includes('inscription')||oid.includes('tablet')||oid.includes('stone');
+      body=tablet?`${e(0,3,24,8,'#0a202a','opacity=".4"')}${p('M-22 1l2 -39 12 -13 25 2 6 17 -2 34Z','#7e9397',rim('#3b5463',1.2))}${p('M-19 -36l12 -12 21 2 4 10Z','#a2afaa')}${l('M-13 -28h24 M-12 -21h23 M-11 -14h17 M-10 -7h20',k,1.5,.8)}${l('M5 -47l-5 9 4 4','#4a6770',1)}${tuft(17,4,.7)}`:`${e(0,3,23,8,'#0a202a','opacity=".4"')}${p('M-15 -5l5 -18 19 0 7 18 -3 10 -25 0Z','#6a7e84',rim('#334f5d',1))}${p('M-23 -29q13 -8 23 -2 13 -8 24 -2l-3 20q-14 -3 -21 1 -10 -4 -22 0Z','#bcc9ae',rim('#425c64',1))}${p('M-21 -30q11 -5 21 -1v18q-11 -5 -21 0Z','#dfdec1')}${p('M1 -31q11 -6 21 -2l-3 18q-9 -3 -18 2Z','#c7d2bc')}${l('M-17 -25l12 -1 M-17 -21h11 M7 -25l10 -2 M7 -20l9 -2','#788f81',1)}${l('M0 -30v17',gold,1.3)}`;
+    } else if(obj.appearance==='mushroom') {
+      body=`${e(0,2,19,7,'#102c36')}${c(0,-11,30,url(uid+'glow'))}${mushrooms(0,0,2)}${p('M-6 0l6 -3 7 3 -7 4Z','#729394')}${c(0,0,1.8,k)}`;
+    } else if(type==='switch') {
+      body=`${e(0,3,20,8,'#0a202a','opacity=".4"')}${p('M-16 -3l5 -10 20 0 8 9 -4 10 -26 0Z','#708c8c',rim('#375360',1))}<g class="eq-switch-lever">${l('M0 -4l-8 -22','#adb6a3',4)}${c(-8,-26,5,gold)}${c(-8,-26,2,'#e9ddb4')}</g>${c(7,-3,2,k)}${tuft(-18,6,.6)}`;
+    } else if(oid==='f-tracks') {
+      body=`${e(-9,-10,4,7,'#b2c2ab','transform="rotate(-18 -9 -10)"')}${e(5,0,4,7,'#b2c2ab','transform="rotate(-18 5 0)"')}${c(-11,-19,2,'#c6d6bb')}${c(3,-9,2,'#c6d6bb')}${l('M-16 -19l4 -5 M-1 -9l4 -5','#87b4aa',1,.55)}`;
+    } else if(obj.size==='small'||obj.size==='large'||oid==='f-tree-front'||oid==='r-front') {
+      body=stone(0,0,obj.size==='large'?1.65:obj.size==='small'?.6:.9);
+    } else if(oid.includes('pillar')) {
+      body=`${e(0,1,18,8,'#3e626a')}${p('M-13 -3l13 -9 13 8 -12 8Z','#9aaca3',rim('#45636a',1))}${l('M-6 -3h12 M0 -8v11','#d4ddbc',1)}`;
+    } else if(oid.includes('statue')) {
+      body=`${column(0,3,.55,true)}${p('M-12 -29l2 -22 10 -9 10 9 3 22Z','#879b99',rim('#3b5961',1))}${e(0,-58,7,8,'#a9b7aa')}${l('M-7 -48l7 9 7 -9','#c5cbb3',1)}${p('M-4 -37l-6 17 12 0 8 -17Z','#617a7c')}`;
+    } else if(oid.includes('key')) {
+      body=`${e(0,2,18,5,'#0a202a','opacity=".35"')}${c(0,-12,26,url(uid+'glow'))}${l('M-6 -17L10 0 M4 -6l-4 4 M8 -2l-4 4',gold,3)}${c(-10,-21,6,'none')}${p('M-15 -21a5 5 0 1 0 10 0 5 5 0 1 0 -10 0Z','none',`stroke="${gold}" stroke-width="3"`)}`;
+    } else if(oid.includes('map')||oid.includes('scroll')) {
+      body=`${e(0,2,22,7,'#0a202a','opacity=".3"')}${p('M-20 -28l34 -3 5 29 -34 3Z','#d4d2b0',rim('#6a7867',1))}${p('M-22 -28q-3 -5 3 -5l34 -2q6 1 3 6 M-16 0q-4 7 2 7l35 -5q5 -2 0 -5Z','#b3bb9a',rim('#6a7867',1))}${l('M-12 -21l10 2 5 -7 9 3 M-8 -2l1 -12 10 5 9 -5','#78988c',1.2)}${l('M-6 -19l9 11 M-6 -8l9 -11','#b37567',1.5)}`;
+    } else if(oid.includes('light')||oid.includes('trail')) {
+      body=`${c(0,-6,30,url(uid+'glow'))}${e(0,2,13,5,'#5a7880')}${crystal(0,0,.55,'blue')}`;
+    } else {
+      body=`${e(0,2,20,7,'#0a202a','opacity=".35"')}${c(0,-18,32,url(uid+'glow'))}${p('M-18 1l5 -14 28 -2 5 16Z','#71868a',rim('#3c5663',1))}${crystal(0,-6,.85,oid.includes('fragment')?'violet':'gold')}`;
+    }
+    return `<g class="eq-object-art${open?' eq-open':''}${solved?' eq-solved':''}${state.sensed?' eq-sense':''}${state.available===false?' eq-object-unavailable':''}">${base}${body}</g>`;
+  }
+
+  const fallbackObstacles={
+    forest:[[70,75,210,95],[610,55,220,95],[40,560,240,35],[700,495,150,100],[470,0,36,475],[470,565,36,75],[470,475,36,90,'f-bridge']],
+    ruins:[[450,0,35,245],[450,400,35,240],[450,245,35,155,'r-gate'],[600,190,60,60],[160,105,40,50],[310,105,40,50],[665,435,35,60],[800,435,35,60]],
+    cavern:[[0,245,420,35],[540,245,420,35],[420,245,120,35,'c-door'],[60,70,70,110],[570,380,70,85],[860,340,60,90]],
+    grove:[[70,65,240,120],[650,70,200,120],[420,280,80,160]],
+    vault:[[250,130,75,170],[640,130,75,170],[410,410,130,60]]
+  };
+  function floor(uid, theme) {
+    const scheme={forest:['#213f48','#294e55','#172f3b'],grove:['#284b4c','#416356','#203d42'],ruins:['#334552','#45575c','#293846'],cavern:['#26364f','#344862','#222d45'],vault:['#35404e','#48535d','#253344']}[theme];
+    return `<defs>${grad(uid+'floor',...scheme)}${halo(uid+'moon',theme==='grove'?'#bde4b7':theme==='cavern'?'#a8acdf':'#a4d7e2')}${halo(uid+'water','#5eabb7')}${grad(uid+'path','#718274','#667c73','#526b67')}${grad(uid+'waterfill','#245466','#367d87','#244b60')}${halo(uid+'gold','#e0cc9c')}</defs>${r(0,0,960,640,url(uid+'floor'))}
+      ${e(430,305,510,350,url(uid+'moon'))}${many(145,i=>{
+        const x=24+(i*137)%912,y=23+(i*173)%592;
+        return i%3===0?l(`M${x} ${y}l5 -2 5 1`,scheme[1],.9,.4):e(x,y,1.7+(i%4),.65,theme==='grove'?'#a1b99b':'#96a7a0','opacity=".12"');
+      })}`;
+  }
+  function pathWay(d, width=66, stony=false) {
+    return `${l(d,'#152d35',width+8,.2)}${l(d,stony?'#69787a':'#637f78',width,.42)}${l(d,stony?'#98a29a':'#96a88d',width-8,.1)}`;
+  }
+  function water(x,y,w,h,uid) {
+    return `${r(x-3,y,w+6,h,'#1b3540')}${r(x,y,w,h,url(uid+'waterfill'))}${l(`M${x+2} ${y}v${h} M${x+w-2} ${y}v${h}`,'#a0c6ba',1,.45)}${many(Math.ceil(h/35),i=>`<g class="eq-water-line" style="--delay:${-(i%6)}s">${l(`M${x+8+(i%3)*3} ${y+12+i*35}q7 -3 13 -1 M${x+9} ${y+20+i*35}h8`,'#a3e2de',.9,.6)}</g>`)}`;
+  }
+  function forestBlock(o,uid,secret=false) {
+    let body=`${r(o.x,o.y,o.w,o.h,'#1b3941',12)}${r(o.x+3,o.y+2,o.w-6,o.h-4,'#2b514f',10)}`;
+    if(o.h<50) {
+      body+=many(Math.floor(o.w/26),i=>`${g(o.x+15+i*26,o.y+18,`${e(0,0,19,13,'#325955')}${e(-3,-4,13,8,'#527b6b')}${l('M-9 0l9 -4 9 4','#87a388',.8,.45)}`)}${tuft(o.x+12+i*26,o.y+o.h-2,.7)}`);
+    } else {
+      body+=many(Math.max(2,Math.floor(o.w/59)),i=>tree(o.x+35+i*((o.w-65)/Math.max(1,Math.floor(o.w/59)-1)),o.y+o.h-9,.69+(i%2)*.12,i));
+      body+=many(Math.floor(o.w/30),i=>tuft(o.x+14+i*30,o.y+o.h-1,.6+(i%3)*.15));
+    }
+    return body+`${mushrooms(o.x+o.w-11,o.y+o.h-3,.85)}${secret?c(o.x+o.w/2,o.y+o.h/2,90,url(uid+'gold')):''}`;
+  }
+  function masonry(o) {
+    const vertical=o.h>o.w, count=Math.ceil((vertical?o.h:o.w)/26);
+    return `${r(o.x+3,o.y+4,o.w,o.h,'#142733')}${r(o.x,o.y,o.w,o.h,'#6c7f86')}${r(o.x+4,o.y+3,o.w-8,o.h-6,'#879491')}${l(vertical?`M${o.x+o.w-5} ${o.y}v${o.h}`:`M${o.x} ${o.y+o.h-4}h${o.w}`,'#bdc4ae',1.4,.6)}${many(count,i=>l(vertical?`M${o.x+2} ${o.y+11+i*26}l${o.w-4} -3`:`M${o.x+10+i*26} ${o.y+2}l-2 ${o.h-4}`,'#3f5866',1.7,.8))}${many(Math.floor(count/3),i=>p(vertical?`M${o.x+3} ${o.y+12+i*74}l12 3 -6 14 9 3 -3 15 -12 -7Z`:`M${o.x+12+i*74} ${o.y+3}l17 4 -3 9 -15 -3Z`,'#466d66','opacity=".8"'))}`;
+  }
+  function crystalRidge(o) {
+    const horizontal=o.w>o.h, count=Math.max(2,Math.floor((horizontal?o.w:o.h)/29));
+    return `${r(o.x,o.y,o.w,o.h,'#19293d',6)}${many(count,i=>{
+      const x=horizontal?o.x+13+i*(o.w-25)/(count-1):o.x+o.w/2+(i%2?11:-11), y=horizontal?o.y+o.h-2:o.y+30+i*(o.h-32)/(count-1);
+      return `${p(`M${x-14} ${y}l-2 -18 11 -13 20 9 5 17 -9 8Z`,i%2?'#52647b':'#465c75',rim('#283c54',1))}${l(`M${x-3} ${y-28}l5 14 12 -5 M${x+2} ${y-14}l-2 16`,'#91a8b8',1,.5)}${i%3===0?crystal(x-2,y,.45+(i%2)*.12,'violet',-10):''}`;
+    })}`;
+  }
+  function runeCircle(x,y,size=1,color='#acc6b5') {
+    return g(x,y,`${e(0,0,67,43,'none',`stroke="${color}" stroke-width="1.1" opacity=".32"`)}${e(0,0,58,36,'none',`stroke="${color}" stroke-width=".8" opacity=".25"`)}${many(8,i=>{
+      const angle=i*Math.PI/4,rx=Math.cos(angle)*61,ry=Math.sin(angle)*39;
+      return l(`M${rx-2} ${ry-4}l4 0 0 7 -4 0 4 -7`,color,.8,.48);
+    })}${l('M0 -26l33 26 -33 25 -33 -25Z M-33 0h66 M0 -26v51',color,.8,.18)}`,size);
+  }
+  function ambient(uid,theme) {
+    const points=theme==='forest'?[[96,218],[280,84],[376,150],[534,315],[657,205],[856,245],[658,530],[775,387],[298,484],[553,82]]:theme==='grove'?[[122,258],[205,218],[315,440],[516,193],[685,240],[820,400],[602,455],[393,511],[815,96],[725,578],[350,155],[566,74]]:[[140,220],[360,88],[560,325],[787,330],[724,149],[869,577],[435,536],[179,589]];
+    return points.map(([x,y],i)=>`<g class="eq-ambient-mote" style="--duration:${4+(i%4)}s;--delay:${-i*.72}s">${c(x,y,5,i%3?'#99d8df':'#c8d7a2',.09)}${c(x,y,1.25,i%3?'#b6e7e5':'#e5eab8',.7)}</g>`).join('');
+  }
+  function groundDetail(theme) {
+    // These are flush ground markings and lighting, never extra collision features.
+    const forest=theme==='forest'||theme==='grove';
+    if(forest) return `<g opacity=".12">${p('M595 0L920 0 555 640 265 640Z','#aedaca')}${p('M170 0h57L0 392V267Z','#a6d5d4')}</g>${many(90,i=>{
+      const x=21+(i*163)%917,y=22+(i*97)%594;
+      return `<g opacity="${.14+(i%3)*.04}" transform="translate(${x} ${y}) rotate(${i*37%180})">${p('M-5 0q3 -5 8 -2 -1 5 -8 2Z',i%3?'#8db19b':'#c3be8b')}${l('M-6 2l9 -4','#9eb8a5',.5)}</g>`;
+    })}${many(12,i=>{
+      const x=i%2?922:32,y=70+Math.floor(i/2)*100;
+      return g(x,y,`${l('M0 16q8 -21 0 -38','#608e79',1,.5)}${many(5,j=>`${p(`M${j%2?-1:3} ${12-j*6}q-14 -2 -16 -9 13 0 16 9Z`,'#52816b','opacity=".36"')}${p(`M${j%2?0:4} ${10-j*6}q12 -3 15 -11 -11 2 -15 11Z`,'#6a9578','opacity=".33"')}`)}`,.7);
+    })}`;
+    if(theme==='cavern') return `${many(8,i=>l(`M${12+i*4} ${22+i*12}Q205 ${89+i*13} 361 ${32+i*11}T${940-i*3} ${80+i*10}`,'#8196b3',.8,.07))}${many(7,i=>l(`M${26+i*4} ${590-i*15}Q237 ${535-i*11} 412 ${586-i*12}T${932-i*8} ${568-i*9}`,'#9da9bf',.8,.08))}${many(28,i=>{
+      const x=30+(i*173)%900,y=28+(i*109)%570;
+      return l(`M${x} ${y}l8 -4 18 3 8 -4 M${x+11} ${y-2}l-4 7`,'#b3bac5',.8,.14);
+    })}`;
+    return `${many(16,i=>{
+      const x=58+(i%4)*243,y=62+Math.floor(i/4)*171;
+      return g(x,y,`${p('M0 -17l29 17 -29 17 -29 -17Z','none','stroke="#a9b6ad" stroke-width=".8" opacity=".14"')}${p('M0 -11l18 11 -18 11 -18 -11Z','none','stroke="#a9b6ad" stroke-width=".7" opacity=".12"')}${c(0,0,2,'#c5c7ab',.15)}`);
+    })}${many(20,i=>{
+      const x=46+(i*137)%880,y=44+(i*191)%555;
+      return l(`M${x} ${y}l9 5 -2 8 13 4 M${x+7} ${y+13}l-5 4`,'#0e2637',.9,.27);
+    })}`;
+  }
+  function worldBackground(name,area) {
+    const theme=Object.hasOwn(fallbackObstacles,name)?name:'forest', uid=`eqw${++serial}`;
+    const canonical=area || (typeof ExplorationData!=='undefined'?ExplorationData.areas[theme]:null);
+    const obstacles=canonical?.obstacles||fallbackObstacles[theme].map(([x,y,w,h,requires])=>({x,y,w,h,requires}));
+    let body=floor(uid,theme)+groundDetail(theme);
+    if(theme==='forest') {
+      body+=`${pathWay('M65 448Q167 462 243 419T305 323Q301 258 343 223L409 192',63)}${pathWay('M145 273Q183 221 210 206',45)}${pathWay('M99 458Q126 373 109 350Q124 317 211 322L273 333',48,true)}${pathWay('M285 405Q298 480 369 509L535 523Q594 520 642 436Q707 331 877 315',72)}${pathWay('M541 525Q579 492 593 422',44)}${pathWay('M352 197Q338 138 350 88L426 92',39)}
+        ${e(177,130,154,111,url(uid+'moon'))}${e(703,280,222,152,url(uid+'moon'))}`;
+      body+=obstacles.filter(o=>!o.requires).map(o=>o.x===470?water(o.x,o.y,o.w,o.h,uid):forestBlock(o,uid)).join('');
+      body+=`${water(470,475,36,90,uid)}${tree(175,166,.96,0)}${many(9,i=>g(114+(i%3)*16,352+Math.floor(i/3)*24,p('M-7 -3l12 -2 4 5 -12 4Z','#8b9b8d','opacity=".3"')))}
+        ${many(7,i=>`${tuft(530+i*47,570+(i%2)*24,.6)}${mushrooms(550+i*43,590+(i%2)*16,.5)}`)}${mushrooms(310,68,.85)}${mushrooms(860,464,1.1)}${mushrooms(50,261,.8)}${tuft(601,190,1.4)}${tuft(846,181,1)}
+        ${l('M515 33q19 28 7 55 M513 230q15 24 4 48 M454 320q-12 23 -5 38','#79a09c',1,.32)}${many(6,i=>e(460,70+i*77,3,9,'#527b70','opacity=".65"'))}
+        ${runeCircle(758,311,.7,'#9dbdb7')}${p('M20 20h920v600H20Z','none','stroke="#9fbeb6" stroke-opacity=".08" stroke-width="1"')}`;
+    } else if(theme==='ruins') {
+      body+=`${pathWay('M45 330L401 315Q464 315 536 315L811 315Q851 279 839 182L885 66',76,true)}${pathWay('M250 315L253 225M255 323L245 431Q242 503 306 534',54,true)}${pathWay('M550 317L554 418Q637 479 751 466L879 548',60,true)}${runeCircle(279,318,1.65)}${runeCircle(689,326,1.2)}
+        ${many(32,i=>{
+          const x=39+(i*79)%870,y=48+(i*113)%548;
+          return `<g opacity=".15">${p(`M${x} ${y}l35 -4 3 21 -35 4Z`,'#a0afa4',rim('#172c3c',1))}${l(`M${x+5} ${y+3}l26 -2`,'#e1d9b7',.8)}</g>`;
+        })}`;
+      body+=obstacles.filter(o=>!o.requires).map(o=>{
+        if(o.w===35&&o.x===450)return masonry(o);
+        if(o.x===600)return `${r(o.x,o.y,o.w,o.h,'#677c80',4)}${p('M605 199l25 -8 25 8v39l-25 9 -25 -9Z','#8a9c97',rim('#3b5664'))}${g(630,238,`${p('M-17 0l5 -35 9 -11 13 9 10 33Z','#91a4a0',rim('#4d6870',1.2))}${e(1,-47,10,12,'#b1c0b1')}${p('M-7 -50l-5 -15 17 -3 10 17Z','#8ba19e')}${l('M-6 -34l5 17 12 -18 M-2 -16l-3 15','#c1c8b1',1.6)}${p('M6 -12l9 -10 3 14 -4 7Z','#698780')}`)}`;
+        return `${r(o.x,o.y,o.w,o.h,'#314a54',5)}${column(o.x+o.w/2,o.y+o.h-5,o.w/49,o.y>400)}`;
+      }).join('');
+      body+=`${l('M425 245h84 M425 400h84','#9daea4',4,.75)}${l('M452 242v-12 M480 242v-12 M452 401v12 M480 401v12','#c2cab0',4,.8)}${tuft(486,437,.8)}${tuft(484,127,.7)}${tuft(210,99,1.1)}${tuft(668,251,.8)}
+        ${l('M57 594q97 -22 150 -5 M676 41l51 3 12 -11 M757 576l-27 5 -18 -9','#a7b2a1',1,.2)}${mushrooms(51,205,.8)}${mushrooms(905,404,.8)}`;
+    } else if(theme==='cavern') {
+      body+=`${pathWay('M56 546Q165 529 211 449Q263 383 348 376L480 307L480 242Q483 166 540 145L806 170',70,true)}${pathWay('M218 452Q402 518 678 555L833 509',70,true)}${pathWay('M475 174Q393 135 214 156',50,true)}
+        ${e(742,439,190,135,url(uid+'moon'))}${e(472,118,236,133,url(uid+'moon'))}${runeCircle(540,145,1.2,'#c8c8e2')}
+        ${p('M0 607Q125 584 218 610T444 612Q577 599 726 624L960 612v28H0Z','#29495e')}${l('M7 620q123 -25 213 -3t213 10 M607 624q71 -1 104 7 M802 630l125 -7','#8cbcc9',1,.3)}
+        ${l('M68 19Q212 34 309 14 M718 23l66 14 97 -16 M922 85q-5 66 15 118','#748aaf',1.4,.25)}`;
+      body+=obstacles.filter(o=>!o.requires).map(o=>crystalRidge(o)).join('');
+      body+=`${crystal(99,157,1.75,'blue',-8)}${crystal(80,164,.9,'violet',-20)}${crystal(115,173,.95,'blue',16)}${crystal(607,450,1.6,'violet',8)}${crystal(586,457,.8,'blue',-14)}${crystal(891,412,1.8,'blue',-8)}${crystal(911,421,.75,'violet',22)}
+        ${g(330,145,`${e(0,0,20,8,'#1d3046')}${l('M0 0v-43','#80969e',4)}${p('M-10 -44l3 -13 15 0 4 13 -4 16 -13 0Z','#8ba4ac',rim('#3a5068',1.4))}${p('M-6 -43l13 0 -2 11 -9 0Z','#e3d3a1')}${c(1,-39,45,url(uid+'gold'))}${l('M-11 -44h24 M-4 -28v-15 M6 -28v-15','#b9bba1',1)}`)}
+        ${crystal(777,183,.85,'blue')}${e(774,172,44,28,url(uid+'moon'))}${l('M423 241l-6 -12 M538 242l6 -12 M421 282l-8 12 M538 282l8 12','#bfc8c7',3,.65)}
+        ${many(16,i=>e(31+i*59,300+(i%3)*5,5,1.6,'#a7b9c2','opacity=".16"'))}`;
+    } else if(theme==='grove') {
+      body+=`${pathWay('M65 502Q160 491 232 328Q288 237 351 224Q497 203 579 227L731 302',70)}${pathWay('M246 384Q284 524 470 536L613 508Q753 485 738 321',65)}${e(533,291,307,206,url(uid+'gold'))}${runeCircle(730,300,1.25,'#d1d9b1')}`;
+      body+=obstacles.map(o=>{
+        if(o.x===420)return `${r(o.x,o.y,o.w,o.h,'#20463f',17)}${p('M423 424l12 -23 0 -83 12 -27 38 -9 11 26 -7 99 10 24 -24 -9 -12 16 -12 -16Z','#4e6b58',rim('#243e40',1.4))}${l('M447 310l-3 80 8 30 M475 304l-4 102 13 16','#99a27b',2,.65)}${p('M438 333l8 -9 4 13 -6 14Z','#25443e')}${g(460,316,`${e(0,-30,47,33,'#385f4d')}${e(-7,-41,37,23,'#557c5d')}${l('M-30 -38q14 -13 29 -8 M3 -29l22 -7','#a3ba8f',1.5,.45)}`)}${mushrooms(428,436,1.15)}${mushrooms(485,439,.75)}`;
+        return forestBlock(o,uid,true);
+      }).join('');
+      body+=`${many(9,i=>mushrooms(110+i*91,587+(i%2)*17,.55+(i%3)*.15))}${tuft(365,89,1.2)}${tuft(608,104,1)}${tuft(830,481,1.2)}${l('M406 171q54 -13 105 0 M277 568q80 19 124 10','#c2c5a0',1,.25)}`;
+    } else {
+      body+=`${pathWay('M54 479L187 483Q220 386 202 315L167 191',62,true)}${pathWay('M196 481L387 503Q557 535 786 480L790 216',75,true)}${pathWay('M481 491L478 339',60,true)}${runeCircle(480,247,2.6,'#a8bdc6')}
+        ${many(5,i=>`${l(`M40 ${60+i*118}H920`,'#8fa2a6',.9,.12)}${l(`M${80+i*195} 30v580`,'#a6b4ae',.9,.13)}`)}
+        ${p('M29 25h902v590H29Z','none','stroke="#8b9ba3" stroke-width="6" stroke-opacity=".22"')}${p('M43 39h874v562H43Z','none','stroke="#c5c8b5" stroke-width="1" stroke-opacity=".25"')}`;
+      body+=obstacles.map(o=>{
+        if(o.y===410)return `${r(o.x+3,o.y+5,o.w,o.h,'#1c3040',4)}${r(o.x,o.y,o.w,o.h,'#786d64',4)}${r(o.x+5,o.y+5,o.w-10,o.h-12,'#a99a7c',2)}${l(`M${o.x+9} ${o.y+19}h${o.w-18} M${o.x+8} ${o.y+38}h${o.w-17}`,'#6f7269',1.3,.6)}${g(465,436,`${p('M-17 -11l35 -1 -2 21 -34 1Z','#c9c8a4',rim('#837e67',.7))}${l('M-12 -7l20 0 M-12 -2l16 0 M-11 3l22 0','#87957a',1)}`)}${g(508,440,`${c(-4,-3,4,'none')}${l('M-4 -7q-7 4 0 8 7 -4 0 -8 M0 1l10 9 3 -3',gold,2)}`)}`;
+        return `${r(o.x+3,o.y+4,o.w,o.h,'#1a2d3e',3)}${r(o.x,o.y,o.w,o.h,'#586b78',3)}${r(o.x+5,o.y+5,o.w-10,o.h-10,'#87959b',2)}${many(5,i=>`${r(o.x+9,o.y+10+i*30,o.w-18,24,'#334b60',2)}${many(6,j=>r(o.x+12+j*9,o.y+13+i*30,5,17,j%3?'#73938f':'#ae9b79',1))}${l(`M${o.x+8} ${o.y+35+i*30}h${o.w-16}`,'#c4c6af',1,.8)}`)}${crystal(o.x+o.w/2,o.y+3,.58,'violet')}`;
+      }).join('');
+      body+=`${[91,870].map(x=>g(x,61,`${c(0,0,51,url(uid+'gold'))}${p('M-10 7l4 -17 13 0 5 17Z','#748c94',rim('#405567',1))}${p('M-6 -10q-6 -14 6 -24 13 12 8 24Z','#d8d1a2')}${c(1,-15,4,'#f4e9c3')}`)).join('')}${l('M379 63h203 M379 73h203 M377 566h205 M377 576h205',gold,1,.25)}`;
+    }
+    return `<g class="eq-scenery eq-scenery-${theme}">${body}${ambient(uid,theme)}${r(0,0,960,640,'none')}</g>`;
+  }
+
+  function background(area) {
+    return worldBackground(typeof area==='string'?area:area?.id||'forest', typeof area==='object'?area:null);
+  }
+  function object(obj = {}, state = {}) {
+    return worldObject(obj,state);
+  }
+  return {background, object, hero:(id,direction)=>actor(id,direction), companion:(id,direction)=>actor(id==='bram'?'bram':'mira',direction), portrait};
+})();
+
+;
 // Scene controller. Only controls from the currently rendered scene may dispatch.
 const app = document.querySelector('#app');
 const pauseDialog = document.querySelector('#pause');
@@ -4029,7 +4873,7 @@ const abilityInfo = {
   sword:['검격','단어의 뜻','sword'], fire:['화염 마법','문장 완성','flame'],
   guard:['수호 방패','표현의 뜻','shield'], heal:['치유 마법','단어 배열','leaf']
 };
-const forestLessons = lessons.filter(l=>l.chapter!==2);
+const forestLessons = lessons.filter(l=>l.chapter!==2&&l.chapter!==3);
 const stageCards = [forestLessons.slice(0,10), forestLessons.slice(8), forestLessons.slice(9)];
 const koreanExamples = {hello:'안녕, 친구야.',thanks:'고마워요, 로완.',apple:'나는 사과를 좋아해요.',water:'나는 물을 마셔요.',bread:'나는 빵을 먹어요.',book:'나는 책을 가지고 있어요.',sword:'나는 검을 가지고 있어요.',forest:'숲은 조용해요.',iam:'나는 학생이에요.',ihave:'나는 책을 가지고 있어요.',ilike:'나는 사과를 좋아해요.',iwant:'물을 좀 원해요.',ieat:'나는 빵을 먹어요.',idrink:'나는 물을 마셔요.'};
 const labels = {'New':'새 표현','Learning':'익히는 중','Review Needed':'복습 필요','Familiar':'익숙한 표현'};
@@ -4062,6 +4906,7 @@ function save(){
   game.hint = Engine.save(game.profile) ? '' : '이 브라우저에서 저장할 수 없어요. 창을 닫기 전까지는 계속 플레이할 수 있어요.';
 }
 function change(screen){
+  if(typeof ExploreView!=='undefined')ExploreView.beforeChange(screen);
   if(game.trial&&!['TRIAL_RUN','TRIAL_RESULTS','PAUSED'].includes(screen)){Trials.leave(game.profile);game.trial=null;}
   if(game.voice && !['VOICE_PRACTICE','QUESTION_ACTIVE','ANSWER_FEEDBACK','PAUSED'].includes(screen))discardVoice();
   if (game.screen === 'PAUSED') pauseDialog.close();
@@ -4074,7 +4919,7 @@ function titleView(){
   const hasSave=game.profile.started;
   const begin=button('new',icon('sword')+' 게임 시작',{cl:hasSave?'':'primary'});
   const resume=button('continue','이어하기',{cl:hasSave?'primary':'',disabled:!hasSave});
-  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.5</div></section>';
+  return '<section class="title">'+Art.forest(1,true)+'<div class="title-veil"></div><div class="title-frame"></div><div class="title-content"><div class="title-chapter">'+icon('crystal')+' 잃어버린 말의 연대기</div><h1><span>English</span> <span>Quest</span></h1><div class="subtitle">The Lost Kingdom of Words</div><p class="title-copy">잃어버린 말의 왕국</p><div class="title-buttons">'+(hasSave?resume+begin:begin+resume)+button('settings','설정',{cl:'title-settings'})+'</div></div><div class="title-foot">English Quest <span>◆</span> v0.7 · The Forgotten Path</div></section>';
 }
 function introView(){
   const item=saga[game.page];
@@ -4228,20 +5073,22 @@ function endingView(){
  return '<section class="center-card panel reward"><div class="reward-crystal">'+icon('star')+'</div>'+heading('CHAPTER COMPLETE','숲이 다시 속삭입니다')+'<div class="dialogue"><div class="portrait">'+Art.rowan()+'</div><p>“들리나요? 물가에서도, 나뭇잎에서도 말이 되살아나고 있어요. 고마워요, 모험가여. <b lang="en">Thank you.</b>”<br>— 로완</p></div><p>획득 칭호 · <strong>Word Apprentice</strong></p><div class="actions">'+button('chapters','다음 장 · 마을로',{cl:'primary'})+button('book','단어 도감')+button('review','오답 복습')+button('map','숲 지도')+'</div></section>';
 }
 function bookView(){
- return heading('FIELD JOURNAL','단어 도감','수첩에서 읽은 표현과 정답·오답 횟수를 확인하세요.')+'<section class="panel book">'+lessons.filter(l=>game.profile.currentChapter===2?l.chapter===2:l.chapter!==2).map(l=>{
+ return heading('FIELD JOURNAL','단어 도감','수첩에서 읽은 표현과 정답·오답 횟수를 확인하세요.')+'<section class="panel book">'+lessons.filter(l=>game.profile.currentChapter===2?l.chapter===2:game.profile.currentChapter===3?l.chapter===3:l.chapter!==2&&l.chapter!==3).map(l=>{
  const r=game.profile.learning[l.id];
  return '<article class="book-row"><div><strong lang="en">'+l.en+'</strong><small>'+l.ko+'</small></div><div>'+l.example+'<small>'+labels[Engine.status(r)]+' · 정답 '+(r?.correct||0)+' / 오답 '+(r?.wrong||0)+'</small></div>'+speakButton(l.en)+'</article>';
  }).join('')+'</section><div class="actions">'+button('map','지도')+button('review','오답 복습')+'</div>';
 }
 const screens={CLASSES:classView,PROFILE:profileView,SKILLS:skillView,EQUIPMENT:equipmentView,TRIALS:trialList,TRIAL_RUN:trialView,TRIAL_RESULTS:trialResults,VOICE_HALL:hallView,VOICE_PRACTICE:voicePracticeView,TODAY:todayView,TITLE:titleView,INTRO:introView,MAP:mapView,LEARNING:lessonView,REWARD:rewardView,CHAPTER_COMPLETE:endingView,BOOK:bookView,REVIEW:reviewView,DASHBOARD:dashboardView,CHAPTERS:chaptersView,VILLAGE:villageView,LOCATION:locationView,QUESTS:questsView,SHOP:()=>itemView(true),BAG:()=>itemView(false),DIALOGUE:dialogueView,VILLAGE_END:villageEnding};
 function render(){
+ if(typeof ExploreView!=='undefined')ExploreView.unmount();
  if(game.screen==='PAUSED'){showSettings();return;}
  const scene=app.querySelector('.battle');
  if(!screens[game.screen]&&scene?.dataset.stage===String(game.stage)){updateBattle(scene);return;}
  const view=(screens[game.screen]||battleView)();
- const shell='<div class="shell"><nav class="topbar" aria-label="게임 메뉴"><div class="brand">'+icon('crystal')+' English Quest</div><div class="nav-right"><span class="topmeta">'+(game.profile.currentChapter===2?'제2장 · 목소리의 마을':'제1장 · 속삭이는 숲')+'</span>'+button('settings',icon('menu'),{cl:'iconbtn',aria:'일시 정지 및 설정',disabled:['PLAYER_ACTION','ENEMY_ACTION'].includes(game.screen)})+'</div></nav>'+view+'</div>';
+ const shell='<div class="shell"><nav class="topbar" aria-label="게임 메뉴"><div class="brand">'+icon('crystal')+' English Quest</div><div class="nav-right"><span class="topmeta">'+(game.profile.currentChapter===3?'제3장 · 잊혀진 길':game.profile.currentChapter===2?'제2장 · 목소리의 마을':'제1장 · 속삭이는 숲')+'</span>'+button('settings',icon('menu'),{cl:'iconbtn',aria:'일시 정지 및 설정',disabled:['PLAYER_ACTION','ENEMY_ACTION'].includes(game.screen)})+'</div></nav>'+view+'</div>';
  app.innerHTML='<div class="world">'+(game.screen==='TITLE'?view:shell)+(game.hint?'<p role="status" class="storage-note">'+game.hint+'</p>':'')+'</div>';
  if(game.screen==='INTRO')revealDialogue();
+ if(game.screen==='EXPLORE')ExploreView.mount();
 }
 
 function revealDialogue(){
@@ -4376,9 +5223,10 @@ function chaptersView(){
   return heading('ATLAS OF WORDS','어느 곳으로 떠날까요?')+
     '<div class="chapter-picker">'+[
       [1,'속삭이는 숲','The Whispering Forest',Art.forest(1,true),p.chapterComplete?'첫 장 완료 · 다시 탐험':'숲의 수정 '+p.completed.length+' / 3'],
-      [2,'목소리를 되찾은 마을','The Village of Voices',VillageArt.scene('square'),p.chapterComplete?'마을 의뢰 '+VillageData.quests.filter(q=>p.village.progress[q.stage].completed).length+' / 3':'숲의 슬라임 왕을 물리치면 열립니다.']
+      [2,'목소리를 되찾은 마을','The Village of Voices',VillageArt.scene('square'),p.chapterComplete?'마을 의뢰 '+VillageData.quests.filter(q=>p.village.progress[q.stage].completed).length+' / 3':'숲의 슬라임 왕을 물리치면 열립니다.'],
+      [3,'잊혀진 길','The Forgotten Path','<svg viewBox="0 0 960 640" preserveAspectRatio="xMidYMid slice">'+ExploreArt.background(ExplorationData.areas.forest)+'</svg>',Exploration.available(p)?p.exploration.completedChapter?'말 수정 복원 완료 · 자유 탐험':'낡은 지도에 나타난 세 지역을 탐험하세요.':'마을의 세 의뢰를 마치면 열립니다.']
     ].map(([n,ko,en,art,sub])=>'<article class="panel chapter-entry"><div class="chapter-scene">'+art+'</div><div class="chapter-body"><span class="eyebrow">CHAPTER 0'+n+'</span><h2>'+ko+'</h2><i>'+en+'</i><p>'+sub+'</p>'+
-      button('chapter',n===1?'숲 지도 펼치기':p.chapterComplete?'마을로 들어가기':'잠긴 챕터',{id:n,cl:'primary',disabled:n===2&&!p.chapterComplete})+'</div></article>').join('')+'</div>';
+      button('chapter',n===1?'숲 지도 펼치기':n===3?'잊혀진 길로':p.chapterComplete?'마을로 들어가기':'잠긴 챕터',{id:n,cl:'primary',disabled:(n===2&&!p.chapterComplete)||(n===3&&!Exploration.available(p))})+'</div></article>').join('')+'</div>';
 }
 function villageView(){
   const p=game.profile,q=currentQuest(),finished=3-(VillageData.quests.filter(q=>!p.village.progress[q.stage].completed).length);
@@ -5059,7 +5907,7 @@ const classInfo=id=>RPG.classes.find(c=>c.id===id);
 const gearInfo=id=>RPG.gear.find(g=>g.id===id);
 const signed=n=>n>0?'+'+n:String(n);
 function rpgHubLinks(){
-  return '<nav class="camp-links" aria-label="모험가 성장과 시련">'+button('profile',icon('hero')+' 영웅 기록')+button('trials',icon('crystal')+' 언어 수정의 시련')+'</nav>';
+  return '<nav class="camp-links" aria-label="모험가 성장과 시련">'+button('profile',icon('hero')+' 영웅 기록')+button('trials',icon('crystal')+' 언어 수정의 시련')+(Exploration.available(game.profile)?button('explore-enter',icon('compass')+' 제3장 · 잊혀진 길',{cl:'primary'}):'')+'</nav>';
 }
 function bonusText(bonuses){
   return Object.entries(statNames).filter(([k])=>bonuses[k]).map(([k,label])=>label+' '+signed(bonuses[k])).join(' · ')||'변화 없음';
@@ -5241,6 +6089,7 @@ function trialResults(){
 
 ;
 function rpgHub(){
+  if(game.profile.currentChapter===3){openExploration();return;}
   if(game.profile.currentChapter===2)enterVillage();else change('MAP');
 }
 function offerClass(){
@@ -5366,6 +6215,285 @@ function rpgAction(action,id){
 }
 
 ;
+// Scene markup is rebuilt for meaningful actions; the animation loop only moves SVG groups.
+const ExploreUI = {panel:null,words:[],hint:'',transcript:false,notice:'',tutorial:false};
+function eqButton(action,label,options={}){return button('explore-'+action,label,options);}
+function eqActivity(){return Exploration.current(game.profile)?.activity;}
+function eqAudioActivity(a){return a&&(a.type==='listening'||a.kind==='listening'||a.kind==='listen');}
+function eqObject(id){return ExplorationData.areas[game.profile.exploration.area].objects.find(o=>o.id===id);}
+function eqCompanion(id){const data=ExplorationData.companions;return Array.isArray(data)?data.find(c=>c.id===id):data[id];}
+function eqName(id){return eqCompanion(id)?.name||({mira:'미라',bram:'브람'})[id]||'혼자 걷는 중';}
+function eqHeroMarkup(p,direction){
+ const cosmetic=p.exploration.cosmetics[0],glow=cosmetic==='runeGlow'?'#a7a5ff':cosmetic==='leafGlow'?'#a7e9b2':'#f6dea0';
+ return '<ellipse cx="0" cy="0" rx="17" ry="8" fill="'+(cosmetic?glow:'none')+'" fill-opacity=".13" stroke="'+glow+'" stroke-opacity=".8" stroke-width="1.5"/>'+(cosmetic?'<path d="M-22-3l-3-5 3-5 3 5Zm44 0-3-5 3-5 3 5Z" fill="'+glow+'" opacity=".8"/>':'')+ExploreArt.hero(p.rpg.classId,direction)+'<path d="M-5-67H5L0-61Z" fill="#fff1b5"/>';
+}
+function eqWorld(){
+ const p=game.profile,s=p.exploration,a=ExplorationData.areas[s.area];
+ const objects=a.objects.filter(o=>Exploration.objectState(p,o).visible).map(o=>{
+  const state=Exploration.objectState(p,o);
+  return '<g class="eq-object '+(state.complete?'eq-solved ':'')+(s.opened.includes(o.id)?'eq-open':'')+'" data-world-object="'+safe(o.id)+'" role="button" tabindex="0" aria-label="'+safe(o.name)+' · 가까이 가서 상호작용" transform="translate('+o.x+' '+o.y+')"><rect x="-30" y="-64" width="60" height="94" fill="transparent" pointer-events="all"/><ellipse class="eq-focus-ring" cx="0" cy="0" rx="31" ry="16"/>'+ExploreArt.object(o,{...state,solved:state.complete,open:s.opened.includes(o.id),available:!state.locked})+'<text class="eq-label" y="28">'+safe(o.name)+'</text></g>';
+ }).join('');
+ return '<div class="eq-stage" id="eq-stage" tabindex="0" role="region" aria-label="'+safe(a.name)+' 탐험 지도. WASD나 방향키로 이동, E로 상호작용"><svg class="eq-world" viewBox="0 0 960 640" aria-label="'+safe(a.name)+'"><g class="eq-background">'+ExploreArt.background(a)+'</g><g class="eq-world-objects">'+objects+'</g><g id="eq-follower" aria-hidden="true"></g><g id="eq-hero" aria-label="모험가" transform="translate('+s.x+' '+s.y+')">'+eqHeroMarkup(p,s.direction)+'</g></svg><span class="eq-map-tag">'+safe(a.en.toUpperCase())+'</span><span class="eq-compass" aria-hidden="true">N</span></div>';
+}
+function exploreView(){
+ const p=game.profile,s=p.exploration,a=ExplorationData.areas[s.area],q=Exploration.objective(p),stats=Engine.stats(p);
+ const companion=s.activeCompanion;
+ const modal=ExploreUI.panel;
+ return '<section class="exploration"><div class="eq-main" '+(modal?'inert':'')+'><header class="eq-heading"><div><span class="eyebrow">CHAPTER III · THE FORGOTTEN PATH</span><h2>'+safe(a.name)+'</h2><p>말을 읽고, 길을 발견하세요.</p></div><div class="eq-vitals"><b>Lv. '+p.level+'</b> <span>HP '+p.hp+' / '+stats.maxHp+'</span><br>금화 '+p.gold+'</div></header><div class="eq-layout"><div>'+eqWorld()+
+ '<div class="eq-controlbar"><div class="eq-pad" role="group" aria-label="터치 또는 마우스 이동"><button class="btn" data-move="up" aria-label="위로 이동">↑</button><button class="btn" data-move="left" aria-label="왼쪽으로 이동">←</button><button class="btn" data-move="down" aria-label="아래로 이동">↓</button><button class="btn" data-move="right" aria-label="오른쪽으로 이동">→</button></div><div><div id="eq-nearby" class="eq-nearby">가까운 물체를 찾아보세요.</div>'+eqButton('interact','E · 상호작용',{cl:'primary eq-interact'})+'<p>WASD / 방향키 · E 상호작용 · Esc 일시 정지</p></div></div><p class="eq-status" id="eq-status" role="status">'+safe(ExploreUI.notice)+'</p></div><aside class="eq-side"><section class="eq-card"><span class="eyebrow">CURRENT QUEST</span><h3>'+safe(q.title)+'</h3><p>'+safe(q.text)+'</p><div class="eq-progress" aria-label="완료 의뢰">'+Exploration.questStatus(p).map(t=>'<i class="'+(t.status==='complete'?'done':'')+'"></i>').join('')+'</div>'+eqButton('journal',icon('book')+' 탐험 일지')+'</section><section class="eq-card eq-companion-summary"><span class="eyebrow">TRAVELING WITH</span>'+(companion?'<div class="eq-small-portrait">'+ExploreArt.portrait(companion)+'</div>':'')+'<h3>'+eqName(companion)+'</h3><p>'+(companion==='mira'?'미라는 어려운 표현을 이해하도록 단서를 줍니다.':companion==='bram'?'브람은 가까운 숨은 물체의 기척을 알아챕니다.':'숲에 있는 두 여행자에게 말을 걸어 보세요.')+'</p>'+eqButton('companions','동료와 이야기')+'</section><section class="eq-card eq-location-card"><span class="eyebrow">THE ANCIENT MAP</span><ol class="eq-area-list">'+Object.values(ExplorationData.areas).filter(t=>['forest','ruins','cavern'].includes(t.id)||s.discovered.includes(t.id)).map(t=>'<li class="'+(s.area===t.id?'current':'')+'">'+safe(t.name)+(s.discovered.includes(t.id)?'':' · 미발견')+'</li>').join('')+'</ol></section></aside></div><nav class="eq-toolbar" aria-label="탐험 메뉴">'+eqButton('notes',icon('book')+' 영어 수첩')+eqButton('bag',icon('shield')+' 소지품')+eqButton('companions',icon('chat')+' 동료')+eqButton('instructions','조작 안내')+eqButton('chapters','장 선택')+(Exploration.current(p)?.phase==='seek'?eqButton('reread','진행 중인 단서',{cl:'primary'}):'')+'</nav></div>'+(modal?eqPanel():'')+'</section>';
+}
+function eqPanelShell(title,content,kicker='FIELD JOURNAL'){
+ return '<div class="eq-modal-shade"><section class="eq-dialog" role="dialog" aria-modal="true" aria-labelledby="eq-dialog-title" tabindex="-1"><div class="eq-dialog-top"><span class="eyebrow">'+safe(kicker)+'</span>'+eqButton('close','×',{aria:'탐험으로 돌아가기'})+'</div><h2 id="eq-dialog-title">'+safe(title)+'</h2>'+content+'</section></div>';
+}
+function eqPanel(){
+ const p=game.profile,s=p.exploration,panel=ExploreUI.panel;
+ if(panel==='tutorial')return eqPanelShell('잊혀진 길을 걷는 법','<p>영어는 길을 여는 열쇠입니다. 시간 제한 없이 천천히 탐험하세요.</p><div class="eq-tutorial-grid"><p><b>01 · 걸어 보기</b><kbd>WASD</kbd> 또는 방향키. 화면 아래 화살표를 눌러서도 움직일 수 있어요.</p><p><b>02 · 가까이 가기</b>표지판·상자·인물 가까이에 가서 <kbd>E</kbd> 또는 상호작용을 누르세요.</p><p><b>03 · 단서를 따라가기</b>영어 지시를 읽고 물체를 찾아 걸어가세요. 문장은 단어 타일을 눌러 조립해요.</p><p><b>04 · 함께 모험하기</b>두 여행자의 부탁을 풀어 동료로 맞이하세요. 동료 메뉴에서 도움과 대화를 선택해요.</p></div><p class="eq-explanation">소리가 없어도 원문으로 모든 퍼즐을 풀 수 있습니다. 설정·대화·일지를 열면 이동이 멈춥니다.</p><div class="actions">'+eqButton('tutorial-done','탐험 시작',{cl:'primary'})+eqButton('tutorial-done','안내 건너뛰기')+'</div>','WELCOME TO CHAPTER III');
+ if(panel==='journal'){
+  const choices=s.choices;
+  return eqPanelShell('잊혀진 길 · 탐험 일지',Exploration.questStatus(p).map(q=>'<article class="eq-quest-row"><h3>'+(q.status==='complete'?'✓ ':q.status==='locked'?'◇ ':'◆ ')+safe(q.title)+'</h3><p>'+safe(q.objective||q.text||q.description||'')+'</p><small>'+({complete:'완료',active:'진행 중',locked:'아직 시작하지 않음'})[q.status]+'</small></article>').join('')+'<h3>내가 선택한 이야기</h3><p>갈림길 · '+(({moon:'달빛 오솔길',stone:'고대 돌길'})[choices.crossroad]||'아직 선택하지 않음')+'<br>수정 복원 · '+(choices.restoration?eqName(choices.restoration)+'의 방법':'아직 선택하지 않음')+'</p><p>완성한 퍼즐 '+s.completed.length+' · 발견한 보물 '+s.opened.length+' · 영입한 동료 '+s.recruited.length+' / 2</p>');
+ }
+ if(panel==='notes'){
+  return eqPanelShell('탐험자의 영어 수첩','<p>현장에서 만난 표현을 다시 읽고 연습하세요. 수첩 연습은 지도 장치나 보물을 대신 열지 않습니다.</p>'+(s.notes.includes('grove-scroll')?eqButton('scroll','발견한 두루마리 펼치기',{cl:'primary'}):'')+ExplorationData.activities.map(a=>{
+   const r=p.voice.records[a.id];const seen=!!r||s.observed.includes(a.id)||s.completed.includes(a.id);
+   return '<article class="eq-lesson-row"><strong lang="en">'+safe(a.english)+'</strong><p>'+safe(a.ko)+'</p><small>'+safe(a.objective)+' · 정답 '+(r?.correct||0)+' / 오답 '+(r?.wrong||0)+(r?.assistedCorrect?' · 도움받은 정답 '+r.assistedCorrect:'')+'</small>'+eqButton('practice','연습하기',{id:a.id})+eqButton('note-speak','듣기',{id:a.id})+(seen?'<small>학습한 표현</small>':'')+'</article>';
+  }).join(''),'CHAPTER III · ENGLISH NOTES');
+ }
+ if(panel==='bag')return eqPanelShell('탐험 소지품','<p class="eq-reward">금화 '+p.gold+'</p><p>회복 물약 '+(p.village.inventory.potion||0)+' · 수호 부적 '+(p.village.inventory.charm||0)+'</p><p>장비 '+p.rpg.collection.length+'종 · 발견한 보물 '+s.opened.length+'개</p><p>이야기 기념품 · '+(s.cosmetics.map(x=>safe(({runeGlow:'룬빛 수정',leafGlow:'잎빛 수정'})[x]||x)).join(', ')||'아직 없음')+'</p><p>학습 두루마리 · '+((s.notes||[]).length?'반딧불 숲의 어휘 두루마리':'아직 없음')+'</p>'+(s.notes.includes('grove-scroll')?eqButton('scroll','두루마리 읽기',{cl:'primary'}):'')+'<p>물약과 부적은 기존 전투에서 사용할 수 있어요. 장비의 능력치는 모든 전투에 적용됩니다.</p><div class="actions">'+eqButton('equipment','장비 확인',{cl:'primary'})+eqButton('profile','영웅 기록')+'</div>');
+ if(panel==='scroll'&&s.notes.includes('grove-scroll'))return eqPanelShell('반딧불 숲의 어휘 두루마리','<p>보물 속에는 먼저 이 길을 걸었던 여행자의 작은 영어 기록이 있었습니다.</p><div class="eq-hint"><strong>find → found</strong><p>find는 찾다, found는 찾았다는 뜻이에요. 발견한 뒤에는 “We found the treasure.”라고 말할 수 있어요.</p><strong>small ↔ large · quiet ↔ loud</strong><p>small은 작은, large는 큰. quiet는 조용한, loud는 소리가 큰이라는 뜻이에요. 크기와 소리를 서로 구분해 보세요.</p></div><p>숲에서 만난 세 표현을 다시 풀어 보세요. 복습 결과는 영어 학습 기록에 남습니다.</p><div class="actions">'+eqButton('practice','보물을 찾았어요',{id:'g-order'})+eqButton('practice','작은 돌의 지시',{id:'g-listen'})+eqButton('practice','숲의 모습',{id:'g-read'})+'</div>','DISCOVERED TREASURE · VOCABULARY SCROLL');
+ if(panel==='companions')return eqPanelShell('함께 걷는 여행자',['mira','bram'].map(id=>{
+  const recruited=s.recruited.includes(id),dialogue=Exploration.companionDialogue(p,id);
+  return '<article class="eq-companion-card"><div>'+ExploreArt.portrait(id)+'</div><div><h3>'+eqName(id)+' · '+(id==='mira'?'견습 마법사':'숲의 순찰자')+'</h3><p lang="en">'+safe(dialogue?.english||'Let’s go together.')+'</p><p>'+safe(dialogue?.ko||'함께 가요.')+'</p><small>'+safe(dialogue?.ability||'숲에서 만나 부탁을 들어주세요.')+'</small><div class="actions">'+eqButton('companion',s.activeCompanion===id?'동행 중':recruited?'함께 걷기':'숲에서 만나기',{id,disabled:!recruited||s.activeCompanion===id})+(recruited?eqButton('talk','영어로 대화',{id}):'')+'</div></div></article>';
+ }).join('')+'<p class="eq-explanation">동료는 이동을 막지 않습니다. 미라는 힌트를, 브람은 가까운 숨은 물체의 기척을 알려 줍니다.</p>');
+ if(panel==='conversation'){
+  const id=s.activeCompanion||s.recruited[0],c=Exploration.companionDialogue(p,id);
+  return eqPanelShell(eqName(id)+'와 잠깐 이야기','<div class="eq-dialog-portrait">'+ExploreArt.portrait(id)+'</div><p class="eq-english" lang="en">'+safe(c.english)+'</p><p>'+safe(c.ko)+'</p><p>'+safe(c.ability)+'</p><div class="actions">'+eqButton('talk-help','Can you help me?')+eqButton('talk-where','Where is the bridge?')+eqButton('talk-describe','What can you see?')+'</div>'+(ExploreUI.notice?'<p class="eq-hint">'+safe(ExploreUI.notice)+'</p>':'')+'<div class="actions">'+eqButton('companions','동료 선택')+'</div>','COMPANION CONVERSATION');
+ }
+ return eqInteractionPanel();
+}
+function eqInteractionPanel(){
+ const p=game.profile,h=Exploration.current(p);
+ if(!h)return eqPanelShell('여행자의 기록','<p>'+safe(ExploreUI.notice||'다시 길을 걸어 보세요.')+'</p>');
+ const a=h.activity,o=eqObject(h.objectId)||{},title=o.name||(h.practice?'표현 다시 연습':'잊혀진 길');
+ let body='';
+ if(h.phase==='choice'){
+  const final=h.choiceId==='restoration'||o.choice==='restoration'||o.id.includes('restore')||o.id.includes('final');
+  const ids=h.options?.map(x=>typeof x==='string'?x:x.id)||(final?['mira','bram']:['moon','stone']);
+  body='<p>'+safe(h.text||'이 선택에 따라 만나는 단서와 대화가 달라집니다. 두 길 모두 수정으로 이어집니다.')+'</p><div class="eq-options">'+ids.map(id=>eqButton('choose',({moon:'The Moonlit Trail · 달빛 오솔길',stone:'The Ancient Stone Road · 고대 돌길',mira:'Ask Mira · 미라와 비문 해석하기',bram:'Ask Bram · 브람과 장치 찾아보기'})[id],{id})).join('')+'</div>';
+ }else if(a){
+  const isListening=eqAudioActivity(a),isOrder=a.kind==='order',showText=!isListening||ExploreUI.transcript||!AudioFX.canSpeak(p.settings)||h.phase==='feedback';
+  body='<span class="eyebrow">'+safe(a.objective)+(h.practice?' · 수첩 연습':'')+'</span>'+(isListening?'<div class="actions">'+eqButton('play','보통 속도로 듣기')+eqButton('play','천천히 듣기',{id:'slow'})+eqButton('transcript','영어 원문 보기')+'</div>':'')+(isOrder&&h.phase!=='feedback'?'':showText?'<p class="eq-english" lang="en">'+safe(a.english)+'</p>':'<p class="eq-english">수정이 전하는 짧은 지시를 들어 보세요.</p>');
+  if(h.phase==='feedback'){
+   const f=h.feedback||{};
+   body+='<div class="eq-feedback '+(f.correct?'':'wrong')+'" role="status"><strong>'+(f.correct?'말의 뜻이 이어졌습니다.':'괜찮아요. 단서를 다시 살펴보세요.')+'</strong><p>'+safe(a.explanation)+'</p><p>'+safe(a.ko)+'</p>'+(f.text?'<p>'+safe(f.text)+'</p>':'')+(f.reward&&Object.values(f.reward).some(Boolean)?'<p class="eq-reward">'+safe(eqRewardText(f.reward))+'</p>':'')+(f.recruited?'<p>'+eqName(f.recruited)+'가 동료가 되었습니다.</p>':'')+'</div><div class="actions">'+(f.correct?eqButton('close','계속 탐험',{cl:'primary'}):eqButton('retry','다시 도전',{cl:'primary'}))+'</div>';
+  }else if(h.phase==='seek'){
+   body+='<p>지시를 읽고 지도에서 해당 물체 가까이 걸어가 상호작용하세요.</p><div class="actions">'+eqButton('seek','직접 찾아보기',{cl:'primary'})+eqButton('hint',p.exploration.activeCompanion==='mira'?'미라의 통찰':'한국어 힌트')+eqButton('abandon','단서 탐색 중단')+'</div>';
+  }else if(a.kind==='order'||a.type==='order'){
+   body+='<p>'+safe(a.ko)+'</p><div class="eq-sentence" aria-live="polite">'+(ExploreUI.words.map(i=>safe(h.words[i])).join(' ')||'단어를 눌러 문장을 이으세요.')+'</div><div class="eq-wordbank">'+h.words.map((word,i)=>eqButton('word',safe(word),{id:i,disabled:ExploreUI.words.includes(i)})).join('')+'</div><div class="actions">'+eqButton('undo','한 단어 되돌리기',{disabled:!ExploreUI.words.length})+eqButton('submit','문장 확인',{cl:'primary',disabled:ExploreUI.words.length!==h.words.length})+eqButton('hint','문장 힌트')+'</div>';
+  }else{
+   body+='<div class="eq-options">'+h.choices.map((choice,i)=>eqButton('answer',safe(choice),{id:i})).join('')+'</div>'+eqButton('hint','한국어 힌트');
+  }
+  if(ExploreUI.hint)body+='<p class="eq-hint">'+safe(ExploreUI.hint)+'</p>';
+ }else{
+  const reward=h.reward||h.feedback?.reward;
+  body=(h.phase==='reward'?'<div class="eq-reward-reveal" aria-hidden="true"><svg viewBox="-70 -65 140 90">'+ExploreArt.object(o,{open:true,solved:true})+'</svg></div>':'')+'<p>'+safe(h.feedback?.explanation||h.text||h.feedback?.text||o.text||'길에 남은 이야기를 발견했습니다.')+'</p>'+(reward&&Object.values(reward).some(Boolean)?'<p class="eq-reward">'+safe(eqRewardText(reward))+'</p>':'')+'<div class="actions">'+eqButton('close','계속 탐험',{cl:'primary'})+'</div>';
+ }
+ if(p.exploration.completedChapter&&a?.final&&!h.practice&&h.phase==='feedback'&&h.feedback?.correct)body+='<div class="eq-feedback"><h3>제3장 완료 · 되살아난 수정</h3><p>세 지역의 말이 하나의 빛으로 이어졌습니다. 두 동료와 남은 비밀을 자유롭게 탐험할 수 있어요.</p></div>';
+ return eqPanelShell(title,body,h.practice?'ENGLISH PRACTICE':'THE FORGOTTEN PATH');
+}
+function eqRewardText(r){return typeof r==='string'?r:[r.gold?'금화 +'+r.gold:'',r.gearId?gearInfo(r.gearId)?.name:'',r.potions?'물약 +'+r.potions:'',r.note?'새 학습 두루마리':'',r.cosmetic?({runeGlow:'룬빛 수정',leafGlow:'잎빛 수정'})[r.cosmetic]:''].filter(Boolean).join(' · ')||'발견을 기록했습니다.';}
+screens.EXPLORE=exploreView;
+
+;
+// One owner for the animation frame and scene listeners. Overlay/pause/focus loss clears input.
+const ExploreView=(()=>{
+ let frameId=0,abort=null,last=0,lastSave=0,lastStep=0,lastAmbience=0,dirty=false,actorDirection='',followerDirection='',lastNearby='';
+ const keys=new Set(),pointers=new Map();
+ const vectors={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
+ const keyDirection={w:'up',a:'left',s:'down',d:'right',ArrowUp:'up',ArrowLeft:'left',ArrowDown:'down',ArrowRight:'right'};
+ function resetInput(){keys.clear();pointers.clear();app.querySelectorAll('[data-move]').forEach(b=>b.classList.remove('is-held'));}
+ function checkpoint(){if(dirty){save();dirty=false;}}
+ function unmount(){
+  if(frameId)cancelAnimationFrame(frameId);frameId=0;
+  abort?.abort();abort=null;resetInput();checkpoint();last=0;
+ }
+ function beforeChange(screen){
+  unmount();
+  if(game.screen==='EXPLORE'&&!['EXPLORE','PAUSED'].includes(screen)){
+   Exploration.close(game.profile);ExploreUI.panel=null;ExploreUI.words=[];
+  }
+ }
+ function announce(message){ExploreUI.notice=message;const node=app.querySelector('#eq-status');if(node)node.textContent=message;}
+ function blocked(){return game.screen!=='EXPLORE'||!!ExploreUI.panel||document.hidden||pauseDialog.open;}
+ function keydown(e){
+  if(game.screen!=='EXPLORE')return;
+  if(ExploreUI.panel){
+   if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();if(!e.repeat)closeExplorePanel();return;}
+   if(e.key==='Tab'){
+    const dialog=app.querySelector('.eq-dialog'),nodes=[...dialog.querySelectorAll('button:not(:disabled),[href],input,select,[tabindex="0"]')];
+    const first=nodes[0],end=nodes.at(-1);
+    if(e.shiftKey&&(document.activeElement===first||document.activeElement===dialog)){e.preventDefault();end?.focus();}
+    else if(!e.shiftKey&&document.activeElement===end){e.preventDefault();first?.focus();}
+   }
+   return;
+  }
+  if(blocked())return;
+  const direction=keyDirection[e.key]||keyDirection[e.key.toLowerCase()];
+  if(direction){e.preventDefault();keys.add(direction);return;}
+  if((e.key.toLowerCase()==='e'||e.code==='Space')&&!e.repeat){
+   if(e.code==='Space'&&document.activeElement?.matches('button,[role="button"]'))return;
+   e.preventDefault();exploreInteract();
+  }
+ }
+ function update(timestamp){
+  frameId=0;
+  if(game.screen!=='EXPLORE')return;
+  const dt=last?Math.min(.1,Math.max(0,(timestamp-last)/1000)):0;last=timestamp;
+  const p=game.profile,s=p.exploration;
+  let moved=false;
+  if(!blocked()){
+   const pressed=new Set([...keys,...pointers.values()]);let x=0,y=0;
+   for(const d of pressed){x+=vectors[d][0];y+=vectors[d][1];}
+   if(x||y){moved=Exploration.move(p,x,y,dt);dirty ||= moved;}
+   if(moved&&timestamp-lastStep>380){AudioFX.play('footstep',p.settings);lastStep=timestamp;}
+   if(timestamp-lastAmbience>6000){AudioFX.play(s.area==='forest'||s.area==='grove'?'forestAir':'caveAir',p.settings);lastAmbience=timestamp;}
+   const follow=Exploration.follow(p,dt),follower=app.querySelector('#eq-follower');
+   if(follower&&follow&&s.activeCompanion){
+    const facing=s.activeCompanion+':'+follow.direction;
+    if(facing!==followerDirection){follower.innerHTML=ExploreArt.companion(s.activeCompanion,follow.direction);followerDirection=facing;}
+    follower.setAttribute('transform','translate('+follow.x.toFixed(2)+' '+follow.y.toFixed(2)+')');
+    follower.classList.toggle('eq-walking',moved);follower.classList.toggle('eq-idle',!moved);
+   }
+  }
+  const hero=app.querySelector('#eq-hero');
+  if(hero){
+   if(actorDirection!==s.direction){hero.innerHTML=eqHeroMarkup(p,s.direction);actorDirection=s.direction;}
+   hero.setAttribute('transform','translate('+s.x.toFixed(2)+' '+s.y.toFixed(2)+')');
+   hero.classList.toggle('eq-walking',moved);hero.classList.toggle('eq-idle',!moved);
+  }
+  const svg=app.querySelector('.eq-world');
+  if(svg){
+   const mobile=window.innerWidth<=820,w=mobile?600:960,h=mobile?400:Math.min(640,Math.max(320,960*svg.clientHeight/Math.max(1,svg.clientWidth)));
+   svg.setAttribute('viewBox',[Math.max(0,Math.min(960-w,s.x-w/2)),Math.max(0,Math.min(640-h,s.y-h/2)),w,h].join(' '));
+  }
+  if(!blocked()){
+   const near=Exploration.nearby(p),first=near[0],target=first?.id||'',sensed=Exploration.sense(p);
+   app.querySelectorAll('.eq-object').forEach(n=>{n.classList.toggle('eq-near',n.dataset.worldObject===target);n.classList.toggle('eq-sense',sensed.includes(n.dataset.worldObject));});
+   if(target!==lastNearby){
+    lastNearby=target;const label=app.querySelector('#eq-nearby'),control=app.querySelector('[data-act="explore-interact"]');
+    if(target&&/^(조금 더 가까이|인물이나 표지판)/.test(ExploreUI.notice))announce('');
+    if(label)label.textContent=first?first.name+' · 가까이 있습니다.':'표지판이나 인물 가까이 걸어가세요.';
+    if(control){control.disabled=!first;control.textContent=first?'E · '+first.name:'E · 상호작용';}
+   }
+  }
+  if(timestamp-lastSave>2000){checkpoint();lastSave=timestamp;}
+  frameId=requestAnimationFrame(update);
+ }
+ function mount(){
+  unmount();if(game.screen!=='EXPLORE')return;
+  abort=new AbortController();const signal=abort.signal;actorDirection='';followerDirection='';lastNearby='__initial';
+  document.addEventListener('keydown',keydown,{signal,capture:true});
+  document.addEventListener('keyup',e=>{const d=keyDirection[e.key]||keyDirection[e.key.toLowerCase()];if(d){keys.delete(d);e.preventDefault();}},{signal});
+  window.addEventListener('blur',()=>{resetInput();checkpoint();},{signal});
+  document.addEventListener('visibilitychange',()=>{resetInput();last=0;checkpoint();AudioFX.stop();},{signal});
+  window.addEventListener('pagehide',()=>{resetInput();checkpoint();},{signal});
+  app.addEventListener('pointerdown',e=>{
+   const el=e.target.closest('[data-move]');if(!el||blocked())return;
+   e.preventDefault();el.setPointerCapture(e.pointerId);pointers.set(e.pointerId,el.dataset.move);el.classList.add('is-held');
+  },{signal});
+  const release=e=>{const direction=pointers.get(e.pointerId);pointers.delete(e.pointerId);if(direction)app.querySelector('[data-move="'+direction+'"]')?.classList.remove('is-held');};
+  app.addEventListener('pointerup',release,{signal});app.addEventListener('pointercancel',release,{signal});app.addEventListener('lostpointercapture',release,{signal});
+  app.addEventListener('click',e=>{
+   const obj=e.target.closest('[data-world-object]');if(obj&&!blocked()){exploreInteract(obj.dataset.worldObject);return;}
+   const pad=e.target.closest('[data-move]');if(pad&&e.detail===0&&!blocked()){
+    const [x,y]=vectors[pad.dataset.move];const moved=Exploration.move(game.profile,x,y,.1);dirty ||= moved;checkpoint();
+   }
+  },{signal});
+  app.addEventListener('keydown',e=>{
+   const obj=e.target.closest('[data-world-object]');if(obj&&!blocked()&&(e.key==='Enter'||e.code==='Space')){e.preventDefault();if(!e.repeat)exploreInteract(obj.dataset.worldObject);}
+  },{signal});
+  frameId=requestAnimationFrame(update);
+  if(ExploreUI.panel)app.querySelector('.eq-dialog')?.focus({preventScroll:true});
+ }
+ return {mount,unmount,beforeChange,announce,resetInput};
+})();
+function openExploration(){
+ if(!Exploration.enter(game.profile))return;
+ ExploreUI.panel=game.profile.exploration.tutorialSeen?null:'tutorial';ExploreUI.words=[];ExploreUI.hint='';ExploreUI.notice='';save();change('EXPLORE');
+}
+function closeExplorePanel(){
+ if(ExploreUI.panel==='tutorial')Exploration.dismissTutorial(game.profile);
+ const h=Exploration.current(game.profile);
+ if(h&&h.phase!=='seek')Exploration.close(game.profile);
+ ExploreUI.panel=null;ExploreUI.words=[];ExploreUI.hint='';AudioFX.stop();save();render();app.querySelector('#eq-stage')?.focus({preventScroll:true});
+}
+function presentExploreHandle(h){
+ if(!h)return;
+ if(h.phase==='transition'){
+  ExploreUI.panel=null;ExploreUI.notice='새 지역 · '+ExplorationData.areas[game.profile.exploration.area].name;AudioFX.play('doorOpen',game.profile.settings);save();render();return;
+ }
+ ExploreUI.panel='interaction';ExploreUI.words=[];ExploreUI.hint='';ExploreUI.transcript=false;
+ if(eqAudioActivity(h.activity)&&!AudioFX.canSpeak(game.profile.settings)){Exploration.assist(game.profile,h,'fallback');ExploreUI.transcript=true;}
+ save();render();
+ if(h.phase==='reward')AudioFX.play('treasure',game.profile.settings);
+}
+function exploreInteract(id){
+ if(game.screen!=='EXPLORE'||ExploreUI.panel)return;
+ id ||= Exploration.nearby(game.profile)[0]?.id;
+ if(!id){ExploreView.announce('인물이나 표지판 가까이에 가서 상호작용하세요.');return;}
+ const h=Exploration.interact(game.profile,id);
+ if(h)presentExploreHandle(h);else ExploreView.announce('조금 더 가까이 다가가세요. 진행 중인 단서도 확인해 보세요.');
+}
+function submitExplore(value){
+ const h=Exploration.current(game.profile);if(!h)return;
+ const r=Exploration.answer(game.profile,h,value);if(!r)return;
+ AudioFX.stop();save();render();AudioFX.play(r.correct?'puzzleSolve':'wrong',game.profile.settings);
+}
+function exploreAction(action,id){
+ const p=game.profile,s=game.screen;
+ if(action==='chapter'&&id==='3'&&s==='CHAPTERS'){openExploration();return true;}
+ if(action==='explore-enter'&&['MAP','VILLAGE','VILLAGE_END','CHAPTERS'].includes(s)){openExploration();return true;}
+ if(!action.startsWith('explore-'))return false;
+ if(s!=='EXPLORE')return true;
+ const act=action.slice(8),h=Exploration.current(p);
+ if(act==='close'){closeExplorePanel();return true;}
+ if(act==='tutorial-done'){Exploration.dismissTutorial(p);closeExplorePanel();return true;}
+ if(act==='instructions'){ExploreUI.panel='tutorial';render();return true;}
+ if(['journal','notes','bag','companions'].includes(act)){ExploreUI.panel=act;AudioFX.stop();render();return true;}
+ if(act==='scroll'&&p.exploration.notes.includes('grove-scroll')){ExploreUI.panel='scroll';render();return true;}
+ if(act==='chapters'){change('CHAPTERS');return true;}
+ if(act==='equipment'){change('EQUIPMENT');openGear();return true;}
+ if(act==='profile'){game.rpgMessage='';change('PROFILE');return true;}
+ if(act==='interact'){exploreInteract();return true;}
+ if(act==='companion'){if(Exploration.selectCompanion(p,id)){save();render();AudioFX.play('companionJoin',p.settings);}return true;}
+ if(act==='talk'&&p.exploration.recruited.includes(id)){Exploration.selectCompanion(p,id);ExploreUI.panel='conversation';ExploreUI.notice='';save();render();return true;}
+ if(act.startsWith('talk-')&&ExploreUI.panel==='conversation'){
+  const c=Exploration.companionDialogue(p);
+  ExploreUI.notice=act==='talk-help'?'Of course. Read the words slowly. — 물론이죠. 단어를 천천히 읽어 보세요.':act==='talk-where'?'The bridge is in the east of the forest. — 다리는 숲 동쪽에 있어요.':c.english+' — '+c.ko;
+  render();return true;
+ }
+ if(act==='note-speak'){const a=ExplorationData.activities.find(t=>t.id===id);if(a)readAloud(a.english);return true;}
+ if(act==='practice'){if(h?.phase==='seek')Exploration.close(p);const task=Exploration.practice(p,id);if(task)presentExploreHandle(task);return true;}
+ if(act==='reread'&&h){ExploreUI.panel='interaction';render();return true;}
+ if(!h)return true;
+ if(act==='seek'&&h.phase==='seek'){ExploreUI.panel=null;AudioFX.stop();save();render();app.querySelector('#eq-stage')?.focus();return true;}
+ if(act==='abandon'&&h.phase==='seek'){Exploration.close(p);closeExplorePanel();return true;}
+ if(act==='choose'&&h.phase==='choice'){const result=Exploration.choose(p,h,id);if(result)presentExploreHandle(result);return true;}
+ if(act==='retry'&&Exploration.retry(p,h)){ExploreUI.words=[];ExploreUI.hint='';save();render();return true;}
+ if(act==='hint'){ExploreUI.hint=Exploration.hint(p,h)||'문장의 동작과 장소를 차례로 살펴보세요.';save();render();return true;}
+ if(act==='transcript'){Exploration.assist(p,h,'transcript');ExploreUI.transcript=true;save();render();return true;}
+ if(act==='play'&&h.activity){
+  const fallback=()=>{if(game.screen==='EXPLORE'&&Exploration.current(p)===h){Exploration.assist(p,h,'fallback');ExploreUI.transcript=true;save();render();}};
+  if(!readAloud(h.activity.english,fallback,id==='slow'?'slow':'normal'))fallback();return true;
+ }
+ if(h.phase!=='question')return true;
+ if(act==='answer'&&Number.isInteger(+id)&&h.choices[+id]!==undefined)submitExplore(h.choices[+id]);
+ if(act==='word'&&Number.isInteger(+id)&&h.words[+id]!==undefined&&!ExploreUI.words.includes(+id)){ExploreUI.words.push(+id);render();app.querySelector('[data-act="explore-word"]:not(:disabled),[data-act="explore-submit"]:not(:disabled)')?.focus({preventScroll:true});}
+ if(act==='undo'){ExploreUI.words.pop();render();}
+ if(act==='submit'&&ExploreUI.words.length===h.words.length)submitExplore(ExploreUI.words.map(i=>h.words[i]).join(' '));
+ return true;
+}
+
+;
 // Keep modal inputs outside the scene so opening settings preserves the current question.
 function showSettings(){
  const p=game.profile, cfg=p.settings;
@@ -5379,6 +6507,7 @@ function showSettings(){
 function openSettings(mode=''){
  if(['PLAYER_ACTION','ENEMY_ACTION','PAUSED'].includes(game.screen))return;
  if(game.voice)silenceVoice();
+ if(typeof ExploreView!=='undefined')ExploreView.unmount();
  game.pausedFrom=game.screen;game.confirm=mode;AudioFX.stop();game.screen='PAUSED';showSettings();
 }
 function closeSettings(){
@@ -5557,6 +6686,7 @@ function dispatch(action,id){
   if(action==='to-title'){game.battle=null;change('TITLE');}
   return;
  }
+ if(typeof exploreAction==='function'&&exploreAction(action,id))return;
  if(rpgAction(action,id))return;
  if(voiceAction(action,id))return;
  if(villageAction(action,id))return;
@@ -5608,7 +6738,7 @@ function dispatch(action,id){
 }
 function handleClick(event){
  const el=event.target.closest('button[data-act]');
- if(!el||!el.isConnected||el.disabled||(event.detail>1&&!['word','trial-tile'].includes(el.dataset.act)))return;
+ if(!el||!el.isConnected||el.disabled||(event.detail>1&&!['word','trial-tile','explore-word'].includes(el.dataset.act)))return;
  if(game.screen==='PAUSED'&&!pauseDialog.contains(el))return;
  AudioFX.play('ui',game.profile.settings);dispatch(el.dataset.act,el.dataset.id);
 }
@@ -5624,7 +6754,7 @@ pauseDialog.addEventListener('change',e=>{
   if(setting==='voice'&&!e.target.checked)AudioFX.stop();save();
  }
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!e.repeat&&game.screen!=='PAUSED'){e.preventDefault();openSettings();}});
+document.addEventListener('keydown',e=>{if(e.defaultPrevented)return;if(e.key==='Escape'&&!e.repeat&&game.screen!=='PAUSED'){e.preventDefault();openSettings();}});
 render();
 
 </script></body></html>

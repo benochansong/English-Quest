@@ -30,9 +30,10 @@ function chaptersView(){
   return heading('ATLAS OF WORDS','어느 곳으로 떠날까요?')+
     '<div class="chapter-picker">'+[
       [1,'속삭이는 숲','The Whispering Forest',Art.forest(1,true),p.chapterComplete?'첫 장 완료 · 다시 탐험':'숲의 수정 '+p.completed.length+' / 3'],
-      [2,'목소리를 되찾은 마을','The Village of Voices',VillageArt.scene('square'),p.chapterComplete?'마을 의뢰 '+VillageData.quests.filter(q=>p.village.progress[q.stage].completed).length+' / 3':'숲의 슬라임 왕을 물리치면 열립니다.']
+      [2,'목소리를 되찾은 마을','The Village of Voices',VillageArt.scene('square'),p.chapterComplete?'마을 의뢰 '+VillageData.quests.filter(q=>p.village.progress[q.stage].completed).length+' / 3':'숲의 슬라임 왕을 물리치면 열립니다.'],
+      [3,'잊혀진 길','The Forgotten Path','<svg viewBox="0 0 960 640" preserveAspectRatio="xMidYMid slice">'+ExploreArt.background(ExplorationData.areas.forest)+'</svg>',Exploration.available(p)?p.exploration.completedChapter?'말 수정 복원 완료 · 자유 탐험':'낡은 지도에 나타난 세 지역을 탐험하세요.':'마을의 세 의뢰를 마치면 열립니다.']
     ].map(([n,ko,en,art,sub])=>'<article class="panel chapter-entry"><div class="chapter-scene">'+art+'</div><div class="chapter-body"><span class="eyebrow">CHAPTER 0'+n+'</span><h2>'+ko+'</h2><i>'+en+'</i><p>'+sub+'</p>'+
-      button('chapter',n===1?'숲 지도 펼치기':p.chapterComplete?'마을로 들어가기':'잠긴 챕터',{id:n,cl:'primary',disabled:n===2&&!p.chapterComplete})+'</div></article>').join('')+'</div>';
+      button('chapter',n===1?'숲 지도 펼치기':n===3?'잊혀진 길로':p.chapterComplete?'마을로 들어가기':'잠긴 챕터',{id:n,cl:'primary',disabled:(n===2&&!p.chapterComplete)||(n===3&&!Exploration.available(p))})+'</div></article>').join('')+'</div>';
 }
 function villageView(){
   const p=game.profile,q=currentQuest(),finished=3-(VillageData.quests.filter(q=>!p.village.progress[q.stage].completed).length);

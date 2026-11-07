@@ -1,4 +1,5 @@
 function rpgHub(){
+  if(game.profile.currentChapter===3){openExploration();return;}
   if(game.profile.currentChapter===2)enterVillage();else change('MAP');
 }
 function offerClass(){

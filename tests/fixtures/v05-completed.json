@@ -1,0 +1,1601 @@
+{
+  "version": 5,
+  "started": true,
+  "currentChapter": 2,
+  "level": 4,
+  "xp": 140,
+  "gold": 0,
+  "hp": 101,
+  "rpg": {
+    "classId": "arcanist",
+    "promptSeen": true,
+    "skills": [
+      "magicTraining",
+      "flameMastery"
+    ],
+    "availablePoints": 1,
+    "spentPoints": 2,
+    "collection": [
+      "travelerSword",
+      "crystalBlade",
+      "runicSword",
+      "leatherArmor",
+      "guardianArmor",
+      "enchantedRobe",
+      "forestCharm",
+      "scholarAmulet",
+      "echoSigil"
+    ],
+    "equipped": {
+      "weapon": "crystalBlade",
+      "armor": "guardianArmor",
+      "accessory": "echoSigil"
+    },
+    "dungeons": {
+      "words": {
+        "clears": 2,
+        "best": 5,
+        "lastIds": [
+          "c2v3",
+          "v6",
+          "v8",
+          "v5",
+          "v3"
+        ]
+      },
+      "sentences": {
+        "clears": 2,
+        "best": 5,
+        "lastIds": [
+          "o0",
+          "c2s2",
+          "o1",
+          "c2s4",
+          "o4"
+        ]
+      },
+      "echoes": {
+        "clears": 2,
+        "best": 5,
+        "lastIds": [
+          "c2l3",
+          "vl-drink",
+          "c2l4",
+          "vl-company",
+          "c2l2"
+        ]
+      }
+    }
+  },
+  "completed": [
+    1,
+    2,
+    3
+  ],
+  "unlocked": 3,
+  "chapterComplete": true,
+  "learning": {
+    "hello": {
+      "correct": 6,
+      "wrong": 3,
+      "seen": true,
+      "streak": 1
+    },
+    "thanks": {
+      "correct": 3,
+      "wrong": 0,
+      "seen": true,
+      "streak": 3
+    },
+    "apple": {
+      "correct": 1,
+      "wrong": 0,
+      "seen": true,
+      "streak": 1
+    },
+    "water": {
+      "correct": 3,
+      "wrong": 0,
+      "seen": true,
+      "streak": 3
+    },
+    "bread": {
+      "correct": 0,
+      "wrong": 0,
+      "seen": true,
+      "streak": 0
+    },
+    "book": {
+      "correct": 1,
+      "wrong": 0,
+      "seen": true,
+      "streak": 1
+    },
+    "sword": {
+      "correct": 2,
+      "wrong": 0,
+      "seen": true,
+      "streak": 2
+    },
+    "forest": {
+      "correct": 1,
+      "wrong": 0,
+      "seen": true,
+      "streak": 1
+    },
+    "iam": {
+      "correct": 2,
+      "wrong": 0,
+      "seen": true,
+      "streak": 2
+    },
+    "ihave": {
+      "correct": 5,
+      "wrong": 0,
+      "seen": true,
+      "streak": 5
+    },
+    "ilike": {
+      "correct": 4,
+      "wrong": 0,
+      "seen": true,
+      "streak": 4
+    },
+    "iwant": {
+      "correct": 4,
+      "wrong": 0,
+      "seen": true,
+      "streak": 4
+    },
+    "ieat": {
+      "correct": 2,
+      "wrong": 0,
+      "seen": true,
+      "streak": 2
+    },
+    "idrink": {
+      "correct": 3,
+      "wrong": 0,
+      "seen": true,
+      "streak": 3
+    },
+    "village-morning": {
+      "correct": 6,
+      "wrong": 1,
+      "seen": true,
+      "streak": 6
+    },
+    "village-excuse": {
+      "correct": 7,
+      "wrong": 1,
+      "seen": true,
+      "streak": 5
+    },
+    "village-price": {
+      "correct": 7,
+      "wrong": 0,
+      "seen": true,
+      "streak": 7
+    },
+    "village-buy": {
+      "correct": 5,
+      "wrong": 0,
+      "seen": true,
+      "streak": 5
+    },
+    "village-here": {
+      "correct": 3,
+      "wrong": 0,
+      "seen": true,
+      "streak": 3
+    },
+    "village-thanks": {
+      "correct": 3,
+      "wrong": 1,
+      "seen": true,
+      "streak": 1
+    },
+    "village-water": {
+      "correct": 7,
+      "wrong": 3,
+      "seen": true,
+      "streak": 2
+    },
+    "village-bread": {
+      "correct": 4,
+      "wrong": 0,
+      "seen": true,
+      "streak": 4
+    },
+    "village-repeat": {
+      "correct": 2,
+      "wrong": 0,
+      "seen": true,
+      "streak": 2
+    },
+    "village-welcome": {
+      "correct": 3,
+      "wrong": 0,
+      "seen": true,
+      "streak": 3
+    },
+    "village-all": {
+      "correct": 2,
+      "wrong": 0,
+      "seen": true,
+      "streak": 2
+    },
+    "village-help": {
+      "correct": 4,
+      "wrong": 1,
+      "seen": true,
+      "streak": 4
+    },
+    "village-need": {
+      "correct": 1,
+      "wrong": 0,
+      "seen": true,
+      "streak": 1
+    },
+    "village-inn": {
+      "correct": 1,
+      "wrong": 0,
+      "seen": true,
+      "streak": 1
+    },
+    "village-left": {
+      "correct": 1,
+      "wrong": 0,
+      "seen": true,
+      "streak": 1
+    },
+    "village-right": {
+      "correct": 1,
+      "wrong": 0,
+      "seen": true,
+      "streak": 1
+    },
+    "village-straight": {
+      "correct": 1,
+      "wrong": 0,
+      "seen": true,
+      "streak": 1
+    },
+    "village-near": {
+      "correct": 0,
+      "wrong": 0,
+      "seen": true,
+      "streak": 0
+    }
+  },
+  "mistakes": {
+    "v0": 3,
+    "c2o2": 2,
+    "c2l1": 1,
+    "clara-hello": 1,
+    "thomas-drink": 1,
+    "elena-help": 1,
+    "scenario-ask": 1
+  },
+  "marked": [
+    "hello"
+  ],
+  "schedule": {
+    "v0": {
+      "step": 0,
+      "dueAt": 0
+    },
+    "c2o2": {
+      "step": 0,
+      "dueAt": 0
+    },
+    "c2l1": {
+      "step": 0,
+      "dueAt": 0
+    },
+    "clara-hello": {
+      "step": 0,
+      "dueAt": 0
+    },
+    "thomas-drink": {
+      "step": 0,
+      "dueAt": 0
+    },
+    "elena-help": {
+      "step": 1,
+      "dueAt": 1794044724650
+    },
+    "scenario-ask": {
+      "step": 0,
+      "dueAt": 0
+    }
+  },
+  "history": [
+    {
+      "id": "c2s2",
+      "correct": true
+    },
+    {
+      "id": "o1",
+      "correct": true
+    },
+    {
+      "id": "c2s4",
+      "correct": true
+    },
+    {
+      "id": "o4",
+      "correct": true
+    },
+    {
+      "id": "c2l1",
+      "correct": false
+    },
+    {
+      "id": "c2l1",
+      "correct": true
+    },
+    {
+      "id": "c2l0",
+      "correct": true
+    },
+    {
+      "id": "c2l3",
+      "correct": true
+    },
+    {
+      "id": "c2l4",
+      "correct": true
+    },
+    {
+      "id": "c2l2",
+      "correct": true
+    }
+  ],
+  "achievements": [
+    "firstVictory",
+    "firstSpell",
+    "combo3",
+    "firstReview",
+    "forestClear",
+    "villageVoice",
+    "firstAdventurer",
+    "swordApprentice",
+    "crystalGuardian",
+    "wellEquipped",
+    "wordExplorer",
+    "villageRestored"
+  ],
+  "village": {
+    "progress": {
+      "4": {
+        "accepted": true,
+        "step": 3,
+        "completed": true,
+        "correct": 8,
+        "wrong": 1,
+        "tags": [
+          "village-morning",
+          "village-excuse",
+          "village-price",
+          "village-buy",
+          "village-here"
+        ],
+        "reviewTags": [
+          "village-morning"
+        ]
+      },
+      "5": {
+        "accepted": true,
+        "step": 3,
+        "completed": true,
+        "correct": 9,
+        "wrong": 1,
+        "tags": [
+          "village-buy",
+          "village-thanks",
+          "village-water",
+          "village-bread",
+          "village-repeat",
+          "village-welcome",
+          "village-all"
+        ],
+        "reviewTags": [
+          "village-water"
+        ]
+      },
+      "6": {
+        "accepted": true,
+        "step": 3,
+        "completed": true,
+        "correct": 14,
+        "wrong": 2,
+        "tags": [
+          "village-excuse",
+          "village-buy",
+          "village-water",
+          "village-bread",
+          "village-repeat",
+          "village-welcome",
+          "village-help",
+          "village-need",
+          "village-inn",
+          "village-left",
+          "village-right",
+          "village-straight"
+        ],
+        "reviewTags": [
+          "village-water",
+          "village-help"
+        ]
+      }
+    },
+    "inventory": {
+      "potion": 2,
+      "charm": 0,
+      "cloak": 1
+    },
+    "scenarioStep": 4,
+    "scenarioComplete": true
+  },
+  "voice": {
+    "introduced": [
+      "vs-greet",
+      "vs-seat",
+      "vs-price",
+      "vs-water",
+      "vs-locate",
+      "vs-repeat",
+      "vs-pay",
+      "vs-thanks",
+      "vl-inn",
+      "vl-change",
+      "vl-across",
+      "vl-morning",
+      "vl-right",
+      "vl-bag",
+      "vl-drink",
+      "vl-company",
+      "vc-rowan-1",
+      "vc-rowan-2",
+      "vc-rowan-3",
+      "vc-clara-1",
+      "vc-clara-2",
+      "vc-clara-3",
+      "vc-thomas-1",
+      "vc-thomas-2",
+      "vc-thomas-3",
+      "vc-elena-1",
+      "vc-elena-2",
+      "vc-elena-3",
+      "vp-cafe-1",
+      "vp-cafe-2",
+      "vp-cafe-3",
+      "vp-cafe-4",
+      "vp-route-1",
+      "vp-route-2",
+      "vp-route-3",
+      "vp-route-4",
+      "vp-shop-1",
+      "vp-shop-2",
+      "vp-shop-3",
+      "vp-shop-4"
+    ],
+    "records": {
+      "v0": {
+        "correct": 2,
+        "wrong": 2,
+        "assistedCorrect": 1,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "v1": {
+        "correct": 2,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "v3": {
+        "correct": 2,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "v5": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "v6": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "v8": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "v9": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "o0": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "o1": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "o4": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2v0": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2v1": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2v3": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2s0": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2s1": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2s2": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2s4": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2o0": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2o1": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2o2": {
+        "correct": 1,
+        "wrong": 1,
+        "assistedCorrect": 1,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2l0": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 1,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 1,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2l1": {
+        "correct": 1,
+        "wrong": 1,
+        "assistedCorrect": 1,
+        "assistedWrong": 1,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 2,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2l2": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 1,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 1,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2l3": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 1,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 1,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "c2l4": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 1,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 1,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "vs-greet": {
+        "correct": 3,
+        "wrong": 1,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 4,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vs-seat": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 1,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vs-price": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 1,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vs-water": {
+        "correct": 2,
+        "wrong": 1,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 3,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": "2026-11-06"
+      },
+      "vs-locate": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 1,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vs-repeat": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 1,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vs-pay": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 1,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vs-thanks": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 1,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vl-inn": {
+        "correct": 3,
+        "wrong": 0,
+        "assistedCorrect": 3,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 3,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "vl-change": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 1,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 1,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vl-across": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 1,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 1,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vl-morning": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 1,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 1,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vl-right": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 1,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 1,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vl-bag": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 1,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 1,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vl-drink": {
+        "correct": 4,
+        "wrong": 1,
+        "assistedCorrect": 4,
+        "assistedWrong": 1,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 5,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": "2026-11-06"
+      },
+      "vl-company": {
+        "correct": 3,
+        "wrong": 0,
+        "assistedCorrect": 3,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 3,
+        "step": 1,
+        "lastDay": "2026-11-07",
+        "dueDay": "2026-11-08",
+        "reviewDay": ""
+      },
+      "vc-rowan-1": {
+        "correct": 1,
+        "wrong": 1,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vc-rowan-2": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vc-rowan-3": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vc-clara-1": {
+        "correct": 2,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vc-clara-2": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vc-clara-3": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vc-thomas-1": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vc-thomas-2": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vc-thomas-3": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vc-elena-1": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vc-elena-2": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vc-elena-3": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vp-cafe-1": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vp-cafe-2": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vp-cafe-3": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vp-cafe-4": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vp-route-1": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vp-route-2": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 1,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 1,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vp-route-3": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 1,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 1,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vp-route-4": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vp-shop-1": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vp-shop-2": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vp-shop-3": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      },
+      "vp-shop-4": {
+        "correct": 1,
+        "wrong": 0,
+        "assistedCorrect": 0,
+        "assistedWrong": 0,
+        "spoken": 0,
+        "text": 0,
+        "transcript": 0,
+        "translation": 0,
+        "fallback": 0,
+        "step": 1,
+        "lastDay": "2026-11-06",
+        "dueDay": "2026-11-07",
+        "reviewDay": ""
+      }
+    },
+    "recent": [
+      {
+        "id": "c2s0",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": false
+      },
+      {
+        "id": "c2o0",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": false
+      },
+      {
+        "id": "c2s1",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": false
+      },
+      {
+        "id": "c2o1",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": false
+      },
+      {
+        "id": "o0",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": false
+      },
+      {
+        "id": "c2s2",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": false
+      },
+      {
+        "id": "o1",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": false
+      },
+      {
+        "id": "c2s4",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": false
+      },
+      {
+        "id": "o4",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": false
+      },
+      {
+        "id": "c2l1",
+        "day": "2026-11-07",
+        "correct": false,
+        "assisted": true
+      },
+      {
+        "id": "c2l1",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": true
+      },
+      {
+        "id": "vl-drink",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": true
+      },
+      {
+        "id": "vl-inn",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": true
+      },
+      {
+        "id": "vl-company",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": true
+      },
+      {
+        "id": "c2l0",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": true
+      },
+      {
+        "id": "c2l3",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": true
+      },
+      {
+        "id": "vl-drink",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": true
+      },
+      {
+        "id": "c2l4",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": true
+      },
+      {
+        "id": "vl-company",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": true
+      },
+      {
+        "id": "c2l2",
+        "day": "2026-11-07",
+        "correct": true,
+        "assisted": true
+      }
+    ],
+    "missions": {
+      "vc-rowan": 3,
+      "vc-clara": 3,
+      "vc-thomas": 3,
+      "vc-elena": 3,
+      "vp-cafe": 4,
+      "vp-route": 4,
+      "vp-shop": 4
+    },
+    "speechAttempts": 0
+  },
+  "settings": {
+    "sound": true,
+    "voice": true,
+    "volume": 0.45,
+    "speechRate": "normal",
+    "speechVolume": 1
+  }
+}
