@@ -178,7 +178,7 @@ test('Offline audio has a safe text fallback when voices and sound output are ab
   a.stop();
 });
 
-test('v1 progress migrates to a separate v7 checkpoint and never changes the legacy bytes', () => {
+test('v1 progress migrates to a separate v8 checkpoint and never changes the legacy bytes', () => {
   const {Engine:e,items} = setup();
   const legacy = {version:1, started:true, level:5, xp:78, gold:844, hp:36,
     completed:[1,2,3], unlocked:3, chapterComplete:true,
@@ -187,14 +187,14 @@ test('v1 progress migrates to a separate v7 checkpoint and never changes the leg
   const original = JSON.stringify(legacy);
   items.set(e.legacyKey, original);
   const profile = e.load();
-  assert.equal(profile.version,7);
+  assert.equal(profile.version,8);
   for (const [key, value] of Object.entries(legacy)) {
     if (key === 'settings') assert.deepEqual(JSON.parse(JSON.stringify(profile.settings)),{...value,speechRate:'normal',speechVolume:1});
     else if (key !== 'version') assert.deepEqual(JSON.parse(JSON.stringify(profile[key])), value);
   }
   assert.equal(profile.achievements.join(','),'firstVictory,forestClear');
   assert.equal(e.reviewList(profile)[0].due,true);
-  assert.equal(JSON.parse(items.get(e.saveKey)).version,7);
+  assert.equal(JSON.parse(items.get(e.saveKey)).version,8);
   profile.gold++;
   e.save(profile);
   assert.equal(e.load().gold,845);
@@ -202,7 +202,7 @@ test('v1 progress migrates to a separate v7 checkpoint and never changes the leg
   items.set(e.saveKey,'damaged');
   assert.equal(e.load().gold,844);
   assert.equal(items.get(e.legacyKey),original);
-  const future = JSON.stringify({version:8, gold:9999});
+  const future = JSON.stringify({version:9, gold:9999});
   items.set(e.saveKey,future);
   const fallback = e.load();
   assert.equal(e.save(fallback),false);

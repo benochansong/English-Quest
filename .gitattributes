@@ -1,0 +1,2 @@
+# Keep the verified standalone download byte-for-byte intact across Git checkouts.
+EnglishQuest.html -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

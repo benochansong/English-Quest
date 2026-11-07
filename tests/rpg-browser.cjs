@@ -60,7 +60,7 @@ async function loadLegacy(page){
   await page.evaluate(value=>localStorage.setItem('EnglishQuest.v4',value),raw);
   await page.reload();await click(page,'continue');await wait(page,'class-preview');
   const migrated=await profile(page);
-  assert.equal(migrated.version,7);
+  assert.equal(migrated.version,8);
   for(const field of ['level','xp','hp','gold','unlocked','completed','chapterComplete','currentChapter','village','learning','mistakes','history','schedule','voice','settings']){
     assert.deepEqual(migrated[field],old[field],'v4 migration changed '+field);
   }

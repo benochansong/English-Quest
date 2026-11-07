@@ -5,7 +5,8 @@ const Engine = (() => {
   const v3Key = 'EnglishQuest.v3';
   const v4Key = 'EnglishQuest.v4';
   const v5Key = 'EnglishQuest.v5';
-  const saveKey = 'EnglishQuest.v7';
+  const v7Key = 'EnglishQuest.v7';
+  const saveKey = 'EnglishQuest.v8';
   const active = new WeakMap();
   const reviews = new WeakMap();
   const achievements = [
@@ -35,9 +36,10 @@ const Engine = (() => {
     ? clamp(value, 0, max) : fallback;
   const emptyRecord = () => ({seen:false, correct:0, wrong:0, streak:0});
   function fresh() {
-    return {version:7, started:false, currentChapter:1, level:1, xp:0, gold:0, hp:100,rpg:RPG.fresh(),
+    return {version:8, started:false, currentChapter:1, level:1, xp:0, gold:0, hp:100,rpg:RPG.fresh(),
       completed:[], unlocked:1, chapterComplete:false, learning:{}, mistakes:{},
       marked:[], schedule:{}, history:[], achievements:[], village:VillageEngine.fresh(),
+      academy:typeof Academy!=='undefined'?Academy.fresh():null,
       voice:VoiceLearning.fresh(), exploration:typeof Exploration!=='undefined'?Exploration.fresh():null,
       settings:{sound:true, voice:true, volume:0.45, speechRate:'normal',speechVolume:1}};
   }
@@ -46,7 +48,7 @@ const Engine = (() => {
   }
   function hydrate(raw) {
     const profile = fresh();
-    if (!raw || ![1, 2, 3, 4, 5, 7].includes(raw.version)) return profile;
+    if (!raw || ![1, 2, 3, 4, 5, 7, 8].includes(raw.version)) return profile;
     profile.started = raw.started === true;
     profile.level = Math.max(1, integer(raw.level, 1, 9999));
     profile.gold = integer(raw.gold, 0, Number.MAX_SAFE_INTEGER);
@@ -63,7 +65,7 @@ const Engine = (() => {
     if (raw.version >= 4) profile.voice=VoiceLearning.hydrate(raw.voice);
     RPG.hydrate(profile,raw.version>=5?raw.rpg:null);
     if(typeof Exploration!=='undefined'){
-      profile.exploration=Exploration.hydrate(raw.version===7?raw.exploration:null,profile);
+      profile.exploration=Exploration.hydrate(raw.version>=7?raw.exploration:null,profile);
       if(raw.currentChapter===3&&Exploration.available(profile))profile.currentChapter=3;
     }
     const {maxHp, nextXp} = stats(profile);
@@ -107,6 +109,7 @@ const Engine = (() => {
     if (profile.completed.length) unlock(profile, 'firstVictory');
     if (profile.chapterComplete) unlock(profile, 'forestClear');
     if (profile.village.scenarioComplete) unlock(profile,'villageVoice');
+    if(typeof Academy!=='undefined')profile.academy=Academy.hydrate(raw.version===8?raw.academy:null);
     RPG.refresh(profile);
     return profile;
   }
@@ -118,9 +121,9 @@ const Engine = (() => {
   function load() {
     try {
       const current = stored(saveKey);
-      if (current?.version === 7) return hydrate(current);
-      for (const legacy of [stored(v5Key),stored(v4Key),stored(v3Key),stored(v2Key),stored(legacyKey),current]) {
-        if (![1,2,3,4,5].includes(legacy?.version)) continue;
+      if (current?.version === 8) return hydrate(current);
+      for (const legacy of [stored(v7Key),stored(v5Key),stored(v4Key),stored(v3Key),stored(v2Key),stored(legacyKey),current]) {
+        if (![1,2,3,4,5,7].includes(legacy?.version)) continue;
         const profile = hydrate(legacy);
         save(profile);
         return profile;
@@ -131,7 +134,7 @@ const Engine = (() => {
   }
   function save(profile) {
     try {
-      if (profile.version !== 7 || stored(saveKey)?.version > 7) return false;
+      if (profile.version !== 8 || stored(saveKey)?.version > 8) return false;
       localStorage.setItem(saveKey, JSON.stringify(profile));
       return true;
     }
@@ -481,7 +484,7 @@ const Engine = (() => {
     encounter.phase = 'REWARD';
     return {xp, gold, levelUp, bonus, replay,gearId};
   }
-  return {saveKey, legacyKey, v2Key, v3Key, v4Key, v5Key, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
+  return {saveKey, legacyKey, v2Key, v3Key, v4Key, v5Key, v7Key, enemies, fresh, stats, hydrate, load, save, teach, record, status, battle,
     achievements, mark, reviewList, startReview, answerReview, dashboard, heavy, bonusPercent,
     training, golemBreak, diving, pulsing, retryBroken, useItem,voicePending,voiceResult,
     available, charging, exposed, shuffle, select, answer, playerAction, enemyAction, reward};
