@@ -19,6 +19,7 @@ Before implementation, the branch was `feature/english-quest-reborn-phase1` at `
 | `node --test tests/*.test.cjs` | **135/135 passed**, 0 skipped, exit **0** | [Unit log](docs/reborn/unit-tests.log) |
 | Chrome **157.0.8103.79**, final bundle | Full offline journey, exit **0** | [Chrome log](docs/reborn/chrome-final.log) |
 | Microsoft Edge **157.0.4341.60**, final bundle | Full offline journey, exit **0** | [Edge log](docs/reborn/edge-final.log) |
+| Chrome, final results capture | Additional real-input victory, expression scroll visibility and screenshot refresh, exit **0** | [Results log](docs/reborn/chrome-results.log) |
 | Chrome, initial integration build | Full journey, exit **0**; subsequently superseded by final run | [Initial log](docs/reborn/chrome-initial.log) |
 
 The 135 tests comprise 94 existing tests, 32 combat/learning tests and 9 audio/manifest tests. Node version: 24.14.0. Edge initially failed to launch inside the Windows sandbox, before any page loaded; its successful run used an isolated temporary profile outside that sandbox. At most two browsers ran concurrently. No real user browser profile or real saved game was opened or changed.
@@ -77,6 +78,6 @@ Other QA findings fixed before the final runs: keyboard/mouse action latch preve
 
 ## Reproduction
 
-Use Node with Playwright resolvable through the environment's module installation and installed Chrome/Edge. Run `node --test tests/*.test.cjs`, then `node tests/reborn-browser.cjs --screenshots`. Set `REBORN_BROWSER=msedge` for Edge (omit `--screenshots` to retain the canonical Chrome captures). Tests use temporary browser contexts and close them on success or failure.
+Use Node with Playwright resolvable through the environment's module installation and installed Chrome/Edge. Run `node --test tests/*.test.cjs`, then `node tests/reborn-browser.cjs --screenshots`. Set `REBORN_BROWSER=msedge` for Edge (omit `--screenshots` to retain the canonical Chrome captures). `--results-only` still plays the actual route to victory, but skips the separate defeat/audio/settings/touch/original-game tail; it was used only for the extra results capture listed above. Tests use temporary browser contexts and close them on success or failure.
 
 Outstanding acceptance work: licensed English voice assets and physical listening review, beginner playtesting/time measurement, and human evaluation of enjoyment and replay motivation. See [gameplay review](REBORN_PHASE1_GAMEPLAY_REVIEW.md).
