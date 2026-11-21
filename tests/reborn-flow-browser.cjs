@@ -2,6 +2,7 @@
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),{pathToFileURL}=require('node:url'),{createHash}=require('node:crypto');
 const {chromium}=require('playwright');
 const root=path.resolve(__dirname,'..'),channel=process.env.REBORN_BROWSER||'chrome',baseline=process.argv.includes('--baseline');
+const out=path.join(root,process.env.REBORN_QA_OUT||'docs/reborn-phase3');
 const file=path.join(root,baseline?'.phase3-baseline/EnglishQuest_REBORN.html':'EnglishQuest_REBORN.html');
 const state=p=>p.evaluate(()=>JSON.parse(JSON.stringify(RebornApp.game.state)));
 const click=(p,a)=>p.locator(`[data-action="${a}"]:visible`).first().click();
@@ -81,15 +82,15 @@ async function journey(p){
    assert.equal(result.stats.combat.damageDealt,230);assert.ok(result.stats.combat.weaknessHits>=1);assert.ok(result.stats.combat.magicHits>=1);
   }
   if(!baseline){assert.ok(runs[2].measure.screens<runs[0].measure.screens,'real learned run has fewer mandatory screens');assert.ok(runs[2].measure.arrangements<runs[0].measure.arrangements);assert.ok(runs.some(r=>r.stats.flow.independentActions>0));
-   await p.locator('.dialog-card').screenshot({path:path.join(root,`docs/reborn-phase3/${channel}-results.png`)});
+   await p.locator('.dialog-card').screenshot({path:path.join(out,`${channel}-results.png`)});
    await p.locator('.flow-review').first().locator('summary').click();await p.locator('.flow-review').first().scrollIntoViewIfNeeded();
-   await p.locator('.dialog-card').screenshot({path:path.join(root,`docs/reborn-phase3/${channel}-expression-results.png`)});
+   await p.locator('.dialog-card').screenshot({path:path.join(out,`${channel}-expression-results.png`)});
    for(const width of [1920,1366,768,390,360]){await p.setViewportSize({width,height:900});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));}
    await p.setViewportSize({width:1366,height:768});await click(p,'restart');
    await p.keyboard.down('d');await p.waitForTimeout(1400);await p.keyboard.up('d');
    await p.waitForFunction(()=>RebornApp.game.state.flowCue?.expressionId==='dodge',null,{timeout:12000});
    await p.locator('#flow-banner').waitFor({state:'visible'});
-   await p.screenshot({path:path.join(root,`docs/reborn-phase3/${channel}-live-cue.png`),fullPage:true});
+   await p.screenshot({path:path.join(out,`${channel}-live-cue.png`),fullPage:true});
    await click(p,'help');const paused=await state(p);assert.equal(paused.mode,'PAUSED');assert.equal(paused.flowCue.assisted,true);
    await p.waitForTimeout(350);assert.equal((await state(p)).enemy.telegraphRemaining,paused.enemy.telegraphRemaining);assert.equal((await state(p)).flowCue.age,paused.flowCue.age);
    await p.locator('#slow').check();await click(p,'replay');await p.waitForFunction(()=>RebornApp.voice.status.state==='ended');assert.equal((await state(p)).flowCue.heard,true);
@@ -100,6 +101,6 @@ async function journey(p){
   }
   assert.equal(await p.evaluate(()=>localStorage.getItem('EnglishQuest.v8')),'unchanged-flow-sentinel');assert.deepEqual(errors,[]);assert.deepEqual(requests,[]);
   const bytes=await fs.readFile(file);const report={browser:channel,version:browser.version(),baseline,artifactSha256:createHash('sha256').update(bytes).digest('hex'),offline:true,runs,errors,requests};
-  await fs.writeFile(path.join(root,`docs/reborn-phase3/${channel}-${baseline?'baseline':'flow'}.json`),JSON.stringify(report,null,2)+'\n');console.log('PASS',channel,baseline?'baseline':'three real learning runs');
+  await fs.writeFile(path.join(out,`${channel}-${baseline?'baseline':'flow'}.json`),JSON.stringify(report,null,2)+'\n');console.log('PASS',channel,baseline?'baseline':'three real learning runs');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

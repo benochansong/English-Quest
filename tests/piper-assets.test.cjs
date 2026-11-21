@@ -10,10 +10,10 @@ function pcm(bytes){
  let energy=0,active=0,peak=0;for(let n=0;n<data.length;n+=2){const v=data.readInt16LE(n);energy+=v*v;if(Math.abs(v)>164)active++;peak=Math.max(peak,Math.abs(v));}
  return{duration:data.length/44100,rms:Math.sqrt(energy/(data.length/2))/32768,active:active/(data.length/2),peak:peak/32768};
 }
-test('All34 exact script entries map to genuine verified mono PCM speech files and immutable receipts',()=>{
- const script=fs.readFileSync(path.join(root,'REBORN_VOICE_SCRIPT.md'),'utf8');
- const originalRows=[...script.matchAll(/^\| (VO_[A-Z_]+) \| [^|]+ \| ([^|]+) \| ([^|]+) \|/gm)];assert.equal(originalRows.length,34);
- assert.equal(manifest.utterances.length,34);
+test('Original34 and two Phase4 exact script entries map to genuine verified mono PCM speech files and immutable receipts',()=>{
+ const script=fs.readFileSync(path.join(root,'REBORN_VOICE_SCRIPT.md'),'utf8')+'\n'+fs.readFileSync(path.join(root,'REBORN_PHASE4_VOICE_SCRIPT.md'),'utf8');
+ const originalRows=[...script.matchAll(/^\| (VO_[A-Z_]+) \| [^|]+ \| ([^|]+) \| ([^|]+) \|/gm)];assert.equal(originalRows.length,36);
+ assert.equal(manifest.utterances.length,36);
  for(const x of manifest.utterances){const original=originalRows.find(r=>r[1]===x.id);assert.ok(original);assert.equal(x.en,original[2].trim());assert.equal(x.ko,original[3].trim());
   const file=path.join(root,x.path),bytes=fs.readFileSync(file),data=pcm(bytes),receipt=JSON.parse(fs.readFileSync(file.replace(/\.wav$/,'.json'),'utf8'));
   assert.equal(x.path,`assets/reborn/voice/${x.id}.wav`);assert.equal(x.normalSpeedAsset,x.path);assert.equal(x.available,true);assert.equal(x.verification.sha256,sha(bytes));assert.equal(receipt.sha256,sha(bytes));assert.equal(receipt.en,x.en);assert.equal(receipt.id,x.id);
@@ -21,9 +21,9 @@ test('All34 exact script entries map to genuine verified mono PCM speech files a
   assert.equal(x.license.redistributionAllowed,true);assert.equal(x.voiceModel,'en_US-ljspeech-medium');assert.match(x.audioSource,/Piper synthetic/);assert.equal(x.qualityReview.reviewer,null);assert.equal(x.qualityReview.status,'Needs listening review');
  }
 });
-test('The standalone game embeds the exact34 approved files without an engine or model runtime',()=>{
+test('The standalone game embeds the exact36 licensed files without an engine or model runtime',()=>{
  const html=fs.readFileSync(path.join(root,'EnglishQuest_REBORN.html'),'utf8');
- const data=JSON.parse(html.match(/const RebornVoiceManifest=(.*);\n/)[1]);assert.equal(data.utterances.filter(x=>x.available&&x.embedded).length,34);
+ const data=JSON.parse(html.match(/const RebornVoiceManifest=(.*);\n/)[1]);assert.equal(data.utterances.filter(x=>x.available&&x.embedded).length,36);
  for(const x of data.utterances){assert.match(x.embedded,/^data:audio\/wav;base64,/);assert.equal(sha(Buffer.from(x.embedded.split(',')[1],'base64')),x.verification.sha256);assert.equal(x.embeddedSlow,null);}
  assert.ok(!html.includes('en_US-lessac-medium'));assert.ok(!/<(?:script|audio)[^>]+src=["']https?:/i.test(html));
 });
@@ -33,6 +33,11 @@ test('Downloaded model identity matches official LFS metadata and all receipts, 
  for(const x of manifest.utterances)assert.equal(x.license.modelSha256,lfs);
  assert.ok(!fs.readdirSync(path.join(root,'assets/reborn/voice')).some(x=>/onnx|lessac/i.test(x)));
  const original=fs.readFileSync(path.join(root,'EnglishQuest.html'));assert.equal(sha(original),'e0f49c2bb74125f16828c0a1d9f5b448b0fea1831c6af9117290668feda0cbad');
+});
+test('Phase4 preserves every original Phase3 voice byte and adds exactly two new spoken instructions',()=>{
+ const hashes=JSON.parse(fs.readFileSync(path.join(root,'docs/reborn-phase4/original-voice-hashes.json'),'utf8'));assert.equal(Object.keys(hashes).length,34);
+ for(const [id,hash] of Object.entries(hashes))assert.equal(sha(fs.readFileSync(path.join(root,`assets/reborn/voice/${id}.wav`))),hash,id);
+ assert.deepEqual(manifest.utterances.filter(r=>!hashes[r.id]).map(r=>r.id),['VO_BRING_DOWN','VO_ACTIVATE_BLUE']);
 });
 
 test('Packaging rejects changed or unapproved audio, while genuinely missing files stay unavailable',()=>{

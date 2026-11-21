@@ -40,7 +40,7 @@ test('Initial isolated state is valid without any DOM, storage, timer or audio g
 test('Short tutorial and boss introduction teach six phrases, support skip, and preserve challenge encounters',()=>{
   const {g,learning}=setup();assert.ok(g.start());assert.equal(g.state.mode,'TUTORIAL');assert.equal(g.state.tutorial.index,0);
   g.proceed();g.proceed();assert.equal(g.state.tutorial.index,2);g.proceed();assert.equal(g.state.mode,'EXPLORATION');assert.equal(g.state.awaitingProceed,false);
-  assert.equal(Object.keys(learning.expressions).length,6);assert.equal(learning.bossLesson.voiceId,'VO_ATTACK_CRYSTAL');
+  assert.deepEqual(Object.keys(learning.expressions).filter(k=>['left','dodge','attack','magic','fire','crystal'].includes(k)),['left','dodge','attack','magic','fire','crystal']);assert.equal(learning.bossLesson.voiceId,'VO_ATTACK_CRYSTAL');
   const other=setup().g;other.start();assert.ok(other.start(true));assert.equal(other.state.mode,'EXPLORATION');other.proceed();assert.equal(other.state.enemy.hp,70);
 });
 test('Movement is responsive and equivalent at 30, 60 and 120 updates per second',()=>{

@@ -1,3 +1,7 @@
+# REBORN Phase 4 — 사냥꾼의 길
+
+`EnglishQuest_REBORN.html`을 Chrome 또는 Edge로 열고 **사냥꾼의 길 시작**을 누르세요. 숲 슬라임을 잡으면 바람 절벽의 까마귀, 다음에는 수정 유적의 골렘으로 이어집니다. **E / 수정 버튼**으로 환경을 활용하며, 기존 챔피언 전투 실험실과 v0.8 원본은 보존했습니다. [실행 안내](REBORN_PHASE4_README_KO.md) · [검사 결과](REBORN_PHASE4_TEST_REPORT.md) · [전투 비교·사람 검토](REBORN_PHASE4_GAMEPLAY_REVIEW.md).
+
 # REBORN Phase 3 — Listen, Act, Flow
 
 `EnglishQuest_REBORN.html`을 Chrome 또는 Edge로 열면 처음에는 안전하게 배우고, 익힌 영어는 전투에서 듣고 행동합니다. 같은 창에서 재도전할 때 반복 문제와 문장 배열이 줄어듭니다. [실행·조작 안내](REBORN_PHASE3_README_KO.md) · [전후 흐름 비교](REBORN_PHASE3_FLOW_REPORT.md) · [검증 결과](REBORN_PHASE3_TEST_REPORT.md) · [사람 플레이 체크리스트](REBORN_PHASE3_PLAYTEST_CHECKLIST.md).

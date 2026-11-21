@@ -52,6 +52,7 @@ def save_json(path, value):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--report', default='docs/piper/production-report.json', help='Production report path relative to repository')
     parser.add_argument('--model', choices=['en_US-ljspeech-medium', 'en_US-lessac-medium'], default='en_US-ljspeech-medium')
     parser.add_argument('--ids', nargs='+', help='Generate/retry only these manifest IDs')
     parser.add_argument('--samples', action='store_true', help='Generate the five initial samples')
@@ -62,8 +63,8 @@ def main():
     manifest_path = ROOT / 'REBORN_VOICE_MANIFEST.json'
     manifest = json.loads(manifest_path.read_text(encoding='utf-8-sig'))
     rows = manifest['utterances']
-    if len(rows) != 34 or len({x['id'] for x in rows}) != 34:
-        raise ValueError('Expected the authoritative 34 unique entries')
+    if len(rows) < 34 or len({x['id'] for x in rows}) != len(rows):
+        raise ValueError('Expected the original 34 entries plus unique extension entries')
     selected = args.ids or (SAMPLES if args.samples else [x['id'] for x in rows])
     if set(selected) - {x['id'] for x in rows}:
         raise ValueError('Unknown voice ID')
@@ -133,11 +134,11 @@ def main():
         except (OSError, ValueError, wave.Error, EOFError):
             pass
     missing = [r['id'] for r in rows if r['id'] not in verified]
-    report = dict(required=34, selected=len(selected), successful=len(results), failed=errors,
+    report = dict(required=len(rows), selected=len(selected), successful=len(results), failed=errors,
                   totalVerified=len(verified), missing=missing, totalBytes=sum(x['bytes'] for x in verified.values()),
                   **fingerprint, modelBytes=model.stat().st_size, localOnly=local_only,
                   manualListening='Needs listening review', results=results)
-    report_path = output / 'production-report.json' if local_only else ROOT / 'docs/piper/production-report.json'
+    report_path = output / 'production-report.json' if local_only else ROOT / args.report
     save_json(report_path, report)
     if args.update_manifest:
         for row in rows:
@@ -158,7 +159,7 @@ def main():
             old_review = row.get('qualityReview', {})
             if old_review.get('approvedSha256') != verified.get(row['id'], {}).get('sha256') or not old_review.get('reviewer'):
                 row['qualityReview'] = dict(status='Needs listening review', pronunciation=None, intelligibility=None, normalAndSlowListening=None, reviewer=None)
-        manifest['status'] = f"{len(verified)}/34 Piper synthetic speech assets technically verified; human listening pending"
+        manifest['status'] = f"{len(verified)}/{len(rows)} Piper synthetic speech assets technically verified; human listening pending"
         manifest['primary'] = 'Bundled Piper synthetic English speech (en_US-ljspeech-medium)'
         for speaker in manifest['speakers'].values():
             speaker['status'] = 'Uses the same LJSpeech synthetic voice; distinct character acting is not delivered'

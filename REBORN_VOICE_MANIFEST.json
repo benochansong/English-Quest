@@ -1,7 +1,7 @@
 {
-  "version": 2,
-  "release": "REBORN Phase 2",
-  "status": "34/34 Piper synthetic speech assets technically verified; human listening pending",
+  "version": 3,
+  "release": "REBORN Phase 4",
+  "status": "36/36 Piper synthetic speech assets technically verified; human listening pending",
   "primary": "Bundled Piper synthetic English speech (en_US-ljspeech-medium)",
   "fallback": "Optional local browser synthesis, explicitly enabled by player; not a recording",
   "utterances": [
@@ -1735,6 +1735,108 @@
         "rms": 0.16654,
         "activeFraction": 0.803857,
         "sha256": "0b39e221ea3500a508008535305984337f21b7fe5ab131976f7144d3e44cc508",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "VO_BRING_DOWN",
+      "en": "Bring it down!",
+      "ko": "아래로 끌어내려요!",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "path": "assets/reborn/voice/VO_BRING_DOWN.wav",
+      "usage": "까마귀 회복 틈 · 바람 수정",
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_BRING_DOWN.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 0.998458,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 0.998458,
+        "bytes": 44076,
+        "peak": 0.999969,
+        "rms": 0.164931,
+        "activeFraction": 0.775799,
+        "sha256": "20a1351c5414764f220fab2d6ec094be5fc0e9113a7ccd44b00ca2f9bb9131d1",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "VO_ACTIVATE_BLUE",
+      "en": "Activate the blue crystal!",
+      "ko": "파란 수정을 활성화하세요!",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "path": "assets/reborn/voice/VO_ACTIVATE_BLUE.wav",
+      "usage": "골렘 방어막 · 파란 원 수정",
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_ACTIVATE_BLUE.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 1.497687,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 1.497687,
+        "bytes": 66092,
+        "peak": 0.999969,
+        "rms": 0.089893,
+        "activeFraction": 0.74243,
+        "sha256": "8af0f778540df6b967f83845510bc396a8528e2ba85dd3f6e56ff7c6687dd627",
         "status": "Technically verified",
         "humanListening": "Needs listening review"
       }

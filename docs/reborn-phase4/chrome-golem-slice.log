@@ -1,0 +1,1 @@
+PASS chrome golem {"duration":27.299,"combat":{"damageDealt":170,"damageReceived":0,"dodges":0,"successfulDodges":0,"perfectDodges":0,"highestCombo":3,"magicUsed":0,"magicHits":0,"weaknessHits":11,"swordHits":11},"field":{"missedAttacks":0,"groundings":0,"shieldBreaks":2,"wrongCrystals":0},"patterns":["fist","slam","pulse"]}
