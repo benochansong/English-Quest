@@ -1,0 +1,297 @@
+{
+  "format": "EnglishQuestIntegrated",
+  "version": 1,
+  "revision": 14,
+  "profile": {
+    "version": 8,
+    "started": true,
+    "currentChapter": 1,
+    "level": 1,
+    "xp": 0,
+    "gold": 0,
+    "hp": 100,
+    "rpg": {
+      "classId": "vanguard",
+      "promptSeen": true,
+      "skills": [],
+      "availablePoints": 0,
+      "spentPoints": 0,
+      "collection": [
+        "travelerSword"
+      ],
+      "equipped": {
+        "weapon": null,
+        "armor": null,
+        "accessory": null
+      },
+      "dungeons": {
+        "words": {
+          "clears": 0,
+          "best": 0,
+          "lastIds": []
+        },
+        "sentences": {
+          "clears": 0,
+          "best": 0,
+          "lastIds": []
+        },
+        "echoes": {
+          "clears": 0,
+          "best": 0,
+          "lastIds": []
+        }
+      }
+    },
+    "completed": [],
+    "unlocked": 1,
+    "chapterComplete": false,
+    "learning": {},
+    "mistakes": {},
+    "marked": [],
+    "schedule": {},
+    "history": [],
+    "achievements": [
+      "firstAdventurer"
+    ],
+    "village": {
+      "progress": {
+        "4": {
+          "accepted": false,
+          "step": 0,
+          "completed": false,
+          "correct": 0,
+          "wrong": 0,
+          "tags": [],
+          "reviewTags": []
+        },
+        "5": {
+          "accepted": false,
+          "step": 0,
+          "completed": false,
+          "correct": 0,
+          "wrong": 0,
+          "tags": [],
+          "reviewTags": []
+        },
+        "6": {
+          "accepted": false,
+          "step": 0,
+          "completed": false,
+          "correct": 0,
+          "wrong": 0,
+          "tags": [],
+          "reviewTags": []
+        }
+      },
+      "inventory": {
+        "potion": 0,
+        "charm": 0,
+        "cloak": 0
+      },
+      "scenarioStep": 0,
+      "scenarioComplete": false
+    },
+    "academy": {
+      "tier": 1,
+      "tierMode": "auto",
+      "records": {},
+      "expressions": {},
+      "recent": [],
+      "units": {},
+      "missions": {},
+      "diagnostics": [],
+      "diagnosticRuns": 0,
+      "rewarded": [],
+      "badges": [],
+      "sessions": 0,
+      "evidenceCount": 0,
+      "adjustedAt": 0,
+      "speechAttempts": 0
+    },
+    "voice": {
+      "introduced": [],
+      "records": {},
+      "recent": [],
+      "missions": {},
+      "speechAttempts": 0
+    },
+    "exploration": {
+      "area": "forest",
+      "x": 100,
+      "y": 450,
+      "direction": "down",
+      "completed": [],
+      "observed": [],
+      "opened": [],
+      "discovered": [
+        "forest"
+      ],
+      "recruited": [],
+      "activeCompanion": null,
+      "choices": {
+        "crossroad": null,
+        "restoration": null
+      },
+      "quests": {
+        "map": "active",
+        "companions": "locked",
+        "bridge": "locked",
+        "fragments": "locked",
+        "path": "locked"
+      },
+      "completedChapter": false,
+      "cosmetics": [],
+      "notes": [],
+      "rewarded": [],
+      "tutorialSeen": false
+    },
+    "settings": {
+      "sound": false,
+      "voice": true,
+      "volume": 0.45,
+      "speechRate": "normal",
+      "speechVolume": 1
+    }
+  },
+  "extension": {
+    "version": 1,
+    "quest": "complete",
+    "recognition": true,
+    "records": {
+      "left": {
+        "encountered": 2,
+        "audioPlayed": 1,
+        "attempted": 2,
+        "completed": 0,
+        "independent": 0,
+        "assisted": 0,
+        "text": 0,
+        "translation": 1,
+        "replay": 0,
+        "missed": 0,
+        "reviews": 1
+      },
+      "dodge": {
+        "encountered": 2,
+        "audioPlayed": 1,
+        "attempted": 1,
+        "completed": 0,
+        "independent": 0,
+        "assisted": 0,
+        "text": 0,
+        "translation": 0,
+        "replay": 0,
+        "missed": 1,
+        "reviews": 0
+      },
+      "fire": {
+        "encountered": 2,
+        "audioPlayed": 2,
+        "attempted": 2,
+        "completed": 2,
+        "independent": 1,
+        "assisted": 1,
+        "text": 0,
+        "translation": 1,
+        "replay": 0,
+        "missed": 0,
+        "reviews": 0
+      }
+    },
+    "memory": {
+      "left": {
+        "introduced": true,
+        "independent": 1,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": "assisted",
+        "stage": "practice"
+      },
+      "dodge": {
+        "introduced": true,
+        "independent": 1,
+        "streak": 0,
+        "actual": 0,
+        "misses": 1,
+        "lastResult": "review",
+        "stage": "practice"
+      },
+      "fire": {
+        "introduced": true,
+        "independent": 1,
+        "streak": 0,
+        "actual": 1,
+        "misses": 0,
+        "lastResult": "assisted",
+        "stage": "practice"
+      }
+    },
+    "runs": [
+      {
+        "runId": "66c6c1e3-34d7-4cee-8242-6cd50d7e6587",
+        "encounterId": "forest-awakens",
+        "status": "victory",
+        "enemyDefeated": true,
+        "meaningful": 1,
+        "independent": 1,
+        "assisted": 0,
+        "audioPlayed": 1
+      },
+      {
+        "runId": "cf262f7d-4015-4d1f-942e-ad40972ffe71",
+        "encounterId": "forest-awakens",
+        "status": "cancel",
+        "enemyDefeated": false,
+        "meaningful": 0,
+        "independent": 0,
+        "assisted": 0,
+        "audioPlayed": 0
+      },
+      {
+        "runId": "bde993ed-d947-43e1-acb1-018200990b05",
+        "encounterId": "forest-awakens",
+        "status": "victory",
+        "enemyDefeated": true,
+        "meaningful": 1,
+        "independent": 0,
+        "assisted": 1,
+        "audioPlayed": 0
+      }
+    ],
+    "processed": [
+      "66c6c1e3-34d7-4cee-8242-6cd50d7e6587",
+      "cf262f7d-4015-4d1f-942e-ad40972ffe71",
+      "bde993ed-d947-43e1-acb1-018200990b05"
+    ],
+    "active": null,
+    "checkpoint": {
+      "screen": "MAP",
+      "chapter": 1,
+      "mapSelection": 0,
+      "location": "forest-map"
+    },
+    "settings": {
+      "master": 0.45,
+      "voice": 1,
+      "sfx": 0.65,
+      "music": 0,
+      "ui": 0.5,
+      "ambient": 0.16,
+      "muted": true,
+      "shakeIntensity": "low",
+      "reducedMotion": false
+    },
+    "lastOutcome": "victory",
+    "adventure": {
+      "version": 1,
+      "serial": 0,
+      "active": null,
+      "completed": [],
+      "rewards": [],
+      "records": {},
+      "history": [],
+      "location": "square"
+    }
+  }
+}

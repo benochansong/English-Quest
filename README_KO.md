@@ -1,3 +1,7 @@
+# REBORN Phase 7 — 목소리가 이어지는 마을
+
+`EnglishQuest_REBORN_INTEGRATED.html`을 열고 숲 지도 또는 마을의 **세 가지 마을 의뢰**를 선택하세요. 클라라의 물건을 모으고, 엘레나의 안내로 여행자를 찾고, 로완의 수정 조사에서 실제 전투를 치릅니다. 기존 36개와 새 Piper 25개 음성, 30개 원본 아카데미 활동 연결, 도움·독립 행동 구분, 별도 저장과 재도전을 제공합니다. [실행 안내](REBORN_PHASE7_README_KO.md) · [구조](REBORN_PHASE7_ARCHITECTURE.md) · [검증 보고서](REBORN_PHASE7_TEST_REPORT.md) · [사람 평가](REBORN_PHASE7_PLAYTEST.md).
+
 # REBORN Phase 6 — 하나의 모험
 
 `EnglishQuest_REBORN_INTEGRATED.html`을 Chrome 또는 Edge에서 여세요. 기존 캠페인의 숲 지도에서 **로완과 대화 → 훈련 부탁 받기 → 실시간 전투 훈련**으로 들어가고, 승리 후 위의 복귀 버튼으로 같은 지도에 돌아옵니다. 원래 두 게임 파일과 저장은 보존하며, 통합판은 별도 저장과 명시적 백업 가져오기를 사용합니다. [실행 안내](REBORN_PHASE6_README_KO.md) · [구조](REBORN_PHASE6_ARCHITECTURE.md) · [검증 보고서](REBORN_PHASE6_TEST_REPORT.md) · [사람 플레이 양식](REBORN_PHASE6_PLAYTEST.md).

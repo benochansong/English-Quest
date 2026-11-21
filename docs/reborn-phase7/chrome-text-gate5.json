@@ -1,0 +1,1114 @@
+{
+  "browser": "chrome",
+  "version": "157.0.8103.79",
+  "sha256": "abedc1aef9eab5be7154bcb69824bb0704cc60352a7a8a4b08ee3c5fc2067326",
+  "offline": true,
+  "textOnly": true,
+  "errors": [],
+  "requests": [],
+  "combat": {
+    "duration": 8.411,
+    "mode": "VICTORY",
+    "kind": "slime",
+    "stats": {
+      "correct": 3,
+      "wrong": 0,
+      "assisted": 3,
+      "independent": 0,
+      "expressions": [
+        "I need fire.",
+        "Move left!",
+        "Watch out!"
+      ],
+      "reviewExpressions": [
+        {
+          "id": "fire",
+          "voiceId": "VO_NEED_FIRE",
+          "english": "I need fire.",
+          "ko": "나는 불이 필요해요.",
+          "reasons": [
+            "hint"
+          ]
+        },
+        {
+          "id": "left",
+          "voiceId": "VO_MOVE_LEFT",
+          "english": "Move left!",
+          "ko": "왼쪽으로 이동해요!",
+          "reasons": [
+            "hint"
+          ]
+        },
+        {
+          "id": "dodge",
+          "voiceId": "VO_WATCH_OUT",
+          "english": "Watch out!",
+          "ko": "조심해요!",
+          "reasons": [
+            "hint"
+          ]
+        }
+      ],
+      "goals": [
+        "combo-three"
+      ],
+      "combat": {
+        "damageDealt": 70,
+        "damageReceived": 7,
+        "dodges": 0,
+        "successfulDodges": 0,
+        "perfectDodges": 0,
+        "highestCombo": 3,
+        "magicUsed": 1,
+        "magicHits": 1,
+        "weaknessHits": 0,
+        "swordHits": 4,
+        "counterattacks": 0
+      },
+      "listening": {
+        "correct": 2,
+        "wrong": 0,
+        "assisted": 2,
+        "independent": 0,
+        "asset": 2,
+        "fallback": 0,
+        "unheard": 0
+      },
+      "magic": {
+        "correct": 1,
+        "wrong": 0,
+        "assisted": 1,
+        "independent": 0
+      },
+      "flow": {
+        "forcedScreens": 3,
+        "forcedSeconds": 1.9166666666666623,
+        "sentenceArrangements": 1,
+        "actionOpportunities": 1,
+        "actionSuccesses": 1,
+        "independentActions": 0,
+        "heardExpressions": [
+          "fire",
+          "left",
+          "dodge"
+        ],
+        "independentExpressions": [],
+        "helpExpressions": [],
+        "outcomes": [
+          {
+            "id": "2:1",
+            "key": "fire",
+            "success": true,
+            "heard": true,
+            "assisted": true,
+            "independent": false,
+            "actual": true,
+            "reason": "action"
+          }
+        ],
+        "audio": {
+          "requested": 9,
+          "playing": 5,
+          "ended": 0,
+          "stopped": 5,
+          "error": 0,
+          "missing": 0,
+          "muted": 0,
+          "blocked": 0,
+          "ignored": 3
+        }
+      },
+      "battlefield": {
+        "missedAttacks": 0,
+        "groundings": 0,
+        "shieldBreaks": 0,
+        "wrongCrystals": 0
+      }
+    },
+    "learning": {
+      "left": {
+        "introduced": true,
+        "stage": "practice",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": "assisted"
+      },
+      "dodge": {
+        "introduced": true,
+        "stage": "practice",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": "assisted"
+      },
+      "attack": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "magic": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "fire": {
+        "introduced": true,
+        "stage": "practice",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": "assisted"
+      },
+      "crystal": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "wind": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "blue": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      }
+    },
+    "report": {
+      "kind": "slime",
+      "durationSeconds": 8.7,
+      "stats": {
+        "correct": 3,
+        "wrong": 0,
+        "assisted": 3,
+        "independent": 0,
+        "expressions": [
+          "I need fire.",
+          "Move left!",
+          "Watch out!"
+        ],
+        "reviewExpressions": [
+          {
+            "id": "fire",
+            "voiceId": "VO_NEED_FIRE",
+            "english": "I need fire.",
+            "ko": "나는 불이 필요해요.",
+            "reasons": [
+              "hint"
+            ]
+          },
+          {
+            "id": "left",
+            "voiceId": "VO_MOVE_LEFT",
+            "english": "Move left!",
+            "ko": "왼쪽으로 이동해요!",
+            "reasons": [
+              "hint"
+            ]
+          },
+          {
+            "id": "dodge",
+            "voiceId": "VO_WATCH_OUT",
+            "english": "Watch out!",
+            "ko": "조심해요!",
+            "reasons": [
+              "hint"
+            ]
+          }
+        ],
+        "goals": [
+          "combo-three"
+        ],
+        "combat": {
+          "damageDealt": 70,
+          "damageReceived": 7,
+          "dodges": 0,
+          "successfulDodges": 0,
+          "perfectDodges": 0,
+          "highestCombo": 3,
+          "magicUsed": 1,
+          "magicHits": 1,
+          "weaknessHits": 0,
+          "swordHits": 4,
+          "counterattacks": 0
+        },
+        "listening": {
+          "correct": 2,
+          "wrong": 0,
+          "assisted": 2,
+          "independent": 0,
+          "asset": 2,
+          "fallback": 0,
+          "unheard": 0
+        },
+        "magic": {
+          "correct": 1,
+          "wrong": 0,
+          "assisted": 1,
+          "independent": 0
+        },
+        "flow": {
+          "forcedScreens": 3,
+          "forcedSeconds": 1.9166666666666623,
+          "sentenceArrangements": 1,
+          "actionOpportunities": 1,
+          "actionSuccesses": 1,
+          "independentActions": 0,
+          "heardExpressions": [
+            "fire",
+            "left",
+            "dodge"
+          ],
+          "independentExpressions": [],
+          "helpExpressions": [
+            "fire",
+            "left",
+            "dodge"
+          ],
+          "outcomes": [
+            {
+              "id": "2:1",
+              "key": "fire",
+              "success": true,
+              "heard": true,
+              "assisted": true,
+              "independent": false,
+              "actual": true,
+              "reason": "action"
+            }
+          ],
+          "audio": {
+            "requested": 8,
+            "playing": 5,
+            "ended": 0,
+            "stopped": 5,
+            "error": 0,
+            "missing": 0,
+            "muted": 0,
+            "blocked": 0,
+            "ignored": 3
+          }
+        },
+        "battlefield": {
+          "missedAttacks": 0,
+          "groundings": 0,
+          "shieldBreaks": 0,
+          "wrongCrystals": 0
+        }
+      },
+      "metrics": {
+        "damageReceived": 7,
+        "successfulDodges": 0,
+        "missedAttacks": 0,
+        "highestCombo": 3,
+        "groundings": 0,
+        "shieldBreaks": 0,
+        "weaknessHits": 0,
+        "spokenRequests": 8,
+        "listeningOpportunities": 1,
+        "independentActions": 0,
+        "assistedActions": 1,
+        "textOnlyActions": 0,
+        "helpExpressions": [
+          "fire",
+          "left",
+          "dodge"
+        ],
+        "interruptions": 3,
+        "interruptionSeconds": 1.917
+      }
+    },
+    "patterns": [
+      "jump",
+      "rush"
+    ],
+    "states": [
+      "IDLE",
+      "APPROACH",
+      "RECOVERY",
+      "TELEGRAPH",
+      "ATTACK",
+      "HIT_REACTION"
+    ],
+    "screens": [
+      "2:1",
+      "2:4",
+      "2:5"
+    ]
+  },
+  "state": {
+    "version": 1,
+    "serial": 6,
+    "active": {
+      "quest": "clara",
+      "runId": "quest-6",
+      "stage": "collect",
+      "items": [
+        "apple-1"
+      ],
+      "route": "river",
+      "evidence": {
+        "intro": {
+          "heard": false,
+          "text": true,
+          "translation": false,
+          "wrong": false,
+          "done": true,
+          "attempts": 1
+        },
+        "collect": {
+          "heard": false,
+          "text": true,
+          "translation": false,
+          "wrong": false,
+          "done": false,
+          "attempts": 1
+        }
+      },
+      "baseline": {
+        "help": {
+          "encountered": 3,
+          "played": 0,
+          "attempted": 2,
+          "completed": 2,
+          "independent": 0,
+          "assisted": 2,
+          "text": 3,
+          "translation": 0,
+          "replay": 0,
+          "missed": 0,
+          "reviews": 0
+        },
+        "supplies": {
+          "encountered": 2,
+          "played": 0,
+          "attempted": 9,
+          "completed": 2,
+          "independent": 0,
+          "assisted": 2,
+          "text": 2,
+          "translation": 0,
+          "replay": 0,
+          "missed": 1,
+          "reviews": 0
+        },
+        "hand": {
+          "encountered": 2,
+          "played": 0,
+          "attempted": 2,
+          "completed": 2,
+          "independent": 0,
+          "assisted": 2,
+          "text": 2,
+          "translation": 0,
+          "replay": 0,
+          "missed": 0,
+          "reviews": 0
+        },
+        "lost": {
+          "encountered": 1,
+          "played": 0,
+          "attempted": 1,
+          "completed": 1,
+          "independent": 0,
+          "assisted": 1,
+          "text": 1,
+          "translation": 0,
+          "replay": 0,
+          "missed": 0,
+          "reviews": 0
+        },
+        "straight": {
+          "encountered": 1,
+          "played": 0,
+          "attempted": 2,
+          "completed": 1,
+          "independent": 0,
+          "assisted": 1,
+          "text": 1,
+          "translation": 0,
+          "replay": 0,
+          "missed": 1,
+          "reviews": 0
+        },
+        "left": {
+          "encountered": 1,
+          "played": 0,
+          "attempted": 1,
+          "completed": 1,
+          "independent": 0,
+          "assisted": 1,
+          "text": 1,
+          "translation": 0,
+          "replay": 0,
+          "missed": 0,
+          "reviews": 0
+        },
+        "bridge": {
+          "encountered": 1,
+          "played": 0,
+          "attempted": 1,
+          "completed": 1,
+          "independent": 0,
+          "assisted": 1,
+          "text": 1,
+          "translation": 0,
+          "replay": 0,
+          "missed": 0,
+          "reviews": 0
+        },
+        "river": {
+          "encountered": 1,
+          "played": 0,
+          "attempted": 2,
+          "completed": 1,
+          "independent": 0,
+          "assisted": 1,
+          "text": 1,
+          "translation": 0,
+          "replay": 0,
+          "missed": 1,
+          "reviews": 0
+        },
+        "found": {
+          "encountered": 1,
+          "played": 0,
+          "attempted": 1,
+          "completed": 1,
+          "independent": 0,
+          "assisted": 1,
+          "text": 1,
+          "translation": 0,
+          "replay": 0,
+          "missed": 0,
+          "reviews": 0
+        },
+        "follow": {
+          "encountered": 1,
+          "played": 1,
+          "attempted": 1,
+          "completed": 1,
+          "independent": 0,
+          "assisted": 1,
+          "text": 1,
+          "translation": 0,
+          "replay": 0,
+          "missed": 0,
+          "reviews": 0
+        },
+        "power": {
+          "encountered": 1,
+          "played": 0,
+          "attempted": 1,
+          "completed": 1,
+          "independent": 0,
+          "assisted": 1,
+          "text": 1,
+          "translation": 0,
+          "replay": 0,
+          "missed": 0,
+          "reviews": 0
+        },
+        "find": {
+          "encountered": 1,
+          "played": 0,
+          "attempted": 1,
+          "completed": 1,
+          "independent": 0,
+          "assisted": 1,
+          "text": 1,
+          "translation": 0,
+          "replay": 0,
+          "missed": 0,
+          "reviews": 0
+        },
+        "blue": {
+          "encountered": 1,
+          "played": 0,
+          "attempted": 2,
+          "completed": 1,
+          "independent": 0,
+          "assisted": 1,
+          "text": 1,
+          "translation": 0,
+          "replay": 0,
+          "missed": 1,
+          "reviews": 0
+        },
+        "glowing": {
+          "encountered": 1,
+          "played": 0,
+          "attempted": 0,
+          "completed": 0,
+          "independent": 0,
+          "assisted": 0,
+          "text": 1,
+          "translation": 0,
+          "replay": 0,
+          "missed": 0,
+          "reviews": 0
+        },
+        "combat": {
+          "encountered": 1,
+          "played": 1,
+          "attempted": 1,
+          "completed": 1,
+          "independent": 0,
+          "assisted": 1,
+          "text": 0,
+          "translation": 0,
+          "replay": 0,
+          "missed": 0,
+          "reviews": 0
+        },
+        "done": {
+          "encountered": 1,
+          "played": 0,
+          "attempted": 0,
+          "completed": 0,
+          "independent": 0,
+          "assisted": 0,
+          "text": 0,
+          "translation": 0,
+          "replay": 0,
+          "missed": 0,
+          "reviews": 0
+        }
+      }
+    },
+    "completed": [
+      "clara",
+      "elena",
+      "rowan"
+    ],
+    "rewards": [
+      "clara",
+      "elena",
+      "rowan"
+    ],
+    "records": {
+      "help": {
+        "encountered": 4,
+        "played": 0,
+        "attempted": 3,
+        "completed": 3,
+        "independent": 0,
+        "assisted": 3,
+        "text": 4,
+        "translation": 0,
+        "replay": 0,
+        "missed": 0,
+        "reviews": 0
+      },
+      "supplies": {
+        "encountered": 3,
+        "played": 0,
+        "attempted": 10,
+        "completed": 2,
+        "independent": 0,
+        "assisted": 2,
+        "text": 3,
+        "translation": 0,
+        "replay": 0,
+        "missed": 1,
+        "reviews": 0
+      },
+      "hand": {
+        "encountered": 2,
+        "played": 0,
+        "attempted": 2,
+        "completed": 2,
+        "independent": 0,
+        "assisted": 2,
+        "text": 2,
+        "translation": 0,
+        "replay": 0,
+        "missed": 0,
+        "reviews": 0
+      },
+      "lost": {
+        "encountered": 1,
+        "played": 0,
+        "attempted": 1,
+        "completed": 1,
+        "independent": 0,
+        "assisted": 1,
+        "text": 1,
+        "translation": 0,
+        "replay": 0,
+        "missed": 0,
+        "reviews": 0
+      },
+      "straight": {
+        "encountered": 1,
+        "played": 0,
+        "attempted": 2,
+        "completed": 1,
+        "independent": 0,
+        "assisted": 1,
+        "text": 1,
+        "translation": 0,
+        "replay": 0,
+        "missed": 1,
+        "reviews": 0
+      },
+      "left": {
+        "encountered": 1,
+        "played": 0,
+        "attempted": 1,
+        "completed": 1,
+        "independent": 0,
+        "assisted": 1,
+        "text": 1,
+        "translation": 0,
+        "replay": 0,
+        "missed": 0,
+        "reviews": 0
+      },
+      "bridge": {
+        "encountered": 1,
+        "played": 0,
+        "attempted": 1,
+        "completed": 1,
+        "independent": 0,
+        "assisted": 1,
+        "text": 1,
+        "translation": 0,
+        "replay": 0,
+        "missed": 0,
+        "reviews": 0
+      },
+      "river": {
+        "encountered": 1,
+        "played": 0,
+        "attempted": 2,
+        "completed": 1,
+        "independent": 0,
+        "assisted": 1,
+        "text": 1,
+        "translation": 0,
+        "replay": 0,
+        "missed": 1,
+        "reviews": 0
+      },
+      "found": {
+        "encountered": 1,
+        "played": 0,
+        "attempted": 1,
+        "completed": 1,
+        "independent": 0,
+        "assisted": 1,
+        "text": 1,
+        "translation": 0,
+        "replay": 0,
+        "missed": 0,
+        "reviews": 0
+      },
+      "follow": {
+        "encountered": 1,
+        "played": 1,
+        "attempted": 1,
+        "completed": 1,
+        "independent": 0,
+        "assisted": 1,
+        "text": 1,
+        "translation": 0,
+        "replay": 0,
+        "missed": 0,
+        "reviews": 0
+      },
+      "power": {
+        "encountered": 1,
+        "played": 0,
+        "attempted": 1,
+        "completed": 1,
+        "independent": 0,
+        "assisted": 1,
+        "text": 1,
+        "translation": 0,
+        "replay": 0,
+        "missed": 0,
+        "reviews": 0
+      },
+      "find": {
+        "encountered": 1,
+        "played": 0,
+        "attempted": 1,
+        "completed": 1,
+        "independent": 0,
+        "assisted": 1,
+        "text": 1,
+        "translation": 0,
+        "replay": 0,
+        "missed": 0,
+        "reviews": 0
+      },
+      "blue": {
+        "encountered": 1,
+        "played": 0,
+        "attempted": 2,
+        "completed": 1,
+        "independent": 0,
+        "assisted": 1,
+        "text": 1,
+        "translation": 0,
+        "replay": 0,
+        "missed": 1,
+        "reviews": 0
+      },
+      "glowing": {
+        "encountered": 1,
+        "played": 0,
+        "attempted": 0,
+        "completed": 0,
+        "independent": 0,
+        "assisted": 0,
+        "text": 1,
+        "translation": 0,
+        "replay": 0,
+        "missed": 0,
+        "reviews": 0
+      },
+      "combat": {
+        "encountered": 1,
+        "played": 1,
+        "attempted": 1,
+        "completed": 1,
+        "independent": 0,
+        "assisted": 1,
+        "text": 0,
+        "translation": 0,
+        "replay": 0,
+        "missed": 0,
+        "reviews": 0
+      },
+      "done": {
+        "encountered": 1,
+        "played": 0,
+        "attempted": 0,
+        "completed": 0,
+        "independent": 0,
+        "assisted": 0,
+        "text": 0,
+        "translation": 0,
+        "replay": 0,
+        "missed": 0,
+        "reviews": 0
+      }
+    },
+    "history": [
+      {
+        "quest": "clara",
+        "runId": "quest-1",
+        "first": true,
+        "records": {
+          "help": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 1,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          },
+          "supplies": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 5,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 1,
+            "reviews": 0
+          },
+          "hand": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 1,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          }
+        }
+      },
+      {
+        "quest": "elena",
+        "runId": "quest-2",
+        "first": true,
+        "records": {
+          "lost": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 1,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          },
+          "straight": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 2,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 1,
+            "reviews": 0
+          },
+          "left": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 1,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          },
+          "bridge": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 1,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          },
+          "river": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 2,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 1,
+            "reviews": 0
+          },
+          "found": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 1,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          },
+          "follow": {
+            "encountered": 1,
+            "played": 1,
+            "attempted": 1,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          }
+        }
+      },
+      {
+        "quest": "rowan",
+        "runId": "quest-3",
+        "first": true,
+        "records": {
+          "power": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 1,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          },
+          "find": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 1,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          },
+          "blue": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 2,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 1,
+            "reviews": 0
+          },
+          "glowing": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 0,
+            "completed": 0,
+            "independent": 0,
+            "assisted": 0,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          },
+          "combat": {
+            "encountered": 1,
+            "played": 1,
+            "attempted": 1,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 0,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          },
+          "done": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 0,
+            "completed": 0,
+            "independent": 0,
+            "assisted": 0,
+            "text": 0,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          }
+        }
+      },
+      {
+        "quest": "clara",
+        "runId": "quest-4",
+        "first": false,
+        "records": {
+          "help": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 1,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          },
+          "supplies": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 4,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          },
+          "hand": {
+            "encountered": 1,
+            "played": 0,
+            "attempted": 1,
+            "completed": 1,
+            "independent": 0,
+            "assisted": 1,
+            "text": 1,
+            "translation": 0,
+            "replay": 0,
+            "missed": 0,
+            "reviews": 0
+          }
+        }
+      }
+    ],
+    "location": "market"
+  },
+  "verified": [
+    "three quests",
+    "wrong item",
+    "wrong direction",
+    "wrong crystal",
+    "real combat",
+    "reload",
+    "replay no rewards",
+    "touch",
+    "unchanged Academy and economy"
+  ]
+}

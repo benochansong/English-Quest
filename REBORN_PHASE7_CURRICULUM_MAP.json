@@ -1,0 +1,518 @@
+{
+  "version": 1,
+  "sourceActivityCount": 500,
+  "sourceExpressionCount": 151,
+  "sourceUnits": 12,
+  "mappings": [
+    {
+      "activityId": "u01-001",
+      "expressionId": "u01.hello",
+      "english": "Hello.",
+      "ko": "안녕하세요.",
+      "objective": "처음 건네는 인사의 뜻을 고르세요.",
+      "questId": "clara",
+      "interaction": "item-delivery-and-dialogue",
+      "voiceId": null,
+      "activityEnglish": "Hello.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u01-044",
+      "expressionId": "u01.hello",
+      "english": "Hello.",
+      "ko": "안녕하세요.",
+      "objective": "상점 직원의 인사에 답하세요.",
+      "questId": "clara",
+      "interaction": "item-delivery-and-dialogue",
+      "voiceId": null,
+      "activityEnglish": "You enter a small shop in the afternoon. The clerk says, “Hello!”",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u01-017",
+      "expressionId": "u01.help",
+      "english": "Can you help me?",
+      "ko": "도와주시겠어요?",
+      "objective": "도움을 부탁하는 문장을 완성하세요.",
+      "questId": "clara",
+      "interaction": "item-delivery-and-dialogue",
+      "voiceId": null,
+      "activityEnglish": "Can you ___ me?",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u01-023",
+      "expressionId": "u01.help",
+      "english": "Can you help me?",
+      "ko": "도와주시겠어요?",
+      "objective": "공손하게 도움을 청하는 문장을 만드세요.",
+      "questId": "clara",
+      "interaction": "item-delivery-and-dialogue",
+      "voiceId": null,
+      "activityEnglish": "Can you help me, please?",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u01-006",
+      "expressionId": "u01.thanks",
+      "english": "Thank you.",
+      "ko": "감사합니다.",
+      "objective": "도움을 받은 뒤 하는 말의 뜻을 고르세요.",
+      "questId": "clara",
+      "interaction": "item-delivery-and-dialogue",
+      "voiceId": null,
+      "activityEnglish": "Thank you.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u01-013",
+      "expressionId": "u01.thanks",
+      "english": "Thank you.",
+      "ko": "감사합니다.",
+      "objective": "도와준 상대에게 감사하는 문장을 완성하세요.",
+      "questId": "clara",
+      "interaction": "item-delivery-and-dialogue",
+      "voiceId": null,
+      "activityEnglish": "Thank ___ for your help.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u01-009",
+      "expressionId": "u01.please",
+      "english": "Please.",
+      "ko": "부탁해요. (공손한 부탁에 쓰는 말)",
+      "objective": "부탁을 공손하게 만드는 말을 고르세요.",
+      "questId": "clara",
+      "interaction": "item-delivery-and-dialogue",
+      "voiceId": null,
+      "activityEnglish": "Please.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u01-019",
+      "expressionId": "u01.please",
+      "english": "Please.",
+      "ko": "부탁해요. (공손한 부탁에 쓰는 말)",
+      "objective": "여기 앉아 달라는 부탁을 완성하세요.",
+      "questId": "clara",
+      "interaction": "item-delivery-and-dialogue",
+      "voiceId": null,
+      "activityEnglish": "Please ___ here.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u04-003",
+      "expressionId": "u04.bread",
+      "english": "a slice of bread",
+      "ko": "빵 한 조각",
+      "objective": "빵의 양을 어떻게 말하고 있나요?",
+      "questId": "clara",
+      "interaction": "item-delivery-and-dialogue",
+      "voiceId": null,
+      "activityEnglish": "a slice of bread",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u04-015",
+      "expressionId": "u04.bread",
+      "english": "a slice of bread",
+      "ko": "빵 한 조각",
+      "objective": "빵 두 조각을 주문하는 문장을 완성하세요.",
+      "questId": "clara",
+      "interaction": "item-delivery-and-dialogue",
+      "voiceId": null,
+      "activityEnglish": "I'd like two ___ of bread.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u04-002",
+      "expressionId": "u04.water",
+      "english": "Can I have some water?",
+      "ko": "물 좀 주시겠어요?",
+      "objective": "무엇 한 잔을 뜻하나요?",
+      "questId": "clara",
+      "interaction": "item-delivery-and-dialogue",
+      "voiceId": null,
+      "activityEnglish": "a glass of water",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u04-014",
+      "expressionId": "u04.water",
+      "english": "Can I have some water?",
+      "ko": "물 좀 주시겠어요?",
+      "objective": "물의 양을 막연히 말하며 부탁하세요.",
+      "questId": "clara",
+      "interaction": "item-delivery-and-dialogue",
+      "voiceId": null,
+      "activityEnglish": "Can I have ___ water?",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u05-001",
+      "expressionId": "u05.price",
+      "english": "How much is this?",
+      "ko": "이것은 얼마인가요?",
+      "objective": "물건을 사는 데 드는 금액을 나타내는 말을 고르세요.",
+      "questId": "clara",
+      "interaction": "item-delivery-and-dialogue",
+      "voiceId": null,
+      "activityEnglish": "price",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u05-013",
+      "expressionId": "u05.price",
+      "english": "How much is this?",
+      "ko": "이것은 얼마인가요?",
+      "objective": "모자 하나의 가격을 물으세요.",
+      "questId": "clara",
+      "interaction": "item-delivery-and-dialogue",
+      "voiceId": null,
+      "activityEnglish": "How much ___ this hat?",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u01-007",
+      "expressionId": "u01.welcome",
+      "english": "You're welcome.",
+      "ko": "천만에요.",
+      "objective": "상대의 감사에 답하는 말의 뜻을 고르세요.",
+      "questId": "elena",
+      "interaction": "landmark-navigation-and-escort",
+      "voiceId": null,
+      "activityEnglish": "You're welcome.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u01-014",
+      "expressionId": "u01.welcome",
+      "english": "You're welcome.",
+      "ko": "천만에요.",
+      "objective": "감사에 답하는 문장을 완성하세요.",
+      "questId": "elena",
+      "interaction": "landmark-navigation-and-escort",
+      "voiceId": null,
+      "activityEnglish": "You ___ welcome.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u01-008",
+      "expressionId": "u01.excuse",
+      "english": "Excuse me.",
+      "ko": "실례합니다.",
+      "objective": "길을 물으려고 말을 걸 때의 뜻을 고르세요.",
+      "questId": "elena",
+      "interaction": "landmark-navigation-and-escort",
+      "voiceId": null,
+      "activityEnglish": "Excuse me.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u01-031",
+      "expressionId": "u01.excuse",
+      "english": "Excuse me.",
+      "ko": "실례합니다.",
+      "objective": "화자는 무엇을 확인하나요?",
+      "questId": "elena",
+      "interaction": "landmark-navigation-and-escort",
+      "voiceId": null,
+      "activityEnglish": "Excuse me. Is this seat free?",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u01-018",
+      "expressionId": "u01.repeat",
+      "english": "Could you say that again?",
+      "ko": "다시 말씀해 주시겠어요?",
+      "objective": "다시 말해 달라는 문장을 완성하세요.",
+      "questId": "elena",
+      "interaction": "landmark-navigation-and-escort",
+      "voiceId": null,
+      "activityEnglish": "Could you ___ that again?",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u01-026",
+      "expressionId": "u01.repeat",
+      "english": "Could you say that again?",
+      "ko": "다시 말씀해 주시겠어요?",
+      "objective": "못 들은 말을 다시 부탁하는 문장을 만드세요.",
+      "questId": "elena",
+      "interaction": "landmark-navigation-and-escort",
+      "voiceId": null,
+      "activityEnglish": "Could you say that again, please?",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u06-003",
+      "expressionId": "u06.straight",
+      "english": "Go straight.",
+      "ko": "곧장 가세요.",
+      "objective": "어떻게 이동해야 하나요?",
+      "questId": "elena",
+      "interaction": "landmark-navigation-and-escort",
+      "voiceId": "P7_STRAIGHT",
+      "activityEnglish": "Go straight.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u06-020",
+      "expressionId": "u06.straight",
+      "english": "Go straight.",
+      "ko": "곧장 가세요.",
+      "objective": "두 블록 동안 곧장 가라는 안내를 완성하세요.",
+      "questId": "elena",
+      "interaction": "landmark-navigation-and-escort",
+      "voiceId": "P7_STRAIGHT",
+      "activityEnglish": "Go straight ___ two blocks.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u06-001",
+      "expressionId": "u06.left",
+      "english": "Turn left.",
+      "ko": "왼쪽으로 도세요.",
+      "objective": "어느 방향으로 돌아야 하나요?",
+      "questId": "elena",
+      "interaction": "landmark-navigation-and-escort",
+      "voiceId": null,
+      "activityEnglish": "Turn left.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u06-013",
+      "expressionId": "u06.left",
+      "english": "Turn left.",
+      "ko": "왼쪽으로 도세요.",
+      "objective": "모퉁이에서 왼쪽으로 돌라는 안내를 완성하세요.",
+      "questId": "elena",
+      "interaction": "landmark-navigation-and-escort",
+      "voiceId": null,
+      "activityEnglish": "___ left at the corner.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u06-002",
+      "expressionId": "u06.right",
+      "english": "Turn right.",
+      "ko": "오른쪽으로 도세요.",
+      "objective": "어느 방향으로 돌아야 하나요?",
+      "questId": "elena",
+      "interaction": "landmark-navigation-and-escort",
+      "voiceId": null,
+      "activityEnglish": "Turn right.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u06-023",
+      "expressionId": "u06.right",
+      "english": "Turn right.",
+      "ko": "오른쪽으로 도세요.",
+      "objective": "신호등에서 오른쪽으로 돌라는 안내를 만드세요.",
+      "questId": "elena",
+      "interaction": "landmark-navigation-and-escort",
+      "voiceId": null,
+      "activityEnglish": "Turn right at the traffic lights.",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u06-010",
+      "expressionId": "u06.far",
+      "english": "Is it far from here?",
+      "ko": "여기서 먼가요?",
+      "objective": "이곳에서 거리가 어떤가요?",
+      "questId": "elena",
+      "interaction": "landmark-navigation-and-escort",
+      "voiceId": null,
+      "activityEnglish": "far from here",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u06-018",
+      "expressionId": "u06.far",
+      "english": "Is it far from here?",
+      "ko": "여기서 먼가요?",
+      "objective": "박물관까지의 거리를 물으세요.",
+      "questId": "elena",
+      "interaction": "landmark-navigation-and-escort",
+      "voiceId": null,
+      "activityEnglish": "How ___ is the museum from here?",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u05-006",
+      "expressionId": "u05.color",
+      "english": "Do you have it in blue?",
+      "ko": "이것의 파란색이 있나요?",
+      "objective": "옷의 색을 고르세요.",
+      "questId": "rowan",
+      "interaction": "blue-crystal-and-combat",
+      "voiceId": null,
+      "activityEnglish": "blue",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    },
+    {
+      "activityId": "u05-016",
+      "expressionId": "u05.color",
+      "english": "Do you have it in blue?",
+      "ko": "이것의 파란색이 있나요?",
+      "objective": "빨간색 상품이 있는지 물으세요.",
+      "questId": "rowan",
+      "interaction": "blue-crystal-and-combat",
+      "voiceId": null,
+      "activityEnglish": "Do you have this ___ red?",
+      "relation": "Contextual practice and optional original activity; not an equivalent graded answer",
+      "supportedEvidence": [
+        "quest-context-encounter",
+        "optional-original-activity-review"
+      ],
+      "grading": "Quest evidence is separate; only the original Academy activity grades its own answer."
+    }
+  ]
+}

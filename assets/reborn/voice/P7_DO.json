@@ -1,0 +1,23 @@
+{
+  "model": "en_US-ljspeech-medium",
+  "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22",
+  "configSha256": "141d612cc0a95ed7efc1ca936b845c2364967f2e9217c5dbfcf69fc4d6c65860",
+  "piperVersion": "1.8.0",
+  "synthesis": "model defaults",
+  "id": "P7_DO",
+  "en": "What should I do?",
+  "format": "PCM WAV",
+  "sampleRate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "durationSeconds": 1.126168,
+  "bytes": 49708,
+  "peak": 0.999969,
+  "rms": 0.141812,
+  "activeFraction": 0.794982,
+  "sha256": "8a8e2f815b23b53d2128bf6273e93c2ee43153e3c21ac46f480e8778ad5ee931",
+  "status": "Technically verified",
+  "humanListening": "Needs listening review",
+  "path": "assets/reborn/voice/P7_DO.wav",
+  "licensing": "Public-domain model and dataset; see REBORN_PIPER_LICENSES.md"
+}

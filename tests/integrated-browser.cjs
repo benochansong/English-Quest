@@ -1,6 +1,6 @@
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),{pathToFileURL}=require('node:url'),crypto=require('node:crypto');
 const {play}=require('./reborn-battlefield-browser.cjs');
-const channel=process.env.REBORN_BROWSER||'chrome',out=path.resolve('docs/reborn-phase6'),url=pathToFileURL(path.resolve('EnglishQuest_REBORN_INTEGRATED.html')).href;
+const channel=process.env.REBORN_BROWSER||'chrome',out=path.resolve(process.env.INTEGRATED_QA_OUT||'docs/reborn-phase6'),url=pathToFileURL(path.resolve('EnglishQuest_REBORN_INTEGRATED.html')).href;
 const click=(p,a)=>p.locator('[data-act="'+a+'"]:visible').first().click();
 const state=p=>p.evaluate(()=>IntegratedWorld.state);
 async function solve(p,f,muted=false){const h=await f.evaluate(()=>RebornApp.game.state.challenge);if(!h)return;if(h.phase==='feedback'){await f.locator('[data-action="proceed"]:visible').click();return;}if(muted)await f.locator('[data-action="korean"]').click();else await f.waitForFunction(()=>RebornApp.game.state.challenge?.heard,null,{timeout:6000});if(h.kind==='magic'){for(const w of ['I','need','fire'])await f.locator('[data-action="word"][data-word="'+w+'"]').click();await f.locator('[data-action="cast"]').click();}else if(h.kind==='action')await f.locator('[data-action="proceed"]:visible').click();else await f.locator('[data-action="answer"][data-answer="'+h.target+'"]').click();}

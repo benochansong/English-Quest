@@ -1,3 +1,12 @@
+# REBORN Phase 7 — The Living Language Adventure (2026-11-21)
+
+- Add three connected, distinct voiced side quests with Clara's real supply collection/delivery, Elena's two-route navigation and traveler escort, and Rowan's crystal investigation using the verified Slime combat bridge.
+- Reuse existing village/NPC/exploration scenery and authored location references; support explicit location selection, contextual wrong-action recovery, touch controls, concise results and replay without reward farming.
+- Map 30 original activities across 15 expressions to quest context and optional Academy review, without fabricating original task grades or mastery.
+- Produce 25 additional licensed local Piper lines in a separate extension manifest; preserve all original 36 recordings and both standalone HTML files. Quest independent listening credit requires the exact recorded instruction to end before the action.
+- Add versioned quest-save migration, temporary inventory, bounded history, quest-bound combat result authority, cancellation/reload/defeat recovery, and audio cleanup on scene/settings/focus changes.
+- Add unit and actual-input offline Chrome/Edge tests, failure/mute/import scenarios and honest pending human-playtest documentation.
+
 # REBORN Phase 6 — One World, One Adventure (2026-11-21)
 
 - Add a separate offline integrated artifact connecting the unchanged v0.8 campaign to one Rowan/Green Slime action training quest and back to the same forest map.
