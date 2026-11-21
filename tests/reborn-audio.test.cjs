@@ -135,3 +135,14 @@ test('Late failed-file events cannot finish or contaminate explicitly selected f
   old.onerror();assert.equal(a.voice.status.source,'browser-fallback');lateStart();lateEnd();assert.equal(a.heard.length,0);assert.equal(a.voice.status.state,'loading');
   a.utterances[0].onstart();assert.equal(a.heard.length,1);assert.equal(a.heard[0].source,'browser-fallback');a.utterances[0].onend();assert.equal(a.voice.status.state,'ended');
 });
+
+test('Important contextual speech replaces ambient audio; lower-priority feedback is dropped, not queued',()=>{
+ const a=voiceLab();a.voice.play('fire',{priority:20,context:'ambient'});a.files[0].onplaying();
+ a.voice.play('fire',{priority:90,context:'warning:1'});assert.equal(a.files[0].paused,true);const warning=a.files[1];warning.onplaying();assert.equal(a.heard.at(-1).context,'warning:1');
+ assert.equal(a.voice.play('fire',{priority:20,context:'feedback'}),false);assert.equal(a.files.length,2);assert.equal(warning.paused,undefined);warning.onended();assert.equal(a.files.length,2,'no late queued warning/feedback');
+});
+
+test('A completed action can finish its utterance but yields immediately to the next live instruction',()=>{
+ const a=voiceLab();a.voice.play('fire',{priority:95,context:'core'});a.files[0].onplaying();a.voice.releaseContext('wrong');assert.equal(a.voice.play('fire',{priority:85,context:'cast'}),false);
+ a.voice.releaseContext('core');assert.equal(a.files[0].paused,undefined,'successful action does not abruptly truncate speech');assert.ok(a.voice.play('fire',{priority:85,context:'cast'}));assert.equal(a.files[0].paused,true);a.files[1].onplaying();assert.equal(a.heard.at(-1).context,'cast');
+});

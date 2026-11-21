@@ -1,0 +1,68 @@
+{
+  "browser": "chrome",
+  "version": "157.0.8103.79",
+  "baseline": true,
+  "artifactSha256": "32efdd50a9e434750d1ab3b6e8ce28424f8da5322252224901f8f4ce6cd87899",
+  "offline": true,
+  "runs": [
+    {
+      "elapsedSeconds": 35.566,
+      "stats": {
+        "correct": 8,
+        "wrong": 0,
+        "assisted": 0,
+        "independent": 8,
+        "expressions": [
+          "Move left!",
+          "Watch out!",
+          "I need fire.",
+          "Attack the crystal!",
+          "Attack the slime!",
+          "Use your magic!"
+        ],
+        "reviewExpressions": [],
+        "goals": [
+          "independent-listening",
+          "combo-three",
+          "crystal-break",
+          "forest-clear"
+        ],
+        "combat": {
+          "damageDealt": 230,
+          "damageReceived": 0,
+          "dodges": 0,
+          "successfulDodges": 0,
+          "perfectDodges": 0,
+          "highestCombo": 3,
+          "magicUsed": 2,
+          "magicHits": 2,
+          "weaknessHits": 1,
+          "swordHits": 17
+        },
+        "listening": {
+          "correct": 5,
+          "wrong": 0,
+          "assisted": 0,
+          "independent": 5,
+          "asset": 5,
+          "fallback": 0,
+          "unheard": 0
+        },
+        "magic": {
+          "correct": 3,
+          "wrong": 0,
+          "assisted": 0,
+          "independent": 3
+        }
+      },
+      "learning": null,
+      "measure": {
+        "screens": 8,
+        "forcedSeconds": 13.659,
+        "arrangements": 3
+      }
+    }
+  ],
+  "errors": [],
+  "requests": []
+}

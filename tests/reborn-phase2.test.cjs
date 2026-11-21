@@ -5,7 +5,8 @@ const path=require('node:path');
 const vm=require('node:vm');
 const source=['reborn-learning.js','reborn-combat.js'].map(f=>fs.readFileSync(path.join(__dirname,'../src',f),'utf8')).join('\n');
 const copy=x=>JSON.parse(JSON.stringify(x));
-function setup(extra={}){const api=vm.runInNewContext(source+'\n;({c:RebornCombat,l:RebornLearning})',extra);return {...api,g:api.c.create()};}
+// Original mechanics reference; new default flow is exercised in reborn-phase3 tests.
+function setup(extra={}){const api=vm.runInNewContext(source+'\n;({c:RebornCombat,l:RebornLearning})',extra);return {...api,g:api.c.create({flow:false})};}
 function tap(g,k){const r=g.input(k);g.input(k,false);return r;}
 function step(g,seconds,fps=120){for(let i=0;i<Math.round(seconds*fps);i++)g.update(1/fps);}
 function solve(g,{audio=false,aid=null,wrong=false}={}){

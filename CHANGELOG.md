@@ -1,3 +1,12 @@
+# 2026-11-21 — REBORN Phase 3: Listen, Act, Flow
+
+- 처음 배우는 안전한 안내와 이후 실전 활용을 분리했습니다. 경고를 듣고 위험 지점에서 벗어나기, 노출된 수정 실제 타격, 익힌 불꽃 문장의 단축 시전을 연결했습니다.
+- 표현별로 최근 두 번의 독립 성공과 대표 표현의 실제 행동 증거를 확인합니다. 같은 페이지에서 재도전할 때 유지하며 기존 캠페인 저장에는 쓰지 않습니다.
+- 실전 도움·다시 듣기는 안전하게 멈춥니다. 음소거·재생 실패·텍스트 도움·오래된 콜백·중복 응답은 독립 듣기 증거로 인정하지 않습니다.
+- 음성 우선순위·최소 경고 간격·기회별 취소와 지연 재생 보호를 추가하고, 결과에서 들은 표현·직접 행동한 표현·도움·복습을 구분했습니다.
+- 기존 34개 Piper WAV, v0.8 원본과 저장, Phase 1 보존본, 검·회피·마법 자원과 충돌 피해 규칙을 유지했습니다.
+- 자동 비교와 사람 검토를 구분한 보고서 및 체크리스트를 추가했습니다. 상세 측정값과 검사 범위는 REBORN_PHASE3_FLOW_REPORT.md 및 REBORN_PHASE3_TEST_REPORT.md를 참고하세요.
+
 # 2026-11-21 — REBORN Piper offline speech
 
 - Generated all 34 unchanged English utterances locally with Piper 1.8.0 and the public-domain `en_US-ljspeech-medium` model; bundled genuine mono PCM WAV in the standalone Reborn HTML.

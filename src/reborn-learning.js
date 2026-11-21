@@ -11,7 +11,7 @@ const RebornLearning = (() => {
   const tutorial = Object.freeze([
     Object.freeze({english:'Move left!',ko:'왼쪽으로 이동해요!',voiceId:'VO_MOVE_LEFT',text:'A / ←, D / →로 이동해요. J를 차례로 눌러 3연격을 잇고, K로 바라보는 방향으로 회피해요. 누르고 있기만 하면 연격이 나가지 않아요.'}),
     Object.freeze({english:'Watch out! · Attack the slime!',ko:'조심해요! · 슬라임을 공격해요!',voiceId:'VO_WATCH_OUT',text:'슬라임이 몸을 움츠리면 공격 예고예요. 경고 지점에서 벗어나고, 공격 뒤 빈틈에 검을 사용해요.'}),
-    Object.freeze({english:'Use your magic! · I need fire.',ko:'마법을 사용해요! · 나는 불이 필요해요.',voiceId:'VO_USE_MAGIC',text:'영어를 듣는 동안 적은 멈춰요. 소리가 없으면 자막이나 한국어 도움을 볼 수 있어요. 숲의 수정에서 L 마법을 배워요.'})
+    Object.freeze({english:'Use your magic! · I need fire.',ko:'마법을 사용해요! · 나는 불이 필요해요.',voiceId:'VO_USE_MAGIC',text:'영어를 처음 배울 때는 적이 멈춰요. 익힌 표현은 전투에서 듣고 행동해요. 소리를 놓치면 도움을 눌러 안전하게 멈출 수 있어요. 숲의 수정에서 L 마법을 배워요.'})
   ]);
   const actions = Object.freeze(['left','right','attack','dodge','magic']);
   const normalize = value => typeof value === 'string' ? value.trim().toLowerCase().replace(/[.!?]+$/,'').replace(/\s+/g,' ') : '';
@@ -40,5 +40,20 @@ const RebornLearning = (() => {
     return {valid:true,correct:value===expressions[key].action};
   }
   const bossLesson=Object.freeze({english:'Attack the crystal!',ko:'수정을 공격해요!',voiceId:'VO_ATTACK_CRYSTAL',text:'챔피언이 수정 돌진을 마치면 중심 수정이 열려요. 안내를 이해한 뒤 빛나는 수정에 검을 맞히면 한 번 더 강한 공격과 경직이 생겨요.'});
-  return Object.freeze({expressions,tutorial,bossLesson,actions,challenge,evaluate});
+  // Session-only evidence. Replay and re-answering the same opportunity cannot advance it.
+  function createProgress(){
+    const entries=Object.fromEntries(Object.keys(expressions).map(key=>[key,{introduced:false,stage:'guided',independent:0,streak:0,actual:0,misses:0,lastResult:null}]));
+    const settled=new Set();
+    function record(key,id,{success,heard=false,assisted=false,actual=false}={}){
+      const row=entries[key];if(!row||!id||settled.has(id))return false;settled.add(id);
+      if(success)row.introduced=true;
+      if(success&&heard&&!assisted){row.independent++;row.streak++;if(actual)row.actual++;row.lastResult='independent';}
+      else {row.streak=0;row.lastResult=success?'assisted':'review';if(!success)row.misses++;}
+      const needsAction=['dodge','crystal','fire'].includes(key);
+      row.stage=!row.introduced?'guided':row.streak>=2&&(!needsAction||row.actual>0)?'familiar':'practice';
+      return true;
+    }
+    return{entries,record,ready:key=>entries[key]?.stage==='familiar',introduced:key=>!!entries[key]?.introduced};
+  }
+  return Object.freeze({expressions,tutorial,bossLesson,actions,challenge,evaluate,createProgress});
 })();

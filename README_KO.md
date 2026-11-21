@@ -1,10 +1,14 @@
+# REBORN Phase 3 — Listen, Act, Flow
+
+`EnglishQuest_REBORN.html`을 Chrome 또는 Edge로 열면 처음에는 안전하게 배우고, 익힌 영어는 전투에서 듣고 행동합니다. 같은 창에서 재도전할 때 반복 문제와 문장 배열이 줄어듭니다. [실행·조작 안내](REBORN_PHASE3_README_KO.md) · [전후 흐름 비교](REBORN_PHASE3_FLOW_REPORT.md) · [검증 결과](REBORN_PHASE3_TEST_REPORT.md) · [사람 플레이 체크리스트](REBORN_PHASE3_PLAYTEST_CHECKLIST.md).
+
 # REBORN 영어 음성 업데이트
 
 `EnglishQuest_REBORN.html`에 무료 Piper 영어 음성 34개가 내장되었습니다. HTML을 Chrome 또는 Edge로 열고 **영어 음성 테스트 → 영어 음성 듣기**를 누르세요. [실행 안내](REBORN_PIPER_SETUP_KO.md) · [음성 검증 보고서](REBORN_PIPER_VOICE_REPORT.md). 기존 v0.8 `EnglishQuest.html`은 그대로입니다.
 
 # English Quest 0.8 — 말의 아카데미
 
-> 별도 실시간 전투 실험실 **Reborn Phase 2**는 `EnglishQuest_REBORN.html`로 실행합니다. [Reborn 실행·조작 안내](REBORN_PHASE2_README_KO.md)를 참고하세요. 기존 v0.8 게임과 저장은 그대로이며, 아래는 기존 게임 안내입니다. Phase 1 보존본은 `releases/EnglishQuest_REBORN_PHASE1.html`에 있습니다.
+> 별도 실시간 전투 실험실 **Reborn Phase 3**는 `EnglishQuest_REBORN.html`로 실행합니다. [Reborn 실행·조작 안내](REBORN_PHASE3_README_KO.md)를 참고하세요. 기존 v0.8 게임과 저장은 그대로이며, 아래는 기존 게임 안내입니다. Phase 1 보존본은 `releases/EnglishQuest_REBORN_PHASE1.html`에 있습니다.
 
 **Windows에서 같은 폴더의 `EnglishQuest.html`을 Chrome 또는 Microsoft Edge로 여세요.** 설치나 서버가 필요 없습니다. 예전 게임 창은 먼저 닫고, 같은 브라우저 프로필에서 **이어하기 → 말의 아카데미**를 선택하세요. 새 모험에서도 숲 지도부터 아카데미에 들어갈 수 있습니다.
 
