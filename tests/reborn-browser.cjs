@@ -1,0 +1,218 @@
+/* Real file:// inputs, isolated browser context, no combat/state mutation.
+   NODE_PATH=<Playwright installation> node tests/reborn-browser.cjs
+   REBORN_BROWSER=msedge; --screenshots writes only docs/reborn/*.png. */
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs/promises');
+const path=require('node:path');
+const crypto=require('node:crypto');
+const {pathToFileURL}=require('node:url');
+const {chromium}=require('playwright');
+const root=path.resolve(__dirname,'..'),out=path.join(root,'docs/reborn');
+const hash=bytes=>crypto.createHash('sha256').update(bytes).digest('hex').toUpperCase();
+const originalHash='E0F49C2BB74125F16828C0A1D9F5B448B0FEA1831C6AF9117290668FEDA0CBAD';
+const url=pathToFileURL(path.join(root,'EnglishQuest_REBORN.html')).href;
+const sizes=[[1920,1080],[1366,768],[768,1024],[390,844],[360,800]];
+const channel=process.env.REBORN_BROWSER||'chrome';
+const capture=process.argv.includes('--screenshots');
+const state=p=>p.evaluate(()=>JSON.parse(JSON.stringify(RebornApp.game.state)));
+const button=(p,id)=>p.locator('[data-action="'+id+'"]:visible').first();
+const click=(p,id)=>button(p,id).click();
+const delay=(p,ms)=>p.waitForTimeout(ms);
+async function waitMode(p,mode){await p.waitForFunction(m=>RebornApp.game.state.mode===m,mode,{timeout:10000});}
+async function shot(p,name){if(capture){await p.screenshot({path:path.join(out,name+'.png'),fullPage:true});}}
+async function layout(p,label){
+  const saved=p.viewportSize();
+  for(const [width,height] of sizes){
+    await p.setViewportSize({width,height});await delay(p,100);
+    const v=await p.evaluate(()=>({w:document.documentElement.scrollWidth,clipped:[...document.querySelectorAll('button,input,summary')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.height&&(r.left<-.5||r.right>innerWidth+.5);}).map(e=>e.textContent.trim())}));
+    assert.ok(v.w<=width+1,label+' horizontal overflow at '+width);assert.deepEqual(v.clipped,[],label+' clipped controls at '+width);
+    if(label==='victory'){
+      await p.locator('.dialog-card').evaluate(e=>{e.scrollTop=0;});
+      const card=await p.locator('.dialog-card').boundingBox(),restart=await button(p,'restart').boundingBox();
+      assert.ok(restart.y>=card.y&&restart.y+restart.height<=card.y+card.height,'restart visible without result scrolling at '+width);
+    }
+    if(label==='listening'&&width===390)await shot(p,'reborn-mobile');
+  }
+  await p.setViewportSize(saved);console.log('layout',label,'five viewports passed');
+}
+async function keyHold(p,key,ms){await p.keyboard.down(key);await delay(p,ms);await p.keyboard.up(key);}
+async function create(browser,options={}){
+  const context=await browser.newContext({viewport:{width:1366,height:768},acceptDownloads:false,...options});
+  await context.setOffline(true);const page=await context.newPage(),errors=[],network=[];
+  page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(/^https?:/.test(r.url()))network.push(r.url());});
+  await page.goto(url);await page.waitForFunction(()=>typeof RebornApp!=='undefined');
+  return{context,page,errors,network};
+}
+async function solve(p,seen,wrongOnce=true){
+  const s=await state(p),c=s.challenge;assert.ok(c);
+  if(c.phase==='feedback'){await click(p,'proceed');return;}
+  const first=!seen.has(c.expressionId);seen.add(c.expressionId);
+  const before=[s.player.hp,s.enemy?.hp,s.enemy?.x];await delay(p,first?350:40);const frozen=await state(p);
+  assert.deepEqual([frozen.player.hp,frozen.enemy?.hp,frozen.enemy?.x],before,'challenge must freeze combat');
+  if(first){
+    await click(p,'english');assert.ok((await p.locator('#hint-text').textContent()).includes(c.english));
+    const aided=await state(p);assert.ok(aided.challenge.assisted,'English help must be recorded');
+    if(c.expressionId==='left'){await layout(p,'listening');await shot(p,'reborn-listening');}
+    if(c.kind==='magic')await shot(p,'reborn-magic');
+  }
+  if(first&&wrongOnce&&(c.expressionId==='left'||c.kind==='magic')){
+    if(c.kind==='magic'){
+      for(const w of ['I','fire','need'])await p.locator('[data-action="word"][data-word="'+w+'"]').click();
+      await click(p,'cast');
+    }else await p.locator('[data-action="answer"][data-answer="right"]').click();
+    const wrong=await state(p);assert.equal(wrong.challenge.completed,false);assert.equal(wrong.player.hp,s.player.hp);
+    const count=wrong.stats.wrong;await p.keyboard.press('j');assert.equal((await state(p)).stats.wrong,count,'feedback rapid inputs cannot submit twice');
+    await click(p,'proceed');await click(p,'replay');assert.equal(await p.evaluate(()=>RebornApp.voice.currentId),c.voiceId,'retry replays instruction');
+    await click(p,'english');assert.ok((await p.locator('#hint-text').textContent()).includes(c.english));
+  }
+  if(c.kind==='magic'){
+    for(const w of ['I','need','fire'])await p.locator('[data-action="word"][data-word="'+w+'"]').click();
+    await click(p,'cast');
+  }else if(c.expressionId==='left')await p.keyboard.press('a');
+  else await p.locator('[data-action="answer"][data-answer="'+c.action+'"]').click();
+  const correct=await state(p);assert.equal(correct.challenge.completed,true);assert.equal(correct.player.hp,s.player.hp);
+  await click(p,'proceed');
+}
+async function playthrough(p){
+  const start=Date.now(),seen=new Set(),patterns=new Set(),phases=new Set(),poses=new Set();let direction=null,lastStage=null,lastAttack=0,lastDodge=0,capturedSlime=false,capturedBoss=false,capturedCharge=false,checkedFacing=false,damage=false;
+  async function move(next){if(direction===next)return;if(direction)await p.keyboard.up(direction);direction=next;if(next)await p.keyboard.down(next);}
+  for(let n=0;n<2200;n++){
+    const s=await state(p);if(s.stage!==lastStage){await move(null);lastStage=s.stage;}poses.add(s.player.pose);if(s.enemy){if(s.enemy.ai==='ATTACK')patterns.add(s.enemy.pattern);phases.add(s.enemy.phase);}if(s.player.hp<100)damage=true;
+    if(s.mode==='VICTORY'){
+      await move(null);await delay(p,300);await shot(p,'reborn-victory');await layout(p,'victory');
+      const learned=p.locator('details.practiced-expressions');assert.ok((await learned.locator('summary').textContent()).includes('5개'));await learned.locator('summary').click();
+      for(const phrase of s.stats.expressions)assert.ok((await learned.locator('p').innerText()).includes(phrase));
+      assert.ok((await p.locator('.dialog-card').textContent()).includes('듣고 행동하기: 정답 4회 · 다시 연습 1회'));await learned.locator('p').scrollIntoViewIfNeeded();const learnedBox=await learned.locator('p').boundingBox(),resultBox=await p.locator('.dialog-card').boundingBox();assert.ok(learnedBox.y>=resultBox.y&&learnedBox.y+learnedBox.height<=resultBox.y+resultBox.height,'all five learned expressions can be brought into view');await shot(p,'reborn-learned');await learned.locator('summary').click();
+      console.log('real input victory',JSON.stringify({elapsedSeconds:(Date.now()-start)/1000,stats:s.stats,patterns:[...patterns],phases:[...phases],poses:[...poses],damage}));assert.deepEqual([...seen].sort(),['attack','dodge','fire','left','magic']);for(const name of ['heavy_jump','triple_bounce','crystal_charge'])assert.ok(patterns.has(name),'observed actual boss attack '+name);assert.ok(checkedFacing);assert.ok(phases.has(2));assert.equal(s.enemy.hp,0);assert.equal(s.stats.listening.independent,0,'missing audio is not independent listening');return s;
+    }
+    assert.notEqual(s.mode,'DEFEAT','real input actor died');
+    if(s.mode==='PAUSED'){await click(p,'resume');continue;}
+    if(s.challenge){await move(null);await solve(p,seen);continue;}
+    if(s.stage==='crystal'){await move(null);await shot(p,'reborn-crystal');await click(p,'proceed');continue;}
+    if(s.stage==='entrance'){await move('d');await delay(p,300);continue;}
+    if(s.enemy?.kind==='slime'&&!capturedSlime){await shot(p,'reborn-slime');capturedSlime=true;}
+    if(s.enemy?.kind==='boss'&&!capturedBoss){await shot(p,'reborn-boss');capturedBoss=true;}
+    const e=s.enemy,hero=s.player;
+    if(e&&s.mode==='COMBAT'){
+      if(e.pattern==='crystal_charge'&&e.ai==='TELEGRAPH'&&!capturedCharge){await shot(p,'reborn-crystal-charge');capturedCharge=true;}
+      const canAttack=e.kind!=='boss'||patterns.has('crystal_charge');
+      if(canAttack&&s.magicUnlocked&&hero.magicCharge>=100&&hero.magicCooldown<=0){await move(null);await p.keyboard.press('l');continue;}
+      const dist=e.x-hero.x,near=Math.abs(dist)<=100;
+      if(near&&!checkedFacing&&e.kind==='slime'&&e.hp===70){
+        await move(null);await keyHold(p,dist<0?'d':'a',25);await p.keyboard.press('j');await delay(p,110);assert.equal((await state(p)).enemy.hp,70,'sword facing away cannot hit behind');checkedFacing=true;continue;
+      }
+      if(e.ai==='TELEGRAPH'&&e.telegraphRemaining<.50){
+        const target=e.attackTargetX;
+        const side=hero.x<target?-1:hero.x>target?1:(hero.x<500?-1:1);
+        const outside=Math.abs(hero.x-target)>130;
+        await move(outside?null:side<0?'a':'d');
+        if(!outside&&hero.dodgeCooldown<=0&&Date.now()-lastDodge>700){await p.keyboard.press('k');lastDodge=Date.now();}
+      }else if(e.ai==='ATTACK'){
+        const away=hero.x<e.attackTargetX?'a':'d';await move(away);
+        if(Math.abs(dist)<110&&hero.dodgeCooldown<=0&&Date.now()-lastDodge>700){await p.keyboard.press('k');lastDodge=Date.now();}
+      }else{
+        if(!near)await move(dist<0?'a':'d');
+        else{
+          await move(null);
+          if(hero.facing!==(dist<0?-1:1))await keyHold(p,dist<0?'a':'d',25);
+          if(canAttack&&hero.attackCooldown<=0&&Date.now()-lastAttack>340){await p.keyboard.press('j');lastAttack=Date.now();}
+        }
+      }
+    }
+    await delay(p,85);
+  }
+  throw Error('playthrough timed out after '+(Date.now()-start)/1000+' sec');
+}
+async function controls(p){
+  assert.equal(await p.evaluate(()=>RebornApp.audio.unlocked),false,'no audio unlock before gesture');
+  await shot(p,'reborn-title');await layout(p,'intro');
+  const laptop=await p.locator('.control-pad').boundingBox();assert.ok(laptop.y+laptop.height<=768,'laptop combat controls must fit with arena');
+  await click(p,'start');
+  for(let i=0;i<3;i++){const s=await state(p);assert.equal(s.tutorial.index,i);await click(p,'proceed');}
+  await waitMode(p,'EXPLORATION');const x=(await state(p)).player.x;await keyHold(p,'a',180);assert.ok((await state(p)).player.x<x);
+  await keyHold(p,'a',350);assert.equal((await state(p)).stage,'slime','walking enters first combat');
+  await keyHold(p,'a',1000);assert.equal((await state(p)).player.x,60,'left boundary');
+  const hp=(await state(p)).enemy.hp;await p.keyboard.press('j');await delay(p,110);assert.equal((await state(p)).enemy.hp,hp,'out-of-range sword cannot hit');
+  await p.keyboard.press('Escape');await waitMode(p,'PAUSED');const paused=await state(p);await keyHold(p,'d',300);await p.keyboard.press('j');await delay(p,300);const after=await state(p);assert.equal(after.player.x,paused.player.x);assert.equal(after.player.hp,paused.player.hp);assert.equal(after.enemy.x,paused.enemy.x);
+  await p.keyboard.press('Escape');await waitMode(p,'COMBAT');
+  await p.keyboard.down('d');await delay(p,120);await p.evaluate(()=>window.dispatchEvent(new Event('blur')));await p.keyboard.up('d');await waitMode(p,'PAUSED');await click(p,'resume');const resumed=(await state(p)).player.x;await delay(p,200);assert.equal((await state(p)).player.x,resumed,'blur releases held movement');
+  await click(p,'pause');await click(p,'restart');await waitMode(p,'EXPLORATION');
+  console.log('tutorial, real movement/boundary/range, pause, focus release, restart passed');
+}
+async function death(p){
+  await click(p,'restart');await keyHold(p,'d',1600);let defeated=false;const start=Date.now();
+  while(Date.now()-start<100000){const s=await state(p);if(s.mode==='DEFEAT'){defeated=true;break;}await delay(p,500);}
+  assert.ok(defeated,'standing in actual attacks should reach defeat');const dead=await state(p);assert.equal(dead.player.hp,0);await p.keyboard.press('j');await p.keyboard.press('k');await delay(p,150);assert.equal((await state(p)).player.hp,0);await shot(p,'reborn-defeat');
+  await click(p,'restart');const fresh=await state(p);assert.equal(fresh.player.hp,100);assert.equal(fresh.stats.correct,0);assert.equal(fresh.stats.wrong,0);assert.equal(fresh.challenge,null);assert.equal(fresh.stage,'entrance');console.log('actual collision damage → defeat → clean restart passed',Math.round((Date.now()-start)/1000)+'s');
+}
+async function audioRender(p){
+  await p.keyboard.press('Escape');
+  const pipeline=await p.evaluate(async()=>{
+    // Ephemeral codec probe, not an English recording or a production voice asset.
+    const rate=22050,count=4410,bytes=new Uint8Array(44+count*2),v=new DataView(bytes.buffer);
+    const chars=(offset,s)=>[...s].forEach((c,i)=>bytes[offset+i]=c.charCodeAt(0));
+    chars(0,'RIFF');v.setUint32(4,36+count*2,true);chars(8,'WAVE');chars(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,rate,true);v.setUint32(28,rate*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);chars(36,'data');v.setUint32(40,count*2,true);
+    for(let i=0;i<count;i++)v.setInt16(44+i*2,Math.round(Math.sin(i/rate*440*Math.PI*2)*1800),true);
+    let binary='';for(const b of bytes)binary+=String.fromCharCode(b);
+    const probe={utterances:[{id:'QA_TONE_NOT_VOICE',en:'Codec test tone',ko:'검사 신호',available:true,embedded:'data:audio/wav;base64,'+btoa(binary)}]};
+    const heard=[],rates=[],statuses=[];let settle;
+    function AudioProbe(src){const a=new Audio(src);a.addEventListener('playing',()=>rates.push(a.playbackRate));return a;}
+    const voice=RebornVoice.create(probe,RebornApp.audio,{Audio:AudioProbe,onHeard:e=>heard.push(e),onStatus:s=>{statuses.push(s.state);if(['ended','error','missing'].includes(s.state))settle?.(s);}});
+    const once=async slow=>{voice.configure({slow});const done=new Promise(r=>settle=r);voice.play('QA_TONE_NOT_VOICE');return await Promise.race([done,new Promise(r=>setTimeout(()=>r({state:'timeout'}),4000))]);};
+    const normal=await once(false),slow=await once(true);voice.stop();return{normal:normal.state,slow:slow.state,rates,heard,statuses};
+  });
+  assert.equal(pipeline.normal,'ended');assert.equal(pipeline.slow,'ended');assert.deepEqual(pipeline.rates,[1,.75]);assert.equal(pipeline.heard.length,2);console.log('native HTMLAudio embedded WAV codec probe (test tone, not English voice)',JSON.stringify(pipeline));
+  const peaks=await p.evaluate(async()=>{
+    const Original=window.AudioContext,result={};
+    try{for(const id of Object.keys(RebornAudio.presets)){
+      const ctx=new OfflineAudioContext(1,44100,44100);Object.defineProperty(ctx,'resume',{value:()=>Promise.resolve()});
+      window.AudioContext=function(){return ctx;};const m=RebornAudio.create({master:1,sfx:1});m.unlock();m.sfx(id);const b=await ctx.startRendering();let peak=0;for(const v of b.getChannelData(0))peak=Math.max(peak,Math.abs(v));result[id]=peak;
+    }}finally{window.AudioContext=Original;}return result;
+  });
+  assert.equal(Object.keys(peaks).length,11);for(const [id,peak]of Object.entries(peaks))assert.ok(peak>0&&peak<1,id+' finite non-clipping waveform');console.log('native OfflineAudioContext eleven cue peaks (not speaker listening)',JSON.stringify(peaks));
+}
+async function touch(browser){
+  const {context,page:p,errors,network}=await create(browser,{viewport:{width:390,height:844},hasTouch:true,isMobile:true,reducedMotion:'reduce'});
+  try{
+    await click(p,'skip');const cdp=await context.newCDPSession(p),target=button(p,'right');await target.scrollIntoViewIfNeeded();const r=await target.boundingBox();const x=(await state(p)).player.x;
+    await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:r.x+r.width/2,y:r.y+r.height/2}]});await delay(p,300);await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});assert.ok((await state(p)).player.x>x,'held real touch moves player');
+    await button(p,'attack').tap();await delay(p,80);assert.ok((await state(p)).player.attackCooldown>0);await delay(p,400);await button(p,'attack').tap();await delay(p,80);assert.ok((await state(p)).player.attackCooldown>0,'touch attack releases and can repeat');
+    await button(p,'dodge').tap();await delay(p,40);assert.ok((await state(p)).player.dodgeCooldown>0);assert.equal(await p.evaluate(()=>RebornApp.settings.reducedMotion),true);
+    await button(p,'pause').tap();await waitMode(p,'PAUSED');await shot(p,'reborn-touch');assert.deepEqual(errors,[]);assert.deepEqual(network,[]);console.log('mobile real touch move/attack/repeat/dodge/pause, reduced motion passed');
+  }finally{await context.close();}
+}
+async function settings(p){
+  await p.locator('details.settings>summary').click();
+  for(const key of ['master','voice','sfx','music']){const slider=p.locator('[data-volume="'+key+'"]');await slider.focus();await slider.press('Home');assert.equal(await p.evaluate(k=>RebornApp.audio.settings[k],key),0);await slider.press('End');assert.equal(await p.evaluate(k=>RebornApp.audio.settings[k],key),1);}
+  await p.locator('#muted').check();await click(p,'replay');assert.equal(await p.evaluate(()=>RebornApp.voice.status.state),'muted');assert.equal(await p.evaluate(()=>RebornApp.audio.voiceVolume),0);await p.locator('#muted').uncheck();
+  await p.locator('#slow').check();await p.locator('#fallback').check();assert.deepEqual(await p.evaluate(()=>({slow:RebornApp.voice.slow,fallback:RebornApp.voice.fallback})),{slow:true,fallback:true});await p.locator('#fallback').uncheck();
+  await p.locator('#reduced').check();assert.equal(await p.evaluate(()=>document.body.dataset.reducedMotion),'true');await p.locator('#shake').uncheck();assert.equal(await p.evaluate(()=>RebornApp.settings.shake),false);
+  await click(p,'replay');assert.equal(await p.evaluate(()=>RebornApp.voice.status.state),'missing');
+  console.log('four native range controls, mute, slow, explicit fallback, shake and reduced motion settings passed');
+}
+async function originalSmoke(browser){
+  const context=await browser.newContext();await context.setOffline(true);const p=await context.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
+  try{await p.goto(pathToFileURL(path.join(root,'EnglishQuest.html')).href);await p.locator('[data-act="new"]').waitFor();await p.locator('[data-act="new"]').click();await p.locator('[data-act="intro-skip"]').click();
+    if(await p.locator('[data-act="class-later"]').count())await p.locator('[data-act="class-later"]').click();
+    await p.locator('[data-act="academy-enter"]').click();await p.waitForFunction(()=>game.screen==='ACADEMY');
+    assert.equal(await p.evaluate(()=>Curriculum.activities.length),500);assert.deepEqual(errors,[]);console.log('unchanged v0.8 new game → map → 500-item academy offline smoke passed');
+  }finally{await context.close();}
+}
+async function main(){
+  const original=await fs.readFile(path.join(root,'EnglishQuest.html'));assert.equal(original.length,794176);assert.equal(hash(original),originalHash);
+  const bundle=await fs.readFile(path.join(root,'EnglishQuest_REBORN.html'));if(capture)await fs.mkdir(out,{recursive:true});console.log('bundle',bundle.length,hash(bundle));
+  const browser=await chromium.launch({channel,headless:true});console.log(channel,browser.version());
+  try{
+    const {context,page,errors,network}=await create(browser);
+    try{
+      const slots={'EnglishQuest.v8':'{"qaSentinel":"current v08 existing bytes preserved"}','EnglishQuest.v7':'{"qaSentinel":"legacy bytes preserved"}','unrelated-setting':'keep me'};
+      await page.evaluate(x=>{for(const[k,v]of Object.entries(x))localStorage.setItem(k,v);},slots);
+      await controls(page);await playthrough(page);if(!process.argv.includes('--results-only')){await death(page);await audioRender(page);await settings(page);}
+      assert.deepEqual(await page.evaluate(keys=>Object.fromEntries(keys.map(k=>[k,localStorage.getItem(k)])),Object.keys(slots)),slots);assert.deepEqual(errors,[]);assert.deepEqual(network,[]);console.log('all pre-existing isolated storage bytes unchanged; no uncaught errors or HTTP(S) requests');
+    }catch(e){console.error('STATE',JSON.stringify(await state(page)));console.error('ERRORS',errors);await shot(page,'reborn-failure');throw e;}finally{await context.close();}
+    if(!process.argv.includes('--results-only')){await touch(browser);await originalSmoke(browser);}
+  }finally{await browser.close();}
+  assert.equal(hash(await fs.readFile(path.join(root,'EnglishQuest.html'))),originalHash);console.log('PASS',channel,'original HTML unchanged');
+}
+main().catch(e=>{console.error(e);process.exitCode=1;});

@@ -1,0 +1,9 @@
+bundle 108727 6A97F8E8E8E800D4BA32728396E6A80C606B839E59C4645F873DE89B8D0D5BC2
+chrome 157.0.8103.79
+layout intro five viewports passed
+tutorial, real movement/boundary/range, pause, focus release, restart passed
+layout listening five viewports passed
+layout victory five viewports passed
+real input victory {"elapsedSeconds":35.003,"stats":{"correct":7,"wrong":2,"assisted":7,"independent":0,"expressions":["Move left!","Watch out!","I need fire.","Attack the slime!","Use your magic!"],"listening":{"correct":4,"wrong":1,"assisted":4,"independent":0,"asset":0,"fallback":0,"unheard":5},"magic":{"correct":3,"wrong":1,"assisted":3,"independent":0}},"patterns":["jump","heavy_jump","triple_bounce","crystal_charge"],"phases":[1,2],"poses":["idle","run","dodge","attack_swing","attack_follow","magic_charge","magic_release","victory"],"damage":false}
+all pre-existing isolated storage bytes unchanged; no uncaught errors or HTTP(S) requests
+PASS chrome original HTML unchanged
