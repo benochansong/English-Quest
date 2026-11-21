@@ -1,0 +1,1 @@
+PASS chrome raven {"duration":13.576,"combat":{"damageDealt":110,"damageReceived":12,"dodges":0,"successfulDodges":0,"perfectDodges":0,"highestCombo":3,"magicUsed":0,"magicHits":0,"weaknessHits":0,"swordHits":10},"field":{"missedAttacks":0,"groundings":1,"shieldBreaks":0,"wrongCrystals":0},"patterns":["dive"]}

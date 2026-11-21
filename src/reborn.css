@@ -235,3 +235,5 @@ body.reborn {
 .session-note{color:#b2c7bc;font-size:.82rem;margin:14px 0}
 .flow-review{margin:9px 0}.flow-review summary{cursor:pointer}.flow-review .button-row{margin:6px 0;flex-wrap:wrap}
 @media(max-width:480px){.flow-banner{align-items:flex-start;flex-direction:column}.flow-banner button{width:100%}}
+.control-pad.has-environment{grid-template-columns:repeat(6,minmax(0,1fr))}
+@media(max-width:600px){.control-pad.has-environment{grid-template-columns:repeat(3,minmax(0,1fr))}}

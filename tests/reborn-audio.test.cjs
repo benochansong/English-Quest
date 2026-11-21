@@ -107,7 +107,7 @@ test('Fallback rejects remote-only voices and handles unavailable or throwing sp
 test('Production manifest has30–50 honest, unique, licensed-or-missing file records',()=>{
   const actual=JSON.parse(fs.readFileSync(path.join(__dirname,'../REBORN_VOICE_MANIFEST.json'),'utf8'));
   assert.ok(actual.utterances.length>=30&&actual.utterances.length<=50);assert.equal(new Set(actual.utterances.map(x=>x.id)).size,actual.utterances.length);
-  assert.equal(actual.utterances.length,34);assert.equal(new Set(actual.utterances.map(x=>x.en.trim().toLowerCase())).size,34,'no duplicate English utterances inflate count');assert.deepEqual([...new Set(actual.utterances.map(x=>x.speaker))].sort(),['ANNOUNCER','CRYSTAL','ROWAN']);
+  assert.equal(actual.utterances.length,36);assert.equal(new Set(actual.utterances.map(x=>x.en.trim().toLowerCase())).size,36,'no duplicate English utterances inflate count');assert.deepEqual([...new Set(actual.utterances.map(x=>x.speaker))].sort(),['ANNOUNCER','CRYSTAL','ROWAN']);
   for(const row of actual.utterances){
     assert.ok(row.en&&row.ko&&row.usage&&row.voiceCharacter&&row.accent,row.id);
     assert.ok(row.path.startsWith('assets/reborn/voice/')&&!row.path.includes('..'),row.id);

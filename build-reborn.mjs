@@ -23,7 +23,7 @@ for(const item of manifest.utterances){
   item.embeddedSlow=await embed(item.slowSpeedAsset,item);
   item.available=!!item.embedded;
 }
-const names=['reborn-learning.js','reborn-combat.js','reborn-art.js','reborn-audio.js','reborn-voice.js','reborn-ui.js'];
+const names=['reborn-learning.js','reborn-battlefield.js','reborn-journey.js','reborn-combat.js','reborn-field-art.js','reborn-art.js','reborn-audio.js','reborn-voice.js','reborn-ui.js'];
 const scripts=await Promise.all(names.map(n=>read('src/'+n)));
 const style=await read('src/reborn.css');
 const html=`<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102c2d"><title>English Quest REBORN · The Battle Awakens</title><style>${style}</style></head><body class="reborn"><main id="app"></main><noscript>JavaScript를 켜 주세요.</noscript><script>'use strict';\nconst RebornVoiceManifest=${JSON.stringify(manifest).replace(/</g,'\\u003c')};\n${scripts.join('\n;\n')}</script></body></html>`;

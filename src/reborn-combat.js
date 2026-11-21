@@ -23,6 +23,9 @@ const RebornCombat = (() => {
   const approach=(value,target,amount)=>value<target?Math.min(value+amount,target):Math.max(value-amount,target);
   const rushPatterns=new Set(['rush','forward_rush','crystal_charge']);
   const activeModes=new Set(['EXPLORATION','COMBAT','PLAYER_HIT']);
+  const field=typeof RebornBattlefield==='undefined'?null:RebornBattlefield;
+  const journey=typeof RebornJourney==='undefined'?null:RebornJourney;
+  const enemyConfig=kind=>CONFIG[kind]||field?.configs[kind];
   function create({flow=true}={}) {
     const progress=RebornLearning.createProgress();
     let generation=0,accumulator=0,events=[],held=new Set(),attack=null,dodge=null,enemyData=null,pending=null,pausedMode=null,moved=0,scripted=new Set(),serial=0,comboHits=0,cast=null,shots=[],goals=new Set();
@@ -38,6 +41,7 @@ const RebornCombat = (() => {
       cancelCue();const phrase=RebornLearning.expressions[key];
       const c={id:`${state.session}:action:${++serial}`,expressionId:key,voiceId:phrase.voiceId,heard:false,source:null,assisted:false,aids:[],age:0,ttl:6,startX:state.player.x,heardX:state.player.x,acted:false,damaged:false,...extra};
       state.flowCue=c;state.stats.flow.actionOpportunities++;
+      if(!state.encounterExpressions.includes(key))state.encounterExpressions.push(key);
       voice(c.voiceId,{priority:key==='crystal'?95:key==='dodge'?90:85,opportunityId:c.id});return c;
     }
     function finishCue(success,reason='missed'){
@@ -46,6 +50,9 @@ const RebornCombat = (() => {
       if(!c.shortcut||!success)progress.record(c.expressionId,c.id,{success,heard:c.heard,assisted:!independent,actual:success&&c.acted});
       const f=state.stats.flow;f.actionSuccesses+=success?1:0;f.independentActions+=independent?1:0;
       if(independent&&!f.independentExpressions.includes(c.expressionId))f.independentExpressions.push(c.expressionId);
+      if(independent&&!state.encounterIndependent.includes(c.expressionId))state.encounterIndependent.push(c.expressionId);
+      if(success&&c.assisted)state.encounterActionCounts.assisted++;
+      if(success&&!c.heard)state.encounterActionCounts.text++;
       if(success&&!state.stats.expressions.includes(RebornLearning.expressions[c.expressionId].english))state.stats.expressions.push(RebornLearning.expressions[c.expressionId].english);
       if(!independent&&!(success&&c.shortcut))review(c.expressionId,success?'hint':reason);
       f.outcomes.push({id:c.id,key:c.expressionId,success,heard:c.heard,assisted:c.assisted,independent,actual:c.acted,reason:success?'action':reason});if(f.outcomes.length>128)f.outcomes.shift();
@@ -69,16 +76,18 @@ const RebornCombat = (() => {
     function resetCombo(){attack=null;comboHits=0;Object.assign(state.player,{comboIndex:0,comboNext:1,comboWindowRemaining:0,comboBuffered:false});}
     function clearTransient(){resetCombo();dodge=null;cast=null;shots=[];state.cast=null;state.projectiles=shots;state.player.vx=0;clearInput();}
     function goal(id){if(goals.has(id))return;goals.add(id);state.stats.goals.push(id);emit('goal',{id});}
-    function review(key,reason){const e=RebornLearning.expressions[key];let r=state.stats.reviewExpressions.find(x=>x.id===key);if(!r){r={id:key,voiceId:e.voiceId,english:e.english,ko:e.ko,reasons:[]};state.stats.reviewExpressions.push(r);}if(!r.reasons.includes(reason))r.reasons.push(reason);}
+    function review(key,reason){const e=RebornLearning.expressions[key];if(!state.encounterReview.includes(key))state.encounterReview.push(key);let r=state.stats.reviewExpressions.find(x=>x.id===key);if(!r){r={id:key,voiceId:e.voiceId,english:e.english,ko:e.ko,reasons:[]};state.stats.reviewExpressions.push(r);}if(!r.reasons.includes(reason))r.reasons.push(reason);}
     function reset() {
       generation++;accumulator=0;events=[];held.clear();attack=null;dodge=null;enemyData=null;pending=null;pausedMode=null;moved=0;scripted=new Set();serial=0;comboHits=0;cast=null;shots=[];goals=new Set();
       Object.assign(state,{mode:'INTRO',stage:'entrance',time:0,session:generation,
         player:{x:CONFIG.player.startX,y:CONFIG.ground,vx:0,runPhase:0,facing:1,hp:CONFIG.player.hp,maxHp:CONFIG.player.hp,pose:'idle',poseTime:0,poseDuration:0,attackCooldown:0,dodgeCooldown:0,invulnerable:0,magicCharge:0,magicCooldown:0,comboIndex:0,comboNext:1,comboWindowRemaining:0,comboBuffered:false,perfectDodge:0,weaknessCharge:0},
         enemy:null,effects:[],projectiles:[],cast:null,bossIntro:null,challenge:null,tutorial:null,magicUnlocked:false,awaitingProceed:true,lastVoiceId:'VO_HELLO',feedback:'',hitStop:0,shake:0,shakePower:0,
-        flowEnabled:flow,learning:progress.entries,flowCue:null,flowFeedback:null,lastWarningAt:-10,
+        flowEnabled:flow,learning:progress.entries,flowCue:null,flowFeedback:null,lastWarningAt:-10,route:'lab',selection:null,adventure:null,encounterReport:null,fieldNotice:'',encounterTime:0,
         stats:{correct:0,wrong:0,assisted:0,independent:0,expressions:[],reviewExpressions:[],goals:[],combat:{damageDealt:0,damageReceived:0,dodges:0,successfulDodges:0,perfectDodges:0,highestCombo:0,magicUsed:0,magicHits:0,weaknessHits:0,swordHits:0},listening:{correct:0,wrong:0,assisted:0,independent:0,asset:0,fallback:0,unheard:0},magic:{correct:0,wrong:0,assisted:0,independent:0}},
         objective:'로완과 함께 숲의 첫 시험을 시작해요.',reward:null});
       state.stats.flow={forcedScreens:0,forcedSeconds:0,sentenceArrangements:0,actionOpportunities:0,actionSuccesses:0,independentActions:0,heardExpressions:[],independentExpressions:[],helpExpressions:[],outcomes:[],audio:{requested:0,playing:0,ended:0,stopped:0,error:0,missing:0,muted:0,blocked:0,ignored:0}};
+      state.stats.battlefield={missedAttacks:0,groundings:0,shieldBreaks:0,wrongCrystals:0};
+      Object.assign(state,{encounterExpressions:[],encounterHeard:[],encounterHelp:[],encounterReview:[],encounterIndependent:[],encounterActionCounts:{assisted:0,text:0},encounterBase:null,encounterPeakCombo:0,encounterOutcomeStart:0,transition:null});
       return state;
     }
     reset();
@@ -97,10 +106,15 @@ const RebornCombat = (() => {
     }
     function spawn(kind) {
       cancelCue();
-      const c=CONFIG[kind];state.stage=kind;state.awaitingProceed=false;state.challenge=null;pending=null;
+      const c=enemyConfig(kind);state.stage=kind;state.awaitingProceed=false;state.challenge=null;pending=null;state.encounterTime=0;
+      Object.assign(state,{encounterBase:JSON.parse(JSON.stringify(state.stats)),encounterPeakCombo:0,encounterOutcomeStart:state.stats.flow.outcomes.length,encounterExpressions:[],encounterHeard:[],encounterHelp:[],encounterReview:[],encounterIndependent:[],encounterActionCounts:{assisted:0,text:0},encounterReport:null,fieldNotice:''});
       clearTransient();pose('idle');
       state.player.x=kind==='boss'?230:state.player.x;
       state.player.invulnerable=0;
+      if(field?.configs[kind]){
+        state.player.x=170;state.player.weaknessCharge=0;state.enemy=field.create(kind,state.player);enemyData={perfect:false,hit:false,staggerTime:0};
+        mode('COMBAT');objectiveCombat();return;
+      }
       state.enemy={id:kind==='boss'?'slime-champion':'green-slime',kind,x:c.startX,y:CONFIG.ground,lift:0,hp:c.hp,maxHp:c.hp,ai:'IDLE',aiTime:0,pattern:c.patterns[0].id,phase:1,facing:-1,telegraphRemaining:0,attackTargetX:state.player.x,landingTargetX:state.player.x,attackDuration:0,attackProgress:0,attackRadius:c.patterns[0].radius,coreExposed:false,coreRemaining:0,attackSerial:0};
       enemyData={patternIndex:0,pattern:null,originX:c.startX,hit:false,repeats:0,resume:null,recovery:c.recovery,staggerTime:0,perfect:false,phaseIndex:0};
       state.objective=kind==='boss'?'슬라임 챔피언: 공격 예고를 피하고 빈틈에 반격해요.':'초록 슬라임: 가까이 다가가 J로 공격하고, 공격 예고를 보고 K로 회피해요.';
@@ -112,11 +126,55 @@ const RebornCombat = (() => {
       cancelCue();
       clearInput();resetCombo();dodge=null;state.player.vx=0;state.player.invulnerable=0;
       const h=RebornLearning.challenge(key,`${state.session}:${++serial}`);
+      if(!state.encounterExpressions.includes(key))state.encounterExpressions.push(key);
       state.challenge=h;pending={h,key,context,locked:false,correct:false,aids:new Set(),heard:false,source:null};
       state.awaitingProceed=false;state.objective=h.prompt;pose(key==='fire'?'magic_charge':'idle');
       state.stats.flow.forcedScreens++;if(key==='fire')state.stats.flow.sentenceArrangements++;
       mode(key==='fire'?'MAGIC_CHALLENGE':'LISTENING_CHALLENGE');voice(h.voiceId,{priority:100,opportunityId:h.id});
       if(key==='fire') sfx('magic_charge');
+    }
+    function fieldOpportunity(key,ttl){
+      if(!activeModes.has(state.mode))return;
+      if(state.flowCue)finishCue(false,'expired');
+      if(!progress.introduced(key)){
+        if(key==='crystal'){openChallenge(key,'combat');return;}
+        openChallenge(key,'field');state.challenge.kind='action';state.challenge.prompt='지시를 듣고 환경을 활용해요. 수정 곁에서 E 또는 상호작용 버튼을 누를 수 있어요.';pending.ttl=ttl;return;
+      }
+      cue(key,{ttl});
+    }
+    function fieldWarning(){
+      if(!activeModes.has(state.mode)||state.flowCue)return;
+      enemyData.perfect=false;
+      if(!progress.introduced('dodge')){openChallenge('dodge','combat');return;}
+      if(!state.flowCue&&state.time-state.lastWarningAt>=6){state.lastWarningAt=state.time;cue('dodge',{attackSerial:state.enemy.attackSerial,ttl:5,enemyId:state.enemy.id});}
+    }
+    function settleWarning(safe){
+      const c=state.flowCue;if(c?.expressionId!=='dodge')return;
+      c.acted=Math.abs(state.player.x-(c.heard?c.heardX:c.startX))>=30||enemyData.perfect;finishCue(!c.damaged&&(safe||enemyData.perfect)&&c.acted);
+    }
+    const fieldAPI={effect,sfx,contact:enemyContact,warning:fieldWarning,opportunity:fieldOpportunity,settleWarning,metric:key=>state.stats.battlefield[key]++,core:open=>{state.player.weaknessCharge=open?1:0;}};
+    function interact(){
+      if(!activeModes.has(state.mode)||!field?.configs[state.enemy?.kind])return false;
+      const result=field.interact(state.enemy,state.player,fieldAPI);state.fieldNotice=result.message||'바람이 까마귀를 붙잡았어요! 가까이 다가가 검으로 반격하세요.';
+      if(result.wrong){state.stats.battlefield.wrongCrystals++;assist('correction');if(state.flowCue)progress.record('blue',state.flowCue.id+':miss',{success:false});}
+      if(result.ok){if(result.key==='wind')state.stats.battlefield.groundings++;const c=state.flowCue;if(c?.expressionId===result.key){c.acted=true;c.intentAfterHeard=c.heard;finishCue(true);}if(result.key==='blue')field.breakShield(state.enemy,fieldAPI,'crystal');}
+      return result.ok;
+    }
+    function selectEncounter(kind){
+      if(!['INTRO','VICTORY','DEFEAT'].includes(state.mode)||!['slime','raven','golem','boss'].includes(kind))return false;
+      reset();state.route='practice';state.selection=kind;state.magicUnlocked=true;state.player.magicCharge=100;spawn(kind);return true;
+    }
+    function startStory(){
+      if(!journey||!['INTRO','VICTORY','DEFEAT'].includes(state.mode))return false;
+      reset();state.route='story';state.adventure={index:0,history:[]};state.magicUnlocked=true;state.player.magicCharge=100;spawn('slime');state.fieldNotice=journey.scenes.slime.text;return true;
+    }
+    function advanceEncounter(){
+      if(state.mode!=='ENCOUNTER_CLEAR'||state.route!=='story'||state.adventure.index>=2)return false;
+      clearTransient();cancelCue();state.adventure.index++;const next=journey.encounters[state.adventure.index];state.transition={next,remaining:1.2,text:journey.scenes[next].text};mode('TRANSITION');voice('VO_FOLLOW');return true;
+    }
+    function retryEncounter(){
+      if(state.mode!=='DEFEAT'||state.route!=='story')return false;
+      const history=state.adventure.history,index=state.adventure.index;reset();state.route='story';state.adventure={index,history};state.magicUnlocked=true;state.player.magicCharge=100;spawn(journey.encounters[index]);return true;
     }
     function ai(value) { const e=state.enemy;if(!e)return;e.ai=value;e.aiTime=0;e.attackProgress=0;e.lift=0; }
     function stagger(duration,interrupt=false){
@@ -126,9 +184,13 @@ const RebornCombat = (() => {
       enemyData.staggerTime=duration;ai('STAGGER');
     }
     function stun() { if(state.enemy?.kind==='boss')stagger(CONFIG.learning.stun);else if(state.enemy?.hp>0){enemyData.recovery=CONFIG.learning.stun;enemyData.repeats=0;enemyData.resume=null;ai('RECOVERY');} }
-    function objectiveCombat() { state.objective=state.stage==='boss'?'슬라임 챔피언: 경고 지점을 벗어나고, 회복 중 반격해요. L 마법도 사용해요.':'J 검 · K 회피 — 슬라임이 몸을 움츠리면 공격 예고예요.'; }
+    function objectiveCombat() { state.objective=state.stage==='golem'?'수정 골렘 · 예고를 피하고, 동료가 말한 수정 곁에서 E로 방어막을 깨세요.':state.stage==='raven'?'그림자 까마귀 · 급강하를 피하고, 낮아지는 틈에 바람 수정 E로 반격 기회를 만드세요.':state.stage==='boss'?'슬라임 챔피언: 경고 지점을 벗어나고, 회복 중 반격해요. L 마법도 사용해요.':'J 검 · K 회피 — 슬라임이 몸을 움츠리면 공격 예고예요.'; }
     function proceed() {
       if(state.mode==='PAUSED') return false;
+      if(pending?.context==='field'&&state.challenge===pending.h){
+        const {key,h,ttl}=pending;progress.entries[key].introduced=true;progress.entries[key].stage=progress.ready(key)?'familiar':'practice';pending=null;state.challenge=null;
+        mode('COMBAT');objectiveCombat();cue(key,{id:h.id,heard:h.heard,source:h.source,assisted:h.assisted,aids:[...h.aids],ttl});return true;
+      }
       if(state.mode==='BOSS_INTRO'){state.bossIntro=null;ai('IDLE');mode('COMBAT');objectiveCombat();return true;}
       if(state.mode==='TUTORIAL') {const n=state.tutorial.index+1;if(n<RebornLearning.tutorial.length)tutorial(n);else exploration();return true;}
       if(state.mode==='EXPLORATION' && state.stage==='entrance'){spawn('slime');return true;}
@@ -149,8 +211,8 @@ const RebornCombat = (() => {
       mode('COMBAT');objectiveCombat();
       if(context==='review')return true;
       if(key==='fire') {if(flow)cue('fire',{id:h.id,heard:h.heard,source:h.source,assisted:h.assisted,aids:[...h.aids],intentAfterHeard:h.heard});castMagic(quality);}
-      else if(key==='crystal'){state.player.weaknessCharge=1;state.enemy.coreExposed=true;state.enemy.coreRemaining=CONFIG.learning.coreWindow;state.player.magicCharge=clamp(state.player.magicCharge+CONFIG.learning.charge,0,CONFIG.magic.charge);stun();pose('idle');if(flow)cue('crystal',{id:h.id,heard:h.heard,source:h.source,assisted:h.assisted,aids:[...h.aids],ttl:CONFIG.learning.coreWindow});}
-      else {state.player.magicCharge=clamp(state.player.magicCharge+CONFIG.learning.charge,0,CONFIG.magic.charge);stun();pose('idle');}
+      else if(key==='crystal'){const window=state.enemy.kind==='golem'?6.5:CONFIG.learning.coreWindow;state.player.weaknessCharge=1;state.enemy.coreExposed=true;state.enemy.coreRemaining=window;state.player.magicCharge=clamp(state.player.magicCharge+CONFIG.learning.charge,0,CONFIG.magic.charge);if(state.enemy.kind!=='golem')stun();pose('idle');if(flow)cue('crystal',{id:h.id,heard:h.heard,source:h.source,assisted:h.assisted,aids:[...h.aids],ttl:window});}
+      else {state.player.magicCharge=clamp(state.player.magicCharge+CONFIG.learning.charge,0,CONFIG.magic.charge);if(!field?.configs[state.enemy?.kind])stun();pose('idle');}
       return true;
     }
     function answer(value) {
@@ -176,6 +238,7 @@ const RebornCombat = (() => {
     }
     function assist(kind='translation') {
       kind=({english:'subtitle',korean:'translation'})[kind]||kind;
+      const key=currentOpportunity()?.expressionId;if(key&&!state.encounterHelp.includes(key))state.encounterHelp.push(key);
       if(flow&&state.flowCue){const c=state.flowCue;c.assisted=true;if(!c.aids.includes(kind))c.aids.push(kind);review(c.expressionId,'hint');if(!state.stats.flow.helpExpressions.includes(c.expressionId))state.stats.flow.helpExpressions.push(c.expressionId);}
       if(!pending || !['subtitle','translation','hint','fallback','correction'].includes(kind))return !!state.flowCue;
       pending.aids.add(kind);pending.h.assisted=true;pending.h.aids=[...pending.aids];review(pending.key,'hint');return true;
@@ -185,22 +248,31 @@ const RebornCombat = (() => {
       if(flow&&state.flowCue&&opportunityId===state.flowCue.id&&!['INTRO','DEFEAT','VICTORY'].includes(state.mode)){
         const c=state.flowCue;
         if(c.expressionId==='dodge'){
-          const e=state.enemy;if(!e||e.attackSerial!==c.attackSerial||e.ai==='ATTACK')return false;
+          const e=state.enemy;if(!e||e.attackSerial!==c.attackSerial||['ATTACK','DIVE_ATTACK','SWEEP_ATTACK','FEATHER_BURST','FIST_ATTACK','GROUND_SLAM','CRYSTAL_PULSE'].includes(e.ai))return false;
+          if(field?.configs[e.kind]&&!c.heard&&e.ai.startsWith('TELEGRAPH_')){e.telegraphTotal=Math.max(e.telegraphTotal,e.aiTime+1.6);e.telegraphRemaining=e.telegraphTotal-e.aiTime;c.ttl=Math.max(c.ttl,c.age+4);}
           if(!c.heard){const telegraphTime=e.ai==='TELEGRAPH'?e.aiTime:enemyData.resume?.ai==='TELEGRAPH'?enemyData.resume.time:null;
             if(telegraphTime!==null){enemyData.telegraphDuration=Math.max(enemyData.telegraphDuration,telegraphTime+1.6);e.telegraphRemaining=enemyData.telegraphDuration-telegraphTime;c.ttl=Math.max(c.ttl,c.age+1.6+e.attackDuration+.3);}}
         }
         if(!c.heard){c.heardX=state.player.x;c.heardAt=c.age;}c.heard=true;c.source=source;
-        if(!state.stats.flow.heardExpressions.includes(c.expressionId))state.stats.flow.heardExpressions.push(c.expressionId);return true;
+        if(!state.stats.flow.heardExpressions.includes(c.expressionId))state.stats.flow.heardExpressions.push(c.expressionId);if(!state.encounterHeard.includes(c.expressionId))state.encounterHeard.push(c.expressionId);return true;
       }
       if(opportunityId!==pending?.h.id)return false;
       if(!pending || pending.locked || state.mode==='PAUSED' || !['asset','browser-fallback'].includes(source))return false;
       if(flow&&!state.stats.flow.heardExpressions.includes(pending.key))state.stats.flow.heardExpressions.push(pending.key);
+      if(!state.encounterHeard.includes(pending.key))state.encounterHeard.push(pending.key);
       pending.heard=true;pending.source=source;pending.h.heard=true;pending.h.source=source;return true;
     }
     function enemyDefeated() {
       cancelCue();
       const e=state.enemy;ai('DEFEATED');e.hp=0;e.coreExposed=false;e.coreRemaining=0;clearTransient();state.player.weaknessCharge=0;state.hitStop=0;pending=null;state.challenge=null;
       effect('burst',e.x,e.y-30,1.1);sfx(e.kind==='boss'?'boss_defeat':'slime_defeat');
+      if(state.route!=='lab'){
+        e.hazards=[];state.awaitingProceed=false;state.encounterReport=journey?journey.snapshot(state):{kind:e.kind,durationSeconds:state.encounterTime,stats:JSON.parse(JSON.stringify(state.stats))};
+        if(state.adventure)state.adventure.history.push(state.encounterReport);
+        pose('victory');const final=state.route!=='story'||state.adventure.index===2;mode(final?'VICTORY':'ENCOUNTER_CLEAR');
+        state.objective=final?(state.route==='story'?'왕국의 수정이 다시 빛납니다. 사냥꾼의 길 완료!':'전투 완료 · 다른 적을 연습하거나 다시 도전하세요.'):'길이 열렸습니다. 다음 장소로 이동하세요.';
+        state.reward={title:field?.names[e.kind]||e.kind};sfx('victory');voice(final?'VO_VICTORY':'VO_GOOD_JOB');return;
+      }
       if(e.kind==='slime') {
         state.stage='crystal';state.awaitingProceed=true;state.objective='빛나는 단어 수정 발견! “I need fire.”를 배우고 마법을 깨워요.';
         state.player.hp=state.player.maxHp;pose('idle');mode('EXPLORATION');voice('VO_CHARGE');
@@ -213,6 +285,7 @@ const RebornCombat = (() => {
     }
     function checkScript() {
       const e=state.enemy;if(!e || e.hp<=0)return;
+      if(field?.configs[e.kind])return;
       const list=e.kind==='slime'?[['slime-left',54,'left'],['slime-dodge',30,'dodge']]:[['boss-attack',120,'attack'],['boss-magic',80,'magic']];
       for(const [id,hp,key] of list)if(e.hp<=hp&&!scripted.has(id)){scripted.add(id);if(flow&&(key==='dodge'?progress.introduced(key):progress.ready(key)))continue;openChallenge(key,'combat');return;}
     }
@@ -236,14 +309,17 @@ const RebornCombat = (() => {
     }
     function damageEnemy(amount,source,{tier=1,direction=state.player.facing}={}) {
       const e=state.enemy;if(!e || e.hp<=0)return false;
-      const weak=source==='sword'&&e.coreExposed&&state.player.weaknessCharge===1;
-      if(weak){amount=Math.round(amount*CONFIG.learning.coreMultiplier);state.player.weaknessCharge=0;e.coreRemaining=0;e.coreExposed=false;state.stats.combat.weaknessHits++;goal('crystal-break');if(state.flowCue?.expressionId==='crystal'){state.flowCue.acted=true;finishCue(true);}}
+      const fieldCore=e.kind==='golem'&&e.coreExposed&&source==='sword';
+      const weak=fieldCore||source==='sword'&&e.coreExposed&&state.player.weaknessCharge===1;
+      if(e.kind==='golem'&&e.shieldActive&&source==='sword')amount=Math.max(1,Math.round(amount*.25));
+      if(weak){amount=Math.round(amount*CONFIG.learning.coreMultiplier);if(!fieldCore){state.player.weaknessCharge=0;e.coreRemaining=0;e.coreExposed=false;}state.stats.combat.weaknessHits++;goal('crystal-break');if(state.flowCue?.expressionId==='crystal'){state.flowCue.acted=true;finishCue(true);}}
       const dealt=Math.min(e.hp,amount);e.hp=clamp(e.hp-dealt,0,e.maxHp);state.stats.combat.damageDealt+=dealt;hitFeedback(e,dealt,{source,tier,direction,weak});
       const strike=CONFIG.sword.strikes[tier-1],knockback=source==='magic'?38:strike.knockback;
       e.x=clamp(e.x+direction*knockback,CONFIG.minX,CONFIG.maxX);if(e.ai==='ATTACK')enemyData.knockback=(enemyData.knockback||0)+direction*knockback;
       landingWarning();
-      if(source==='sword'){state.player.magicCharge=clamp(state.player.magicCharge+strike.charge,0,CONFIG.magic.charge);state.stats.combat.swordHits++;comboHits++;state.stats.combat.highestCombo=Math.max(state.stats.combat.highestCombo,comboHits);if(comboHits===3)goal('combo-three');}
+      if(source==='sword'){state.player.magicCharge=clamp(state.player.magicCharge+strike.charge,0,CONFIG.magic.charge);state.stats.combat.swordHits++;comboHits++;state.stats.combat.highestCombo=Math.max(state.stats.combat.highestCombo,comboHits);state.encounterPeakCombo=Math.max(state.encounterPeakCombo,comboHits);if(comboHits===3)goal('combo-three');}
       if(e.hp<=0){enemyDefeated();return true;}
+      if(field?.configs[e.kind]){field.hit(e,tier,fieldAPI,source);return true;}
       if(e.kind==='boss'&&e.phase===1&&e.hp<=e.maxHp*.5){e.phase=2;enemyData.phaseIndex=0;effect('charge',e.x,e.y-35,.65);sfx('bossPhase');}
       // Brief recoil preserves a telegraph's progress; repeated sword hits cannot restart it forever.
       if(weak)stagger(CONFIG.learning.coreStagger,true);
@@ -297,7 +373,7 @@ const RebornCombat = (() => {
         const tx=e.x,ty=e.y-e.lift-35,dx=tx-shot.x,dy=ty-shot.y,length=Math.hypot(dx,dy)||1;
         shot.vx=dx/length*CONFIG.magic.projectileSpeed;shot.vy=dy/length*CONFIG.magic.projectileSpeed;
         const nx=shot.x+shot.vx*dt,ny=shot.y+shot.vy*dt;
-        const rx=CONFIG[e.kind].radius*.8+shot.radius,ry=(e.kind==='boss'?42:30)+shot.radius;
+        const rx=enemyConfig(e.kind).radius*.8+shot.radius,ry=(e.kind==='boss'?42:30)+shot.radius;
         const ax=(shot.x-tx)/rx,ay=(shot.y-ty)/ry,bx=(nx-shot.x)/rx,by=(ny-shot.y)/ry;
         const ratio=clamp(-(ax*bx+ay*by)/(bx*bx+by*by||1),0,1);
         const hit=(ax+bx*ratio)**2+(ay+by*ratio)**2<=1;
@@ -308,12 +384,13 @@ const RebornCombat = (() => {
     }
     function input(action,pressed=true) {
       if(action==='clear'){clearInput();state.player.vx=0;state.player.comboBuffered=false;if(attack)attack.buffered=false;return true;}
-      if(!['left','right','attack','dodge','magic','replay','hint'].includes(action))return false;
+      if(!['left','right','attack','dodge','magic','interact','replay','hint'].includes(action))return false;
       if(!pressed){held.delete(action);return true;}
       if(held.has(action))return false;
       held.add(action);
       if(action==='replay') {if(state.mode==='PAUSED')return false;voice(state.challenge?.voiceId||state.tutorial?.voiceId||state.lastVoiceId);return true;}
       if(action==='hint')return assist('translation');
+      if(action==='interact')return interact();
       if(state.mode==='LISTENING_CHALLENGE')return answer(action);
       if(!activeModes.has(state.mode))return false;
       if(action==='left'||action==='right'){if(!attack&&!dodge)state.player.facing=action==='left'?-1:1;return true;}
@@ -359,6 +436,7 @@ const RebornCombat = (() => {
     function tickEnemy(dt) {
       // Paid Sentence Magic gets a brief safe rune-charge, then hostile time resumes.
       const e=state.enemy;if(!e||e.hp<=0||cast?.phase==='charge'||!['COMBAT','PLAYER_HIT'].includes(state.mode))return;
+      if(field?.configs[e.kind]){field.tick(e,state.player,dt,fieldAPI);return;}
       const c=CONFIG[e.kind];e.aiTime+=dt;
       if(e.coreRemaining>0){e.coreRemaining=countdown(e.coreRemaining,dt);if(e.coreRemaining===0){e.coreExposed=false;state.player.weaknessCharge=0;if(state.flowCue?.expressionId==='crystal')finishCue(false);}}
       if(e.ai==='STAGGER'){if(e.aiTime>=enemyData.staggerTime){const r=enemyData.resume;ai(r?.ai||'RECOVERY');e.aiTime=r?.time||0;e.lift=r?.lift||0;enemyData.resume=null;}return;}
@@ -401,8 +479,8 @@ const RebornCombat = (() => {
     }
     function movePlayer(dx,bypass=false) {
       const p=state.player,e=state.enemy;let next=clamp(p.x+dx,CONFIG.minX,CONFIG.maxX);
-      if(!bypass&&e&&e.hp>0&&e.ai!=='ATTACK'){
-        const gap=CONFIG.player.radius+CONFIG[e.kind].radius;
+      if(!bypass&&e&&e.hp>0&&e.ai!=='ATTACK'&&e.lift<100){
+        const gap=CONFIG.player.radius+enemyConfig(e.kind).radius;
         if(p.x<=e.x-gap&&next>e.x-gap)next=e.x-gap;
         else if(p.x>=e.x+gap&&next<e.x+gap)next=e.x+gap;
         else if(Math.abs(p.x-e.x)<gap&&Math.abs(next-e.x)<Math.abs(p.x-e.x))next=p.x;
@@ -412,6 +490,8 @@ const RebornCombat = (() => {
     function tick(dt) {
       if(state.mode==='PAUSED'||state.mode==='INTRO')return;
       state.time+=dt;
+      if(state.mode==='TRANSITION'){state.transition.remaining-=dt;if(state.transition.remaining<=0){const next=state.transition.next;state.transition=null;state.player.hp=state.player.maxHp;state.player.magicCharge=100;state.player.magicCooldown=0;state.player.attackCooldown=0;state.player.dodgeCooldown=0;spawn(next);}return;}
+      if(state.enemy?.hp>0&&state.mode!=='BOSS_INTRO')state.encounterTime+=dt;
       if(flow){
         if(['LISTENING_CHALLENGE','MAGIC_CHALLENGE'].includes(state.mode))state.stats.flow.forcedSeconds+=dt;
         if(state.flowFeedback){state.flowFeedback.remaining-=dt;if(state.flowFeedback.remaining<=0)state.flowFeedback=null;}
@@ -447,7 +527,7 @@ const RebornCombat = (() => {
         }
         if(attack===a&&t>=c.anticipation+c.swing&&p.pose!=='attack_follow')pose('attack_follow',c.follow);
         if(attack===a&&t>=c.cooldown-1e-8){
-          if(!a.hit)comboHits=0;attack=null;p.comboIndex=0;p.comboBuffered=false;
+          if(!a.hit){comboHits=0;state.stats.battlefield.missedAttacks++;}attack=null;p.comboIndex=0;p.comboBuffered=false;
           if(a.buffered&&a.index<3)startStrike(a.index+1);
           else {p.comboNext=a.index<3?a.index+1:1;p.comboWindowRemaining=a.index<3?CONFIG.sword.comboWindow:0;if(a.index===3)comboHits=0;pose('idle');}
         }
@@ -464,12 +544,12 @@ const RebornCombat = (() => {
       while(accumulator>=CONFIG.step-1e-10){accumulator-=CONFIG.step;tick(CONFIG.step);}
       return state;
     }
-    function pause(){if(['PAUSED','INTRO','VICTORY','DEFEAT'].includes(state.mode))return false;pausedMode=state.mode;clearInput();state.player.vx=0;state.player.comboBuffered=false;if(attack)attack.buffered=false;mode('PAUSED');return true;}
+    function pause(){if(['PAUSED','INTRO','VICTORY','DEFEAT','ENCOUNTER_CLEAR'].includes(state.mode))return false;pausedMode=state.mode;clearInput();state.player.vx=0;state.player.comboBuffered=false;if(attack)attack.buffered=false;mode('PAUSED');return true;}
     function resume(){if(state.mode!=='PAUSED'||!pausedMode)return false;const previous=pausedMode;pausedMode=null;clearInput();mode(previous);return true;}
-    function restart(){reset();start(true);return state;}
+    function restart(){const selected=state.selection,route=state.route;reset();if(route==='story')startStory();else if(route==='practice')selectEncounter(selected);else start(true);return state;}
     function mainMenu(){reset();return state;}
     function drainEvents(){const out=events;events=[];return out;}
-    return {state,update,input,start,proceed,pause,resume,restart,mainMenu,answer,assist,heard,drainEvents,audioEvent,learnAgain};
+    return {state,update,input,start,proceed,pause,resume,restart,mainMenu,answer,assist,heard,drainEvents,audioEvent,learnAgain,selectEncounter,startStory,advanceEncounter,retryEncounter};
   }
   return Object.freeze({CONFIG,create});
 })();

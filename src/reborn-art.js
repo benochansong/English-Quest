@@ -374,17 +374,18 @@ const RebornArt = (() => {
     const power=Number.isFinite(state.shakePower)?clamp(state.shakePower)*4.8:Math.min(4.5,(state.shake||0)*15);
     const shake=!reduced&&(state.shake||0)>0?power*intensity*clamp(state.shake/.1):0;
     if(shake)ctx.translate(Math.sin(t*73)*shake,Math.cos(t*59)*shake*.55);
-    background(ctx);
-    atmosphere(ctx,state,t,reduced);
+    const field=typeof RebornFieldArt==='undefined'?null:RebornFieldArt;
+    if(!field?.background(ctx,state,t,reduced)){background(ctx);atmosphere(ctx,state,t,reduced);}
+    field?.objects(ctx,state,t,reduced);
     if(state.stage==='crystal'){
       const bob=reduced?0:Math.sin(t*2)*4;
       glow(ctx,550,345+bob,78,'#b5e8de',.45);
       ellipse(ctx,550,FLOOR+2,38,8,null,'#b8d7be',1);
       local(ctx,550,367+bob,0,()=>{crystal(ctx,0,0,1.25,'#bce5dd');ellipse(ctx,0,-24,32,39,null,'#b3dcd1',.8);});
     }
-    if(state.enemy)telegraph(ctx,state.enemy,t,reduced);
+    if(state.enemy){if(state.enemy.objects)field?.telegraph(ctx,state.enemy);else telegraph(ctx,state.enemy,t,reduced);}
     if(state.player)hero(ctx,state.player,t,reduced);
-    if(state.enemy)slime(ctx,state.enemy,t,reduced);
+    if(state.enemy&&!field?.draw(ctx,state.enemy,t,reduced))slime(ctx,state.enemy,t,reduced);
     magic(ctx,state,t,reduced);
     effects(ctx,state,t,reduced);
     ctx.restore();

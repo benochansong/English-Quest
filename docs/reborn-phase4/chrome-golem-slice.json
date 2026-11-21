@@ -1,0 +1,376 @@
+{
+  "browser": "chrome",
+  "version": "157.0.8103.79",
+  "hash": "a6504c1fb9d11a2bd564c3f5762339d8d79a6bf1ad15ec4a806c93fe0ea3abf4",
+  "offline": true,
+  "errors": [],
+  "requests": [],
+  "result": {
+    "duration": 27.299,
+    "mode": "VICTORY",
+    "kind": "golem",
+    "stats": {
+      "correct": 2,
+      "wrong": 0,
+      "assisted": 0,
+      "independent": 2,
+      "expressions": [
+        "Activate the blue crystal!",
+        "Attack the crystal!",
+        "Watch out!"
+      ],
+      "reviewExpressions": [
+        {
+          "id": "blue",
+          "voiceId": "VO_ACTIVATE_BLUE",
+          "english": "Activate the blue crystal!",
+          "ko": "파란 수정을 활성화하세요!",
+          "reasons": [
+            "expired"
+          ]
+        }
+      ],
+      "goals": [
+        "independent-listening",
+        "crystal-break",
+        "combo-three"
+      ],
+      "combat": {
+        "damageDealt": 170,
+        "damageReceived": 0,
+        "dodges": 0,
+        "successfulDodges": 0,
+        "perfectDodges": 0,
+        "highestCombo": 3,
+        "magicUsed": 0,
+        "magicHits": 0,
+        "weaknessHits": 11,
+        "swordHits": 11
+      },
+      "listening": {
+        "correct": 2,
+        "wrong": 0,
+        "assisted": 0,
+        "independent": 2,
+        "asset": 2,
+        "fallback": 0,
+        "unheard": 0
+      },
+      "magic": {
+        "correct": 0,
+        "wrong": 0,
+        "assisted": 0,
+        "independent": 0
+      },
+      "flow": {
+        "forcedScreens": 3,
+        "forcedSeconds": 5.600000000000068,
+        "sentenceArrangements": 0,
+        "actionOpportunities": 4,
+        "actionSuccesses": 3,
+        "independentActions": 3,
+        "heardExpressions": [
+          "blue",
+          "crystal",
+          "dodge"
+        ],
+        "independentExpressions": [
+          "blue",
+          "crystal"
+        ],
+        "helpExpressions": [],
+        "outcomes": [
+          {
+            "id": "2:1",
+            "key": "blue",
+            "success": true,
+            "heard": true,
+            "assisted": false,
+            "independent": true,
+            "actual": true,
+            "reason": "action"
+          },
+          {
+            "id": "2:3",
+            "key": "crystal",
+            "success": true,
+            "heard": true,
+            "assisted": false,
+            "independent": true,
+            "actual": true,
+            "reason": "action"
+          },
+          {
+            "id": "2:action:6",
+            "key": "blue",
+            "success": false,
+            "heard": true,
+            "assisted": false,
+            "independent": false,
+            "actual": false,
+            "reason": "expired"
+          },
+          {
+            "id": "2:action:7",
+            "key": "crystal",
+            "success": true,
+            "heard": true,
+            "assisted": false,
+            "independent": true,
+            "actual": true,
+            "reason": "action"
+          }
+        ],
+        "audio": {
+          "requested": 10,
+          "playing": 9,
+          "ended": 6,
+          "stopped": 3,
+          "error": 0,
+          "missing": 0,
+          "muted": 0,
+          "blocked": 0,
+          "ignored": 0
+        }
+      },
+      "battlefield": {
+        "missedAttacks": 0,
+        "groundings": 0,
+        "shieldBreaks": 2,
+        "wrongCrystals": 0
+      }
+    },
+    "learning": {
+      "left": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "dodge": {
+        "introduced": true,
+        "stage": "practice",
+        "independent": 1,
+        "streak": 1,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": "independent"
+      },
+      "attack": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "magic": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "fire": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "crystal": {
+        "introduced": true,
+        "stage": "familiar",
+        "independent": 2,
+        "streak": 2,
+        "actual": 2,
+        "misses": 0,
+        "lastResult": "independent"
+      },
+      "wind": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "blue": {
+        "introduced": true,
+        "stage": "practice",
+        "independent": 1,
+        "streak": 0,
+        "actual": 1,
+        "misses": 1,
+        "lastResult": "review"
+      }
+    },
+    "report": {
+      "kind": "golem",
+      "duration": 27.866666666665726,
+      "stats": {
+        "correct": 2,
+        "wrong": 0,
+        "assisted": 0,
+        "independent": 2,
+        "expressions": [
+          "Activate the blue crystal!",
+          "Attack the crystal!",
+          "Watch out!"
+        ],
+        "reviewExpressions": [
+          {
+            "id": "blue",
+            "voiceId": "VO_ACTIVATE_BLUE",
+            "english": "Activate the blue crystal!",
+            "ko": "파란 수정을 활성화하세요!",
+            "reasons": [
+              "expired"
+            ]
+          }
+        ],
+        "goals": [
+          "independent-listening",
+          "crystal-break",
+          "combo-three"
+        ],
+        "combat": {
+          "damageDealt": 170,
+          "damageReceived": 0,
+          "dodges": 0,
+          "successfulDodges": 0,
+          "perfectDodges": 0,
+          "highestCombo": 3,
+          "magicUsed": 0,
+          "magicHits": 0,
+          "weaknessHits": 11,
+          "swordHits": 11
+        },
+        "listening": {
+          "correct": 2,
+          "wrong": 0,
+          "assisted": 0,
+          "independent": 2,
+          "asset": 2,
+          "fallback": 0,
+          "unheard": 0
+        },
+        "magic": {
+          "correct": 0,
+          "wrong": 0,
+          "assisted": 0,
+          "independent": 0
+        },
+        "flow": {
+          "forcedScreens": 3,
+          "forcedSeconds": 5.600000000000068,
+          "sentenceArrangements": 0,
+          "actionOpportunities": 4,
+          "actionSuccesses": 3,
+          "independentActions": 3,
+          "heardExpressions": [
+            "blue",
+            "crystal",
+            "dodge"
+          ],
+          "independentExpressions": [
+            "blue",
+            "crystal"
+          ],
+          "helpExpressions": [],
+          "outcomes": [
+            {
+              "id": "2:1",
+              "key": "blue",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "2:3",
+              "key": "crystal",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "2:action:6",
+              "key": "blue",
+              "success": false,
+              "heard": true,
+              "assisted": false,
+              "independent": false,
+              "actual": false,
+              "reason": "expired"
+            },
+            {
+              "id": "2:action:7",
+              "key": "crystal",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            }
+          ],
+          "audio": {
+            "requested": 9,
+            "playing": 9,
+            "ended": 6,
+            "stopped": 3,
+            "error": 0,
+            "missing": 0,
+            "muted": 0,
+            "blocked": 0,
+            "ignored": 0
+          }
+        },
+        "battlefield": {
+          "missedAttacks": 0,
+          "groundings": 0,
+          "shieldBreaks": 2,
+          "wrongCrystals": 0
+        }
+      }
+    },
+    "patterns": [
+      "fist",
+      "slam",
+      "pulse"
+    ],
+    "states": [
+      "SHIELD_ACTIVATE",
+      "IDLE",
+      "APPROACH",
+      "TELEGRAPH_FIST",
+      "FIST_ATTACK",
+      "RECOVERY",
+      "SHIELD_BREAK",
+      "STAGGER",
+      "TELEGRAPH_SLAM",
+      "TELEGRAPH_PULSE",
+      "CRYSTAL_PULSE"
+    ],
+    "screens": [
+      "2:1",
+      "2:3",
+      "2:5"
+    ]
+  }
+}
