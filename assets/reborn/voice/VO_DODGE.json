@@ -1,0 +1,23 @@
+{
+  "model": "en_US-ljspeech-medium",
+  "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22",
+  "configSha256": "141d612cc0a95ed7efc1ca936b845c2364967f2e9217c5dbfcf69fc4d6c65860",
+  "piperVersion": "1.8.0",
+  "synthesis": "model defaults",
+  "id": "VO_DODGE",
+  "en": "Dodge!",
+  "format": "PCM WAV",
+  "sampleRate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "durationSeconds": 0.638549,
+  "bytes": 28204,
+  "peak": 0.999969,
+  "rms": 0.144735,
+  "activeFraction": 0.694531,
+  "sha256": "c61dd1bf80aa900c62d7ba48a156211a10c5381deed2c3be4792fb069790531b",
+  "status": "Technically verified",
+  "humanListening": "Needs listening review",
+  "path": "assets/reborn/voice/VO_DODGE.wav",
+  "licensing": "Public-domain model and dataset; see REBORN_PIPER_LICENSES.md"
+}

@@ -1,6 +1,6 @@
 # REBORN Phase 2 — voice production script
 
-**0/34 authorized English recordings available.** No paid audio generation performed. These are original production scripts, not delivered human recordings or verified natural synthetic speech. The developer fallback is optional local browser synthesis and is labeled separately.
+**34/34 Piper synthetic English speech files generated and technically verified (2026-11-21).** The exact script below is unchanged. All roles currently use `en_US-ljspeech-medium`; these are not human recordings or three distinct voice actors. No paid generation was used. Pronunciation and naturalness still need human listening approval. See [Piper production report](REBORN_PIPER_VOICE_REPORT.md) and [model licensing](REBORN_PIPER_LICENSES.md). Optional local browser synthesis remains an explicitly selected fallback.
 
 ## Voice identities
 

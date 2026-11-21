@@ -1,0 +1,23 @@
+{
+  "model": "en_US-ljspeech-medium",
+  "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22",
+  "configSha256": "141d612cc0a95ed7efc1ca936b845c2364967f2e9217c5dbfcf69fc4d6c65860",
+  "piperVersion": "1.8.0",
+  "synthesis": "model defaults",
+  "id": "VO_VICTORY",
+  "en": "Victory!",
+  "format": "PCM WAV",
+  "sampleRate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "durationSeconds": 0.673379,
+  "bytes": 29740,
+  "peak": 0.999969,
+  "rms": 0.11032,
+  "activeFraction": 0.648976,
+  "sha256": "3230ebf58b5ffb1132649dfb9aca0778c614ffe062a6c7e96c9bb7d13eb636c8",
+  "status": "Technically verified",
+  "humanListening": "Needs listening review",
+  "path": "assets/reborn/voice/VO_VICTORY.wav",
+  "licensing": "Public-domain model and dataset; see REBORN_PIPER_LICENSES.md"
+}

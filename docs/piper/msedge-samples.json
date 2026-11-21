@@ -1,0 +1,91 @@
+{
+  "browser": "msedge",
+  "version": "157.0.4341.60",
+  "stage": "initial-five",
+  "count": 5,
+  "offline": true,
+  "errors": [],
+  "requests": [],
+  "artifactSha256": "4cce2e69e10891d2922a3efddb731ebf55a4f032d8c49521fca060ee759a3ddb",
+  "artifactBytes": 444591,
+  "results": [
+    {
+      "id": "VO_HELLO",
+      "normal": {
+        "id": "VO_HELLO",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.568889,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_MOVE_LEFT",
+      "normal": {
+        "id": "VO_MOVE_LEFT",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.940408,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_WATCH_OUT",
+      "normal": {
+        "id": "VO_WATCH_OUT",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.754649,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_NEED_FIRE",
+      "normal": {
+        "id": "VO_NEED_FIRE",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.172608,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_ATTACK_CRYSTAL",
+      "normal": {
+        "id": "VO_ATTACK_CRYSTAL",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.160998,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    }
+  ],
+  "controls": "volume/mute/zero/stop/interruption/scene cleanup passed",
+  "savePreserved": true,
+  "humanListening": "Not performed"
+}

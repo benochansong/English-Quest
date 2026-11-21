@@ -1,6 +1,7 @@
 import {readFile, writeFile, rename, rm} from 'node:fs/promises';
 import {resolve, relative, isAbsolute} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {createHash} from 'node:crypto';
 const root=fileURLToPath(new URL('.',import.meta.url));
 const read=name=>readFile(new URL(name,import.meta.url),'utf8');
 const manifest=JSON.parse(await read('REBORN_VOICE_MANIFEST.json'));
@@ -11,6 +12,7 @@ async function embed(path,item){
   try {
     const bytes=await readFile(file);
     if(!item.license?.redistributionAllowed||!item.license?.source||!item.license?.type) throw Error('Audio needs verified redistribution metadata: '+item.id);
+    if(item.voiceModel&&(!item.verification||item.verification.status!=='Technically verified'||item.verification.sha256!==createHash('sha256').update(bytes).digest('hex')))throw Error('Piper asset is unverified or modified: '+item.id);
     const ext=file.split('.').pop().toLowerCase(), mime={mp3:'audio/mpeg',wav:'audio/wav',ogg:'audio/ogg',opus:'audio/ogg',m4a:'audio/mp4'}[ext];
     if(!mime||!bytes.length) throw Error('Invalid audio asset: '+item.id);
     return 'data:'+mime+';base64,'+bytes.toString('base64');

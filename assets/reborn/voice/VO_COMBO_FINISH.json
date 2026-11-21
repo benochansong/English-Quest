@@ -1,0 +1,23 @@
+{
+  "model": "en_US-ljspeech-medium",
+  "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22",
+  "configSha256": "141d612cc0a95ed7efc1ca936b845c2364967f2e9217c5dbfcf69fc4d6c65860",
+  "piperVersion": "1.8.0",
+  "synthesis": "model defaults",
+  "id": "VO_COMBO_FINISH",
+  "en": "Great combo!",
+  "format": "PCM WAV",
+  "sampleRate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "durationSeconds": 0.928798,
+  "bytes": 41004,
+  "peak": 0.999969,
+  "rms": 0.16654,
+  "activeFraction": 0.803857,
+  "sha256": "0b39e221ea3500a508008535305984337f21b7fe5ab131976f7144d3e44cc508",
+  "status": "Technically verified",
+  "humanListening": "Needs listening review",
+  "path": "assets/reborn/voice/VO_COMBO_FINISH.wav",
+  "licensing": "Public-domain model and dataset; see REBORN_PIPER_LICENSES.md"
+}

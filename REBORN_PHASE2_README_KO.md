@@ -1,3 +1,7 @@
+# 최신 오디오 업데이트 — Piper
+
+2026-11-21: 현재 `EnglishQuest_REBORN.html`에는 실제 Piper 영어 합성 음성 **34/34개**가 들어 있습니다. 아래 문서는 음성 제작 전 Phase 2 설명을 포함합니다. 현재 실행·재생성 방법은 [Piper 실행 안내](REBORN_PIPER_SETUP_KO.md), 검증 결과는 [음성 제작 보고서](REBORN_PIPER_VOICE_REPORT.md)를 확인하세요.
+
 # English Quest REBORN Phase 2 — The Battle Awakens
 
 직접 조작하는 숲 전투를 3연속 검격, Perfect Dodge, 보스 수정 약점과 실제 마법 투사체로 확장했습니다. 기존 v0.8과 저장 데이터는 그대로이며, 실험실은 저장소 API를 사용하지 않습니다.

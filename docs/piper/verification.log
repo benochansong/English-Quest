@@ -1,0 +1,51 @@
+VO_HELLO: 0.569s, 25132 bytes (existing)
+VO_MOVE_LEFT: 0.940s, 41516 bytes (existing)
+VO_MOVE_RIGHT: 0.929s, 41004 bytes (existing)
+VO_WATCH_OUT: 0.755s, 33324 bytes (existing)
+VO_DODGE: 0.639s, 28204 bytes (existing)
+VO_ATTACK: 0.534s, 23596 bytes (existing)
+VO_ATTACK_SLIME: 1.289s, 56876 bytes (existing)
+VO_USE_MAGIC: 1.115s, 49196 bytes (existing)
+VO_LISTEN: 1.033s, 45612 bytes (existing)
+VO_GOOD_JOB: 0.685s, 30252 bytes (existing)
+VO_TRY_AGAIN: 0.824s, 36396 bytes (existing)
+VO_YOU_CAN: 1.033s, 45612 bytes (existing)
+VO_NEED_FIRE: 1.173s, 51756 bytes (existing)
+VO_OPEN_GATE: 0.964s, 42540 bytes (existing)
+VO_FOLLOW: 0.697s, 30764 bytes (existing)
+VO_BE_CAREFUL: 0.743s, 32812 bytes (existing)
+VO_SLIME_COMING: 1.138s, 50220 bytes (existing)
+VO_ENEMY_WEAK: 1.416s, 62508 bytes (existing)
+VO_ONCE_MORE: 1.080s, 47660 bytes (existing)
+VO_VICTORY: 0.673s, 29740 bytes (existing)
+VO_READY: 0.882s, 38956 bytes (existing)
+VO_KEEP_DISTANCE: 1.196s, 52780 bytes (existing)
+VO_WAIT: 1.149s, 50732 bytes (existing)
+VO_CHARGE: 1.289s, 56876 bytes (existing)
+VO_BOSS: 1.347s, 59436 bytes (existing)
+VO_JUMP: 0.917s, 40492 bytes (existing)
+VO_THREE: 1.126s, 49708 bytes (existing)
+VO_CRYSTAL: 1.440s, 63532 bytes (existing)
+VO_TAKE_BREAK: 0.789s, 34860 bytes (existing)
+VO_RETURN: 1.115s, 49196 bytes (existing)
+VO_ATTACK_CRYSTAL: 1.161s, 51244 bytes (existing)
+VO_CORE_EXPOSED: 1.683s, 74284 bytes (existing)
+VO_PERFECT_DODGE: 1.115s, 49196 bytes (existing)
+VO_COMBO_FINISH: 0.929s, 41004 bytes (existing)
+{
+  "required": 34,
+  "selected": 34,
+  "successful": 34,
+  "failed": [],
+  "totalVerified": 34,
+  "missing": [],
+  "totalBytes": 1517016,
+  "model": "en_US-ljspeech-medium",
+  "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22",
+  "configSha256": "141d612cc0a95ed7efc1ca936b845c2364967f2e9217c5dbfcf69fc4d6c65860",
+  "piperVersion": "1.8.0",
+  "synthesis": "model defaults",
+  "modelBytes": 63531379,
+  "localOnly": false,
+  "manualListening": "Needs listening review"
+}

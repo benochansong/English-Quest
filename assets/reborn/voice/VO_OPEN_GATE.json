@@ -1,0 +1,23 @@
+{
+  "model": "en_US-ljspeech-medium",
+  "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22",
+  "configSha256": "141d612cc0a95ed7efc1ca936b845c2364967f2e9217c5dbfcf69fc4d6c65860",
+  "piperVersion": "1.8.0",
+  "synthesis": "model defaults",
+  "id": "VO_OPEN_GATE",
+  "en": "Open the gate.",
+  "format": "PCM WAV",
+  "sampleRate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "durationSeconds": 0.963628,
+  "bytes": 42540,
+  "peak": 0.999969,
+  "rms": 0.155863,
+  "activeFraction": 0.782944,
+  "sha256": "fe0956b11e51848f8490b54870f5c605892890cdb39a38cfb949aa61cc443fb6",
+  "status": "Technically verified",
+  "humanListening": "Needs listening review",
+  "path": "assets/reborn/voice/VO_OPEN_GATE.wav",
+  "licensing": "Public-domain model and dataset; see REBORN_PIPER_LICENSES.md"
+}
