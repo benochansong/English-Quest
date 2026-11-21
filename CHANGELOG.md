@@ -1,3 +1,10 @@
+# REBORN Phase 6 — One World, One Adventure (2026-11-21)
+
+- Add a separate offline integrated artifact connecting the unchanged v0.8 campaign to one Rowan/Green Slime action training quest and back to the same forest map.
+- Add a private-run combat bridge, isolated versioned save envelope, explicit backup/import and validated English-action evidence without changing Academy mastery or repeating economy rewards.
+- Reuse 36 existing Piper clips; isolate combat input/styles/RAF in a temporary frame, suspend campaign audio on entry and fully tear down combat on return.
+- Add storage/authority regression tests, actual-input Chrome/Edge integration scenarios and honest manual playtest documentation. Preserve both original HTML artifacts byte-for-byte.
+
 # REBORN Phase 5 — The Art of Game Feel (2026-11-21)
 
 - Preserve Phase 4 three-encounter journey and original Champion; retain v0.8 and archived releases.

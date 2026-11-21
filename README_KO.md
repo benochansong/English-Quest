@@ -1,3 +1,7 @@
+# REBORN Phase 6 — 하나의 모험
+
+`EnglishQuest_REBORN_INTEGRATED.html`을 Chrome 또는 Edge에서 여세요. 기존 캠페인의 숲 지도에서 **로완과 대화 → 훈련 부탁 받기 → 실시간 전투 훈련**으로 들어가고, 승리 후 위의 복귀 버튼으로 같은 지도에 돌아옵니다. 원래 두 게임 파일과 저장은 보존하며, 통합판은 별도 저장과 명시적 백업 가져오기를 사용합니다. [실행 안내](REBORN_PHASE6_README_KO.md) · [구조](REBORN_PHASE6_ARCHITECTURE.md) · [검증 보고서](REBORN_PHASE6_TEST_REPORT.md) · [사람 플레이 양식](REBORN_PHASE6_PLAYTEST.md).
+
 # REBORN Phase 5 — 검과 목소리
 
 `EnglishQuest_REBORN.html`을 Chrome 또는 Edge에서 여세요. 검 입력 예약·접촉 자세·정확한 회피 뒤 반격, 적별 피격, 36개 영어 음량 균형과 경고 믹싱을 개선했습니다. [실행·조작](REBORN_PHASE5_README_KO.md) · [전후 측정](REBORN_PHASE5_GAMEPLAY_REVIEW.md) · [검증 보고서](REBORN_PHASE5_TEST_REPORT.md) · [사람 평가 양식](REBORN_PHASE5_HUMAN_PLAYTEST.md). 사람 재미·발음 평가는 아직 미실시입니다.
