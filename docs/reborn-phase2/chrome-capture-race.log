@@ -1,0 +1,24 @@
+bundle 156873 45397F8E5513EA3BA30122543087AF94281E981172DCBBA179FB3817D82D437F
+chrome 157.0.8103.79
+layout intro five viewports passed
+tutorial, real movement/boundary/range, pause, focus release, restart passed
+actual landing contact within dodge iframe earned Perfect Dodge
+layout listening five viewports passed
+sentence accepted → resource consumed → visible charge before projectile damage
+sentence accepted → resource consumed → visible charge before projectile damage
+layout victory five viewports passed
+STATE {"mode":"VICTORY","stage":"complete","time":43.6833333333315,"session":2,"player":{"x":222.69166666666655,"y":425,"vx":0,"runPhase":3.058898936493521,"facing":1,"hp":100,"maxHp":100,"pose":"victory","poseTime":1.5833333333333302,"poseDuration":0,"attackCooldown":0.3149999999999998,"dodgeCooldown":0,"invulnerable":0,"magicCharge":80,"magicCooldown":2.941666666666472,"comboIndex":0,"comboNext":1,"comboWindowRemaining":0,"comboBuffered":false,"perfectDodge":0,"weaknessCharge":0},"enemy":{"id":"slime-champion","kind":"boss","x":336.03472222222234,"y":425,"lift":0,"hp":0,"maxHp":160,"ai":"DEFEATED","aiTime":1.5833333333333302,"pattern":"crystal_charge","phase":2,"facing":-1,"telegraphRemaining":0.8273333333333334,"attackTargetX":162.69166666666655,"attackDuration":0.4524,"attackProgress":0,"attackRadius":58,"coreExposed":false,"coreRemaining":0,"attackSerial":8},"effects":[],"projectiles":[],"cast":null,"bossIntro":null,"challenge":null,"tutorial":null,"magicUnlocked":true,"awaitingProceed":false,"lastVoiceId":"VO_VICTORY","feedback":"","hitStop":0,"shake":0,"shakePower":0,"stats":{"correct":8,"wrong":3,"assisted":8,"independent":0,"expressions":["Move left!","Watch out!","I need fire.","Attack the crystal!","Attack the slime!","Use your magic!"],"reviewExpressions":[{"id":"left","voiceId":"VO_MOVE_LEFT","english":"Move left!","ko":"왼쪽으로 이동해요!","reasons":["wrong","hint"]},{"id":"dodge","voiceId":"VO_WATCH_OUT","english":"Watch out!","ko":"조심해요!","reasons":["hint"]},{"id":"fire","voiceId":"VO_NEED_FIRE","english":"I need fire.","ko":"나는 불이 필요해요.","reasons":["hint","wrong","text"]},{"id":"crystal","voiceId":"VO_ATTACK_CRYSTAL","english":"Attack the crystal!","ko":"수정을 공격해요!","reasons":["hint"]},{"id":"attack","voiceId":"VO_ATTACK_SLIME","english":"Attack the slime!","ko":"슬라임을 공격해요!","reasons":["hint"]},{"id":"magic","voiceId":"VO_USE_MAGIC","english":"Use your magic!","ko":"마법을 사용해요!","reasons":["hint"]}],"goals":["perfect-dodge","combo-three","boss-dodge","crystal-break","forest-clear"],"combat":{"damageDealt":230,"damageReceived":7,"dodges":9,"successfulDodges":3,"perfectDodges":3,"highestCombo":3,"magicUsed":2,"magicHits":2,"weaknessHits":1,"swordHits":17},"listening":{"correct":5,"wrong":2,"assisted":5,"independent":0,"asset":0,"fallback":0,"unheard":7},"magic":{"correct":3,"wrong":1,"assisted":3,"independent":0}},"objective":"숲의 첫 시험 완료! 배운 표현을 다시 듣고 새로 도전해 보세요.","reward":{"title":"숲의 첫빛","description":"이번 실험실 도전의 기념 휘장 — 기존 게임 보상과 별개예요.","expressions":["Move left!","Watch out!","I need fire.","Attack the crystal!","Attack the slime!","Use your magic!"],"goals":["perfect-dodge","combo-three","boss-dodge","crystal-break","forest-clear"]}}
+ERRORS []
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert.ok((await p.locator('.dialog-card').textContent()).includes('듣고 행동하기: 정답 5회 · 다시 연습 1회'))
+
+    at playthrough (E:\Documents\ChatGPT\English Quest\tests\reborn-browser.cjs:109:14)
+    at async main (E:\Documents\ChatGPT\English Quest\tests\reborn-browser.cjs:250:83) {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}

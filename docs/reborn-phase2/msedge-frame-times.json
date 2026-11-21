@@ -1,0 +1,21 @@
+{
+  "scope": "Headless file:// automated combat with screenshot/input overhead; descriptive sample, not a hardware FPS certification",
+  "browser": "msedge",
+  "samples": 8033,
+  "frameMs": {
+    "p50": 4.19999999999709,
+    "p95": 4.399999999997817,
+    "max": 41.599999999998545,
+    "over25": 2,
+    "over50": 0,
+    "over100": 0
+  },
+  "callbackMs": {
+    "p50": 0.7000000001862645,
+    "p95": 1.2000000001862645,
+    "max": 9.200000000186265
+  },
+  "maxEffects": 8,
+  "maxProjectiles": 1,
+  "maxAudioNodes": 14
+}

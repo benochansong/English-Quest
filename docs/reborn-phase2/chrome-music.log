@@ -1,0 +1,5 @@
+bundle 156873 45397F8E5513EA3BA30122543087AF94281E981172DCBBA179FB3817D82D437F
+chrome 157.0.8103.79
+native three-state procedural music render (not speaker listening) {"contexts":1,"scenes":[{"activeNodes":2,"nodeLimit":96,"musicScene":"exploration","phase":1,"ducked":false,"contextCreated":true,"time":0},{"activeNodes":2,"nodeLimit":96,"musicScene":"combat","phase":1,"ducked":false,"contextCreated":true,"time":0.4005442176870748},{"activeNodes":4,"nodeLimit":96,"musicScene":"boss","phase":2,"ducked":false,"contextCreated":true,"time":1.1000453514739228}],"peak":0.05488533526659012,"rms":{"exploration":0.013420085770194077,"combat":0.004644732888959592,"boss":0.005805819547546988}}
+all pre-existing isolated storage bytes unchanged; no uncaught errors or HTTP(S) requests
+PASS chrome original v08 and archived Phase1 HTML unchanged

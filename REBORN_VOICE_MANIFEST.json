@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "release": "REBORN Phase 1",
+  "version": 2,
+  "release": "REBORN Phase 2",
   "status": "Awaiting authorized voice assets",
   "primary": "licensed bundled audio",
   "fallback": "Optional local browser synthesis, explicitly enabled by player; not a recording",
@@ -9,8 +9,8 @@
       "id": "VO_HELLO",
       "en": "Hello!",
       "ko": "안녕!",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_HELLO.mp3",
       "usage": "입장 안내",
       "speedOptions": [
@@ -24,14 +24,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_HELLO.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_MOVE_LEFT",
       "en": "Move left!",
       "ko": "왼쪽으로 움직여!",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_MOVE_LEFT.mp3",
       "usage": "듣고 행동하기 · 이동",
       "speedOptions": [
@@ -45,14 +57,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_MOVE_LEFT.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_MOVE_RIGHT",
       "en": "Move right!",
       "ko": "오른쪽으로 움직여!",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_MOVE_RIGHT.mp3",
       "usage": "이동 연습",
       "speedOptions": [
@@ -66,14 +90,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_MOVE_RIGHT.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_WATCH_OUT",
       "en": "Watch out!",
       "ko": "조심해!",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_WATCH_OUT.mp3",
       "usage": "듣고 행동하기 · 회피",
       "speedOptions": [
@@ -87,14 +123,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_WATCH_OUT.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_DODGE",
       "en": "Dodge!",
       "ko": "피해!",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_DODGE.mp3",
       "usage": "회피 연습",
       "speedOptions": [
@@ -108,14 +156,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_DODGE.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_ATTACK",
       "en": "Attack!",
       "ko": "공격해!",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_ATTACK.mp3",
       "usage": "검 조작 연습",
       "speedOptions": [
@@ -129,14 +189,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_ATTACK.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_ATTACK_SLIME",
       "en": "Attack the slime!",
       "ko": "슬라임을 공격해!",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_ATTACK_SLIME.mp3",
       "usage": "듣고 행동하기 · 검",
       "speedOptions": [
@@ -150,14 +222,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_ATTACK_SLIME.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_USE_MAGIC",
       "en": "Use your magic!",
       "ko": "마법을 사용해!",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_USE_MAGIC.mp3",
       "usage": "듣고 행동하기 · 마법",
       "speedOptions": [
@@ -171,14 +255,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_USE_MAGIC.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_LISTEN",
       "en": "Listen carefully.",
       "ko": "잘 들어 봐.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_LISTEN.mp3",
       "usage": "듣기 안내",
       "speedOptions": [
@@ -192,14 +288,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_LISTEN.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_GOOD_JOB",
       "en": "Good job!",
       "ko": "잘했어!",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Combat Announcer",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_GOOD_JOB.mp3",
       "usage": "정답 피드백",
       "speedOptions": [
@@ -213,14 +321,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ANNOUNCER",
+      "normalSpeedAsset": "assets/reborn/voice/VO_GOOD_JOB.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_TRY_AGAIN",
       "en": "Try again.",
       "ko": "다시 해 봐.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_TRY_AGAIN.mp3",
       "usage": "오답 피드백",
       "speedOptions": [
@@ -234,14 +354,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_TRY_AGAIN.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_YOU_CAN",
       "en": "You can do it.",
       "ko": "넌 할 수 있어.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_YOU_CAN.mp3",
       "usage": "재도전 안내",
       "speedOptions": [
@@ -255,14 +387,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_YOU_CAN.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_NEED_FIRE",
       "en": "I need fire.",
       "ko": "나는 불이 필요해.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Magical Crystal",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_NEED_FIRE.mp3",
       "usage": "Sentence Magic",
       "speedOptions": [
@@ -276,14 +420,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "CRYSTAL",
+      "normalSpeedAsset": "assets/reborn/voice/VO_NEED_FIRE.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_OPEN_GATE",
       "en": "Open the gate.",
       "ko": "문을 열어.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Magical Crystal",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_OPEN_GATE.mp3",
       "usage": "승리 뒤 출구 표현 복습",
       "speedOptions": [
@@ -297,14 +453,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "CRYSTAL",
+      "normalSpeedAsset": "assets/reborn/voice/VO_OPEN_GATE.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_FOLLOW",
       "en": "Follow me.",
       "ko": "나를 따라와.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_FOLLOW.mp3",
       "usage": "숲 입장",
       "speedOptions": [
@@ -318,14 +486,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_FOLLOW.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_BE_CAREFUL",
       "en": "Be careful.",
       "ko": "조심해.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_BE_CAREFUL.mp3",
       "usage": "보스 예고",
       "speedOptions": [
@@ -339,14 +519,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_BE_CAREFUL.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_SLIME_COMING",
       "en": "The slime is coming.",
       "ko": "슬라임이 오고 있어.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_SLIME_COMING.mp3",
       "usage": "첫 전투 진입",
       "speedOptions": [
@@ -360,14 +552,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_SLIME_COMING.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_ENEMY_WEAK",
       "en": "The enemy is weak.",
       "ko": "적이 약해졌어.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_ENEMY_WEAK.mp3",
       "usage": "듣기 보상 취약 시간",
       "speedOptions": [
@@ -381,14 +585,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_ENEMY_WEAK.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_ONCE_MORE",
       "en": "One more time.",
       "ko": "한 번 더.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_ONCE_MORE.mp3",
       "usage": "음성 반복 연습",
       "speedOptions": [
@@ -402,14 +618,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_ONCE_MORE.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_VICTORY",
       "en": "Victory!",
       "ko": "승리!",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Combat Announcer",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_VICTORY.mp3",
       "usage": "보스 격파",
       "speedOptions": [
@@ -423,14 +651,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ANNOUNCER",
+      "normalSpeedAsset": "assets/reborn/voice/VO_VICTORY.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_READY",
       "en": "Are you ready?",
       "ko": "준비됐어?",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_READY.mp3",
       "usage": "튜토리얼 시작",
       "speedOptions": [
@@ -444,14 +684,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_READY.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_KEEP_DISTANCE",
       "en": "Keep your distance.",
       "ko": "거리를 유지해.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_KEEP_DISTANCE.mp3",
       "usage": "적 공격 예고 복습",
       "speedOptions": [
@@ -465,14 +717,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_KEEP_DISTANCE.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_WAIT",
       "en": "Wait for an opening.",
       "ko": "빈틈을 기다려.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_WAIT.mp3",
       "usage": "적 회복 시간 공략 복습",
       "speedOptions": [
@@ -486,14 +750,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_WAIT.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_CHARGE",
       "en": "Your magic is ready.",
       "ko": "마법이 준비됐어.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Magical Crystal",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_CHARGE.mp3",
       "usage": "수정 발견",
       "speedOptions": [
@@ -507,14 +783,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "CRYSTAL",
+      "normalSpeedAsset": "assets/reborn/voice/VO_CHARGE.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_BOSS",
       "en": "The champion is here.",
       "ko": "챔피언이 나타났어.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Combat Announcer",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_BOSS.mp3",
       "usage": "보스 등장",
       "speedOptions": [
@@ -528,14 +816,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ANNOUNCER",
+      "normalSpeedAsset": "assets/reborn/voice/VO_BOSS.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_JUMP",
       "en": "A heavy jump!",
       "ko": "강한 점프야!",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Combat Announcer",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_JUMP.mp3",
       "usage": "보스 패턴 복습",
       "speedOptions": [
@@ -549,14 +849,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ANNOUNCER",
+      "normalSpeedAsset": "assets/reborn/voice/VO_JUMP.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_THREE",
       "en": "Three bounces!",
       "ko": "세 번 튀어 오른다!",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Combat Announcer",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_THREE.mp3",
       "usage": "보스 패턴 복습",
       "speedOptions": [
@@ -570,14 +882,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ANNOUNCER",
+      "normalSpeedAsset": "assets/reborn/voice/VO_THREE.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_CRYSTAL",
       "en": "The crystal is charging.",
       "ko": "수정이 힘을 모으고 있어.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Combat Announcer",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_CRYSTAL.mp3",
       "usage": "보스 패턴 복습",
       "speedOptions": [
@@ -591,14 +915,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ANNOUNCER",
+      "normalSpeedAsset": "assets/reborn/voice/VO_CRYSTAL.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_TAKE_BREAK",
       "en": "Take a break.",
       "ko": "잠깐 쉬어.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_TAKE_BREAK.mp3",
       "usage": "일시정지",
       "speedOptions": [
@@ -612,14 +948,26 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_TAKE_BREAK.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     },
     {
       "id": "VO_RETURN",
       "en": "Let us try again.",
       "ko": "우리 다시 해 보자.",
-      "voiceCharacter": "Mira — encouraging adult companion",
-      "accent": "General American (production target; not yet delivered)",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
       "path": "assets/reborn/voice/VO_RETURN.mp3",
       "usage": "재도전",
       "speedOptions": [
@@ -633,7 +981,168 @@
         "performerOrModel": null,
         "redistributionAllowed": false,
         "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "normalSpeedAsset": "assets/reborn/voice/VO_RETURN.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      }
+    },
+    {
+      "id": "VO_ATTACK_CRYSTAL",
+      "en": "Attack the crystal!",
+      "ko": "수정을 공격해!",
+      "usage": "보스 입장 학습과 노출된 수정 약점 듣기",
+      "path": "assets/reborn/voice/VO_ATTACK_CRYSTAL.mp3",
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "available": false,
+      "license": {
+        "type": null,
+        "source": null,
+        "performerOrModel": null,
+        "redistributionAllowed": false,
+        "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
+      "normalSpeedAsset": "assets/reborn/voice/VO_ATTACK_CRYSTAL.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      }
+    },
+    {
+      "id": "VO_CORE_EXPOSED",
+      "en": "The crystal is exposed.",
+      "ko": "수정이 드러났어.",
+      "usage": "수정 약점 노출 복습",
+      "path": "assets/reborn/voice/VO_CORE_EXPOSED.mp3",
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "available": false,
+      "license": {
+        "type": null,
+        "source": null,
+        "performerOrModel": null,
+        "redistributionAllowed": false,
+        "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ROWAN",
+      "voiceCharacter": "Rowan — The Guide",
+      "accent": "General American (target, not delivered)",
+      "normalSpeedAsset": "assets/reborn/voice/VO_CORE_EXPOSED.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      }
+    },
+    {
+      "id": "VO_PERFECT_DODGE",
+      "en": "Perfect dodge!",
+      "ko": "완벽하게 피했어!",
+      "usage": "정확한 회피 피드백·복습",
+      "path": "assets/reborn/voice/VO_PERFECT_DODGE.mp3",
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "available": false,
+      "license": {
+        "type": null,
+        "source": null,
+        "performerOrModel": null,
+        "redistributionAllowed": false,
+        "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ANNOUNCER",
+      "voiceCharacter": "Combat Announcer",
+      "accent": "General American (target, not delivered)",
+      "normalSpeedAsset": "assets/reborn/voice/VO_PERFECT_DODGE.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      }
+    },
+    {
+      "id": "VO_COMBO_FINISH",
+      "en": "Great combo!",
+      "ko": "멋진 연속 공격이야!",
+      "usage": "3연속 검 공격 복습",
+      "path": "assets/reborn/voice/VO_COMBO_FINISH.mp3",
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "available": false,
+      "license": {
+        "type": null,
+        "source": null,
+        "performerOrModel": null,
+        "redistributionAllowed": false,
+        "status": "missing; no recording or paid generation performed"
+      },
+      "speaker": "ANNOUNCER",
+      "voiceCharacter": "Combat Announcer",
+      "accent": "General American (target, not delivered)",
+      "normalSpeedAsset": "assets/reborn/voice/VO_COMBO_FINISH.mp3",
+      "slowSpeedAsset": null,
+      "durationSeconds": null,
+      "audioSource": null,
+      "qualityReview": {
+        "status": "pending — asset missing",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
       }
     }
-  ]
+  ],
+  "speakers": {
+    "ROWAN": {
+      "name": "Rowan — The Guide",
+      "direction": "Warm, calm, patient, wise; clear conversational General American.",
+      "status": "production target; no recordings supplied"
+    },
+    "ANNOUNCER": {
+      "name": "Combat Announcer",
+      "direction": "Energetic, brief and expressive; clear stress without shouting.",
+      "status": "production target; no recordings supplied"
+    },
+    "CRYSTAL": {
+      "name": "Magical Crystal",
+      "direction": "Soft, mysterious and highly intelligible; optional subtle reverberation only after intelligibility review.",
+      "status": "production target; no recordings supplied"
+    }
+  }
 }

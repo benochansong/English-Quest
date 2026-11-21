@@ -1,0 +1,293 @@
+{
+  "contexts": 1,
+  "scenes": [
+    {
+      "activeNodes": 2,
+      "nodeLimit": 96,
+      "musicScene": "exploration",
+      "phase": 1,
+      "ducked": false,
+      "contextCreated": true,
+      "time": 0
+    },
+    {
+      "activeNodes": 2,
+      "nodeLimit": 96,
+      "musicScene": "combat",
+      "phase": 1,
+      "ducked": false,
+      "contextCreated": true,
+      "time": 0.4005442176870748
+    },
+    {
+      "activeNodes": 4,
+      "nodeLimit": 96,
+      "musicScene": "boss",
+      "phase": 2,
+      "ducked": false,
+      "contextCreated": true,
+      "time": 1.1000453514739228
+    }
+  ],
+  "gainEvents": [
+    {
+      "index": 0,
+      "value": 1,
+      "time": 0,
+      "constant": 0.025
+    },
+    {
+      "index": 1,
+      "value": 1,
+      "time": 0,
+      "constant": 0.025
+    },
+    {
+      "index": 3,
+      "value": 1,
+      "time": 0,
+      "constant": 0.025
+    },
+    {
+      "index": 2,
+      "value": 1,
+      "time": 0,
+      "constant": 0.08
+    },
+    {
+      "index": 4,
+      "value": 1,
+      "time": 0,
+      "constant": 0.25
+    },
+    {
+      "index": 5,
+      "value": 0,
+      "time": 0,
+      "constant": 0.25
+    },
+    {
+      "index": 6,
+      "value": 0,
+      "time": 0,
+      "constant": 0.25
+    },
+    {
+      "index": 0,
+      "value": 1,
+      "time": 0,
+      "constant": 0.025
+    },
+    {
+      "index": 1,
+      "value": 1,
+      "time": 0,
+      "constant": 0.025
+    },
+    {
+      "index": 3,
+      "value": 1,
+      "time": 0,
+      "constant": 0.025
+    },
+    {
+      "index": 2,
+      "value": 1,
+      "time": 0,
+      "constant": 0.08
+    },
+    {
+      "index": 4,
+      "value": 1,
+      "time": 0,
+      "constant": 0.25
+    },
+    {
+      "index": 5,
+      "value": 0,
+      "time": 0,
+      "constant": 0.25
+    },
+    {
+      "index": 6,
+      "value": 0,
+      "time": 0,
+      "constant": 0.25
+    },
+    {
+      "index": 0,
+      "value": 1,
+      "time": 0.4005442176870748,
+      "constant": 0.025
+    },
+    {
+      "index": 1,
+      "value": 1,
+      "time": 0.4005442176870748,
+      "constant": 0.025
+    },
+    {
+      "index": 3,
+      "value": 1,
+      "time": 0.4005442176870748,
+      "constant": 0.025
+    },
+    {
+      "index": 2,
+      "value": 1,
+      "time": 0.4005442176870748,
+      "constant": 0.08
+    },
+    {
+      "index": 4,
+      "value": 0,
+      "time": 0.4005442176870748,
+      "constant": 0.25
+    },
+    {
+      "index": 5,
+      "value": 1,
+      "time": 0.4005442176870748,
+      "constant": 0.25
+    },
+    {
+      "index": 6,
+      "value": 0,
+      "time": 0.4005442176870748,
+      "constant": 0.25
+    },
+    {
+      "index": 0,
+      "value": 1,
+      "time": 0.6008163265306122,
+      "constant": 0.025
+    },
+    {
+      "index": 1,
+      "value": 0.35,
+      "time": 0.6008163265306122,
+      "constant": 0.025
+    },
+    {
+      "index": 3,
+      "value": 0.45,
+      "time": 0.6008163265306122,
+      "constant": 0.025
+    },
+    {
+      "index": 2,
+      "value": 0.16,
+      "time": 0.6008163265306122,
+      "constant": 0.08
+    },
+    {
+      "index": 4,
+      "value": 0,
+      "time": 0.6008163265306122,
+      "constant": 0.25
+    },
+    {
+      "index": 5,
+      "value": 1,
+      "time": 0.6008163265306122,
+      "constant": 0.25
+    },
+    {
+      "index": 6,
+      "value": 0,
+      "time": 0.6008163265306122,
+      "constant": 0.25
+    },
+    {
+      "index": 0,
+      "value": 1,
+      "time": 0.9026757369614512,
+      "constant": 0.025
+    },
+    {
+      "index": 1,
+      "value": 1,
+      "time": 0.9026757369614512,
+      "constant": 0.025
+    },
+    {
+      "index": 3,
+      "value": 1,
+      "time": 0.9026757369614512,
+      "constant": 0.025
+    },
+    {
+      "index": 2,
+      "value": 1,
+      "time": 0.9026757369614512,
+      "constant": 0.08
+    },
+    {
+      "index": 4,
+      "value": 0,
+      "time": 0.9026757369614512,
+      "constant": 0.25
+    },
+    {
+      "index": 5,
+      "value": 1,
+      "time": 0.9026757369614512,
+      "constant": 0.25
+    },
+    {
+      "index": 6,
+      "value": 0,
+      "time": 0.9026757369614512,
+      "constant": 0.25
+    },
+    {
+      "index": 0,
+      "value": 1,
+      "time": 1.1000453514739228,
+      "constant": 0.025
+    },
+    {
+      "index": 1,
+      "value": 1,
+      "time": 1.1000453514739228,
+      "constant": 0.025
+    },
+    {
+      "index": 3,
+      "value": 1,
+      "time": 1.1000453514739228,
+      "constant": 0.025
+    },
+    {
+      "index": 2,
+      "value": 1,
+      "time": 1.1000453514739228,
+      "constant": 0.08
+    },
+    {
+      "index": 4,
+      "value": 0,
+      "time": 1.1000453514739228,
+      "constant": 0.25
+    },
+    {
+      "index": 5,
+      "value": 0,
+      "time": 1.1000453514739228,
+      "constant": 0.25
+    },
+    {
+      "index": 6,
+      "value": 1,
+      "time": 1.1000453514739228,
+      "constant": 0.25
+    }
+  ],
+  "peak": 0.05488533526659012,
+  "finite": true,
+  "rms": {
+    "exploration": 0.013420085770194077,
+    "combat": 0.004644732888959592,
+    "boss": 0.005805819547546988
+  }
+}

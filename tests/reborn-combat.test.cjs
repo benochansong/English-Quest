@@ -5,6 +5,9 @@ const path=require('node:path');
 const vm=require('node:vm');
 const source=['reborn-learning.js','reborn-combat.js'].map(f=>fs.readFileSync(path.join(__dirname,'../src',f),'utf8')).join('\n');
 const plain=x=>JSON.parse(JSON.stringify(x));
+// Phase 2 intentionally adds acceleration, contact hit-stop, combo tiers,
+// a taught core opening, a skippable boss card and delayed projectile damage.
+// Phase 1 assertions below retain their original invariants with those timing changes.
 function setup(extra={}){const api=vm.runInNewContext(source+'\n;({combat:RebornCombat,learning:RebornLearning})',extra);return {...api,g:api.combat.create()};}
 function advance(g,seconds,fps=60){for(let i=0;i<Math.round(seconds*fps);i++)g.update(1/fps);}
 function tap(g,key){const r=g.input(key,true);g.input(key,false);return r;}
@@ -21,45 +24,43 @@ function slimeChallenge(){const c=fight();strikeAt(c.g);advance(c.g,.3);strikeAt
 function completeSlime(g){
   for(let i=0;i<20&&g.state.stage==='slime';i++){
     if(g.state.challenge){solve(g);continue;}
-    advance(g,.4);strikeAt(g);
+    advance(g,.6);if(g.state.challenge)continue;strikeAt(g);
   }
   assert.equal(g.state.stage,'crystal');
 }
-function boss(){const c=fight();completeSlime(c.g);c.g.proceed();solve(c.g);assert.equal(c.g.state.stage,'boss');return c;}
-function wait(g,predicate,max=30){for(let i=0;i<max*120;i++){if(predicate())return;g.update(1/120);}assert.fail('condition not reached: '+g.state.mode+'/'+g.state.enemy?.ai);}
+function boss(){const c=fight();completeSlime(c.g);c.g.proceed();solve(c.g);assert.equal(c.g.state.stage,'boss');assert.equal(c.g.state.mode,'BOSS_INTRO');c.g.proceed();return c;}
+function wait(g,predicate,max=30){for(let i=0;i<max*120;i++){if(predicate())return;if(g.state.challenge)solve(g);g.update(1/120);}assert.fail('condition not reached: '+g.state.mode+'/'+g.state.enemy?.ai);}
 
 test('Initial isolated state is valid without any DOM, storage, timer or audio globals',()=>{
   let accessed=0;const {g}=setup({get localStorage(){accessed++;throw Error('campaign storage forbidden');}});
   assert.equal(accessed,0);assert.equal(g.state.mode,'INTRO');assert.equal(g.state.player.hp,100);assert.equal(g.state.enemy,null);
   const before=plain(g.state);g.update(5);assert.deepEqual(plain(g.state),before);assert.equal(tap(g,'attack'),false);
 });
-test('Short tutorial teaches all five phrases, supports skip, and preserves challenge encounters',()=>{
+test('Short tutorial and boss introduction teach six phrases, support skip, and preserve challenge encounters',()=>{
   const {g,learning}=setup();assert.ok(g.start());assert.equal(g.state.mode,'TUTORIAL');assert.equal(g.state.tutorial.index,0);
   g.proceed();g.proceed();assert.equal(g.state.tutorial.index,2);g.proceed();assert.equal(g.state.mode,'EXPLORATION');assert.equal(g.state.awaitingProceed,false);
-  assert.equal(Object.keys(learning.expressions).length,5);
+  assert.equal(Object.keys(learning.expressions).length,6);assert.equal(learning.bossLesson.voiceId,'VO_ATTACK_CRYSTAL');
   const other=setup().g;other.start();assert.ok(other.start(true));assert.equal(other.state.mode,'EXPLORATION');other.proceed();assert.equal(other.state.enemy.hp,70);
 });
 test('Movement is responsive and equivalent at 30, 60 and 120 updates per second',()=>{
-  const positions=[30,60,120].map(fps=>{const {g}=fight();g.input('left');advance(g,.4,fps);g.input('left',false);const x=g.state.player.x;advance(g,.2,fps);assert.equal(g.state.player.x,x);return x;});
-  assert.ok(Math.abs(positions[0]-82)<1e-8);assert.deepEqual(positions,[positions[0],positions[0],positions[0]]);
+  const positions=[30,60,120].map(fps=>{const {g}=fight();g.input('left');advance(g,.4,fps);g.input('left',false);const x=g.state.player.x;advance(g,.2,fps);assert.ok(g.state.player.x<x);assert.equal(g.state.player.vx,0);const stopped=g.state.player.x;advance(g,.2,fps);assert.equal(g.state.player.x,stopped);return stopped;});
+  assert.ok(positions[0]>82&&positions[0]<100);assert.deepEqual(positions,[positions[0],positions[0],positions[0]]);
 });
 test('Movement boundaries and opposing held inputs are enforced',()=>{
   const {g}=fight();g.input('left');g.input('right');advance(g,.2);assert.equal(g.state.player.x,170);g.input('right',false);advance(g,2);assert.equal(g.state.player.x,60);
   g.state.enemy=null;g.input('left',false);g.input('right');advance(g,6);assert.equal(g.state.player.x,940);
 });
 test('Walking through the entrance starts the slime once without a timed wait',()=>{
-  const {g}=setup();g.start(true);g.input('right');advance(g,.3);assert.equal(g.state.stage,'slime');assert.equal(g.state.enemy.hp,70);assert.equal(g.state.mode,'COMBAT');
+  const {g}=setup();g.start(true);g.input('right');advance(g,.35);assert.equal(g.state.stage,'slime');assert.equal(g.state.enemy.hp,70);assert.equal(g.state.mode,'COMBAT');
   assert.equal(g.proceed(),false);assert.equal(g.state.enemy.hp,70);
 });
 test('Sword hitbox requires correct facing and actual range',()=>{
-  const {g}=fight();g.state.player.x=400;g.state.enemy.x=480;g.state.player.facing=-1;tap(g,'attack');advance(g,.1);assert.equal(g.state.enemy.hp,70);
-  advance(g,.3);g.state.player.facing=1;g.state.enemy.x=520;tap(g,'attack');advance(g,.1);assert.equal(g.state.enemy.hp,70);
-  advance(g,.3);g.state.enemy.x=480;tap(g,'attack');advance(g,.1);assert.equal(g.state.enemy.hp,62);
+  for(const [facing,range,hp] of [[-1,80,70],[1,120,70],[1,80,62]]){const {g}=fight();g.state.player.x=400;g.state.enemy.x=400+range;g.state.player.facing=facing;tap(g,'attack');advance(g,.1);assert.equal(g.state.enemy.hp,hp);}
 });
 test('Sword anticipation, swing, follow-through, once-only damage and cooldown are deterministic',()=>{
   const {g,combat}=fight();g.state.player.x=500;g.state.enemy.x=580;assert.ok(tap(g,'attack'));assert.equal(g.state.player.pose,'attack_anticipation');
   advance(g,.05);assert.equal(g.state.enemy.hp,70);advance(g,.05);assert.equal(g.state.enemy.hp,62);assert.equal(g.state.player.pose,'attack_swing');
-  assert.equal(tap(g,'attack'),false);advance(g,.1);assert.equal(g.state.player.pose,'attack_follow');advance(g,.15);assert.equal(g.state.enemy.hp,62);assert.ok(g.state.player.attackCooldown<1e-8);
+  advance(g,.15);assert.equal(g.state.player.pose,'attack_follow');advance(g,.16);assert.equal(g.state.enemy.hp,62);assert.ok(g.state.player.attackCooldown<1e-8);
   assert.equal(combat.CONFIG.sword.damage,8);assert.equal(combat.CONFIG.sword.cooldown,.35);
 });
 test('Held or rapid repeated attack presses never duplicate attacks',()=>{
@@ -95,7 +96,7 @@ test('Enemy death clamps HP, stops damage, and reveals the crystal safely',()=>{
 });
 test('Scripted listening occurs at meaningful milestones and freezes hostile timers',()=>{
   const {g}=slimeChallenge();assert.equal(g.state.challenge.target,'left');assert.equal(g.state.mode,'LISTENING_CHALLENGE');const before=plain({p:g.state.player,e:g.state.enemy});advance(g,15);
-  assert.deepEqual(plain({p:g.state.player,e:g.state.enemy}),before);assert.equal(g.state.stats.correct,0);solve(g);assert.equal(g.state.enemy.ai,'RECOVERY');assert.equal(g.state.player.magicCharge,53);
+  assert.deepEqual(plain({p:g.state.player,e:g.state.enemy}),before);assert.equal(g.state.stats.correct,0);solve(g);assert.equal(g.state.enemy.ai,'RECOVERY');assert.equal(g.state.player.magicCharge,55);
 });
 test('Listening wrong answer explains, requires explicit retry, and never causes damage',()=>{
   const {g}=slimeChallenge();const hp=g.state.player.hp;assert.equal(g.answer('right').correct,false);assert.match(g.state.challenge.feedback,/left/);assert.equal(g.answer('right'),false);assert.equal(g.answer('left'),false);
@@ -125,22 +126,23 @@ test('Discovery teaches magic before the boss and fully restores a beginner',()=
   solve(g,{heard:false,wrong:true});assert.equal(g.state.magicUnlocked,true);assert.equal(g.state.enemy.kind,'boss');assert.equal(g.state.enemy.hp,160);assert.equal(g.state.player.hp,100);assert.equal(g.state.player.magicCharge,100);
 });
 test('Fire Burst consumes charge once and cannot bypass its cooldown by repeated input',()=>{
-  const {g}=boss();assert.ok(tap(g,'magic'));assert.equal(g.answer('I need fire.').correct,true);assert.equal(g.answer('I need fire.'),false);assert.ok(g.proceed());assert.equal(g.state.enemy.hp,128);assert.equal(g.state.player.magicCharge,0);assert.equal(g.state.player.magicCooldown,8);
-  assert.equal(tap(g,'magic'),false);assert.equal(g.proceed(),false);assert.equal(g.state.enemy.hp,128);g.state.player.magicCharge=100;assert.equal(tap(g,'magic'),false);
-  advance(g,8.2);assert.ok(tap(g,'magic'));
+  const {g}=boss();assert.ok(tap(g,'magic'));assert.equal(g.answer('I need fire.').correct,true);assert.equal(g.answer('I need fire.'),false);assert.ok(g.proceed());assert.equal(g.state.enemy.hp,160);assert.equal(g.state.player.magicCharge,0);assert.equal(g.state.player.magicCooldown,8);
+  assert.equal(tap(g,'magic'),false);assert.equal(g.proceed(),false);wait(g,()=>g.state.stats.combat.magicHits===1);assert.equal(g.state.enemy.hp,128);g.state.player.magicCharge=100;assert.equal(tap(g,'magic'),false);
+  wait(g,()=>g.state.player.magicCooldown===0);assert.ok(tap(g,'magic'));
 });
-test('Boss cycles heavy jump, triple bounce with three warned landings, and crystal charge',()=>{
-  const {g}=boss();g.state.player.x=60;g.state.enemy.x=250;const patterns=[],tripleLandings=[];let last='';
+test('Boss phase A cycles crystal charge, heavy jump and forward rush with clear telegraphs',()=>{
+  const {g}=boss();g.state.player.x=60;g.state.enemy.x=250;const patterns=[];let last='';
   for(let n=0;n<50*120&&patterns.length<3;n++){
+    if(g.state.challenge){solve(g);continue;}
     const e=g.state.enemy;g.state.player.invulnerable=1;g.update(1/120);
-    const mark=e.pattern+':'+e.ai;if(mark!==last){if(e.ai==='TELEGRAPH'&&!patterns.includes(e.pattern))patterns.push(e.pattern);if(e.pattern==='triple_bounce'&&e.ai==='RECOVERY')tripleLandings.push(e.x);last=mark;}
+    const mark=e.pattern+':'+e.ai;if(mark!==last){if(e.ai==='TELEGRAPH'&&!patterns.includes(e.pattern))patterns.push(e.pattern);last=mark;}
   }
-  assert.deepEqual(patterns,['heavy_jump','triple_bounce','crystal_charge']);assert.equal(tripleLandings.length,3);
+  assert.deepEqual(patterns,['crystal_charge','heavy_jump','forward_rush']);
 });
 test('Sword misses the boss above its actual vertical reach and hits on descent',()=>{
   const {g,combat}=boss();g.state.player.x=480;g.state.enemy.x=600;wait(g,()=>g.state.enemy.ai==='ATTACK'&&g.state.enemy.lift>110);
   assert.ok(g.state.enemy.lift>combat.CONFIG.sword.height);g.state.player.x=g.state.enemy.x-60;g.state.player.facing=1;tap(g,'attack');advance(g,.1);assert.equal(g.state.enemy.hp,160);
-  const h=boss().g;h.state.player.x=480;h.state.enemy.x=600;wait(h,()=>h.state.enemy.ai==='ATTACK'&&h.state.enemy.attackProgress>.5&&h.state.enemy.lift<85);
+  const h=boss().g;h.state.player.x=480;h.state.enemy.x=600;wait(h,()=>h.state.enemy.ai==='ATTACK'&&h.state.enemy.pattern==='heavy_jump'&&h.state.enemy.attackProgress>.5&&h.state.enemy.lift<85);
   h.state.player.x=h.state.enemy.x-95;h.state.player.facing=1;assert.ok(tap(h,'attack'));advance(h,.08);assert.equal(h.state.enemy.hp,152);assert.ok(h.state.enemy.lift>0,'hit while descending, before landing');
 });
 test('Boss phase switches at exactly half HP, with modestly faster telegraphs',()=>{
@@ -177,6 +179,7 @@ test('A complete no-audio run wins through real movement, sword, dodge and sente
   for(let i=0;i<180*60&&!['VICTORY','DEFEAT'].includes(g.state.mode);i++){
     const s=g.state,p=s.player,e=s.enemy;
     if(s.challenge){solve(g,{heard:false});continue;}
+    if(s.mode==='BOSS_INTRO'){g.proceed();continue;}
     if(s.stage==='crystal'){g.proceed();continue;}
     if(s.mode==='COMBAT'||s.mode==='PLAYER_HIT'){
       phases.add(e.phase);const dx=e.x-p.x,dir=dx<0?'left':'right';
@@ -190,5 +193,5 @@ test('A complete no-audio run wins through real movement, sword, dodge and sente
     g.update(1/60);
   }
   assert.equal(g.state.mode,'VICTORY');assert.ok(g.state.player.hp>0);assert.deepEqual([...used].sort(),['attack','dodge','magic']);assert.ok(phases.has(2));
-  assert.equal(g.state.stats.listening.correct,4);assert.equal(g.state.stats.independent,0);assert.equal(g.state.stats.expressions.length,5);
+  assert.equal(g.state.stats.listening.correct,5);assert.equal(g.state.stats.independent,0);assert.equal(g.state.stats.expressions.length,6);
 });

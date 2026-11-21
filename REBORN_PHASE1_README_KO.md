@@ -1,5 +1,7 @@
 # English Quest REBORN — The Awakening
 
+> 이 문서는 Phase 1 당시의 기록입니다. Phase 2 브랜치에서는 보존본 `releases/EnglishQuest_REBORN_PHASE1.html`을 열면 Phase 1을 실행할 수 있습니다. 루트의 `EnglishQuest_REBORN.html`은 Phase 2이며 새 안내는 `REBORN_PHASE2_README_KO.md`를 참고하세요.
+
 기존 v0.8과 분리된 숲 전투 실험실입니다. `EnglishQuest.html`은 기존 모험, `EnglishQuest_REBORN.html`은 새 실시간 전투입니다. 두 파일을 혼동하지 마세요.
 
 ## Windows 실행
