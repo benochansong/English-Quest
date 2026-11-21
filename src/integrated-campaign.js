@@ -1,5 +1,6 @@
 /* Runs inside the campaign closure, against an explicitly isolated storage facade. */
 const World=(()=>{
+ const recoveredQuest=WorldStore.snapshot.extension.active?.encounterId==='crystal-disturbance';
  const bridge=CampaignCombatBridge.create(WorldStore),nativeDispatch=dispatch,nativeNew=startNew,nativeCommit=Backup.commit;
  let run=null,frame=null,importPreview=null,notice='',reviewKey=null,entering=false,leaving=false;
  const sound={master:.7,voice:.85,sfx:.65,music:0,ui:.5,ambient:.16,muted:false,shakeIntensity:'low',reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches};
@@ -19,9 +20,11 @@ const World=(()=>{
  screens.WORLD_COMBAT=()=>'';
  const host=document.createElement('section');host.id='world-combat';host.hidden=true;host.innerHTML='<div class="world-combat-bar"><p id="world-combat-status" role="status">로완의 훈련 · J 검 / K 회피 / L 문장 마법. 전투 종료 후 결과를 가지고 돌아가세요.</p><button id="world-return">결과 확인 · 로완에게 돌아가기</button><button id="world-cancel">훈련 그만두기</button></div>';document.body.append(host);
  function settings(){const p=game.profile.settings;return{...sound,...WorldStore.snapshot.extension.settings,master:p.volume,voice:p.voice?p.speechVolume:0,muted:!p.sound};}
- async function enter(){if(entering||run||game.screen!=='WORLD_QUEST')return;entering=true;const checkpoint={screen:'MAP',mapSelection:game.mapSelection};const started=bridge.start({profile:game.profile,returnLocation:checkpoint});if(!started){notice=WorldStore.error||'현재 위치에서는 훈련을 시작할 수 없어요.';render();entering=false;return;}
+ async function enter(encounterId='forest-awakens'){const quest=encounterId==='crystal-disturbance';if(entering||run||game.screen!==(quest?'LANGUAGE_WORLD':'WORLD_QUEST'))return;entering=true;const checkpoint={screen:quest?'LANGUAGE_WORLD':'MAP',location:quest?'ruins':'forest-map',mapSelection:game.mapSelection};const started=bridge.start({encounterId,profile:game.profile,returnLocation:checkpoint});if(!started){notice=WorldStore.error||'현재 위치에서는 훈련을 시작할 수 없어요.';render();entering=false;return;}
   run=started;stopVoice();AudioFX.stop();SpeechInput.cancel();academySilence();clearTimeout(game.timer);change('WORLD_COMBAT');app.inert=true;app.hidden=true;host.hidden=false;
   await IntegratedLifecycle.suspend();if(run!==started){entering=false;return;}window.IntegratedEntry={...run.entry,settings:settings(),slow:game.profile.settings.speechRate==='slow'};
+  document.getElementById('world-combat-status').textContent=(quest?'수정의 이상 현상':'로완의 훈련')+' · J 검 / K 회피 / L 문장 마법. 실제 영어 행동을 완료하고 승리하세요.';
+  document.getElementById('world-return').textContent=quest?'결과 확인 · 조사 장소로 돌아가기':'결과 확인 · 로완에게 돌아가기';
   frame=document.createElement('iframe');frame.id='world-frame';frame.title='로완의 실시간 숲 훈련';frame.srcdoc=IntegratedAssets.frame;frame.addEventListener('load',()=>{if(frame?.contentWindow.IntegratedCombat){frame.contentWindow.focus();}else{document.getElementById('world-combat-status').textContent='전투를 열지 못했어요. 훈련 그만두기로 안전하게 돌아갈 수 있습니다.';}});host.append(frame);entering=false;
  }
  async function leave(cancel=false){if(!run||leaving)return;const api=frame?.contentWindow.IntegratedCombat;let packet;try{packet=api?.capture();}catch{}
@@ -32,15 +35,17 @@ const World=(()=>{
   leaving=true;api?.stop();frame?.remove();frame=null;run=null;window.IntegratedEntry=null;host.hidden=true;app.hidden=false;app.inert=false;game.profile=Engine.load()||game.profile;
   await IntegratedLifecycle.resume();game.mapSelection=result.returnLocation.mapSelection;
   notice=status==='victory'?(result.summary.meaningful?'훈련 결과를 저장했어요. 로완에게 보고하세요.':'슬라임을 이겼어요. 훈련 완료에는 실제 영어 행동이 한 번 필요해요. 다시 도전해 보세요.'):status==='defeat'?'이번 훈련은 패배했어요. 캠페인 HP와 진행은 그대로예요. 다시 도전할 수 있습니다.':'훈련을 중단했어요. 이번 시도의 학습 결과는 확정하지 않았습니다.';
-  change('MAP');app.querySelector('[data-act="world-rowan"]')?.focus();leaving=false;
+  change(result.returnLocation.screen);app.querySelector('[data-act="world-rowan"],[data-act="living-move"]')?.focus();leaving=false;
  }
  host.querySelector('#world-return').addEventListener('click',()=>leave());host.querySelector('#world-cancel').addEventListener('click',()=>leave(true));
  document.addEventListener('keydown',e=>{if(run){e.preventDefault();e.stopImmediatePropagation();}},true);
  Backup.commit=(handle,options)=>WorldStore.transaction(()=>{const result=nativeCommit(handle,options);if(result.ok)WorldStore.resetExtension();return result;});
  startNew=()=>{if(WorldStore.locked){notice=WorldStore.error;render();return;}const before=game.profile;const result=WorldStore.transaction(()=>{WorldStore.resetExtension();nativeNew();return{ok:!!WorldStore.snapshot.profile};});if(!result?.ok){game.profile=before;notice=WorldStore.error;change('TITLE');}};
  const previousChange=change;change=screen=>{stopVoice();previousChange(screen);};
+ const previousSettings=openSettings;openSettings=mode=>{stopVoice();previousSettings(mode);};
+ window.addEventListener('blur',stopVoice);
  function checkedBackup(value){if(!IntegratedStore.valid(value)||value.extension.active)throw Error('안전한 통합 백업이 아닙니다.');if(value.profile){const preview=Backup.preview(JSON.stringify(value.profile));if(!preview.ok)throw Error(preview.error);value.profile=preview.profile;Backup.cancel(preview.handle);}return value;}
- function play(id,key=null){stopVoice();Object.assign(sound,settings());reviewKey=key;voice.configure({slow:game.profile.settings.speechRate==='slow'});mixer.unlock();voice.play(id);}
+ function play(id,key=null){stopVoice();Object.assign(sound,settings());mixer.configure(sound);reviewKey=key;voice.configure({slow:game.profile.settings.speechRate==='slow'});mixer.unlock();voice.play(id);}
  dispatch=(action,id)=>{
   if(!action.startsWith('world-'))return nativeDispatch(action,id);
   if(run)return;
@@ -59,8 +64,8 @@ const World=(()=>{
  };
  app.addEventListener('change',async e=>{if(e.target.id!=='world-import'||game.screen!=='WORLD_BACKUP')return;importPreview=null;const file=e.target.files[0];if(!file)return;if(file.size>Backup.maxBytes){notice='백업 파일이 너무 큽니다.';render();return;}try{const text=await file.text();if(game.screen!=='WORLD_BACKUP')return;const value=JSON.parse(text);if(value.format==='EnglishQuestIntegrated'){checkedBackup(value);importPreview={integrated:value,label:'통합 모험 · 훈련 '+value.extension.runs.length+'회'};}else{const preview=Backup.preview(text);if(!preview.ok)throw Error(preview.error);importPreview={handle:preview.handle,label:'기존 v0.8 모험'};}notice='';}catch(e){notice=e.message||'백업을 읽지 못했어요.';}render();});
  if(WorldStore.locked)notice=WorldStore.error;
- else if(bridge.recover()){const cp=WorldStore.snapshot.extension.checkpoint;game.mapSelection=cp?.mapSelection||0;notice='중단된 훈련에서 안전하게 돌아왔어요. 미완료 결과는 저장하지 않았습니다.';game.screen=game.profile.started?'MAP':'TITLE';}
+ else if(bridge.recover()){const cp=WorldStore.snapshot.extension.checkpoint;game.mapSelection=cp?.mapSelection||0;notice='중단된 훈련에서 안전하게 돌아왔어요. 미완료 결과는 저장하지 않았습니다.';game.screen=game.profile.started?(cp?.screen==='LANGUAGE_WORLD'?'TITLE':'MAP'):'TITLE';}
  render();
- return Object.freeze({get state(){return{save:WorldStore.snapshot,error:WorldStore.error,active:bridge.active,lifecycle:IntegratedLifecycle.state,screen:game.screen};}});
+ return Object.freeze({beginQuestCombat:()=>enter('crystal-disturbance'),get state(){return{recoveredQuest,save:WorldStore.snapshot,error:WorldStore.error,active:bridge.active,lifecycle:IntegratedLifecycle.state,screen:game.screen};}});
 })();
 window.IntegratedWorld=World;

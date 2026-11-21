@@ -1,0 +1,35 @@
+{
+  "browser": "msedge",
+  "version": "157.0.4341.60",
+  "sha256": "d331b7fcc5eee2ba91c53223c19f30ae266b186c3a22ffbc43b4946b491616e1",
+  "results": [
+    {
+      "mode": "failure",
+      "completed": true,
+      "independent": 0,
+      "played": 0,
+      "errors": []
+    },
+    {
+      "mode": "muted",
+      "completed": true,
+      "independent": 0,
+      "played": 0,
+      "errors": []
+    },
+    {
+      "mode": "phase6-import",
+      "completed": true,
+      "independent": 0,
+      "played": 0,
+      "errors": []
+    },
+    {
+      "mode": "pause",
+      "completed": true,
+      "independent": 0,
+      "played": 0,
+      "errors": []
+    }
+  ]
+}

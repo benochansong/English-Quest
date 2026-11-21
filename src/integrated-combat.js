@@ -7,14 +7,15 @@
  document.addEventListener('click',e=>{if(e.target.closest('[data-action="replay"]')){const key=op()?.expressionId;if(key)row(key).replay++;}},true);
  const restore=()=>{const fresh=RebornLearning.createProgress().entries;for(const key of Object.keys(g.state.learning))Object.assign(g.state.learning[key],fresh[key],entry.memory[key]||{});};
  const restart=g.restart;g.restart=()=>{for(const k of Object.keys(evidence))delete evidence[k];const result=restart();restore();return result;};
- Object.assign(app.settings,entry.settings);app.voice.configure({slow:entry.slow});
+ Object.assign(app.settings,entry.settings);app.audio.configure(app.settings);app.voice.configure({slow:entry.slow});
  document.querySelector('#slow').checked=!!entry.slow;
  for(const el of document.querySelectorAll('[data-volume]'))el.value=Math.round(app.settings[el.dataset.volume]*100);
  document.querySelector('#muted').checked=app.settings.muted;document.querySelector('#reduced').checked=app.settings.reducedMotion;document.querySelector('#shake').value=app.settings.shakeIntensity;
  document.body.dataset.reducedMotion=String(app.settings.reducedMotion);
  g.selectEncounter('slime');restore();
- document.querySelector('.eyebrow').textContent='ENGLISH QUEST / 로완의 숲 훈련';
- document.querySelector('.footer').innerHTML='<span>다시 깨어난 숲 · 완료 후 위의 버튼으로 로완에게 돌아가세요.</span>';
+ const quest=entry.encounterId==='crystal-disturbance';
+ document.querySelector('.eyebrow').textContent=quest?'ENGLISH QUEST / 수정의 이상 현상':'ENGLISH QUEST / 로완의 숲 훈련';
+ document.querySelector('.footer').innerHTML=quest?'<span>수정을 지키고 조사 장소로 돌아가세요.</span>':'<span>다시 깨어난 숲 · 완료 후 위의 버튼으로 로완에게 돌아가세요.</span>';
  app.sync();app.audio.unlock();
  let stopped=false;
  window.IntegratedCombat=Object.freeze({

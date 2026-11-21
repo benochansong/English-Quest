@@ -1,0 +1,1300 @@
+{
+  "version": 1,
+  "release": "REBORN Phase 7 quest extension",
+  "status": "25/25 Piper synthetic speech assets technically verified; human listening pending",
+  "utterances": [
+    {
+      "id": "P7_HELP",
+      "en": "Hello! Can you help me?",
+      "ko": "안녕하세요! 저를 도와주실 수 있나요?",
+      "speaker": "CLARA",
+      "voiceCharacter": "CLARA",
+      "usage": "Phase 7 quest help",
+      "path": "assets/reborn/voice/P7_HELP.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_HELP.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 1.474467,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 1.474467,
+        "bytes": 65068,
+        "peak": 0.999969,
+        "rms": 0.194383,
+        "activeFraction": 0.818467,
+        "sha256": "2d1a05d35628a2ad04e6187067a9b8f085d2faf17009f484cd85aff077855e04",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_YES",
+      "en": "Of course!",
+      "ko": "물론이죠!",
+      "speaker": "PLAYER",
+      "voiceCharacter": "PLAYER",
+      "usage": "Phase 7 quest yes",
+      "path": "assets/reborn/voice/P7_YES.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_YES.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 0.859138,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 0.859138,
+        "bytes": 37932,
+        "peak": 0.999969,
+        "rms": 0.209564,
+        "activeFraction": 0.866448,
+        "sha256": "8f07cccd6ad333fab73e4d31e38e7abe2047a3ff34fd12465678eb1ddb8a247e",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_SUPPLIES",
+      "en": "I need three apples and some bread.",
+      "ko": "사과 세 개와 빵이 좀 필요해요.",
+      "speaker": "CLARA",
+      "voiceCharacter": "CLARA",
+      "usage": "Phase 7 quest supplies",
+      "path": "assets/reborn/voice/P7_SUPPLIES.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_SUPPLIES.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 2.321995,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 2.321995,
+        "bytes": 102444,
+        "peak": 0.999969,
+        "rms": 0.129408,
+        "activeFraction": 0.865801,
+        "sha256": "d891d664e9ed89a836c4c3864a815c7b071c3645b9b679fa900e4bf14e6f2b00",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_BOOK",
+      "en": "That's a book. I need bread.",
+      "ko": "그건 책이에요. 저는 빵이 필요해요.",
+      "speaker": "CLARA",
+      "voiceCharacter": "CLARA",
+      "usage": "Phase 7 quest book",
+      "path": "assets/reborn/voice/P7_BOOK.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_BOOK.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 2.020136,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 2.020136,
+        "bytes": 89132,
+        "peak": 0.999969,
+        "rms": 0.150799,
+        "activeFraction": 0.749327,
+        "sha256": "b086d6f5588b8d8df6586bcb0bc2e8530dc41b6993ec179d3597eca402cd8649",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_HAND",
+      "en": "Here you are.",
+      "ko": "여기 있습니다.",
+      "speaker": "PLAYER",
+      "voiceCharacter": "PLAYER",
+      "usage": "Phase 7 quest hand",
+      "path": "assets/reborn/voice/P7_HAND.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_HAND.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 0.870748,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 0.870748,
+        "bytes": 38444,
+        "peak": 0.999969,
+        "rms": 0.192925,
+        "activeFraction": 0.85901,
+        "sha256": "e52da51f16933fdd8ca5d27228ae33cbf3b9f93368e14db85d39901a47976c34",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_THANKS",
+      "en": "Thank you! You helped me a lot.",
+      "ko": "고마워요! 정말 많은 도움이 되었어요.",
+      "speaker": "CLARA",
+      "voiceCharacter": "CLARA",
+      "usage": "Phase 7 quest thanks",
+      "path": "assets/reborn/voice/P7_THANKS.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_THANKS.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 2.136236,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 2.136236,
+        "bytes": 94252,
+        "peak": 0.999969,
+        "rms": 0.110743,
+        "activeFraction": 0.717073,
+        "sha256": "ad3efbec6872fb219d7345d68c99d80d7d0a17337d62df1da2b4d5bcb0d89740",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_WELCOME",
+      "en": "You're welcome!",
+      "ko": "천만에요!",
+      "speaker": "PLAYER",
+      "voiceCharacter": "PLAYER",
+      "usage": "Phase 7 quest welcome",
+      "path": "assets/reborn/voice/P7_WELCOME.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_WELCOME.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 0.824308,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 0.824308,
+        "bytes": 36396,
+        "peak": 0.999969,
+        "rms": 0.163334,
+        "activeFraction": 0.805843,
+        "sha256": "91e7dabd55a81bf16393819aa6b22849935ef442a5b8ad734a2ae06f30945f31",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_LOST",
+      "en": "A traveler is lost near the forest.",
+      "ko": "여행자가 숲 근처에서 길을 잃었어요.",
+      "speaker": "ELENA",
+      "voiceCharacter": "ELENA",
+      "usage": "Phase 7 quest lost",
+      "path": "assets/reborn/voice/P7_LOST.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_LOST.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 2.356825,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 2.356825,
+        "bytes": 103980,
+        "peak": 0.999969,
+        "rms": 0.113888,
+        "activeFraction": 0.77921,
+        "sha256": "af52a73ebc545f1f56ee054d84d6626d9ccf2edc663f12c0e23c9dbadae42cc8",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_WHERE",
+      "en": "Where should I go?",
+      "ko": "어디로 가야 하나요?",
+      "speaker": "PLAYER",
+      "voiceCharacter": "PLAYER",
+      "usage": "Phase 7 quest where",
+      "path": "assets/reborn/voice/P7_WHERE.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_WHERE.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 1.021678,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 1.021678,
+        "bytes": 45100,
+        "peak": 0.999969,
+        "rms": 0.141741,
+        "activeFraction": 0.848633,
+        "sha256": "d2fe22d2e5575a3aa3cc02dbfc57a0ef99bb92880d33ecc09dc920cef4c2838e",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_STRAIGHT",
+      "en": "Go straight.",
+      "ko": "곧장 가세요.",
+      "speaker": "ELENA",
+      "voiceCharacter": "ELENA",
+      "usage": "Phase 7 quest straight",
+      "path": "assets/reborn/voice/P7_STRAIGHT.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_STRAIGHT.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 0.812698,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 0.812698,
+        "bytes": 35884,
+        "peak": 0.999969,
+        "rms": 0.147959,
+        "activeFraction": 0.733817,
+        "sha256": "4a27fc28abea44775bf09e92d02574224b5c04864b489ebe3034ae2a6f640eb4",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_LEFT",
+      "en": "Turn left at the tree.",
+      "ko": "나무에서 왼쪽으로 도세요.",
+      "speaker": "ELENA",
+      "voiceCharacter": "ELENA",
+      "usage": "Phase 7 quest left",
+      "path": "assets/reborn/voice/P7_LEFT.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_LEFT.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 1.253878,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 1.253878,
+        "bytes": 55340,
+        "peak": 0.999969,
+        "rms": 0.127178,
+        "activeFraction": 0.796152,
+        "sha256": "321f634f716189425fc821530c194ccfb02e86aa2ecc0521c54e68af40e54ff3",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_RIGHT",
+      "en": "Turn right at the tree.",
+      "ko": "나무에서 오른쪽으로 도세요.",
+      "speaker": "ELENA",
+      "voiceCharacter": "ELENA",
+      "usage": "Phase 7 quest right",
+      "path": "assets/reborn/voice/P7_RIGHT.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_RIGHT.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 1.358367,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 1.358367,
+        "bytes": 59948,
+        "peak": 0.999969,
+        "rms": 0.122777,
+        "activeFraction": 0.743657,
+        "sha256": "0aa0c27722a8f4a24c426a1d372a29793661ecde10b4d6794f8ad16712aab026",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_BRIDGE",
+      "en": "Cross the bridge.",
+      "ko": "다리를 건너세요.",
+      "speaker": "ELENA",
+      "voiceCharacter": "ELENA",
+      "usage": "Phase 7 quest bridge",
+      "path": "assets/reborn/voice/P7_BRIDGE.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_BRIDGE.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 1.172608,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 1.172608,
+        "bytes": 51756,
+        "peak": 0.999969,
+        "rms": 0.14495,
+        "activeFraction": 0.809329,
+        "sha256": "f4953211f76a9bf31a83bc4853652a6c9e2d8d1ccb04ca31b0244a641649d8ce",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_RIVER",
+      "en": "Look near the river.",
+      "ko": "강 근처를 살펴보세요.",
+      "speaker": "ELENA",
+      "voiceCharacter": "ELENA",
+      "usage": "Phase 7 quest river",
+      "path": "assets/reborn/voice/P7_RIVER.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_RIVER.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 1.079728,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 1.079728,
+        "bytes": 47660,
+        "peak": 0.999969,
+        "rms": 0.131357,
+        "activeFraction": 0.828251,
+        "sha256": "6c321d2e2fdd7d14a74e85c5ea7faca3d6ab4109b2172492f7086908e0fd52ac",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_FOUND",
+      "en": "Thank you for finding me!",
+      "ko": "저를 찾아 주셔서 고마워요!",
+      "speaker": "TRAVELER",
+      "voiceCharacter": "TRAVELER",
+      "usage": "Phase 7 quest found",
+      "path": "assets/reborn/voice/P7_FOUND.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_FOUND.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 1.358367,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 1.358367,
+        "bytes": 59948,
+        "peak": 0.999969,
+        "rms": 0.129817,
+        "activeFraction": 0.832799,
+        "sha256": "afd6b9ffa31012cfc4381d892bf6fa891fba3b478fd404437bc6503e7cd8d031",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_HOME",
+      "en": "We are safe now.",
+      "ko": "이제 우리는 안전해요.",
+      "speaker": "ELENA",
+      "voiceCharacter": "ELENA",
+      "usage": "Phase 7 quest home",
+      "path": "assets/reborn/voice/P7_HOME.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_HOME.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 1.335147,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 1.335147,
+        "bytes": 58924,
+        "peak": 0.999969,
+        "rms": 0.166607,
+        "activeFraction": 0.844056,
+        "sha256": "7668897beaa1b637ece796ab11612fd941fa701a6788878a8dab3f96622ed411",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_POWER",
+      "en": "The crystal is losing its power.",
+      "ko": "수정이 힘을 잃고 있어요.",
+      "speaker": "ROWAN",
+      "voiceCharacter": "ROWAN",
+      "usage": "Phase 7 quest power",
+      "path": "assets/reborn/voice/P7_POWER.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_POWER.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 2.182676,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 2.182676,
+        "bytes": 96300,
+        "peak": 0.999969,
+        "rms": 0.130777,
+        "activeFraction": 0.740089,
+        "sha256": "04deae27a364d5053ad34365308f7302b704d532cb9ed8906459cb5fdd0cc53d",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_DO",
+      "en": "What should I do?",
+      "ko": "무엇을 해야 하나요?",
+      "speaker": "PLAYER",
+      "voiceCharacter": "PLAYER",
+      "usage": "Phase 7 quest do",
+      "path": "assets/reborn/voice/P7_DO.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_DO.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 1.126168,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 1.126168,
+        "bytes": 49708,
+        "peak": 0.999969,
+        "rms": 0.141812,
+        "activeFraction": 0.794982,
+        "sha256": "8a8e2f815b23b53d2128bf6273e93c2ee43153e3c21ac46f480e8778ad5ee931",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_FIND",
+      "en": "Find the glowing crystal.",
+      "ko": "빛나는 수정을 찾으세요.",
+      "speaker": "ROWAN",
+      "voiceCharacter": "ROWAN",
+      "usage": "Phase 7 quest find",
+      "path": "assets/reborn/voice/P7_FIND.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_FIND.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 1.404807,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 1.404807,
+        "bytes": 61996,
+        "peak": 0.999969,
+        "rms": 0.128707,
+        "activeFraction": 0.81321,
+        "sha256": "9b75e26318451154a328bfbfefa908695d58ec035f827a688cbd54c5ef3e5600",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_BLUE",
+      "en": "Touch the blue crystal.",
+      "ko": "파란 수정을 만지세요.",
+      "speaker": "ROWAN",
+      "voiceCharacter": "ROWAN",
+      "usage": "Phase 7 quest blue",
+      "path": "assets/reborn/voice/P7_BLUE.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_BLUE.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 1.277098,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 1.277098,
+        "bytes": 56364,
+        "peak": 0.999969,
+        "rms": 0.131091,
+        "activeFraction": 0.820455,
+        "sha256": "f22aa56dd0745bec6405e61ad8636b759483505a72ea2868e1e1d4400c4e0cdc",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_GLOWING",
+      "en": "The crystal is glowing.",
+      "ko": "수정이 빛나고 있어요.",
+      "speaker": "ROWAN",
+      "voiceCharacter": "ROWAN",
+      "usage": "Phase 7 quest glowing",
+      "path": "assets/reborn/voice/P7_GLOWING.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_GLOWING.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 1.323537,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 1.323537,
+        "bytes": 58412,
+        "peak": 0.999969,
+        "rms": 0.140746,
+        "activeFraction": 0.804174,
+        "sha256": "b4bb6cfe78e5497b0b73e906edea3aa4ed46e611fd21094ba76734c9bc3cafd5",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_DONE",
+      "en": "We did it!",
+      "ko": "우리가 해냈어요!",
+      "speaker": "ROWAN",
+      "voiceCharacter": "ROWAN",
+      "usage": "Phase 7 quest done",
+      "path": "assets/reborn/voice/P7_DONE.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_DONE.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 0.684989,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 0.684989,
+        "bytes": 30252,
+        "peak": 0.999969,
+        "rms": 0.163132,
+        "activeFraction": 0.741459,
+        "sha256": "d8ee22941ae7d4147b7fefee3c6eb07bf0177c8c62fed92810e515b37ebbfa12",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_APPLES",
+      "en": "Three apples.",
+      "ko": "사과 세 개예요.",
+      "speaker": "CLARA",
+      "voiceCharacter": "CLARA",
+      "usage": "Phase 7 quest apples",
+      "path": "assets/reborn/voice/P7_APPLES.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_APPLES.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 1.149388,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 1.149388,
+        "bytes": 50732,
+        "peak": 0.999969,
+        "rms": 0.104966,
+        "activeFraction": 0.814433,
+        "sha256": "27e70163ab07a135fc53f39fe8bce553df67d68b00e5f2e5b3573cd957a65b49",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_BREAD",
+      "en": "Some bread.",
+      "ko": "빵이 좀 있어요.",
+      "speaker": "CLARA",
+      "voiceCharacter": "CLARA",
+      "usage": "Phase 7 quest bread",
+      "path": "assets/reborn/voice/P7_BREAD.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_BREAD.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 0.812698,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 0.812698,
+        "bytes": 35884,
+        "peak": 0.999969,
+        "rms": 0.158366,
+        "activeFraction": 0.779632,
+        "sha256": "429c09be56a9fcbb0ccb456d6a400360c684833c338a5711620477e48ab4278c",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    },
+    {
+      "id": "P7_RETRY",
+      "en": "Listen again and try another path.",
+      "ko": "다시 듣고 다른 길로 가 보세요.",
+      "speaker": "ELENA",
+      "voiceCharacter": "ELENA",
+      "usage": "Phase 7 quest retry",
+      "path": "assets/reborn/voice/P7_RETRY.wav",
+      "available": true,
+      "license": {
+        "type": "Public-domain model and dataset",
+        "source": "https://brycebeattie.com/files/tts/",
+        "performerOrModel": "en_US-ljspeech-medium",
+        "redistributionAllowed": true,
+        "status": "Reviewed published model and dataset terms; see REBORN_PIPER_LICENSES.md",
+        "dataset": "https://keithito.com/LJ-Speech-Dataset/",
+        "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22"
+      },
+      "qualityReview": {
+        "status": "Needs listening review",
+        "pronunciation": null,
+        "intelligibility": null,
+        "normalAndSlowListening": null,
+        "reviewer": null
+      },
+      "speedOptions": [
+        1,
+        0.75
+      ],
+      "normalSpeedAsset": "assets/reborn/voice/P7_RETRY.wav",
+      "slowSpeedAsset": null,
+      "durationSeconds": 2.333605,
+      "audioSource": "Locally generated Piper synthetic English speech.",
+      "audioFormat": "PCM WAV",
+      "voiceModel": "en_US-ljspeech-medium",
+      "accent": "en-US model; pronunciation awaits human listening review",
+      "verification": {
+        "format": "PCM WAV",
+        "sampleRate": 22050,
+        "channels": 1,
+        "bits": 16,
+        "durationSeconds": 2.333605,
+        "bytes": 102956,
+        "peak": 0.999969,
+        "rms": 0.144423,
+        "activeFraction": 0.819846,
+        "sha256": "5bd90458353042b4cf699bc3e17b94f9759bb7159c4460e26480700c4c117543",
+        "status": "Technically verified",
+        "humanListening": "Needs listening review"
+      }
+    }
+  ],
+  "speakers": {
+    "CLARA": {
+      "status": "Uses the same LJSpeech synthetic voice; distinct character acting is not delivered"
+    },
+    "PLAYER": {
+      "status": "Uses the same LJSpeech synthetic voice; distinct character acting is not delivered"
+    },
+    "ELENA": {
+      "status": "Uses the same LJSpeech synthetic voice; distinct character acting is not delivered"
+    },
+    "TRAVELER": {
+      "status": "Uses the same LJSpeech synthetic voice; distinct character acting is not delivered"
+    },
+    "ROWAN": {
+      "status": "Uses the same LJSpeech synthetic voice; distinct character acting is not delivered"
+    }
+  },
+  "primary": "Bundled Piper synthetic English speech (en_US-ljspeech-medium)"
+}

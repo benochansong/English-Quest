@@ -1,0 +1,23 @@
+{
+  "model": "en_US-ljspeech-medium",
+  "modelSha256": "6f52a751e2349abe7a76735eb09dc1875298c77ea2342ffd2fef79ff81b87f22",
+  "configSha256": "141d612cc0a95ed7efc1ca936b845c2364967f2e9217c5dbfcf69fc4d6c65860",
+  "piperVersion": "1.8.0",
+  "synthesis": "model defaults",
+  "id": "P7_BRIDGE",
+  "en": "Cross the bridge.",
+  "format": "PCM WAV",
+  "sampleRate": 22050,
+  "channels": 1,
+  "bits": 16,
+  "durationSeconds": 1.172608,
+  "bytes": 51756,
+  "peak": 0.999969,
+  "rms": 0.14495,
+  "activeFraction": 0.809329,
+  "sha256": "f4953211f76a9bf31a83bc4853652a6c9e2d8d1ccb04ca31b0244a641649d8ce",
+  "status": "Technically verified",
+  "humanListening": "Needs listening review",
+  "path": "assets/reborn/voice/P7_BRIDGE.wav",
+  "licensing": "Public-domain model and dataset; see REBORN_PIPER_LICENSES.md"
+}

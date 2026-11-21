@@ -2,17 +2,18 @@
 const IntegratedStore=(()=>{
  const KEY='EnglishQuest.integrated.v1',PREFIX='EnglishQuest.integrated.aux.v1.';
  const clone=x=>JSON.parse(JSON.stringify(x));
- const extension=()=>({version:1,quest:'new',recognition:false,records:{},memory:{},runs:[],processed:[],active:null,checkpoint:null,settings:null,lastOutcome:null});
+ const extension=()=>({version:1,quest:'new',recognition:false,records:{},memory:{},runs:[],processed:[],active:null,checkpoint:null,settings:null,lastOutcome:null,...(typeof LivingAdventure!=='undefined'?{adventure:LivingAdventure.fresh()}:{})});
  const fresh=()=>({format:'EnglishQuestIntegrated',version:1,revision:0,profile:null,extension:extension()});
  const object=x=>!!x&&typeof x==='object'&&!Array.isArray(x);
  function valid(x){
   if(!object(x)||x.format!=='EnglishQuestIntegrated'||x.version!==1||!Number.isSafeInteger(x.revision)||x.revision<0||x.profile!==null&&(!object(x.profile)||x.profile.version!==8))return false;
   const e=x.extension;if(!object(e)||e.version!==1||!['new','accepted','ready','complete'].includes(e.quest)||typeof e.recognition!=='boolean'||e.recognition!==(e.quest==='complete')||!Array.isArray(e.processed)||e.processed.length>200||e.processed.some(v=>typeof v!=='string')||!Array.isArray(e.runs)||e.runs.length>40||!object(e.records)||!object(e.memory))return false;
-  const checkpoint=c=>object(c)&&c.screen==='MAP'&&c.chapter===1&&Number.isInteger(c.mapSelection)&&c.mapSelection>=0&&c.mapSelection<=3;
-  if(e.active!==null&&(!object(e.active)||typeof e.active.runId!=='string'||e.active.encounterId!=='forest-awakens'||!checkpoint(e.active.checkpoint)))return false;
+  const checkpoint=c=>object(c)&&(['MAP'].includes(c.screen)&&c.chapter===1||c.screen==='LANGUAGE_WORLD'&&[1,2,3].includes(c.chapter)&&c.location==='ruins')&&Number.isInteger(c.mapSelection)&&c.mapSelection>=0&&c.mapSelection<=3;
+  if(e.active!==null&&(!object(e.active)||typeof e.active.runId!=='string'||!['forest-awakens','crystal-disturbance'].includes(e.active.encounterId)||!checkpoint(e.active.checkpoint)))return false;
   if(e.checkpoint!==null&&!checkpoint(e.checkpoint))return false;
   for(const [key,r]of Object.entries(e.records)){if(!['left','dodge','fire'].includes(key)||!object(r)||!['encountered','audioPlayed','attempted','completed','independent','assisted','text','translation','replay','missed','reviews'].every(k=>Number.isSafeInteger(r[k])&&r[k]>=0)||r.independent+r.assisted!==r.completed)return false;}
   if(e.settings!==null&&(!object(e.settings)||!['master','voice','sfx','music','ui','ambient'].every(k=>Number.isFinite(e.settings[k])&&e.settings[k]>=0&&e.settings[k]<=1)||typeof e.settings.muted!=='boolean'||typeof e.settings.reducedMotion!=='boolean'||!['off','low','normal'].includes(e.settings.shakeIntensity)))return false;
+  if(e.adventure!==undefined&&(typeof LivingAdventure==='undefined'||!LivingAdventure.valid(e.adventure)))return false;
   return true;
  }
  function create(storage){
@@ -32,7 +33,7 @@ const IntegratedStore=(()=>{
    setItem(key,value){if(key==='EnglishQuest.v8'){const p=JSON.parse(value);if(p?.version!==8||!update(d=>{d.profile=p;}))throw Error(error||'Invalid campaign');}else storage.setItem(PREFIX+key,String(value));},
    removeItem(key){if(key==='EnglishQuest.v8'){if(!update(d=>{d.profile=null;}))throw Error(error);}else storage.removeItem(PREFIX+key);}
   };
-  return{get snapshot(){return clone(data);},get error(){return error;},get locked(){return locked;},update,transaction,campaignStorage,replace(value){if(!valid(value)||value.extension.active)return false;return persist(clone(value));},resetExtension(){return update(d=>{d.extension=extension();});}};
+  return{get snapshot(){return clone(data);},get error(){return error;},get locked(){return locked;},update,transaction,campaignStorage,replace(value){if(!valid(value)||value.extension.active)return false;const next=clone(value);if(typeof LivingAdventure!=='undefined')LivingAdventure.migrate(next.extension);return persist(next);},resetExtension(){return update(d=>{d.extension=extension();});}};
  }
  return {KEY,PREFIX,create,extension,valid};
 })();

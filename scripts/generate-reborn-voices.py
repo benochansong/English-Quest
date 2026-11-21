@@ -53,6 +53,7 @@ def save_json(path, value):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--report', default='docs/piper/production-report.json', help='Production report path relative to repository')
+    parser.add_argument('--manifest', default='REBORN_VOICE_MANIFEST.json', help='Existing manifest or a separate quest extension manifest')
     parser.add_argument('--model', choices=['en_US-ljspeech-medium', 'en_US-lessac-medium'], default='en_US-ljspeech-medium')
     parser.add_argument('--ids', nargs='+', help='Generate/retry only these manifest IDs')
     parser.add_argument('--samples', action='store_true', help='Generate the five initial samples')
@@ -60,10 +61,12 @@ def main():
     parser.add_argument('--verify-only', action='store_true')
     parser.add_argument('--update-manifest', action='store_true')
     args = parser.parse_args()
-    manifest_path = ROOT / 'REBORN_VOICE_MANIFEST.json'
+    manifest_path = (ROOT / args.manifest).resolve()
+    if manifest_path.parent != ROOT:
+        raise ValueError('Manifest must be in the repository root')
     manifest = json.loads(manifest_path.read_text(encoding='utf-8-sig'))
     rows = manifest['utterances']
-    if len(rows) < 34 or len({x['id'] for x in rows}) != len(rows):
+    if not rows or (manifest_path.name == 'REBORN_VOICE_MANIFEST.json' and len(rows) < 34) or len({x['id'] for x in rows}) != len(rows):
         raise ValueError('Expected the original 34 entries plus unique extension entries')
     selected = args.ids or (SAMPLES if args.samples else [x['id'] for x in rows])
     if set(selected) - {x['id'] for x in rows}:
