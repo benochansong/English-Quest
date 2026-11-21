@@ -5,20 +5,22 @@ const RebornVoice=(()=>{
     const AudioClass=options.Audio||globalThis.Audio, synth=options.speechSynthesis||globalThis.speechSynthesis;
     const Utterance=options.SpeechSynthesisUtterance||globalThis.SpeechSynthesisUtterance;
     const timer=options.setTimeout||globalThis.setTimeout,clear=options.clearTimeout||globalThis.clearTimeout;
-    let generation=0,active=null,timeout=null,currentId=null,slow=false,fallback=false;
+    let generation=0,active=null,timeout=null,currentId=null,slow=false,fallback=false,request={priority:0,context:null};
     const availableCount=manifest.utterances.filter(x=>x.available&&x.embedded).length;
     let status={state:'idle',source:null,message:`영어 음성 ${availableCount}/${manifest.utterances.length}개 · 듣기 버튼을 눌러 주세요.`};
-    function report(state,source,message){status={state,source,message,id:currentId};options.onStatus?.(status);}
+    function report(state,source,message){status={state,source,message,id:currentId,context:request.context,priority:request.priority};options.onStatus?.(status);}
     function stop(){generation++;if(timeout!==null){clear(timeout);timeout=null;}if(active){active.onplaying=active.onended=active.onerror=null;active.pause?.();active=null;}synth?.cancel?.();mixer.duck(false);if(status.state==='playing'||status.state==='loading')report('stopped',null,'음성이 멈췄습니다. 다시 듣기로 재생할 수 있습니다.');}
     function configure(values){if('slow'in values)slow=!!values.slow;if('fallback'in values)fallback=!!values.fallback;stop();report('idle',null,'재생 설정 변경됨 · 다시 듣기를 누르세요.');}
     function refreshVolume(){
       if(mixer.voiceVolume<=0){stop();report('muted',null,'음량이 0이거나 음소거 상태입니다. 소리를 켠 뒤 다시 듣기를 누르세요.');}
       else if(active)active.volume=mixer.voiceVolume;
     }
-    function play(id){
-      stop();currentId=id;const item=table.get(id),token=generation;
+    function play(id,next={}){
+      const proposed={priority:100,context:null,...next};
+      if(['playing','loading'].includes(status.state)&&proposed.priority<request.priority){options.onIgnored?.({id,context:proposed.context});return false;}
+      stop();request=proposed;currentId=id;const item=table.get(id),token=generation;
       const live=()=>generation===token;let heard=false;
-      const started=source=>{if(!heard&&live()&&mixer.voiceVolume>0){heard=true;options.onHeard?.({id,source});}};
+      const started=source=>{if(!heard&&live()&&mixer.voiceVolume>0){heard=true;options.onHeard?.({id,source,context:request.context});}};
       if(!item){report('missing',null,'음성 대본을 찾지 못했습니다.');return false;}
       if(!mixer.unlocked){report('blocked',null,'먼저 시작 또는 듣기 버튼을 눌러 주세요.');return false;}
       if(mixer.voiceVolume<=0){report('muted',null,'음성이 꺼져 있습니다. 소리를 켜거나 원문 도움을 이용하세요.');return false;}
@@ -46,7 +48,9 @@ const RebornVoice=(()=>{
         report('loading','asset','음성 파일 준비 중');const pending=active.play();pending?.catch?.(()=>{if(live()&&active===media){active?.pause?.();active=null;clear(timeout);timeout=null;browserFallback('브라우저에서 음성 재생을 거부했습니다');}});return true;
       }catch{return browserFallback('음성 재생 장치를 사용할 수 없습니다');}
     }
-    return{play,replay:()=>currentId?play(currentId):false,stop,configure,refreshVolume,get availableCount(){return availableCount;},get status(){return status;},get currentId(){return currentId;},get slow(){return slow;},get fallback(){return fallback;},getItem:id=>table.get(id)};
+    return{play,replay:()=>currentId?play(currentId):false,stop,configure,refreshVolume,
+      releaseContext(context){if(context&&request.context===context){request.priority=0;status.priority=0;}},
+      get availableCount(){return availableCount;},get status(){return status;},get currentId(){return currentId;},get slow(){return slow;},get fallback(){return fallback;},getItem:id=>table.get(id)};
   }
   return{create};
 })();

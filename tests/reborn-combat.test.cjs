@@ -8,7 +8,8 @@ const plain=x=>JSON.parse(JSON.stringify(x));
 // Phase 2 intentionally adds acceleration, contact hit-stop, combo tiers,
 // a taught core opening, a skippable boss card and delayed projectile damage.
 // Phase 1 assertions below retain their original invariants with those timing changes.
-function setup(extra={}){const api=vm.runInNewContext(source+'\n;({combat:RebornCombat,learning:RebornLearning})',extra);return {...api,g:api.combat.create()};}
+// Retain the Phase 2 mechanics reference; Phase 3 flow has separate integration coverage.
+function setup(extra={}){const api=vm.runInNewContext(source+'\n;({combat:RebornCombat,learning:RebornLearning})',extra);return {...api,g:api.combat.create({flow:false})};}
 function advance(g,seconds,fps=60){for(let i=0;i<Math.round(seconds*fps);i++)g.update(1/fps);}
 function tap(g,key){const r=g.input(key,true);g.input(key,false);return r;}
 function fight(){const c=setup();c.g.start(true);c.g.proceed();return c;}

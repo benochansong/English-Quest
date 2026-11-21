@@ -50,6 +50,6 @@ async function firstLesson(p){
    await click(p,'proceed');assert.ok(['COMBAT','PLAYER_HIT'].includes((await state(p)).mode),'audio failure never permanently blocks combat');assert.deepEqual(errors,[]);
    cases.push({kind,heard:s.challenge.heard,assisted:s.challenge.assisted,independent:s.stats.listening.independent,continued:true});await context.close();
   }
-  await fs.writeFile(path.join(root,`docs/piper/${channel}-learning.json`),JSON.stringify({browser:channel,version:browser.version(),cases},null,2)+'\n');console.log('PASS',channel,JSON.stringify(cases));
+  await fs.writeFile(path.join(root,process.env.REBORN_QA_OUT||'docs/piper',`${channel}-learning.json`),JSON.stringify({browser:channel,version:browser.version(),cases},null,2)+'\n');console.log('PASS',channel,JSON.stringify(cases));
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});

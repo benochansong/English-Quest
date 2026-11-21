@@ -1,0 +1,39 @@
+✔ Reborn mixer is gesture-gated, layers original cues and clamps five independent volumes (20.4238ms)
+✔ Mixer ducks music, effects and interface independently and restores each configured gain (8.9187ms)
+✔ Original exploration/combat/boss music uses one bounded scheduler and gain crossfades (8.5377ms)
+✔ Rapid layered audio stays within96 source nodes, reuses one context and recovers after cleanup (10.7238ms)
+✔ Missing voice files remain honestly unavailable and never create listening evidence or automatic TTS (4.5ms)
+✔ File playback uses one channel; only playing marks heard; restart and stop invalidate captured old callbacks (2.4842ms)
+✔ Slow and optional local browser fallback are labeled separately, respect volume, and restore ducking (2.243ms)
+✔ A separately provided slow take plays at1x; absent slow assets use pitch-preserving0.75x normal audio (3.3218ms)
+✔ Rejected/broken assets and playback timeouts clean up without inventing successful playback (6.6023ms)
+✔ Fallback rejects remote-only voices and handles unavailable or throwing speech services safely (5.409ms)
+✔ Production manifest has30–50 honest, unique, licensed-or-missing file records (29.1154ms)
+✔ All combat event cue names route to an actual sound preset (8.3418ms)
+✔ Piper media counts one audible start, updates live volume, and cancels at zero (2.1215ms)
+✔ Late failed-file events cannot finish or contaminate explicitly selected fallback speech (1.7669ms)
+✔ Important contextual speech replaces ambient audio; lower-priority feedback is dropped, not queued (1.9319ms)
+✔ A completed action can finish its utterance but yields immediately to the next live instruction (1.7353ms)
+✔ Two distinct independent opportunities plus real action are required for representative phrases (5.6768ms)
+✔ Silence, assistance and recent mistakes cannot promote familiarity or retry the same evidence (2.0715ms)
+✔ Default flow retains session learning across restart/menu but a new instance starts fresh (4.8519ms)
+✔ First guided instruction stays safe, counts forced time, and rejects stale playback tokens (7.6583ms)
+✔ Warned attacks allow2.2seconds before release and carry a unique speech context (3.7916ms)
+✔ Real movement out of a warned landing after speech counts once without Perfect Dodge (7.0079ms)
+✔ Standing in a warned attack cannot manufacture a listening success (7.0151ms)
+✔ Visible avoidance while muted succeeds without independent listening credit (6.3268ms)
+✔ Help freezes the same cue and records assistance on safe resume (6.4495ms)
+✔ Known crystal instruction stays live and only a real in-range sword hit consumes the bonus (16.4164ms)
+✔ Missed crystal exposure expires without a mandatory modal or permanent combat lock (17.2023ms)
+✔ Familiar fire skips arrangement but preserves charge, cooldown and collision-only32damage (8.7987ms)
+✔ Voluntary sentence review is safe and never grants a free projectile or charge (7.2202ms)
+✔ Restart invalidates live tokens and clears per-run action rewards (3.3024ms)
+✔ Muting an already-started opportunity invalidates hearing until another audible playback (6.4216ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 344.2117
