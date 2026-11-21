@@ -88,6 +88,6 @@
 
 - [ ] 실제 사람 플레이 평가 (현재 참가자 0명)
 - [ ] 36개 음성 발음·자연스러움 듣기 승인 (현재 0/36)
-- [ ] Dedicated branch pushed and separate Draft PR opened; no merge.
+- [x] Dedicated branch pushed: `codex/reborn-phase5-game-feel`; [Draft PR #12](https://github.com/benochansong/English-Quest/pull/12) opened, not merged.
 
 확정된 녹음 결함은 없어 재생성·교체하지 않았습니다. 해당 검사 항목은 전수 기술 감사와 미승인 상태 확인을 뜻하며 주관적 품질 승인을 뜻하지 않습니다.

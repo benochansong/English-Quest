@@ -22,3 +22,5 @@ Phase 4의 세 전투와 챔피언을 유지하면서 입력·타격감·음성 
 학습은 Guided → Practice → Familiar를 유지합니다. 플레이 중 학습 기억은 같은 페이지의 재도전에 이어지고 새로고침하면 초기화됩니다. 기존 v0.8 저장에는 접근하지 않습니다. 선택 도전과 추천 연습은 진행 조건이나 반복 재화 보상이 아닙니다.
 
 [기준 감사](REBORN_PHASE5_BASELINE_REPORT.md) · [전후 측정](REBORN_PHASE5_GAMEPLAY_REVIEW.md) · [검증 결과](REBORN_PHASE5_TEST_REPORT.md) · [사람 플레이 양식](REBORN_PHASE5_HUMAN_PLAYTEST.md).
+
+GitHub: [Phase 5 Draft PR #12](https://github.com/benochansong/English-Quest/pull/12), 브랜치 `codex/reborn-phase5-game-feel`. Phase 4 #11 위에 쌓은 미병합 변경입니다.
