@@ -31,6 +31,19 @@ function voiceLab(options={},data=manifest){
   const voice=e.RebornVoice.create(data,mixer,{Audio:AudioDouble,speechSynthesis:synth,SpeechSynthesisUtterance:Utterance,onStatus:s=>statuses.push({...s}),onHeard:r=>heard.push({...r}),...options});
   return {...e,voice,mixer,files,utterances,heard,ducks,statuses,synth};
 }
+
+test('P5: measured loud takes are attenuated without amplifying quiet clips; refreshed volume keeps the factor',()=>{
+ const data=JSON.parse(JSON.stringify(manifest));data.utterances[1].verification={rms:.252};
+ const a=voiceLab({},data);a.voice.play('fire');assert.equal(a.files[0].volume,.3);a.mixer.voiceVolume=.8;a.voice.refreshVolume();assert.equal(a.files[0].volume,.4);
+ data.utterances[1].verification.rms=.06;const b=voiceLab({},data);b.voice.play('fire');assert.equal(b.files[0].volume,.6);
+});
+test('P5: warning bus stays stronger than effects under voice, ambience ducks and same-scene HUD ticks do not schedule gain ramps',()=>{
+ const {RebornAudio,lab}=environment(),m=RebornAudio.create({sfx:.8,ambient:.4});m.unlock();m.duck(true);
+ assert.equal(m.diagnostics.warningDuck,.75);assert.equal(m.diagnostics.ambientDuck,.12);
+ m.sfx('slimeAttack');const bus=lab.gains[7];assert.ok(Math.abs(bus.gain.calls.at(-1)[1]-.6)<1e-9);
+ const count=lab.gains[0].gain.calls.length;for(let i=0;i<100;i++)m.setScene('exploration');assert.equal(lab.gains[0].gain.calls.length,count);
+ m.duck(false);assert.equal(bus.gain.calls.at(-1)[1],.8);m.stop();
+});
 test('Reborn mixer is gesture-gated, layers original cues and clamps five independent volumes',()=>{
   const {RebornAudio,lab}=environment(),m=RebornAudio.create();
   assert.equal(lab.contexts.length,0);assert.equal(m.sfx('sword'),false);

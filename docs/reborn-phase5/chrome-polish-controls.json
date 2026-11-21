@@ -1,0 +1,10 @@
+{
+  "browser": "chrome",
+  "version": "157.0.8103.79",
+  "realBufferedInput": true,
+  "heldKeyNoLoop": true,
+  "pausedNodes": 0,
+  "reducedMotion": true,
+  "width": 360,
+  "errors": []
+}

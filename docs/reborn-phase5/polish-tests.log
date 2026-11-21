@@ -1,0 +1,32 @@
+✔ P5: measured loud takes are attenuated without amplifying quiet clips; refreshed volume keeps the factor (7.8506ms)
+✔ P5: warning bus stays stronger than effects under voice, ambience ducks and same-scene HUD ticks do not schedule gain ramps (11.7123ms)
+✔ Reborn mixer is gesture-gated, layers original cues and clamps five independent volumes (10.7826ms)
+✔ Mixer ducks music, effects and interface independently and restores each configured gain (9.684ms)
+✔ Original exploration/combat/boss music uses one bounded scheduler and gain crossfades (11.6398ms)
+✔ Rapid layered audio stays within96 source nodes, reuses one context and recovers after cleanup (9.7889ms)
+✔ Missing voice files remain honestly unavailable and never create listening evidence or automatic TTS (4.6446ms)
+✔ File playback uses one channel; only playing marks heard; restart and stop invalidate captured old callbacks (2.2055ms)
+✔ Slow and optional local browser fallback are labeled separately, respect volume, and restore ducking (3.9177ms)
+✔ A separately provided slow take plays at1x; absent slow assets use pitch-preserving0.75x normal audio (3.2455ms)
+✔ Rejected/broken assets and playback timeouts clean up without inventing successful playback (6.2145ms)
+✔ Fallback rejects remote-only voices and handles unavailable or throwing speech services safely (6.115ms)
+✔ Production manifest has30–50 honest, unique, licensed-or-missing file records (23.5856ms)
+✔ All combat event cue names route to an actual sound preset (10.1718ms)
+✔ Piper media counts one audible start, updates live volume, and cancels at zero (2.0408ms)
+✔ Late failed-file events cannot finish or contaminate explicitly selected fallback speech (1.6109ms)
+✔ Important contextual speech replaces ambient audio; lower-priority feedback is dropped, not queued (1.6609ms)
+✔ A completed action can finish its utterance but yields immediately to the next live instruction (1.7571ms)
+✔ P5: a distinct press at25ms buffers exactly one next strike, holds and finisher cannot loop (16.4554ms)
+✔ P5: sound starts with the active arc and contact freezes a visible blade pose with exact damage (3.0955ms)
+✔ P5: empty dodge creates no counter; a real collision opens a bounded single counter opportunity (10.2664ms)
+✔ P5: missed counter expires and scene reset removes it without changing dodge invulnerability (6.4571ms)
+✔ P5: golem absorbs70% of sword displacement while actual shield damage stays correct (5.8811ms)
+✔ P5: clear replay replaces the current story result, preserves earlier history and creates no duplicate reward (3.8299ms)
+ℹ tests 24
+ℹ suites 0
+ℹ pass 24
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 337.9053

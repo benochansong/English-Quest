@@ -1,0 +1,21 @@
+{
+  "scope": "Headless file:// automated combat with screenshot/input overhead; descriptive sample, not a hardware FPS certification",
+  "browser": "chrome",
+  "samples": 7280,
+  "frameMs": {
+    "p50": 4.200000000000728,
+    "p95": 8.400000000001455,
+    "max": 46,
+    "over25": 3,
+    "over50": 0,
+    "over100": 0
+  },
+  "callbackMs": {
+    "p50": 0.8000000007450581,
+    "p95": 1.300000000745058,
+    "max": 8.300000000745058
+  },
+  "maxEffects": 9,
+  "maxProjectiles": 1,
+  "maxAudioNodes": 15
+}

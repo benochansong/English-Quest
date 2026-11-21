@@ -1,0 +1,1962 @@
+{
+  "browser": "chrome",
+  "version": "157.0.8103.79",
+  "hash": "18c28194fc46d9b3534bbfd62c7cdf919232439f4c4bae7e51cd0bb596ec1866",
+  "offline": true,
+  "muted": true,
+  "errors": [],
+  "requests": [],
+  "runs": [
+    {
+      "reports": [
+        {
+          "duration": 7.493,
+          "mode": "ENCOUNTER_CLEAR",
+          "kind": "slime",
+          "stats": {
+            "correct": 2,
+            "wrong": 0,
+            "assisted": 2,
+            "independent": 0,
+            "expressions": [
+              "Move left!",
+              "Watch out!"
+            ],
+            "reviewExpressions": [
+              {
+                "id": "left",
+                "voiceId": "VO_MOVE_LEFT",
+                "english": "Move left!",
+                "ko": "왼쪽으로 이동해요!",
+                "reasons": [
+                  "hint"
+                ]
+              },
+              {
+                "id": "dodge",
+                "voiceId": "VO_WATCH_OUT",
+                "english": "Watch out!",
+                "ko": "조심해요!",
+                "reasons": [
+                  "hint"
+                ]
+              }
+            ],
+            "goals": [
+              "combo-three"
+            ],
+            "combat": {
+              "damageDealt": 70,
+              "damageReceived": 7,
+              "dodges": 0,
+              "successfulDodges": 0,
+              "perfectDodges": 0,
+              "highestCombo": 3,
+              "magicUsed": 0,
+              "magicHits": 0,
+              "weaknessHits": 0,
+              "swordHits": 7,
+              "counterattacks": 0
+            },
+            "listening": {
+              "correct": 2,
+              "wrong": 0,
+              "assisted": 2,
+              "independent": 0,
+              "asset": 0,
+              "fallback": 0,
+              "unheard": 2
+            },
+            "magic": {
+              "correct": 0,
+              "wrong": 0,
+              "assisted": 0,
+              "independent": 0
+            },
+            "flow": {
+              "forcedScreens": 2,
+              "forcedSeconds": 0.7416666666666665,
+              "sentenceArrangements": 0,
+              "actionOpportunities": 0,
+              "actionSuccesses": 0,
+              "independentActions": 0,
+              "heardExpressions": [],
+              "independentExpressions": [],
+              "helpExpressions": [],
+              "outcomes": [],
+              "audio": {
+                "requested": 6,
+                "playing": 0,
+                "ended": 0,
+                "stopped": 0,
+                "error": 0,
+                "missing": 0,
+                "muted": 6,
+                "blocked": 0,
+                "ignored": 0
+              }
+            },
+            "battlefield": {
+              "missedAttacks": 0,
+              "groundings": 0,
+              "shieldBreaks": 0,
+              "wrongCrystals": 0
+            }
+          },
+          "learning": {
+            "left": {
+              "introduced": true,
+              "stage": "practice",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": "assisted"
+            },
+            "dodge": {
+              "introduced": true,
+              "stage": "practice",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": "assisted"
+            },
+            "attack": {
+              "introduced": false,
+              "stage": "guided",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": null
+            },
+            "magic": {
+              "introduced": false,
+              "stage": "guided",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": null
+            },
+            "fire": {
+              "introduced": false,
+              "stage": "guided",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": null
+            },
+            "crystal": {
+              "introduced": false,
+              "stage": "guided",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": null
+            },
+            "wind": {
+              "introduced": false,
+              "stage": "guided",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": null
+            },
+            "blue": {
+              "introduced": false,
+              "stage": "guided",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": null
+            }
+          },
+          "report": {
+            "kind": "slime",
+            "durationSeconds": 7.658,
+            "stats": {
+              "correct": 2,
+              "wrong": 0,
+              "assisted": 2,
+              "independent": 0,
+              "expressions": [
+                "Move left!",
+                "Watch out!"
+              ],
+              "reviewExpressions": [
+                {
+                  "id": "left",
+                  "voiceId": "VO_MOVE_LEFT",
+                  "english": "Move left!",
+                  "ko": "왼쪽으로 이동해요!",
+                  "reasons": [
+                    "hint"
+                  ]
+                },
+                {
+                  "id": "dodge",
+                  "voiceId": "VO_WATCH_OUT",
+                  "english": "Watch out!",
+                  "ko": "조심해요!",
+                  "reasons": [
+                    "hint"
+                  ]
+                }
+              ],
+              "goals": [
+                "combo-three"
+              ],
+              "combat": {
+                "damageDealt": 70,
+                "damageReceived": 7,
+                "dodges": 0,
+                "successfulDodges": 0,
+                "perfectDodges": 0,
+                "highestCombo": 3,
+                "magicUsed": 0,
+                "magicHits": 0,
+                "weaknessHits": 0,
+                "swordHits": 7,
+                "counterattacks": 0
+              },
+              "listening": {
+                "correct": 2,
+                "wrong": 0,
+                "assisted": 2,
+                "independent": 0,
+                "asset": 0,
+                "fallback": 0,
+                "unheard": 2
+              },
+              "magic": {
+                "correct": 0,
+                "wrong": 0,
+                "assisted": 0,
+                "independent": 0
+              },
+              "flow": {
+                "forcedScreens": 2,
+                "forcedSeconds": 0.7416666666666665,
+                "sentenceArrangements": 0,
+                "actionOpportunities": 0,
+                "actionSuccesses": 0,
+                "independentActions": 0,
+                "heardExpressions": [],
+                "independentExpressions": [],
+                "helpExpressions": [
+                  "left",
+                  "dodge"
+                ],
+                "outcomes": [],
+                "audio": {
+                  "requested": 5,
+                  "playing": 0,
+                  "ended": 0,
+                  "stopped": 0,
+                  "error": 0,
+                  "missing": 0,
+                  "muted": 5,
+                  "blocked": 0,
+                  "ignored": 0
+                }
+              },
+              "battlefield": {
+                "missedAttacks": 0,
+                "groundings": 0,
+                "shieldBreaks": 0,
+                "wrongCrystals": 0
+              }
+            },
+            "metrics": {
+              "damageReceived": 7,
+              "successfulDodges": 0,
+              "missedAttacks": 0,
+              "highestCombo": 3,
+              "groundings": 0,
+              "shieldBreaks": 0,
+              "weaknessHits": 0,
+              "spokenRequests": 5,
+              "listeningOpportunities": 0,
+              "independentActions": 0,
+              "assistedActions": 0,
+              "textOnlyActions": 0,
+              "helpExpressions": [
+                "left",
+                "dodge"
+              ],
+              "interruptions": 2,
+              "interruptionSeconds": 0.742
+            }
+          },
+          "patterns": [
+            "jump",
+            "rush"
+          ],
+          "states": [
+            "IDLE",
+            "APPROACH",
+            "TELEGRAPH",
+            "ATTACK",
+            "RECOVERY",
+            "HIT_REACTION"
+          ],
+          "screens": [
+            "2:1",
+            "2:2"
+          ]
+        },
+        {
+          "duration": 11.861,
+          "mode": "ENCOUNTER_CLEAR",
+          "kind": "raven",
+          "stats": {
+            "correct": 3,
+            "wrong": 0,
+            "assisted": 3,
+            "independent": 0,
+            "expressions": [
+              "Move left!",
+              "Watch out!",
+              "Bring it down!",
+              "I need fire."
+            ],
+            "reviewExpressions": [
+              {
+                "id": "left",
+                "voiceId": "VO_MOVE_LEFT",
+                "english": "Move left!",
+                "ko": "왼쪽으로 이동해요!",
+                "reasons": [
+                  "hint"
+                ]
+              },
+              {
+                "id": "dodge",
+                "voiceId": "VO_WATCH_OUT",
+                "english": "Watch out!",
+                "ko": "조심해요!",
+                "reasons": [
+                  "hint",
+                  "missed"
+                ]
+              },
+              {
+                "id": "wind",
+                "voiceId": "VO_BRING_DOWN",
+                "english": "Bring it down!",
+                "ko": "아래로 끌어내려요!",
+                "reasons": [
+                  "hint"
+                ]
+              },
+              {
+                "id": "fire",
+                "voiceId": "VO_NEED_FIRE",
+                "english": "I need fire.",
+                "ko": "나는 불이 필요해요.",
+                "reasons": [
+                  "hint"
+                ]
+              }
+            ],
+            "goals": [
+              "combo-three"
+            ],
+            "combat": {
+              "damageDealt": 180,
+              "damageReceived": 19,
+              "dodges": 0,
+              "successfulDodges": 0,
+              "perfectDodges": 0,
+              "highestCombo": 3,
+              "magicUsed": 1,
+              "magicHits": 1,
+              "weaknessHits": 0,
+              "swordHits": 15,
+              "counterattacks": 0
+            },
+            "listening": {
+              "correct": 2,
+              "wrong": 0,
+              "assisted": 2,
+              "independent": 0,
+              "asset": 0,
+              "fallback": 0,
+              "unheard": 2
+            },
+            "magic": {
+              "correct": 1,
+              "wrong": 0,
+              "assisted": 1,
+              "independent": 0
+            },
+            "flow": {
+              "forcedScreens": 4,
+              "forcedSeconds": 1.5916666666666635,
+              "sentenceArrangements": 1,
+              "actionOpportunities": 3,
+              "actionSuccesses": 2,
+              "independentActions": 0,
+              "heardExpressions": [],
+              "independentExpressions": [],
+              "helpExpressions": [],
+              "outcomes": [
+                {
+                  "id": "2:action:3",
+                  "key": "dodge",
+                  "success": false,
+                  "heard": false,
+                  "assisted": false,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "missed"
+                },
+                {
+                  "id": "2:4",
+                  "key": "wind",
+                  "success": true,
+                  "heard": false,
+                  "assisted": true,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "action"
+                },
+                {
+                  "id": "2:6",
+                  "key": "fire",
+                  "success": true,
+                  "heard": false,
+                  "assisted": true,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "action"
+                }
+              ],
+              "audio": {
+                "requested": 14,
+                "playing": 0,
+                "ended": 0,
+                "stopped": 0,
+                "error": 0,
+                "missing": 0,
+                "muted": 14,
+                "blocked": 0,
+                "ignored": 0
+              }
+            },
+            "battlefield": {
+              "missedAttacks": 0,
+              "groundings": 1,
+              "shieldBreaks": 0,
+              "wrongCrystals": 0
+            }
+          },
+          "learning": {
+            "left": {
+              "introduced": true,
+              "stage": "practice",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": "assisted"
+            },
+            "dodge": {
+              "introduced": true,
+              "stage": "practice",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 1,
+              "lastResult": "review"
+            },
+            "attack": {
+              "introduced": false,
+              "stage": "guided",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": null
+            },
+            "magic": {
+              "introduced": false,
+              "stage": "guided",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": null
+            },
+            "fire": {
+              "introduced": true,
+              "stage": "practice",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": "assisted"
+            },
+            "crystal": {
+              "introduced": false,
+              "stage": "guided",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": null
+            },
+            "wind": {
+              "introduced": true,
+              "stage": "practice",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": "assisted"
+            },
+            "blue": {
+              "introduced": false,
+              "stage": "guided",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": null
+            }
+          },
+          "report": {
+            "kind": "raven",
+            "durationSeconds": 11.85,
+            "stats": {
+              "correct": 3,
+              "wrong": 0,
+              "assisted": 3,
+              "independent": 0,
+              "expressions": [
+                "Watch out!",
+                "Bring it down!",
+                "I need fire."
+              ],
+              "reviewExpressions": [
+                {
+                  "id": "dodge",
+                  "voiceId": "VO_WATCH_OUT",
+                  "english": "Watch out!",
+                  "ko": "조심해요!",
+                  "reasons": [
+                    "hint",
+                    "missed"
+                  ]
+                },
+                {
+                  "id": "wind",
+                  "voiceId": "VO_BRING_DOWN",
+                  "english": "Bring it down!",
+                  "ko": "아래로 끌어내려요!",
+                  "reasons": [
+                    "hint"
+                  ]
+                },
+                {
+                  "id": "fire",
+                  "voiceId": "VO_NEED_FIRE",
+                  "english": "I need fire.",
+                  "ko": "나는 불이 필요해요.",
+                  "reasons": [
+                    "hint"
+                  ]
+                }
+              ],
+              "goals": [
+                "combo-three"
+              ],
+              "combat": {
+                "damageDealt": 110,
+                "damageReceived": 12,
+                "dodges": 0,
+                "successfulDodges": 0,
+                "perfectDodges": 0,
+                "highestCombo": 3,
+                "magicUsed": 1,
+                "magicHits": 1,
+                "weaknessHits": 0,
+                "swordHits": 8,
+                "counterattacks": 0
+              },
+              "listening": {
+                "correct": 0,
+                "wrong": 0,
+                "assisted": 0,
+                "independent": 0,
+                "asset": 0,
+                "fallback": 0,
+                "unheard": 0
+              },
+              "magic": {
+                "correct": 1,
+                "wrong": 0,
+                "assisted": 1,
+                "independent": 0
+              },
+              "flow": {
+                "forcedScreens": 2,
+                "forcedSeconds": 0.849999999999997,
+                "sentenceArrangements": 1,
+                "actionOpportunities": 3,
+                "actionSuccesses": 2,
+                "independentActions": 0,
+                "heardExpressions": [],
+                "independentExpressions": [],
+                "helpExpressions": [
+                  "wind",
+                  "fire"
+                ],
+                "outcomes": [
+                  {
+                    "id": "2:action:3",
+                    "key": "dodge",
+                    "success": false,
+                    "heard": false,
+                    "assisted": false,
+                    "independent": false,
+                    "actual": true,
+                    "reason": "missed"
+                  },
+                  {
+                    "id": "2:4",
+                    "key": "wind",
+                    "success": true,
+                    "heard": false,
+                    "assisted": true,
+                    "independent": false,
+                    "actual": true,
+                    "reason": "action"
+                  },
+                  {
+                    "id": "2:6",
+                    "key": "fire",
+                    "success": true,
+                    "heard": false,
+                    "assisted": true,
+                    "independent": false,
+                    "actual": true,
+                    "reason": "action"
+                  }
+                ],
+                "audio": {
+                  "requested": 13,
+                  "playing": 0,
+                  "ended": 0,
+                  "stopped": 0,
+                  "error": 0,
+                  "missing": 0,
+                  "muted": 13,
+                  "blocked": 0,
+                  "ignored": 0
+                }
+              },
+              "battlefield": {
+                "missedAttacks": 0,
+                "groundings": 1,
+                "shieldBreaks": 0,
+                "wrongCrystals": 0
+              }
+            },
+            "metrics": {
+              "damageReceived": 12,
+              "successfulDodges": 0,
+              "missedAttacks": 0,
+              "highestCombo": 3,
+              "groundings": 1,
+              "shieldBreaks": 0,
+              "weaknessHits": 0,
+              "spokenRequests": 6,
+              "listeningOpportunities": 3,
+              "independentActions": 0,
+              "assistedActions": 2,
+              "textOnlyActions": 2,
+              "helpExpressions": [
+                "wind",
+                "fire"
+              ],
+              "interruptions": 2,
+              "interruptionSeconds": 0.85
+            }
+          },
+          "patterns": [
+            "dive"
+          ],
+          "states": [
+            "PATROL",
+            "APPROACH",
+            "TELEGRAPH_DIVE",
+            "DIVE_ATTACK",
+            "RECOVERY",
+            "GROUNDED"
+          ],
+          "screens": [
+            "2:4",
+            "2:6"
+          ]
+        },
+        {
+          "duration": 22.179,
+          "mode": "VICTORY",
+          "kind": "golem",
+          "stats": {
+            "correct": 4,
+            "wrong": 0,
+            "assisted": 4,
+            "independent": 0,
+            "expressions": [
+              "Move left!",
+              "Watch out!",
+              "Bring it down!",
+              "I need fire.",
+              "Activate the blue crystal!",
+              "Attack the crystal!"
+            ],
+            "reviewExpressions": [
+              {
+                "id": "left",
+                "voiceId": "VO_MOVE_LEFT",
+                "english": "Move left!",
+                "ko": "왼쪽으로 이동해요!",
+                "reasons": [
+                  "hint"
+                ]
+              },
+              {
+                "id": "dodge",
+                "voiceId": "VO_WATCH_OUT",
+                "english": "Watch out!",
+                "ko": "조심해요!",
+                "reasons": [
+                  "hint",
+                  "missed",
+                  "expired"
+                ]
+              },
+              {
+                "id": "wind",
+                "voiceId": "VO_BRING_DOWN",
+                "english": "Bring it down!",
+                "ko": "아래로 끌어내려요!",
+                "reasons": [
+                  "hint"
+                ]
+              },
+              {
+                "id": "fire",
+                "voiceId": "VO_NEED_FIRE",
+                "english": "I need fire.",
+                "ko": "나는 불이 필요해요.",
+                "reasons": [
+                  "hint"
+                ]
+              },
+              {
+                "id": "blue",
+                "voiceId": "VO_ACTIVATE_BLUE",
+                "english": "Activate the blue crystal!",
+                "ko": "파란 수정을 활성화하세요!",
+                "reasons": [
+                  "hint",
+                  "expired"
+                ]
+              },
+              {
+                "id": "crystal",
+                "voiceId": "VO_ATTACK_CRYSTAL",
+                "english": "Attack the crystal!",
+                "ko": "수정을 공격해요!",
+                "reasons": [
+                  "hint"
+                ]
+              }
+            ],
+            "goals": [
+              "combo-three",
+              "crystal-break"
+            ],
+            "combat": {
+              "damageDealt": 350,
+              "damageReceived": 19,
+              "dodges": 0,
+              "successfulDodges": 0,
+              "perfectDodges": 0,
+              "highestCombo": 3,
+              "magicUsed": 1,
+              "magicHits": 1,
+              "weaknessHits": 11,
+              "swordHits": 26,
+              "counterattacks": 0
+            },
+            "listening": {
+              "correct": 3,
+              "wrong": 0,
+              "assisted": 3,
+              "independent": 0,
+              "asset": 0,
+              "fallback": 0,
+              "unheard": 3
+            },
+            "magic": {
+              "correct": 1,
+              "wrong": 0,
+              "assisted": 1,
+              "independent": 0
+            },
+            "flow": {
+              "forcedScreens": 6,
+              "forcedSeconds": 2.124999999999995,
+              "sentenceArrangements": 1,
+              "actionOpportunities": 8,
+              "actionSuccesses": 5,
+              "independentActions": 0,
+              "heardExpressions": [],
+              "independentExpressions": [],
+              "helpExpressions": [],
+              "outcomes": [
+                {
+                  "id": "2:action:3",
+                  "key": "dodge",
+                  "success": false,
+                  "heard": false,
+                  "assisted": false,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "missed"
+                },
+                {
+                  "id": "2:4",
+                  "key": "wind",
+                  "success": true,
+                  "heard": false,
+                  "assisted": true,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "action"
+                },
+                {
+                  "id": "2:6",
+                  "key": "fire",
+                  "success": true,
+                  "heard": false,
+                  "assisted": true,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "action"
+                },
+                {
+                  "id": "2:9",
+                  "key": "blue",
+                  "success": true,
+                  "heard": false,
+                  "assisted": true,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "action"
+                },
+                {
+                  "id": "2:11",
+                  "key": "crystal",
+                  "success": true,
+                  "heard": false,
+                  "assisted": true,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "action"
+                },
+                {
+                  "id": "2:action:13",
+                  "key": "dodge",
+                  "success": false,
+                  "heard": false,
+                  "assisted": false,
+                  "independent": false,
+                  "actual": false,
+                  "reason": "expired"
+                },
+                {
+                  "id": "2:action:14",
+                  "key": "blue",
+                  "success": false,
+                  "heard": false,
+                  "assisted": false,
+                  "independent": false,
+                  "actual": false,
+                  "reason": "expired"
+                },
+                {
+                  "id": "2:action:15",
+                  "key": "crystal",
+                  "success": true,
+                  "heard": false,
+                  "assisted": false,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "action"
+                }
+              ],
+              "audio": {
+                "requested": 24,
+                "playing": 0,
+                "ended": 0,
+                "stopped": 0,
+                "error": 0,
+                "missing": 0,
+                "muted": 24,
+                "blocked": 0,
+                "ignored": 0
+              }
+            },
+            "battlefield": {
+              "missedAttacks": 0,
+              "groundings": 1,
+              "shieldBreaks": 2,
+              "wrongCrystals": 0
+            }
+          },
+          "learning": {
+            "left": {
+              "introduced": true,
+              "stage": "practice",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": "assisted"
+            },
+            "dodge": {
+              "introduced": true,
+              "stage": "practice",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 2,
+              "lastResult": "review"
+            },
+            "attack": {
+              "introduced": false,
+              "stage": "guided",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": null
+            },
+            "magic": {
+              "introduced": false,
+              "stage": "guided",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": null
+            },
+            "fire": {
+              "introduced": true,
+              "stage": "practice",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": "assisted"
+            },
+            "crystal": {
+              "introduced": true,
+              "stage": "practice",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": "assisted"
+            },
+            "wind": {
+              "introduced": true,
+              "stage": "practice",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 0,
+              "lastResult": "assisted"
+            },
+            "blue": {
+              "introduced": true,
+              "stage": "practice",
+              "independent": 0,
+              "streak": 0,
+              "actual": 0,
+              "misses": 1,
+              "lastResult": "review"
+            }
+          },
+          "report": {
+            "kind": "golem",
+            "durationSeconds": 22.167,
+            "stats": {
+              "correct": 4,
+              "wrong": 0,
+              "assisted": 4,
+              "independent": 0,
+              "expressions": [
+                "Activate the blue crystal!",
+                "Attack the crystal!",
+                "Watch out!"
+              ],
+              "reviewExpressions": [
+                {
+                  "id": "dodge",
+                  "voiceId": "VO_WATCH_OUT",
+                  "english": "Watch out!",
+                  "ko": "조심해요!",
+                  "reasons": [
+                    "hint",
+                    "missed",
+                    "expired"
+                  ]
+                },
+                {
+                  "id": "blue",
+                  "voiceId": "VO_ACTIVATE_BLUE",
+                  "english": "Activate the blue crystal!",
+                  "ko": "파란 수정을 활성화하세요!",
+                  "reasons": [
+                    "hint",
+                    "expired"
+                  ]
+                },
+                {
+                  "id": "crystal",
+                  "voiceId": "VO_ATTACK_CRYSTAL",
+                  "english": "Attack the crystal!",
+                  "ko": "수정을 공격해요!",
+                  "reasons": [
+                    "hint"
+                  ]
+                }
+              ],
+              "goals": [
+                "combo-three",
+                "crystal-break"
+              ],
+              "combat": {
+                "damageDealt": 170,
+                "damageReceived": 0,
+                "dodges": 0,
+                "successfulDodges": 0,
+                "perfectDodges": 0,
+                "highestCombo": 3,
+                "magicUsed": 0,
+                "magicHits": 0,
+                "weaknessHits": 11,
+                "swordHits": 11,
+                "counterattacks": 0
+              },
+              "listening": {
+                "correct": 1,
+                "wrong": 0,
+                "assisted": 1,
+                "independent": 0,
+                "asset": 0,
+                "fallback": 0,
+                "unheard": 1
+              },
+              "magic": {
+                "correct": 0,
+                "wrong": 0,
+                "assisted": 0,
+                "independent": 0
+              },
+              "flow": {
+                "forcedScreens": 2,
+                "forcedSeconds": 0.5333333333333317,
+                "sentenceArrangements": 0,
+                "actionOpportunities": 5,
+                "actionSuccesses": 3,
+                "independentActions": 0,
+                "heardExpressions": [],
+                "independentExpressions": [],
+                "helpExpressions": [
+                  "blue",
+                  "crystal"
+                ],
+                "outcomes": [
+                  {
+                    "id": "2:9",
+                    "key": "blue",
+                    "success": true,
+                    "heard": false,
+                    "assisted": true,
+                    "independent": false,
+                    "actual": true,
+                    "reason": "action"
+                  },
+                  {
+                    "id": "2:11",
+                    "key": "crystal",
+                    "success": true,
+                    "heard": false,
+                    "assisted": true,
+                    "independent": false,
+                    "actual": true,
+                    "reason": "action"
+                  },
+                  {
+                    "id": "2:action:13",
+                    "key": "dodge",
+                    "success": false,
+                    "heard": false,
+                    "assisted": false,
+                    "independent": false,
+                    "actual": false,
+                    "reason": "expired"
+                  },
+                  {
+                    "id": "2:action:14",
+                    "key": "blue",
+                    "success": false,
+                    "heard": false,
+                    "assisted": false,
+                    "independent": false,
+                    "actual": false,
+                    "reason": "expired"
+                  },
+                  {
+                    "id": "2:action:15",
+                    "key": "crystal",
+                    "success": true,
+                    "heard": false,
+                    "assisted": false,
+                    "independent": false,
+                    "actual": true,
+                    "reason": "action"
+                  }
+                ],
+                "audio": {
+                  "requested": 23,
+                  "playing": 0,
+                  "ended": 0,
+                  "stopped": 0,
+                  "error": 0,
+                  "missing": 0,
+                  "muted": 23,
+                  "blocked": 0,
+                  "ignored": 0
+                }
+              },
+              "battlefield": {
+                "missedAttacks": 0,
+                "groundings": 0,
+                "shieldBreaks": 2,
+                "wrongCrystals": 0
+              }
+            },
+            "metrics": {
+              "damageReceived": 0,
+              "successfulDodges": 0,
+              "missedAttacks": 0,
+              "highestCombo": 3,
+              "groundings": 0,
+              "shieldBreaks": 2,
+              "weaknessHits": 11,
+              "spokenRequests": 8,
+              "listeningOpportunities": 5,
+              "independentActions": 0,
+              "assistedActions": 2,
+              "textOnlyActions": 3,
+              "helpExpressions": [
+                "blue",
+                "crystal"
+              ],
+              "interruptions": 2,
+              "interruptionSeconds": 0.533
+            }
+          },
+          "patterns": [
+            "fist",
+            "slam",
+            "pulse"
+          ],
+          "states": [
+            "SHIELD_ACTIVATE",
+            "IDLE",
+            "APPROACH",
+            "TELEGRAPH_FIST",
+            "FIST_ATTACK",
+            "RECOVERY",
+            "SHIELD_BREAK",
+            "STAGGER",
+            "TELEGRAPH_SLAM",
+            "TELEGRAPH_PULSE",
+            "CRYSTAL_PULSE"
+          ],
+          "screens": [
+            "2:9",
+            "2:11"
+          ]
+        }
+      ],
+      "history": [
+        {
+          "kind": "slime",
+          "durationSeconds": 7.658,
+          "stats": {
+            "correct": 2,
+            "wrong": 0,
+            "assisted": 2,
+            "independent": 0,
+            "expressions": [
+              "Move left!",
+              "Watch out!"
+            ],
+            "reviewExpressions": [
+              {
+                "id": "left",
+                "voiceId": "VO_MOVE_LEFT",
+                "english": "Move left!",
+                "ko": "왼쪽으로 이동해요!",
+                "reasons": [
+                  "hint"
+                ]
+              },
+              {
+                "id": "dodge",
+                "voiceId": "VO_WATCH_OUT",
+                "english": "Watch out!",
+                "ko": "조심해요!",
+                "reasons": [
+                  "hint",
+                  "missed",
+                  "expired"
+                ]
+              }
+            ],
+            "goals": [
+              "combo-three"
+            ],
+            "combat": {
+              "damageDealt": 70,
+              "damageReceived": 7,
+              "dodges": 0,
+              "successfulDodges": 0,
+              "perfectDodges": 0,
+              "highestCombo": 3,
+              "magicUsed": 0,
+              "magicHits": 0,
+              "weaknessHits": 0,
+              "swordHits": 7,
+              "counterattacks": 0
+            },
+            "listening": {
+              "correct": 2,
+              "wrong": 0,
+              "assisted": 2,
+              "independent": 0,
+              "asset": 0,
+              "fallback": 0,
+              "unheard": 2
+            },
+            "magic": {
+              "correct": 0,
+              "wrong": 0,
+              "assisted": 0,
+              "independent": 0
+            },
+            "flow": {
+              "forcedScreens": 2,
+              "forcedSeconds": 0.7416666666666665,
+              "sentenceArrangements": 0,
+              "actionOpportunities": 0,
+              "actionSuccesses": 0,
+              "independentActions": 0,
+              "heardExpressions": [],
+              "independentExpressions": [],
+              "helpExpressions": [
+                "left",
+                "dodge"
+              ],
+              "outcomes": [],
+              "audio": {
+                "requested": 5,
+                "playing": 0,
+                "ended": 0,
+                "stopped": 0,
+                "error": 0,
+                "missing": 0,
+                "muted": 5,
+                "blocked": 0,
+                "ignored": 0
+              }
+            },
+            "battlefield": {
+              "missedAttacks": 0,
+              "groundings": 0,
+              "shieldBreaks": 0,
+              "wrongCrystals": 0
+            }
+          },
+          "metrics": {
+            "damageReceived": 7,
+            "successfulDodges": 0,
+            "missedAttacks": 0,
+            "highestCombo": 3,
+            "groundings": 0,
+            "shieldBreaks": 0,
+            "weaknessHits": 0,
+            "spokenRequests": 5,
+            "listeningOpportunities": 0,
+            "independentActions": 0,
+            "assistedActions": 0,
+            "textOnlyActions": 0,
+            "helpExpressions": [
+              "left",
+              "dodge"
+            ],
+            "interruptions": 2,
+            "interruptionSeconds": 0.742
+          }
+        },
+        {
+          "kind": "raven",
+          "durationSeconds": 11.85,
+          "stats": {
+            "correct": 3,
+            "wrong": 0,
+            "assisted": 3,
+            "independent": 0,
+            "expressions": [
+              "Watch out!",
+              "Bring it down!",
+              "I need fire."
+            ],
+            "reviewExpressions": [
+              {
+                "id": "dodge",
+                "voiceId": "VO_WATCH_OUT",
+                "english": "Watch out!",
+                "ko": "조심해요!",
+                "reasons": [
+                  "hint",
+                  "missed",
+                  "expired"
+                ]
+              },
+              {
+                "id": "wind",
+                "voiceId": "VO_BRING_DOWN",
+                "english": "Bring it down!",
+                "ko": "아래로 끌어내려요!",
+                "reasons": [
+                  "hint"
+                ]
+              },
+              {
+                "id": "fire",
+                "voiceId": "VO_NEED_FIRE",
+                "english": "I need fire.",
+                "ko": "나는 불이 필요해요.",
+                "reasons": [
+                  "hint"
+                ]
+              }
+            ],
+            "goals": [
+              "combo-three"
+            ],
+            "combat": {
+              "damageDealt": 110,
+              "damageReceived": 12,
+              "dodges": 0,
+              "successfulDodges": 0,
+              "perfectDodges": 0,
+              "highestCombo": 3,
+              "magicUsed": 1,
+              "magicHits": 1,
+              "weaknessHits": 0,
+              "swordHits": 8,
+              "counterattacks": 0
+            },
+            "listening": {
+              "correct": 0,
+              "wrong": 0,
+              "assisted": 0,
+              "independent": 0,
+              "asset": 0,
+              "fallback": 0,
+              "unheard": 0
+            },
+            "magic": {
+              "correct": 1,
+              "wrong": 0,
+              "assisted": 1,
+              "independent": 0
+            },
+            "flow": {
+              "forcedScreens": 2,
+              "forcedSeconds": 0.849999999999997,
+              "sentenceArrangements": 1,
+              "actionOpportunities": 3,
+              "actionSuccesses": 2,
+              "independentActions": 0,
+              "heardExpressions": [],
+              "independentExpressions": [],
+              "helpExpressions": [
+                "wind",
+                "fire"
+              ],
+              "outcomes": [
+                {
+                  "id": "2:action:3",
+                  "key": "dodge",
+                  "success": false,
+                  "heard": false,
+                  "assisted": false,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "missed"
+                },
+                {
+                  "id": "2:4",
+                  "key": "wind",
+                  "success": true,
+                  "heard": false,
+                  "assisted": true,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "action"
+                },
+                {
+                  "id": "2:6",
+                  "key": "fire",
+                  "success": true,
+                  "heard": false,
+                  "assisted": true,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "action"
+                }
+              ],
+              "audio": {
+                "requested": 13,
+                "playing": 0,
+                "ended": 0,
+                "stopped": 0,
+                "error": 0,
+                "missing": 0,
+                "muted": 13,
+                "blocked": 0,
+                "ignored": 0
+              }
+            },
+            "battlefield": {
+              "missedAttacks": 0,
+              "groundings": 1,
+              "shieldBreaks": 0,
+              "wrongCrystals": 0
+            }
+          },
+          "metrics": {
+            "damageReceived": 12,
+            "successfulDodges": 0,
+            "missedAttacks": 0,
+            "highestCombo": 3,
+            "groundings": 1,
+            "shieldBreaks": 0,
+            "weaknessHits": 0,
+            "spokenRequests": 6,
+            "listeningOpportunities": 3,
+            "independentActions": 0,
+            "assistedActions": 2,
+            "textOnlyActions": 2,
+            "helpExpressions": [
+              "wind",
+              "fire"
+            ],
+            "interruptions": 2,
+            "interruptionSeconds": 0.85
+          }
+        },
+        {
+          "kind": "golem",
+          "durationSeconds": 22.167,
+          "stats": {
+            "correct": 4,
+            "wrong": 0,
+            "assisted": 4,
+            "independent": 0,
+            "expressions": [
+              "Activate the blue crystal!",
+              "Attack the crystal!",
+              "Watch out!"
+            ],
+            "reviewExpressions": [
+              {
+                "id": "dodge",
+                "voiceId": "VO_WATCH_OUT",
+                "english": "Watch out!",
+                "ko": "조심해요!",
+                "reasons": [
+                  "hint",
+                  "missed",
+                  "expired"
+                ]
+              },
+              {
+                "id": "blue",
+                "voiceId": "VO_ACTIVATE_BLUE",
+                "english": "Activate the blue crystal!",
+                "ko": "파란 수정을 활성화하세요!",
+                "reasons": [
+                  "hint",
+                  "expired"
+                ]
+              },
+              {
+                "id": "crystal",
+                "voiceId": "VO_ATTACK_CRYSTAL",
+                "english": "Attack the crystal!",
+                "ko": "수정을 공격해요!",
+                "reasons": [
+                  "hint"
+                ]
+              }
+            ],
+            "goals": [
+              "combo-three",
+              "crystal-break"
+            ],
+            "combat": {
+              "damageDealt": 170,
+              "damageReceived": 0,
+              "dodges": 0,
+              "successfulDodges": 0,
+              "perfectDodges": 0,
+              "highestCombo": 3,
+              "magicUsed": 0,
+              "magicHits": 0,
+              "weaknessHits": 11,
+              "swordHits": 11,
+              "counterattacks": 0
+            },
+            "listening": {
+              "correct": 1,
+              "wrong": 0,
+              "assisted": 1,
+              "independent": 0,
+              "asset": 0,
+              "fallback": 0,
+              "unheard": 1
+            },
+            "magic": {
+              "correct": 0,
+              "wrong": 0,
+              "assisted": 0,
+              "independent": 0
+            },
+            "flow": {
+              "forcedScreens": 2,
+              "forcedSeconds": 0.5333333333333317,
+              "sentenceArrangements": 0,
+              "actionOpportunities": 5,
+              "actionSuccesses": 3,
+              "independentActions": 0,
+              "heardExpressions": [],
+              "independentExpressions": [],
+              "helpExpressions": [
+                "blue",
+                "crystal"
+              ],
+              "outcomes": [
+                {
+                  "id": "2:9",
+                  "key": "blue",
+                  "success": true,
+                  "heard": false,
+                  "assisted": true,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "action"
+                },
+                {
+                  "id": "2:11",
+                  "key": "crystal",
+                  "success": true,
+                  "heard": false,
+                  "assisted": true,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "action"
+                },
+                {
+                  "id": "2:action:13",
+                  "key": "dodge",
+                  "success": false,
+                  "heard": false,
+                  "assisted": false,
+                  "independent": false,
+                  "actual": false,
+                  "reason": "expired"
+                },
+                {
+                  "id": "2:action:14",
+                  "key": "blue",
+                  "success": false,
+                  "heard": false,
+                  "assisted": false,
+                  "independent": false,
+                  "actual": false,
+                  "reason": "expired"
+                },
+                {
+                  "id": "2:action:15",
+                  "key": "crystal",
+                  "success": true,
+                  "heard": false,
+                  "assisted": false,
+                  "independent": false,
+                  "actual": true,
+                  "reason": "action"
+                }
+              ],
+              "audio": {
+                "requested": 23,
+                "playing": 0,
+                "ended": 0,
+                "stopped": 0,
+                "error": 0,
+                "missing": 0,
+                "muted": 23,
+                "blocked": 0,
+                "ignored": 0
+              }
+            },
+            "battlefield": {
+              "missedAttacks": 0,
+              "groundings": 0,
+              "shieldBreaks": 2,
+              "wrongCrystals": 0
+            }
+          },
+          "metrics": {
+            "damageReceived": 0,
+            "successfulDodges": 0,
+            "missedAttacks": 0,
+            "highestCombo": 3,
+            "groundings": 0,
+            "shieldBreaks": 2,
+            "weaknessHits": 11,
+            "spokenRequests": 8,
+            "listeningOpportunities": 5,
+            "independentActions": 0,
+            "assistedActions": 2,
+            "textOnlyActions": 3,
+            "helpExpressions": [
+              "blue",
+              "crystal"
+            ],
+            "interruptions": 2,
+            "interruptionSeconds": 0.533
+          }
+        }
+      ],
+      "learning": {
+        "left": {
+          "introduced": true,
+          "stage": "practice",
+          "independent": 0,
+          "streak": 0,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": "assisted"
+        },
+        "dodge": {
+          "introduced": true,
+          "stage": "practice",
+          "independent": 0,
+          "streak": 0,
+          "actual": 0,
+          "misses": 2,
+          "lastResult": "review"
+        },
+        "attack": {
+          "introduced": false,
+          "stage": "guided",
+          "independent": 0,
+          "streak": 0,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": null
+        },
+        "magic": {
+          "introduced": false,
+          "stage": "guided",
+          "independent": 0,
+          "streak": 0,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": null
+        },
+        "fire": {
+          "introduced": true,
+          "stage": "practice",
+          "independent": 0,
+          "streak": 0,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": "assisted"
+        },
+        "crystal": {
+          "introduced": true,
+          "stage": "practice",
+          "independent": 0,
+          "streak": 0,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": "assisted"
+        },
+        "wind": {
+          "introduced": true,
+          "stage": "practice",
+          "independent": 0,
+          "streak": 0,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": "assisted"
+        },
+        "blue": {
+          "introduced": true,
+          "stage": "practice",
+          "independent": 0,
+          "streak": 0,
+          "actual": 0,
+          "misses": 1,
+          "lastResult": "review"
+        }
+      },
+      "stats": {
+        "correct": 4,
+        "wrong": 0,
+        "assisted": 4,
+        "independent": 0,
+        "expressions": [
+          "Move left!",
+          "Watch out!",
+          "Bring it down!",
+          "I need fire.",
+          "Activate the blue crystal!",
+          "Attack the crystal!"
+        ],
+        "reviewExpressions": [
+          {
+            "id": "left",
+            "voiceId": "VO_MOVE_LEFT",
+            "english": "Move left!",
+            "ko": "왼쪽으로 이동해요!",
+            "reasons": [
+              "hint"
+            ]
+          },
+          {
+            "id": "dodge",
+            "voiceId": "VO_WATCH_OUT",
+            "english": "Watch out!",
+            "ko": "조심해요!",
+            "reasons": [
+              "hint",
+              "missed",
+              "expired"
+            ]
+          },
+          {
+            "id": "wind",
+            "voiceId": "VO_BRING_DOWN",
+            "english": "Bring it down!",
+            "ko": "아래로 끌어내려요!",
+            "reasons": [
+              "hint"
+            ]
+          },
+          {
+            "id": "fire",
+            "voiceId": "VO_NEED_FIRE",
+            "english": "I need fire.",
+            "ko": "나는 불이 필요해요.",
+            "reasons": [
+              "hint"
+            ]
+          },
+          {
+            "id": "blue",
+            "voiceId": "VO_ACTIVATE_BLUE",
+            "english": "Activate the blue crystal!",
+            "ko": "파란 수정을 활성화하세요!",
+            "reasons": [
+              "hint",
+              "expired"
+            ]
+          },
+          {
+            "id": "crystal",
+            "voiceId": "VO_ATTACK_CRYSTAL",
+            "english": "Attack the crystal!",
+            "ko": "수정을 공격해요!",
+            "reasons": [
+              "hint"
+            ]
+          }
+        ],
+        "goals": [
+          "combo-three",
+          "crystal-break"
+        ],
+        "combat": {
+          "damageDealt": 350,
+          "damageReceived": 19,
+          "dodges": 0,
+          "successfulDodges": 0,
+          "perfectDodges": 0,
+          "highestCombo": 3,
+          "magicUsed": 1,
+          "magicHits": 1,
+          "weaknessHits": 11,
+          "swordHits": 26,
+          "counterattacks": 0
+        },
+        "listening": {
+          "correct": 3,
+          "wrong": 0,
+          "assisted": 3,
+          "independent": 0,
+          "asset": 0,
+          "fallback": 0,
+          "unheard": 3
+        },
+        "magic": {
+          "correct": 1,
+          "wrong": 0,
+          "assisted": 1,
+          "independent": 0
+        },
+        "flow": {
+          "forcedScreens": 6,
+          "forcedSeconds": 2.124999999999995,
+          "sentenceArrangements": 1,
+          "actionOpportunities": 8,
+          "actionSuccesses": 5,
+          "independentActions": 0,
+          "heardExpressions": [],
+          "independentExpressions": [],
+          "helpExpressions": [],
+          "outcomes": [
+            {
+              "id": "2:action:3",
+              "key": "dodge",
+              "success": false,
+              "heard": false,
+              "assisted": false,
+              "independent": false,
+              "actual": true,
+              "reason": "missed"
+            },
+            {
+              "id": "2:4",
+              "key": "wind",
+              "success": true,
+              "heard": false,
+              "assisted": true,
+              "independent": false,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "2:6",
+              "key": "fire",
+              "success": true,
+              "heard": false,
+              "assisted": true,
+              "independent": false,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "2:9",
+              "key": "blue",
+              "success": true,
+              "heard": false,
+              "assisted": true,
+              "independent": false,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "2:11",
+              "key": "crystal",
+              "success": true,
+              "heard": false,
+              "assisted": true,
+              "independent": false,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "2:action:13",
+              "key": "dodge",
+              "success": false,
+              "heard": false,
+              "assisted": false,
+              "independent": false,
+              "actual": false,
+              "reason": "expired"
+            },
+            {
+              "id": "2:action:14",
+              "key": "blue",
+              "success": false,
+              "heard": false,
+              "assisted": false,
+              "independent": false,
+              "actual": false,
+              "reason": "expired"
+            },
+            {
+              "id": "2:action:15",
+              "key": "crystal",
+              "success": true,
+              "heard": false,
+              "assisted": false,
+              "independent": false,
+              "actual": true,
+              "reason": "action"
+            }
+          ],
+          "audio": {
+            "requested": 24,
+            "playing": 0,
+            "ended": 0,
+            "stopped": 0,
+            "error": 0,
+            "missing": 0,
+            "muted": 24,
+            "blocked": 0,
+            "ignored": 0
+          }
+        },
+        "battlefield": {
+          "missedAttacks": 0,
+          "groundings": 1,
+          "shieldBreaks": 2,
+          "wrongCrystals": 0
+        }
+      }
+    }
+  ]
+}

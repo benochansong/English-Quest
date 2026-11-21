@@ -237,3 +237,6 @@ body.reborn {
 @media(max-width:480px){.flow-banner{align-items:flex-start;flex-direction:column}.flow-banner button{width:100%}}
 .control-pad.has-environment{grid-template-columns:repeat(6,minmax(0,1fr))}
 @media(max-width:600px){.control-pad.has-environment{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Phase 5: concise outcomes and encounter identity. */
+.victory-skip{align-self:end;margin:1rem;padding:.5rem;background:#102e39d9;border-radius:12px}.overlay:has(.victory-skip){backdrop-filter:none;background:none;align-items:end}.practice-next{border-left:3px solid var(--gold,#cbb886);padding-left:.8rem}.reborn .enemy-hp .hp-fill[data-kind="raven"]{background:linear-gradient(90deg,#786294,#c6a6db)}.reborn .enemy-hp .hp-fill[data-kind="golem"]{background:linear-gradient(90deg,#528d9a,#b4e5df)}.reborn .enemy-hp .hp-fill[data-kind="boss"]{background:linear-gradient(90deg,#a27eab,#edd296)}

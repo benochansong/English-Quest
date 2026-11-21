@@ -1,0 +1,7 @@
+{
+  "gameplaySha256": "18c28194fc46d9b3534bbfd62c7cdf919232439f4c4bae7e51cd0bb596ec1866",
+  "finalSha256": "842317fa8892998b6206482584260defbc831a333c3a126f0c1f87192d1e91bd",
+  "nonStyleSha256": "032ac7ceb6d008c17f4930d4ea34653b522e03c8a18e6cc85bc1d985e90dab84",
+  "onlyStyleChanged": true,
+  "change": "Increase specificity for enemy HP colors; all HTML outside style blocks is byte-identical"
+}

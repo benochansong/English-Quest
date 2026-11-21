@@ -1,0 +1,130 @@
+{
+  "definition": "Fixed-step simulation accepts a distinct second press, not hardware latency",
+  "baseline": "5187950abfdea0d694aed981a27fb821e09d7fed",
+  "before": {
+    "buffer": [
+      {
+        "atMs": 0,
+        "accepted": false
+      },
+      {
+        "atMs": 25,
+        "accepted": false
+      },
+      {
+        "atMs": 50,
+        "accepted": false
+      },
+      {
+        "atMs": 75,
+        "accepted": true
+      }
+    ],
+    "strikes": [
+      {
+        "damage": 8,
+        "range": 104,
+        "height": 85,
+        "anticipation": 0.065,
+        "swing": 0.09,
+        "follow": 0.15,
+        "cooldown": 0.35,
+        "knockback": 8,
+        "charge": 14
+      },
+      {
+        "damage": 10,
+        "range": 112,
+        "height": 100,
+        "anticipation": 0.075,
+        "swing": 0.11,
+        "follow": 0.17,
+        "cooldown": 0.39,
+        "knockback": 14,
+        "charge": 16
+      },
+      {
+        "damage": 16,
+        "range": 126,
+        "height": 105,
+        "anticipation": 0.11,
+        "swing": 0.14,
+        "follow": 0.24,
+        "cooldown": 0.52,
+        "knockback": 32,
+        "charge": 20
+      }
+    ],
+    "dodge": {
+      "duration": 0.3,
+      "invulnerability": 0.18,
+      "cooldown": 0.65,
+      "speed": 490,
+      "perfectCharge": 20,
+      "perfectDisplay": 0.7
+    }
+  },
+  "after": {
+    "buffer": [
+      {
+        "atMs": 0,
+        "accepted": false
+      },
+      {
+        "atMs": 25,
+        "accepted": true
+      },
+      {
+        "atMs": 50,
+        "accepted": true
+      },
+      {
+        "atMs": 75,
+        "accepted": true
+      }
+    ],
+    "strikes": [
+      {
+        "damage": 8,
+        "range": 104,
+        "height": 85,
+        "anticipation": 0.065,
+        "swing": 0.09,
+        "follow": 0.15,
+        "cooldown": 0.35,
+        "knockback": 8,
+        "charge": 14
+      },
+      {
+        "damage": 10,
+        "range": 112,
+        "height": 100,
+        "anticipation": 0.075,
+        "swing": 0.11,
+        "follow": 0.17,
+        "cooldown": 0.39,
+        "knockback": 14,
+        "charge": 16
+      },
+      {
+        "damage": 16,
+        "range": 126,
+        "height": 105,
+        "anticipation": 0.11,
+        "swing": 0.14,
+        "follow": 0.24,
+        "cooldown": 0.52,
+        "knockback": 32,
+        "charge": 20
+      }
+    ],
+    "dodge": {
+      "duration": 0.3,
+      "invulnerability": 0.18,
+      "cooldown": 0.65,
+      "speed": 490,
+      "perfectCharge": 20,
+      "perfectDisplay": 0.7
+    }
+  }
+}

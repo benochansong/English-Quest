@@ -1,3 +1,12 @@
+# REBORN Phase 5 — The Art of Game Feel (2026-11-21)
+
+- Preserve Phase 4 three-encounter journey and original Champion; retain v0.8 and archived releases.
+- Accept one distinct combo continuation from 25ms; align swing audio and visible contact pose with hit-stop; keep damage and attack timings.
+- Fix perfect-dodge eligibility across field attacks while another instruction is active. Add one bounded counter opportunity with charge feedback, without extra damage or invulnerability.
+- Reduce Golem displacement; separate slime, feather, stone and crystal reactions; short skippable victory presentation and current-encounter replay.
+- Audit 36 unchanged Piper WAVs; attenuate measured loud clips at playback. Separate warning and ambient buses, preserve speech priority, skip redundant mixer automation, bound field path cache.
+- Add same-route before/after browser measurement, targeted regression tests and honest manual playtest forms. Human enjoyment and pronunciation remain unverified.
+
 # 2026-11-21 — REBORN Phase 4: The Living Battlefield
 
 - 승리 후 다음 장소로 이동하는 사냥꾼의 길을 추가했습니다. 숲 슬라임 → 바람 절벽의 그림자 까마귀 → 수정 유적의 골렘을 이어서 플레이합니다.

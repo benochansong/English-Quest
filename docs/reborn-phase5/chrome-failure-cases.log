@@ -1,0 +1,1 @@
+PASS chrome [{"kind":"audible","heard":true,"assisted":false,"independent":1,"continued":true},{"kind":"muted-text","heard":false,"assisted":true,"independent":0,"continued":true},{"kind":"rejected-media","heard":false,"assisted":true,"independent":0,"continued":true}]

@@ -4,10 +4,11 @@ const RebornCombat = (() => {
   const CONFIG = freeze({
     width:1000,height:560,ground:425,minX:60,maxX:940,step:1/120,maxDelta:.25,
     player:{hp:100,startX:170,speed:220,acceleration:1900,deceleration:2300,reversal:2800,radius:18,hitTime:.24,hitInvulnerability:.55,knockback:18},
-    sword:{damage:8,range:104,height:85,cooldown:.35,anticipation:.065,swing:.09,follow:.15,charge:14,knockback:8,comboWindow:.65,
+    sword:{damage:8,range:104,height:85,cooldown:.35,anticipation:.065,swing:.09,follow:.15,charge:14,knockback:8,comboWindow:.65,bufferStart:.025,
       strikes:[{damage:8,range:104,height:85,anticipation:.065,swing:.09,follow:.15,cooldown:.35,knockback:8,charge:14},
         {damage:10,range:112,height:100,anticipation:.075,swing:.11,follow:.17,cooldown:.39,knockback:14,charge:16},
         {damage:16,range:126,height:105,anticipation:.11,swing:.14,follow:.24,cooldown:.52,knockback:32,charge:20}]},
+    feel:{contactPoseFraction:.35,counterWindow:1.2,counterCharge:8,entry:.65,victory:.7,recoil:.22,golemKnockback:.3},
     dodge:{duration:.30,invulnerability:.18,cooldown:.65,speed:490,perfectCharge:20,perfectDisplay:.7},
     magic:{damage:32,charge:100,cooldown:8,chargeTime:.5,release:.38,projectileSpeed:740,projectileRadius:13,projectileLife:2.5,maxProjectiles:3},
     learning:{charge:25,stun:.9,coreWindow:3.6,coreMultiplier:1.5,coreStagger:.7},
@@ -74,20 +75,20 @@ const RebornCombat = (() => {
     function pose(value,duration=0) {state.player.pose=value;state.player.poseTime=0;state.player.poseDuration=duration;}
     function clearInput() {held.clear();}
     function resetCombo(){attack=null;comboHits=0;Object.assign(state.player,{comboIndex:0,comboNext:1,comboWindowRemaining:0,comboBuffered:false});}
-    function clearTransient(){resetCombo();dodge=null;cast=null;shots=[];state.cast=null;state.projectiles=shots;state.player.vx=0;clearInput();}
+    function clearTransient(){resetCombo();dodge=null;cast=null;shots=[];state.cast=null;state.projectiles=shots;state.player.vx=0;state.player.counterRemaining=0;clearInput();}
     function goal(id){if(goals.has(id))return;goals.add(id);state.stats.goals.push(id);emit('goal',{id});}
     function review(key,reason){const e=RebornLearning.expressions[key];if(!state.encounterReview.includes(key))state.encounterReview.push(key);let r=state.stats.reviewExpressions.find(x=>x.id===key);if(!r){r={id:key,voiceId:e.voiceId,english:e.english,ko:e.ko,reasons:[]};state.stats.reviewExpressions.push(r);}if(!r.reasons.includes(reason))r.reasons.push(reason);}
     function reset() {
       generation++;accumulator=0;events=[];held.clear();attack=null;dodge=null;enemyData=null;pending=null;pausedMode=null;moved=0;scripted=new Set();serial=0;comboHits=0;cast=null;shots=[];goals=new Set();
       Object.assign(state,{mode:'INTRO',stage:'entrance',time:0,session:generation,
-        player:{x:CONFIG.player.startX,y:CONFIG.ground,vx:0,runPhase:0,facing:1,hp:CONFIG.player.hp,maxHp:CONFIG.player.hp,pose:'idle',poseTime:0,poseDuration:0,attackCooldown:0,dodgeCooldown:0,invulnerable:0,magicCharge:0,magicCooldown:0,comboIndex:0,comboNext:1,comboWindowRemaining:0,comboBuffered:false,perfectDodge:0,weaknessCharge:0},
+        player:{x:CONFIG.player.startX,y:CONFIG.ground,vx:0,runPhase:0,facing:1,hp:CONFIG.player.hp,maxHp:CONFIG.player.hp,pose:'idle',poseTime:0,poseDuration:0,attackCooldown:0,dodgeCooldown:0,invulnerable:0,magicCharge:0,magicCooldown:0,comboIndex:0,comboNext:1,comboWindowRemaining:0,comboBuffered:false,perfectDodge:0,counterRemaining:0,weaknessCharge:0},
         enemy:null,effects:[],projectiles:[],cast:null,bossIntro:null,challenge:null,tutorial:null,magicUnlocked:false,awaitingProceed:true,lastVoiceId:'VO_HELLO',feedback:'',hitStop:0,shake:0,shakePower:0,
         flowEnabled:flow,learning:progress.entries,flowCue:null,flowFeedback:null,lastWarningAt:-10,route:'lab',selection:null,adventure:null,encounterReport:null,fieldNotice:'',encounterTime:0,
-        stats:{correct:0,wrong:0,assisted:0,independent:0,expressions:[],reviewExpressions:[],goals:[],combat:{damageDealt:0,damageReceived:0,dodges:0,successfulDodges:0,perfectDodges:0,highestCombo:0,magicUsed:0,magicHits:0,weaknessHits:0,swordHits:0},listening:{correct:0,wrong:0,assisted:0,independent:0,asset:0,fallback:0,unheard:0},magic:{correct:0,wrong:0,assisted:0,independent:0}},
+        stats:{correct:0,wrong:0,assisted:0,independent:0,expressions:[],reviewExpressions:[],goals:[],combat:{damageDealt:0,damageReceived:0,dodges:0,successfulDodges:0,perfectDodges:0,highestCombo:0,magicUsed:0,magicHits:0,weaknessHits:0,swordHits:0,counterattacks:0},listening:{correct:0,wrong:0,assisted:0,independent:0,asset:0,fallback:0,unheard:0},magic:{correct:0,wrong:0,assisted:0,independent:0}},
         objective:'로완과 함께 숲의 첫 시험을 시작해요.',reward:null});
       state.stats.flow={forcedScreens:0,forcedSeconds:0,sentenceArrangements:0,actionOpportunities:0,actionSuccesses:0,independentActions:0,heardExpressions:[],independentExpressions:[],helpExpressions:[],outcomes:[],audio:{requested:0,playing:0,ended:0,stopped:0,error:0,missing:0,muted:0,blocked:0,ignored:0}};
       state.stats.battlefield={missedAttacks:0,groundings:0,shieldBreaks:0,wrongCrystals:0};
-      Object.assign(state,{encounterExpressions:[],encounterHeard:[],encounterHelp:[],encounterReview:[],encounterIndependent:[],encounterActionCounts:{assisted:0,text:0},encounterBase:null,encounterPeakCombo:0,encounterOutcomeStart:0,transition:null});
+      Object.assign(state,{encounterExpressions:[],encounterHeard:[],encounterHelp:[],encounterReview:[],encounterIndependent:[],encounterActionCounts:{assisted:0,text:0},encounterBase:null,encounterPeakCombo:0,encounterOutcomeStart:0,transition:null,presentationRemaining:0});
       return state;
     }
     reset();
@@ -112,10 +113,10 @@ const RebornCombat = (() => {
       state.player.x=kind==='boss'?230:state.player.x;
       state.player.invulnerable=0;
       if(field?.configs[kind]){
-        state.player.x=170;state.player.weaknessCharge=0;state.enemy=field.create(kind,state.player);enemyData={perfect:false,hit:false,staggerTime:0};
+        state.player.x=170;state.player.weaknessCharge=0;state.enemy=field.create(kind,state.player);state.enemy.entryRemaining=CONFIG.feel.entry;enemyData={perfect:false,hit:false,staggerTime:0};
         mode('COMBAT');objectiveCombat();return;
       }
-      state.enemy={id:kind==='boss'?'slime-champion':'green-slime',kind,x:c.startX,y:CONFIG.ground,lift:0,hp:c.hp,maxHp:c.hp,ai:'IDLE',aiTime:0,pattern:c.patterns[0].id,phase:1,facing:-1,telegraphRemaining:0,attackTargetX:state.player.x,landingTargetX:state.player.x,attackDuration:0,attackProgress:0,attackRadius:c.patterns[0].radius,coreExposed:false,coreRemaining:0,attackSerial:0};
+      state.enemy={id:kind==='boss'?'slime-champion':'green-slime',kind,x:c.startX,y:CONFIG.ground,lift:0,hp:c.hp,maxHp:c.hp,ai:'IDLE',aiTime:0,pattern:c.patterns[0].id,phase:1,facing:-1,telegraphRemaining:0,attackTargetX:state.player.x,landingTargetX:state.player.x,attackDuration:0,attackProgress:0,attackRadius:c.patterns[0].radius,coreExposed:false,coreRemaining:0,attackSerial:0,entryRemaining:CONFIG.feel.entry};
       enemyData={patternIndex:0,pattern:null,originX:c.startX,hit:false,repeats:0,resume:null,recovery:c.recovery,staggerTime:0,perfect:false,phaseIndex:0};
       state.objective=kind==='boss'?'슬라임 챔피언: 공격 예고를 피하고 빈틈에 반격해요.':'초록 슬라임: 가까이 다가가 J로 공격하고, 공격 예고를 보고 K로 회피해요.';
       if(kind==='boss'){state.bossIntro={...RebornLearning.bossLesson,remaining:c.intro,duration:c.intro,automatic:flow&&progress.introduced('crystal')};state.enemy.ai='ENTRANCE';mode('BOSS_INTRO');voice(state.bossIntro.automatic?'VO_BOSS':'VO_ATTACK_CRYSTAL');}
@@ -143,8 +144,8 @@ const RebornCombat = (() => {
       cue(key,{ttl});
     }
     function fieldWarning(){
-      if(!activeModes.has(state.mode)||state.flowCue)return;
       enemyData.perfect=false;
+      if(!activeModes.has(state.mode)||state.flowCue)return;
       if(!progress.introduced('dodge')){openChallenge('dodge','combat');return;}
       if(!state.flowCue&&state.time-state.lastWarningAt>=6){state.lastWarningAt=state.time;cue('dodge',{attackSerial:state.enemy.attackSerial,ttl:5,enemyId:state.enemy.id});}
     }
@@ -173,8 +174,8 @@ const RebornCombat = (() => {
       clearTransient();cancelCue();state.adventure.index++;const next=journey.encounters[state.adventure.index];state.transition={next,remaining:1.2,text:journey.scenes[next].text};mode('TRANSITION');voice('VO_FOLLOW');return true;
     }
     function retryEncounter(){
-      if(state.mode!=='DEFEAT'||state.route!=='story')return false;
-      const history=state.adventure.history,index=state.adventure.index;reset();state.route='story';state.adventure={index,history};state.magicUnlocked=true;state.player.magicCharge=100;spawn(journey.encounters[index]);return true;
+      if(!['DEFEAT','ENCOUNTER_CLEAR'].includes(state.mode)||state.route!=='story')return false;
+      const index=state.adventure.index,history=state.adventure.history.slice(0,index);reset();state.route='story';state.adventure={index,history};state.magicUnlocked=true;state.player.magicCharge=100;spawn(journey.encounters[index]);return true;
     }
     function ai(value) { const e=state.enemy;if(!e)return;e.ai=value;e.aiTime=0;e.attackProgress=0;e.lift=0; }
     function stagger(duration,interrupt=false){
@@ -267,7 +268,7 @@ const RebornCombat = (() => {
       const e=state.enemy;ai('DEFEATED');e.hp=0;e.coreExposed=false;e.coreRemaining=0;clearTransient();state.player.weaknessCharge=0;state.hitStop=0;pending=null;state.challenge=null;
       effect('burst',e.x,e.y-30,1.1);sfx(e.kind==='boss'?'boss_defeat':'slime_defeat');
       if(state.route!=='lab'){
-        e.hazards=[];state.awaitingProceed=false;state.encounterReport=journey?journey.snapshot(state):{kind:e.kind,durationSeconds:state.encounterTime,stats:JSON.parse(JSON.stringify(state.stats))};
+        e.hazards=[];state.presentationRemaining=CONFIG.feel.victory;state.awaitingProceed=false;state.encounterReport=journey?journey.snapshot(state):{kind:e.kind,durationSeconds:state.encounterTime,stats:JSON.parse(JSON.stringify(state.stats))};
         if(state.adventure)state.adventure.history.push(state.encounterReport);
         pose('victory');const final=state.route!=='story'||state.adventure.index===2;mode(final?'VICTORY':'ENCOUNTER_CLEAR');
         state.objective=final?(state.route==='story'?'왕국의 수정이 다시 빛납니다. 사냥꾼의 길 완료!':'전투 완료 · 다른 적을 연습하거나 다시 도전하세요.'):'길이 열렸습니다. 다음 장소로 이동하세요.';
@@ -293,6 +294,7 @@ const RebornCombat = (() => {
       const enemy=target===state.enemy,heavy=tier===3||source==='magic'||weak;
       const stop=enemy?(source==='magic'?CONFIG.feedback.magicStop:weak?CONFIG.feedback.finisherStop:[CONFIG.feedback.lightStop,CONFIG.feedback.mediumStop,CONFIG.feedback.finisherStop][tier-1]):state.enemy?.kind==='boss'?CONFIG.feedback.bossStop:CONFIG.feedback.lightStop;
       state.hitStop=Math.max(state.hitStop,stop);state.shake=Math.max(state.shake,heavy?CONFIG.feedback.heavyShake:CONFIG.feedback.lightShake);state.shakePower=heavy?1:(enemy ? .25 : .6);
+      if(enemy){target.recoilRemaining=CONFIG.feel.recoil;target.recoilDirection=direction;target.recoilTier=tier;}
       const meta={tier,heavy,direction,targetKind:enemy?target.kind:'player',quality:source};
       effect('damage',target.x,target.y-(target.lift||0)-90,.8,enemy?amount:-amount,meta);effect('impact',target.x,target.y-(target.lift||0)-32,.26,enemy?amount:-amount,meta);
       if(enemy){sfx(weak?'coreHit':source==='magic'?'magic_explosion':'impact'+tier);effect(weak?'core_hit':'droplets',target.x,target.y-(target.lift||0)-35,.45,amount,meta);}else sfx('player_hit');
@@ -313,9 +315,10 @@ const RebornCombat = (() => {
       const weak=fieldCore||source==='sword'&&e.coreExposed&&state.player.weaknessCharge===1;
       if(e.kind==='golem'&&e.shieldActive&&source==='sword')amount=Math.max(1,Math.round(amount*.25));
       if(weak){amount=Math.round(amount*CONFIG.learning.coreMultiplier);if(!fieldCore){state.player.weaknessCharge=0;e.coreRemaining=0;e.coreExposed=false;}state.stats.combat.weaknessHits++;goal('crystal-break');if(state.flowCue?.expressionId==='crystal'){state.flowCue.acted=true;finishCue(true);}}
+      if(source==='sword'&&state.player.counterRemaining>0&&!/ATTACK|TELEGRAPH|BURST|PULSE|SLAM/.test(e.ai)){state.player.counterRemaining=0;state.stats.combat.counterattacks++;state.player.magicCharge=clamp(state.player.magicCharge+CONFIG.feel.counterCharge,0,CONFIG.magic.charge);effect('counter',e.x,e.y-e.lift-60,.55);sfx('perfectDodge');}
       const dealt=Math.min(e.hp,amount);e.hp=clamp(e.hp-dealt,0,e.maxHp);state.stats.combat.damageDealt+=dealt;hitFeedback(e,dealt,{source,tier,direction,weak});
       const strike=CONFIG.sword.strikes[tier-1],knockback=source==='magic'?38:strike.knockback;
-      e.x=clamp(e.x+direction*knockback,CONFIG.minX,CONFIG.maxX);if(e.ai==='ATTACK')enemyData.knockback=(enemyData.knockback||0)+direction*knockback;
+      e.x=clamp(e.x+direction*knockback*(e.kind==='golem'?CONFIG.feel.golemKnockback:1),CONFIG.minX,CONFIG.maxX);if(e.ai==='ATTACK')enemyData.knockback=(enemyData.knockback||0)+direction*knockback;
       landingWarning();
       if(source==='sword'){state.player.magicCharge=clamp(state.player.magicCharge+strike.charge,0,CONFIG.magic.charge);state.stats.combat.swordHits++;comboHits++;state.stats.combat.highestCombo=Math.max(state.stats.combat.highestCombo,comboHits);state.encounterPeakCombo=Math.max(state.encounterPeakCombo,comboHits);if(comboHits===3)goal('combo-three');}
       if(e.hp<=0){enemyDefeated();return true;}
@@ -336,11 +339,11 @@ const RebornCombat = (() => {
     function startStrike(index){
       if(state.flowCue?.expressionId==='crystal')state.flowCue.intentAfterHeard=state.flowCue.heard;
       const p=state.player,c=CONFIG.sword.strikes[index-1];p.attackCooldown=c.cooldown;p.comboIndex=index;p.comboNext=index<3?index+1:1;p.comboBuffered=false;p.comboWindowRemaining=0;
-      if(index===1)comboHits=0;attack={time:0,facing:p.facing,hit:false,started:false,index,buffered:false};pose('attack_anticipation',c.anticipation);sfx('sword'+index);return true;
+      if(index===1)comboHits=0;attack={time:0,facing:p.facing,hit:false,started:false,index,buffered:false};pose('attack_anticipation',c.anticipation);return true;
     }
     function beginAttack() {
       const p=state.player;if(!activeModes.has(state.mode)||state.stage==='crystal'||dodge||cast||state.mode==='PLAYER_HIT')return false;
-      if(attack){const c=CONFIG.sword.strikes[attack.index-1];if(attack.index>=3||attack.buffered||attack.time<c.anticipation)return false;attack.buffered=true;p.comboBuffered=true;return true;}
+      if(attack){const c=CONFIG.sword.strikes[attack.index-1];if(attack.index>=3||attack.buffered||attack.time<CONFIG.sword.bufferStart)return false;attack.buffered=true;p.comboBuffered=true;return true;}
       if(p.attackCooldown>0)return false;
       return startStrike(p.comboWindowRemaining>0?p.comboNext:1);
     }
@@ -398,7 +401,7 @@ const RebornCombat = (() => {
     }
     function damagePlayer(amount) {
       const p=state.player;if(p.invulnerable>1e-8||p.hp<=0||!['COMBAT','PLAYER_HIT'].includes(state.mode))return false;
-      const dealt=Math.min(p.hp,amount);p.hp=clamp(p.hp-dealt,0,p.maxHp);p.invulnerable=CONFIG.player.hitInvulnerability;resetCombo();dodge=null;p.vx=0;state.stats.combat.damageReceived+=dealt;
+      const dealt=Math.min(p.hp,amount);p.hp=clamp(p.hp-dealt,0,p.maxHp);p.counterRemaining=0;p.invulnerable=CONFIG.player.hitInvulnerability;resetCombo();dodge=null;p.vx=0;state.stats.combat.damageReceived+=dealt;
       if(state.flowCue)state.flowCue.damaged=true;
       const direction=p.x<state.enemy.x?-1:1;p.x=clamp(p.x+direction*CONFIG.player.knockback,CONFIG.minX,CONFIG.maxX);
       hitFeedback(p,dealt,{source:'enemy',direction});
@@ -408,7 +411,7 @@ const RebornCombat = (() => {
     }
     function enemyContact(amount){
       if(dodge&&dodge.time<CONFIG.dodge.invulnerability-1e-8&&state.player.invulnerable>0&&!enemyData.perfect){
-        enemyData.perfect=true;state.stats.combat.perfectDodges++;state.stats.combat.successfulDodges++;state.player.perfectDodge=CONFIG.dodge.perfectDisplay;
+        enemyData.perfect=true;state.stats.combat.perfectDodges++;state.stats.combat.successfulDodges++;state.player.perfectDodge=CONFIG.dodge.perfectDisplay;state.player.counterRemaining=CONFIG.feel.counterWindow;
         state.player.magicCharge=clamp(state.player.magicCharge+CONFIG.dodge.perfectCharge,0,CONFIG.magic.charge);effect('perfect_dodge',state.player.x,state.player.y-35,.6);sfx('perfectDodge');goal('perfect-dodge');if(state.enemy.kind==='boss')goal('boss-dodge');return false;
       }
       return damagePlayer(amount);
@@ -489,7 +492,7 @@ const RebornCombat = (() => {
     }
     function tick(dt) {
       if(state.mode==='PAUSED'||state.mode==='INTRO')return;
-      state.time+=dt;
+      state.time+=dt;state.presentationRemaining=countdown(state.presentationRemaining,dt);
       if(state.mode==='TRANSITION'){state.transition.remaining-=dt;if(state.transition.remaining<=0){const next=state.transition.next;state.transition=null;state.player.hp=state.player.maxHp;state.player.magicCharge=100;state.player.magicCooldown=0;state.player.attackCooldown=0;state.player.dodgeCooldown=0;spawn(next);}return;}
       if(state.enemy?.hp>0&&state.mode!=='BOSS_INTRO')state.encounterTime+=dt;
       if(flow){
@@ -506,7 +509,8 @@ const RebornCombat = (() => {
       if(!activeModes.has(state.mode))return;
       if(state.hitStop>0){state.hitStop=Math.max(0,state.hitStop-dt);return;}
       const p=state.player;
-      p.attackCooldown=countdown(p.attackCooldown,dt);p.dodgeCooldown=countdown(p.dodgeCooldown,dt);p.magicCooldown=countdown(p.magicCooldown,dt);p.invulnerable=countdown(p.invulnerable,dt);p.perfectDodge=countdown(p.perfectDodge,dt);p.poseTime+=dt;
+      p.attackCooldown=countdown(p.attackCooldown,dt);p.dodgeCooldown=countdown(p.dodgeCooldown,dt);p.magicCooldown=countdown(p.magicCooldown,dt);p.invulnerable=countdown(p.invulnerable,dt);p.perfectDodge=countdown(p.perfectDodge,dt);p.poseTime+=dt;p.counterRemaining=countdown(p.counterRemaining,dt);
+      if(state.enemy){state.enemy.entryRemaining=countdown(state.enemy.entryRemaining||0,dt);state.enemy.recoilRemaining=countdown(state.enemy.recoilRemaining||0,dt);}
       if(!attack&&p.comboWindowRemaining>0){p.comboWindowRemaining=countdown(p.comboWindowRemaining,dt);if(p.comboWindowRemaining===0){p.comboNext=1;comboHits=0;}}
       if(state.mode==='PLAYER_HIT'&&p.poseTime>=CONFIG.player.hitTime){mode('COMBAT');pose('idle');}
       if(dodge){dodge.time+=dt;movePlayer(dodge.direction*CONFIG.dodge.speed*dt,true);if(dodge.time>=CONFIG.dodge.duration-1e-8){dodge=null;pose('idle');}}
@@ -521,9 +525,9 @@ const RebornCombat = (() => {
       }
       if(attack){
         attack.time+=dt;const a=attack,t=attack.time,c=CONFIG.sword.strikes[a.index-1];
-        if(t>=c.anticipation&&!a.started){a.started=true;pose('attack_swing',c.swing);effect('slash',p.x+a.facing*48,p.y-35,c.swing+.04,a.facing,{tier:a.index,heavy:a.index===3,direction:a.facing});}
+        if(t>=c.anticipation&&!a.started){a.started=true;sfx('sword'+a.index);pose('attack_swing',c.swing);effect('slash',p.x+a.facing*48,p.y-35,c.swing+.04,a.facing,{tier:a.index,heavy:a.index===3,direction:a.facing});}
         if(t>=c.anticipation&&t<=c.anticipation+c.swing&&!a.hit){
-          const e=state.enemy;if(e&&e.hp>0&&(e.x-p.x)*a.facing>=0&&Math.abs(e.x-p.x)<=c.range&&e.lift<=c.height){a.hit=true;damageEnemy(c.damage,'sword',{tier:a.index,direction:a.facing});}
+          const e=state.enemy;if(e&&e.hp>0&&(e.x-p.x)*a.facing>=0&&Math.abs(e.x-p.x)<=c.range&&e.lift<=c.height){a.hit=true;p.poseTime=Math.max(p.poseTime,c.swing*CONFIG.feel.contactPoseFraction);damageEnemy(c.damage,'sword',{tier:a.index,direction:a.facing});}
         }
         if(attack===a&&t>=c.anticipation+c.swing&&p.pose!=='attack_follow')pose('attack_follow',c.follow);
         if(attack===a&&t>=c.cooldown-1e-8){
@@ -549,7 +553,7 @@ const RebornCombat = (() => {
     function restart(){const selected=state.selection,route=state.route;reset();if(route==='story')startStory();else if(route==='practice')selectEncounter(selected);else start(true);return state;}
     function mainMenu(){reset();return state;}
     function drainEvents(){const out=events;events=[];return out;}
-    return {state,update,input,start,proceed,pause,resume,restart,mainMenu,answer,assist,heard,drainEvents,audioEvent,learnAgain,selectEncounter,startStory,advanceEncounter,retryEncounter};
+    return {state,skipPresentation(){state.presentationRemaining=0;},update,input,start,proceed,pause,resume,restart,mainMenu,answer,assist,heard,drainEvents,audioEvent,learnAgain,selectEncounter,startStory,advanceEncounter,retryEncounter};
   }
   return Object.freeze({CONFIG,create});
 })();

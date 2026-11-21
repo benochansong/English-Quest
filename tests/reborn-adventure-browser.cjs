@@ -1,7 +1,7 @@
 /* Complete offline journeys with real input. No writes to gameplay state. */
 const {play,read,click}=require('./reborn-battlefield-browser.cjs');
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),crypto=require('node:crypto'),{pathToFileURL}=require('node:url'),{chromium}=require('playwright');
-const root=path.resolve(__dirname,'..'),out=path.join(root,'docs/reborn-phase4'),channel=process.env.REBORN_BROWSER||'chrome',muted=process.argv.includes('--muted');
+const root=path.resolve(__dirname,'..'),out=path.join(root,process.env.REBORN_QA_OUT||'docs/reborn-phase4'),channel=process.env.REBORN_BROWSER||'chrome',muted=process.argv.includes('--muted');
 (async()=>{
  const browser=await chromium.launch({channel,headless:true});
  try{

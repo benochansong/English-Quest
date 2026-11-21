@@ -15,9 +15,9 @@ const RebornAudio=(()=>{
     boss:{bpm:108,notes:[220,261.63,329.63,293.66,220,392,329.63,261.63],bass:110}
   };
   function create(initial={}){
-    const settings={master:.7,voice:.85,sfx:.65,music:0,ui:.5,muted:false,...initial};
+    const settings={master:.7,voice:.85,sfx:.65,music:0,ui:.5,ambient:.16,muted:false,...initial};
     const clamp=v=>Math.max(0,Math.min(1,Number(v)||0));
-    let context,master,sfxBus,musicBus,uiBus,noiseSample,unlocked=false,ducked=false,musicScene='exploration',phase=1,nextBeat=0,beat=0;
+    let context,master,sfxBus,musicBus,uiBus,noiseSample,unlocked=false,ducked=false,musicScene='exploration',phase=1,nextBeat=0,beat=0,ambientBus,warningBus,nextAmbient=0;
     const active=new Set(),musicLayers={};
     const LIMIT=96;
     function mix(){
@@ -26,6 +26,8 @@ const RebornAudio=(()=>{
       sfxBus.gain.setTargetAtTime(settings.sfx*(ducked?.35:1),t,.025);
       uiBus.gain.setTargetAtTime(settings.ui*(ducked?.45:1),t,.025);
       musicBus.gain.setTargetAtTime(settings.music*(ducked?.16:1),t,.08);
+      warningBus.gain.setTargetAtTime(settings.sfx*(ducked?.75:1),t,.025);
+      ambientBus.gain.setTargetAtTime(settings.ambient*(ducked?.12:1),t,.1);
       for(const [name,bus]of Object.entries(musicLayers))bus.gain.setTargetAtTime(name===musicScene?1:0,t,.25);
     }
     function unlock(){
@@ -36,6 +38,7 @@ const RebornAudio=(()=>{
           master=context.createGain();sfxBus=context.createGain();musicBus=context.createGain();uiBus=context.createGain();
           master.connect(context.destination);sfxBus.connect(master);musicBus.connect(master);uiBus.connect(master);
           for(const name of Object.keys(scores)){musicLayers[name]=context.createGain();musicLayers[name].gain.value=name===musicScene?1:0;musicLayers[name].connect(musicBus);}
+          warningBus=context.createGain();warningBus.connect(master);ambientBus=context.createGain();ambientBus.connect(master);
           if(context.createBuffer){noiseSample=context.createBuffer(1,Math.floor(context.sampleRate*.4),context.sampleRate);const data=noiseSample.getChannelData(0);let seed=10321;for(let i=0;i<data.length;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;data[i]=seed/2147483648-1;}}
         }
         if(context.state==='suspended')context.resume().catch(()=>{});mix();return true;
@@ -66,9 +69,13 @@ const RebornAudio=(()=>{
     }
     function setScene(name,nextPhase=1){
       if(!Object.hasOwn(scores,name)&&name!=='silent')return false;
-      if(name!==musicScene){musicScene=name;beat=0;nextBeat=context?.currentTime||0;}phase=nextPhase===2?2:1;mix();return true;
+      const next=nextPhase===2?2:1;if(name===musicScene&&phase===next)return true;
+      if(name!==musicScene){musicScene=name;beat=0;nextBeat=context?.currentTime||0;nextAmbient=0;}phase=next;mix();return true;
     }
     function tick(){
+      if(context&&unlocked&&!settings.muted&&musicScene!=='silent'&&settings.ambient>0&&context.currentTime>=nextAmbient){
+        noise(musicScene==='boss'?220:500,.38,.03,ambientBus);nextAmbient=context.currentTime+2.5;
+      }
       if(!context||!unlocked||settings.music<=0||settings.muted||musicScene==='silent')return;
       const score=scores[musicScene],bus=musicLayers[musicScene],now=context.currentTime;
       if(nextBeat<now-.25)nextBeat=now;const interval=60/(score.bpm+(musicScene==='boss'&&phase===2?10:0));
@@ -81,11 +88,11 @@ const RebornAudio=(()=>{
         beat++;nextBeat+=interval;
       }
     }
-    function configure(values){for(const key of ['master','voice','sfx','music','ui'])if(key in values)settings[key]=clamp(values[key]);if('muted'in values)settings.muted=!!values.muted;mix();}
-    function stop(){for(const o of active){try{o.stop();}catch{}}nextBeat=0;}
-    return{settings,unlock,configure,sfx:id=>cue(id,sfxBus),ui:id=>cue(id,uiBus),setScene,tick,stop,duck(value){ducked=!!value;mix();},
+    function configure(values){for(const key of ['master','voice','sfx','music','ui','ambient'])if(key in values)settings[key]=clamp(values[key]);if('muted'in values)settings.muted=!!values.muted;mix();}
+    function stop(){for(const o of active){try{o.stop();}catch{}}nextBeat=0;nextAmbient=0;}
+    return{settings,unlock,configure,sfx:id=>cue(id,['slimeAttack','slime_warning','slime_rush','slime_jump','bossPhase','charge'].includes(id)?warningBus:sfxBus),ui:id=>cue(id,uiBus),setScene,tick,stop,duck(value){ducked=!!value;mix();},
       get voiceVolume(){return settings.muted?0:settings.master*settings.voice;},get unlocked(){return unlocked;},get contextState(){return context?.state||'unavailable';},
-      get diagnostics(){return{activeNodes:active.size,nodeLimit:LIMIT,musicScene,phase,ducked,contextCreated:!!context};}};
+      get diagnostics(){return{warningDuck:ducked?.75:1,ambientDuck:ducked?.12:1,activeNodes:active.size,nodeLimit:LIMIT,musicScene,phase,ducked,contextCreated:!!context};}};
   }
   return{create,presets,scores};
 })();

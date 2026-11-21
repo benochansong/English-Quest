@@ -1,8 +1,8 @@
 /* Original vector illustrations for the new battlefield. Rendering is read-only. */
 const RebornFieldArt=(()=>{
-  const TAU=Math.PI*2;
+  const TAU=Math.PI*2,paths=new Map();
   function oval(c,x,y,rx,ry,fill,stroke){c.beginPath();c.ellipse(x,y,rx,ry,0,0,TAU);if(fill){c.fillStyle=fill;c.fill();}if(stroke){c.strokeStyle=stroke;c.lineWidth=2;c.stroke();}}
-  function path(c,d,fill,stroke='#242238',width=2){const p=new Path2D(d);c.fillStyle=fill;c.fill(p);if(stroke){c.strokeStyle=stroke;c.lineWidth=width;c.stroke(p);}}
+  function path(c,d,fill,stroke='#242238',width=2){let p=paths.get(d);if(!p){p=new Path2D(d);if(paths.size<256)paths.set(d,p);}c.fillStyle=fill;c.fill(p);if(stroke){c.strokeStyle=stroke;c.lineWidth=width;c.stroke(p);}}
   function line(c,x,y,x2,y2,color,width=2){c.strokeStyle=color;c.lineWidth=width;c.beginPath();c.moveTo(x,y);c.lineTo(x2,y2);c.stroke();}
   function glow(c,x,y,r,color){const g=c.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,color+'80');g.addColorStop(1,color+'00');oval(c,x,y,r,r,g);}
   function background(c,s,t,reduced){
@@ -56,7 +56,9 @@ const RebornFieldArt=(()=>{
     const y=425-e.lift-38,flap=reduced?0:Math.sin(t*(ground?3:10))*.55;
     oval(c,e.x,430,ground?43:28,7,'#10203366');
     c.save();c.translate(e.x,y);c.scale(e.facing||-1,1);
-    if(dead){c.globalAlpha=Math.max(.15,1-e.aiTime*.7);c.rotate(Math.min(1,e.aiTime)*.8);}
+    if(dead){c.globalAlpha=Math.max(0,1-e.aiTime/.7);c.rotate(reduced?0:Math.min(1,e.aiTime)*.8);for(let i=0;i<8;i++){c.save();c.translate((i-4)*(10+e.aiTime*55),-i*8);path(c,'M-9 -3L12 0L-8 7L-3 0Z','#a18bbb',null);c.restore();}}
+    if(e.recoilRemaining>0){c.rotate((e.recoilDirection||1)*e.recoilRemaining*(reduced?.1:.5));}
+    if(e.entryRemaining>0){c.globalAlpha*=1-e.entryRemaining*.7;}
     if(dive)c.rotate(.55);else if(anticipation)c.rotate(-.25);else if(ground)c.rotate(.12);
     glow(c,0,-10,65,'#9071cd');
     for(const side of [-1,1]){c.save();c.scale(side,1);c.translate(-4,-10);c.rotate(ground?.65:anticipation?-.9:flap-.25);
@@ -87,7 +89,9 @@ const RebornFieldArt=(()=>{
     const dead=e.ai==='DEFEATED',walk=e.ai==='APPROACH',windup=e.ai.startsWith('TELEGRAPH'),strike=['FIST_ATTACK','GROUND_SLAM'].includes(e.ai),pulse=e.ai==='CRYSTAL_PULSE';
     const sway=reduced?0:walk?Math.sin(t*5)*4:Math.sin(t*1.2)*1.5;
     oval(c,e.x,431,78,12,'#0e283b99');c.save();c.translate(e.x,425+sway);c.scale(e.facing||-1,1);
-    if(dead){c.globalAlpha=Math.max(.2,1-e.aiTime*.5);c.translate(0,Math.min(30,e.aiTime*35));c.scale(1,Math.max(.3,1-e.aiTime*.35));}
+    if(e.recoilRemaining>0){c.rotate((e.recoilDirection||1)*e.recoilRemaining*(reduced?.025:.12));}
+    if(e.entryRemaining>0){for(let i=0;i<6;i++){const x=(i-3)*24;path(c,`M${x} -5L${x+10} -17L${x+22} -3Z`,'#b1c6bb',null);}}
+    if(dead){for(let i=0;i<7;i++){const x=(i-3)*(16+e.aiTime*25);path(c,`M${x} -10L${x+12} -30L${x+25} -16L${x+22} 0Z`,'#8fa7a4','#cad5b5');}c.globalAlpha=Math.max(0,1-e.aiTime/.8);c.translate(0,Math.min(30,e.aiTime*35));c.scale(1,Math.max(.3,1-e.aiTime*.35));}
     for(const side of [-1,1]){c.save();c.translate(side*29,walk?(reduced?0:Math.sin(t*5+side)*4):0);path(c,'M-20 0L-24 -34L-15 -66L12 -66L23 -36L26 -1Z','#657b7f','#b7b9a1');path(c,'M-18 -36L14 -40L13 -20L-17 -17Z','#8b9c95',null);line(c,-10,-31,7,-25,'#bdd6b4');c.restore();}
     path(c,'M-50 -57L-64 -108L-42 -144L39 -144L65 -107L48 -58L15 -40L-17 -40Z',e.hitFlash>0?'#b9c9c2':'#607a85','#b5c0af',3);
     path(c,'M-42 -139L-18 -154L17 -154L40 -139L22 -125H-24Z','#93a9a6','#c8cfb6');
@@ -95,7 +99,7 @@ const RebornFieldArt=(()=>{
     path(c,'M-25 -151L-29 -183L-11 -204L20 -198L33 -171L23 -147Z','#7f9697','#b6c4b6',2);path(c,'M-23 -181L26 -178L19 -166L-18 -167Z','#263e50',null);line(c,-16,-176,14,-174,'#a7f0e2',4);
     glow(c,0,-98,e.coreExposed||pulse?75:36,'#8ee0f0');path(c,'M0 -129L24 -107L17 -76L0 -62L-17 -76L-24 -107Z',e.coreExposed?'#d4f4df':'#74b8d2','#e0f1cd',2);path(c,'M0 -129V-62L17 -76L24 -107Z','#4f97b8',null);
     for(const side of [-1,1]){line(c,side*32,-118,side*44,-106,'#a6cdb8');line(c,side*44,-106,side*33,-89,'#a6cdb8');}
-    if(e.shieldActive){c.save();c.globalAlpha=e.shieldFlash>0?.85:.32;oval(c,0,-106,101,119,'#8dcde622','#acdfe7');for(let i=0;i<6;i++){const a=i*TAU/6;line(c,Math.cos(a)*96,-106+Math.sin(a)*112,Math.cos(a+.4)*96,-106+Math.sin(a+.4)*112,'#b6ecde',3);}c.restore();}
+    if(e.shieldActive){c.save();c.globalAlpha=e.shieldFlash>0?.85:.32;oval(c,0,-106,101,119,'#8dcde622','#acdfe7');for(let i=0;i<Math.ceil(3-e.shieldHealth);i++){line(c,-60+i*42,-165,-48+i*42,-126,'#eff7e2',3);line(c,-48+i*42,-126,-64+i*42,-100,'#eff7e2',2);}for(let i=0;i<6;i++){const a=i*TAU/6;line(c,Math.cos(a)*96,-106+Math.sin(a)*112,Math.cos(a+.4)*96,-106+Math.sin(a+.4)*112,'#b6ecde',3);}c.restore();}
     if(e.ai==='SHIELD_BREAK')for(let i=0;i<8;i++){const a=i*TAU/8,r=65+e.aiTime*90;c.save();c.translate(Math.cos(a)*r,-106+Math.sin(a)*r);c.rotate(a);path(c,'M0 -10L9 2L1 14L-5 3Z','#b7e4e3','#edf0cc',1);c.restore();}
     c.restore();c.textAlign='center';c.font='bold 12px sans-serif';c.fillStyle='#def3d8';c.fillText(e.shieldActive?'방어막 '+Math.ceil(e.shieldHealth/3*100)+'%':'핵 노출 · '+e.coreRemaining.toFixed(1)+'초',e.x,190);
   }

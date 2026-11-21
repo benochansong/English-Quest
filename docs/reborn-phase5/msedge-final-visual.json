@@ -1,0 +1,23 @@
+{
+  "browser": "msedge",
+  "hash": "842317fa8892998b6206482584260defbc831a333c3a126f0c1f87192d1e91bd",
+  "rows": [
+    {
+      "kind": "slime",
+      "gradient": "linear-gradient(90deg, rgb(169, 119, 110), rgb(229, 188, 150))"
+    },
+    {
+      "kind": "raven",
+      "gradient": "linear-gradient(90deg, rgb(120, 98, 148), rgb(198, 166, 219))"
+    },
+    {
+      "kind": "golem",
+      "gradient": "linear-gradient(90deg, rgb(82, 141, 154), rgb(180, 229, 223))"
+    },
+    {
+      "kind": "boss",
+      "gradient": "linear-gradient(90deg, rgb(162, 126, 171), rgb(237, 210, 150))"
+    }
+  ],
+  "errors": []
+}
