@@ -1,0 +1,177 @@
+/* Reborn is an isolated, touch-accessible action lab. No legacy selectors leak out. */
+body.reborn {
+  --ink:#071b22; --panel:#102a30; --panel-2:#16363a; --line:#6d8b7b50;
+  --paper:#e9eddb; --muted:#a7bfb4; --gold:#d8c08a; --mint:#8fd7bd; --danger:#e7a18a;
+  margin:0; min-width:320px; color:var(--paper); background:#081b22;
+  background-image:radial-gradient(ellipse at 50% 0,#234744 0,transparent 60%),linear-gradient(135deg,#0c2029,#081b22 60%);
+  font-family:"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif; font-size:14px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.reborn *, .reborn *::before, .reborn *::after { box-sizing:border-box; }
+.reborn [hidden] { display:none !important; }
+.reborn button,.reborn input,.reborn select { font:inherit; }
+.reborn button,.reborn summary { -webkit-tap-highlight-color:transparent; }
+.reborn button {
+  min-height:44px; padding:11px 17px; border:1px solid #91aa9363; border-radius:8px;
+  color:var(--paper); background:linear-gradient(160deg,#294b49,#18373a); cursor:pointer;
+  transition:background .15s,border-color .15s,transform .15s,box-shadow .15s;
+}
+.reborn button:hover:not(:disabled) { border-color:#b4c6a7; background:linear-gradient(160deg,#365b53,#20443f); }
+.reborn button:active:not(:disabled),.reborn button.pressed { transform:translateY(1px); background:#3d6556; box-shadow:inset 0 2px 7px #06191c88; }
+.reborn button:disabled { opacity:.43; cursor:not-allowed; }
+.reborn :focus-visible { outline:3px solid #e3cf97; outline-offset:3px; }
+.reborn a { color:#e1c991; }
+.reborn .shell { width:min(1240px,calc(100% - 64px)); margin:0 auto; padding:28px 0 24px; }
+.reborn .topbar { display:flex; align-items:center; gap:24px; padding-bottom:22px; border-bottom:1px solid var(--line); }
+.reborn .brand { flex:1; min-width:0; }
+.reborn .eyebrow { display:block; color:var(--gold); font-size:10px; font-weight:700; letter-spacing:.22em; line-height:1.5; }
+.reborn .brand h1 { margin:6px 0 0; color:#eceddb; font:500 34px/1 Georgia,"Times New Roman",serif; letter-spacing:.15em; }
+.reborn .brand h1 span { display:inline-block; margin-left:15px; color:#a5bdb1; font:500 9px/1.5 system-ui,sans-serif; letter-spacing:.25em; vertical-align:middle; }
+.reborn .badge,.reborn .pill { display:inline-flex; align-items:center; width:fit-content; padding:6px 11px; border:1px solid #b1bc8e45; border-radius:30px; color:#c5cfaf; background:#24473e66; font-size:10px; letter-spacing:.05em; }
+.reborn .topbar>button { min-width:113px; color:#c8d8c6; font-size:12px; background:#17343a; }
+.reborn .hud { display:grid; grid-template-columns:1fr 1.35fr 1fr; align-items:center; gap:35px; padding:22px 5px 20px; }
+.reborn .hero-hp,.reborn .enemy-hp { min-width:0; }
+.reborn .meter-label { display:flex; justify-content:space-between; align-items:center; gap:10px; margin:0 0 8px; font-size:11px; color:#a9c0b5; }
+.reborn .meter-label b { color:#d7e1cc; font-size:12px; letter-spacing:.03em; }
+.reborn .meter-label span { font-variant-numeric:tabular-nums; white-space:nowrap; }
+.reborn .hp-track { height:7px; background:#04171c; border:1px solid #93b39d2b; border-radius:20px; overflow:hidden; box-shadow:0 1px #e2e2aa0c; }
+.reborn .hp-fill { width:100%; height:100%; border-radius:20px; background:linear-gradient(90deg,#4a9e8c,#c2e3a0); box-shadow:0 0 9px #a2deb55c; transition:width .18s ease-out; }
+.reborn .enemy-hp .hp-fill { background:linear-gradient(90deg,#a9776e,#e5bc96); box-shadow:0 0 9px #dfaa8150; }
+.reborn .objective { text-align:center; color:#b8ccbd; font-size:12px; line-height:1.65; }
+.reborn .arena { position:relative; isolation:isolate; overflow:hidden; border:1px solid #9dbd9a5e; border-radius:13px; background:#102d35; box-shadow:0 26px 65px #00111770,0 0 0 5px #2a4b4133; }
+.reborn canvas#battle { display:block; width:100%; height:auto; aspect-ratio:1000/560; background:#12313b; touch-action:pan-y; }
+.reborn .arena-caption { display:flex; align-items:center; justify-content:space-between; gap:14px; min-height:43px; padding:9px 6px 10px; color:#a6bcae; font-size:11px; }
+.reborn #scene-label { color:#8eaaa1; font-size:9px; letter-spacing:.19em; white-space:nowrap; }
+.reborn #combat-feedback { flex:1; min-width:0; text-align:center; color:#d2d9be; }
+.reborn #charge { padding:4px 9px; border:1px solid #9bad8040; border-radius:20px; color:#d8c68f; background:#283e34; font-size:10px; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.reborn .toolbar { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:24px; padding:20px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.reborn .control-pad { display:grid; grid-template-columns:.8fr .8fr 1.1fr 1fr 1fr; align-self:start; gap:8px; }
+.reborn .control-pad button { min-height:72px; padding:11px 5px; user-select:none; touch-action:none; border-color:#769a865e; background:linear-gradient(160deg,#234741,#122e34); }
+.reborn .control-pad button strong { display:block; color:#deead5; font-size:14px; font-weight:600; }
+.reborn .control-pad button small { display:block; margin-top:4px; color:#a0baac; font-size:9px; font-weight:400; letter-spacing:.02em; }
+.reborn .control-pad button[data-action=attack] { border-color:#b7b88670; background:linear-gradient(160deg,#4c5540,#283f35); }
+.reborn .control-pad button[data-action=magic] { border-color:#9daac47d; background:linear-gradient(160deg,#3b4b5d,#263949); }
+.reborn .voice-panel { min-width:0; padding-left:24px; border-left:1px solid var(--line); }
+.reborn .button-row { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+.reborn .button-row>button { flex:0 1 auto; }
+.reborn .voice-panel .button-row button { min-height:44px; padding:8px 12px; font-size:12px; background:#18383c; }
+.reborn .audio-options { display:flex; flex-wrap:wrap; gap:5px 18px; margin-top:9px; color:#adbfac; font-size:11px; }
+.reborn .audio-options label { display:flex; gap:7px; align-items:center; min-height:28px; }
+.reborn input[type=checkbox] { width:16px; height:16px; margin:0; accent-color:#a7ceb2; }
+.reborn .voice-status { margin:5px 0 0; color:#aec3b8; font-size:11px; overflow-wrap:anywhere; }
+.reborn .hint-text { margin:7px 0 0; padding:7px 10px; border-left:2px solid #d1b879; background:#2a433644; color:#e0d8b4; font-size:12px; }
+.reborn .settings,.reborn .expression-practice { margin-top:14px; border:1px solid #66867642; border-radius:8px; background:#102b30a6; }
+.reborn details>summary { min-height:47px; padding:13px 17px; color:#bfd0be; cursor:pointer; font-size:12px; }
+.reborn details[open]>summary { border-bottom:1px solid #76937a30; color:#e0e7cc; }
+.reborn .settings-grid,.reborn .setting-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:17px 26px; padding:20px; color:#b8cdbb; font-size:12px; }
+.reborn .settings-grid>label,.reborn .setting-grid>label { display:flex; flex-direction:column; gap:10px; min-width:0; }
+.reborn .settings-grid>label:has(input[type=checkbox]) { flex-direction:row; align-items:center; min-height:30px; }
+.reborn input[type=range] { width:100%; margin:0; accent-color:#b8c696; }
+.reborn .settings>.muted,.reborn .expression-practice>p { margin:0; padding:0 20px 17px; font-size:11px; }
+.reborn .expression-practice>p { padding-top:15px; }
+.reborn .expression-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; padding:0 16px 16px; }
+.reborn .expression-list button { padding:11px 13px; text-align:left; background:#16363a; }
+.reborn .expression-list button b { display:block; color:#e0e8d2; font-size:12px; font-weight:500; }
+.reborn .expression-list button span { display:block; margin-top:3px; color:#9ebbad; font-size:11px; }
+.reborn .footer { display:flex; justify-content:space-between; gap:20px; padding:21px 3px 0; color:#779b91; font-size:10px; letter-spacing:.02em; }
+.reborn .overlay { position:absolute; z-index:5; inset:0; display:flex; justify-content:center; align-items:center; padding:25px; overflow:auto; background:#0619215c; backdrop-filter:blur(3px); }
+.reborn .dialog-card { position:relative; width:min(570px,100%); max-height:100%; overflow:auto; padding:30px 34px; border:1px solid #b5be8c80; border-radius:11px; background:linear-gradient(145deg,#173a3bf5,#0e282ff7); box-shadow:0 20px 80px #00131da6,inset 0 0 0 5px #95ae8933; scrollbar-color:#54786d #102b30; }
+.reborn .dialog-card::before { content:""; display:block; width:35px; height:2px; margin-bottom:15px; background:#d2c08a; }
+.reborn .dialog-card h2 { margin:8px 0 15px; color:#eeeaca; font-size:26px; font-weight:600; line-height:1.35; letter-spacing:-.03em; }
+.reborn .dialog-card p { margin:11px 0; color:#c0d3c3; line-height:1.8; font-size:13px; overflow-wrap:anywhere; }
+.reborn .dialog-card>.button-row { margin-top:22px; }
+.reborn button.primary { border-color:#d0c28f; color:#18342f; background:linear-gradient(145deg,#e2d4a1,#b8c095); font-weight:700; box-shadow:0 3px 16px #050e1729; }
+.reborn button.primary:hover:not(:disabled) { background:linear-gradient(145deg,#efe0ad,#c8d0a4); }
+.reborn button.secondary { background:#17363b; border-color:#819d8566; color:#c5d9c8; }
+.reborn .muted,.reborn .dialog-card p.muted { color:#98b3a5; font-size:11px; }
+.reborn .choices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin:17px 0; }
+.reborn .choices>button { min-height:48px; padding:10px 15px; text-align:left; background:#214441; border-color:#8eb29a62; }
+.reborn .choices>button:last-child:nth-child(odd) { grid-column:1/-1; }
+.reborn .sentence { display:flex; align-items:center; flex-wrap:wrap; gap:8px; min-height:68px; margin:20px 0 12px; padding:14px 17px; border:1px dashed #a4bd8a7d; border-radius:7px; color:#f0e8c1; background:#0a252b; font-size:22px; line-height:1.5; }
+.reborn .word-bank { display:flex; flex-wrap:wrap; gap:9px; }
+.reborn .word-bank button { min-width:66px; padding:10px 19px; color:#e8e9cc; font-size:17px; background:#385448; border-color:#bec6958a; }
+.reborn .feedback { border-left:2px solid #afd4aa; padding:10px 14px; background:#b3c9940c; }
+.reborn .result-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin:24px 0; }
+.reborn .result-grid>span,.reborn .stat { padding:15px 6px; color:#a5bfae; text-align:center; border:1px solid #8ea57e35; border-radius:6px; background:#0f2b30; font-size:10px; }
+.reborn .result-grid b,.reborn .stat b { display:block; margin-bottom:5px; color:#e3d7a8; font:500 24px/1.3 Georgia,serif; }
+.reborn .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; clip-path:inset(50%); }
+@media(min-width:1001px) {
+  /* Keep the arena and action pad together on laptop-height displays without cropping the world. */
+  .reborn .shell { width:min(1240px,calc(100% - 64px),max(720px,calc((100svh - 360px) * 1.785714))); }
+}
+@media(min-width:1600px) { .reborn .shell { padding-top:35px; } .reborn .topbar { padding-bottom:27px; } .reborn .hud { padding-top:26px; padding-bottom:24px; } }
+@media(max-width:1000px) {
+  .reborn .shell { width:calc(100% - 40px); padding-top:22px; }
+  .reborn .topbar { gap:18px; } .reborn .brand h1 span { display:block; margin:8px 0 0; }
+  .reborn .topbar>.badge { font-size:9px; padding:5px 9px; }
+  .reborn .hud { gap:20px; grid-template-columns:1fr 1.2fr 1fr; }
+  .reborn .toolbar { gap:17px; grid-template-columns:1.1fr 1fr; }
+  .reborn .voice-panel { padding-left:17px; }
+  .reborn .voice-panel .button-row { gap:6px; } .reborn .voice-panel .button-row button { padding:7px 9px; font-size:11px; }
+  .reborn .audio-options { gap:4px 9px; }
+  .reborn .dialog-card { padding:23px 27px; }
+  .reborn .dialog-card h2 { font-size:24px; }
+}
+@media(max-width:780px) {
+  .reborn .shell { width:calc(100% - 32px); }
+  .reborn .topbar>.badge { display:none; }
+  .reborn .toolbar { grid-template-columns:1fr; gap:17px; }
+  .reborn .voice-panel { border-left:0; border-top:1px solid #73927b3b; padding:15px 0 0; }
+  .reborn .control-pad { gap:10px; }
+  .reborn .control-pad button { min-height:66px; }
+  .reborn .voice-panel .button-row button { padding:8px 14px; font-size:12px; }
+  .reborn .settings-grid,.reborn .setting-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .reborn .expression-list { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:600px) {
+  .reborn .shell { width:calc(100% - 24px); padding:19px 0 calc(20px + env(safe-area-inset-bottom)); }
+  .reborn .topbar { gap:12px; padding:0 3px 17px; }
+  .reborn .brand .eyebrow { font-size:8px; letter-spacing:.14em; }
+  .reborn .brand h1 { font-size:27px; letter-spacing:.14em; }
+  .reborn .brand h1 span { margin-top:6px; font-size:8px; letter-spacing:.18em; }
+  .reborn .topbar>button { min-width:95px; padding:10px 12px; font-size:11px; }
+  .reborn .hud { grid-template-columns:1fr 1fr; gap:12px 24px; padding:17px 4px 14px; }
+  .reborn .objective { grid-column:1/-1; grid-row:2; min-height:20px; color:#b0c9b7; font-size:11px; }
+  .reborn .enemy-hp { grid-column:2; grid-row:1; }
+  .reborn .meter-label { gap:5px; font-size:10px; margin-bottom:7px; }
+  .reborn .meter-label b { font-size:10px; }
+  .reborn .hp-track { height:6px; }
+  .reborn .arena { border-radius:8px; box-shadow:0 17px 30px #00111750,0 0 0 3px #2a4b4133; }
+  .reborn .overlay { position:relative; inset:auto; padding:0; overflow:visible; background:none; backdrop-filter:none; border-top:1px solid #a6bc8759; }
+  .reborn .dialog-card { width:100%; max-height:none; overflow:visible; padding:22px 21px; border:0; border-radius:0; background:linear-gradient(145deg,#173b3d,#102b31); box-shadow:none; }
+  .reborn .dialog-card::before { margin-bottom:12px; }
+  .reborn .dialog-card h2 { margin:8px 0 13px; font-size:23px; }
+  .reborn .dialog-card p { font-size:12px; line-height:1.8; }
+  .reborn .dialog-card .eyebrow { font-size:9px; letter-spacing:.17em; }
+  .reborn .dialog-card>.button-row { margin-top:20px; }
+  .reborn .dialog-card>.button-row>button { flex:1 1 auto; font-size:12px; }
+  .reborn .arena-caption { display:grid; grid-template-columns:1fr auto; gap:5px 10px; padding:12px 3px; }
+  .reborn #scene-label { font-size:8px; letter-spacing:.14em; }
+  .reborn #charge { grid-column:2; grid-row:1; font-size:9px; }
+  .reborn #combat-feedback { grid-column:1/-1; min-height:14px; text-align:left; font-size:10px; }
+  .reborn .toolbar { padding:14px 0 17px; gap:14px; }
+  .reborn .control-pad { gap:6px; grid-template-columns:.85fr .85fr 1fr 1fr 1fr; }
+  .reborn .control-pad button { min-height:65px; padding:10px 3px; border-radius:6px; }
+  .reborn .control-pad button strong { font-size:13px; }
+  .reborn .control-pad button small { font-size:8px; letter-spacing:-.03em; white-space:nowrap; }
+  .reborn .voice-panel { padding-top:13px; }
+  .reborn .voice-panel .button-row { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
+  .reborn .voice-panel .button-row button { padding:9px 4px; font-size:11px; }
+  .reborn .audio-options { gap:4px 17px; font-size:10px; margin-top:7px; }
+  .reborn .voice-status { font-size:10px; line-height:1.7; }
+  .reborn .choices { gap:7px; }
+  .reborn .choices>button { font-size:12px; padding:10px 12px; }
+  .reborn .sentence { min-height:60px; font-size:20px; margin-top:17px; }
+  .reborn .settings-grid,.reborn .setting-grid { gap:17px; padding:17px; font-size:11px; }
+  .reborn .settings,.reborn .expression-practice { margin-top:11px; }
+  .reborn .expression-list { padding:0 11px 11px; gap:6px; }
+  .reborn .expression-list button { padding:10px; }
+  .reborn .expression-list button b { font-size:11px; }
+  .reborn .expression-list button span { font-size:10px; }
+  .reborn .result-grid { grid-template-columns:repeat(2,minmax(0,1fr)); margin:18px 0; }
+  .reborn .footer { flex-direction:column; gap:5px; padding-top:18px; font-size:9px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .reborn *, .reborn *::before,.reborn *::after { scroll-behavior:auto !important; animation:none !important; transition:none !important; }
+}
+.reborn[data-reduced-motion=true] *, .reborn[data-reduced-motion=true] *::before,.reborn[data-reduced-motion=true] *::after { animation:none !important; transition:none !important; }

@@ -1,0 +1,15 @@
+bundle 108727 6A97F8E8E8E800D4BA32728396E6A80C606B839E59C4645F873DE89B8D0D5BC2
+chrome 157.0.8103.79
+layout intro five viewports passed
+tutorial, real movement/boundary/range, pause, focus release, restart passed
+layout listening five viewports passed
+layout victory five viewports passed
+real input victory {"elapsedSeconds":35.7,"stats":{"correct":7,"wrong":2,"assisted":7,"independent":0,"expressions":["Move left!","Watch out!","I need fire.","Attack the slime!","Use your magic!"],"listening":{"correct":4,"wrong":1,"assisted":4,"independent":0,"asset":0,"fallback":0,"unheard":5},"magic":{"correct":3,"wrong":1,"assisted":3,"independent":0}},"patterns":["jump","heavy_jump","triple_bounce","crystal_charge"],"phases":[1,2],"poses":["idle","run","dodge","attack_swing","attack_follow","magic_charge","hit","magic_release","victory"],"damage":true}
+actual collision damage → defeat → clean restart passed 44s
+native HTMLAudio embedded WAV codec probe (test tone, not English voice) {"normal":"ended","slow":"ended","rates":[1,0.75],"heard":[{"id":"QA_TONE_NOT_VOICE","source":"asset"},{"id":"QA_TONE_NOT_VOICE","source":"asset"}],"statuses":["idle","loading","playing","ended","idle","loading","playing","ended"]}
+native OfflineAudioContext eleven cue peaks (not speaker listening) {"sword":0.1128351166844368,"impact":0.2253096103668213,"bounce":0.22364962100982666,"slimeAttack":0.23831479251384735,"playerHit":0.11315443366765976,"dodge":0.24827194213867188,"magicCharge":0.2484147697687149,"magicExplosion":0.10895180702209473,"bossEntrance":0.241679847240448,"bossDeath":0.2494424432516098,"victory":0.24982500076293945}
+four native range controls, mute, slow, explicit fallback, shake and reduced motion settings passed
+all pre-existing isolated storage bytes unchanged; no uncaught errors or HTTP(S) requests
+mobile real touch move/attack/repeat/dodge/pause, reduced motion passed
+unchanged v0.8 new game → map → 500-item academy offline smoke passed
+PASS chrome original HTML unchanged
