@@ -5,10 +5,11 @@ const RebornLearning = (() => {
     dodge: Object.freeze({id:'dodge',voiceId:'VO_WATCH_OUT',english:'Watch out!',ko:'조심해요!',action:'dodge',explanation:'Watch out!은 위험을 조심하라는 말이에요. 여기서는 회피로 위험을 피할 수 있어요.'}),
     attack: Object.freeze({id:'attack',voiceId:'VO_ATTACK_SLIME',english:'Attack the slime!',ko:'슬라임을 공격해요!',action:'attack',explanation:'Attack은 공격하다예요. the slime은 지금 앞에 있는 슬라임을 가리켜요.'}),
     magic: Object.freeze({id:'magic',voiceId:'VO_USE_MAGIC',english:'Use your magic!',ko:'마법을 사용해요!',action:'magic',explanation:'Use는 사용하다, your magic은 여러분의 마법이에요. 마법을 선택해 보세요.'}),
-    fire: Object.freeze({id:'fire',voiceId:'VO_NEED_FIRE',english:'I need fire.',ko:'나는 불이 필요해요.',action:null,explanation:'I(나는) + need(필요해요) + fire(불)의 순서예요. I need …로 필요한 것을 말할 수 있어요.'})
+    fire: Object.freeze({id:'fire',voiceId:'VO_NEED_FIRE',english:'I need fire.',ko:'나는 불이 필요해요.',action:null,explanation:'I(나는) + need(필요해요) + fire(불)의 순서예요. I need …로 필요한 것을 말할 수 있어요.'}),
+    crystal: Object.freeze({id:'crystal',voiceId:'VO_ATTACK_CRYSTAL',english:'Attack the crystal!',ko:'수정을 공격해요!',action:'attack',explanation:'Attack은 공격하다, the crystal은 빛나는 수정이에요. 노출된 수정에 검을 맞히면 한 번 더 강하게 공격할 수 있어요.'})
   });
   const tutorial = Object.freeze([
-    Object.freeze({english:'Move left!',ko:'왼쪽으로 이동해요!',voiceId:'VO_MOVE_LEFT',text:'A / ←, D / →로 이동해요. J로 검을 휘두르고 K로 바라보는 방향으로 회피해요.'}),
+    Object.freeze({english:'Move left!',ko:'왼쪽으로 이동해요!',voiceId:'VO_MOVE_LEFT',text:'A / ←, D / →로 이동해요. J를 차례로 눌러 3연격을 잇고, K로 바라보는 방향으로 회피해요. 누르고 있기만 하면 연격이 나가지 않아요.'}),
     Object.freeze({english:'Watch out! · Attack the slime!',ko:'조심해요! · 슬라임을 공격해요!',voiceId:'VO_WATCH_OUT',text:'슬라임이 몸을 움츠리면 공격 예고예요. 경고 지점에서 벗어나고, 공격 뒤 빈틈에 검을 사용해요.'}),
     Object.freeze({english:'Use your magic! · I need fire.',ko:'마법을 사용해요! · 나는 불이 필요해요.',voiceId:'VO_USE_MAGIC',text:'영어를 듣는 동안 적은 멈춰요. 소리가 없으면 자막이나 한국어 도움을 볼 수 있어요. 숲의 수정에서 L 마법을 배워요.'})
   ]);
@@ -38,5 +39,6 @@ const RebornLearning = (() => {
     if (!actions.includes(value)) return {valid:false,correct:false};
     return {valid:true,correct:value===expressions[key].action};
   }
-  return Object.freeze({expressions,tutorial,actions,challenge,evaluate});
+  const bossLesson=Object.freeze({english:'Attack the crystal!',ko:'수정을 공격해요!',voiceId:'VO_ATTACK_CRYSTAL',text:'챔피언이 수정 돌진을 마치면 중심 수정이 열려요. 안내를 이해한 뒤 빛나는 수정에 검을 맞히면 한 번 더 강한 공격과 경직이 생겨요.'});
+  return Object.freeze({expressions,tutorial,bossLesson,actions,challenge,evaluate});
 })();

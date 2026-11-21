@@ -1,4 +1,4 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102c2d"><title>English Quest REBORN · The Awakening</title><style>/* Reborn is an isolated, touch-accessible action lab. No legacy selectors leak out. */
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102c2d"><title>English Quest REBORN · The Battle Awakens</title><style>/* Reborn is an isolated, touch-accessible action lab. No legacy selectors leak out. */
 body.reborn {
   --ink:#071b22; --panel:#102a30; --panel-2:#16363a; --line:#6d8b7b50;
   --paper:#e9eddb; --muted:#a7bfb4; --gold:#d8c08a; --mint:#8fd7bd; --danger:#e7a18a;
@@ -34,6 +34,7 @@ body.reborn {
 .reborn .meter-label { display:flex; justify-content:space-between; align-items:center; gap:10px; margin:0 0 8px; font-size:11px; color:#a9c0b5; }
 .reborn .meter-label b { color:#d7e1cc; font-size:12px; letter-spacing:.03em; }
 .reborn .meter-label span { font-variant-numeric:tabular-nums; white-space:nowrap; }
+.reborn #enemy-name { font-size:11px; white-space:nowrap; letter-spacing:0; }
 .reborn .hp-track { height:7px; background:#04171c; border:1px solid #93b39d2b; border-radius:20px; overflow:hidden; box-shadow:0 1px #e2e2aa0c; }
 .reborn .hp-fill { width:100%; height:100%; border-radius:20px; background:linear-gradient(90deg,#4a9e8c,#c2e3a0); box-shadow:0 0 9px #a2deb55c; transition:width .18s ease-out; }
 .reborn .enemy-hp .hp-fill { background:linear-gradient(90deg,#a9776e,#e5bc96); box-shadow:0 0 9px #dfaa8150; }
@@ -95,6 +96,42 @@ body.reborn {
 .reborn .result-grid>span,.reborn .stat { padding:15px 6px; color:#a5bfae; text-align:center; border:1px solid #8ea57e35; border-radius:6px; background:#0f2b30; font-size:10px; }
 .reborn .result-grid b,.reborn .stat b { display:block; margin-bottom:5px; color:#e3d7a8; font:500 24px/1.3 Georgia,serif; }
 .reborn .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; clip-path:inset(50%); }
+/* Phase 2 status occupies the existing caption, leaving the combat world unobstructed. */
+.reborn .arena-caption { flex-wrap:wrap; gap:6px 10px; }
+.reborn .combo-status,.reborn #combo-status { display:inline-flex; align-items:center; gap:5px; min-height:24px; color:#e2ce9a; font-size:10px; font-variant-numeric:tabular-nums; white-space:nowrap; }
+.reborn .combo-status b { color:#f2e5b8; font-size:13px; }
+.reborn .combo-status[data-tier="3"],.reborn #combo-status[data-tier="3"] { color:#ffe2a4; text-shadow:0 0 12px #d3b2776b; }
+.reborn .dodge-status,.reborn #dodge-status { min-height:24px; padding:4px 7px; border:1px solid transparent; border-radius:4px; color:#acd4e7; font-size:10px; white-space:nowrap; }
+.reborn .dodge-status.active,.reborn #dodge-status[data-perfect="true"] { border-color:#89c5dd5c; background:#345e703d; color:#cfedfc; }
+.reborn .boss-banner { text-align:center; border-color:#c1b589; background:radial-gradient(ellipse at 50% 20%,#4b596e52,transparent 70%),linear-gradient(145deg,#173a3bf5,#0e282ff7); }
+.reborn .boss-banner::before { margin-right:auto; margin-left:auto; width:65px; }
+.reborn .boss-banner .eyebrow { color:#c2cee0; letter-spacing:.23em; }
+.reborn .boss-banner h2 { color:#e7dfb8; font-size:30px; letter-spacing:.02em; }
+.reborn .boss-banner .button-row { justify-content:center; }
+.reborn .overlay:has(.boss-banner) { align-items:flex-start; background:linear-gradient(#06192150,transparent 65%); backdrop-filter:none; padding-top:20px; }
+.reborn .overlay:has(.boss-banner) .dialog-card { width:min(440px,100%); margin-right:auto; padding:12px 24px; }
+.reborn .overlay:has(.boss-banner) .dialog-card::before { display:none; }
+.reborn .overlay:has(.boss-banner) h2 { margin:5px 0 7px; font-size:25px; }
+.reborn .overlay:has(.boss-banner) p { margin:5px 0; font-size:11px; }
+.reborn .overlay:has(.boss-banner) .button-row { margin-top:10px; }
+.reborn .combat-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:18px 0; }
+.reborn .combat-stats>div,.reborn .combat-stats>span { min-width:0; padding:13px 7px; border:1px solid #94ac8340; border-radius:6px; background:#102c32; color:#abc5b5; text-align:center; font-size:10px; }
+.reborn .combat-stats b,.reborn .combat-stats strong { display:block; color:#e7dbad; font:500 24px/1.35 Georgia,serif; font-variant-numeric:tabular-nums; margin:0 0 4px; }
+.reborn .performance { margin:18px 0 7px; color:#d6dec0; font-size:12px; font-weight:600; letter-spacing:.02em; }
+.reborn .goal-list { display:grid; gap:7px; margin:12px 0 20px; padding:0; list-style:none; }
+.reborn .goal-list:has(>.pill) { display:flex; flex-wrap:wrap; }
+.reborn .goal-list li { padding:9px 12px; border-left:2px solid #7697826b; background:#08252b66; color:#a9c2b2; font-size:11px; line-height:1.7; }
+.reborn .goal-list li.complete,.reborn .goal-list li[data-complete="true"] { border-left-color:#c8c990; color:#d9e5bd; background:#52634222; }
+.reborn .review-list { margin:12px 0 18px; padding:0; list-style:none; color:#c4d6c4; }
+.reborn .review-list li { padding:11px 0; border-bottom:1px solid #89a08336; font-size:12px; line-height:1.6; }
+.reborn .review-list li span,.reborn .review-list li small { display:block; margin-top:3px; color:#9fbaab; font-size:11px; }
+.reborn .review-list button { margin-top:8px; min-height:44px; padding:7px 13px; font-size:11px; }
+.reborn .input-help { margin-top:14px; border:1px solid #66867642; border-radius:8px; background:#102b30a6; }
+.reborn .input-help>div,.reborn .input-help>p { padding:0 18px 16px; color:#aec7b8; font-size:12px; line-height:1.9; }
+.reborn .input-help kbd { padding:2px 6px; border:1px solid #8ca78c50; border-radius:4px; color:#dcd9b1; background:#1d3d3d; font:11px system-ui,sans-serif; }
+.reborn .settings select { min-height:44px; width:100%; padding:9px 10px; border:1px solid #8aa58a66; border-radius:5px; color:#dce7ce; background:#17363a; }
+.reborn .settings-grid { grid-template-columns:repeat(5,minmax(0,1fr)); }
+.reborn .settings-grid input[type=range] { min-height:24px; }
 @media(min-width:1001px) {
   /* Keep the arena and action pad together on laptop-height displays without cropping the world. */
   .reborn .shell { width:min(1240px,calc(100% - 64px),max(720px,calc((100svh - 360px) * 1.785714))); }
@@ -111,6 +148,7 @@ body.reborn {
   .reborn .audio-options { gap:4px 9px; }
   .reborn .dialog-card { padding:23px 27px; }
   .reborn .dialog-card h2 { font-size:24px; }
+  .reborn .settings-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
 }
 @media(max-width:780px) {
   .reborn .shell { width:calc(100% - 32px); }
@@ -135,9 +173,12 @@ body.reborn {
   .reborn .enemy-hp { grid-column:2; grid-row:1; }
   .reborn .meter-label { gap:5px; font-size:10px; margin-bottom:7px; }
   .reborn .meter-label b { font-size:10px; }
+  .reborn #enemy-name { font-size:9px; }
   .reborn .hp-track { height:6px; }
   .reborn .arena { border-radius:8px; box-shadow:0 17px 30px #00111750,0 0 0 3px #2a4b4133; }
   .reborn .overlay { position:relative; inset:auto; padding:0; overflow:visible; background:none; backdrop-filter:none; border-top:1px solid #a6bc8759; }
+  .reborn .overlay:has(.boss-banner) { padding:0; background:none; }
+  .reborn .overlay:has(.boss-banner) .dialog-card { padding:20px 21px; }
   .reborn .dialog-card { width:100%; max-height:none; overflow:visible; padding:22px 21px; border:0; border-radius:0; background:linear-gradient(145deg,#173b3d,#102b31); box-shadow:none; }
   .reborn .dialog-card::before { margin-bottom:12px; }
   .reborn .dialog-card h2 { margin:8px 0 13px; font-size:23px; }
@@ -149,6 +190,10 @@ body.reborn {
   .reborn #scene-label { font-size:8px; letter-spacing:.14em; }
   .reborn #charge { grid-column:2; grid-row:1; font-size:9px; }
   .reborn #combat-feedback { grid-column:1/-1; min-height:14px; text-align:left; font-size:10px; }
+  .reborn #combo-status { grid-column:1; grid-row:2; font-size:9px; }
+  .reborn #dodge-status { grid-column:2; grid-row:2; justify-self:end; font-size:9px; padding:3px 5px; }
+  .reborn #combo-status~#combat-feedback,.reborn .arena-caption:has(#combo-status) #combat-feedback { grid-row:3; }
+  .reborn #combat-feedback:empty { display:none; }
   .reborn .toolbar { padding:14px 0 17px; gap:14px; }
   .reborn .control-pad { gap:6px; grid-template-columns:.85fr .85fr 1fr 1fr 1fr; }
   .reborn .control-pad button { min-height:65px; padding:10px 3px; border-radius:6px; }
@@ -169,6 +214,10 @@ body.reborn {
   .reborn .expression-list button b { font-size:11px; }
   .reborn .expression-list button span { font-size:10px; }
   .reborn .result-grid { grid-template-columns:repeat(2,minmax(0,1fr)); margin:18px 0; }
+  .reborn .combat-stats { gap:6px; }
+  .reborn .combat-stats>div,.reborn .combat-stats>span { padding:11px 5px; font-size:9px; }
+  .reborn .combat-stats b,.reborn .combat-stats strong { font-size:23px; }
+  .reborn .boss-banner h2 { font-size:25px; }
   .reborn .footer { flex-direction:column; gap:5px; padding-top:18px; font-size:9px; }
 }
 @media(prefers-reduced-motion:reduce) {
@@ -176,7 +225,7 @@ body.reborn {
 }
 .reborn[data-reduced-motion=true] *, .reborn[data-reduced-motion=true] *::before,.reborn[data-reduced-motion=true] *::after { animation:none !important; transition:none !important; }
 </style></head><body class="reborn"><main id="app"></main><noscript>JavaScript를 켜 주세요.</noscript><script>'use strict';
-const RebornVoiceManifest={"version":1,"release":"REBORN Phase 1","status":"Awaiting authorized voice assets","primary":"licensed bundled audio","fallback":"Optional local browser synthesis, explicitly enabled by player; not a recording","utterances":[{"id":"VO_HELLO","en":"Hello!","ko":"안녕!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_HELLO.mp3","usage":"입장 안내","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_MOVE_LEFT","en":"Move left!","ko":"왼쪽으로 움직여!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_MOVE_LEFT.mp3","usage":"듣고 행동하기 · 이동","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_MOVE_RIGHT","en":"Move right!","ko":"오른쪽으로 움직여!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_MOVE_RIGHT.mp3","usage":"이동 연습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_WATCH_OUT","en":"Watch out!","ko":"조심해!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_WATCH_OUT.mp3","usage":"듣고 행동하기 · 회피","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_DODGE","en":"Dodge!","ko":"피해!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_DODGE.mp3","usage":"회피 연습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_ATTACK","en":"Attack!","ko":"공격해!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_ATTACK.mp3","usage":"검 조작 연습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_ATTACK_SLIME","en":"Attack the slime!","ko":"슬라임을 공격해!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_ATTACK_SLIME.mp3","usage":"듣고 행동하기 · 검","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_USE_MAGIC","en":"Use your magic!","ko":"마법을 사용해!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_USE_MAGIC.mp3","usage":"듣고 행동하기 · 마법","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_LISTEN","en":"Listen carefully.","ko":"잘 들어 봐.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_LISTEN.mp3","usage":"듣기 안내","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_GOOD_JOB","en":"Good job!","ko":"잘했어!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_GOOD_JOB.mp3","usage":"정답 피드백","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_TRY_AGAIN","en":"Try again.","ko":"다시 해 봐.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_TRY_AGAIN.mp3","usage":"오답 피드백","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_YOU_CAN","en":"You can do it.","ko":"넌 할 수 있어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_YOU_CAN.mp3","usage":"재도전 안내","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_NEED_FIRE","en":"I need fire.","ko":"나는 불이 필요해.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_NEED_FIRE.mp3","usage":"Sentence Magic","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_OPEN_GATE","en":"Open the gate.","ko":"문을 열어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_OPEN_GATE.mp3","usage":"승리 뒤 출구 표현 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_FOLLOW","en":"Follow me.","ko":"나를 따라와.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_FOLLOW.mp3","usage":"숲 입장","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_BE_CAREFUL","en":"Be careful.","ko":"조심해.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_BE_CAREFUL.mp3","usage":"보스 예고","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_SLIME_COMING","en":"The slime is coming.","ko":"슬라임이 오고 있어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_SLIME_COMING.mp3","usage":"첫 전투 진입","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_ENEMY_WEAK","en":"The enemy is weak.","ko":"적이 약해졌어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_ENEMY_WEAK.mp3","usage":"듣기 보상 취약 시간","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_ONCE_MORE","en":"One more time.","ko":"한 번 더.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_ONCE_MORE.mp3","usage":"음성 반복 연습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_VICTORY","en":"Victory!","ko":"승리!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_VICTORY.mp3","usage":"보스 격파","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_READY","en":"Are you ready?","ko":"준비됐어?","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_READY.mp3","usage":"튜토리얼 시작","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_KEEP_DISTANCE","en":"Keep your distance.","ko":"거리를 유지해.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_KEEP_DISTANCE.mp3","usage":"적 공격 예고 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_WAIT","en":"Wait for an opening.","ko":"빈틈을 기다려.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_WAIT.mp3","usage":"적 회복 시간 공략 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_CHARGE","en":"Your magic is ready.","ko":"마법이 준비됐어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_CHARGE.mp3","usage":"수정 발견","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_BOSS","en":"The champion is here.","ko":"챔피언이 나타났어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_BOSS.mp3","usage":"보스 등장","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_JUMP","en":"A heavy jump!","ko":"강한 점프야!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_JUMP.mp3","usage":"보스 패턴 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_THREE","en":"Three bounces!","ko":"세 번 튀어 오른다!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_THREE.mp3","usage":"보스 패턴 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_CRYSTAL","en":"The crystal is charging.","ko":"수정이 힘을 모으고 있어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_CRYSTAL.mp3","usage":"보스 패턴 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_TAKE_BREAK","en":"Take a break.","ko":"잠깐 쉬어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_TAKE_BREAK.mp3","usage":"일시정지","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_RETURN","en":"Let us try again.","ko":"우리 다시 해 보자.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_RETURN.mp3","usage":"재도전","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null}]};
+const RebornVoiceManifest={"version":2,"release":"REBORN Phase 2","status":"Awaiting authorized voice assets","primary":"licensed bundled audio","fallback":"Optional local browser synthesis, explicitly enabled by player; not a recording","utterances":[{"id":"VO_HELLO","en":"Hello!","ko":"안녕!","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_HELLO.mp3","usage":"입장 안내","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_HELLO.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_MOVE_LEFT","en":"Move left!","ko":"왼쪽으로 움직여!","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_MOVE_LEFT.mp3","usage":"듣고 행동하기 · 이동","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_MOVE_LEFT.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_MOVE_RIGHT","en":"Move right!","ko":"오른쪽으로 움직여!","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_MOVE_RIGHT.mp3","usage":"이동 연습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_MOVE_RIGHT.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_WATCH_OUT","en":"Watch out!","ko":"조심해!","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_WATCH_OUT.mp3","usage":"듣고 행동하기 · 회피","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_WATCH_OUT.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_DODGE","en":"Dodge!","ko":"피해!","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_DODGE.mp3","usage":"회피 연습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_DODGE.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_ATTACK","en":"Attack!","ko":"공격해!","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_ATTACK.mp3","usage":"검 조작 연습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_ATTACK.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_ATTACK_SLIME","en":"Attack the slime!","ko":"슬라임을 공격해!","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_ATTACK_SLIME.mp3","usage":"듣고 행동하기 · 검","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_ATTACK_SLIME.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_USE_MAGIC","en":"Use your magic!","ko":"마법을 사용해!","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_USE_MAGIC.mp3","usage":"듣고 행동하기 · 마법","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_USE_MAGIC.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_LISTEN","en":"Listen carefully.","ko":"잘 들어 봐.","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_LISTEN.mp3","usage":"듣기 안내","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_LISTEN.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_GOOD_JOB","en":"Good job!","ko":"잘했어!","voiceCharacter":"Combat Announcer","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_GOOD_JOB.mp3","usage":"정답 피드백","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ANNOUNCER","normalSpeedAsset":"assets/reborn/voice/VO_GOOD_JOB.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_TRY_AGAIN","en":"Try again.","ko":"다시 해 봐.","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_TRY_AGAIN.mp3","usage":"오답 피드백","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_TRY_AGAIN.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_YOU_CAN","en":"You can do it.","ko":"넌 할 수 있어.","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_YOU_CAN.mp3","usage":"재도전 안내","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_YOU_CAN.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_NEED_FIRE","en":"I need fire.","ko":"나는 불이 필요해.","voiceCharacter":"Magical Crystal","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_NEED_FIRE.mp3","usage":"Sentence Magic","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"CRYSTAL","normalSpeedAsset":"assets/reborn/voice/VO_NEED_FIRE.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_OPEN_GATE","en":"Open the gate.","ko":"문을 열어.","voiceCharacter":"Magical Crystal","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_OPEN_GATE.mp3","usage":"승리 뒤 출구 표현 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"CRYSTAL","normalSpeedAsset":"assets/reborn/voice/VO_OPEN_GATE.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_FOLLOW","en":"Follow me.","ko":"나를 따라와.","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_FOLLOW.mp3","usage":"숲 입장","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_FOLLOW.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_BE_CAREFUL","en":"Be careful.","ko":"조심해.","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_BE_CAREFUL.mp3","usage":"보스 예고","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_BE_CAREFUL.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_SLIME_COMING","en":"The slime is coming.","ko":"슬라임이 오고 있어.","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_SLIME_COMING.mp3","usage":"첫 전투 진입","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_SLIME_COMING.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_ENEMY_WEAK","en":"The enemy is weak.","ko":"적이 약해졌어.","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_ENEMY_WEAK.mp3","usage":"듣기 보상 취약 시간","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_ENEMY_WEAK.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_ONCE_MORE","en":"One more time.","ko":"한 번 더.","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_ONCE_MORE.mp3","usage":"음성 반복 연습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_ONCE_MORE.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_VICTORY","en":"Victory!","ko":"승리!","voiceCharacter":"Combat Announcer","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_VICTORY.mp3","usage":"보스 격파","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ANNOUNCER","normalSpeedAsset":"assets/reborn/voice/VO_VICTORY.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_READY","en":"Are you ready?","ko":"준비됐어?","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_READY.mp3","usage":"튜토리얼 시작","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_READY.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_KEEP_DISTANCE","en":"Keep your distance.","ko":"거리를 유지해.","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_KEEP_DISTANCE.mp3","usage":"적 공격 예고 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_KEEP_DISTANCE.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_WAIT","en":"Wait for an opening.","ko":"빈틈을 기다려.","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_WAIT.mp3","usage":"적 회복 시간 공략 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_WAIT.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_CHARGE","en":"Your magic is ready.","ko":"마법이 준비됐어.","voiceCharacter":"Magical Crystal","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_CHARGE.mp3","usage":"수정 발견","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"CRYSTAL","normalSpeedAsset":"assets/reborn/voice/VO_CHARGE.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_BOSS","en":"The champion is here.","ko":"챔피언이 나타났어.","voiceCharacter":"Combat Announcer","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_BOSS.mp3","usage":"보스 등장","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ANNOUNCER","normalSpeedAsset":"assets/reborn/voice/VO_BOSS.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_JUMP","en":"A heavy jump!","ko":"강한 점프야!","voiceCharacter":"Combat Announcer","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_JUMP.mp3","usage":"보스 패턴 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ANNOUNCER","normalSpeedAsset":"assets/reborn/voice/VO_JUMP.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_THREE","en":"Three bounces!","ko":"세 번 튀어 오른다!","voiceCharacter":"Combat Announcer","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_THREE.mp3","usage":"보스 패턴 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ANNOUNCER","normalSpeedAsset":"assets/reborn/voice/VO_THREE.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_CRYSTAL","en":"The crystal is charging.","ko":"수정이 힘을 모으고 있어.","voiceCharacter":"Combat Announcer","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_CRYSTAL.mp3","usage":"보스 패턴 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ANNOUNCER","normalSpeedAsset":"assets/reborn/voice/VO_CRYSTAL.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_TAKE_BREAK","en":"Take a break.","ko":"잠깐 쉬어.","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_TAKE_BREAK.mp3","usage":"일시정지","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_TAKE_BREAK.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_RETURN","en":"Let us try again.","ko":"우리 다시 해 보자.","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","path":"assets/reborn/voice/VO_RETURN.mp3","usage":"재도전","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","normalSpeedAsset":"assets/reborn/voice/VO_RETURN.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_ATTACK_CRYSTAL","en":"Attack the crystal!","ko":"수정을 공격해!","usage":"보스 입장 학습과 노출된 수정 약점 듣기","path":"assets/reborn/voice/VO_ATTACK_CRYSTAL.mp3","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","normalSpeedAsset":"assets/reborn/voice/VO_ATTACK_CRYSTAL.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_CORE_EXPOSED","en":"The crystal is exposed.","ko":"수정이 드러났어.","usage":"수정 약점 노출 복습","path":"assets/reborn/voice/VO_CORE_EXPOSED.mp3","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ROWAN","voiceCharacter":"Rowan — The Guide","accent":"General American (target, not delivered)","normalSpeedAsset":"assets/reborn/voice/VO_CORE_EXPOSED.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_PERFECT_DODGE","en":"Perfect dodge!","ko":"완벽하게 피했어!","usage":"정확한 회피 피드백·복습","path":"assets/reborn/voice/VO_PERFECT_DODGE.mp3","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ANNOUNCER","voiceCharacter":"Combat Announcer","accent":"General American (target, not delivered)","normalSpeedAsset":"assets/reborn/voice/VO_PERFECT_DODGE.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null},{"id":"VO_COMBO_FINISH","en":"Great combo!","ko":"멋진 연속 공격이야!","usage":"3연속 검 공격 복습","path":"assets/reborn/voice/VO_COMBO_FINISH.mp3","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"speaker":"ANNOUNCER","voiceCharacter":"Combat Announcer","accent":"General American (target, not delivered)","normalSpeedAsset":"assets/reborn/voice/VO_COMBO_FINISH.mp3","slowSpeedAsset":null,"durationSeconds":null,"audioSource":null,"qualityReview":{"status":"pending — asset missing","pronunciation":null,"intelligibility":null,"normalAndSlowListening":null,"reviewer":null},"embedded":null,"embeddedSlow":null}],"speakers":{"ROWAN":{"name":"Rowan — The Guide","direction":"Warm, calm, patient, wise; clear conversational General American.","status":"production target; no recordings supplied"},"ANNOUNCER":{"name":"Combat Announcer","direction":"Energetic, brief and expressive; clear stress without shouting.","status":"production target; no recordings supplied"},"CRYSTAL":{"name":"Magical Crystal","direction":"Soft, mysterious and highly intelligible; optional subtle reverberation only after intelligibility review.","status":"production target; no recordings supplied"}}};
 /* Isolated Reborn lesson definitions. No campaign records, browser APIs or audio. */
 const RebornLearning = (() => {
   const expressions = Object.freeze({
@@ -184,10 +233,11 @@ const RebornLearning = (() => {
     dodge: Object.freeze({id:'dodge',voiceId:'VO_WATCH_OUT',english:'Watch out!',ko:'조심해요!',action:'dodge',explanation:'Watch out!은 위험을 조심하라는 말이에요. 여기서는 회피로 위험을 피할 수 있어요.'}),
     attack: Object.freeze({id:'attack',voiceId:'VO_ATTACK_SLIME',english:'Attack the slime!',ko:'슬라임을 공격해요!',action:'attack',explanation:'Attack은 공격하다예요. the slime은 지금 앞에 있는 슬라임을 가리켜요.'}),
     magic: Object.freeze({id:'magic',voiceId:'VO_USE_MAGIC',english:'Use your magic!',ko:'마법을 사용해요!',action:'magic',explanation:'Use는 사용하다, your magic은 여러분의 마법이에요. 마법을 선택해 보세요.'}),
-    fire: Object.freeze({id:'fire',voiceId:'VO_NEED_FIRE',english:'I need fire.',ko:'나는 불이 필요해요.',action:null,explanation:'I(나는) + need(필요해요) + fire(불)의 순서예요. I need …로 필요한 것을 말할 수 있어요.'})
+    fire: Object.freeze({id:'fire',voiceId:'VO_NEED_FIRE',english:'I need fire.',ko:'나는 불이 필요해요.',action:null,explanation:'I(나는) + need(필요해요) + fire(불)의 순서예요. I need …로 필요한 것을 말할 수 있어요.'}),
+    crystal: Object.freeze({id:'crystal',voiceId:'VO_ATTACK_CRYSTAL',english:'Attack the crystal!',ko:'수정을 공격해요!',action:'attack',explanation:'Attack은 공격하다, the crystal은 빛나는 수정이에요. 노출된 수정에 검을 맞히면 한 번 더 강하게 공격할 수 있어요.'})
   });
   const tutorial = Object.freeze([
-    Object.freeze({english:'Move left!',ko:'왼쪽으로 이동해요!',voiceId:'VO_MOVE_LEFT',text:'A / ←, D / →로 이동해요. J로 검을 휘두르고 K로 바라보는 방향으로 회피해요.'}),
+    Object.freeze({english:'Move left!',ko:'왼쪽으로 이동해요!',voiceId:'VO_MOVE_LEFT',text:'A / ←, D / →로 이동해요. J를 차례로 눌러 3연격을 잇고, K로 바라보는 방향으로 회피해요. 누르고 있기만 하면 연격이 나가지 않아요.'}),
     Object.freeze({english:'Watch out! · Attack the slime!',ko:'조심해요! · 슬라임을 공격해요!',voiceId:'VO_WATCH_OUT',text:'슬라임이 몸을 움츠리면 공격 예고예요. 경고 지점에서 벗어나고, 공격 뒤 빈틈에 검을 사용해요.'}),
     Object.freeze({english:'Use your magic! · I need fire.',ko:'마법을 사용해요! · 나는 불이 필요해요.',voiceId:'VO_USE_MAGIC',text:'영어를 듣는 동안 적은 멈춰요. 소리가 없으면 자막이나 한국어 도움을 볼 수 있어요. 숲의 수정에서 L 마법을 배워요.'})
   ]);
@@ -217,7 +267,8 @@ const RebornLearning = (() => {
     if (!actions.includes(value)) return {valid:false,correct:false};
     return {valid:true,correct:value===expressions[key].action};
   }
-  return Object.freeze({expressions,tutorial,actions,challenge,evaluate});
+  const bossLesson=Object.freeze({english:'Attack the crystal!',ko:'수정을 공격해요!',voiceId:'VO_ATTACK_CRYSTAL',text:'챔피언이 수정 돌진을 마치면 중심 수정이 열려요. 안내를 이해한 뒤 빛나는 수정에 검을 맞히면 한 번 더 강한 공격과 경직이 생겨요.'});
+  return Object.freeze({expressions,tutorial,bossLesson,actions,challenge,evaluate});
 })();
 
 ;
@@ -226,36 +277,47 @@ const RebornCombat = (() => {
   const freeze = x => { Object.values(x).forEach(v=>{if(v && typeof v==='object') freeze(v);}); return Object.freeze(x); };
   const CONFIG = freeze({
     width:1000,height:560,ground:425,minX:60,maxX:940,step:1/120,maxDelta:.25,
-    player:{hp:100,startX:170,speed:220,radius:18,hitTime:.24,hitInvulnerability:.55,knockback:18},
-    sword:{damage:8,range:104,height:85,cooldown:.35,anticipation:.065,swing:.09,follow:.15,charge:14,knockback:8},
-    dodge:{duration:.30,invulnerability:.18,cooldown:.65,speed:490},
-    magic:{damage:32,charge:100,cooldown:8,release:.38},
-    learning:{charge:25,stun:.9},
+    player:{hp:100,startX:170,speed:220,acceleration:1900,deceleration:2300,reversal:2800,radius:18,hitTime:.24,hitInvulnerability:.55,knockback:18},
+    sword:{damage:8,range:104,height:85,cooldown:.35,anticipation:.065,swing:.09,follow:.15,charge:14,knockback:8,comboWindow:.65,
+      strikes:[{damage:8,range:104,height:85,anticipation:.065,swing:.09,follow:.15,cooldown:.35,knockback:8,charge:14},
+        {damage:10,range:112,height:100,anticipation:.075,swing:.11,follow:.17,cooldown:.39,knockback:14,charge:16},
+        {damage:16,range:126,height:105,anticipation:.11,swing:.14,follow:.24,cooldown:.52,knockback:32,charge:20}]},
+    dodge:{duration:.30,invulnerability:.18,cooldown:.65,speed:490,perfectCharge:20,perfectDisplay:.7},
+    magic:{damage:32,charge:100,cooldown:8,chargeTime:.5,release:.38,projectileSpeed:740,projectileRadius:13,projectileLife:2.5,maxProjectiles:3},
+    learning:{charge:25,stun:.9,coreWindow:3.6,coreMultiplier:1.5,coreStagger:.7},
+    feedback:{lightStop:.05,mediumStop:.06,finisherStop:.09,magicStop:.095,bossStop:.11,lightShake:.035,heavyShake:.16,knockbackDecay:180,maxEffects:64,maxEvents:100},
     slime:{hp:70,startX:690,radius:38,speed:43,approachRange:215,idle:.55,recovery:.85,hitReaction:.12,
       patterns:[{id:'jump',telegraph:.85,duration:.55,damage:8,radius:46,lift:74},{id:'rush',telegraph:1.05,duration:.42,damage:7,radius:42,lift:0}]},
-    boss:{hp:160,startX:740,radius:58,speed:50,approachRange:290,idle:.65,recovery:1.05,hitReaction:.10,phaseSpeed:.87,
-      patterns:[{id:'heavy_jump',telegraph:1.05,duration:.62,damage:16,radius:70,lift:126},{id:'triple_bounce',telegraph:.8,duration:.32,damage:8,radius:54,lift:72,repeat:3,repeatTelegraph:.5},{id:'crystal_charge',telegraph:1.2,duration:.52,damage:14,radius:58,lift:0}]}
+    boss:{hp:160,startX:740,radius:58,speed:50,approachRange:290,idle:.45,recovery:1.05,hitReaction:.10,phaseSpeed:.87,intro:.9,
+      phaseA:['crystal_charge','heavy_jump','forward_rush'],phaseB:['heavy_jump','triple_bounce','crystal_charge','forward_rush'],
+      patterns:[{id:'heavy_jump',telegraph:1.05,duration:.62,damage:16,radius:70,lift:126},{id:'forward_rush',telegraph:.95,duration:.46,damage:11,radius:53,lift:0},{id:'triple_bounce',telegraph:.8,duration:.32,damage:8,radius:54,lift:72,repeat:3,repeatTelegraph:.5},{id:'crystal_charge',telegraph:1.2,duration:.52,damage:14,radius:58,lift:0}]}
   });
   const clamp=(x,min,max)=>Math.max(min,Math.min(max,x));
   const countdown=(value,dt)=>value-dt<1e-8?0:value-dt;
+  const approach=(value,target,amount)=>value<target?Math.min(value+amount,target):Math.max(value-amount,target);
+  const rushPatterns=new Set(['rush','forward_rush','crystal_charge']);
   const activeModes=new Set(['EXPLORATION','COMBAT','PLAYER_HIT']);
   function create() {
-    let generation=0,accumulator=0,events=[],held=new Set(),attack=null,dodge=null,enemyData=null,pending=null,pausedMode=null,moved=0,scripted=new Set(),serial=0;
+    let generation=0,accumulator=0,events=[],held=new Set(),attack=null,dodge=null,enemyData=null,pending=null,pausedMode=null,moved=0,scripted=new Set(),serial=0,comboHits=0,cast=null,shots=[],goals=new Set();
     const state={};
-    const emit=(type,extra={})=>events.push({type,...extra,session:state.session});
+    const emit=(type,extra={})=>{events.push({type,...extra,session:state.session});if(events.length>CONFIG.feedback.maxEvents)events.shift();};
     const soundIds={sword_swing:'sword',sword_impact:'impact',slime_bounce:'bounce',slime_warning:'slimeAttack',slime_rush:'slimeAttack',slime_jump:'bounce',slime_land:'impact',slime_defeat:'impact',player_hit:'playerHit',magic_charge:'magicCharge',magic_explosion:'magicExplosion',boss_entrance:'bossEntrance',boss_defeat:'bossDeath',boss_phase:'charge',crystal_charge:'charge',correct:'magic',incorrect:'bounce',defeat:'bossDeath'};
     const sfx=id=>emit('sfx',{id:soundIds[id]||id});
     const voice=id=>{state.lastVoiceId=id;emit('voice',{id});};
     function mode(value) { state.mode=value;emit('scene',{mode:value,stage:state.stage}); }
-    function effect(type,x,y,life,value=0) {state.effects.push({type,x,y,life,ttl:life,value});}
+    function effect(type,x,y,life,value=0,meta={}) {state.effects.push({type,x,y,life,ttl:life,value,...meta});if(state.effects.length>CONFIG.feedback.maxEffects)state.effects.shift();}
     function pose(value,duration=0) {state.player.pose=value;state.player.poseTime=0;state.player.poseDuration=duration;}
     function clearInput() {held.clear();}
+    function resetCombo(){attack=null;comboHits=0;Object.assign(state.player,{comboIndex:0,comboNext:1,comboWindowRemaining:0,comboBuffered:false});}
+    function clearTransient(){resetCombo();dodge=null;cast=null;shots=[];state.cast=null;state.projectiles=shots;state.player.vx=0;clearInput();}
+    function goal(id){if(goals.has(id))return;goals.add(id);state.stats.goals.push(id);emit('goal',{id});}
+    function review(key,reason){const e=RebornLearning.expressions[key];let r=state.stats.reviewExpressions.find(x=>x.id===key);if(!r){r={id:key,voiceId:e.voiceId,english:e.english,ko:e.ko,reasons:[]};state.stats.reviewExpressions.push(r);}if(!r.reasons.includes(reason))r.reasons.push(reason);}
     function reset() {
-      generation++;accumulator=0;events=[];held.clear();attack=null;dodge=null;enemyData=null;pending=null;pausedMode=null;moved=0;scripted=new Set();serial=0;
+      generation++;accumulator=0;events=[];held.clear();attack=null;dodge=null;enemyData=null;pending=null;pausedMode=null;moved=0;scripted=new Set();serial=0;comboHits=0;cast=null;shots=[];goals=new Set();
       Object.assign(state,{mode:'INTRO',stage:'entrance',time:0,session:generation,
-        player:{x:CONFIG.player.startX,y:CONFIG.ground,facing:1,hp:CONFIG.player.hp,maxHp:CONFIG.player.hp,pose:'idle',poseTime:0,poseDuration:0,attackCooldown:0,dodgeCooldown:0,invulnerable:0,magicCharge:0,magicCooldown:0},
-        enemy:null,effects:[],challenge:null,tutorial:null,magicUnlocked:false,awaitingProceed:true,lastVoiceId:'VO_HELLO',feedback:'',hitStop:0,shake:0,
-        stats:{correct:0,wrong:0,assisted:0,independent:0,expressions:[],listening:{correct:0,wrong:0,assisted:0,independent:0,asset:0,fallback:0,unheard:0},magic:{correct:0,wrong:0,assisted:0,independent:0}},
+        player:{x:CONFIG.player.startX,y:CONFIG.ground,vx:0,runPhase:0,facing:1,hp:CONFIG.player.hp,maxHp:CONFIG.player.hp,pose:'idle',poseTime:0,poseDuration:0,attackCooldown:0,dodgeCooldown:0,invulnerable:0,magicCharge:0,magicCooldown:0,comboIndex:0,comboNext:1,comboWindowRemaining:0,comboBuffered:false,perfectDodge:0,weaknessCharge:0},
+        enemy:null,effects:[],projectiles:[],cast:null,bossIntro:null,challenge:null,tutorial:null,magicUnlocked:false,awaitingProceed:true,lastVoiceId:'VO_HELLO',feedback:'',hitStop:0,shake:0,shakePower:0,
+        stats:{correct:0,wrong:0,assisted:0,independent:0,expressions:[],reviewExpressions:[],goals:[],combat:{damageDealt:0,damageReceived:0,dodges:0,successfulDodges:0,perfectDodges:0,highestCombo:0,magicUsed:0,magicHits:0,weaknessHits:0,swordHits:0},listening:{correct:0,wrong:0,assisted:0,independent:0,asset:0,fallback:0,unheard:0},magic:{correct:0,wrong:0,assisted:0,independent:0}},
         objective:'로완과 함께 숲의 첫 시험을 시작해요.',reward:null});
       return state;
     }
@@ -275,17 +337,18 @@ const RebornCombat = (() => {
     }
     function spawn(kind) {
       const c=CONFIG[kind];state.stage=kind;state.awaitingProceed=false;state.challenge=null;pending=null;
-      attack=null;dodge=null;clearInput();pose('idle');
+      clearTransient();pose('idle');
       state.player.x=kind==='boss'?230:state.player.x;
       state.player.invulnerable=0;
-      state.enemy={id:kind==='boss'?'slime-champion':'green-slime',kind,x:c.startX,y:CONFIG.ground,lift:0,hp:c.hp,maxHp:c.hp,ai:'IDLE',aiTime:0,pattern:c.patterns[0].id,phase:1,facing:-1,telegraphRemaining:0,attackTargetX:state.player.x,attackDuration:0,attackProgress:0};
-      enemyData={patternIndex:0,pattern:null,originX:c.startX,hit:false,repeats:0,resume:null,recovery:c.recovery};
+      state.enemy={id:kind==='boss'?'slime-champion':'green-slime',kind,x:c.startX,y:CONFIG.ground,lift:0,hp:c.hp,maxHp:c.hp,ai:'IDLE',aiTime:0,pattern:c.patterns[0].id,phase:1,facing:-1,telegraphRemaining:0,attackTargetX:state.player.x,landingTargetX:state.player.x,attackDuration:0,attackProgress:0,attackRadius:c.patterns[0].radius,coreExposed:false,coreRemaining:0,attackSerial:0};
+      enemyData={patternIndex:0,pattern:null,originX:c.startX,hit:false,repeats:0,resume:null,recovery:c.recovery,staggerTime:0,perfect:false,phaseIndex:0};
       state.objective=kind==='boss'?'슬라임 챔피언: 공격 예고를 피하고 빈틈에 반격해요.':'초록 슬라임: 가까이 다가가 J로 공격하고, 공격 예고를 보고 K로 회피해요.';
-      mode('COMBAT');sfx(kind==='boss'?'boss_entrance':'slime_bounce');
-      voice(kind==='boss'?'VO_BE_CAREFUL':'VO_SLIME_COMING');
+      if(kind==='boss'){state.bossIntro={...RebornLearning.bossLesson,remaining:c.intro,duration:c.intro};state.enemy.ai='ENTRANCE';mode('BOSS_INTRO');voice('VO_ATTACK_CRYSTAL');}
+      else {mode('COMBAT');voice('VO_SLIME_COMING');}
+      sfx(kind==='boss'?'boss_entrance':'slime_bounce');
     }
     function openChallenge(key,context) {
-      clearInput();attack=null;dodge=null;state.player.invulnerable=0;
+      clearInput();resetCombo();dodge=null;state.player.vx=0;state.player.invulnerable=0;
       const h=RebornLearning.challenge(key,`${state.session}:${++serial}`);
       state.challenge=h;pending={h,key,context,locked:false,correct:false,aids:new Set(),heard:false,source:null};
       state.awaitingProceed=false;state.objective=h.prompt;pose(key==='fire'?'magic_charge':'idle');
@@ -293,10 +356,17 @@ const RebornCombat = (() => {
       if(key==='fire') sfx('magic_charge');
     }
     function ai(value) { const e=state.enemy;if(!e)return;e.ai=value;e.aiTime=0;e.attackProgress=0;e.lift=0; }
-    function stun() { if(state.enemy && state.enemy.hp>0){enemyData.recovery=CONFIG.learning.stun;enemyData.repeats=0;enemyData.resume=null;ai('RECOVERY');} }
+    function stagger(duration,interrupt=false){
+      const e=state.enemy;if(!e||e.hp<=0)return;
+      if(interrupt){enemyData.resume=null;enemyData.repeats=0;enemyData.recovery=.5;}
+      else if(e.ai!=='HIT_REACTION'&&e.ai!=='STAGGER')enemyData.resume={ai:e.ai,time:e.aiTime,lift:e.lift};
+      enemyData.staggerTime=duration;ai('STAGGER');
+    }
+    function stun() { if(state.enemy?.kind==='boss')stagger(CONFIG.learning.stun);else if(state.enemy?.hp>0){enemyData.recovery=CONFIG.learning.stun;enemyData.repeats=0;enemyData.resume=null;ai('RECOVERY');} }
     function objectiveCombat() { state.objective=state.stage==='boss'?'슬라임 챔피언: 경고 지점을 벗어나고, 회복 중 반격해요. L 마법도 사용해요.':'J 검 · K 회피 — 슬라임이 몸을 움츠리면 공격 예고예요.'; }
     function proceed() {
       if(state.mode==='PAUSED') return false;
+      if(state.mode==='BOSS_INTRO'){state.bossIntro=null;ai('IDLE');mode('COMBAT');objectiveCombat();return true;}
       if(state.mode==='TUTORIAL') {const n=state.tutorial.index+1;if(n<RebornLearning.tutorial.length)tutorial(n);else exploration();return true;}
       if(state.mode==='EXPLORATION' && state.stage==='entrance'){spawn('slime');return true;}
       if(state.mode==='EXPLORATION' && state.stage==='crystal'){openChallenge('fire','discovery');return true;}
@@ -305,13 +375,14 @@ const RebornCombat = (() => {
         pending.locked=false;pending.h.phase='answer';pending.h.feedback='한 번 더 해 보세요. 틀려도 체력은 줄지 않아요.';
         pending.aids.add('correction');pending.h.assisted=true;pending.h.aids=[...pending.aids];return true;
       }
-      const {key,context}=pending;pending=null;state.challenge=null;clearInput();
+      const {key,context}=pending,quality=pending.h.resultQuality;pending=null;state.challenge=null;clearInput();
       if(context==='discovery') {
         state.magicUnlocked=true;state.player.hp=state.player.maxHp;state.player.magicCharge=CONFIG.magic.charge;
         state.player.attackCooldown=0;state.player.dodgeCooldown=0;state.player.magicCooldown=0;spawn('boss');return true;
       }
       mode('COMBAT');objectiveCombat();
-      if(key==='fire') castMagic();
+      if(key==='fire') castMagic(quality);
+      else if(key==='crystal'){state.player.weaknessCharge=1;state.enemy.coreExposed=true;state.enemy.coreRemaining=CONFIG.learning.coreWindow;state.player.magicCharge=clamp(state.player.magicCharge+CONFIG.learning.charge,0,CONFIG.magic.charge);stun();pose('idle');}
       else {state.player.magicCharge=clamp(state.player.magicCharge+CONFIG.learning.charge,0,CONFIG.magic.charge);stun();pose('idle');}
       return true;
     }
@@ -323,30 +394,34 @@ const RebornCombat = (() => {
       const category=h.kind==='listen'?state.stats.listening:state.stats.magic;
       if(result.correct){state.stats.correct++;category.correct++;if(independent){state.stats.independent++;category.independent++;}else{state.stats.assisted++;category.assisted++;}
         if(!state.stats.expressions.includes(h.english))state.stats.expressions.push(h.english);
-        h.feedback=`좋아요! ${h.english} — ${h.ko}`;sfx('correct');voice('VO_GOOD_JOB');
-      }else{state.stats.wrong++;category.wrong++;h.feedback=`다시 해 봐요. ${h.explanation}`;pending.aids.add('correction');h.assisted=true;h.aids=[...pending.aids];sfx('incorrect');voice('VO_TRY_AGAIN');}
+        h.resultQuality=pending.aids.has('correction')?'corrected':independent?'independent':'assisted';
+        h.feedback=`${h.resultQuality==='corrected'?'다시 익혔어요!':independent?'듣고 이해했어요!':'도움을 활용해 완성했어요!'} ${h.english} — ${h.ko}`;emit('ui',{id:'correct'});voice('VO_GOOD_JOB');
+        if(h.kind==='listen'&&independent)goal('independent-listening');
+        if(!independent)review(pending.key,pending.aids.size?'hint':'text');
+      }else{state.stats.wrong++;category.wrong++;review(pending.key,'wrong');h.feedback=`다시 해 봐요. ${h.explanation}`;pending.aids.add('correction');h.assisted=true;h.aids=[...pending.aids];emit('ui',{id:'incorrect'});voice('VO_TRY_AGAIN');}
       if(h.kind==='listen'){if(!pending.heard)category.unheard++;else if(pending.source==='asset')category.asset++;else category.fallback++;}
       return {correct:result.correct,independent:result.correct&&independent,feedback:h.feedback};
     }
     function assist(kind='translation') {
       kind=({english:'subtitle',korean:'translation'})[kind]||kind;
       if(!pending || !['subtitle','translation','hint','fallback','correction'].includes(kind))return false;
-      pending.aids.add(kind);pending.h.assisted=true;pending.h.aids=[...pending.aids];return true;
+      pending.aids.add(kind);pending.h.assisted=true;pending.h.aids=[...pending.aids];review(pending.key,'hint');return true;
     }
     function heard(source='asset') {
       if(!pending || pending.locked || state.mode==='PAUSED' || !['asset','browser-fallback'].includes(source))return false;
       pending.heard=true;pending.source=source;pending.h.heard=true;pending.h.source=source;return true;
     }
     function enemyDefeated() {
-      const e=state.enemy;ai('DEFEATED');e.hp=0;attack=null;dodge=null;clearInput();state.hitStop=0;pending=null;state.challenge=null;
+      const e=state.enemy;ai('DEFEATED');e.hp=0;e.coreExposed=false;e.coreRemaining=0;clearTransient();state.player.weaknessCharge=0;state.hitStop=0;pending=null;state.challenge=null;
       effect('burst',e.x,e.y-30,1.1);sfx(e.kind==='boss'?'boss_defeat':'slime_defeat');
       if(e.kind==='slime') {
         state.stage='crystal';state.awaitingProceed=true;state.objective='빛나는 단어 수정 발견! “I need fire.”를 배우고 마법을 깨워요.';
         state.player.hp=state.player.maxHp;pose('idle');mode('EXPLORATION');voice('VO_CHARGE');
       } else {
+        effect('core_collapse',e.x,e.y-60,.9);goal('forest-clear');
         state.stage='complete';state.awaitingProceed=false;pose('victory');mode('VICTORY');sfx('victory');voice('VO_VICTORY');
         state.objective='숲의 첫 시험 완료! 배운 표현을 다시 듣고 새로 도전해 보세요.';
-        state.reward={title:'숲의 첫빛',description:'이번 실험실 도전의 기념 휘장 — 기존 게임 보상과 별개예요.',expressions:[...state.stats.expressions]};
+        state.reward={title:'숲의 첫빛',description:'이번 실험실 도전의 기념 휘장 — 기존 게임 보상과 별개예요.',expressions:[...state.stats.expressions],goals:[...state.stats.goals]};
       }
     }
     function checkScript() {
@@ -354,37 +429,96 @@ const RebornCombat = (() => {
       const list=e.kind==='slime'?[['slime-left',54,'left'],['slime-dodge',30,'dodge']]:[['boss-attack',120,'attack'],['boss-magic',80,'magic']];
       for(const [id,hp,key] of list)if(e.hp<=hp&&!scripted.has(id)){scripted.add(id);openChallenge(key,'combat');return;}
     }
-    function damageEnemy(amount,source) {
+    function hitFeedback(target,amount,{source='sword',tier=1,direction=1,weak=false}={}){
+      const enemy=target===state.enemy,heavy=tier===3||source==='magic'||weak;
+      const stop=enemy?(source==='magic'?CONFIG.feedback.magicStop:weak?CONFIG.feedback.finisherStop:[CONFIG.feedback.lightStop,CONFIG.feedback.mediumStop,CONFIG.feedback.finisherStop][tier-1]):state.enemy?.kind==='boss'?CONFIG.feedback.bossStop:CONFIG.feedback.lightStop;
+      state.hitStop=Math.max(state.hitStop,stop);state.shake=Math.max(state.shake,heavy?CONFIG.feedback.heavyShake:CONFIG.feedback.lightShake);state.shakePower=heavy?1:(enemy ? .25 : .6);
+      const meta={tier,heavy,direction,targetKind:enemy?target.kind:'player',quality:source};
+      effect('damage',target.x,target.y-(target.lift||0)-90,.8,enemy?amount:-amount,meta);effect('impact',target.x,target.y-(target.lift||0)-32,.26,enemy?amount:-amount,meta);
+      if(enemy){sfx(weak?'coreHit':source==='magic'?'magic_explosion':'impact'+tier);effect(weak?'core_hit':'droplets',target.x,target.y-(target.lift||0)-35,.45,amount,meta);}else sfx('player_hit');
+    }
+    function landingWarning(){
+      const e=state.enemy;if(!e)return;
+      e.landingTargetX=e.attackTargetX;
+      if(e.ai!=='ATTACK'||rushPatterns.has(e.pattern))return;
+      // Predict the same final fixed step used by collision, including late recoil.
+      // The locked movement target remains unchanged; only its warning is corrected.
+      const steps=Math.ceil(Math.max(0,e.attackDuration-e.aiTime-1e-8)/CONFIG.step);
+      const residual=approach(enemyData.knockback||0,0,CONFIG.feedback.knockbackDecay*steps*CONFIG.step);
+      e.landingTargetX=clamp(e.attackTargetX+residual,CONFIG.minX,CONFIG.maxX);
+    }
+    function damageEnemy(amount,source,{tier=1,direction=state.player.facing}={}) {
       const e=state.enemy;if(!e || e.hp<=0)return false;
-      e.hp=clamp(e.hp-amount,0,e.maxHp);effect('damage',e.x,e.y-90,.7,amount);effect('impact',e.x,e.y-32,.23,amount);sfx(source==='magic'?'magic_explosion':'sword_impact');
-      if(source==='sword'){state.player.magicCharge=clamp(state.player.magicCharge+CONFIG.sword.charge,0,CONFIG.magic.charge);e.x=clamp(e.x+state.player.facing*CONFIG.sword.knockback,CONFIG.minX,CONFIG.maxX);}
-      if(source==='magic'){state.hitStop=.045;state.shake=.16;}
+      const weak=source==='sword'&&e.coreExposed&&state.player.weaknessCharge===1;
+      if(weak){amount=Math.round(amount*CONFIG.learning.coreMultiplier);state.player.weaknessCharge=0;e.coreRemaining=0;e.coreExposed=false;state.stats.combat.weaknessHits++;goal('crystal-break');}
+      const dealt=Math.min(e.hp,amount);e.hp=clamp(e.hp-dealt,0,e.maxHp);state.stats.combat.damageDealt+=dealt;hitFeedback(e,dealt,{source,tier,direction,weak});
+      const strike=CONFIG.sword.strikes[tier-1],knockback=source==='magic'?38:strike.knockback;
+      e.x=clamp(e.x+direction*knockback,CONFIG.minX,CONFIG.maxX);if(e.ai==='ATTACK')enemyData.knockback=(enemyData.knockback||0)+direction*knockback;
+      landingWarning();
+      if(source==='sword'){state.player.magicCharge=clamp(state.player.magicCharge+strike.charge,0,CONFIG.magic.charge);state.stats.combat.swordHits++;comboHits++;state.stats.combat.highestCombo=Math.max(state.stats.combat.highestCombo,comboHits);if(comboHits===3)goal('combo-three');}
       if(e.hp<=0){enemyDefeated();return true;}
-      if(e.kind==='boss'&&e.phase===1&&e.hp<=e.maxHp*.5){e.phase=2;effect('charge',e.x,e.y-35,.65);sfx('boss_phase');}
+      if(e.kind==='boss'&&e.phase===1&&e.hp<=e.maxHp*.5){e.phase=2;enemyData.phaseIndex=0;effect('charge',e.x,e.y-35,.65);sfx('bossPhase');}
       // Brief recoil preserves a telegraph's progress; repeated sword hits cannot restart it forever.
-      if(e.ai!=='ATTACK'&&e.ai!=='HIT_REACTION') {enemyData.resume={ai:e.ai,time:e.aiTime};ai('HIT_REACTION');}
+      if(weak)stagger(CONFIG.learning.coreStagger,true);
+      else if(tier===3&&e.ai!=='ATTACK')stagger(.36);
+      else if(e.ai!=='ATTACK'&&e.ai!=='HIT_REACTION'&&e.ai!=='STAGGER'){enemyData.resume={ai:e.ai,time:e.aiTime};ai('HIT_REACTION');}
       checkScript();return true;
     }
-    function castMagic() {
-      const p=state.player;if(!state.magicUnlocked||p.magicCharge<CONFIG.magic.charge||p.magicCooldown>0||!state.enemy||state.enemy.hp<=0)return false;
-      p.magicCharge=0;p.magicCooldown=CONFIG.magic.cooldown;pose('magic_release',CONFIG.magic.release);
-      effect('fire',state.enemy.x,CONFIG.ground-40,.7);damageEnemy(CONFIG.magic.damage,'magic');return true;
+    function castMagic(quality='assisted') {
+      const p=state.player;if(cast||!state.magicUnlocked||p.magicCharge<CONFIG.magic.charge||p.magicCooldown>0||!state.enemy||state.enemy.hp<=0)return false;
+      p.magicCharge=0;p.magicCooldown=CONFIG.magic.cooldown;resetCombo();pose('magic_charge',CONFIG.magic.chargeTime);state.stats.combat.magicUsed++;
+      cast={phase:'charge',time:0,duration:CONFIG.magic.chargeTime,quality,session:state.session,enemy:state.enemy};state.cast={phase:cast.phase,time:0,duration:cast.duration,quality,session:state.session};
+      effect('runes',p.x,p.y-40,CONFIG.magic.chargeTime,0,{quality});sfx('magic_charge');return true;
+    }
+    function startStrike(index){
+      const p=state.player,c=CONFIG.sword.strikes[index-1];p.attackCooldown=c.cooldown;p.comboIndex=index;p.comboNext=index<3?index+1:1;p.comboBuffered=false;p.comboWindowRemaining=0;
+      if(index===1)comboHits=0;attack={time:0,facing:p.facing,hit:false,started:false,index,buffered:false};pose('attack_anticipation',c.anticipation);sfx('sword'+index);return true;
     }
     function beginAttack() {
-      const p=state.player;if(!activeModes.has(state.mode)||state.stage==='crystal'||p.attackCooldown>0||dodge||state.mode==='PLAYER_HIT'||p.pose==='magic_release')return false;
-      p.attackCooldown=CONFIG.sword.cooldown;attack={time:0,facing:p.facing,hit:false};pose('attack_anticipation',CONFIG.sword.anticipation);sfx('sword_swing');return true;
+      const p=state.player;if(!activeModes.has(state.mode)||state.stage==='crystal'||dodge||cast||state.mode==='PLAYER_HIT')return false;
+      if(attack){const c=CONFIG.sword.strikes[attack.index-1];if(attack.index>=3||attack.buffered||attack.time<c.anticipation)return false;attack.buffered=true;p.comboBuffered=true;return true;}
+      if(p.attackCooldown>0)return false;
+      return startStrike(p.comboWindowRemaining>0?p.comboNext:1);
     }
     function beginDodge() {
-      const p=state.player;if(!activeModes.has(state.mode)||state.stage==='crystal'||p.dodgeCooldown>0||dodge)return false;
-      p.dodgeCooldown=CONFIG.dodge.cooldown;p.invulnerable=Math.max(p.invulnerable,CONFIG.dodge.invulnerability);dodge={time:0,direction:p.facing};attack=null;pose('dodge',CONFIG.dodge.duration);
+      const p=state.player;if(!activeModes.has(state.mode)||state.stage==='crystal'||p.dodgeCooldown>0||dodge||cast?.phase==='charge')return false;
+      p.dodgeCooldown=CONFIG.dodge.cooldown;p.invulnerable=Math.max(p.invulnerable,CONFIG.dodge.invulnerability);dodge={time:0,direction:p.facing};resetCombo();p.vx=0;state.stats.combat.dodges++;pose('dodge',CONFIG.dodge.duration);
       if(state.mode==='PLAYER_HIT')mode('COMBAT');effect('dodge',p.x,p.y-20,.3);sfx('dodge');return true;
     }
     function beginMagic() {
-      const p=state.player;if(state.mode!=='COMBAT'||!state.magicUnlocked||p.magicCharge<CONFIG.magic.charge||p.magicCooldown>0||dodge)return false;
+      const p=state.player;if(state.mode!=='COMBAT'||cast||!state.magicUnlocked||p.magicCharge<CONFIG.magic.charge||p.magicCooldown>0||dodge)return false;
       openChallenge('fire','combat');return true;
     }
+    function tickCast(dt){
+      if(!cast)return;
+      if(cast.session!==state.session||cast.enemy!==state.enemy||state.enemy.hp<=0){cast=null;state.cast=null;return;}
+      cast.time+=dt;
+      if(cast.phase==='charge'&&cast.time>=CONFIG.magic.chargeTime){
+        const p=state.player,e=state.enemy,direction=e.x>=p.x?1:-1;
+        shots.push({id:`${state.session}:fire:${++serial}`,kind:'fire',x:p.x+direction*26,y:p.y-60,vx:direction*CONFIG.magic.projectileSpeed,vy:0,radius:CONFIG.magic.projectileRadius,life:CONFIG.magic.projectileLife,ttl:CONFIG.magic.projectileLife,session:state.session,enemyId:e.id,quality:cast.quality});
+        if(shots.length>CONFIG.magic.maxProjectiles)shots.shift();state.projectiles=shots;
+        cast.phase='release';cast.time=0;cast.duration=CONFIG.magic.release;if(state.mode!=='PLAYER_HIT')pose('magic_release',CONFIG.magic.release);sfx('fireLaunch');
+      }else if(cast.phase==='release'&&cast.time>=CONFIG.magic.release){cast=null;state.cast=null;if(state.player.pose==='magic_release')pose('idle');return;}
+      Object.assign(state.cast,{phase:cast.phase,time:cast.time,duration:cast.duration});
+    }
+    function tickProjectiles(dt){
+      const e=state.enemy;if(!e||e.hp<=0){shots=[];state.projectiles=shots;return;}
+      for(const shot of [...shots]){
+        if(shot.session!==state.session||shot.enemyId!==e.id||shot.life<=0){shots=shots.filter(x=>x!==shot);continue;}
+        const tx=e.x,ty=e.y-e.lift-35,dx=tx-shot.x,dy=ty-shot.y,length=Math.hypot(dx,dy)||1;
+        shot.vx=dx/length*CONFIG.magic.projectileSpeed;shot.vy=dy/length*CONFIG.magic.projectileSpeed;
+        const nx=shot.x+shot.vx*dt,ny=shot.y+shot.vy*dt;
+        const rx=CONFIG[e.kind].radius*.8+shot.radius,ry=(e.kind==='boss'?42:30)+shot.radius;
+        const ax=(shot.x-tx)/rx,ay=(shot.y-ty)/ry,bx=(nx-shot.x)/rx,by=(ny-shot.y)/ry;
+        const ratio=clamp(-(ax*bx+ay*by)/(bx*bx+by*by||1),0,1);
+        const hit=(ax+bx*ratio)**2+(ay+by*ratio)**2<=1;
+        shot.x=nx;shot.y=ny;shot.life=countdown(shot.life,dt);
+        if(hit){shots=shots.filter(x=>x!==shot);state.projectiles=shots;state.stats.combat.magicHits++;effect('fire',e.x,e.y-e.lift-35,.7,0,{quality:shot.quality,heavy:true});damageEnemy(CONFIG.magic.damage,'magic',{direction:shot.vx>=0?1:-1});break;}
+      }
+      shots=shots.filter(x=>x.life>0);state.projectiles=shots;
+    }
     function input(action,pressed=true) {
-      if(action==='clear'){clearInput();return true;}
+      if(action==='clear'){clearInput();state.player.vx=0;state.player.comboBuffered=false;if(attack)attack.buffered=false;return true;}
       if(!['left','right','attack','dodge','magic','replay','hint'].includes(action))return false;
       if(!pressed){held.delete(action);return true;}
       if(held.has(action))return false;
@@ -398,27 +532,42 @@ const RebornCombat = (() => {
     }
     function damagePlayer(amount) {
       const p=state.player;if(p.invulnerable>1e-8||p.hp<=0||!['COMBAT','PLAYER_HIT'].includes(state.mode))return false;
-      p.hp=clamp(p.hp-amount,0,p.maxHp);p.invulnerable=CONFIG.player.hitInvulnerability;attack=null;dodge=null;
+      const dealt=Math.min(p.hp,amount);p.hp=clamp(p.hp-dealt,0,p.maxHp);p.invulnerable=CONFIG.player.hitInvulnerability;resetCombo();dodge=null;p.vx=0;state.stats.combat.damageReceived+=dealt;
       const direction=p.x<state.enemy.x?-1:1;p.x=clamp(p.x+direction*CONFIG.player.knockback,CONFIG.minX,CONFIG.maxX);
-      effect('damage',p.x,p.y-90,.7,-amount);effect('impact',p.x,p.y-28,.22,-amount);sfx('player_hit');state.shake=.12;
-      if(p.hp===0){clearInput();pose('defeat');mode('DEFEAT');state.objective='잠깐 쉬어도 괜찮아요. 경고 지점에서 벗어나 다시 도전해 보세요.';sfx('defeat');}
+      hitFeedback(p,dealt,{source:'enemy',direction});
+      if(p.hp===0){clearTransient();pose('defeat');mode('DEFEAT');state.objective='잠깐 쉬어도 괜찮아요. 경고 지점에서 벗어나 다시 도전해 보세요.';sfx('defeat');}
       else {pose('hit',CONFIG.player.hitTime);mode('PLAYER_HIT');}
       return true;
     }
+    function enemyContact(amount){
+      if(dodge&&dodge.time<CONFIG.dodge.invulnerability-1e-8&&state.player.invulnerable>0&&!enemyData.perfect){
+        enemyData.perfect=true;state.stats.combat.perfectDodges++;state.stats.combat.successfulDodges++;state.player.perfectDodge=CONFIG.dodge.perfectDisplay;
+        state.player.magicCharge=clamp(state.player.magicCharge+CONFIG.dodge.perfectCharge,0,CONFIG.magic.charge);effect('perfect_dodge',state.player.x,state.player.y-35,.6);sfx('perfectDodge');goal('perfect-dodge');if(state.enemy.kind==='boss')goal('boss-dodge');return false;
+      }
+      return damagePlayer(amount);
+    }
     function startTelegraph(repeat=false) {
       const e=state.enemy,c=CONFIG[e.kind];
-      if(!repeat){enemyData.pattern=c.patterns[enemyData.patternIndex%c.patterns.length];enemyData.patternIndex++;enemyData.repeats=enemyData.pattern.repeat||1;}
+      if(!repeat){
+        if(e.kind==='boss'){const sequence=e.phase===2?c.phaseB:c.phaseA;const index=e.phase===2?enemyData.phaseIndex++:enemyData.patternIndex++;enemyData.pattern=c.patterns.find(x=>x.id===sequence[index%sequence.length]);}
+        else {const far=Math.abs(state.player.x-e.x)>180,id=far&&e.pattern!=='rush'?'rush':['jump','rush','jump'][enemyData.patternIndex++%3];enemyData.pattern=c.patterns.find(x=>x.id===id);}
+        enemyData.repeats=enemyData.pattern.repeat||1;
+      }
       const pat=enemyData.pattern;const speed=e.phase===2?CONFIG.boss.phaseSpeed:1;
-      e.pattern=pat.id;e.facing=state.player.x<e.x?-1:1;
-      const overshoot=['rush','crystal_charge'].includes(pat.id)?60*e.facing:0;
+      e.pattern=pat.id;e.facing=state.player.x<e.x?-1:1;e.attackRadius=pat.radius;
+      const overshoot=rushPatterns.has(pat.id)?60*e.facing:0;
       e.attackTargetX=clamp(state.player.x+overshoot,CONFIG.minX,CONFIG.maxX);
+      e.landingTargetX=e.attackTargetX;
       e.telegraphRemaining=(repeat?pat.repeatTelegraph:pat.telegraph)*speed;
-      enemyData.telegraphDuration=e.telegraphRemaining;e.attackDuration=pat.duration*speed;enemyData.originX=e.x;enemyData.hit=false;ai('TELEGRAPH');
+      enemyData.telegraphDuration=e.telegraphRemaining;e.attackDuration=pat.duration*speed;enemyData.originX=e.x;enemyData.hit=false;enemyData.perfect=false;enemyData.knockback=0;e.attackSerial++;ai('TELEGRAPH');
       sfx(pat.id==='crystal_charge'?'crystal_charge':'slime_warning');
     }
     function tickEnemy(dt) {
-      const e=state.enemy;if(!e||e.hp<=0||!['COMBAT','PLAYER_HIT'].includes(state.mode))return;
+      // Paid Sentence Magic gets a brief safe rune-charge, then hostile time resumes.
+      const e=state.enemy;if(!e||e.hp<=0||cast?.phase==='charge'||!['COMBAT','PLAYER_HIT'].includes(state.mode))return;
       const c=CONFIG[e.kind];e.aiTime+=dt;
+      if(e.coreRemaining>0){e.coreRemaining=countdown(e.coreRemaining,dt);if(e.coreRemaining===0){e.coreExposed=false;state.player.weaknessCharge=0;}}
+      if(e.ai==='STAGGER'){if(e.aiTime>=enemyData.staggerTime){const r=enemyData.resume;ai(r?.ai||'RECOVERY');e.aiTime=r?.time||0;e.lift=r?.lift||0;enemyData.resume=null;}return;}
       if(e.ai==='HIT_REACTION'){if(e.aiTime>=c.hitReaction){const r=enemyData.resume;ai(r?.ai||'RECOVERY');e.aiTime=r?.time||0;enemyData.resume=null;}return;}
       if(e.ai==='IDLE'){if(e.aiTime>=c.idle)ai('APPROACH');return;}
       if(e.ai==='APPROACH'){
@@ -428,19 +577,23 @@ const RebornCombat = (() => {
       }
       if(e.ai==='TELEGRAPH'){
         e.telegraphRemaining=Math.max(0,enemyData.telegraphDuration-e.aiTime);
-        if(e.telegraphRemaining<=1e-8){ai('ATTACK');sfx(['rush','crystal_charge'].includes(e.pattern)?'slime_rush':'slime_jump');}return;
+        if(e.telegraphRemaining<=1e-8){ai('ATTACK');sfx(rushPatterns.has(e.pattern)?'slime_rush':'slime_jump');}return;
       }
       if(e.ai==='ATTACK'){
         const pat=enemyData.pattern,oldX=e.x,t=clamp(e.aiTime/e.attackDuration,0,1);e.attackProgress=t;e.lift=Math.sin(t*Math.PI)*pat.lift;
-        e.x=enemyData.originX+(e.attackTargetX-enemyData.originX)*t;
-        if(['rush','crystal_charge'].includes(pat.id)){
+        enemyData.knockback=approach(enemyData.knockback||0,0,CONFIG.feedback.knockbackDecay*dt);e.x=clamp(enemyData.originX+(e.attackTargetX-enemyData.originX)*t+enemyData.knockback,CONFIG.minX,CONFIG.maxX);landingWarning();
+        if(rushPatterns.has(pat.id)){
           const lo=Math.min(oldX,e.x)-pat.radius,hi=Math.max(oldX,e.x)+pat.radius;
-          if(!enemyData.hit&&state.player.x>=lo&&state.player.x<=hi){enemyData.hit=true;damagePlayer(pat.damage);}
+          if(!enemyData.hit&&state.player.x>=lo&&state.player.x<=hi){enemyData.hit=true;enemyContact(pat.damage);}
         }
         if(t>=1){
-          if(!enemyData.hit&&!['rush','crystal_charge'].includes(pat.id)&&Math.abs(state.player.x-e.x)<=pat.radius){enemyData.hit=true;damagePlayer(pat.damage);}
-          effect('shockwave',e.x,e.y,.35,pat.radius);sfx('slime_land');enemyData.repeats--;
+          if(!enemyData.hit&&!rushPatterns.has(pat.id)&&Math.abs(state.player.x-e.x)<=pat.radius){enemyData.hit=true;enemyContact(pat.damage);}
+          effect('shockwave',e.x,e.y,.35,pat.radius);effect('dust',e.x,e.y,.4);sfx('slime_land');enemyData.repeats--;
           enemyData.recovery=enemyData.repeats>0?.20:c.recovery;ai('RECOVERY');
+          if(pat.id==='crystal_charge'&&e.hp>0&&state.mode!=='DEFEAT'){
+            e.coreExposed=true;e.coreRemaining=CONFIG.learning.coreWindow;effect('charge',e.x,e.y-55,.7);
+            if(!scripted.has('core-listening')){scripted.add('core-listening');openChallenge('crystal','combat');}
+          }
         }return;
       }
       if(e.ai==='RECOVERY'&&e.aiTime>=enemyData.recovery){if(enemyData.repeats>0)startTelegraph(true);else ai('IDLE');}
@@ -460,31 +613,44 @@ const RebornCombat = (() => {
       state.time+=dt;
       state.effects.forEach(e=>e.life-=dt);state.effects=state.effects.filter(e=>e.life>0);
       state.shake=Math.max(0,state.shake-dt);
+      if(state.shake===0)state.shakePower=0;
       if(state.enemy?.ai==='DEFEATED')state.enemy.aiTime+=dt;
       if(state.mode==='VICTORY'||state.mode==='DEFEAT')state.player.poseTime+=dt;
+      if(state.mode==='BOSS_INTRO'){state.enemy.aiTime+=dt;state.bossIntro.remaining=countdown(state.bossIntro.remaining,dt);return;}
       if(!activeModes.has(state.mode))return;
       if(state.hitStop>0){state.hitStop=Math.max(0,state.hitStop-dt);return;}
       const p=state.player;
-      p.attackCooldown=countdown(p.attackCooldown,dt);p.dodgeCooldown=countdown(p.dodgeCooldown,dt);p.magicCooldown=countdown(p.magicCooldown,dt);p.invulnerable=countdown(p.invulnerable,dt);p.poseTime+=dt;
+      p.attackCooldown=countdown(p.attackCooldown,dt);p.dodgeCooldown=countdown(p.dodgeCooldown,dt);p.magicCooldown=countdown(p.magicCooldown,dt);p.invulnerable=countdown(p.invulnerable,dt);p.perfectDodge=countdown(p.perfectDodge,dt);p.poseTime+=dt;
+      if(!attack&&p.comboWindowRemaining>0){p.comboWindowRemaining=countdown(p.comboWindowRemaining,dt);if(p.comboWindowRemaining===0){p.comboNext=1;comboHits=0;}}
       if(state.mode==='PLAYER_HIT'&&p.poseTime>=CONFIG.player.hitTime){mode('COMBAT');pose('idle');}
       if(dodge){dodge.time+=dt;movePlayer(dodge.direction*CONFIG.dodge.speed*dt,true);if(dodge.time>=CONFIG.dodge.duration-1e-8){dodge=null;pose('idle');}}
       else if(state.mode!=='PLAYER_HIT'&&state.stage!=='crystal'){
         const direction=(held.has('right')?1:0)-(held.has('left')?1:0);
-        if(direction){if(!attack)p.facing=direction;moved+=movePlayer(direction*CONFIG.player.speed*dt*(attack?.55:1));if(!attack&&p.pose!=='magic_release'&&p.pose!=='run')pose('run');}
-        else if(!attack&&p.pose==='run')pose('idle');
+        const scale=cast?.phase==='charge'?.35:attack?.55:1,target=direction*CONFIG.player.speed*scale;
+        const acceleration=!direction?CONFIG.player.deceleration:p.vx*direction<0?CONFIG.player.reversal:CONFIG.player.acceleration;
+        p.vx=approach(p.vx,target,acceleration*dt);
+        if(direction&&!attack&&!cast)p.facing=direction;
+        if(Math.abs(p.vx)>1e-8){const distance=movePlayer(p.vx*dt);moved+=distance;p.runPhase=(p.runPhase+distance/16)%(Math.PI*2);if(distance<Math.abs(p.vx*dt)-1e-8)p.vx=0;if(!attack&&!cast&&p.pose!=='run')pose('run');}
+        else if(!attack&&!cast&&p.pose==='run')pose('idle');
       }
       if(attack){
-        attack.time+=dt;const a=attack,t=attack.time;
-        if(t>=CONFIG.sword.anticipation&&!a.hit){
-          a.hit=true;pose('attack_swing',CONFIG.sword.swing);effect('slash',p.x+a.facing*48,p.y-35,.15,a.facing);
-          const e=state.enemy;if(e&&e.hp>0&&(e.x-p.x)*a.facing>=0&&Math.abs(e.x-p.x)<=CONFIG.sword.range&&e.lift<=CONFIG.sword.height)damageEnemy(CONFIG.sword.damage,'sword');
+        attack.time+=dt;const a=attack,t=attack.time,c=CONFIG.sword.strikes[a.index-1];
+        if(t>=c.anticipation&&!a.started){a.started=true;pose('attack_swing',c.swing);effect('slash',p.x+a.facing*48,p.y-35,c.swing+.04,a.facing,{tier:a.index,heavy:a.index===3,direction:a.facing});}
+        if(t>=c.anticipation&&t<=c.anticipation+c.swing&&!a.hit){
+          const e=state.enemy;if(e&&e.hp>0&&(e.x-p.x)*a.facing>=0&&Math.abs(e.x-p.x)<=c.range&&e.lift<=c.height){a.hit=true;damageEnemy(c.damage,'sword',{tier:a.index,direction:a.facing});}
         }
-        if(attack&&t>=CONFIG.sword.anticipation+CONFIG.sword.swing&&p.pose!=='attack_follow')pose('attack_follow',CONFIG.sword.follow);
-        if(attack&&t>=CONFIG.sword.anticipation+CONFIG.sword.swing+CONFIG.sword.follow){attack=null;pose('idle');}
+        if(attack===a&&t>=c.anticipation+c.swing&&p.pose!=='attack_follow')pose('attack_follow',c.follow);
+        if(attack===a&&t>=c.cooldown-1e-8){
+          if(!a.hit)comboHits=0;attack=null;p.comboIndex=0;p.comboBuffered=false;
+          if(a.buffered&&a.index<3)startStrike(a.index+1);
+          else {p.comboNext=a.index<3?a.index+1:1;p.comboWindowRemaining=a.index<3?CONFIG.sword.comboWindow:0;if(a.index===3)comboHits=0;pose('idle');}
+        }
       }
-      if(p.pose==='magic_release'&&p.poseTime>=CONFIG.magic.release)pose('idle');
       if(state.mode==='EXPLORATION'&&state.stage==='entrance'&&moved>=55)spawn('slime');
+      if(!activeModes.has(state.mode))return;
+      tickCast(dt);
       tickEnemy(dt);
+      if(activeModes.has(state.mode))tickProjectiles(dt);
     }
     function update(dtSeconds) {
       if(!Number.isFinite(dtSeconds)||dtSeconds<=0||state.mode==='PAUSED')return state;
@@ -492,11 +658,12 @@ const RebornCombat = (() => {
       while(accumulator>=CONFIG.step-1e-10){accumulator-=CONFIG.step;tick(CONFIG.step);}
       return state;
     }
-    function pause(){if(['PAUSED','INTRO','VICTORY','DEFEAT'].includes(state.mode))return false;pausedMode=state.mode;clearInput();mode('PAUSED');return true;}
+    function pause(){if(['PAUSED','INTRO','VICTORY','DEFEAT'].includes(state.mode))return false;pausedMode=state.mode;clearInput();state.player.vx=0;state.player.comboBuffered=false;if(attack)attack.buffered=false;mode('PAUSED');return true;}
     function resume(){if(state.mode!=='PAUSED'||!pausedMode)return false;const previous=pausedMode;pausedMode=null;clearInput();mode(previous);return true;}
     function restart(){reset();start(true);return state;}
+    function mainMenu(){reset();return state;}
     function drainEvents(){const out=events;events=[];return out;}
-    return {state,update,input,start,proceed,pause,resume,restart,answer,assist,heard,drainEvents};
+    return {state,update,input,start,proceed,pause,resume,restart,mainMenu,answer,assist,heard,drainEvents};
   }
   return Object.freeze({CONFIG,create});
 })();
@@ -509,6 +676,7 @@ const RebornArt = (() => {
   const cache=new Map(); let scenery=null;
   const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,Number(x)||0));
   const mix=(a,b,t)=>a+(b-a)*clamp(t), ease=t=>1-(1-clamp(t))**3;
+  const smooth=t=>{const q=clamp(t);return q*q*(3-2*q);};
   const palette={ink:'#142e3c',gold:'#cbb886',light:'#e6e8d0',steel:'#b2c9ce',cape:'#367b83'};
   function shape(c,d,fill,stroke,width=1){
     let p=cache.get(d);if(!p){p=new Path2D(d);if(cache.size<240)cache.set(d,p);}
@@ -583,6 +751,31 @@ const RebornArt = (() => {
     if(scenery)c.drawImage(scenery,0,0);else buildScenery(c);
   }
 
+  function atmosphere(c,state,time,reduced){
+    if(reduced)return;
+    const px=clamp(state.player?.x??500,60,940)-500;
+    // Two very restrained decorative depth layers; the collision floor never moves.
+    c.save();c.globalAlpha=.025+.008*Math.sin(time*.34);
+    const drift=Math.sin(time*.17)*4-px*.007;
+    shape(c,`M${558+drift} 0L${581+drift} 0L${483+drift} 390L${394+drift} 390Z`,'#d7f1d1');
+    shape(c,`M${672+drift} 0L${694+drift} 0L${858+drift} 385L${786+drift} 385Z`,'#d7f1d1');c.restore();
+    for(let i=0;i<14;i++){const x=100+(i*137)%811+Math.sin(time*.6+i)*11-px*.012,y=125+(i*71)%259+Math.sin(time*.7+i*2)*7;c.save();c.globalAlpha=.2+.25*(.5+.5*Math.sin(time*1.4+i));ellipse(c,x,y,1.2,1.2,i%3?'#d1e6c1':'#9bdee5');c.restore();}
+    local(c,-px*.026,0,0,()=>{for(let i=0;i<7;i++){leaf(c,18+i*13,18+(i%3)*11,.7,'#234c4e',-.7+i*.12);leaf(c,980-i*12,7+(i%3)*13,.72,'#244e4e',.7-i*.12);}});
+  }
+
+  // Each attack has its own swept silhouette and wind-up/recovery rig below.
+  function swordTrail(c,x,y,face,tier,progress,opacity=1,reduced=false){
+    const q=clamp(progress),a=Math.sin(q*Math.PI)*opacity;if(a<=0)return;
+    c.save();c.globalAlpha*=a;local(c,x,y,0,()=>{
+      const paths=tier===1?['M-14 -51Q43 -78 100 -53Q58 -28 4 -43','M-4 -52Q47 -64 100 -53']:
+        tier===2?['M4 -9Q82 -34 88 -125Q64 -74 8 -40','M10 -22Q74 -53 88 -125']:
+        ['M-19 -142Q65 -178 96 -92Q113 -35 71 10Q86 -61 45 -108Q17 -137 -19 -142','M-10 -144Q78 -143 92 -68Q99 -18 71 10'];
+      shape(c,paths[0],tier===3?'#eacb8f45':'#b3e6de3d');
+      shape(c,paths[1],null,tier===3?'#f0d6a0':'#d8f1df',tier===3?4.5:3);
+      if(!reduced){c.globalAlpha*=.6;local(c,tier===1?-5:-4,tier===1?6:3,0,()=>shape(c,paths[1],null,tier===3?'#b8ded0':'#8acacb',1));}
+    },face,1);c.restore();
+  }
+
   function sword(c,angle,glowing=false){local(c,0,0,angle,()=>{
     shape(c,'M-4 -12L-5 -58L0 -74L6 -58L4 -12Z',gradient(c,-5,0,6,0,[[0,'#7a9eaf'],[.42,'#eff1d8'],[.6,'#bed5d7'],[1,'#668ba3']]),'#476576',.8);
     line(c,[[0,-68],[0,-14]],'#739da8',1);line(c,[[1,-52],[3,-47],[0,-42],[2,-37]],glowing?'#d9f7e7':'#b3d9d7',1);
@@ -610,14 +803,29 @@ const RebornArt = (() => {
   function hero(c,p,time,reduced){
     const aliases={attack_anticipation:'anticipation',attack_swing:'swing',attack_follow:'followthrough',magic_charge:'magiccharge',magic_release:'magicrelease'};
     const pose=aliases[p.pose]||p.pose||'idle',elapsed=Math.max(0,p.poseTime||0),face=p.facing===-1?-1:1;
-    const cycle=(reduced?0:time)*13;
+    const tier=clamp(p.comboIndex||1,1,3),speed=Number.isFinite(p.vx)?clamp(Math.abs(p.vx)/220):1;
+    const cycle=reduced?0:(Number.isFinite(p.runPhase)?p.runPhase:elapsed*13);
     let lean=0,bodyY=0,crouch=0,l1=-.12,l2=.09,r1=.16,r2=-.07,aa=.45,ab=.15,blade=.67,backA=-.25,backB=-.12;
     if(pose==='idle'){bodyY=reduced?0:Math.sin(time*2.5)*1.1;}
-    if(pose==='run'){const z=Math.sin(cycle);bodyY=-Math.abs(Math.cos(cycle))*2.5;lean=.09;l1=z*.64;l2=-z*.4;r1=-z*.64;r2=z*.4;aa=.32+z*.45;ab=.4-z*.4;backA=-z*.65;backB=.2+z*.4;blade=.9;}
-    if(pose==='anticipation'){const q=ease(elapsed/(p.poseDuration||.065));lean=-.09*q;aa=mix(.45,-2.05,q);ab=mix(.15,-2.45,q);blade=mix(.67,-1.1,q);l1=-.3;r1=.35;bodyY=1.5;}
-    if(pose==='swing'){const q=ease(elapsed/(p.poseDuration||.12));lean=.14;aa=mix(-2.05,1.15,q);ab=mix(-2.45,.9,q);blade=mix(-1.1,2.02,q);l1=-.3;r1=.44;r2=-.25;backA=-.55;bodyY=-1;}
-    if(pose==='followthrough'){const q=ease(elapsed/(p.poseDuration||.14));lean=mix(.14,0,q);aa=mix(1.15,.45,q);ab=mix(.9,.15,q);blade=mix(2.02,.67,q);l1=-.3+q*.18;r1=.44-q*.28;}
-    if(pose==='dodge'){crouch=11;lean=.3;l1=-.9;l2=.75;r1=1;r2=-.6;aa=-.65;ab=-1.2;blade=-1.7;backA=.8;backB=1.5;bodyY=3;}
+    if(pose==='run'){const z=Math.sin(cycle),stride=.35+speed*.65;bodyY=-Math.abs(Math.cos(cycle))*2.5*stride;lean=.03+speed*.1;l1=z*.72*stride;l2=-z*.43*stride;r1=-z*.72*stride;r2=z*.43*stride;aa=.32+z*.42*stride;ab=.4-z*.36*stride;backA=-z*.65*stride;backB=.2+z*.4*stride;blade=.9;}
+    if(pose==='anticipation'){
+      const q=smooth(elapsed/(p.poseDuration||.065));
+      if(tier===1){lean=-.07*q;aa=mix(.45,-.9,q);ab=mix(.15,-1.2,q);blade=mix(.67,.1,q);l1=-.25;r1=.3;bodyY=1;}
+      if(tier===2){lean=.12*q;aa=mix(.45,1.1,q);ab=mix(.15,.7,q);blade=mix(.67,2.65,q);l1=-.45;r1=.5;crouch=4*q;}
+      if(tier===3){lean=-.16*q;aa=mix(.45,-2.95,q);ab=mix(.15,-2.8,q);blade=mix(.67,-.65,q);backA=-2.3*q;backB=-2.6*q;l1=-.42;r1=.48;crouch=3*q;bodyY=-2*q;}
+    }
+    if(pose==='swing'){
+      const q=smooth(elapsed/(p.poseDuration||.12));l1=-.35;r1=.48;r2=-.25;
+      if(tier===1){lean=mix(-.07,.13,q);aa=mix(-.9,1.4,q);ab=mix(-1.2,1.55,q);blade=mix(.1,2.15,q);backA=-.65;bodyY=-1;}
+      if(tier===2){lean=mix(.12,-.12,q);aa=mix(1.1,-1.85,q);ab=mix(.7,-2,q);blade=mix(2.65,.15,q);backA=.55;backB=1.1;bodyY=mix(3,-4,q);crouch=4*(1-q);}
+      if(tier===3){lean=mix(-.16,.28,q);aa=mix(-2.95,.85,q);ab=mix(-2.8,1.3,q);blade=mix(-.65,2.65,q);backA=mix(-2.3,-.5,q);backB=mix(-2.6,.25,q);l1=-.65;r1=.7;r2=-.38;crouch=5*q;bodyY=mix(-2,3,q);}
+    }
+    if(pose==='followthrough'){
+      const q=ease(elapsed/(p.poseDuration||.14));
+      const final=tier===1?[.13,1.4,1.55,2.15]:tier===2?[-.12,-1.85,-2,.15]:[.28,.85,1.3,2.65];
+      lean=mix(final[0],0,q);aa=mix(final[1],.45,q);ab=mix(final[2],.15,q);blade=mix(final[3],.67,q);l1=mix(tier===3?-.65:-.35,-.12,q);r1=mix(tier===3?.7:.48,.16,q);crouch=tier===3?5*(1-q):0;bodyY=tier===2?-4*(1-q):0;
+    }
+    if(pose==='dodge'){const q=clamp(elapsed/(p.poseDuration||.3)),recovery=smooth((q-.65)/.35);crouch=11*(1-recovery);lean=.3*(1-recovery);l1=mix(-.9,-.12,recovery);l2=mix(.75,.09,recovery);r1=mix(1,.16,recovery);r2=mix(-.6,-.07,recovery);aa=mix(-.65,.45,recovery);ab=mix(-1.2,.15,recovery);blade=mix(-1.7,.67,recovery);backA=.8;backB=1.5;bodyY=3*(1-recovery);}
     if(pose==='magiccharge'){const q=clamp(elapsed/.45);lean=-.08;aa=.3;ab=.6;blade=1.1;backA=-1.05;backB=1.6;bodyY=reduced?0:-Math.sin(q*Math.PI)*1.5;}
     if(pose==='magicrelease'){lean=.12;aa=.4;ab=.7;blade=1.2;backA=1.1;backB=1.7;l1=-.35;r1=.4;}
     if(pose==='hit'){lean=-.17;bodyY=2;aa=-.2;ab=.7;blade=.2;backA=-.6;l1=-.4;r1=.5;}
@@ -625,13 +833,14 @@ const RebornArt = (() => {
     if(pose==='defeat'){crouch=15;lean=.38;l1=-1.15;l2=1;r1=1.1;r2=-.4;aa=.4;ab=1.2;blade=1.75;backA=.4;backB=1.4;bodyY=6;}
     const invulnerable=!!p.invulnerable||p.invuln>0;
     ellipse(c,p.x,FLOOR+5,24+(pose==='dodge'?8:0),6,'#071f2d70');
-    if(pose==='dodge'&&!reduced){for(let i=1;i<=3;i++){c.save();c.globalAlpha=.12*(1-i/4);local(c,p.x-face*i*19,p.y||FLOOR,lean,()=>shape(c,'M-24 -68Q-12 -94 7 -83L19 -58L25 -18L-4 -12L-25 -25Z','#b2efdf'),face,1);c.restore();}}
+    if(pose==='dodge'&&!reduced){for(let i=1;i<=3;i++){c.save();c.globalAlpha=.22*(1-i/4);local(c,p.x-face*i*18,p.y||FLOOR,lean,()=>{shape(c,'M-24 -68Q-12 -94 7 -83L19 -58L25 -18L-4 -12L-25 -25Z',p.perfectDodge>0?'#a8d7f1':'#b2efdf');line(c,[[-42,-39],[-17,-39]],'#b5e4e0',1.5);},face,1);c.restore();}}
+    if(p.perfectDodge>0){glow(c,p.x,(p.y||FLOOR)-48,70,'#80c9f4',reduced?.17:.25);ellipse(c,p.x,FLOOR+3,33,9,null,'#b4e7ff',2);}
     if(invulnerable){ellipse(c,p.x,FLOOR+3,30,8,null,'#b4f0df',1.4);glow(c,p.x,(p.y||FLOOR)-47,68,'#9cdfdc',.13);}
     local(c,p.x,p.y||FLOOR,0,()=>{
       if(pose==='defeat')c.globalAlpha*=.78;
       local(c,0,bodyY,lean,()=>{
         // The cape is a deforming cloth layer, not part of a flattened actor image.
-        const trail=pose==='run'||pose==='dodge'?12:pose==='swing'?8:0,wave=reduced?0:Math.sin(time*5)*3;
+        const trail=pose==='run'?5+speed*11:pose==='dodge'?19:pose==='swing'?8+tier*3:0,wave=reduced?0:Math.sin(time*5)*3;
         c.beginPath();c.moveTo(-10,-72+crouch);c.bezierCurveTo(-29,-67+crouch,-37-trail,-44+crouch,-35-trail+wave,-13+crouch);c.lineTo(-14-wave,-19+crouch);c.lineTo(5,-27+crouch);c.quadraticCurveTo(-7,-51+crouch,-10,-72+crouch);c.fillStyle=gradient(c,-30,-70,0,-10,[[0,'#4f9699'],[.45,'#286471'],[1,'#173d56']]);c.fill();c.strokeStyle='#173847';c.lineWidth=1.3;c.stroke();
         line(c,[[-17,-64+crouch],[-26-trail*.6,-41+crouch],[-26-trail+wave,-19+crouch]],'#81b3a9',1.1);
         line(c,[[-10,-60+crouch],[-15,-31+crouch],[-11,-22+crouch]],'#477f83',1);
@@ -654,7 +863,7 @@ const RebornArt = (() => {
         });
         // Front shoulder and weapon arm are separately articulated for every attack phase.
         ellipse(c,12,-67+crouch,9,7,'#afc3bf',palette.ink,1.3);line(c,[[6,-69+crouch],[15,-71+crouch],[19,-67+crouch]],'#d7d4aa',1);
-        arm(c,13,-66+crouch,aa,ab,true,pose.startsWith('magic')?'magic':true,blade);
+        arm(c,13,-66+crouch,aa,ab,true,pose.startsWith('magic')||p.weaknessCharge?'magic':true,blade);
         if(pose==='magiccharge'||pose==='magicrelease'){
           const q=pose==='magiccharge'?clamp(elapsed/.45):1,ox=pose==='magicrelease'?38:19,oy=-62+crouch;
           glow(c,ox,oy,35+q*15,'#ffd492',.4);ellipse(c,ox,oy,5+q*4,5+q*4,'#f5e7ba');ellipse(c,ox,oy,11+q*6,11+q*6,null,'#dcb879',1.2);
@@ -662,43 +871,55 @@ const RebornArt = (() => {
         }
       });
     },face,1);
+    if(p.weaknessCharge){glow(c,p.x+face*33,(p.y||FLOOR)-70,36,'#e8dc9f',.18);rune(c,p.x-face*19,(p.y||FLOOR)-114,1,.55);}
     if(pose==='hit'){glow(c,p.x,(p.y||FLOOR)-55,42,'#f0aa91',.18);}
-    if(pose==='swing'){
-      const q=clamp(elapsed/(p.poseDuration||.12));c.save();c.globalAlpha=.72*Math.sin(q*Math.PI);local(c,p.x,p.y||FLOOR,0,()=>{c.strokeStyle='#e5f7dd';c.lineWidth=6;c.beginPath();c.ellipse(20,-55,76,64,0,-1.6+q*.2,1.2+q*.2);c.stroke();c.strokeStyle='#79d3d1';c.lineWidth=2;c.beginPath();c.ellipse(20,-55,83,70,0,-1.55,1.1);c.stroke();},face,1);c.restore();
-    }
+    if(pose==='swing')swordTrail(c,p.x,p.y||FLOOR,face,tier,elapsed/(p.poseDuration||.12),.84,reduced);
   }
 
   function attackDuration(enemy){
-    return enemy.attackDuration||({jump:.55,rush:.42,heavy_jump:.62,triple_bounce:.32,crystal_charge:.52})[enemy.pattern]||.5;
+    return enemy.attackDuration||({jump:.55,rush:.42,forward_rush:.48,heavy_jump:.62,triple_bounce:.32,crystal_charge:.52})[enemy.pattern]||.5;
   }
   function telegraph(c,e,time,reduced){
-    if(e.ai!=='TELEGRAPH'&&!(e.ai==='ATTACK'&&e.pattern!=='rush'&&e.pattern!=='crystal_charge'))return;
-    const boss=e.kind==='boss',target=Number.isFinite(e.attackTargetX)?e.attackTargetX:e.x;
-    const radius=({jump:46,rush:42,heavy_jump:70,triple_bounce:54,crystal_charge:58})[e.pattern]||(boss?70:46);
+    const rushing=['rush','forward_rush','crystal_charge'].includes(e.pattern);
+    if(e.ai!=='TELEGRAPH'&&!(e.ai==='ATTACK'&&!rushing))return;
+    const markerX=rushing?e.attackTargetX:(e.landingTargetX??e.attackTargetX);
+    const boss=e.kind==='boss',target=Number.isFinite(markerX)?markerX:e.x;
+    const radius=e.attackRadius||({jump:46,rush:42,forward_rush:58,heavy_jump:70,triple_bounce:54,crystal_charge:58})[e.pattern]||(boss?70:46);
     const alpha=e.ai==='ATTACK'?.28:reduced?.55:.4+.13*Math.sin(time*12);
     c.save();c.globalAlpha=alpha;ellipse(c,target,FLOOR+2,radius,11,'#e77e653e','#f3ad89',2);
     line(c,[[target-radius+8,FLOOR+2],[target+radius-8,FLOOR+2]],'#f8b38d',1.2);
     for(let i=-1;i<=1;i++)line(c,[[target+i*17-4,FLOOR-4],[target+i*17,FLOOR],[target+i*17+4,FLOOR-4]],'#ffe1a2',1.6);
-    if(e.pattern==='rush'||e.pattern==='crystal_charge'){
+    if(rushing){
       const dir=target>=e.x?1:-1;line(c,[[e.x,FLOOR+7],[target,FLOOR+7]],'#d8b57e',2);line(c,[[target-dir*12,FLOOR],[target,FLOOR+7],[target-dir*12,FLOOR+14]],'#f5d59d',2);
     }
     c.restore();
   }
   function slime(c,e,time,reduced){
     const boss=e.kind==='boss',size=boss?1.75:1.04,ai=e.ai||'IDLE',t=e.aiTime||0,phase2=e.phase===2;
+    if(ai==='DEFEATED'&&t>1.15)return;
     let sx=1,sy=1,lift=0,tilt=0,opacity=1;
     if(ai==='IDLE'){sx=1+(reduced?0:Math.sin(time*3)*.025);sy=1-(sx-1)*.7;}
     if(ai==='APPROACH'){const b=Math.abs(Math.sin(t*5));lift=reduced?0:b*12;sx=1+(1-b)*.08;sy=1-(1-b)*.09;}
-    if(ai==='TELEGRAPH'){const q=clamp(t/(t+(e.telegraphRemaining||.3)));sx=1+.24*q;sy=1-.27*q;tilt=e.pattern==='crystal_charge'?(e.facing===-1?-.04:.04):0;}
+    if(ai==='ENTRANCE'){const q=ease(t/.9);lift=(1-q)*40;opacity=q;sx=.85+.15*q;sy=1.12-.12*q;}
+    if(ai==='TELEGRAPH'){const q=clamp(t/(t+(e.telegraphRemaining||.3)));sx=1+.24*q;sy=1-.27*q;tilt=['rush','forward_rush','crystal_charge'].includes(e.pattern)?(e.facing===-1?-.07:.07)*q:0;}
     if(ai==='ATTACK'){
       const q=clamp(Number.isFinite(e.attackProgress)?e.attackProgress:t/attackDuration(e));
-      if(e.pattern==='rush'||e.pattern==='crystal_charge'){sx=1.19;sy=.87;tilt=(e.facing===-1?-1:1)*.08;}
+      if(['rush','forward_rush','crystal_charge'].includes(e.pattern)){sx=e.pattern==='crystal_charge'?1.08:1.3;sy=e.pattern==='crystal_charge'?.96:.8;tilt=(e.facing===-1?-1:1)*.08;}
       else{lift=Number.isFinite(e.lift)?e.lift:Math.sin(q*Math.PI)*(boss?(e.pattern==='heavy_jump'?126:72):74);sx=.9+.08*Math.sin(q*Math.PI);sy=1.11-.05*Math.sin(q*Math.PI);}
     }
     if(ai==='RECOVERY'){const q=clamp(t/.35);sx=mix(1.2,1,q);sy=mix(.75,1,q);}
-    if(ai==='HIT_REACTION'){sx=1.15;sy=.79;tilt=(e.facing===-1?1:-1)*.09;}
-    if(ai==='DEFEATED'){const q=clamp(t/.7);sx=1+q*.35;sy=1-q*.86;opacity=1-q;}
-    ellipse(c,e.x,FLOOR+5,(boss?48:31)*(1-lift/450),boss?9:6,'#08253066');
+    if(ai==='HIT_REACTION'||ai==='STAGGER'){sx=1.15;sy=.79;tilt=(e.facing===-1?1:-1)*.09;}
+    if(ai==='DEFEATED'){const q=clamp(t/(boss?.95:.7));sx=1+q*.35;sy=1-q*.86;opacity=1-q;}
+    c.save();c.globalAlpha=opacity;ellipse(c,e.x,FLOOR+5,(boss?48:31)*(1-lift/450),boss?9:6,'#08253066');c.restore();
+    if(boss&&ai!=='DEFEATED'){
+      const aura=ai==='ENTRANCE'?.28:phase2?.17:.07;
+      glow(c,e.x,FLOOR-55-lift,phase2?145:120,phase2?'#c5b7f1':'#a4d7d4',aura);
+      if(ai==='ENTRANCE'||phase2){c.save();c.globalAlpha=ai==='ENTRANCE'?.5:.2;ellipse(c,e.x,FLOOR+2,83,15,null,phase2?'#c6bce4':'#c1d7b4',1.2);c.restore();}
+    }
+    if(ai==='ATTACK'&&['rush','forward_rush','crystal_charge'].includes(e.pattern)&&!reduced){
+      const dir=e.facing===-1?-1:1;
+      for(let i=0;i<4;i++){c.save();c.globalAlpha=.21-i*.035;line(c,[[e.x-dir*(32+i*12),FLOOR-18-i*15],[e.x-dir*(67+i*16),FLOOR-18-i*15]],e.pattern==='crystal_charge'?'#d6c9f2':'#b7dfbe',2.5-i*.4);c.restore();}
+    }
     c.save();c.globalAlpha=opacity;
     local(c,e.x,(e.y||FLOOR)-lift,tilt,()=>{
       const body=gradient(c,-28,-61,25,3,[[0,boss?'#b7d5a0':'#c1df8d'],[.3,boss?'#81bd97':'#8fc96b'],[.7,boss?'#4c9f8b':'#50a771'],[1,boss?'#3a7c83':'#3b8070']]);
@@ -707,27 +928,70 @@ const RebornArt = (() => {
       shape(c,'M-27 -39Q-22 -55 -7 -57Q1 -58 6 -54Q-15 -51 -19 -35Z','#e4efba');
       ellipse(c,-25,-23,3,7,'#c7e9ad');ellipse(c,20,-11,5,2.4,'#d2e6a0');ellipse(c,25,-35,2,3,'#c1dca2');
       if(boss){
-        glow(c,1,-32,30,phase2?'#e9c6ec':'#b2e7e4',.4);
-        local(c,0,-14,0,()=>crystal(c,0,0,.62,phase2?'#c3b3e0':'#a8dae0'));
+        const exposed=!!e.coreExposed,collapse=ai==='DEFEATED'?1-clamp(t/.65):1;
+        glow(c,1,-32,exposed?42:30,exposed?'#e9f4c5':phase2?'#e9c6ec':'#b2e7e4',exposed?.65:.4);
+        local(c,0,-31,0,()=>crystal(c,0,17,.62,exposed?'#edf4cc':phase2?'#c3b3e0':'#a8dae0'),Math.max(.07,collapse));
         ellipse(c,1,-31,12,15,null,phase2?'#e7d6e7':'#d5ecd0',.7);
         line(c,[[-8,-31],[1,-42],[10,-31],[1,-20],[-8,-31]],'#e9e9c1',.65);
+        if(exposed){
+          ellipse(c,1,-31,19,23,null,'#f2e8ad',1.2);
+          line(c,[[-26,-43],[-31,-43],[-31,-20],[-26,-20]],'#e5eac0',1.1);
+          line(c,[[27,-43],[32,-43],[32,-20],[27,-20]],'#e5eac0',1.1);
+        }
       }
       const look=(e.facing===-1?-1:1)*2,ey=boss?-38:-30;
       ellipse(c,-13+look,ey,4.6,boss?6:7,'#193e4a');ellipse(c,13+look,ey,4.6,boss?6:7,'#193e4a');ellipse(c,-14+look,ey-2,1.2,1.8,'#f0edcc');ellipse(c,12+look,ey-2,1.2,1.8,'#f0edcc');
       if(ai==='TELEGRAPH'||ai==='ATTACK'||phase2){line(c,[[-20,ey-10],[-9,ey-6]],'#3d6655',2);line(c,[[8,ey-6],[20,ey-10]],'#3d6655',2);}
-      if(ai==='HIT_REACTION'){line(c,[[-4,-18],[0,-23],[4,-18],[0,-13],[-4,-18]],'#2a5860',1.4);}
+      if(ai==='HIT_REACTION'||ai==='STAGGER'){line(c,[[-4,-18],[0,-23],[4,-18],[0,-13],[-4,-18]],'#2a5860',1.4);}
       else{c.beginPath();c.moveTo(-6,-17);c.quadraticCurveTo(0,ai==='ATTACK'?-22:-10,7,-17);c.strokeStyle='#2c5c60';c.lineWidth=1.6;c.stroke();}
       if(boss){local(c,0,-63,ai==='DEFEATED'?.2:reduced?0:Math.sin(time*2)*.02,()=>{
         shape(c,'M-24 -3L-28 -24L-15 -17L-7 -32L3 -19L14 -31L20 -15L31 -22L25 -2Z','#b6a276','#586f65',1.2);
         shape(c,'M-20 -5L-23 -17L-14 -12L-7 -24L2 -13L13 -23L18 -10L25 -15L21 -5Z','#dfca8d');line(c,[[-23,-1],[25,-1]],'#f3e1a8',2);
         crystal(c,2,-5,.3,phase2?'#dabce0':'#93cbd5');ellipse(c,-15,-6,2,2,'#83b7b4');ellipse(c,17,-6,2,2,'#83b7b4');
       });}
-      if(ai==='TELEGRAPH'&&e.pattern==='crystal_charge'){ellipse(c,0,-31,43,43,null,'#d8d5f3',1.5);for(let i=0;i<5;i++){const a=i*TAU/5+(reduced?0:time*3);ellipse(c,Math.cos(a)*42,-31+Math.sin(a)*42,2,2,'#e0e9ef');}}
+      if((ai==='TELEGRAPH'||ai==='ATTACK')&&e.pattern==='crystal_charge'){ellipse(c,0,-31,43,43,null,'#d8d5f3',1.5);for(let i=0;i<5;i++){const a=i*TAU/5+(reduced?0:time*3);local(c,Math.cos(a)*42,-31+Math.sin(a)*42,a+.4,()=>shape(c,'M0 -5L3 0L0 6L-3 0Z','#e0e9ef'));}}
     },size*sx,size*sy);
     c.restore();
+    if(ai==='DEFEATED'&&boss&&t<1.15){
+      const q=clamp((t-.23)/.85),a=1-q;
+      c.save();c.globalAlpha=a;glow(c,e.x,FLOOR-52,30+q*70,'#d5dbef',.3);
+      if(t>.23){ellipse(c,e.x,FLOOR-52,18+q*87,18+q*64,null,'#d8e4e6',a*2+.5);for(let i=0;i<10;i++){const angle=i*TAU/10,r=reduced?38:20+q*95;local(c,e.x+Math.cos(angle)*r,FLOOR-52+Math.sin(angle)*r*.65,angle+q,()=>shape(c,'M0 -9L4 -1L1 7L-4 0Z',i%2?'#c7d8ea':'#e1e6ba'),a);}}
+      c.restore();
+    }
   }
 
-  const effectDuration={slash:.22,impact:.3,damage:.85,dodge:.32,fire:.65,burst:.8,shockwave:.55,charge:.6};
+  function rune(c,x,y,index,scale=1){local(c,x,y,0,()=>{
+    const paths=['M-7 -7L0 -12L7 -7L0 -2L-7 -7M0 -2V10M-6 5H6','M-7 9V-10L5 -2L-7 4M5 -2V10','M-7 -10L7 -10L-4 0L6 0L-4 11'];
+    shape(c,paths[index%3],null,'#e8d9aa',1.7);
+  },scale);}
+  function magic(c,state,time,reduced){
+    const p=state.player,cast=state.cast;
+    if(p&&cast&&cast.phase==='charge'){
+      const q=clamp(cast.time/(cast.duration||.7)),r=58*(1-smooth((q-.65)/.35)) + 8,cy=p.y-61;
+      const angle=reduced?0:q*TAU*.8;
+      glow(c,p.x,cy,65,'#e1d3a5',.2+q*.2);ellipse(c,p.x,p.y+2,38+q*8,10,null,'#e0d3a1',1.2);
+      for(let i=0;i<3;i++){
+        const a=angle+i*TAU/3,x=p.x+Math.cos(a)*r,y=cy+Math.sin(a)*r*.62;
+        const morph=clamp((q-.12)/.3);
+        if(morph<1){c.save();c.globalAlpha=1-morph;c.font='600 16px Georgia,serif';c.textAlign='center';c.fillStyle='#f1e7bd';c.fillText(['I','need','fire.'][i],x,y+5);c.restore();}
+        c.save();c.globalAlpha=morph;rune(c,x,y,i,.9+q*.2);c.restore();
+      }
+      if(q>.4){c.save();c.globalAlpha=(q-.4)*.7;ellipse(c,p.x,cy,30-q*13,30-q*13,null,'#d4e4d4',1.2);c.restore();}
+    }
+    for(const shot of (state.projectiles||[]).slice(-8)){
+      if(shot.life<=0)continue;
+      const angle=Math.atan2(shot.vy||0,shot.vx||1),r=shot.radius||15;
+      local(c,shot.x,shot.y,angle,()=>{
+        glow(c,0,0,r*3.8,'#f2c283',.42);
+        if(!reduced){shape(c,`M${-r*4.4} -3Q${-r*2} -17 4 -10L${r} 0L3 10Q${-r*2} 17 ${-r*4.4} 3L${-r*2.6} 0Z`,gradient(c,-r*4,0,r,0,[[0,'#e3aa5500'],[.5,'#e3b77488'],[1,'#f3d7a9']]));}
+        ellipse(c,0,0,r*1.15,r*.88,'#e3bb7e');ellipse(c,2,0,r*.75,r*.65,'#fff0c9');ellipse(c,4,-1,r*.32,r*.3,'#fff9e3');
+        ellipse(c,0,0,r*1.5,r*1.5,null,'#b4e4dc',1.2);
+        for(let i=0;i<3;i++){const a=i*TAU/3+(reduced?0:time*5);ellipse(c,Math.cos(a)*r*1.5,Math.sin(a)*r*1.5,1.7,1.7,'#e2f1dd');}
+      });
+    }
+  }
+
+  const effectDuration={slash:.22,impact:.3,damage:.85,dodge:.32,fire:.65,burst:.8,shockwave:.55,charge:.6,perfect_dodge:.65,runes:.7,core_hit:.6,dust:.4};
   function effects(c,state,time,reduced){
     for(const f of (state.effects||[]).slice(-48)){
       const duration=f.ttl||f.initialLife||effectDuration[f.type]||.6,q=clamp(1-(f.life||0)/duration),a=1-q;
@@ -735,23 +999,41 @@ const RebornArt = (() => {
       c.save();c.globalAlpha=a;
       if(f.type==='damage'){
         const yy=(y>FLOOR-20?y-75:y)-(reduced?8:q*30),value=typeof f.value==='number'?Math.round(f.value):f.value||'';
-        c.font='700 25px Georgia, serif';c.textAlign='center';c.lineJoin='round';c.strokeStyle='#122d3d';c.lineWidth=4;c.strokeText(String(value),x,yy);c.fillStyle=(f.target==='player'||Number(f.value)<0)?'#efb19a':'#f3e8b8';c.fillText(String(value),x,yy);
+        const heavy=f.heavy||f.tier===3||Number(value)>=16,size=(heavy?32:25)*(reduced?1:1+Math.sin(clamp(q*4)*Math.PI)*.12);
+        c.font=`700 ${size}px Georgia, serif`;c.textAlign='center';c.lineJoin='round';c.strokeStyle='#122d3d';c.lineWidth=4;c.strokeText(String(value),x,yy);c.fillStyle=(f.target==='player'||Number(f.value)<0)?'#efb19a':heavy?'#fff0c0':'#f3e8b8';c.fillText(String(value),x,yy);
       }else if(f.type==='impact'){
-        const yy=y>FLOOR-15?y-35:y;
-        for(let i=0;i<7;i++){const angle=i*TAU/7+.25,r=9+q*27;line(c,[[x+Math.cos(angle)*r*.35,yy+Math.sin(angle)*r*.35],[x+Math.cos(angle)*r,yy+Math.sin(angle)*r]],i%2?'#d6efdd':'#e9c68b',2);}
-        ellipse(c,x,yy,4+a*4,4+a*4,'#f3f0c8');
+        const yy=y>FLOOR-15?y-35:y,heavy=f.heavy||f.tier===3||Number(f.value)>=16,n=reduced?4:heavy?10:7,spread=reduced?14:9+q*(heavy?43:27);
+        for(let i=0;i<n;i++){const angle=i*TAU/n+.25;line(c,[[x+Math.cos(angle)*spread*.35,yy+Math.sin(angle)*spread*.35],[x+Math.cos(angle)*spread,yy+Math.sin(angle)*spread]],i%2?'#d6efdd':'#e9c68b',heavy?2.5:2);}
+        ellipse(c,x,yy,4+a*(heavy?7:4),4+a*(heavy?7:4),'#f3f0c8');
+      }else if(f.type==='droplets'){
+        const yy=y>FLOOR-15?y-35:y,heavy=f.heavy||f.tier===3,crystalHit=f.targetKind==='boss';
+        for(let i=0;i<(reduced?3:heavy?7:4);i++){const angle=-Math.PI*.95+i*.43,r=reduced?17:12+q*(20+i*5),xx=x+Math.cos(angle)*r,dy=yy+Math.sin(angle)*r+(reduced?0:q*q*25);
+          if(crystalHit)local(c,xx,dy,reduced?i:q+i,()=>shape(c,'M0 -5L3 0L0 5L-2 0Z','#c8dee1'),.8+a*.3);else ellipse(c,xx,dy,2+a*1.2,2+a*.6,i%2?'#a8d6a1':'#79bca4');
+        }
       }else if(f.type==='fire'||f.type==='burst'){
         const yy=y>FLOOR-20?y-43:y,rad=18+ease(q)*(f.type==='burst'?80:58);
         glow(c,x,yy,rad*1.4,'#efc681',.46);ellipse(c,x,yy,rad,rad*.75,null,'#e6c790',2+a*2);ellipse(c,x,yy,rad*.68,rad*.5,null,'#a9dddb',1.5);
-        for(let i=0;i<12;i++){const angle=i*TAU/12+.3,r=rad*(.5+q);const xx=x+Math.cos(angle)*r,y2=yy+Math.sin(angle)*r*.7;local(c,xx,y2,angle,()=>shape(c,'M-3 0L0 -9L3 0L0 5Z',i%2?'#efdeb0':'#b5dfd7'),.6+a*.7);}
-        if(f.type==='fire'&&state.player){const px=state.player.x+state.player.facing*25;line(c,[[px,FLOOR-65],[(px+x)/2,yy-16],[x,yy]],'#f2d898',a*4+.5);}
+        const count=reduced?5:12;
+        for(let i=0;i<count;i++){const angle=i*TAU/count+.3,r=reduced?rad*.65:rad*(.5+q);const xx=x+Math.cos(angle)*r,y2=yy+Math.sin(angle)*r*.7;local(c,xx,y2,angle,()=>shape(c,'M-3 0L0 -9L3 0L0 5Z',i%2?'#efdeb0':'#b5dfd7'),.6+a*.7);}
       }else if(f.type==='shockwave'){
-        const rad=12+q*105;ellipse(c,x,FLOOR+3,rad,rad*.15,null,'#d5d9bd',2);ellipse(c,x,FLOOR+5,rad*.8,rad*.11,null,'#8bbcb9',1);
+        const rad=reduced?45:12+q*(Number(f.value)||105);ellipse(c,x,FLOOR+3,rad,rad*.15,null,'#d5d9bd',2);ellipse(c,x,FLOOR+5,rad*.8,rad*.11,null,'#8bbcb9',1);
+        if(!reduced)for(let i=0;i<5;i++)ellipse(c,x+(i-2)*(12+q*17),FLOOR+2-Math.sin(q*Math.PI)*8,4+a*4,2+a*2,'#b2b49370');
       }else if(f.type==='charge'){
         const yy=y>FLOOR-20?y-65:y;ellipse(c,x,yy,28-q*13,28-q*13,null,'#e3d2ac',1.3);glow(c,x,yy,38,'#e4c790',.2);
       }else if(f.type==='slash'){
-        const dir=f.facing||state.player?.facing||1;local(c,x,y>FLOOR-20?y-45:y,0,()=>{c.beginPath();c.ellipse(0,0,30+q*23,37+q*18,.4,-1.1,1.1);c.strokeStyle='#d6eee0';c.lineWidth=a*4+.5;c.stroke();},dir,1);
-      }else if(f.type==='dodge'){ellipse(c,x,FLOOR+3,18+q*30,5,null,'#9bd6ce',1.2);}
+        const dir=f.direction||f.facing||state.player?.facing||1,tier=f.tier||state.player?.comboIndex||1;
+        swordTrail(c,x-dir*48,y+35,dir,tier,.25+q*.7,.5,reduced);
+      }else if(f.type==='dodge'){ellipse(c,x,FLOOR+3,reduced?28:18+q*30,5,null,'#9bd6ce',1.2);
+      }else if(f.type==='perfect_dodge'){
+        const yy=y>FLOOR-20?y-48:y;glow(c,x,yy,82,'#83cef4',.28);ellipse(c,x,yy,reduced?37:27+q*35,reduced?43:33+q*40,null,'#c8edff',1.5);
+        for(let i=0;i<4;i++){const angle=i*TAU/4+.6,r=reduced?42:30+q*32;local(c,x+Math.cos(angle)*r,yy+Math.sin(angle)*r,angle,()=>shape(c,'M-3 0L0 -7L3 0L0 7Z','#d2f0ff'),a);}
+      }else if(f.type==='core_hit'){
+        const yy=y>FLOOR-20?y-54:y,r=reduced?42:12+ease(q)*78;
+        glow(c,x,yy,r+30,'#d5e7f1',.42);ellipse(c,x,yy,r,r,null,'#edf1c3',2.5);ellipse(c,x,yy,r*.65,r*.65,null,'#a6d5eb',1.3);
+        for(let i=0;i<(reduced?5:11);i++){const angle=i*TAU/(reduced?5:11);local(c,x+Math.cos(angle)*r,yy+Math.sin(angle)*r,angle+q,()=>shape(c,'M0 -8L4 -1L0 7L-3 0Z',i%2?'#dbe9ee':'#f0e8b7'),a+.25);}
+      }else if(f.type==='dust'){
+        for(let i=0;i<(reduced?3:6);i++){const xx=x+(i-2.5)*(reduced?10:8+q*16),yy=FLOOR+2-(reduced?2:Math.sin(q*Math.PI)*(4+i%3*3));ellipse(c,xx,yy,3+a*5,2+a*2,'#b4b69770');}
+      }else if(f.type==='runes'&&!state.cast){for(let i=0;i<3;i++)rune(c,x+(i-1)*27,y-(reduced?0:q*12),i,.8);}
       c.restore();
     }
   }
@@ -759,10 +1041,12 @@ const RebornArt = (() => {
     if(!ctx)return;
     const t=Number.isFinite(visualTime)?visualTime:0,reduced=!!settings.reducedMotion;
     ctx.save();ctx.clearRect(0,0,W,H);ctx.fillStyle='#102e39';ctx.fillRect(0,0,W,H);
-    const shake=!reduced&&settings.shake!==false?Math.min(4.5,(state.shake||0)*15):0;
+    const intensity=settings.shakeIntensity==='off'||settings.shake===false?0:settings.shakeIntensity==='low'?.45:1;
+    const power=Number.isFinite(state.shakePower)?clamp(state.shakePower)*4.8:Math.min(4.5,(state.shake||0)*15);
+    const shake=!reduced&&(state.shake||0)>0?power*intensity*clamp(state.shake/.1):0;
     if(shake)ctx.translate(Math.sin(t*73)*shake,Math.cos(t*59)*shake*.55);
     background(ctx);
-    if(!reduced){for(let i=0;i<17;i++){const x=100+(i*137)%811+Math.sin(t*.6+i)*11,y=125+(i*71)%259+Math.sin(t*.7+i*2)*7;ctx.save();ctx.globalAlpha=.2+.35*(.5+.5*Math.sin(t*1.4+i));ellipse(ctx,x,y,1.3,1.3,i%3?'#d1e6c1':'#9bdee5');ctx.restore();}}
+    atmosphere(ctx,state,t,reduced);
     if(state.stage==='crystal'){
       const bob=reduced?0:Math.sin(t*2)*4;
       glow(ctx,550,345+bob,78,'#b5e8de',.45);
@@ -772,6 +1056,7 @@ const RebornArt = (() => {
     if(state.enemy)telegraph(ctx,state.enemy,t,reduced);
     if(state.player)hero(ctx,state.player,t,reduced);
     if(state.enemy)slime(ctx,state.enemy,t,reduced);
+    magic(ctx,state,t,reduced);
     effects(ctx,state,t,reduced);
     ctx.restore();
   }
@@ -779,52 +1064,96 @@ const RebornArt = (() => {
 })();
 
 ;
-/* Original procedural sound design; no external samples, no campaign state. */
+/* Original procedural score and layered cues. One context, bounded scheduled voices. */
 const RebornAudio=(()=>{
   const presets={
-    sword:[420,160,.12,'sawtooth'],impact:[120,45,.16,'triangle'],bounce:[170,270,.11,'sine'],slimeAttack:[180,70,.25,'triangle'],
-    playerHit:[160,65,.24,'sawtooth'],dodge:[450,900,.12,'sine'],magicCharge:[260,920,.5,'sine'],magicExplosion:[90,35,.5,'sawtooth'],
-    bossEntrance:[100,65,.8,'triangle'],bossDeath:[330,880,.8,'sine'],victory:[523,1046,.8,'sine']
+    sword:[420,160,.12,'sawtooth'],sword1:[480,180,.13,'triangle'],sword2:[340,760,.17,'triangle'],sword3:[210,80,.24,'sawtooth'],
+    impact:[120,45,.16,'triangle'],impact1:[150,60,.16,'triangle'],impact2:[125,42,.22,'triangle'],impact3:[92,30,.34,'sawtooth'],
+    bounce:[170,270,.11,'sine'],slimeAttack:[180,70,.25,'triangle'],enemyRecoil:[220,95,.14,'sine'],playerHit:[160,65,.24,'sawtooth'],
+    dodge:[450,900,.12,'sine'],perfectDodge:[784,1568,.35,'sine'],magicCharge:[260,920,.5,'sine'],fireLaunch:[720,240,.3,'triangle'],magicExplosion:[90,35,.5,'sawtooth'],
+    coreHit:[880,440,.45,'sine'],bossEntrance:[100,65,.8,'triangle'],bossPhase:[146,73,.7,'triangle'],bossDeath:[330,880,.8,'sine'],victory:[523,1046,.8,'sine'],
+    select:[660,880,.08,'sine'],correct:[659,988,.28,'sine'],incorrect:[294,220,.18,'sine']
+  };
+  const aliases={swing:'sword',hit:'impact',attack:'slimeAttack',hurt:'playerHit',magic:'magicExplosion',charge:'magicCharge',boss:'bossEntrance',win:'victory',sword_swing:'sword',sword_impact:'impact',slime_bounce:'bounce',slime_warning:'bounce',slime_jump:'slimeAttack',slime_rush:'slimeAttack',slime_land:'impact',slime_defeat:'magicExplosion',player_hit:'playerHit',magic_charge:'magicCharge',magic_explosion:'magicExplosion',crystal_charge:'magicCharge',boss_entrance:'bossEntrance',boss_defeat:'bossDeath',boss_phase:'bossPhase',perfect_dodge:'perfectDodge',core_hit:'coreHit',fire_launch:'fireLaunch',defeat:'playerHit'};
+  const scores={
+    exploration:{bpm:68,notes:[293.66,440,392,329.63,293.66,220,261.63,329.63],bass:146.83},
+    combat:{bpm:96,notes:[293.66,349.23,440,392,293.66,440,523.25,392],bass:146.83},
+    boss:{bpm:108,notes:[220,261.63,329.63,293.66,220,392,329.63,261.63],bass:110}
   };
   function create(initial={}){
-    const settings={master:.7,voice:.85,sfx:.65,music:0,muted:false,...initial};
-    let context,master,sfxBus,musicBus,unlocked=false,ducked=false,musicNodes=[],active=new Set();
+    const settings={master:.7,voice:.85,sfx:.65,music:0,ui:.5,muted:false,...initial};
     const clamp=v=>Math.max(0,Math.min(1,Number(v)||0));
+    let context,master,sfxBus,musicBus,uiBus,noiseSample,unlocked=false,ducked=false,musicScene='exploration',phase=1,nextBeat=0,beat=0;
+    const active=new Set(),musicLayers={};
+    const LIMIT=96;
     function mix(){
-      if(!context)return;
-      const t=context.currentTime;
+      if(!context)return;const t=context.currentTime;
       master.gain.setTargetAtTime(settings.muted?0:settings.master,t,.025);
       sfxBus.gain.setTargetAtTime(settings.sfx*(ducked?.35:1),t,.025);
-      musicBus.gain.setTargetAtTime(settings.music*(ducked?.18:1)*.045,t,.08);
+      uiBus.gain.setTargetAtTime(settings.ui*(ducked?.45:1),t,.025);
+      musicBus.gain.setTargetAtTime(settings.music*(ducked?.16:1),t,.08);
+      for(const [name,bus]of Object.entries(musicLayers))bus.gain.setTargetAtTime(name===musicScene?1:0,t,.25);
     }
     function unlock(){
       unlocked=true;
       try{
-        if(!context){const C=globalThis.AudioContext||globalThis.webkitAudioContext;if(!C)return false;context=new C();master=context.createGain();sfxBus=context.createGain();musicBus=context.createGain();master.connect(context.destination);sfxBus.connect(master);musicBus.connect(master);}
-        if(context.state==='suspended')context.resume().catch(()=>{});
-        mix();music();return true;
+        if(!context){
+          const C=globalThis.AudioContext||globalThis.webkitAudioContext;if(!C)return false;context=new C();
+          master=context.createGain();sfxBus=context.createGain();musicBus=context.createGain();uiBus=context.createGain();
+          master.connect(context.destination);sfxBus.connect(master);musicBus.connect(master);uiBus.connect(master);
+          for(const name of Object.keys(scores)){musicLayers[name]=context.createGain();musicLayers[name].gain.value=name===musicScene?1:0;musicLayers[name].connect(musicBus);}
+          if(context.createBuffer){noiseSample=context.createBuffer(1,Math.floor(context.sampleRate*.4),context.sampleRate);const data=noiseSample.getChannelData(0);let seed=10321;for(let i=0;i<data.length;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;data[i]=seed/2147483648-1;}}
+        }
+        if(context.state==='suspended')context.resume().catch(()=>{});mix();return true;
       }catch{return false;}
     }
-    function music(){
-      if(!context||!unlocked)return;
-      if(settings.music>0&&!musicNodes.length){
-        // An original, quiet open fifth; optional ambience rather than a borrowed score.
-        [146.83,220,293.66].forEach((f,i)=>{const o=context.createOscillator(),g=context.createGain();o.type='sine';o.frequency.value=f;g.gain.value=i===0?.6:.25;o.connect(g);g.connect(musicBus);o.start();musicNodes.push({o,g});});
-      }else if(settings.music===0){for(const {o,g} of musicNodes){o.stop();o.disconnect();g.disconnect();}musicNodes=[];}
+    function envelope(source,node,bus,at,length,level){
+      if(active.size>=LIMIT){source.disconnect();node.disconnect();return false;}
+      const g=context.createGain();g.gain.setValueAtTime(.0001,at);g.gain.exponentialRampToValueAtTime(Math.max(.0002,level),at+.008);g.gain.exponentialRampToValueAtTime(.0001,at+length);
+      node.connect(g);g.connect(bus);active.add(source);
+      source.onended=()=>{active.delete(source);source.disconnect();if(node!==source)node.disconnect();g.disconnect();};source.start(at);source.stop(at+length+.025);return true;
     }
-    function configure(values){for(const key of ['master','voice','sfx','music'])if(key in values)settings[key]=clamp(values[key]);if('muted'in values)settings.muted=!!values.muted;mix();music();}
-    function sfx(id){
-      const aliases={swing:'sword',hit:'impact',attack:'slimeAttack',hurt:'playerHit',magic:'magicExplosion',charge:'magicCharge',boss:'bossEntrance',win:'victory',sword_swing:'sword',sword_impact:'impact',slime_bounce:'bounce',slime_warning:'bounce',slime_jump:'slimeAttack',slime_rush:'slimeAttack',slime_land:'impact',slime_defeat:'magicExplosion',player_hit:'playerHit',magic_charge:'magicCharge',magic_explosion:'magicExplosion',crystal_charge:'magicCharge',boss_entrance:'bossEntrance',boss_defeat:'bossDeath',boss_phase:'bossEntrance',correct:'victory',incorrect:'bounce',defeat:'playerHit'};
-      const p=presets[aliases[id]||id];if(!p||!unlocked||!context||settings.muted)return false;
-      const [f,to,duration,type]=p,t=context.currentTime,o=context.createOscillator(),g=context.createGain();
-      o.type=type;o.frequency.setValueAtTime(f,t);o.frequency.exponentialRampToValueAtTime(to,t+duration);
-      g.gain.setValueAtTime(.001,t);g.gain.exponentialRampToValueAtTime(type==='sawtooth'?.12:.25,t+.008);g.gain.exponentialRampToValueAtTime(.001,t+duration);
-      o.connect(g);g.connect(sfxBus);active.add(o);o.onended=()=>{active.delete(o);o.disconnect();g.disconnect();};o.start();o.stop(t+duration+.02);return true;
+    function tone(freq,to,length,level,bus,type='sine',at=context.currentTime){
+      if(active.size>=LIMIT)return false;
+      const o=context.createOscillator();o.type=type;o.frequency.setValueAtTime(freq,at);o.frequency.exponentialRampToValueAtTime(to,at+length);return envelope(o,o,bus,at,length,level);
     }
-    function stop(){for(const o of active){try{o.stop();}catch{}}for(const {o,g} of musicNodes){o.stop();o.disconnect();g.disconnect();}musicNodes=[];}
-    return{settings,unlock,configure,sfx,stop,duck(value){ducked=!!value;mix();},get voiceVolume(){return settings.muted?0:settings.master*settings.voice;},get unlocked(){return unlocked;},get contextState(){return context?.state||'unavailable';}};
+    function noise(freq,length,level,bus){
+      if(!noiseSample||!context.createBufferSource||!context.createBiquadFilter)return;
+      const source=context.createBufferSource(),filter=context.createBiquadFilter();source.buffer=noiseSample;filter.type='bandpass';filter.frequency.value=freq;filter.Q.value=.7;source.connect(filter);envelope(source,filter,bus,context.currentTime,length,level);
+    }
+    function cue(id,bus){
+      const key=aliases[id]||id,p=presets[key];if(!p||!unlocked||!context||settings.muted||active.size>=LIMIT)return false;
+      const [f,to,duration,type]=p;const result=tone(f,to,duration,.105,bus,type);
+      if(/^sword/.test(key)){noise(key==='sword3'?620:1400,duration,.055,bus);tone(f*1.8,to*1.6,duration*.65,.028,bus,'sine');}
+      else if(/^impact|Explosion|playerHit|slimeAttack/.test(key)){tone(f*.55,to*.65,duration*.8,.09,bus,'sine');noise(key==='impact3'?700:1100,duration*.65,.06,bus);}
+      else if(['perfectDodge','coreHit','victory','bossDeath','correct'].includes(key)){tone(f*1.5,to*1.5,duration*.7,.055,bus,'sine',context.currentTime+.035);tone(f*2,to*2,duration*.45,.027,bus,'sine',context.currentTime+.07);}
+      else if(['bossEntrance','bossPhase','magicCharge'].includes(key)){tone(f*1.5,to*1.5,duration,.045,bus,'triangle');}
+      return result;
+    }
+    function setScene(name,nextPhase=1){
+      if(!Object.hasOwn(scores,name)&&name!=='silent')return false;
+      if(name!==musicScene){musicScene=name;beat=0;nextBeat=context?.currentTime||0;}phase=nextPhase===2?2:1;mix();return true;
+    }
+    function tick(){
+      if(!context||!unlocked||settings.music<=0||settings.muted||musicScene==='silent')return;
+      const score=scores[musicScene],bus=musicLayers[musicScene],now=context.currentTime;
+      if(nextBeat<now-.25)nextBeat=now;const interval=60/(score.bpm+(musicScene==='boss'&&phase===2?10:0));
+      // One scheduler, called by the existing RAF; no unbounded timers or hidden contexts.
+      for(let n=0;n<2&&nextBeat<=now+.10;n++){
+        const f=score.notes[beat%score.notes.length];tone(f,f,interval*.8,.035,bus,'sine',nextBeat);
+        if(beat%2===0)tone(score.bass,score.bass,interval*1.6,.038,bus,'triangle',nextBeat);
+        if(musicScene!=='exploration')tone(65,40,.1,.035,bus,'sine',nextBeat);
+        if(musicScene==='boss'&&phase===2&&beat%2===1)tone(f*2,f*2,interval*.35,.018,bus,'sine',nextBeat+.12);
+        beat++;nextBeat+=interval;
+      }
+    }
+    function configure(values){for(const key of ['master','voice','sfx','music','ui'])if(key in values)settings[key]=clamp(values[key]);if('muted'in values)settings.muted=!!values.muted;mix();}
+    function stop(){for(const o of active){try{o.stop();}catch{}}nextBeat=0;}
+    return{settings,unlock,configure,sfx:id=>cue(id,sfxBus),ui:id=>cue(id,uiBus),setScene,tick,stop,duck(value){ducked=!!value;mix();},
+      get voiceVolume(){return settings.muted?0:settings.master*settings.voice;},get unlocked(){return unlocked;},get contextState(){return context?.state||'unavailable';},
+      get diagnostics(){return{activeNodes:active.size,nodeLimit:LIMIT,musicScene,phase,ducked,contextCreated:!!context};}};
   }
-  return{create,presets};
+  return{create,presets,scores};
 })();
 
 ;
@@ -836,7 +1165,7 @@ const RebornVoice=(()=>{
     const Utterance=options.SpeechSynthesisUtterance||globalThis.SpeechSynthesisUtterance;
     const timer=options.setTimeout||globalThis.setTimeout,clear=options.clearTimeout||globalThis.clearTimeout;
     let generation=0,active=null,timeout=null,currentId=null,slow=false,fallback=false;
-    let status={state:'idle',source:null,message:'음성 파일 0개 · 원문 도움 또는 선택적 기기 음성을 사용할 수 있습니다.'};
+    let status={state:'idle',source:null,message:`제작 음성 ${manifest.utterances.filter(x=>x.available).length}/${manifest.utterances.length}개 · 원문 도움 또는 선택적 기기 음성을 사용할 수 있습니다.`};
     function report(state,source,message){status={state,source,message,id:currentId};options.onStatus?.(status);}
     function stop(){generation++;if(timeout!==null){clear(timeout);timeout=null;}if(active){active.onplaying=active.onended=active.onerror=null;active.pause?.();active=null;}synth?.cancel?.();mixer.duck(false);if(status.state==='playing'||status.state==='loading')report('stopped',null,'음성이 멈췄습니다. 다시 듣기로 재생할 수 있습니다.');}
     function configure(values){if('slow'in values)slow=!!values.slow;if('fallback'in values)fallback=!!values.fallback;stop();report('idle',null,'재생 설정 변경됨 · 다시 듣기를 누르세요.');}
@@ -861,7 +1190,8 @@ const RebornVoice=(()=>{
       }
       if(!item.available||!item.embedded)return browserFallback('제작 음성 파일 미포함');
       try{
-        active=new AudioClass(item.embedded);active.volume=mixer.voiceVolume;active.playbackRate=slow?.75:1;active.preservesPitch=true;
+        const slowTake=slow&&item.embeddedSlow;
+        active=new AudioClass(slowTake||item.embedded);active.volume=mixer.voiceVolume;active.playbackRate=(slow&&!slowTake)?0.75:1;active.preservesPitch=true;
         active.onplaying=()=>{if(!live())return;mixer.duck(true);report('playing','asset','음성 파일 재생 중');options.onHeard?.({id,source:'asset'});};
         active.onended=()=>finish('ended','asset','음성 파일 재생 완료');
         active.onerror=()=>{if(!live())return;active?.pause?.();active=null;clear(timeout);timeout=null;browserFallback('음성 파일 오류');};
@@ -878,23 +1208,25 @@ const RebornVoice=(()=>{
 /* Standalone lab shell. No access to campaign storage. A single fixed-step RAF. */
 const RebornApp=(()=>{
   const game=RebornCombat.create();
-  const settings={master:.7,voice:.85,sfx:.65,music:0,muted:false,shake:true,reducedMotion:globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches||false};
+  const settings={master:.7,voice:.85,sfx:.65,music:0,ui:.5,muted:false,shakeIntensity:'low',reducedMotion:globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches||false};
   const audio=RebornAudio.create(settings);
+  const voiceCount=RebornVoiceManifest.utterances.filter(x=>x.available).length;
   document.body.dataset.reducedMotion=String(settings.reducedMotion);
-  let voiceSession=0,voiceChallenge=null,hintChallenge=null,visibleMode='',overlayKey='',lastFrame=0,accumulator=0,lastHud=0,words=[],showEnglish=false,showKorean=false;
+  let voiceSession=0,voiceChallenge=null,hintChallenge=null,visibleMode='',lastEventMode='',overlayKey='',lastFrame=0,accumulator=0,lastHud=0,words=[],showEnglish=false,showKorean=false;
   const held=new Set(),pointerActions=new Map();
   const escape=text=>String(text??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
   const labels={left:'← 왼쪽',right:'오른쪽 →',attack:'검 공격',dodge:'회피',magic:'마법'};
   const button=(action,text,extra='')=>`<button type="button" data-action="${action}" ${extra}>${text}</button>`;
   document.getElementById('app').innerHTML=`<div class="shell">
-    <header class="topbar"><div class="brand"><span class="eyebrow">ENGLISH QUEST / COMBAT LAB</span><h1>REBORN <span>THE AWAKENING</span></h1></div><span class="badge">PHASE 01 · 독립 전투 실험실</span>${button('pause','Ⅱ 일시정지','aria-label="일시정지 또는 계속하기"')}</header>
+    <header class="topbar"><div class="brand"><span class="eyebrow">ENGLISH QUEST / COMBAT LAB</span><h1>REBORN <span>THE BATTLE AWAKENS</span></h1></div><span class="badge">PHASE 02 · 전투의 각성</span>${button('pause','Ⅱ 일시정지','aria-label="일시정지 또는 계속하기"')}</header>
     <section class="hud" aria-label="전투 상태"><div class="hero-hp"><div class="meter-label"><b>숲의 수호자</b><span id="hero-health"></span></div><div class="hp-track"><div id="hero-bar" class="hp-fill"></div></div></div><div class="objective" id="objective" role="status"></div><div class="enemy-hp"><div class="meter-label"><b id="enemy-name">ENCHANTED FOREST</b><span id="enemy-health"></span></div><div class="hp-track"><div id="enemy-bar" class="hp-fill"></div></div></div></section>
     <section class="arena" aria-label="숲 전투장"><canvas id="battle" width="1000" height="560" aria-label="좌우 이동, 검 공격, 회피로 싸우는 실시간 숲 전투장"></canvas><div id="overlay" class="overlay" hidden></div></section>
-    <div class="arena-caption"><span id="scene-label">THE WHISPERING WOODS</span><span id="combat-feedback" role="status"></span><span id="charge">마법 수정 발견 전</span></div>
+    <div class="arena-caption"><span id="scene-label">THE WHISPERING WOODS</span><span id="combo-status" class="combo-status">J · 3연속 공격</span><span id="dodge-status" class="dodge-status">K · 회피</span><span id="combat-feedback" role="status"></span><span id="charge">마법 수정 발견 전</span></div>
     <section class="toolbar" aria-label="조작과 음성"><div class="control-pad">${button('left','<strong>←</strong><small>A · 이동</small>','aria-label="왼쪽 이동"')}${button('right','<strong>→</strong><small>D · 이동</small>','aria-label="오른쪽 이동"')}${button('attack','<strong>검</strong><small>J · 공격</small>','aria-label="검 공격"')}${button('dodge','<strong>회피</strong><small>K · 피하기</small>','aria-label="회피"')}${button('magic','<strong>마법</strong><small>L · 문장</small>','aria-label="영어 마법"')}</div>
     <div class="voice-panel"><div class="button-row">${button('replay','▶ 듣기 / 다시 듣기 <kbd>R</kbd>')}${button('english','영어 원문')}${button('korean','한국어 뜻 <kbd>H</kbd>')}</div><div class="audio-options"><label><input id="slow" type="checkbox"> 느리게 0.75×</label><label><input id="fallback" type="checkbox"> 기기 음성 대안 (합성)</label></div><p id="voice-status" class="voice-status" role="status"></p><p id="hint-text" class="hint-text" hidden></p></div></section>
-    <details class="settings"><summary>소리·화면 설정</summary><div class="settings-grid">${[['master','전체',70],['voice','영어 음성',85],['sfx','전투 효과음',65],['music','숲의 화음',0]].map(([id,label,val])=>`<label>${label}<input type="range" data-volume="${id}" min="0" max="100" value="${val}" aria-label="${label} 음량"></label>`).join('')}<label><input id="muted" type="checkbox"> 전체 음소거</label><label><input id="shake" type="checkbox" checked> 큰 충격의 화면 흔들림</label><label><input id="reduced" type="checkbox" ${settings.reducedMotion?'checked':''}> 움직임 줄이기</label></div><p class="muted">음성 파일 미포함 · 기기 합성 음성은 선택 사항입니다. 음악 없이도 모든 조작이 가능합니다.</p></details>
-    <details class="expression-practice"><summary>30개 표현 미리 듣기·복습</summary><p>전투 중 열면 안전하게 멈춥니다. 제작 음성 파일은 아직 제공되지 않았습니다.</p><div class="expression-list">${RebornVoiceManifest.utterances.map(x=>button('phrase',`<b>${escape(x.en)}</b><span>${escape(x.ko)}</span>`,`data-voice="${x.id}"`)).join('')}</div></details>
+    <details class="settings"><summary>소리·화면 설정</summary><div class="settings-grid">${[['master','전체',70],['voice','영어 음성',85],['sfx','전투 효과음',65],['music','장면별 음악',0],['ui','안내 효과음',50]].map(([id,label,val])=>`<label>${label}<input type="range" data-volume="${id}" min="0" max="100" value="${val}" aria-label="${label} 음량"></label>`).join('')}<label><input id="muted" type="checkbox"> 전체 음소거</label><label>화면 흔들림<select id="shake" aria-label="화면 흔들림 강도"><option value="off">끄기</option><option value="low" selected>낮게</option><option value="normal">보통</option></select></label><label><input id="reduced" type="checkbox" ${settings.reducedMotion?'checked':''}> 움직임 줄이기</label></div><p class="muted">제작 음성 ${voiceCount}/${RebornVoiceManifest.utterances.length}개 · 기기 합성 음성은 선택 사항입니다. 음악은 원작 절차적 패턴이며 기본 꺼짐입니다.</p></details>
+    <details class="input-help"><summary>조작 도움말 · 연속 공격과 회피</summary><p>A / D 또는 ← / → 이동 · J를 차례로 눌러 빠른 베기 → 올려 베기 → 마무리 공격. 누르고 있기만 하면 연속 공격하지 않습니다.</p><p>K는 바라보는 방향으로 회피합니다. 적의 공격이 닿는 순간 무적 시간 안에 있으면 Perfect Dodge와 마법 충전을 얻습니다. 성공 회피는 필수가 아닙니다.</p><p>L은 충전된 문장 마법 · R 다시 듣기 · H 한국어 도움 · Esc 일시정지. 일반 공격에는 영어 문제가 없습니다.</p></details>
+    <details class="expression-practice"><summary>${RebornVoiceManifest.utterances.length}개 표현 미리 듣기·복습</summary><p>전투 중 열면 안전하게 멈춥니다. 제작 음성 ${voiceCount}/${RebornVoiceManifest.utterances.length}개, 누락된 표현은 원문 도움을 이용하세요.</p><div class="expression-list">${RebornVoiceManifest.utterances.map(x=>button('phrase',`<b>${escape(x.en)}</b><span>${escape(x.ko)} · ${escape(x.speaker)}</span>`,`data-voice="${x.id}"`)).join('')}</div></details>
     <footer class="footer"><span>직접 움직이고, 듣고, 행동하세요.</span><span>v0.8 모험·아카데미 저장과 완전히 분리된 연습입니다.</span></footer></div>`;
   const $=id=>document.getElementById(id),canvas=$('battle'),ctx=canvas.getContext('2d'),overlay=$('overlay');
   const voice=RebornVoice.create(RebornVoiceManifest,audio,{
@@ -907,12 +1239,18 @@ const RebornApp=(()=>{
   function reveal(kind){game.assist(kind);if(kind==='english')showEnglish=true;else showKorean=true;renderHints();}
   function release(){held.clear();pointerActions.clear();for(const action of Object.keys(labels))game.input(action,false);document.querySelectorAll('.pressed').forEach(x=>x.classList.remove('pressed'));}
   function pause(){release();game.pause();voice.stop();audio.stop();sync();}
-  function drain(){for(const event of game.drainEvents()){if(event.type==='sfx')audio.sfx(event.id);if(event.type==='voice')playVoice(event.id);}}
+  function drain(){for(const event of game.drainEvents()){
+    if(event.type==='scene'){if(!['COMBAT','PLAYER_HIT'].includes(event.mode)||!['COMBAT','PLAYER_HIT'].includes(lastEventMode))voice.stop();lastEventMode=event.mode;}
+    if(event.type==='sfx')audio.sfx(event.id);if(event.type==='ui')audio.ui(event.id);if(event.type==='voice')playVoice(event.id);
+  }}
   function act(action,element){
     audio.unlock();
+    if(!labels[action]&&!['replay','pause','resume'].includes(action))audio.ui('select');
     if(action==='start'||action==='skip'){release();voice.stop();game.start(action==='skip');}
     else if(action==='proceed')game.proceed();
     else if(action==='restart'){release();voice.stop();game.restart();showEnglish=showKorean=false;}
+    else if(action==='menu'){release();voice.stop();audio.stop();game.mainMenu();showEnglish=showKorean=false;}
+    else if(action==='practice'){game.assist('hint');pause();const library=document.querySelector('.expression-practice');library.open=true;library.scrollIntoView({block:'start',behavior:'instant'});}
     else if(action==='pause'){if(game.state.mode==='PAUSED')game.resume();else pause();}
     else if(action==='resume')game.resume();
     else if(action==='replay')playVoice(game.state.challenge?.voiceId||voice.currentId||game.state.lastVoiceId||'VO_HELLO');
@@ -927,23 +1265,37 @@ const RebornApp=(()=>{
   }
   function renderSentence(){const cast=document.querySelector('[data-action="cast"]');if(cast)cast.disabled=words.length!==3;const sentence=$('sentence');if(sentence)sentence.textContent=words.join(' ')||'단어를 순서대로 눌러 주세요';document.querySelectorAll('[data-action="word"]').forEach(b=>{b.disabled=words.includes(b.dataset.word);});}
   function card(content){return `<div class="dialog-card" role="region" aria-label="현재 게임 안내">${content}</div>`;}
+  function resultCard(s){
+    const win=s.mode==='VICTORY',st=s.stats,combat=st.combat||{};
+    const goals={'forest-clear':'숲의 시험 완주','combo-three':'검 3연속 적중','perfect-dodge':'Perfect Dodge','boss-dodge':'보스 공격 정확히 회피','crystal-break':'수정 약점 적중','independent-listening':'도움 없이 듣고 행동'};
+    const values=[['받은 피해',combat.damageReceived],['성공 회피',combat.successfulDodges],['회피 사용',combat.dodges],['최고 연속 적중',combat.highestCombo],['마법 사용',combat.magicUsed],['수정 약점 적중',combat.weaknessHits]];
+    return card(`<span class="eyebrow">${win?'THE FOREST REMEMBERS':'A NEW ATTEMPT'}</span><h2>${win?'숲의 목소리를 깨웠습니다':'다시 일어설 수 있어요'}</h2>
+      <div class="button-row">${button('restart','전투 다시 하기','class="primary"')}${button('practice','표현 연습')}${button('menu','처음 화면')}</div>
+      <p>${win?'Slime Champion 격파 · 연습용 '+escape(s.reward?.title||'숲의 첫빛')+' 표식':'붉은 예고를 보고 거리를 벌리거나 K로 피하세요.'}</p>
+      <div class="combat-stats">${values.map(([label,value])=>`<div class="stat"><b>${value||0}</b><span>${label}</span></div>`).join('')}</div>
+      <p class="muted">듣고 행동하기: 정답 ${st.listening?.correct||0}회 · 다시 연습 ${st.listening?.wrong||0}회 · 독립 듣기 ${st.listening?.independent||0}회</p>
+      <div class="goal-list">${(st.goals||[]).map(id=>`<span class="pill" data-goal="${escape(id)}">✓ ${escape(goals[id]||id)}</span>`).join('')||'<span class="muted">다음에는 검 3연속 적중에 도전해 보세요.</span>'}</div>
+      <details class="practiced-expressions"><summary>이번에 연습한 표현 ${(st.expressions||[]).length}개</summary><p>${(st.expressions||[]).map(escape).join('<br>')||'아직 완료한 표현이 없습니다.'}</p></details>
+      <details class="review-expressions"><summary>다시 들으면 좋은 표현 ${(st.reviewExpressions||[]).length}개</summary><ul class="review-list">${(st.reviewExpressions||[]).map(x=>`<li>${button('phrase',escape(x.english),`data-voice="${escape(x.voiceId)}"`)}<span>${escape(x.ko)} · ${x.reasons.map(r=>({wrong:'다시 시도',hint:'도움 사용',text:'텍스트로 연습'}[r]||r)).map(escape).join(', ')}</span></li>`).join('')||'<li>이번 기록에서 복습할 표현이 없습니다.</li>'}</ul></details>
+      <p class="muted">목표는 이번 도전에서 실제로 일어난 행동만 표시합니다. 기존 모험 경험치·금화·아이템은 바뀌지 않습니다.</p>`);
+  }
   function renderOverlay(){
     const s=game.state,c=s.challenge,t=s.tutorial;
     if(c?.id!==hintChallenge){hintChallenge=c?.id;showEnglish=showKorean=false;const library=document.querySelector('.expression-practice');if(c&&library.open){game.assist('hint');library.open=false;}renderHints();}
     const key=[s.session,s.mode,s.stage,t?.index,c?.id,c?.phase,c?.attempts,c?.feedback,s.awaitingProceed].join('|');
     if(key===overlayKey)return;overlayKey=key;words=[];
     let html='';
-    if(s.mode==='INTRO')html=card(`<span class="eyebrow">THE AWAKENING</span><h2>깨어나는 숲</h2><p>검을 들고 직접 싸우세요.<br>동료의 영어를 이해하면 마법의 힘이 열립니다.</p><p class="muted">A / D 이동 · J 공격 · K 회피 · L 마법<br>음성 파일은 준비 중입니다. 원문 도움으로도 끝까지 플레이할 수 있습니다.</p><div class="button-row">${button('start','처음부터 배우기','class="primary"')}${button('skip','조작을 알아요 · 바로 시작')}</div>`);
+    if(s.mode==='INTRO')html=card(`<span class="eyebrow">THE BATTLE AWAKENS</span><h2>검끝에서 깨어나는 힘</h2><p>세 번의 검격, 정확한 회피.<br>영어를 이해하면 챔피언의 수정이 약점을 드러냅니다.</p><p class="muted">A / D 이동 · J 연속 공격 · K 회피 · L 마법<br>제작 음성 ${voiceCount}/${RebornVoiceManifest.utterances.length}개 · 원문 도움으로도 끝까지 플레이할 수 있습니다.</p><div class="button-row">${button('start','처음부터 배우기','class="primary"')}${button('skip','조작을 알아요 · 바로 시작')}</div>`);
     else if(s.mode==='TUTORIAL')html=card(`<span class="eyebrow">짧은 연습 ${Number(t?.index||0)+1} / ${t?.total||3}</span><h2>${escape(t?.english||'직접 움직여 보세요')}</h2><p>${escape(t?.ko||'')}</p><p>${escape(t?.text||'A / D 이동 · J 공격 · K 회피')}</p><div class="button-row">${button('replay','▶ 표현 듣기')}${button('proceed','알겠어요','class="primary"')}${button('skip','설명 건너뛰기')}</div>`);
+    else if(s.mode==='BOSS_INTRO')html=card(`<span class="eyebrow">SLIME CHAMPION</span><h2>수정의 수호자</h2><p>${escape(s.bossIntro?.english||'Attack the crystal!')} — ${escape(s.bossIntro?.ko||'수정을 공격해요!')}</p><p>${escape(s.bossIntro?.text||'수정 돌진이 끝나면 빛나는 중심의 빈틈을 노리세요.')}</p><div class="button-row">${button('replay','▶ 표현 듣기')}${button('proceed','준비됐어요 · 전투 시작','class="primary"')}</div>`);
     else if(s.mode==='PAUSED')html=card(`<span class="eyebrow">A MOMENT OF QUIET</span><h2>숲도 잠깐 쉬어갑니다</h2><p>전투와 피해가 멈췄습니다. 아래에서 음량과 표현을 확인할 수 있습니다.</p><div class="button-row">${button('resume','계속하기','class="primary"')}${button('restart','처음으로')}</div>`);
     else if(c&&(s.mode==='LISTENING_CHALLENGE'||s.mode==='MAGIC_CHALLENGE')){
       const feedback=c.phase==='feedback';
       html=card(`<span class="eyebrow">${c.kind==='magic'?'SENTENCE MAGIC':'LISTEN & ACT'} · 적은 기다립니다</span><h2>${c.kind==='magic'?'불꽃을 깨우는 문장':'동료의 말을 듣고 행동하세요'}</h2><p>${escape(c.prompt||'소리를 듣고 알맞은 행동을 골라 주세요.')}</p>${feedback?`<p class="feedback" role="status">${escape(c.feedback||s.feedback)}</p>${button('proceed',c.completed?'전투로 돌아가기':'다시 시도','class="primary"')}`:c.kind==='magic'?`<p id="sentence" class="sentence">단어를 순서대로 눌러 주세요</p><div class="word-bank">${(c.words||['fire','I','need']).map(w=>button('word',escape(w),`data-word="${escape(w)}"`)).join('')}</div><div class="button-row">${button('clear','다시 배열')}${button('cast','Fire Burst 시전','class="primary" disabled')}</div>`:`<div class="choices">${(c.choices||['left','right','attack','dodge','magic']).map(x=>button('answer',labels[x]||escape(x),`data-answer="${escape(x)}"`)).join('')}</div>`}<p class="muted">다시 듣기 R · 영어 원문 · 한국어 뜻 H는 아래에서 선택하세요.<br>소리가 없거나 도움이 필요하면 원문을 볼 수 있습니다.</p>`);
     }else if(s.mode==='VICTORY'||s.mode==='DEFEAT'){
-      const win=s.mode==='VICTORY',st=s.stats||{};
-      html=card(`<span class="eyebrow">${win?'THE FOREST REMEMBERS':'A NEW ATTEMPT'}</span><h2>${win?'숲의 목소리를 깨웠습니다':'다시 일어설 수 있어요'}</h2><div class="button-row">${button('restart','다시 도전','class="primary"')}${button('phrase','표현 복습: I need fire.','data-voice="VO_NEED_FIRE"')}</div><p>${win?'Slime Champion 격파 · 연습용 '+escape(s.reward?.title||'숲의 첫빛')+' 표식':'붉은 예고를 보고 거리를 벌리거나 K로 피하세요.'}</p><div class="result-grid"><span>정답 <b>${st.correct||0}</b></span><span>다시 연습 <b>${st.wrong||0}</b></span><span>도움 정답 <b>${st.assisted||0}</b></span><span>독립 듣기 <b>${st.listening?.independent||0}</b></span></div><p class="muted">듣고 행동하기: 정답 ${st.listening?.correct||0}회 · 다시 연습 ${st.listening?.wrong||0}회</p><details class="practiced-expressions"><summary>이번에 연습한 표현 ${(st.expressions||[]).length}개</summary><p>${(st.expressions||[]).map(escape).join('<br>')||'아직 완료한 표현이 없습니다.'}</p></details><p class="muted">이번 연습 결과만 표시합니다. 기존 모험의 경험치·금화·아이템은 바뀌지 않습니다.</p>`);
+      html=resultCard(s);
     }else if(s.awaitingProceed||s.mode==='EXPLORATION'&&s.stage==='crystal')html=card(`<span class="eyebrow">WORD CRYSTAL</span><h2>불꽃의 문장을 발견했습니다</h2><p>I need fire. — 나는 불이 필요해.</p><p>적을 공격하면 마법이 충전됩니다. L을 눌러 문장을 완성하면 Fire Burst가 발동합니다.</p>${button('proceed','마법 문장 배우기','class="primary"')}`);
-    overlay.hidden=!html;overlay.innerHTML=html;
+    overlay.hidden=!html;overlay.innerHTML=html;overlay.classList.toggle('boss-intro',s.mode==='BOSS_INTRO');if(s.mode==='BOSS_INTRO')overlay.querySelector('.dialog-card')?.classList.add('boss-banner');
     if(html){release();const first=overlay.querySelector('button');if(first&&visibleMode!==s.mode)first.focus({preventScroll:true});}
     visibleMode=s.mode;
   }
@@ -952,23 +1304,28 @@ const RebornApp=(()=>{
     $('hero-health').textContent=`${Math.ceil(p.hp)} / ${p.maxHp}`;$('hero-bar').style.width=(100*p.hp/p.maxHp)+'%';
     $('enemy-name').textContent=e?(e.kind==='boss'?'SLIME CHAMPION · '+(e.phase===2?'Ⅱ':'Ⅰ'):'GREEN SLIME'):'ENCHANTED FOREST';
     $('enemy-health').textContent=e?`${Math.ceil(e.hp)} / ${e.maxHp}`:'';$('enemy-bar').style.width=e?(100*e.hp/e.maxHp)+'%':'0%';
-    $('objective').textContent=s.objective||'숲의 목소리를 따라가세요';$('scene-label').textContent=({entrance:'01 / FOREST ENTRANCE',slime:'02 / THE FIRST ENCOUNTER',crystal:'03 / WORD CRYSTAL',boss:'04 / SLIME CHAMPION',complete:'05 / THE AWAKENING'})[s.stage]||'THE WHISPERING WOODS';
+    const objective=s.objective||'숲의 목소리를 따라가세요';if($('objective').textContent!==objective)$('objective').textContent=objective;
+    $('scene-label').textContent=({entrance:'01 / FOREST ENTRANCE',slime:'02 / THE FIRST ENCOUNTER',crystal:'03 / WORD CRYSTAL',boss:'04 / SLIME CHAMPION',complete:'05 / THE AWAKENING'})[s.stage]||'THE WHISPERING WOODS';
     $('charge').textContent=s.magicUnlocked?`마법 ${Math.floor(p.magicCharge||0)}% · ${(p.magicCooldown||0)>0?Number(p.magicCooldown).toFixed(1)+'초':'L'}`:'마법 수정 발견 전';
-    $('combat-feedback').textContent=s.feedback||'';
+    $('combo-status').textContent=p.comboBuffered?'다음 검격 준비됨':p.comboIndex?`검 ${p.comboIndex}/3 · ${p.comboWindowRemaining>0?'J로 이어가기':'연속 공격'}`:'J · 3연속 공격';
+    $('dodge-status').textContent=p.perfectDodge>0?'PERFECT DODGE':p.dodgeCooldown>0?`회피 ${p.dodgeCooldown.toFixed(1)}초`:'K · 회피 준비';
+    const feedback=p.weaknessCharge>0?'빛나는 수정에 다음 검격 강화':e?.coreExposed?'수정 노출 · 반격 기회':s.feedback||'';if($('combat-feedback').textContent!==feedback)$('combat-feedback').textContent=feedback;
+    const quiet=['PAUSED','LISTENING_CHALLENGE','MAGIC_CHALLENGE','VICTORY','DEFEAT'].includes(s.mode);
+    audio.setScene(quiet?'silent':s.stage==='boss'?'boss':s.stage==='slime'?'combat':'exploration',e?.phase||1);
   }
-  document.addEventListener('click',event=>{const b=event.target.closest('button[data-action]');if(!b)return;if(b.dataset.action==='left'||b.dataset.action==='right'){if(event.detail===0){act(b.dataset.action,b);game.input(b.dataset.action,false);}return;}act(b.dataset.action,b);});
-  document.addEventListener('pointerdown',event=>{const b=event.target.closest('[data-action="left"],[data-action="right"]');if(!b)return;event.preventDefault();audio.unlock();pointerActions.set(event.pointerId,b.dataset.action);b.setPointerCapture?.(event.pointerId);b.classList.add('pressed');game.input(b.dataset.action,true);drain();sync();});
-  function pointerRelease(event){const action=pointerActions.get(event.pointerId);pointerActions.delete(event.pointerId);if(action&&!Array.from(pointerActions.values()).includes(action)&&!held.has(action))game.input(action,false);event.target.closest?.('button')?.classList.remove('pressed');}
+  document.addEventListener('click',event=>{const b=event.target.closest('button[data-action]');if(!b)return;if(labels[b.dataset.action]&&event.detail>0)return;if(b.dataset.action==='left'||b.dataset.action==='right'){act(b.dataset.action,b);game.input(b.dataset.action,false);return;}act(b.dataset.action,b);});
+  document.addEventListener('pointerdown',event=>{const b=event.target.closest('.control-pad button[data-action]');if(!b)return;event.preventDefault();audio.unlock();if(b.dataset.action!=='left'&&b.dataset.action!=='right'){act(b.dataset.action,b);return;}pointerActions.set(event.pointerId,b.dataset.action);b.setPointerCapture?.(event.pointerId);b.classList.add('pressed');game.input(b.dataset.action,true);drain();sync();});
+  function pointerRelease(event){const action=pointerActions.get(event.pointerId);pointerActions.delete(event.pointerId);if(action&&!Array.from(pointerActions.values()).includes(action)&&![...held].some(code=>keymap[code]===action))game.input(action,false);event.target.closest?.('button')?.classList.remove('pressed');}
   document.addEventListener('pointerup',pointerRelease);document.addEventListener('pointercancel',pointerRelease);
   const keymap={KeyA:'left',ArrowLeft:'left',KeyD:'right',ArrowRight:'right',KeyJ:'attack',KeyK:'dodge',KeyL:'magic',KeyR:'replay',KeyH:'korean',Escape:'pause'};
-  document.addEventListener('keydown',event=>{const action=keymap[event.code];if(!action||event.ctrlKey||event.altKey||event.metaKey||event.target.matches('input,select,textarea'))return;event.preventDefault();if(event.repeat)return;if(action==='left'||action==='right')held.add(action);act(action);});
-  document.addEventListener('keyup',event=>{const action=keymap[event.code];if(!action)return;held.delete(action);if(labels[action])game.input(action,false);});
+  document.addEventListener('keydown',event=>{const action=keymap[event.code];if(!action||event.ctrlKey||event.altKey||event.metaKey||event.target.matches('input,select,textarea'))return;event.preventDefault();if(event.repeat)return;held.add(event.code);act(action);});
+  document.addEventListener('keyup',event=>{const action=keymap[event.code];if(!action)return;held.delete(event.code);if(labels[action]&&![...held].some(code=>keymap[code]===action)&&!Array.from(pointerActions.values()).includes(action))game.input(action,false);});
   globalThis.addEventListener('blur',()=>{if(!['INTRO','VICTORY','DEFEAT'].includes(game.state.mode))pause();else release();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
-  document.addEventListener('change',event=>{const el=event.target;if(el.id==='slow'||el.id==='fallback'){voice.configure({slow:$('slow').checked,fallback:$('fallback').checked});}if(el.id==='muted'){settings.muted=el.checked;audio.configure({muted:el.checked});voice.stop();}if(el.id==='shake')settings.shake=el.checked;if(el.id==='reduced'){settings.reducedMotion=el.checked;document.body.dataset.reducedMotion=String(el.checked);}});
-  document.addEventListener('input',event=>{const key=event.target.dataset.volume;if(key){settings[key]=Number(event.target.value)/100;audio.configure({[key]:settings[key]});if(key==='voice'||key==='master')voice.stop();}});
+  document.addEventListener('change',event=>{const el=event.target;if(el.id==='slow'||el.id==='fallback'){voice.configure({slow:$('slow').checked,fallback:$('fallback').checked});}if(el.id==='muted'){settings.muted=el.checked;audio.configure({muted:el.checked});voice.stop();}if(el.id==='shake')settings.shakeIntensity=el.value;if(el.id==='reduced'){settings.reducedMotion=el.checked;document.body.dataset.reducedMotion=String(el.checked);}});
+  document.addEventListener('input',event=>{const key=event.target.dataset.volume;if(key){audio.unlock();settings[key]=Number(event.target.value)/100;audio.configure({[key]:settings[key]});if(key==='voice'||key==='master')voice.stop();}});
   document.querySelectorAll('details').forEach(el=>el.addEventListener('toggle',()=>{if(el.open&&el.classList.contains('expression-practice'))game.assist('hint');if(el.open&&!['INTRO','PAUSED','VICTORY','DEFEAT'].includes(game.state.mode))pause();}));
-  function frame(now){const elapsed=lastFrame?Math.min(.15,(now-lastFrame)/1000):0;lastFrame=now;accumulator+=elapsed;let steps=0;while(accumulator>=1/60&&steps++<9){game.update(1/60);accumulator-=1/60;}drain();RebornArt.draw(ctx,game.state,now/1000,settings);if(now-lastHud>80){sync();lastHud=now;}requestAnimationFrame(frame);}
+  function frame(now){const elapsed=lastFrame?Math.min(.15,(now-lastFrame)/1000):0;lastFrame=now;accumulator+=elapsed;let steps=0;while(accumulator>=1/60&&steps++<9){game.update(1/60);accumulator-=1/60;}drain();audio.tick();RebornArt.draw(ctx,game.state,now/1000,settings);if(now-lastHud>80){sync();lastHud=now;}requestAnimationFrame(frame);}
   sync();requestAnimationFrame(frame);
   return{game,audio,voice,settings,keymap,release,sync};
 })();

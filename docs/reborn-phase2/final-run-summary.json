@@ -1,0 +1,309 @@
+{
+  "verifiedDate": "2026-11-21",
+  "artifacts": [
+    {
+      "file": "EnglishQuest.html",
+      "bytes": 794176,
+      "sha256": "E0F49C2BB74125F16828C0A1D9F5B448B0FEA1831C6AF9117290668FEDA0CBAD"
+    },
+    {
+      "file": "releases/EnglishQuest_REBORN_PHASE1.html",
+      "bytes": 108727,
+      "sha256": "6A97F8E8E8E800D4BA32728396E6A80C606B839E59C4645F873DE89B8D0D5BC2"
+    },
+    {
+      "file": "EnglishQuest_REBORN.html",
+      "bytes": 157714,
+      "sha256": "240BF1EE091A4E686E9919B873911B989DDE6A53E1960D898FFFABD1E0509E0D"
+    }
+  ],
+  "unitTests": {
+    "passed": 165,
+    "failed": 0,
+    "skipped": 0,
+    "actualProcessExitCode": 0
+  },
+  "runs": [
+    {
+      "file": "chrome-final.log",
+      "browser": "chrome",
+      "actualProcessExitCode": 0,
+      "artifactHeader": "bundle 157714 240BF1EE091A4E686E9919B873911B989DDE6A53E1960D898FFFABD1E0509E0D",
+      "victory": {
+        "elapsedSeconds": 46.977,
+        "stats": {
+          "correct": 8,
+          "wrong": 2,
+          "assisted": 8,
+          "independent": 0,
+          "expressions": [
+            "Move left!",
+            "Watch out!",
+            "I need fire.",
+            "Attack the crystal!",
+            "Attack the slime!",
+            "Use your magic!"
+          ],
+          "reviewExpressions": [
+            {
+              "id": "left",
+              "voiceId": "VO_MOVE_LEFT",
+              "english": "Move left!",
+              "ko": "왼쪽으로 이동해요!",
+              "reasons": [
+                "hint",
+                "wrong"
+              ]
+            },
+            {
+              "id": "dodge",
+              "voiceId": "VO_WATCH_OUT",
+              "english": "Watch out!",
+              "ko": "조심해요!",
+              "reasons": [
+                "hint"
+              ]
+            },
+            {
+              "id": "fire",
+              "voiceId": "VO_NEED_FIRE",
+              "english": "I need fire.",
+              "ko": "나는 불이 필요해요.",
+              "reasons": [
+                "hint",
+                "wrong",
+                "text"
+              ]
+            },
+            {
+              "id": "crystal",
+              "voiceId": "VO_ATTACK_CRYSTAL",
+              "english": "Attack the crystal!",
+              "ko": "수정을 공격해요!",
+              "reasons": [
+                "hint"
+              ]
+            },
+            {
+              "id": "attack",
+              "voiceId": "VO_ATTACK_SLIME",
+              "english": "Attack the slime!",
+              "ko": "슬라임을 공격해요!",
+              "reasons": [
+                "hint"
+              ]
+            },
+            {
+              "id": "magic",
+              "voiceId": "VO_USE_MAGIC",
+              "english": "Use your magic!",
+              "ko": "마법을 사용해요!",
+              "reasons": [
+                "hint"
+              ]
+            }
+          ],
+          "goals": [
+            "perfect-dodge",
+            "combo-three",
+            "boss-dodge",
+            "crystal-break",
+            "forest-clear"
+          ],
+          "combat": {
+            "damageDealt": 230,
+            "damageReceived": 7,
+            "dodges": 9,
+            "successfulDodges": 3,
+            "perfectDodges": 3,
+            "highestCombo": 3,
+            "magicUsed": 2,
+            "magicHits": 2,
+            "weaknessHits": 1,
+            "swordHits": 17
+          },
+          "listening": {
+            "correct": 5,
+            "wrong": 1,
+            "assisted": 5,
+            "independent": 0,
+            "asset": 0,
+            "fallback": 0,
+            "unheard": 6
+          },
+          "magic": {
+            "correct": 3,
+            "wrong": 1,
+            "assisted": 3,
+            "independent": 0
+          }
+        },
+        "patterns": [
+          "crystal_charge",
+          "heavy_jump",
+          "forward_rush",
+          "triple_bounce"
+        ],
+        "phases": [
+          1,
+          2
+        ],
+        "poses": [
+          "idle",
+          "run",
+          "attack_swing",
+          "attack_follow",
+          "attack_anticipation",
+          "magic_charge",
+          "dodge",
+          "magic_release",
+          "victory"
+        ],
+        "damage": true
+      }
+    },
+    {
+      "file": "edge-final.log",
+      "browser": "msedge",
+      "actualProcessExitCode": 0,
+      "artifactHeader": "bundle 157714 240BF1EE091A4E686E9919B873911B989DDE6A53E1960D898FFFABD1E0509E0D",
+      "victory": {
+        "elapsedSeconds": 41.018,
+        "stats": {
+          "correct": 8,
+          "wrong": 2,
+          "assisted": 8,
+          "independent": 0,
+          "expressions": [
+            "Move left!",
+            "Watch out!",
+            "I need fire.",
+            "Attack the crystal!",
+            "Attack the slime!",
+            "Use your magic!"
+          ],
+          "reviewExpressions": [
+            {
+              "id": "left",
+              "voiceId": "VO_MOVE_LEFT",
+              "english": "Move left!",
+              "ko": "왼쪽으로 이동해요!",
+              "reasons": [
+                "hint",
+                "wrong"
+              ]
+            },
+            {
+              "id": "dodge",
+              "voiceId": "VO_WATCH_OUT",
+              "english": "Watch out!",
+              "ko": "조심해요!",
+              "reasons": [
+                "hint"
+              ]
+            },
+            {
+              "id": "fire",
+              "voiceId": "VO_NEED_FIRE",
+              "english": "I need fire.",
+              "ko": "나는 불이 필요해요.",
+              "reasons": [
+                "hint",
+                "wrong",
+                "text"
+              ]
+            },
+            {
+              "id": "crystal",
+              "voiceId": "VO_ATTACK_CRYSTAL",
+              "english": "Attack the crystal!",
+              "ko": "수정을 공격해요!",
+              "reasons": [
+                "hint"
+              ]
+            },
+            {
+              "id": "attack",
+              "voiceId": "VO_ATTACK_SLIME",
+              "english": "Attack the slime!",
+              "ko": "슬라임을 공격해요!",
+              "reasons": [
+                "hint"
+              ]
+            },
+            {
+              "id": "magic",
+              "voiceId": "VO_USE_MAGIC",
+              "english": "Use your magic!",
+              "ko": "마법을 사용해요!",
+              "reasons": [
+                "hint"
+              ]
+            }
+          ],
+          "goals": [
+            "perfect-dodge",
+            "combo-three",
+            "boss-dodge",
+            "crystal-break",
+            "forest-clear"
+          ],
+          "combat": {
+            "damageDealt": 230,
+            "damageReceived": 7,
+            "dodges": 9,
+            "successfulDodges": 3,
+            "perfectDodges": 3,
+            "highestCombo": 3,
+            "magicUsed": 2,
+            "magicHits": 2,
+            "weaknessHits": 1,
+            "swordHits": 17
+          },
+          "listening": {
+            "correct": 5,
+            "wrong": 1,
+            "assisted": 5,
+            "independent": 0,
+            "asset": 0,
+            "fallback": 0,
+            "unheard": 6
+          },
+          "magic": {
+            "correct": 3,
+            "wrong": 1,
+            "assisted": 3,
+            "independent": 0
+          }
+        },
+        "patterns": [
+          "crystal_charge",
+          "heavy_jump",
+          "forward_rush",
+          "triple_bounce"
+        ],
+        "phases": [
+          1,
+          2
+        ],
+        "poses": [
+          "idle",
+          "run",
+          "dodge",
+          "attack_swing",
+          "attack_follow",
+          "attack_anticipation",
+          "magic_charge",
+          "magic_release",
+          "victory"
+        ],
+        "damage": true
+      }
+    }
+  ],
+  "limitations": [
+    "No production English recordings: 0/34",
+    "No physical speaker or human beginner playtest",
+    "Native music probe used pre-marker build with identical audio source"
+  ]
+}

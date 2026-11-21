@@ -8,43 +8,59 @@ const vm=require('node:vm');
 const source=['reborn-audio.js','reborn-voice.js'].map(n=>fs.readFileSync(path.join(__dirname,'../src',n),'utf8')).join('\n');
 const manifest={utterances:[{id:'move',en:'Move left!',ko:'왼쪽으로 이동하세요.',available:false,embedded:null},{id:'fire',en:'I need fire.',ko:'나는 불이 필요해요.',available:true,embedded:'data:audio/wav;base64,VEVTVA=='}]};
 function environment(extra={}){
-  const lab={contexts:[],gains:[],oscillators:[],timers:new Map(),id:0};
+  const lab={contexts:[],gains:[],oscillators:[],buffers:[],filters:[],timers:new Map(),id:0};
   const param=()=>({value:0,calls:[],setTargetAtTime(...args){this.calls.push(['target',...args]);},setValueAtTime(...args){this.calls.push(['value',...args]);},exponentialRampToValueAtTime(...args){this.calls.push(['ramp',...args]);}});
   class Context {
-    constructor(){this.currentTime=0;this.state='suspended';this.destination={};lab.contexts.push(this);}
+    constructor(){this.currentTime=0;this.sampleRate=44100;this.state='suspended';this.destination={};lab.contexts.push(this);}
     resume(){this.state='running';return Promise.resolve();}
-    createGain(){const node={gain:param(),connect(){},disconnect(){this.disconnected=true;}};lab.gains.push(node);return node;}
+    createGain(){const node={gain:param(),connections:[],connect(n){this.connections.push(n);},disconnect(){this.disconnected=true;}};lab.gains.push(node);return node;}
     createOscillator(){const node={frequency:param(),connect(){},disconnect(){this.disconnected=true;},start(){this.started=true;},stop(){this.stopped=true;}};lab.oscillators.push(node);return node;}
+    createBuffer(_channels,length){const data=new Float32Array(length);return{getChannelData:()=>data};}
+    createBufferSource(){const node={connect(){},disconnect(){this.disconnected=true;},start(){this.started=true;},stop(){this.stopped=true;}};lab.buffers.push(node);return node;}
+    createBiquadFilter(){const node={frequency:param(),Q:param(),connect(){},disconnect(){this.disconnected=true;}};lab.filters.push(node);return node;}
   }
   const context={AudioContext:Context,setTimeout:fn=>{const id=++lab.id;lab.timers.set(id,fn);return id;},clearTimeout:id=>lab.timers.delete(id),...extra};
   const api=vm.runInNewContext(source+'\n;({RebornAudio,RebornVoice})',context);return {...api,lab,context};
 }
-function voiceLab(options={}){
+function voiceLab(options={},data=manifest){
   const e=environment(),files=[],utterances=[],heard=[],ducks=[],statuses=[];
   class AudioDouble {constructor(src){this.src=src;files.push(this);}play(){this.playCalls=(this.playCalls||0)+1;return Promise.resolve();}pause(){this.paused=true;}}
   class Utterance {constructor(text){this.text=text;}}
   const synth={getVoices:()=>[{lang:'en-US',name:'Local test voice',localService:true}],speak:u=>utterances.push(u),cancel(){this.cancelled=(this.cancelled||0)+1;}};
   const mixer={unlocked:true,voiceVolume:.6,duck:value=>ducks.push(value)};
-  const voice=e.RebornVoice.create(manifest,mixer,{Audio:AudioDouble,speechSynthesis:synth,SpeechSynthesisUtterance:Utterance,onStatus:s=>statuses.push({...s}),onHeard:r=>heard.push({...r}),...options});
+  const voice=e.RebornVoice.create(data,mixer,{Audio:AudioDouble,speechSynthesis:synth,SpeechSynthesisUtterance:Utterance,onStatus:s=>statuses.push({...s}),onHeard:r=>heard.push({...r}),...options});
   return {...e,voice,mixer,files,utterances,heard,ducks,statuses,synth};
 }
-test('Reborn mixer is gesture-gated, has eleven distinct original cues and separate clamped volumes',()=>{
+test('Reborn mixer is gesture-gated, layers original cues and clamps five independent volumes',()=>{
   const {RebornAudio,lab}=environment(),m=RebornAudio.create();
   assert.equal(lab.contexts.length,0);assert.equal(m.sfx('sword'),false);
   assert.equal(m.unlock(),true);assert.equal(lab.contexts.length,1);assert.equal(m.contextState,'running');
-  assert.equal(Object.keys(RebornAudio.presets).length,11);
-  for(const id of Object.keys(RebornAudio.presets))assert.equal(m.sfx(id),true,id);
-  assert.equal(lab.oscillators.length,11);assert.ok(lab.oscillators.every(o=>o.started&&o.stopped));
-  for(const o of lab.oscillators)o.onended();assert.ok(lab.oscillators.every(o=>o.disconnected));
-  m.configure({master:.4,voice:.3,sfx:.2,music:0});assert.equal(m.voiceVolume,.12);
-  m.configure({master:4,voice:-2,sfx:NaN,music:-1});assert.equal(m.settings.master,1);assert.equal(m.voiceVolume,0);assert.equal(m.settings.sfx,0);assert.equal(m.settings.music,0);
+  const ids=Object.keys(RebornAudio.presets);assert.ok(ids.length>=20);
+  for(const id of ids){assert.equal(m.sfx(id),true,id);for(const o of [...lab.oscillators,...lab.buffers].filter(x=>!x.disconnected))o.onended();}
+  assert.ok(lab.oscillators.length>ids.length,'cues include harmonic layers');assert.ok(lab.buffers.length>0,'original noise layers used');assert.ok(lab.oscillators.every(o=>o.started&&o.stopped&&o.disconnected));assert.ok(lab.filters.every(o=>o.disconnected));
+  m.configure({master:.4,voice:.3,sfx:.2,music:0,ui:.8});assert.equal(m.voiceVolume,.12);assert.equal(m.settings.ui,.8);
+  m.configure({master:4,voice:-2,sfx:NaN,music:-1,ui:9});assert.equal(m.settings.master,1);assert.equal(m.voiceVolume,0);assert.equal(m.settings.sfx,0);assert.equal(m.settings.music,0);assert.equal(m.settings.ui,1);
   m.configure({muted:true});assert.equal(m.voiceVolume,0);assert.equal(m.sfx('impact'),false);assert.equal(m.sfx('nonexistent'),false);
 });
-test('Reborn mixer ducks effects/ambience, restores gains and stops owned sound nodes',()=>{
-  const {RebornAudio,lab}=environment(),m=RebornAudio.create({music:.5,sfx:.8});m.unlock();m.configure({music:.5});
-  assert.equal(lab.oscillators.length,3);m.duck(true);assert.ok(Math.abs(lab.gains[1].gain.calls.at(-1)[1]-.28)<1e-9);
-  m.duck(false);assert.equal(lab.gains[1].gain.calls.at(-1)[1],.8);
-  m.sfx('dodge');m.stop();assert.ok(lab.oscillators.every(o=>o.stopped));assert.doesNotThrow(()=>m.stop());
+test('Mixer ducks music, effects and interface independently and restores each configured gain',()=>{
+  const {RebornAudio,lab}=environment(),m=RebornAudio.create({music:.5,sfx:.8,ui:.6});m.unlock();m.tick();
+  assert.ok(lab.oscillators.length>=2);m.duck(true);assert.ok(Math.abs(lab.gains[1].gain.calls.at(-1)[1]-.28)<1e-9);assert.ok(Math.abs(lab.gains[2].gain.calls.at(-1)[1]-.08)<1e-9);assert.ok(Math.abs(lab.gains[3].gain.calls.at(-1)[1]-.27)<1e-9);
+  m.duck(false);assert.equal(lab.gains[1].gain.calls.at(-1)[1],.8);assert.equal(lab.gains[2].gain.calls.at(-1)[1],.5);assert.equal(lab.gains[3].gain.calls.at(-1)[1],.6);
+  m.ui('select');assert.equal(lab.gains.at(-1).connections[0],lab.gains[3]);m.sfx('dodge');m.stop();assert.ok(lab.oscillators.every(o=>o.stopped));assert.doesNotThrow(()=>m.stop());
+});
+
+test('Original exploration/combat/boss music uses one bounded scheduler and gain crossfades',()=>{
+  const {RebornAudio,lab}=environment(),m=RebornAudio.create({music:.5});m.unlock();m.tick();const first=lab.oscillators.length;m.tick();assert.equal(lab.oscillators.length,first,'same tick cannot duplicate scheduled beat');
+  assert.equal(m.setScene('combat'),true);m.tick();assert.equal(lab.gains[4].gain.calls.at(-1)[1],0);assert.equal(lab.gains[5].gain.calls.at(-1)[1],1);assert.equal(lab.gains[5].gain.calls.at(-1)[3],.25);
+  assert.equal(m.setScene('boss',2),true);m.tick();assert.equal(m.diagnostics.phase,2);assert.equal(m.diagnostics.musicScene,'boss');assert.equal(lab.gains[6].gain.calls.at(-1)[1],1);
+  const total=lab.oscillators.length;m.setScene('silent');lab.contexts[0].currentTime=30;m.tick();assert.equal(lab.oscillators.length,total);assert.equal(m.setScene('unknown'),false);assert.equal(m.diagnostics.musicScene,'silent');
+  m.setScene('boss');m.configure({muted:true});m.tick();assert.equal(lab.oscillators.length,total);assert.equal(lab.contexts.length,1);
+});
+
+test('Rapid layered audio stays within96 source nodes, reuses one context and recovers after cleanup',()=>{
+  const {RebornAudio,lab}=environment(),m=RebornAudio.create();for(let i=0;i<20;i++)m.unlock();
+  for(let i=0;i<500;i++)m.sfx('impact3');assert.equal(lab.contexts.length,1);assert.ok(m.diagnostics.activeNodes<=96);assert.equal(m.sfx('impact3'),false);
+  m.stop();for(const o of [...lab.oscillators,...lab.buffers])o.onended();assert.equal(m.diagnostics.activeNodes,0);assert.equal(m.sfx('impact3'),true);
 });
 test('Missing voice files remain honestly unavailable and never create listening evidence or automatic TTS',()=>{
   const {voice,mixer,files,utterances,heard}=voiceLab();assert.equal(voice.currentId,null);assert.equal(files.length,0);assert.equal(utterances.length,0);
@@ -68,6 +84,13 @@ test('Slow and optional local browser fallback are labeled separately, respect v
   u.onend();assert.equal(voice.status.state,'ended');assert.equal(ducks.at(-1),false);
   voice.configure({slow:false});voice.replay();assert.equal(utterances[1].rate,1);
 });
+
+test('A separately provided slow take plays at1x; absent slow assets use pitch-preserving0.75x normal audio',()=>{
+  const data=JSON.parse(JSON.stringify(manifest));data.utterances[1].embeddedSlow='data:audio/wav;base64,U0xPV19URVNU';
+  const a=voiceLab({},data);a.voice.configure({slow:true});a.voice.play('fire');assert.equal(a.files[0].src,data.utterances[1].embeddedSlow);assert.equal(a.files[0].playbackRate,1);assert.equal(a.files[0].preservesPitch,true);assert.equal(a.heard.length,0);
+  a.voice.configure({slow:false});a.voice.replay();assert.equal(a.files[1].src,data.utterances[1].embedded);assert.equal(a.files[1].playbackRate,1);assert.equal(a.files[0].paused,true);
+  const b=voiceLab();b.voice.configure({slow:true});b.voice.play('fire');assert.equal(b.files[0].playbackRate,.75);assert.equal(b.files[0].preservesPitch,true);
+});
 test('Rejected/broken assets and playback timeouts clean up without inventing successful playback',async()=>{
   class Rejected {play(){return Promise.reject(new Error('not allowed'));}pause(){this.paused=true;}}
   const first=voiceLab({Audio:Rejected});first.voice.play('fire');await Promise.resolve();assert.equal(first.voice.status.state,'missing');assert.equal(first.heard.length,0);
@@ -81,16 +104,18 @@ test('Fallback rejects remote-only voices and handles unavailable or throwing sp
   }
 });
 
-test('Production manifest has thirty honest, unique, licensed-or-missing file records',()=>{
+test('Production manifest has30–50 honest, unique, licensed-or-missing file records',()=>{
   const actual=JSON.parse(fs.readFileSync(path.join(__dirname,'../REBORN_VOICE_MANIFEST.json'),'utf8'));
-  assert.equal(actual.utterances.length,30);assert.equal(new Set(actual.utterances.map(x=>x.id)).size,30);
+  assert.ok(actual.utterances.length>=30&&actual.utterances.length<=50);assert.equal(new Set(actual.utterances.map(x=>x.id)).size,actual.utterances.length);
+  assert.equal(actual.utterances.length,34);assert.equal(new Set(actual.utterances.map(x=>x.en.trim().toLowerCase())).size,34,'no duplicate English utterances inflate count');assert.deepEqual([...new Set(actual.utterances.map(x=>x.speaker))].sort(),['ANNOUNCER','CRYSTAL','ROWAN']);
   for(const row of actual.utterances){
     assert.ok(row.en&&row.ko&&row.usage&&row.voiceCharacter&&row.accent,row.id);
     assert.ok(row.path.startsWith('assets/reborn/voice/')&&!row.path.includes('..'),row.id);
     assert.deepEqual(row.speedOptions,[1,.75]);
+    assert.equal(row.normalSpeedAsset,row.path);assert.ok(actual.speakers[row.speaker]);assert.ok(Object.hasOwn(row,'slowSpeedAsset')&&Object.hasOwn(row,'durationSeconds')&&Object.hasOwn(row,'audioSource')&&row.qualityReview);
     const present=fs.existsSync(path.join(__dirname,'..',row.path));assert.equal(row.available,present,row.id+' availability');
     if(present)assert.ok(row.license.redistributionAllowed&&row.license.source&&row.license.type,row.id+' license');
-    else assert.equal(row.license.redistributionAllowed,false,'absent audio is never represented as licensed/delivered');
+    else {assert.equal(row.license.redistributionAllowed,false,'absent audio is never represented as licensed/delivered');assert.equal(row.durationSeconds,null);assert.equal(row.audioSource,null);assert.equal(row.qualityReview.reviewer,null);assert.match(row.qualityReview.status,/pending|missing/);}
   }
 });
 

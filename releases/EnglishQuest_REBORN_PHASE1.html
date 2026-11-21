@@ -1,0 +1,975 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102c2d"><title>English Quest REBORN · The Awakening</title><style>/* Reborn is an isolated, touch-accessible action lab. No legacy selectors leak out. */
+body.reborn {
+  --ink:#071b22; --panel:#102a30; --panel-2:#16363a; --line:#6d8b7b50;
+  --paper:#e9eddb; --muted:#a7bfb4; --gold:#d8c08a; --mint:#8fd7bd; --danger:#e7a18a;
+  margin:0; min-width:320px; color:var(--paper); background:#081b22;
+  background-image:radial-gradient(ellipse at 50% 0,#234744 0,transparent 60%),linear-gradient(135deg,#0c2029,#081b22 60%);
+  font-family:"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif; font-size:14px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.reborn *, .reborn *::before, .reborn *::after { box-sizing:border-box; }
+.reborn [hidden] { display:none !important; }
+.reborn button,.reborn input,.reborn select { font:inherit; }
+.reborn button,.reborn summary { -webkit-tap-highlight-color:transparent; }
+.reborn button {
+  min-height:44px; padding:11px 17px; border:1px solid #91aa9363; border-radius:8px;
+  color:var(--paper); background:linear-gradient(160deg,#294b49,#18373a); cursor:pointer;
+  transition:background .15s,border-color .15s,transform .15s,box-shadow .15s;
+}
+.reborn button:hover:not(:disabled) { border-color:#b4c6a7; background:linear-gradient(160deg,#365b53,#20443f); }
+.reborn button:active:not(:disabled),.reborn button.pressed { transform:translateY(1px); background:#3d6556; box-shadow:inset 0 2px 7px #06191c88; }
+.reborn button:disabled { opacity:.43; cursor:not-allowed; }
+.reborn :focus-visible { outline:3px solid #e3cf97; outline-offset:3px; }
+.reborn a { color:#e1c991; }
+.reborn .shell { width:min(1240px,calc(100% - 64px)); margin:0 auto; padding:28px 0 24px; }
+.reborn .topbar { display:flex; align-items:center; gap:24px; padding-bottom:22px; border-bottom:1px solid var(--line); }
+.reborn .brand { flex:1; min-width:0; }
+.reborn .eyebrow { display:block; color:var(--gold); font-size:10px; font-weight:700; letter-spacing:.22em; line-height:1.5; }
+.reborn .brand h1 { margin:6px 0 0; color:#eceddb; font:500 34px/1 Georgia,"Times New Roman",serif; letter-spacing:.15em; }
+.reborn .brand h1 span { display:inline-block; margin-left:15px; color:#a5bdb1; font:500 9px/1.5 system-ui,sans-serif; letter-spacing:.25em; vertical-align:middle; }
+.reborn .badge,.reborn .pill { display:inline-flex; align-items:center; width:fit-content; padding:6px 11px; border:1px solid #b1bc8e45; border-radius:30px; color:#c5cfaf; background:#24473e66; font-size:10px; letter-spacing:.05em; }
+.reborn .topbar>button { min-width:113px; color:#c8d8c6; font-size:12px; background:#17343a; }
+.reborn .hud { display:grid; grid-template-columns:1fr 1.35fr 1fr; align-items:center; gap:35px; padding:22px 5px 20px; }
+.reborn .hero-hp,.reborn .enemy-hp { min-width:0; }
+.reborn .meter-label { display:flex; justify-content:space-between; align-items:center; gap:10px; margin:0 0 8px; font-size:11px; color:#a9c0b5; }
+.reborn .meter-label b { color:#d7e1cc; font-size:12px; letter-spacing:.03em; }
+.reborn .meter-label span { font-variant-numeric:tabular-nums; white-space:nowrap; }
+.reborn .hp-track { height:7px; background:#04171c; border:1px solid #93b39d2b; border-radius:20px; overflow:hidden; box-shadow:0 1px #e2e2aa0c; }
+.reborn .hp-fill { width:100%; height:100%; border-radius:20px; background:linear-gradient(90deg,#4a9e8c,#c2e3a0); box-shadow:0 0 9px #a2deb55c; transition:width .18s ease-out; }
+.reborn .enemy-hp .hp-fill { background:linear-gradient(90deg,#a9776e,#e5bc96); box-shadow:0 0 9px #dfaa8150; }
+.reborn .objective { text-align:center; color:#b8ccbd; font-size:12px; line-height:1.65; }
+.reborn .arena { position:relative; isolation:isolate; overflow:hidden; border:1px solid #9dbd9a5e; border-radius:13px; background:#102d35; box-shadow:0 26px 65px #00111770,0 0 0 5px #2a4b4133; }
+.reborn canvas#battle { display:block; width:100%; height:auto; aspect-ratio:1000/560; background:#12313b; touch-action:pan-y; }
+.reborn .arena-caption { display:flex; align-items:center; justify-content:space-between; gap:14px; min-height:43px; padding:9px 6px 10px; color:#a6bcae; font-size:11px; }
+.reborn #scene-label { color:#8eaaa1; font-size:9px; letter-spacing:.19em; white-space:nowrap; }
+.reborn #combat-feedback { flex:1; min-width:0; text-align:center; color:#d2d9be; }
+.reborn #charge { padding:4px 9px; border:1px solid #9bad8040; border-radius:20px; color:#d8c68f; background:#283e34; font-size:10px; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.reborn .toolbar { display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); gap:24px; padding:20px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.reborn .control-pad { display:grid; grid-template-columns:.8fr .8fr 1.1fr 1fr 1fr; align-self:start; gap:8px; }
+.reborn .control-pad button { min-height:72px; padding:11px 5px; user-select:none; touch-action:none; border-color:#769a865e; background:linear-gradient(160deg,#234741,#122e34); }
+.reborn .control-pad button strong { display:block; color:#deead5; font-size:14px; font-weight:600; }
+.reborn .control-pad button small { display:block; margin-top:4px; color:#a0baac; font-size:9px; font-weight:400; letter-spacing:.02em; }
+.reborn .control-pad button[data-action=attack] { border-color:#b7b88670; background:linear-gradient(160deg,#4c5540,#283f35); }
+.reborn .control-pad button[data-action=magic] { border-color:#9daac47d; background:linear-gradient(160deg,#3b4b5d,#263949); }
+.reborn .voice-panel { min-width:0; padding-left:24px; border-left:1px solid var(--line); }
+.reborn .button-row { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+.reborn .button-row>button { flex:0 1 auto; }
+.reborn .voice-panel .button-row button { min-height:44px; padding:8px 12px; font-size:12px; background:#18383c; }
+.reborn .audio-options { display:flex; flex-wrap:wrap; gap:5px 18px; margin-top:9px; color:#adbfac; font-size:11px; }
+.reborn .audio-options label { display:flex; gap:7px; align-items:center; min-height:28px; }
+.reborn input[type=checkbox] { width:16px; height:16px; margin:0; accent-color:#a7ceb2; }
+.reborn .voice-status { margin:5px 0 0; color:#aec3b8; font-size:11px; overflow-wrap:anywhere; }
+.reborn .hint-text { margin:7px 0 0; padding:7px 10px; border-left:2px solid #d1b879; background:#2a433644; color:#e0d8b4; font-size:12px; }
+.reborn .settings,.reborn .expression-practice { margin-top:14px; border:1px solid #66867642; border-radius:8px; background:#102b30a6; }
+.reborn details>summary { min-height:47px; padding:13px 17px; color:#bfd0be; cursor:pointer; font-size:12px; }
+.reborn details[open]>summary { border-bottom:1px solid #76937a30; color:#e0e7cc; }
+.reborn .settings-grid,.reborn .setting-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:17px 26px; padding:20px; color:#b8cdbb; font-size:12px; }
+.reborn .settings-grid>label,.reborn .setting-grid>label { display:flex; flex-direction:column; gap:10px; min-width:0; }
+.reborn .settings-grid>label:has(input[type=checkbox]) { flex-direction:row; align-items:center; min-height:30px; }
+.reborn input[type=range] { width:100%; margin:0; accent-color:#b8c696; }
+.reborn .settings>.muted,.reborn .expression-practice>p { margin:0; padding:0 20px 17px; font-size:11px; }
+.reborn .expression-practice>p { padding-top:15px; }
+.reborn .expression-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; padding:0 16px 16px; }
+.reborn .expression-list button { padding:11px 13px; text-align:left; background:#16363a; }
+.reborn .expression-list button b { display:block; color:#e0e8d2; font-size:12px; font-weight:500; }
+.reborn .expression-list button span { display:block; margin-top:3px; color:#9ebbad; font-size:11px; }
+.reborn .footer { display:flex; justify-content:space-between; gap:20px; padding:21px 3px 0; color:#779b91; font-size:10px; letter-spacing:.02em; }
+.reborn .overlay { position:absolute; z-index:5; inset:0; display:flex; justify-content:center; align-items:center; padding:25px; overflow:auto; background:#0619215c; backdrop-filter:blur(3px); }
+.reborn .dialog-card { position:relative; width:min(570px,100%); max-height:100%; overflow:auto; padding:30px 34px; border:1px solid #b5be8c80; border-radius:11px; background:linear-gradient(145deg,#173a3bf5,#0e282ff7); box-shadow:0 20px 80px #00131da6,inset 0 0 0 5px #95ae8933; scrollbar-color:#54786d #102b30; }
+.reborn .dialog-card::before { content:""; display:block; width:35px; height:2px; margin-bottom:15px; background:#d2c08a; }
+.reborn .dialog-card h2 { margin:8px 0 15px; color:#eeeaca; font-size:26px; font-weight:600; line-height:1.35; letter-spacing:-.03em; }
+.reborn .dialog-card p { margin:11px 0; color:#c0d3c3; line-height:1.8; font-size:13px; overflow-wrap:anywhere; }
+.reborn .dialog-card>.button-row { margin-top:22px; }
+.reborn button.primary { border-color:#d0c28f; color:#18342f; background:linear-gradient(145deg,#e2d4a1,#b8c095); font-weight:700; box-shadow:0 3px 16px #050e1729; }
+.reborn button.primary:hover:not(:disabled) { background:linear-gradient(145deg,#efe0ad,#c8d0a4); }
+.reborn button.secondary { background:#17363b; border-color:#819d8566; color:#c5d9c8; }
+.reborn .muted,.reborn .dialog-card p.muted { color:#98b3a5; font-size:11px; }
+.reborn .choices { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin:17px 0; }
+.reborn .choices>button { min-height:48px; padding:10px 15px; text-align:left; background:#214441; border-color:#8eb29a62; }
+.reborn .choices>button:last-child:nth-child(odd) { grid-column:1/-1; }
+.reborn .sentence { display:flex; align-items:center; flex-wrap:wrap; gap:8px; min-height:68px; margin:20px 0 12px; padding:14px 17px; border:1px dashed #a4bd8a7d; border-radius:7px; color:#f0e8c1; background:#0a252b; font-size:22px; line-height:1.5; }
+.reborn .word-bank { display:flex; flex-wrap:wrap; gap:9px; }
+.reborn .word-bank button { min-width:66px; padding:10px 19px; color:#e8e9cc; font-size:17px; background:#385448; border-color:#bec6958a; }
+.reborn .feedback { border-left:2px solid #afd4aa; padding:10px 14px; background:#b3c9940c; }
+.reborn .result-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin:24px 0; }
+.reborn .result-grid>span,.reborn .stat { padding:15px 6px; color:#a5bfae; text-align:center; border:1px solid #8ea57e35; border-radius:6px; background:#0f2b30; font-size:10px; }
+.reborn .result-grid b,.reborn .stat b { display:block; margin-bottom:5px; color:#e3d7a8; font:500 24px/1.3 Georgia,serif; }
+.reborn .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; clip-path:inset(50%); }
+@media(min-width:1001px) {
+  /* Keep the arena and action pad together on laptop-height displays without cropping the world. */
+  .reborn .shell { width:min(1240px,calc(100% - 64px),max(720px,calc((100svh - 360px) * 1.785714))); }
+}
+@media(min-width:1600px) { .reborn .shell { padding-top:35px; } .reborn .topbar { padding-bottom:27px; } .reborn .hud { padding-top:26px; padding-bottom:24px; } }
+@media(max-width:1000px) {
+  .reborn .shell { width:calc(100% - 40px); padding-top:22px; }
+  .reborn .topbar { gap:18px; } .reborn .brand h1 span { display:block; margin:8px 0 0; }
+  .reborn .topbar>.badge { font-size:9px; padding:5px 9px; }
+  .reborn .hud { gap:20px; grid-template-columns:1fr 1.2fr 1fr; }
+  .reborn .toolbar { gap:17px; grid-template-columns:1.1fr 1fr; }
+  .reborn .voice-panel { padding-left:17px; }
+  .reborn .voice-panel .button-row { gap:6px; } .reborn .voice-panel .button-row button { padding:7px 9px; font-size:11px; }
+  .reborn .audio-options { gap:4px 9px; }
+  .reborn .dialog-card { padding:23px 27px; }
+  .reborn .dialog-card h2 { font-size:24px; }
+}
+@media(max-width:780px) {
+  .reborn .shell { width:calc(100% - 32px); }
+  .reborn .topbar>.badge { display:none; }
+  .reborn .toolbar { grid-template-columns:1fr; gap:17px; }
+  .reborn .voice-panel { border-left:0; border-top:1px solid #73927b3b; padding:15px 0 0; }
+  .reborn .control-pad { gap:10px; }
+  .reborn .control-pad button { min-height:66px; }
+  .reborn .voice-panel .button-row button { padding:8px 14px; font-size:12px; }
+  .reborn .settings-grid,.reborn .setting-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .reborn .expression-list { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:600px) {
+  .reborn .shell { width:calc(100% - 24px); padding:19px 0 calc(20px + env(safe-area-inset-bottom)); }
+  .reborn .topbar { gap:12px; padding:0 3px 17px; }
+  .reborn .brand .eyebrow { font-size:8px; letter-spacing:.14em; }
+  .reborn .brand h1 { font-size:27px; letter-spacing:.14em; }
+  .reborn .brand h1 span { margin-top:6px; font-size:8px; letter-spacing:.18em; }
+  .reborn .topbar>button { min-width:95px; padding:10px 12px; font-size:11px; }
+  .reborn .hud { grid-template-columns:1fr 1fr; gap:12px 24px; padding:17px 4px 14px; }
+  .reborn .objective { grid-column:1/-1; grid-row:2; min-height:20px; color:#b0c9b7; font-size:11px; }
+  .reborn .enemy-hp { grid-column:2; grid-row:1; }
+  .reborn .meter-label { gap:5px; font-size:10px; margin-bottom:7px; }
+  .reborn .meter-label b { font-size:10px; }
+  .reborn .hp-track { height:6px; }
+  .reborn .arena { border-radius:8px; box-shadow:0 17px 30px #00111750,0 0 0 3px #2a4b4133; }
+  .reborn .overlay { position:relative; inset:auto; padding:0; overflow:visible; background:none; backdrop-filter:none; border-top:1px solid #a6bc8759; }
+  .reborn .dialog-card { width:100%; max-height:none; overflow:visible; padding:22px 21px; border:0; border-radius:0; background:linear-gradient(145deg,#173b3d,#102b31); box-shadow:none; }
+  .reborn .dialog-card::before { margin-bottom:12px; }
+  .reborn .dialog-card h2 { margin:8px 0 13px; font-size:23px; }
+  .reborn .dialog-card p { font-size:12px; line-height:1.8; }
+  .reborn .dialog-card .eyebrow { font-size:9px; letter-spacing:.17em; }
+  .reborn .dialog-card>.button-row { margin-top:20px; }
+  .reborn .dialog-card>.button-row>button { flex:1 1 auto; font-size:12px; }
+  .reborn .arena-caption { display:grid; grid-template-columns:1fr auto; gap:5px 10px; padding:12px 3px; }
+  .reborn #scene-label { font-size:8px; letter-spacing:.14em; }
+  .reborn #charge { grid-column:2; grid-row:1; font-size:9px; }
+  .reborn #combat-feedback { grid-column:1/-1; min-height:14px; text-align:left; font-size:10px; }
+  .reborn .toolbar { padding:14px 0 17px; gap:14px; }
+  .reborn .control-pad { gap:6px; grid-template-columns:.85fr .85fr 1fr 1fr 1fr; }
+  .reborn .control-pad button { min-height:65px; padding:10px 3px; border-radius:6px; }
+  .reborn .control-pad button strong { font-size:13px; }
+  .reborn .control-pad button small { font-size:8px; letter-spacing:-.03em; white-space:nowrap; }
+  .reborn .voice-panel { padding-top:13px; }
+  .reborn .voice-panel .button-row { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
+  .reborn .voice-panel .button-row button { padding:9px 4px; font-size:11px; }
+  .reborn .audio-options { gap:4px 17px; font-size:10px; margin-top:7px; }
+  .reborn .voice-status { font-size:10px; line-height:1.7; }
+  .reborn .choices { gap:7px; }
+  .reborn .choices>button { font-size:12px; padding:10px 12px; }
+  .reborn .sentence { min-height:60px; font-size:20px; margin-top:17px; }
+  .reborn .settings-grid,.reborn .setting-grid { gap:17px; padding:17px; font-size:11px; }
+  .reborn .settings,.reborn .expression-practice { margin-top:11px; }
+  .reborn .expression-list { padding:0 11px 11px; gap:6px; }
+  .reborn .expression-list button { padding:10px; }
+  .reborn .expression-list button b { font-size:11px; }
+  .reborn .expression-list button span { font-size:10px; }
+  .reborn .result-grid { grid-template-columns:repeat(2,minmax(0,1fr)); margin:18px 0; }
+  .reborn .footer { flex-direction:column; gap:5px; padding-top:18px; font-size:9px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .reborn *, .reborn *::before,.reborn *::after { scroll-behavior:auto !important; animation:none !important; transition:none !important; }
+}
+.reborn[data-reduced-motion=true] *, .reborn[data-reduced-motion=true] *::before,.reborn[data-reduced-motion=true] *::after { animation:none !important; transition:none !important; }
+</style></head><body class="reborn"><main id="app"></main><noscript>JavaScript를 켜 주세요.</noscript><script>'use strict';
+const RebornVoiceManifest={"version":1,"release":"REBORN Phase 1","status":"Awaiting authorized voice assets","primary":"licensed bundled audio","fallback":"Optional local browser synthesis, explicitly enabled by player; not a recording","utterances":[{"id":"VO_HELLO","en":"Hello!","ko":"안녕!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_HELLO.mp3","usage":"입장 안내","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_MOVE_LEFT","en":"Move left!","ko":"왼쪽으로 움직여!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_MOVE_LEFT.mp3","usage":"듣고 행동하기 · 이동","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_MOVE_RIGHT","en":"Move right!","ko":"오른쪽으로 움직여!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_MOVE_RIGHT.mp3","usage":"이동 연습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_WATCH_OUT","en":"Watch out!","ko":"조심해!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_WATCH_OUT.mp3","usage":"듣고 행동하기 · 회피","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_DODGE","en":"Dodge!","ko":"피해!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_DODGE.mp3","usage":"회피 연습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_ATTACK","en":"Attack!","ko":"공격해!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_ATTACK.mp3","usage":"검 조작 연습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_ATTACK_SLIME","en":"Attack the slime!","ko":"슬라임을 공격해!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_ATTACK_SLIME.mp3","usage":"듣고 행동하기 · 검","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_USE_MAGIC","en":"Use your magic!","ko":"마법을 사용해!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_USE_MAGIC.mp3","usage":"듣고 행동하기 · 마법","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_LISTEN","en":"Listen carefully.","ko":"잘 들어 봐.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_LISTEN.mp3","usage":"듣기 안내","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_GOOD_JOB","en":"Good job!","ko":"잘했어!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_GOOD_JOB.mp3","usage":"정답 피드백","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_TRY_AGAIN","en":"Try again.","ko":"다시 해 봐.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_TRY_AGAIN.mp3","usage":"오답 피드백","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_YOU_CAN","en":"You can do it.","ko":"넌 할 수 있어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_YOU_CAN.mp3","usage":"재도전 안내","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_NEED_FIRE","en":"I need fire.","ko":"나는 불이 필요해.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_NEED_FIRE.mp3","usage":"Sentence Magic","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_OPEN_GATE","en":"Open the gate.","ko":"문을 열어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_OPEN_GATE.mp3","usage":"승리 뒤 출구 표현 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_FOLLOW","en":"Follow me.","ko":"나를 따라와.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_FOLLOW.mp3","usage":"숲 입장","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_BE_CAREFUL","en":"Be careful.","ko":"조심해.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_BE_CAREFUL.mp3","usage":"보스 예고","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_SLIME_COMING","en":"The slime is coming.","ko":"슬라임이 오고 있어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_SLIME_COMING.mp3","usage":"첫 전투 진입","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_ENEMY_WEAK","en":"The enemy is weak.","ko":"적이 약해졌어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_ENEMY_WEAK.mp3","usage":"듣기 보상 취약 시간","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_ONCE_MORE","en":"One more time.","ko":"한 번 더.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_ONCE_MORE.mp3","usage":"음성 반복 연습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_VICTORY","en":"Victory!","ko":"승리!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_VICTORY.mp3","usage":"보스 격파","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_READY","en":"Are you ready?","ko":"준비됐어?","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_READY.mp3","usage":"튜토리얼 시작","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_KEEP_DISTANCE","en":"Keep your distance.","ko":"거리를 유지해.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_KEEP_DISTANCE.mp3","usage":"적 공격 예고 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_WAIT","en":"Wait for an opening.","ko":"빈틈을 기다려.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_WAIT.mp3","usage":"적 회복 시간 공략 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_CHARGE","en":"Your magic is ready.","ko":"마법이 준비됐어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_CHARGE.mp3","usage":"수정 발견","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_BOSS","en":"The champion is here.","ko":"챔피언이 나타났어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_BOSS.mp3","usage":"보스 등장","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_JUMP","en":"A heavy jump!","ko":"강한 점프야!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_JUMP.mp3","usage":"보스 패턴 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_THREE","en":"Three bounces!","ko":"세 번 튀어 오른다!","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_THREE.mp3","usage":"보스 패턴 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_CRYSTAL","en":"The crystal is charging.","ko":"수정이 힘을 모으고 있어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_CRYSTAL.mp3","usage":"보스 패턴 복습","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_TAKE_BREAK","en":"Take a break.","ko":"잠깐 쉬어.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_TAKE_BREAK.mp3","usage":"일시정지","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null},{"id":"VO_RETURN","en":"Let us try again.","ko":"우리 다시 해 보자.","voiceCharacter":"Mira — encouraging adult companion","accent":"General American (production target; not yet delivered)","path":"assets/reborn/voice/VO_RETURN.mp3","usage":"재도전","speedOptions":[1,0.75],"available":false,"license":{"type":null,"source":null,"performerOrModel":null,"redistributionAllowed":false,"status":"missing; no recording or paid generation performed"},"embedded":null}]};
+/* Isolated Reborn lesson definitions. No campaign records, browser APIs or audio. */
+const RebornLearning = (() => {
+  const expressions = Object.freeze({
+    left: Object.freeze({id:'left',voiceId:'VO_MOVE_LEFT',english:'Move left!',ko:'왼쪽으로 이동해요!',action:'left',explanation:'Move는 이동하다, left는 왼쪽이에요. 왼쪽 이동을 선택해 보세요.'}),
+    dodge: Object.freeze({id:'dodge',voiceId:'VO_WATCH_OUT',english:'Watch out!',ko:'조심해요!',action:'dodge',explanation:'Watch out!은 위험을 조심하라는 말이에요. 여기서는 회피로 위험을 피할 수 있어요.'}),
+    attack: Object.freeze({id:'attack',voiceId:'VO_ATTACK_SLIME',english:'Attack the slime!',ko:'슬라임을 공격해요!',action:'attack',explanation:'Attack은 공격하다예요. the slime은 지금 앞에 있는 슬라임을 가리켜요.'}),
+    magic: Object.freeze({id:'magic',voiceId:'VO_USE_MAGIC',english:'Use your magic!',ko:'마법을 사용해요!',action:'magic',explanation:'Use는 사용하다, your magic은 여러분의 마법이에요. 마법을 선택해 보세요.'}),
+    fire: Object.freeze({id:'fire',voiceId:'VO_NEED_FIRE',english:'I need fire.',ko:'나는 불이 필요해요.',action:null,explanation:'I(나는) + need(필요해요) + fire(불)의 순서예요. I need …로 필요한 것을 말할 수 있어요.'})
+  });
+  const tutorial = Object.freeze([
+    Object.freeze({english:'Move left!',ko:'왼쪽으로 이동해요!',voiceId:'VO_MOVE_LEFT',text:'A / ←, D / →로 이동해요. J로 검을 휘두르고 K로 바라보는 방향으로 회피해요.'}),
+    Object.freeze({english:'Watch out! · Attack the slime!',ko:'조심해요! · 슬라임을 공격해요!',voiceId:'VO_WATCH_OUT',text:'슬라임이 몸을 움츠리면 공격 예고예요. 경고 지점에서 벗어나고, 공격 뒤 빈틈에 검을 사용해요.'}),
+    Object.freeze({english:'Use your magic! · I need fire.',ko:'마법을 사용해요! · 나는 불이 필요해요.',voiceId:'VO_USE_MAGIC',text:'영어를 듣는 동안 적은 멈춰요. 소리가 없으면 자막이나 한국어 도움을 볼 수 있어요. 숲의 수정에서 L 마법을 배워요.'})
+  ]);
+  const actions = Object.freeze(['left','right','attack','dodge','magic']);
+  const normalize = value => typeof value === 'string' ? value.trim().toLowerCase().replace(/[.!?]+$/,'').replace(/\s+/g,' ') : '';
+  function challenge(key, id) {
+    const e = expressions[key];
+    if (!e) return null;
+    return {id,kind:key==='fire'?'magic':'listen',expressionId:key,voiceId:e.voiceId,
+      target:key==='fire'?'I need fire.':e.action,action:e.action,
+      prompt:key==='fire'?'“나는 불이 필요해요.”를 영어로 완성해 보세요.':'안내를 듣고 알맞은 행동을 선택해 보세요.',
+      english:e.english,ko:e.ko,choices:key==='fire'?['I fire need.','I need fire.','Need fire I.']:[...actions],
+      words:key==='fire'?['fire','I','need']:null,feedback:'',explanation:e.explanation,
+      assisted:false,aids:[],heard:false,source:null,attempts:0,completed:false,phase:'answer'};
+  }
+  function evaluate(key, value) {
+    if (!expressions[key]) return {valid:false,correct:false};
+    if (key==='fire') {
+      if (Array.isArray(value)) {
+        if (value.length!==3 || value.some(x=>typeof x!=='string') || [...value].map(normalize).sort().join('|')!=='fire|i|need') return {valid:false,correct:false};
+        value=value.join(' ');
+      }
+      if (typeof value!=='string' || value.length>80 || !normalize(value)) return {valid:false,correct:false};
+      // Accept only the taught three-word sentence, not a substring or fuzzy match.
+      return {valid:true,correct:normalize(value)==='i need fire'};
+    }
+    if (!actions.includes(value)) return {valid:false,correct:false};
+    return {valid:true,correct:value===expressions[key].action};
+  }
+  return Object.freeze({expressions,tutorial,actions,challenge,evaluate});
+})();
+
+;
+/* Reborn Combat Lab: deterministic simulation, deliberately separate from v0.8. */
+const RebornCombat = (() => {
+  const freeze = x => { Object.values(x).forEach(v=>{if(v && typeof v==='object') freeze(v);}); return Object.freeze(x); };
+  const CONFIG = freeze({
+    width:1000,height:560,ground:425,minX:60,maxX:940,step:1/120,maxDelta:.25,
+    player:{hp:100,startX:170,speed:220,radius:18,hitTime:.24,hitInvulnerability:.55,knockback:18},
+    sword:{damage:8,range:104,height:85,cooldown:.35,anticipation:.065,swing:.09,follow:.15,charge:14,knockback:8},
+    dodge:{duration:.30,invulnerability:.18,cooldown:.65,speed:490},
+    magic:{damage:32,charge:100,cooldown:8,release:.38},
+    learning:{charge:25,stun:.9},
+    slime:{hp:70,startX:690,radius:38,speed:43,approachRange:215,idle:.55,recovery:.85,hitReaction:.12,
+      patterns:[{id:'jump',telegraph:.85,duration:.55,damage:8,radius:46,lift:74},{id:'rush',telegraph:1.05,duration:.42,damage:7,radius:42,lift:0}]},
+    boss:{hp:160,startX:740,radius:58,speed:50,approachRange:290,idle:.65,recovery:1.05,hitReaction:.10,phaseSpeed:.87,
+      patterns:[{id:'heavy_jump',telegraph:1.05,duration:.62,damage:16,radius:70,lift:126},{id:'triple_bounce',telegraph:.8,duration:.32,damage:8,radius:54,lift:72,repeat:3,repeatTelegraph:.5},{id:'crystal_charge',telegraph:1.2,duration:.52,damage:14,radius:58,lift:0}]}
+  });
+  const clamp=(x,min,max)=>Math.max(min,Math.min(max,x));
+  const countdown=(value,dt)=>value-dt<1e-8?0:value-dt;
+  const activeModes=new Set(['EXPLORATION','COMBAT','PLAYER_HIT']);
+  function create() {
+    let generation=0,accumulator=0,events=[],held=new Set(),attack=null,dodge=null,enemyData=null,pending=null,pausedMode=null,moved=0,scripted=new Set(),serial=0;
+    const state={};
+    const emit=(type,extra={})=>events.push({type,...extra,session:state.session});
+    const soundIds={sword_swing:'sword',sword_impact:'impact',slime_bounce:'bounce',slime_warning:'slimeAttack',slime_rush:'slimeAttack',slime_jump:'bounce',slime_land:'impact',slime_defeat:'impact',player_hit:'playerHit',magic_charge:'magicCharge',magic_explosion:'magicExplosion',boss_entrance:'bossEntrance',boss_defeat:'bossDeath',boss_phase:'charge',crystal_charge:'charge',correct:'magic',incorrect:'bounce',defeat:'bossDeath'};
+    const sfx=id=>emit('sfx',{id:soundIds[id]||id});
+    const voice=id=>{state.lastVoiceId=id;emit('voice',{id});};
+    function mode(value) { state.mode=value;emit('scene',{mode:value,stage:state.stage}); }
+    function effect(type,x,y,life,value=0) {state.effects.push({type,x,y,life,ttl:life,value});}
+    function pose(value,duration=0) {state.player.pose=value;state.player.poseTime=0;state.player.poseDuration=duration;}
+    function clearInput() {held.clear();}
+    function reset() {
+      generation++;accumulator=0;events=[];held.clear();attack=null;dodge=null;enemyData=null;pending=null;pausedMode=null;moved=0;scripted=new Set();serial=0;
+      Object.assign(state,{mode:'INTRO',stage:'entrance',time:0,session:generation,
+        player:{x:CONFIG.player.startX,y:CONFIG.ground,facing:1,hp:CONFIG.player.hp,maxHp:CONFIG.player.hp,pose:'idle',poseTime:0,poseDuration:0,attackCooldown:0,dodgeCooldown:0,invulnerable:0,magicCharge:0,magicCooldown:0},
+        enemy:null,effects:[],challenge:null,tutorial:null,magicUnlocked:false,awaitingProceed:true,lastVoiceId:'VO_HELLO',feedback:'',hitStop:0,shake:0,
+        stats:{correct:0,wrong:0,assisted:0,independent:0,expressions:[],listening:{correct:0,wrong:0,assisted:0,independent:0,asset:0,fallback:0,unheard:0},magic:{correct:0,wrong:0,assisted:0,independent:0}},
+        objective:'로완과 함께 숲의 첫 시험을 시작해요.',reward:null});
+      return state;
+    }
+    reset();
+    function tutorial(index) {
+      const item=RebornLearning.tutorial[index];
+      state.tutorial={...item,index,total:RebornLearning.tutorial.length};state.objective=item.text;
+      mode('TUTORIAL');voice(item.voiceId);
+    }
+    function exploration() {
+      state.tutorial=null;state.awaitingProceed=false;state.objective='A / D 또는 ← / →로 숲을 걸어 보세요. J 검 · K 회피';mode('EXPLORATION');
+    }
+    function start(skipTutorial=false) {
+      if(state.mode==='TUTORIAL'&&skipTutorial){clearInput();exploration();return true;}
+      if(state.mode!=='INTRO') return false;
+      clearInput();if(skipTutorial) exploration();else tutorial(0);return true;
+    }
+    function spawn(kind) {
+      const c=CONFIG[kind];state.stage=kind;state.awaitingProceed=false;state.challenge=null;pending=null;
+      attack=null;dodge=null;clearInput();pose('idle');
+      state.player.x=kind==='boss'?230:state.player.x;
+      state.player.invulnerable=0;
+      state.enemy={id:kind==='boss'?'slime-champion':'green-slime',kind,x:c.startX,y:CONFIG.ground,lift:0,hp:c.hp,maxHp:c.hp,ai:'IDLE',aiTime:0,pattern:c.patterns[0].id,phase:1,facing:-1,telegraphRemaining:0,attackTargetX:state.player.x,attackDuration:0,attackProgress:0};
+      enemyData={patternIndex:0,pattern:null,originX:c.startX,hit:false,repeats:0,resume:null,recovery:c.recovery};
+      state.objective=kind==='boss'?'슬라임 챔피언: 공격 예고를 피하고 빈틈에 반격해요.':'초록 슬라임: 가까이 다가가 J로 공격하고, 공격 예고를 보고 K로 회피해요.';
+      mode('COMBAT');sfx(kind==='boss'?'boss_entrance':'slime_bounce');
+      voice(kind==='boss'?'VO_BE_CAREFUL':'VO_SLIME_COMING');
+    }
+    function openChallenge(key,context) {
+      clearInput();attack=null;dodge=null;state.player.invulnerable=0;
+      const h=RebornLearning.challenge(key,`${state.session}:${++serial}`);
+      state.challenge=h;pending={h,key,context,locked:false,correct:false,aids:new Set(),heard:false,source:null};
+      state.awaitingProceed=false;state.objective=h.prompt;pose(key==='fire'?'magic_charge':'idle');
+      mode(key==='fire'?'MAGIC_CHALLENGE':'LISTENING_CHALLENGE');voice(h.voiceId);
+      if(key==='fire') sfx('magic_charge');
+    }
+    function ai(value) { const e=state.enemy;if(!e)return;e.ai=value;e.aiTime=0;e.attackProgress=0;e.lift=0; }
+    function stun() { if(state.enemy && state.enemy.hp>0){enemyData.recovery=CONFIG.learning.stun;enemyData.repeats=0;enemyData.resume=null;ai('RECOVERY');} }
+    function objectiveCombat() { state.objective=state.stage==='boss'?'슬라임 챔피언: 경고 지점을 벗어나고, 회복 중 반격해요. L 마법도 사용해요.':'J 검 · K 회피 — 슬라임이 몸을 움츠리면 공격 예고예요.'; }
+    function proceed() {
+      if(state.mode==='PAUSED') return false;
+      if(state.mode==='TUTORIAL') {const n=state.tutorial.index+1;if(n<RebornLearning.tutorial.length)tutorial(n);else exploration();return true;}
+      if(state.mode==='EXPLORATION' && state.stage==='entrance'){spawn('slime');return true;}
+      if(state.mode==='EXPLORATION' && state.stage==='crystal'){openChallenge('fire','discovery');return true;}
+      if(!pending || state.challenge!==pending.h || !pending.locked) return false;
+      if(!pending.correct) {
+        pending.locked=false;pending.h.phase='answer';pending.h.feedback='한 번 더 해 보세요. 틀려도 체력은 줄지 않아요.';
+        pending.aids.add('correction');pending.h.assisted=true;pending.h.aids=[...pending.aids];return true;
+      }
+      const {key,context}=pending;pending=null;state.challenge=null;clearInput();
+      if(context==='discovery') {
+        state.magicUnlocked=true;state.player.hp=state.player.maxHp;state.player.magicCharge=CONFIG.magic.charge;
+        state.player.attackCooldown=0;state.player.dodgeCooldown=0;state.player.magicCooldown=0;spawn('boss');return true;
+      }
+      mode('COMBAT');objectiveCombat();
+      if(key==='fire') castMagic();
+      else {state.player.magicCharge=clamp(state.player.magicCharge+CONFIG.learning.charge,0,CONFIG.magic.charge);stun();pose('idle');}
+      return true;
+    }
+    function answer(value) {
+      if(!pending || state.mode==='PAUSED' || state.challenge!==pending.h || pending.locked || !['LISTENING_CHALLENGE','MAGIC_CHALLENGE'].includes(state.mode)) return false;
+      const result=RebornLearning.evaluate(pending.key,value);if(!result.valid)return false;
+      const h=pending.h;pending.locked=true;pending.correct=result.correct;h.attempts++;h.phase='feedback';h.completed=result.correct;
+      const independent=pending.aids.size===0 && pending.heard;
+      const category=h.kind==='listen'?state.stats.listening:state.stats.magic;
+      if(result.correct){state.stats.correct++;category.correct++;if(independent){state.stats.independent++;category.independent++;}else{state.stats.assisted++;category.assisted++;}
+        if(!state.stats.expressions.includes(h.english))state.stats.expressions.push(h.english);
+        h.feedback=`좋아요! ${h.english} — ${h.ko}`;sfx('correct');voice('VO_GOOD_JOB');
+      }else{state.stats.wrong++;category.wrong++;h.feedback=`다시 해 봐요. ${h.explanation}`;pending.aids.add('correction');h.assisted=true;h.aids=[...pending.aids];sfx('incorrect');voice('VO_TRY_AGAIN');}
+      if(h.kind==='listen'){if(!pending.heard)category.unheard++;else if(pending.source==='asset')category.asset++;else category.fallback++;}
+      return {correct:result.correct,independent:result.correct&&independent,feedback:h.feedback};
+    }
+    function assist(kind='translation') {
+      kind=({english:'subtitle',korean:'translation'})[kind]||kind;
+      if(!pending || !['subtitle','translation','hint','fallback','correction'].includes(kind))return false;
+      pending.aids.add(kind);pending.h.assisted=true;pending.h.aids=[...pending.aids];return true;
+    }
+    function heard(source='asset') {
+      if(!pending || pending.locked || state.mode==='PAUSED' || !['asset','browser-fallback'].includes(source))return false;
+      pending.heard=true;pending.source=source;pending.h.heard=true;pending.h.source=source;return true;
+    }
+    function enemyDefeated() {
+      const e=state.enemy;ai('DEFEATED');e.hp=0;attack=null;dodge=null;clearInput();state.hitStop=0;pending=null;state.challenge=null;
+      effect('burst',e.x,e.y-30,1.1);sfx(e.kind==='boss'?'boss_defeat':'slime_defeat');
+      if(e.kind==='slime') {
+        state.stage='crystal';state.awaitingProceed=true;state.objective='빛나는 단어 수정 발견! “I need fire.”를 배우고 마법을 깨워요.';
+        state.player.hp=state.player.maxHp;pose('idle');mode('EXPLORATION');voice('VO_CHARGE');
+      } else {
+        state.stage='complete';state.awaitingProceed=false;pose('victory');mode('VICTORY');sfx('victory');voice('VO_VICTORY');
+        state.objective='숲의 첫 시험 완료! 배운 표현을 다시 듣고 새로 도전해 보세요.';
+        state.reward={title:'숲의 첫빛',description:'이번 실험실 도전의 기념 휘장 — 기존 게임 보상과 별개예요.',expressions:[...state.stats.expressions]};
+      }
+    }
+    function checkScript() {
+      const e=state.enemy;if(!e || e.hp<=0)return;
+      const list=e.kind==='slime'?[['slime-left',54,'left'],['slime-dodge',30,'dodge']]:[['boss-attack',120,'attack'],['boss-magic',80,'magic']];
+      for(const [id,hp,key] of list)if(e.hp<=hp&&!scripted.has(id)){scripted.add(id);openChallenge(key,'combat');return;}
+    }
+    function damageEnemy(amount,source) {
+      const e=state.enemy;if(!e || e.hp<=0)return false;
+      e.hp=clamp(e.hp-amount,0,e.maxHp);effect('damage',e.x,e.y-90,.7,amount);effect('impact',e.x,e.y-32,.23,amount);sfx(source==='magic'?'magic_explosion':'sword_impact');
+      if(source==='sword'){state.player.magicCharge=clamp(state.player.magicCharge+CONFIG.sword.charge,0,CONFIG.magic.charge);e.x=clamp(e.x+state.player.facing*CONFIG.sword.knockback,CONFIG.minX,CONFIG.maxX);}
+      if(source==='magic'){state.hitStop=.045;state.shake=.16;}
+      if(e.hp<=0){enemyDefeated();return true;}
+      if(e.kind==='boss'&&e.phase===1&&e.hp<=e.maxHp*.5){e.phase=2;effect('charge',e.x,e.y-35,.65);sfx('boss_phase');}
+      // Brief recoil preserves a telegraph's progress; repeated sword hits cannot restart it forever.
+      if(e.ai!=='ATTACK'&&e.ai!=='HIT_REACTION') {enemyData.resume={ai:e.ai,time:e.aiTime};ai('HIT_REACTION');}
+      checkScript();return true;
+    }
+    function castMagic() {
+      const p=state.player;if(!state.magicUnlocked||p.magicCharge<CONFIG.magic.charge||p.magicCooldown>0||!state.enemy||state.enemy.hp<=0)return false;
+      p.magicCharge=0;p.magicCooldown=CONFIG.magic.cooldown;pose('magic_release',CONFIG.magic.release);
+      effect('fire',state.enemy.x,CONFIG.ground-40,.7);damageEnemy(CONFIG.magic.damage,'magic');return true;
+    }
+    function beginAttack() {
+      const p=state.player;if(!activeModes.has(state.mode)||state.stage==='crystal'||p.attackCooldown>0||dodge||state.mode==='PLAYER_HIT'||p.pose==='magic_release')return false;
+      p.attackCooldown=CONFIG.sword.cooldown;attack={time:0,facing:p.facing,hit:false};pose('attack_anticipation',CONFIG.sword.anticipation);sfx('sword_swing');return true;
+    }
+    function beginDodge() {
+      const p=state.player;if(!activeModes.has(state.mode)||state.stage==='crystal'||p.dodgeCooldown>0||dodge)return false;
+      p.dodgeCooldown=CONFIG.dodge.cooldown;p.invulnerable=Math.max(p.invulnerable,CONFIG.dodge.invulnerability);dodge={time:0,direction:p.facing};attack=null;pose('dodge',CONFIG.dodge.duration);
+      if(state.mode==='PLAYER_HIT')mode('COMBAT');effect('dodge',p.x,p.y-20,.3);sfx('dodge');return true;
+    }
+    function beginMagic() {
+      const p=state.player;if(state.mode!=='COMBAT'||!state.magicUnlocked||p.magicCharge<CONFIG.magic.charge||p.magicCooldown>0||dodge)return false;
+      openChallenge('fire','combat');return true;
+    }
+    function input(action,pressed=true) {
+      if(action==='clear'){clearInput();return true;}
+      if(!['left','right','attack','dodge','magic','replay','hint'].includes(action))return false;
+      if(!pressed){held.delete(action);return true;}
+      if(held.has(action))return false;
+      held.add(action);
+      if(action==='replay') {if(state.mode==='PAUSED')return false;voice(state.challenge?.voiceId||state.tutorial?.voiceId||state.lastVoiceId);return true;}
+      if(action==='hint')return assist('translation');
+      if(state.mode==='LISTENING_CHALLENGE')return answer(action);
+      if(!activeModes.has(state.mode))return false;
+      if(action==='left'||action==='right'){if(!attack&&!dodge)state.player.facing=action==='left'?-1:1;return true;}
+      if(action==='attack')return beginAttack();if(action==='dodge')return beginDodge();if(action==='magic')return beginMagic();return false;
+    }
+    function damagePlayer(amount) {
+      const p=state.player;if(p.invulnerable>1e-8||p.hp<=0||!['COMBAT','PLAYER_HIT'].includes(state.mode))return false;
+      p.hp=clamp(p.hp-amount,0,p.maxHp);p.invulnerable=CONFIG.player.hitInvulnerability;attack=null;dodge=null;
+      const direction=p.x<state.enemy.x?-1:1;p.x=clamp(p.x+direction*CONFIG.player.knockback,CONFIG.minX,CONFIG.maxX);
+      effect('damage',p.x,p.y-90,.7,-amount);effect('impact',p.x,p.y-28,.22,-amount);sfx('player_hit');state.shake=.12;
+      if(p.hp===0){clearInput();pose('defeat');mode('DEFEAT');state.objective='잠깐 쉬어도 괜찮아요. 경고 지점에서 벗어나 다시 도전해 보세요.';sfx('defeat');}
+      else {pose('hit',CONFIG.player.hitTime);mode('PLAYER_HIT');}
+      return true;
+    }
+    function startTelegraph(repeat=false) {
+      const e=state.enemy,c=CONFIG[e.kind];
+      if(!repeat){enemyData.pattern=c.patterns[enemyData.patternIndex%c.patterns.length];enemyData.patternIndex++;enemyData.repeats=enemyData.pattern.repeat||1;}
+      const pat=enemyData.pattern;const speed=e.phase===2?CONFIG.boss.phaseSpeed:1;
+      e.pattern=pat.id;e.facing=state.player.x<e.x?-1:1;
+      const overshoot=['rush','crystal_charge'].includes(pat.id)?60*e.facing:0;
+      e.attackTargetX=clamp(state.player.x+overshoot,CONFIG.minX,CONFIG.maxX);
+      e.telegraphRemaining=(repeat?pat.repeatTelegraph:pat.telegraph)*speed;
+      enemyData.telegraphDuration=e.telegraphRemaining;e.attackDuration=pat.duration*speed;enemyData.originX=e.x;enemyData.hit=false;ai('TELEGRAPH');
+      sfx(pat.id==='crystal_charge'?'crystal_charge':'slime_warning');
+    }
+    function tickEnemy(dt) {
+      const e=state.enemy;if(!e||e.hp<=0||!['COMBAT','PLAYER_HIT'].includes(state.mode))return;
+      const c=CONFIG[e.kind];e.aiTime+=dt;
+      if(e.ai==='HIT_REACTION'){if(e.aiTime>=c.hitReaction){const r=enemyData.resume;ai(r?.ai||'RECOVERY');e.aiTime=r?.time||0;enemyData.resume=null;}return;}
+      if(e.ai==='IDLE'){if(e.aiTime>=c.idle)ai('APPROACH');return;}
+      if(e.ai==='APPROACH'){
+        const dx=state.player.x-e.x;e.facing=dx<0?-1:1;
+        if(Math.abs(dx)>c.approachRange)e.x=clamp(e.x+e.facing*c.speed*dt,CONFIG.minX,CONFIG.maxX);
+        else startTelegraph();return;
+      }
+      if(e.ai==='TELEGRAPH'){
+        e.telegraphRemaining=Math.max(0,enemyData.telegraphDuration-e.aiTime);
+        if(e.telegraphRemaining<=1e-8){ai('ATTACK');sfx(['rush','crystal_charge'].includes(e.pattern)?'slime_rush':'slime_jump');}return;
+      }
+      if(e.ai==='ATTACK'){
+        const pat=enemyData.pattern,oldX=e.x,t=clamp(e.aiTime/e.attackDuration,0,1);e.attackProgress=t;e.lift=Math.sin(t*Math.PI)*pat.lift;
+        e.x=enemyData.originX+(e.attackTargetX-enemyData.originX)*t;
+        if(['rush','crystal_charge'].includes(pat.id)){
+          const lo=Math.min(oldX,e.x)-pat.radius,hi=Math.max(oldX,e.x)+pat.radius;
+          if(!enemyData.hit&&state.player.x>=lo&&state.player.x<=hi){enemyData.hit=true;damagePlayer(pat.damage);}
+        }
+        if(t>=1){
+          if(!enemyData.hit&&!['rush','crystal_charge'].includes(pat.id)&&Math.abs(state.player.x-e.x)<=pat.radius){enemyData.hit=true;damagePlayer(pat.damage);}
+          effect('shockwave',e.x,e.y,.35,pat.radius);sfx('slime_land');enemyData.repeats--;
+          enemyData.recovery=enemyData.repeats>0?.20:c.recovery;ai('RECOVERY');
+        }return;
+      }
+      if(e.ai==='RECOVERY'&&e.aiTime>=enemyData.recovery){if(enemyData.repeats>0)startTelegraph(true);else ai('IDLE');}
+    }
+    function movePlayer(dx,bypass=false) {
+      const p=state.player,e=state.enemy;let next=clamp(p.x+dx,CONFIG.minX,CONFIG.maxX);
+      if(!bypass&&e&&e.hp>0&&e.ai!=='ATTACK'){
+        const gap=CONFIG.player.radius+CONFIG[e.kind].radius;
+        if(p.x<=e.x-gap&&next>e.x-gap)next=e.x-gap;
+        else if(p.x>=e.x+gap&&next<e.x+gap)next=e.x+gap;
+        else if(Math.abs(p.x-e.x)<gap&&Math.abs(next-e.x)<Math.abs(p.x-e.x))next=p.x;
+      }
+      const distance=Math.abs(next-p.x);p.x=clamp(next,CONFIG.minX,CONFIG.maxX);return distance;
+    }
+    function tick(dt) {
+      if(state.mode==='PAUSED'||state.mode==='INTRO')return;
+      state.time+=dt;
+      state.effects.forEach(e=>e.life-=dt);state.effects=state.effects.filter(e=>e.life>0);
+      state.shake=Math.max(0,state.shake-dt);
+      if(state.enemy?.ai==='DEFEATED')state.enemy.aiTime+=dt;
+      if(state.mode==='VICTORY'||state.mode==='DEFEAT')state.player.poseTime+=dt;
+      if(!activeModes.has(state.mode))return;
+      if(state.hitStop>0){state.hitStop=Math.max(0,state.hitStop-dt);return;}
+      const p=state.player;
+      p.attackCooldown=countdown(p.attackCooldown,dt);p.dodgeCooldown=countdown(p.dodgeCooldown,dt);p.magicCooldown=countdown(p.magicCooldown,dt);p.invulnerable=countdown(p.invulnerable,dt);p.poseTime+=dt;
+      if(state.mode==='PLAYER_HIT'&&p.poseTime>=CONFIG.player.hitTime){mode('COMBAT');pose('idle');}
+      if(dodge){dodge.time+=dt;movePlayer(dodge.direction*CONFIG.dodge.speed*dt,true);if(dodge.time>=CONFIG.dodge.duration-1e-8){dodge=null;pose('idle');}}
+      else if(state.mode!=='PLAYER_HIT'&&state.stage!=='crystal'){
+        const direction=(held.has('right')?1:0)-(held.has('left')?1:0);
+        if(direction){if(!attack)p.facing=direction;moved+=movePlayer(direction*CONFIG.player.speed*dt*(attack?.55:1));if(!attack&&p.pose!=='magic_release'&&p.pose!=='run')pose('run');}
+        else if(!attack&&p.pose==='run')pose('idle');
+      }
+      if(attack){
+        attack.time+=dt;const a=attack,t=attack.time;
+        if(t>=CONFIG.sword.anticipation&&!a.hit){
+          a.hit=true;pose('attack_swing',CONFIG.sword.swing);effect('slash',p.x+a.facing*48,p.y-35,.15,a.facing);
+          const e=state.enemy;if(e&&e.hp>0&&(e.x-p.x)*a.facing>=0&&Math.abs(e.x-p.x)<=CONFIG.sword.range&&e.lift<=CONFIG.sword.height)damageEnemy(CONFIG.sword.damage,'sword');
+        }
+        if(attack&&t>=CONFIG.sword.anticipation+CONFIG.sword.swing&&p.pose!=='attack_follow')pose('attack_follow',CONFIG.sword.follow);
+        if(attack&&t>=CONFIG.sword.anticipation+CONFIG.sword.swing+CONFIG.sword.follow){attack=null;pose('idle');}
+      }
+      if(p.pose==='magic_release'&&p.poseTime>=CONFIG.magic.release)pose('idle');
+      if(state.mode==='EXPLORATION'&&state.stage==='entrance'&&moved>=55)spawn('slime');
+      tickEnemy(dt);
+    }
+    function update(dtSeconds) {
+      if(!Number.isFinite(dtSeconds)||dtSeconds<=0||state.mode==='PAUSED')return state;
+      accumulator+=Math.min(CONFIG.maxDelta,dtSeconds);
+      while(accumulator>=CONFIG.step-1e-10){accumulator-=CONFIG.step;tick(CONFIG.step);}
+      return state;
+    }
+    function pause(){if(['PAUSED','INTRO','VICTORY','DEFEAT'].includes(state.mode))return false;pausedMode=state.mode;clearInput();mode('PAUSED');return true;}
+    function resume(){if(state.mode!=='PAUSED'||!pausedMode)return false;const previous=pausedMode;pausedMode=null;clearInput();mode(previous);return true;}
+    function restart(){reset();start(true);return state;}
+    function drainEvents(){const out=events;events=[];return out;}
+    return {state,update,input,start,proceed,pause,resume,restart,answer,assist,heard,drainEvents};
+  }
+  return Object.freeze({CONFIG,create});
+})();
+
+;
+// Original Canvas illustration. Rendering never changes combat state or owns a frame loop.
+// Caller provides a 1000×560 logical viewport and time in seconds; DPR scaling is preserved.
+const RebornArt = (() => {
+  const W=1000,H=560,FLOOR=425,TAU=Math.PI*2;
+  const cache=new Map(); let scenery=null;
+  const clamp=(x,a=0,b=1)=>Math.max(a,Math.min(b,Number(x)||0));
+  const mix=(a,b,t)=>a+(b-a)*clamp(t), ease=t=>1-(1-clamp(t))**3;
+  const palette={ink:'#142e3c',gold:'#cbb886',light:'#e6e8d0',steel:'#b2c9ce',cape:'#367b83'};
+  function shape(c,d,fill,stroke,width=1){
+    let p=cache.get(d);if(!p){p=new Path2D(d);if(cache.size<240)cache.set(d,p);}
+    if(fill){c.fillStyle=fill;c.fill(p);}if(stroke){c.strokeStyle=stroke;c.lineWidth=width;c.lineJoin='round';c.stroke(p);}
+  }
+  function ellipse(c,x,y,rx,ry,fill,stroke,width=1){c.beginPath();c.ellipse(x,y,Math.max(.01,rx),Math.max(.01,ry),0,0,TAU);if(fill){c.fillStyle=fill;c.fill();}if(stroke){c.strokeStyle=stroke;c.lineWidth=width;c.stroke();}}
+  function line(c,points,color,width=1){c.beginPath();points.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.strokeStyle=color;c.lineWidth=width;c.lineCap='round';c.lineJoin='round';c.stroke();}
+  function local(c,x,y,angle,fn,sx=1,sy=sx){c.save();c.translate(x,y);c.rotate(angle||0);c.scale(sx,sy);fn();c.restore();}
+  function gradient(c,x,y,x2,y2,stops){const gr=c.createLinearGradient(x,y,x2,y2);stops.forEach(([at,color])=>gr.addColorStop(at,color));return gr;}
+  function glow(c,x,y,r,color,alpha=.3){c.save();c.globalAlpha*=alpha;const gr=c.createRadialGradient(x,y,0,x,y,r);gr.addColorStop(0,color);gr.addColorStop(.3,color+'80');gr.addColorStop(1,color+'00');ellipse(c,x,y,r,r,gr);c.restore();}
+  function leaf(c,x,y,s,color,angle=0){local(c,x,y,angle,()=>shape(c,'M-14 0Q-4 -13 13 -3Q7 9 -14 0Z',color),s);}
+  function bush(c,x,y,s,colors){local(c,x,y,0,()=>{shape(c,'M-72 9Q-89 -13 -61 -28Q-67 -51 -37 -48Q-23 -69 1 -49Q31 -65 45 -38Q79 -37 75 -13Q94 8 62 21L-59 23Z',colors[0]);shape(c,'M-66 -23Q-52 -44 -35 -39Q-20 -61 1 -44Q27 -55 39 -33Q65 -33 67 -17Q33 -24 22 -10Q0 -25 -20 -11Q-43 -27 -66 -23Z',colors[1]);for(let i=0;i<9;i++)leaf(c,-53+i*14,-14-(i%3)*10,.55,colors[2],i*.2);},s);}
+  function tree(c,x,y,s,front=false){local(c,x,y,0,()=>{
+    const bark=front?'#193a42':'#294a55',lit=front?'#38605b':'#436873';
+    shape(c,'M-69 9Q-35 -4 -27 -44L-30 -193Q-35 -250 -74 -289L-101 -311L-85 -317L-34 -277L-47 -362L-27 -358L-6 -275Q16 -305 49 -316L69 -314L17 -273Q1 -241 13 -202L23 -43Q27 -9 70 9L27 9L-2 -7L-31 12Z',bark);
+    shape(c,'M-20 -298Q-9 -226 -10 -177L-7 -47Q-9 -19 -28 4L-11 2Q7 -25 4 -57L0 -202Q-5 -235 -20 -298Z',lit);
+    line(c,[[-32,-252],[-19,-193],[-22,-69],[-39,-9]],front?'#709078':'#64888b',2);
+    line(c,[[13,-214],[6,-167],[14,-100],[14,-49],[32,-7]],'#5c7c72',1.2);
+    line(c,[[-43,-292],[-28,-267],[-16,-232]],'#8ba18b',1.4);
+    shape(c,'M-28 -92L-19 -110L-18 -67L-26 -50Z','#102e39');
+    bush(c,-52,-296,1.25,front?['#163c42','#265653','#4b7b65']:['#2b5360','#3a6971','#578789']);
+    bush(c,59,-300,1.33,front?['#193f44','#2d5a56','#527e66']:['#2b5360','#3a6971','#578789']);
+    bush(c,-2,-359,1.22,front?['#173a40','#2c5752','#56846a']:['#2b5360','#3a6971','#578789']);
+  },s);}
+  function mushroom(c,x,y,s=1){local(c,x,y,0,()=>{shape(c,'M-2 0L-1 -17L3 -17L4 0Z','#a6c5af');shape(c,'M-15 -16Q-11 -33 1 -32Q12 -31 17 -17Q4 -10 -15 -16Z','#78b8b4','#396e78',.8);shape(c,'M-12 -19Q-7 -30 2 -29Q9 -28 13 -21Q-2 -25 -12 -19Z','#c1e0cc');ellipse(c,-5,-21,2,1,'#e4edcf');ellipse(c,6,-19,1.2,.8,'#e4edcf');},s);}
+  function stone(c,x,y,s=1){local(c,x,y,0,()=>{shape(c,'M-25 0L-17 -15L2 -24L26 -13L31 -2L11 7L-17 6Z','#59797b','#284d58');shape(c,'M-17 -15L2 -24L26 -13L6 -7Z','#90a59a');line(c,[[2,-23],[6,-8],[11,6]],'#bed0ae',.8);},s);}
+  function crystal(c,x,y,s=1,color='#9ddfe3',angle=0){local(c,x,y,angle,()=>{shape(c,'M0 -43L10 -29L8 -6L0 2L-10 -7L-9 -29Z',color,'#4b899f',1);shape(c,'M0 -43L1 -12L8 -6L10 -29Z','#6fa6c4');shape(c,'M0 -43L-9 -29L1 -12Z','#ddf5e8');line(c,[[1,-12],[0,2]],'#cbe9ed',.7);},s);}
+  function buildScenery(c){
+    c.fillStyle=gradient(c,0,0,0,H,[[0,'#081923'],[.43,'#1e4351'],[.75,'#527879'],[1,'#1a424a']]);c.fillRect(0,0,W,H);
+    glow(c,647,105,207,'#b7ddd5',.3);glow(c,435,293,260,'#82c8cc',.16);
+    ellipse(c,650,98,36,36,'#d4e4cf');ellipse(c,662,89,34,34,'#c7dcd0');ellipse(c,637,104,8,5,'#bbd3c6');ellipse(c,654,120,4,3,'#b5cec5');
+    c.save();c.globalAlpha=.09;shape(c,'M605 0L697 0L925 425L529 425Z','#d2f3dc');shape(c,'M562 0L583 0L454 425L333 425Z','#a8e6de');c.restore();
+    shape(c,'M0 237Q108 199 180 223Q282 170 375 211Q495 169 608 209Q742 180 827 220Q938 176 1000 221L1000 420H0Z','#214753');
+    for(let i=0;i<18;i++){
+      const x=18+i*58,base=371+(i%3)*9,height=185+(i*37)%110;
+      c.save();c.globalAlpha=.34;shape(c,`M${x-8} ${base}L${x-5} ${base-height}L${x+5} ${base-height-12}L${x+10} ${base}Z`,'#547d82');line(c,[[x,base-height+75],[x-23,base-height+48],[x-37,base-height+44]],'#547d82',5);line(c,[[x+2,base-height+110],[x+27,base-height+70]],'#547d82',4);c.restore();
+    }
+    // A distant sanctuary belongs to the scenery, not the combat collision plane.
+    c.save();c.globalAlpha=.65;
+    shape(c,'M419 368L419 253Q420 206 489 167Q558 208 559 253V368H541V256Q536 219 489 190Q443 219 437 256V368Z','#597b80','#789b95',2);
+    shape(c,'M432 368V264Q439 221 489 190Q535 221 546 264V368Z','#284e5a');
+    for(let i=0;i<7;i++){line(c,[[420,268+i*15],[436,268+i*15]],'#294e5c',2);line(c,[[542,268+i*15],[558,268+i*15]],'#294e5c',2);}
+    line(c,[[429,250],[434,229],[450,207],[489,180],[528,207],[545,231],[549,250]],'#acc2ae',1.3);
+    shape(c,'M466 361L466 283L489 263L511 283L511 361Z','#547b7a');
+    line(c,[[489,278],[489,335]],'#b7cdb3',1);ellipse(c,489,302,10,15,null,'#a4c7bd',1);crystal(c,489,345,.65,'#a8d8d1');
+    c.restore();
+    tree(c,223,395,.72,false);tree(c,785,404,.81,false);tree(c,87,415,.65,false);tree(c,934,411,.65,false);
+    shape(c,'M0 375Q90 359 187 383Q283 366 370 384Q473 363 576 383Q691 365 793 379Q888 359 1000 381V444H0Z','#3b6867');
+    // The soft mist sits behind the floor and never obscures the silhouettes.
+    const mist=c.createLinearGradient(0,340,0,420);mist.addColorStop(0,'#acd9c100');mist.addColorStop(.6,'#acd9c12a');mist.addColorStop(1,'#acd9c100');c.fillStyle=mist;c.fillRect(0,340,W,80);
+    tree(c,17,435,1.12,true);tree(c,991,440,1.15,true);
+    bush(c,-2,434,.95,['#173d43','#295c55','#56856b']);bush(c,1010,439,1.03,['#163d43','#2b5f58','#56866c']);
+    shape(c,'M0 432Q84 405 185 414Q302 425 407 414Q518 402 615 417Q737 407 849 414Q929 410 1000 433V560H0Z','#244b50');
+    shape(c,'M0 431Q147 409 249 424Q384 412 498 418Q652 409 792 421Q910 411 1000 432L1000 458Q842 448 729 453Q569 441 452 453Q281 443 177 455Q72 446 0 463Z','#7b8b74');
+    shape(c,'M0 439Q173 423 310 435Q509 422 668 434Q869 422 1000 443V452Q835 436 675 444Q504 433 323 445Q178 435 0 454Z','#acaa87');
+    line(c,[[0,429],[97,419],[215,425],[329,420],[438,422],[540,415],[649,422],[752,417],[881,423],[1000,434]],'#c6c5a0',1.2);
+    for(let i=0;i<65;i++){const x=18+i*15.7,y=438+(i*13)%35;c.save();c.globalAlpha=.18;ellipse(c,x,y,2+(i%4),.8,'#d7cda2');c.restore();}
+    shape(c,'M0 494Q99 466 217 493L362 485Q478 513 594 485Q736 463 857 489Q938 464 1000 481V560H0Z','#153c44');
+    shape(c,'M0 533Q118 492 239 528Q369 506 487 537Q662 506 775 527Q899 496 1000 522V560H0Z','#102e39');
+    for(let i=0;i<19;i++){const x=(i*67)%1000,y=479+(i%3)*24;local(c,x,y,0,()=>{shape(c,'M-10 7Q-17 -13 -16 -18Q-5 -12 0 3Q-3 -16 6 -26Q11 -10 6 3Q14 -13 25 -12Q15 1 10 9Z',i%2?'#406c59':'#305b52');line(c,[[1,7],[4,-17]],'#73906a',1);},.8+(i%3)*.15);}
+    stone(c,105,468,1.1);stone(c,922,460,.95);stone(c,736,490,.55);stone(c,354,481,.4);
+    for(const [x,y,s]of[[56,467,.72],[77,474,.5],[871,473,.9],[900,477,.5],[953,497,.65],[208,499,.5]]){glow(c,x,y-12,27,'#9cdce0',.23);mushroom(c,x,y,s);}
+    crystal(c,825,404,.9,'#9ed8d6',-.16);crystal(c,845,407,.64,'#b3c9e5',.25);glow(c,833,385,65,'#9bd9d7',.22);
+    // Hanging vines frame the upper field but leave the active arena unobstructed.
+    for(const [x,y,bend]of[[147,21,13],[178,0,-9],[851,5,12],[883,0,-11]]){c.save();c.strokeStyle='#557e66';c.lineWidth=1.6;c.beginPath();c.moveTo(x,y);c.bezierCurveTo(x+bend,y+40,x-bend,y+70,x+4,y+113);c.stroke();for(let j=1;j<6;j++)leaf(c,x+(j%2?4:-5),y+j*18,.4,'#6e9677',(j%2?1:-1)*.55);c.restore();}
+    c.strokeStyle='#c8c7a51c';c.lineWidth=1;c.strokeRect(13,13,974,534);
+  }
+  function background(c){
+    if(!scenery){const surface=typeof OffscreenCanvas!=='undefined'?new OffscreenCanvas(W,H):typeof document!=='undefined'?document.createElement('canvas'):null;
+      if(surface){surface.width=W;surface.height=H;const sc=surface.getContext('2d');if(sc){buildScenery(sc);scenery=surface;}}
+    }
+    if(scenery)c.drawImage(scenery,0,0);else buildScenery(c);
+  }
+
+  function sword(c,angle,glowing=false){local(c,0,0,angle,()=>{
+    shape(c,'M-4 -12L-5 -58L0 -74L6 -58L4 -12Z',gradient(c,-5,0,6,0,[[0,'#7a9eaf'],[.42,'#eff1d8'],[.6,'#bed5d7'],[1,'#668ba3']]),'#476576',.8);
+    line(c,[[0,-68],[0,-14]],'#739da8',1);line(c,[[1,-52],[3,-47],[0,-42],[2,-37]],glowing?'#d9f7e7':'#b3d9d7',1);
+    shape(c,'M-13 -13L-8 -8L-2 -10L2 -10L9 -7L15 -13L12 -5L5 -3L0 -5L-7 -3L-12 -5Z',palette.gold,'#665e4b',1);
+    shape(c,'M-2 -4L3 -4L2 8L-2 8Z','#5b4b3c','#b3a379',1);line(c,[[-2,0],[3,1],[-2,4],[2,5]],'#c9b282',1);
+    shape(c,'M-4 9L0 6L5 10L0 14Z','#a8c6bc','#847857',1);ellipse(c,0,-8,2.4,2.4,'#79c9c5');
+  });}
+  function segment(c,x1,y1,x2,y2,width,color,edge){
+    const dx=x2-x1,dy=y2-y1,len=Math.max(.01,Math.hypot(dx,dy)),nx=-dy/len*width/2,ny=dx/len*width/2;
+    c.beginPath();c.moveTo(x1+nx,y1+ny);c.lineTo(x2+nx*.75,y2+ny*.75);c.lineTo(x2-nx*.75,y2-ny*.75);c.lineTo(x1-nx,y1-ny);c.closePath();c.fillStyle=color;c.fill();if(edge){c.strokeStyle=edge;c.lineWidth=1.1;c.stroke();}
+  }
+  function leg(c,x,hipY,thigh,shin,front){
+    const kx=x+Math.sin(thigh)*18,ky=hipY+Math.cos(thigh)*18,fx=kx+Math.sin(shin)*18,fy=ky+Math.cos(shin)*18;
+    segment(c,x,hipY,kx,ky,11,front?'#637c86':'#3c5967',palette.ink);ellipse(c,kx,ky,5.5,4.3,front?'#a3b8b9':'#698c96',palette.ink,.7);
+    segment(c,kx,ky,fx,fy,9,front?'#69868e':'#395b67',palette.ink);
+    local(c,fx,fy,0,()=>{shape(c,'M-5 -5L5 -5L8 0L13 2L12 6L-6 6Z',front?'#3e4c4e':'#293c43',palette.ink,.9);line(c,[[-3,-3],[4,-3]],palette.gold,1);});
+  }
+  function arm(c,x,y,a,b,front,weapon,weaponAngle){
+    const ex=x+Math.sin(a)*15,ey=y+Math.cos(a)*15,hx=ex+Math.sin(b)*16,hy=ey+Math.cos(b)*16;
+    segment(c,x,y,ex,ey,11,front?'#91acb5':'#4f7788',palette.ink);ellipse(c,ex,ey,5,5,front?'#bdcbc5':'#6a929e',palette.ink,1);
+    segment(c,ex,ey,hx,hy,9,front?'#7696a3':'#3b6576',palette.ink);ellipse(c,hx,hy,4.5,4.5,'#d4a883','#6f6c60',.8);
+    if(weapon)local(c,hx,hy,0,()=>sword(c,weaponAngle,weapon==='magic'));
+    return [hx,hy];
+  }
+  function hero(c,p,time,reduced){
+    const aliases={attack_anticipation:'anticipation',attack_swing:'swing',attack_follow:'followthrough',magic_charge:'magiccharge',magic_release:'magicrelease'};
+    const pose=aliases[p.pose]||p.pose||'idle',elapsed=Math.max(0,p.poseTime||0),face=p.facing===-1?-1:1;
+    const cycle=(reduced?0:time)*13;
+    let lean=0,bodyY=0,crouch=0,l1=-.12,l2=.09,r1=.16,r2=-.07,aa=.45,ab=.15,blade=.67,backA=-.25,backB=-.12;
+    if(pose==='idle'){bodyY=reduced?0:Math.sin(time*2.5)*1.1;}
+    if(pose==='run'){const z=Math.sin(cycle);bodyY=-Math.abs(Math.cos(cycle))*2.5;lean=.09;l1=z*.64;l2=-z*.4;r1=-z*.64;r2=z*.4;aa=.32+z*.45;ab=.4-z*.4;backA=-z*.65;backB=.2+z*.4;blade=.9;}
+    if(pose==='anticipation'){const q=ease(elapsed/(p.poseDuration||.065));lean=-.09*q;aa=mix(.45,-2.05,q);ab=mix(.15,-2.45,q);blade=mix(.67,-1.1,q);l1=-.3;r1=.35;bodyY=1.5;}
+    if(pose==='swing'){const q=ease(elapsed/(p.poseDuration||.12));lean=.14;aa=mix(-2.05,1.15,q);ab=mix(-2.45,.9,q);blade=mix(-1.1,2.02,q);l1=-.3;r1=.44;r2=-.25;backA=-.55;bodyY=-1;}
+    if(pose==='followthrough'){const q=ease(elapsed/(p.poseDuration||.14));lean=mix(.14,0,q);aa=mix(1.15,.45,q);ab=mix(.9,.15,q);blade=mix(2.02,.67,q);l1=-.3+q*.18;r1=.44-q*.28;}
+    if(pose==='dodge'){crouch=11;lean=.3;l1=-.9;l2=.75;r1=1;r2=-.6;aa=-.65;ab=-1.2;blade=-1.7;backA=.8;backB=1.5;bodyY=3;}
+    if(pose==='magiccharge'){const q=clamp(elapsed/.45);lean=-.08;aa=.3;ab=.6;blade=1.1;backA=-1.05;backB=1.6;bodyY=reduced?0:-Math.sin(q*Math.PI)*1.5;}
+    if(pose==='magicrelease'){lean=.12;aa=.4;ab=.7;blade=1.2;backA=1.1;backB=1.7;l1=-.35;r1=.4;}
+    if(pose==='hit'){lean=-.17;bodyY=2;aa=-.2;ab=.7;blade=.2;backA=-.6;l1=-.4;r1=.5;}
+    if(pose==='victory'){lean=-.04;aa=-2.7;ab=-2.95;blade=.12;backA=-.2;bodyY=reduced?0:Math.sin(time*2)*.6;}
+    if(pose==='defeat'){crouch=15;lean=.38;l1=-1.15;l2=1;r1=1.1;r2=-.4;aa=.4;ab=1.2;blade=1.75;backA=.4;backB=1.4;bodyY=6;}
+    const invulnerable=!!p.invulnerable||p.invuln>0;
+    ellipse(c,p.x,FLOOR+5,24+(pose==='dodge'?8:0),6,'#071f2d70');
+    if(pose==='dodge'&&!reduced){for(let i=1;i<=3;i++){c.save();c.globalAlpha=.12*(1-i/4);local(c,p.x-face*i*19,p.y||FLOOR,lean,()=>shape(c,'M-24 -68Q-12 -94 7 -83L19 -58L25 -18L-4 -12L-25 -25Z','#b2efdf'),face,1);c.restore();}}
+    if(invulnerable){ellipse(c,p.x,FLOOR+3,30,8,null,'#b4f0df',1.4);glow(c,p.x,(p.y||FLOOR)-47,68,'#9cdfdc',.13);}
+    local(c,p.x,p.y||FLOOR,0,()=>{
+      if(pose==='defeat')c.globalAlpha*=.78;
+      local(c,0,bodyY,lean,()=>{
+        // The cape is a deforming cloth layer, not part of a flattened actor image.
+        const trail=pose==='run'||pose==='dodge'?12:pose==='swing'?8:0,wave=reduced?0:Math.sin(time*5)*3;
+        c.beginPath();c.moveTo(-10,-72+crouch);c.bezierCurveTo(-29,-67+crouch,-37-trail,-44+crouch,-35-trail+wave,-13+crouch);c.lineTo(-14-wave,-19+crouch);c.lineTo(5,-27+crouch);c.quadraticCurveTo(-7,-51+crouch,-10,-72+crouch);c.fillStyle=gradient(c,-30,-70,0,-10,[[0,'#4f9699'],[.45,'#286471'],[1,'#173d56']]);c.fill();c.strokeStyle='#173847';c.lineWidth=1.3;c.stroke();
+        line(c,[[-17,-64+crouch],[-26-trail*.6,-41+crouch],[-26-trail+wave,-19+crouch]],'#81b3a9',1.1);
+        line(c,[[-10,-60+crouch],[-15,-31+crouch],[-11,-22+crouch]],'#477f83',1);
+        leg(c,-5,-35+crouch,l1,l2,false);
+        arm(c,-9,-68+crouch,backA,backB,false,false,0);
+        leg(c,7,-35+crouch,r1,r2,true);
+        shape(c,`M-12 ${-70+crouch}L7 ${-74+crouch}L16 ${-62+crouch}L12 ${-36+crouch}L-10 ${-36+crouch}L-17 ${-54+crouch}Z`,gradient(c,-15,-70,18,-30,[[0,'#d0d9cb'],[.36,'#9db8bc'],[.6,'#6c96a3'],[1,'#395f77']]),palette.ink,1.4);
+        line(c,[[-7,-65+crouch],[1,-54+crouch],[9,-65+crouch]],'#e8e3bd',1.2);line(c,[[1,-55+crouch],[1,-43+crouch]],'#c6cfb4',1);
+        shape(c,`M-13 ${-42+crouch}L14 ${-42+crouch}L15 ${-35+crouch}L-12 ${-34+crouch}Z`,'#5d5240',palette.ink,1);
+        local(c,2,-38+crouch,0,()=>{shape(c,'M-4 -4H4V4H-4Z',palette.gold);shape(c,'M-2 -2H2V2H-2Z','#3b585c');});
+        shape(c,`M-11 ${-34+crouch}L-13 ${-25+crouch}L-2 ${-22+crouch}L0 ${-33+crouch} M3 ${-34+crouch}L5 ${-22+crouch}L17 ${-26+crouch}L13 ${-34+crouch}Z`,'#6f95a0',palette.ink,1);
+        local(c,0,-79+crouch,pose==='hit'?-.12:pose==='defeat'?.25:0,()=>{
+          shape(c,'M-7 -12Q-11 -28 3 -28Q15 -25 12 -8L7 2L-3 2Z','#d8ae88','#4a5360',1);
+          shape(c,'M-8 -12Q-15 -26 -2 -32Q11 -37 16 -24L14 -13L10 -21L3 -21L-2 -16Z','#4c4038',palette.ink,1);
+          shape(c,'M-11 -20Q-12 -34 1 -35Q12 -35 16 -24L9 -26L0 -24Z','#a7c0c5',palette.ink,1);
+          shape(c,'M-1 -34L3 -42L6 -34L5 -26Z','#4d9caa','#31596e',.7);line(c,[[-8,-26],[0,-29],[10,-28]],'#e4e1bf',1);
+          line(c,[[6,-14],[10,-14]],'#263c47',1.5);line(c,[[12,-10],[15,-8],[12,-6]],'#ad896c',.9);
+          line(c,[[7,-2],[11,-3]],pose==='hit'?'#7f584b':'#91624e',.8);
+          shape(c,'M-9 0L8 1L11 7L-5 8L-11 5Z','#4f8e8c',palette.ink,.8);line(c,[[-5,4],[5,5]],'#a5c6b0',.8);
+        });
+        // Front shoulder and weapon arm are separately articulated for every attack phase.
+        ellipse(c,12,-67+crouch,9,7,'#afc3bf',palette.ink,1.3);line(c,[[6,-69+crouch],[15,-71+crouch],[19,-67+crouch]],'#d7d4aa',1);
+        arm(c,13,-66+crouch,aa,ab,true,pose.startsWith('magic')?'magic':true,blade);
+        if(pose==='magiccharge'||pose==='magicrelease'){
+          const q=pose==='magiccharge'?clamp(elapsed/.45):1,ox=pose==='magicrelease'?38:19,oy=-62+crouch;
+          glow(c,ox,oy,35+q*15,'#ffd492',.4);ellipse(c,ox,oy,5+q*4,5+q*4,'#f5e7ba');ellipse(c,ox,oy,11+q*6,11+q*6,null,'#dcb879',1.2);
+          for(let i=0;i<5;i++){const a=i*TAU/5+(reduced?0:time*2);ellipse(c,ox+Math.cos(a)*21,oy+Math.sin(a)*21,1.3,1.3,'#fff2c7');}
+        }
+      });
+    },face,1);
+    if(pose==='hit'){glow(c,p.x,(p.y||FLOOR)-55,42,'#f0aa91',.18);}
+    if(pose==='swing'){
+      const q=clamp(elapsed/(p.poseDuration||.12));c.save();c.globalAlpha=.72*Math.sin(q*Math.PI);local(c,p.x,p.y||FLOOR,0,()=>{c.strokeStyle='#e5f7dd';c.lineWidth=6;c.beginPath();c.ellipse(20,-55,76,64,0,-1.6+q*.2,1.2+q*.2);c.stroke();c.strokeStyle='#79d3d1';c.lineWidth=2;c.beginPath();c.ellipse(20,-55,83,70,0,-1.55,1.1);c.stroke();},face,1);c.restore();
+    }
+  }
+
+  function attackDuration(enemy){
+    return enemy.attackDuration||({jump:.55,rush:.42,heavy_jump:.62,triple_bounce:.32,crystal_charge:.52})[enemy.pattern]||.5;
+  }
+  function telegraph(c,e,time,reduced){
+    if(e.ai!=='TELEGRAPH'&&!(e.ai==='ATTACK'&&e.pattern!=='rush'&&e.pattern!=='crystal_charge'))return;
+    const boss=e.kind==='boss',target=Number.isFinite(e.attackTargetX)?e.attackTargetX:e.x;
+    const radius=({jump:46,rush:42,heavy_jump:70,triple_bounce:54,crystal_charge:58})[e.pattern]||(boss?70:46);
+    const alpha=e.ai==='ATTACK'?.28:reduced?.55:.4+.13*Math.sin(time*12);
+    c.save();c.globalAlpha=alpha;ellipse(c,target,FLOOR+2,radius,11,'#e77e653e','#f3ad89',2);
+    line(c,[[target-radius+8,FLOOR+2],[target+radius-8,FLOOR+2]],'#f8b38d',1.2);
+    for(let i=-1;i<=1;i++)line(c,[[target+i*17-4,FLOOR-4],[target+i*17,FLOOR],[target+i*17+4,FLOOR-4]],'#ffe1a2',1.6);
+    if(e.pattern==='rush'||e.pattern==='crystal_charge'){
+      const dir=target>=e.x?1:-1;line(c,[[e.x,FLOOR+7],[target,FLOOR+7]],'#d8b57e',2);line(c,[[target-dir*12,FLOOR],[target,FLOOR+7],[target-dir*12,FLOOR+14]],'#f5d59d',2);
+    }
+    c.restore();
+  }
+  function slime(c,e,time,reduced){
+    const boss=e.kind==='boss',size=boss?1.75:1.04,ai=e.ai||'IDLE',t=e.aiTime||0,phase2=e.phase===2;
+    let sx=1,sy=1,lift=0,tilt=0,opacity=1;
+    if(ai==='IDLE'){sx=1+(reduced?0:Math.sin(time*3)*.025);sy=1-(sx-1)*.7;}
+    if(ai==='APPROACH'){const b=Math.abs(Math.sin(t*5));lift=reduced?0:b*12;sx=1+(1-b)*.08;sy=1-(1-b)*.09;}
+    if(ai==='TELEGRAPH'){const q=clamp(t/(t+(e.telegraphRemaining||.3)));sx=1+.24*q;sy=1-.27*q;tilt=e.pattern==='crystal_charge'?(e.facing===-1?-.04:.04):0;}
+    if(ai==='ATTACK'){
+      const q=clamp(Number.isFinite(e.attackProgress)?e.attackProgress:t/attackDuration(e));
+      if(e.pattern==='rush'||e.pattern==='crystal_charge'){sx=1.19;sy=.87;tilt=(e.facing===-1?-1:1)*.08;}
+      else{lift=Number.isFinite(e.lift)?e.lift:Math.sin(q*Math.PI)*(boss?(e.pattern==='heavy_jump'?126:72):74);sx=.9+.08*Math.sin(q*Math.PI);sy=1.11-.05*Math.sin(q*Math.PI);}
+    }
+    if(ai==='RECOVERY'){const q=clamp(t/.35);sx=mix(1.2,1,q);sy=mix(.75,1,q);}
+    if(ai==='HIT_REACTION'){sx=1.15;sy=.79;tilt=(e.facing===-1?1:-1)*.09;}
+    if(ai==='DEFEATED'){const q=clamp(t/.7);sx=1+q*.35;sy=1-q*.86;opacity=1-q;}
+    ellipse(c,e.x,FLOOR+5,(boss?48:31)*(1-lift/450),boss?9:6,'#08253066');
+    c.save();c.globalAlpha=opacity;
+    local(c,e.x,(e.y||FLOOR)-lift,tilt,()=>{
+      const body=gradient(c,-28,-61,25,3,[[0,boss?'#b7d5a0':'#c1df8d'],[.3,boss?'#81bd97':'#8fc96b'],[.7,boss?'#4c9f8b':'#50a771'],[1,boss?'#3a7c83':'#3b8070']]);
+      shape(c,'M-37 -5Q-43 -24 -30 -40Q-24 -65 -3 -65Q18 -68 29 -47Q46 -30 39 -10Q28 5 2 3Q-25 6 -37 -5Z',body,boss?'#b3d5ad':'#a2c789',1.15);
+      shape(c,'M-33 -13Q-23 -3 -3 -7Q22 -9 34 -21Q39 -7 21 -3L-18 -1Z',boss?'#4b8d8b':'#549c70');
+      shape(c,'M-27 -39Q-22 -55 -7 -57Q1 -58 6 -54Q-15 -51 -19 -35Z','#e4efba');
+      ellipse(c,-25,-23,3,7,'#c7e9ad');ellipse(c,20,-11,5,2.4,'#d2e6a0');ellipse(c,25,-35,2,3,'#c1dca2');
+      if(boss){
+        glow(c,1,-32,30,phase2?'#e9c6ec':'#b2e7e4',.4);
+        local(c,0,-14,0,()=>crystal(c,0,0,.62,phase2?'#c3b3e0':'#a8dae0'));
+        ellipse(c,1,-31,12,15,null,phase2?'#e7d6e7':'#d5ecd0',.7);
+        line(c,[[-8,-31],[1,-42],[10,-31],[1,-20],[-8,-31]],'#e9e9c1',.65);
+      }
+      const look=(e.facing===-1?-1:1)*2,ey=boss?-38:-30;
+      ellipse(c,-13+look,ey,4.6,boss?6:7,'#193e4a');ellipse(c,13+look,ey,4.6,boss?6:7,'#193e4a');ellipse(c,-14+look,ey-2,1.2,1.8,'#f0edcc');ellipse(c,12+look,ey-2,1.2,1.8,'#f0edcc');
+      if(ai==='TELEGRAPH'||ai==='ATTACK'||phase2){line(c,[[-20,ey-10],[-9,ey-6]],'#3d6655',2);line(c,[[8,ey-6],[20,ey-10]],'#3d6655',2);}
+      if(ai==='HIT_REACTION'){line(c,[[-4,-18],[0,-23],[4,-18],[0,-13],[-4,-18]],'#2a5860',1.4);}
+      else{c.beginPath();c.moveTo(-6,-17);c.quadraticCurveTo(0,ai==='ATTACK'?-22:-10,7,-17);c.strokeStyle='#2c5c60';c.lineWidth=1.6;c.stroke();}
+      if(boss){local(c,0,-63,ai==='DEFEATED'?.2:reduced?0:Math.sin(time*2)*.02,()=>{
+        shape(c,'M-24 -3L-28 -24L-15 -17L-7 -32L3 -19L14 -31L20 -15L31 -22L25 -2Z','#b6a276','#586f65',1.2);
+        shape(c,'M-20 -5L-23 -17L-14 -12L-7 -24L2 -13L13 -23L18 -10L25 -15L21 -5Z','#dfca8d');line(c,[[-23,-1],[25,-1]],'#f3e1a8',2);
+        crystal(c,2,-5,.3,phase2?'#dabce0':'#93cbd5');ellipse(c,-15,-6,2,2,'#83b7b4');ellipse(c,17,-6,2,2,'#83b7b4');
+      });}
+      if(ai==='TELEGRAPH'&&e.pattern==='crystal_charge'){ellipse(c,0,-31,43,43,null,'#d8d5f3',1.5);for(let i=0;i<5;i++){const a=i*TAU/5+(reduced?0:time*3);ellipse(c,Math.cos(a)*42,-31+Math.sin(a)*42,2,2,'#e0e9ef');}}
+    },size*sx,size*sy);
+    c.restore();
+  }
+
+  const effectDuration={slash:.22,impact:.3,damage:.85,dodge:.32,fire:.65,burst:.8,shockwave:.55,charge:.6};
+  function effects(c,state,time,reduced){
+    for(const f of (state.effects||[]).slice(-48)){
+      const duration=f.ttl||f.initialLife||effectDuration[f.type]||.6,q=clamp(1-(f.life||0)/duration),a=1-q;
+      const x=f.x??500,y=f.y??FLOOR;
+      c.save();c.globalAlpha=a;
+      if(f.type==='damage'){
+        const yy=(y>FLOOR-20?y-75:y)-(reduced?8:q*30),value=typeof f.value==='number'?Math.round(f.value):f.value||'';
+        c.font='700 25px Georgia, serif';c.textAlign='center';c.lineJoin='round';c.strokeStyle='#122d3d';c.lineWidth=4;c.strokeText(String(value),x,yy);c.fillStyle=(f.target==='player'||Number(f.value)<0)?'#efb19a':'#f3e8b8';c.fillText(String(value),x,yy);
+      }else if(f.type==='impact'){
+        const yy=y>FLOOR-15?y-35:y;
+        for(let i=0;i<7;i++){const angle=i*TAU/7+.25,r=9+q*27;line(c,[[x+Math.cos(angle)*r*.35,yy+Math.sin(angle)*r*.35],[x+Math.cos(angle)*r,yy+Math.sin(angle)*r]],i%2?'#d6efdd':'#e9c68b',2);}
+        ellipse(c,x,yy,4+a*4,4+a*4,'#f3f0c8');
+      }else if(f.type==='fire'||f.type==='burst'){
+        const yy=y>FLOOR-20?y-43:y,rad=18+ease(q)*(f.type==='burst'?80:58);
+        glow(c,x,yy,rad*1.4,'#efc681',.46);ellipse(c,x,yy,rad,rad*.75,null,'#e6c790',2+a*2);ellipse(c,x,yy,rad*.68,rad*.5,null,'#a9dddb',1.5);
+        for(let i=0;i<12;i++){const angle=i*TAU/12+.3,r=rad*(.5+q);const xx=x+Math.cos(angle)*r,y2=yy+Math.sin(angle)*r*.7;local(c,xx,y2,angle,()=>shape(c,'M-3 0L0 -9L3 0L0 5Z',i%2?'#efdeb0':'#b5dfd7'),.6+a*.7);}
+        if(f.type==='fire'&&state.player){const px=state.player.x+state.player.facing*25;line(c,[[px,FLOOR-65],[(px+x)/2,yy-16],[x,yy]],'#f2d898',a*4+.5);}
+      }else if(f.type==='shockwave'){
+        const rad=12+q*105;ellipse(c,x,FLOOR+3,rad,rad*.15,null,'#d5d9bd',2);ellipse(c,x,FLOOR+5,rad*.8,rad*.11,null,'#8bbcb9',1);
+      }else if(f.type==='charge'){
+        const yy=y>FLOOR-20?y-65:y;ellipse(c,x,yy,28-q*13,28-q*13,null,'#e3d2ac',1.3);glow(c,x,yy,38,'#e4c790',.2);
+      }else if(f.type==='slash'){
+        const dir=f.facing||state.player?.facing||1;local(c,x,y>FLOOR-20?y-45:y,0,()=>{c.beginPath();c.ellipse(0,0,30+q*23,37+q*18,.4,-1.1,1.1);c.strokeStyle='#d6eee0';c.lineWidth=a*4+.5;c.stroke();},dir,1);
+      }else if(f.type==='dodge'){ellipse(c,x,FLOOR+3,18+q*30,5,null,'#9bd6ce',1.2);}
+      c.restore();
+    }
+  }
+  function draw(ctx,state={},visualTime=0,settings={}){
+    if(!ctx)return;
+    const t=Number.isFinite(visualTime)?visualTime:0,reduced=!!settings.reducedMotion;
+    ctx.save();ctx.clearRect(0,0,W,H);ctx.fillStyle='#102e39';ctx.fillRect(0,0,W,H);
+    const shake=!reduced&&settings.shake!==false?Math.min(4.5,(state.shake||0)*15):0;
+    if(shake)ctx.translate(Math.sin(t*73)*shake,Math.cos(t*59)*shake*.55);
+    background(ctx);
+    if(!reduced){for(let i=0;i<17;i++){const x=100+(i*137)%811+Math.sin(t*.6+i)*11,y=125+(i*71)%259+Math.sin(t*.7+i*2)*7;ctx.save();ctx.globalAlpha=.2+.35*(.5+.5*Math.sin(t*1.4+i));ellipse(ctx,x,y,1.3,1.3,i%3?'#d1e6c1':'#9bdee5');ctx.restore();}}
+    if(state.stage==='crystal'){
+      const bob=reduced?0:Math.sin(t*2)*4;
+      glow(ctx,550,345+bob,78,'#b5e8de',.45);
+      ellipse(ctx,550,FLOOR+2,38,8,null,'#b8d7be',1);
+      local(ctx,550,367+bob,0,()=>{crystal(ctx,0,0,1.25,'#bce5dd');ellipse(ctx,0,-24,32,39,null,'#b3dcd1',.8);});
+    }
+    if(state.enemy)telegraph(ctx,state.enemy,t,reduced);
+    if(state.player)hero(ctx,state.player,t,reduced);
+    if(state.enemy)slime(ctx,state.enemy,t,reduced);
+    effects(ctx,state,t,reduced);
+    ctx.restore();
+  }
+  return {draw,width:W,height:H,ground:FLOOR};
+})();
+
+;
+/* Original procedural sound design; no external samples, no campaign state. */
+const RebornAudio=(()=>{
+  const presets={
+    sword:[420,160,.12,'sawtooth'],impact:[120,45,.16,'triangle'],bounce:[170,270,.11,'sine'],slimeAttack:[180,70,.25,'triangle'],
+    playerHit:[160,65,.24,'sawtooth'],dodge:[450,900,.12,'sine'],magicCharge:[260,920,.5,'sine'],magicExplosion:[90,35,.5,'sawtooth'],
+    bossEntrance:[100,65,.8,'triangle'],bossDeath:[330,880,.8,'sine'],victory:[523,1046,.8,'sine']
+  };
+  function create(initial={}){
+    const settings={master:.7,voice:.85,sfx:.65,music:0,muted:false,...initial};
+    let context,master,sfxBus,musicBus,unlocked=false,ducked=false,musicNodes=[],active=new Set();
+    const clamp=v=>Math.max(0,Math.min(1,Number(v)||0));
+    function mix(){
+      if(!context)return;
+      const t=context.currentTime;
+      master.gain.setTargetAtTime(settings.muted?0:settings.master,t,.025);
+      sfxBus.gain.setTargetAtTime(settings.sfx*(ducked?.35:1),t,.025);
+      musicBus.gain.setTargetAtTime(settings.music*(ducked?.18:1)*.045,t,.08);
+    }
+    function unlock(){
+      unlocked=true;
+      try{
+        if(!context){const C=globalThis.AudioContext||globalThis.webkitAudioContext;if(!C)return false;context=new C();master=context.createGain();sfxBus=context.createGain();musicBus=context.createGain();master.connect(context.destination);sfxBus.connect(master);musicBus.connect(master);}
+        if(context.state==='suspended')context.resume().catch(()=>{});
+        mix();music();return true;
+      }catch{return false;}
+    }
+    function music(){
+      if(!context||!unlocked)return;
+      if(settings.music>0&&!musicNodes.length){
+        // An original, quiet open fifth; optional ambience rather than a borrowed score.
+        [146.83,220,293.66].forEach((f,i)=>{const o=context.createOscillator(),g=context.createGain();o.type='sine';o.frequency.value=f;g.gain.value=i===0?.6:.25;o.connect(g);g.connect(musicBus);o.start();musicNodes.push({o,g});});
+      }else if(settings.music===0){for(const {o,g} of musicNodes){o.stop();o.disconnect();g.disconnect();}musicNodes=[];}
+    }
+    function configure(values){for(const key of ['master','voice','sfx','music'])if(key in values)settings[key]=clamp(values[key]);if('muted'in values)settings.muted=!!values.muted;mix();music();}
+    function sfx(id){
+      const aliases={swing:'sword',hit:'impact',attack:'slimeAttack',hurt:'playerHit',magic:'magicExplosion',charge:'magicCharge',boss:'bossEntrance',win:'victory',sword_swing:'sword',sword_impact:'impact',slime_bounce:'bounce',slime_warning:'bounce',slime_jump:'slimeAttack',slime_rush:'slimeAttack',slime_land:'impact',slime_defeat:'magicExplosion',player_hit:'playerHit',magic_charge:'magicCharge',magic_explosion:'magicExplosion',crystal_charge:'magicCharge',boss_entrance:'bossEntrance',boss_defeat:'bossDeath',boss_phase:'bossEntrance',correct:'victory',incorrect:'bounce',defeat:'playerHit'};
+      const p=presets[aliases[id]||id];if(!p||!unlocked||!context||settings.muted)return false;
+      const [f,to,duration,type]=p,t=context.currentTime,o=context.createOscillator(),g=context.createGain();
+      o.type=type;o.frequency.setValueAtTime(f,t);o.frequency.exponentialRampToValueAtTime(to,t+duration);
+      g.gain.setValueAtTime(.001,t);g.gain.exponentialRampToValueAtTime(type==='sawtooth'?.12:.25,t+.008);g.gain.exponentialRampToValueAtTime(.001,t+duration);
+      o.connect(g);g.connect(sfxBus);active.add(o);o.onended=()=>{active.delete(o);o.disconnect();g.disconnect();};o.start();o.stop(t+duration+.02);return true;
+    }
+    function stop(){for(const o of active){try{o.stop();}catch{}}for(const {o,g} of musicNodes){o.stop();o.disconnect();g.disconnect();}musicNodes=[];}
+    return{settings,unlock,configure,sfx,stop,duck(value){ducked=!!value;mix();},get voiceVolume(){return settings.muted?0:settings.master*settings.voice;},get unlocked(){return unlocked;},get contextState(){return context?.state||'unavailable';}};
+  }
+  return{create,presets};
+})();
+
+;
+/* File-first, single-channel voice adapter. Its events never change combat rules. */
+const RebornVoice=(()=>{
+  function create(manifest,mixer,options={}){
+    const table=new Map(manifest.utterances.map(x=>[x.id,x]));
+    const AudioClass=options.Audio||globalThis.Audio, synth=options.speechSynthesis||globalThis.speechSynthesis;
+    const Utterance=options.SpeechSynthesisUtterance||globalThis.SpeechSynthesisUtterance;
+    const timer=options.setTimeout||globalThis.setTimeout,clear=options.clearTimeout||globalThis.clearTimeout;
+    let generation=0,active=null,timeout=null,currentId=null,slow=false,fallback=false;
+    let status={state:'idle',source:null,message:'음성 파일 0개 · 원문 도움 또는 선택적 기기 음성을 사용할 수 있습니다.'};
+    function report(state,source,message){status={state,source,message,id:currentId};options.onStatus?.(status);}
+    function stop(){generation++;if(timeout!==null){clear(timeout);timeout=null;}if(active){active.onplaying=active.onended=active.onerror=null;active.pause?.();active=null;}synth?.cancel?.();mixer.duck(false);if(status.state==='playing'||status.state==='loading')report('stopped',null,'음성이 멈췄습니다. 다시 듣기로 재생할 수 있습니다.');}
+    function configure(values){if('slow'in values)slow=!!values.slow;if('fallback'in values)fallback=!!values.fallback;stop();report('idle',null,'재생 설정 변경됨 · 다시 듣기를 누르세요.');}
+    function play(id){
+      stop();currentId=id;const item=table.get(id),token=generation;
+      const live=()=>generation===token;
+      if(!item){report('missing',null,'음성 대본을 찾지 못했습니다.');return false;}
+      if(!mixer.unlocked){report('blocked',null,'먼저 시작 또는 듣기 버튼을 눌러 주세요.');return false;}
+      if(mixer.voiceVolume<=0){report('muted',null,'음성이 꺼져 있습니다. 소리를 켜거나 원문 도움을 이용하세요.');return false;}
+      const finish=(state,source,message)=>{if(!live())return;generation++;clear(timeout);timeout=null;if(active){active.onplaying=active.onended=active.onerror=null;active.pause?.();active=null;}mixer.duck(false);report(state,source,message);};
+      function browserFallback(reason){
+        if(!live())return;
+        if(!fallback){finish('missing',null,reason+' · 원문 도움 또는 「기기 음성 대안」을 선택하세요.');return false;}
+        const voices=synth?.getVoices?.()||[],voice=voices.find(v=>v.localService&&/^en-US$/i.test(v.lang))||voices.find(v=>v.localService&&/^en[-_]/i.test(v.lang));
+        if(!voice||!Utterance){finish('missing',null,'설치된 로컬 영어 음성이 없습니다. 원문 도움으로 진행할 수 있습니다.');return false;}
+        const utterance=new Utterance(item.en);utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=slow?.75:1;utterance.volume=mixer.voiceVolume;
+        utterance.onstart=()=>{if(!live())return;mixer.duck(true);report('playing','browser-fallback','기기 합성 음성 재생 중 · 제작 음성 파일 아님');options.onHeard?.({id,source:'browser-fallback'});};
+        utterance.onend=()=>finish('ended','browser-fallback','기기 음성 재생 완료');utterance.onerror=()=>finish('error','browser-fallback','기기 음성을 재생하지 못했습니다. 원문 도움을 사용하세요.');
+        timeout=timer(()=>{if(live()){synth.cancel();finish('error','browser-fallback','음성 응답 시간이 초과되었습니다. 다시 듣거나 원문을 보세요.');}},15000);
+        report('loading','browser-fallback','기기 합성 음성 준비 중');
+        try{synth.speak(utterance);return true;}catch{finish('error','browser-fallback','기기 음성을 재생하지 못했습니다. 원문 도움을 사용하세요.');return false;}
+      }
+      if(!item.available||!item.embedded)return browserFallback('제작 음성 파일 미포함');
+      try{
+        active=new AudioClass(item.embedded);active.volume=mixer.voiceVolume;active.playbackRate=slow?.75:1;active.preservesPitch=true;
+        active.onplaying=()=>{if(!live())return;mixer.duck(true);report('playing','asset','음성 파일 재생 중');options.onHeard?.({id,source:'asset'});};
+        active.onended=()=>finish('ended','asset','음성 파일 재생 완료');
+        active.onerror=()=>{if(!live())return;active?.pause?.();active=null;clear(timeout);timeout=null;browserFallback('음성 파일 오류');};
+        timeout=timer(()=>{if(live()){active?.pause?.();finish('error','asset','음성 파일 재생 시간이 초과되었습니다.');}},15000);
+        report('loading','asset','음성 파일 준비 중');const pending=active.play();pending?.catch?.(()=>{if(live()){active?.pause?.();active=null;clear(timeout);timeout=null;browserFallback('브라우저에서 음성 재생을 거부했습니다');}});return true;
+      }catch{return browserFallback('음성 재생 장치를 사용할 수 없습니다');}
+    }
+    return{play,replay:()=>currentId?play(currentId):false,stop,configure,get status(){return status;},get currentId(){return currentId;},get slow(){return slow;},get fallback(){return fallback;},getItem:id=>table.get(id)};
+  }
+  return{create};
+})();
+
+;
+/* Standalone lab shell. No access to campaign storage. A single fixed-step RAF. */
+const RebornApp=(()=>{
+  const game=RebornCombat.create();
+  const settings={master:.7,voice:.85,sfx:.65,music:0,muted:false,shake:true,reducedMotion:globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches||false};
+  const audio=RebornAudio.create(settings);
+  document.body.dataset.reducedMotion=String(settings.reducedMotion);
+  let voiceSession=0,voiceChallenge=null,hintChallenge=null,visibleMode='',overlayKey='',lastFrame=0,accumulator=0,lastHud=0,words=[],showEnglish=false,showKorean=false;
+  const held=new Set(),pointerActions=new Map();
+  const escape=text=>String(text??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
+  const labels={left:'← 왼쪽',right:'오른쪽 →',attack:'검 공격',dodge:'회피',magic:'마법'};
+  const button=(action,text,extra='')=>`<button type="button" data-action="${action}" ${extra}>${text}</button>`;
+  document.getElementById('app').innerHTML=`<div class="shell">
+    <header class="topbar"><div class="brand"><span class="eyebrow">ENGLISH QUEST / COMBAT LAB</span><h1>REBORN <span>THE AWAKENING</span></h1></div><span class="badge">PHASE 01 · 독립 전투 실험실</span>${button('pause','Ⅱ 일시정지','aria-label="일시정지 또는 계속하기"')}</header>
+    <section class="hud" aria-label="전투 상태"><div class="hero-hp"><div class="meter-label"><b>숲의 수호자</b><span id="hero-health"></span></div><div class="hp-track"><div id="hero-bar" class="hp-fill"></div></div></div><div class="objective" id="objective" role="status"></div><div class="enemy-hp"><div class="meter-label"><b id="enemy-name">ENCHANTED FOREST</b><span id="enemy-health"></span></div><div class="hp-track"><div id="enemy-bar" class="hp-fill"></div></div></div></section>
+    <section class="arena" aria-label="숲 전투장"><canvas id="battle" width="1000" height="560" aria-label="좌우 이동, 검 공격, 회피로 싸우는 실시간 숲 전투장"></canvas><div id="overlay" class="overlay" hidden></div></section>
+    <div class="arena-caption"><span id="scene-label">THE WHISPERING WOODS</span><span id="combat-feedback" role="status"></span><span id="charge">마법 수정 발견 전</span></div>
+    <section class="toolbar" aria-label="조작과 음성"><div class="control-pad">${button('left','<strong>←</strong><small>A · 이동</small>','aria-label="왼쪽 이동"')}${button('right','<strong>→</strong><small>D · 이동</small>','aria-label="오른쪽 이동"')}${button('attack','<strong>검</strong><small>J · 공격</small>','aria-label="검 공격"')}${button('dodge','<strong>회피</strong><small>K · 피하기</small>','aria-label="회피"')}${button('magic','<strong>마법</strong><small>L · 문장</small>','aria-label="영어 마법"')}</div>
+    <div class="voice-panel"><div class="button-row">${button('replay','▶ 듣기 / 다시 듣기 <kbd>R</kbd>')}${button('english','영어 원문')}${button('korean','한국어 뜻 <kbd>H</kbd>')}</div><div class="audio-options"><label><input id="slow" type="checkbox"> 느리게 0.75×</label><label><input id="fallback" type="checkbox"> 기기 음성 대안 (합성)</label></div><p id="voice-status" class="voice-status" role="status"></p><p id="hint-text" class="hint-text" hidden></p></div></section>
+    <details class="settings"><summary>소리·화면 설정</summary><div class="settings-grid">${[['master','전체',70],['voice','영어 음성',85],['sfx','전투 효과음',65],['music','숲의 화음',0]].map(([id,label,val])=>`<label>${label}<input type="range" data-volume="${id}" min="0" max="100" value="${val}" aria-label="${label} 음량"></label>`).join('')}<label><input id="muted" type="checkbox"> 전체 음소거</label><label><input id="shake" type="checkbox" checked> 큰 충격의 화면 흔들림</label><label><input id="reduced" type="checkbox" ${settings.reducedMotion?'checked':''}> 움직임 줄이기</label></div><p class="muted">음성 파일 미포함 · 기기 합성 음성은 선택 사항입니다. 음악 없이도 모든 조작이 가능합니다.</p></details>
+    <details class="expression-practice"><summary>30개 표현 미리 듣기·복습</summary><p>전투 중 열면 안전하게 멈춥니다. 제작 음성 파일은 아직 제공되지 않았습니다.</p><div class="expression-list">${RebornVoiceManifest.utterances.map(x=>button('phrase',`<b>${escape(x.en)}</b><span>${escape(x.ko)}</span>`,`data-voice="${x.id}"`)).join('')}</div></details>
+    <footer class="footer"><span>직접 움직이고, 듣고, 행동하세요.</span><span>v0.8 모험·아카데미 저장과 완전히 분리된 연습입니다.</span></footer></div>`;
+  const $=id=>document.getElementById(id),canvas=$('battle'),ctx=canvas.getContext('2d'),overlay=$('overlay');
+  const voice=RebornVoice.create(RebornVoiceManifest,audio,{
+    onStatus(status){$('voice-status').textContent=status.message;},
+    onHeard(event){if(game.state.session===voiceSession&&game.state.challenge===voiceChallenge&&voiceChallenge?.voiceId===event.id)game.heard(event.source);}
+  });
+  $('voice-status').textContent=voice.status.message;
+  function playVoice(id){voiceSession=game.state.session;voiceChallenge=game.state.challenge;voice.play(id);renderHints();}
+  function renderHints(){const item=voice.getItem(game.state.challenge?.voiceId||voice.currentId);$('hint-text').hidden=!(item&&(showEnglish||showKorean));$('hint-text').textContent=item?[showEnglish?item.en:'',showKorean?item.ko:''].filter(Boolean).join(' — '):'';}
+  function reveal(kind){game.assist(kind);if(kind==='english')showEnglish=true;else showKorean=true;renderHints();}
+  function release(){held.clear();pointerActions.clear();for(const action of Object.keys(labels))game.input(action,false);document.querySelectorAll('.pressed').forEach(x=>x.classList.remove('pressed'));}
+  function pause(){release();game.pause();voice.stop();audio.stop();sync();}
+  function drain(){for(const event of game.drainEvents()){if(event.type==='sfx')audio.sfx(event.id);if(event.type==='voice')playVoice(event.id);}}
+  function act(action,element){
+    audio.unlock();
+    if(action==='start'||action==='skip'){release();voice.stop();game.start(action==='skip');}
+    else if(action==='proceed')game.proceed();
+    else if(action==='restart'){release();voice.stop();game.restart();showEnglish=showKorean=false;}
+    else if(action==='pause'){if(game.state.mode==='PAUSED')game.resume();else pause();}
+    else if(action==='resume')game.resume();
+    else if(action==='replay')playVoice(game.state.challenge?.voiceId||voice.currentId||game.state.lastVoiceId||'VO_HELLO');
+    else if(action==='english'||action==='korean')reveal(action);
+    else if(action==='phrase'){game.assist('hint');pause();showEnglish=showKorean=true;playVoice(element.dataset.voice);}
+    else if(action==='answer')game.answer(element.dataset.answer);
+    else if(action==='word'){words.push(element.dataset.word);renderSentence();}
+    else if(action==='clear'){words=[];renderSentence();}
+    else if(action==='cast')game.answer(words.slice());
+    else if(labels[action]){game.input(action,true);if(action!=='left'&&action!=='right')game.input(action,false);}
+    drain();sync();
+  }
+  function renderSentence(){const cast=document.querySelector('[data-action="cast"]');if(cast)cast.disabled=words.length!==3;const sentence=$('sentence');if(sentence)sentence.textContent=words.join(' ')||'단어를 순서대로 눌러 주세요';document.querySelectorAll('[data-action="word"]').forEach(b=>{b.disabled=words.includes(b.dataset.word);});}
+  function card(content){return `<div class="dialog-card" role="region" aria-label="현재 게임 안내">${content}</div>`;}
+  function renderOverlay(){
+    const s=game.state,c=s.challenge,t=s.tutorial;
+    if(c?.id!==hintChallenge){hintChallenge=c?.id;showEnglish=showKorean=false;const library=document.querySelector('.expression-practice');if(c&&library.open){game.assist('hint');library.open=false;}renderHints();}
+    const key=[s.session,s.mode,s.stage,t?.index,c?.id,c?.phase,c?.attempts,c?.feedback,s.awaitingProceed].join('|');
+    if(key===overlayKey)return;overlayKey=key;words=[];
+    let html='';
+    if(s.mode==='INTRO')html=card(`<span class="eyebrow">THE AWAKENING</span><h2>깨어나는 숲</h2><p>검을 들고 직접 싸우세요.<br>동료의 영어를 이해하면 마법의 힘이 열립니다.</p><p class="muted">A / D 이동 · J 공격 · K 회피 · L 마법<br>음성 파일은 준비 중입니다. 원문 도움으로도 끝까지 플레이할 수 있습니다.</p><div class="button-row">${button('start','처음부터 배우기','class="primary"')}${button('skip','조작을 알아요 · 바로 시작')}</div>`);
+    else if(s.mode==='TUTORIAL')html=card(`<span class="eyebrow">짧은 연습 ${Number(t?.index||0)+1} / ${t?.total||3}</span><h2>${escape(t?.english||'직접 움직여 보세요')}</h2><p>${escape(t?.ko||'')}</p><p>${escape(t?.text||'A / D 이동 · J 공격 · K 회피')}</p><div class="button-row">${button('replay','▶ 표현 듣기')}${button('proceed','알겠어요','class="primary"')}${button('skip','설명 건너뛰기')}</div>`);
+    else if(s.mode==='PAUSED')html=card(`<span class="eyebrow">A MOMENT OF QUIET</span><h2>숲도 잠깐 쉬어갑니다</h2><p>전투와 피해가 멈췄습니다. 아래에서 음량과 표현을 확인할 수 있습니다.</p><div class="button-row">${button('resume','계속하기','class="primary"')}${button('restart','처음으로')}</div>`);
+    else if(c&&(s.mode==='LISTENING_CHALLENGE'||s.mode==='MAGIC_CHALLENGE')){
+      const feedback=c.phase==='feedback';
+      html=card(`<span class="eyebrow">${c.kind==='magic'?'SENTENCE MAGIC':'LISTEN & ACT'} · 적은 기다립니다</span><h2>${c.kind==='magic'?'불꽃을 깨우는 문장':'동료의 말을 듣고 행동하세요'}</h2><p>${escape(c.prompt||'소리를 듣고 알맞은 행동을 골라 주세요.')}</p>${feedback?`<p class="feedback" role="status">${escape(c.feedback||s.feedback)}</p>${button('proceed',c.completed?'전투로 돌아가기':'다시 시도','class="primary"')}`:c.kind==='magic'?`<p id="sentence" class="sentence">단어를 순서대로 눌러 주세요</p><div class="word-bank">${(c.words||['fire','I','need']).map(w=>button('word',escape(w),`data-word="${escape(w)}"`)).join('')}</div><div class="button-row">${button('clear','다시 배열')}${button('cast','Fire Burst 시전','class="primary" disabled')}</div>`:`<div class="choices">${(c.choices||['left','right','attack','dodge','magic']).map(x=>button('answer',labels[x]||escape(x),`data-answer="${escape(x)}"`)).join('')}</div>`}<p class="muted">다시 듣기 R · 영어 원문 · 한국어 뜻 H는 아래에서 선택하세요.<br>소리가 없거나 도움이 필요하면 원문을 볼 수 있습니다.</p>`);
+    }else if(s.mode==='VICTORY'||s.mode==='DEFEAT'){
+      const win=s.mode==='VICTORY',st=s.stats||{};
+      html=card(`<span class="eyebrow">${win?'THE FOREST REMEMBERS':'A NEW ATTEMPT'}</span><h2>${win?'숲의 목소리를 깨웠습니다':'다시 일어설 수 있어요'}</h2><div class="button-row">${button('restart','다시 도전','class="primary"')}${button('phrase','표현 복습: I need fire.','data-voice="VO_NEED_FIRE"')}</div><p>${win?'Slime Champion 격파 · 연습용 '+escape(s.reward?.title||'숲의 첫빛')+' 표식':'붉은 예고를 보고 거리를 벌리거나 K로 피하세요.'}</p><div class="result-grid"><span>정답 <b>${st.correct||0}</b></span><span>다시 연습 <b>${st.wrong||0}</b></span><span>도움 정답 <b>${st.assisted||0}</b></span><span>독립 듣기 <b>${st.listening?.independent||0}</b></span></div><p class="muted">듣고 행동하기: 정답 ${st.listening?.correct||0}회 · 다시 연습 ${st.listening?.wrong||0}회</p><details class="practiced-expressions"><summary>이번에 연습한 표현 ${(st.expressions||[]).length}개</summary><p>${(st.expressions||[]).map(escape).join('<br>')||'아직 완료한 표현이 없습니다.'}</p></details><p class="muted">이번 연습 결과만 표시합니다. 기존 모험의 경험치·금화·아이템은 바뀌지 않습니다.</p>`);
+    }else if(s.awaitingProceed||s.mode==='EXPLORATION'&&s.stage==='crystal')html=card(`<span class="eyebrow">WORD CRYSTAL</span><h2>불꽃의 문장을 발견했습니다</h2><p>I need fire. — 나는 불이 필요해.</p><p>적을 공격하면 마법이 충전됩니다. L을 눌러 문장을 완성하면 Fire Burst가 발동합니다.</p>${button('proceed','마법 문장 배우기','class="primary"')}`);
+    overlay.hidden=!html;overlay.innerHTML=html;
+    if(html){release();const first=overlay.querySelector('button');if(first&&visibleMode!==s.mode)first.focus({preventScroll:true});}
+    visibleMode=s.mode;
+  }
+  function sync(){
+    const s=game.state,p=s.player,e=s.enemy;renderOverlay();
+    $('hero-health').textContent=`${Math.ceil(p.hp)} / ${p.maxHp}`;$('hero-bar').style.width=(100*p.hp/p.maxHp)+'%';
+    $('enemy-name').textContent=e?(e.kind==='boss'?'SLIME CHAMPION · '+(e.phase===2?'Ⅱ':'Ⅰ'):'GREEN SLIME'):'ENCHANTED FOREST';
+    $('enemy-health').textContent=e?`${Math.ceil(e.hp)} / ${e.maxHp}`:'';$('enemy-bar').style.width=e?(100*e.hp/e.maxHp)+'%':'0%';
+    $('objective').textContent=s.objective||'숲의 목소리를 따라가세요';$('scene-label').textContent=({entrance:'01 / FOREST ENTRANCE',slime:'02 / THE FIRST ENCOUNTER',crystal:'03 / WORD CRYSTAL',boss:'04 / SLIME CHAMPION',complete:'05 / THE AWAKENING'})[s.stage]||'THE WHISPERING WOODS';
+    $('charge').textContent=s.magicUnlocked?`마법 ${Math.floor(p.magicCharge||0)}% · ${(p.magicCooldown||0)>0?Number(p.magicCooldown).toFixed(1)+'초':'L'}`:'마법 수정 발견 전';
+    $('combat-feedback').textContent=s.feedback||'';
+  }
+  document.addEventListener('click',event=>{const b=event.target.closest('button[data-action]');if(!b)return;if(b.dataset.action==='left'||b.dataset.action==='right'){if(event.detail===0){act(b.dataset.action,b);game.input(b.dataset.action,false);}return;}act(b.dataset.action,b);});
+  document.addEventListener('pointerdown',event=>{const b=event.target.closest('[data-action="left"],[data-action="right"]');if(!b)return;event.preventDefault();audio.unlock();pointerActions.set(event.pointerId,b.dataset.action);b.setPointerCapture?.(event.pointerId);b.classList.add('pressed');game.input(b.dataset.action,true);drain();sync();});
+  function pointerRelease(event){const action=pointerActions.get(event.pointerId);pointerActions.delete(event.pointerId);if(action&&!Array.from(pointerActions.values()).includes(action)&&!held.has(action))game.input(action,false);event.target.closest?.('button')?.classList.remove('pressed');}
+  document.addEventListener('pointerup',pointerRelease);document.addEventListener('pointercancel',pointerRelease);
+  const keymap={KeyA:'left',ArrowLeft:'left',KeyD:'right',ArrowRight:'right',KeyJ:'attack',KeyK:'dodge',KeyL:'magic',KeyR:'replay',KeyH:'korean',Escape:'pause'};
+  document.addEventListener('keydown',event=>{const action=keymap[event.code];if(!action||event.ctrlKey||event.altKey||event.metaKey||event.target.matches('input,select,textarea'))return;event.preventDefault();if(event.repeat)return;if(action==='left'||action==='right')held.add(action);act(action);});
+  document.addEventListener('keyup',event=>{const action=keymap[event.code];if(!action)return;held.delete(action);if(labels[action])game.input(action,false);});
+  globalThis.addEventListener('blur',()=>{if(!['INTRO','VICTORY','DEFEAT'].includes(game.state.mode))pause();else release();});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
+  document.addEventListener('change',event=>{const el=event.target;if(el.id==='slow'||el.id==='fallback'){voice.configure({slow:$('slow').checked,fallback:$('fallback').checked});}if(el.id==='muted'){settings.muted=el.checked;audio.configure({muted:el.checked});voice.stop();}if(el.id==='shake')settings.shake=el.checked;if(el.id==='reduced'){settings.reducedMotion=el.checked;document.body.dataset.reducedMotion=String(el.checked);}});
+  document.addEventListener('input',event=>{const key=event.target.dataset.volume;if(key){settings[key]=Number(event.target.value)/100;audio.configure({[key]:settings[key]});if(key==='voice'||key==='master')voice.stop();}});
+  document.querySelectorAll('details').forEach(el=>el.addEventListener('toggle',()=>{if(el.open&&el.classList.contains('expression-practice'))game.assist('hint');if(el.open&&!['INTRO','PAUSED','VICTORY','DEFEAT'].includes(game.state.mode))pause();}));
+  function frame(now){const elapsed=lastFrame?Math.min(.15,(now-lastFrame)/1000):0;lastFrame=now;accumulator+=elapsed;let steps=0;while(accumulator>=1/60&&steps++<9){game.update(1/60);accumulator-=1/60;}drain();RebornArt.draw(ctx,game.state,now/1000,settings);if(now-lastHud>80){sync();lastHud=now;}requestAnimationFrame(frame);}
+  sync();requestAnimationFrame(frame);
+  return{game,audio,voice,settings,keymap,release,sync};
+})();
+</script></body></html>

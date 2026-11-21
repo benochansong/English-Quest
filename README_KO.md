@@ -1,5 +1,7 @@
 # English Quest 0.8 — 말의 아카데미
 
+> 별도 실시간 전투 실험실 **Reborn Phase 2**는 `EnglishQuest_REBORN.html`로 실행합니다. [Reborn 실행·조작 안내](REBORN_PHASE2_README_KO.md)를 참고하세요. 기존 v0.8 게임과 저장은 그대로이며, 아래는 기존 게임 안내입니다. Phase 1 보존본은 `releases/EnglishQuest_REBORN_PHASE1.html`에 있습니다.
+
 **Windows에서 같은 폴더의 `EnglishQuest.html`을 Chrome 또는 Microsoft Edge로 여세요.** 설치나 서버가 필요 없습니다. 예전 게임 창은 먼저 닫고, 같은 브라우저 프로필에서 **이어하기 → 말의 아카데미**를 선택하세요. 새 모험에서도 숲 지도부터 아카데미에 들어갈 수 있습니다.
 
 [0.8 개발 브랜치](https://github.com/benochansong/English-Quest/tree/feature/english-quest-curriculum-v08)에서 **Code → Download ZIP**으로 받아 압축을 풀거나, `EnglishQuest.html`의 **Download raw file**로 단일 파일을 저장하세요. 기존 세 장과 영웅 성장·장비·시련·말하기 연습도 계속 사용할 수 있습니다.

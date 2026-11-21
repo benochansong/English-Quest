@@ -6,7 +6,7 @@ const RebornVoice=(()=>{
     const Utterance=options.SpeechSynthesisUtterance||globalThis.SpeechSynthesisUtterance;
     const timer=options.setTimeout||globalThis.setTimeout,clear=options.clearTimeout||globalThis.clearTimeout;
     let generation=0,active=null,timeout=null,currentId=null,slow=false,fallback=false;
-    let status={state:'idle',source:null,message:'음성 파일 0개 · 원문 도움 또는 선택적 기기 음성을 사용할 수 있습니다.'};
+    let status={state:'idle',source:null,message:`제작 음성 ${manifest.utterances.filter(x=>x.available).length}/${manifest.utterances.length}개 · 원문 도움 또는 선택적 기기 음성을 사용할 수 있습니다.`};
     function report(state,source,message){status={state,source,message,id:currentId};options.onStatus?.(status);}
     function stop(){generation++;if(timeout!==null){clear(timeout);timeout=null;}if(active){active.onplaying=active.onended=active.onerror=null;active.pause?.();active=null;}synth?.cancel?.();mixer.duck(false);if(status.state==='playing'||status.state==='loading')report('stopped',null,'음성이 멈췄습니다. 다시 듣기로 재생할 수 있습니다.');}
     function configure(values){if('slow'in values)slow=!!values.slow;if('fallback'in values)fallback=!!values.fallback;stop();report('idle',null,'재생 설정 변경됨 · 다시 듣기를 누르세요.');}
@@ -31,7 +31,8 @@ const RebornVoice=(()=>{
       }
       if(!item.available||!item.embedded)return browserFallback('제작 음성 파일 미포함');
       try{
-        active=new AudioClass(item.embedded);active.volume=mixer.voiceVolume;active.playbackRate=slow?.75:1;active.preservesPitch=true;
+        const slowTake=slow&&item.embeddedSlow;
+        active=new AudioClass(slowTake||item.embedded);active.volume=mixer.voiceVolume;active.playbackRate=(slow&&!slowTake)?0.75:1;active.preservesPitch=true;
         active.onplaying=()=>{if(!live())return;mixer.duck(true);report('playing','asset','음성 파일 재생 중');options.onHeard?.({id,source:'asset'});};
         active.onended=()=>finish('ended','asset','음성 파일 재생 완료');
         active.onerror=()=>{if(!live())return;active?.pause?.();active=null;clear(timeout);timeout=null;browserFallback('음성 파일 오류');};

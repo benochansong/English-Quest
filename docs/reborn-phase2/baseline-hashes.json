@@ -1,0 +1,17 @@
+[
+  {
+    "path": "EnglishQuest.html",
+    "bytes": 794176,
+    "sha256": "E0F49C2BB74125F16828C0A1D9F5B448B0FEA1831C6AF9117290668FEDA0CBAD"
+  },
+  {
+    "path": "EnglishQuest_REBORN.html",
+    "bytes": 108727,
+    "sha256": "6A97F8E8E8E800D4BA32728396E6A80C606B839E59C4645F873DE89B8D0D5BC2"
+  },
+  {
+    "path": "releases/EnglishQuest_REBORN_PHASE1.html",
+    "bytes": 108727,
+    "sha256": "6A97F8E8E8E800D4BA32728396E6A80C606B839E59C4645F873DE89B8D0D5BC2"
+  }
+]
