@@ -237,7 +237,7 @@ const RebornArt = (() => {
       else{lift=Number.isFinite(e.lift)?e.lift:Math.sin(q*Math.PI)*(boss?(e.pattern==='heavy_jump'?126:72):74);sx=.9+.08*Math.sin(q*Math.PI);sy=1.11-.05*Math.sin(q*Math.PI);}
     }
     if(ai==='RECOVERY'){const q=clamp(t/.35);sx=mix(1.2,1,q);sy=mix(.75,1,q);}
-    if(ai==='HIT_REACTION'||ai==='STAGGER'){sx=1.15;sy=.79;tilt=(e.facing===-1?1:-1)*.09;}
+    if(ai==='HIT_REACTION'||ai==='STAGGER'){const q=clamp((e.recoilRemaining||0)/.22),pulse=reduced?1:Math.cos(t*24)*q;sx=1+(boss?.08:.2)*pulse;sy=1-(boss?.09:.23)*pulse;tilt=(e.recoilDirection||1)*(boss?.035:.09)*q;}
     if(ai==='DEFEATED'){const q=clamp(t/(boss?.95:.7));sx=1+q*.35;sy=1-q*.86;opacity=1-q;}
     c.save();c.globalAlpha=opacity;ellipse(c,e.x,FLOOR+5,(boss?48:31)*(1-lift/450),boss?9:6,'#08253066');c.restore();
     if(boss&&ai!=='DEFEATED'){
@@ -330,6 +330,8 @@ const RebornArt = (() => {
         const yy=(y>FLOOR-20?y-75:y)-(reduced?8:q*30),value=typeof f.value==='number'?Math.round(f.value):f.value||'';
         const heavy=f.heavy||f.tier===3||Number(value)>=16,size=(heavy?32:25)*(reduced?1:1+Math.sin(clamp(q*4)*Math.PI)*.12);
         c.font=`700 ${size}px Georgia, serif`;c.textAlign='center';c.lineJoin='round';c.strokeStyle='#122d3d';c.lineWidth=4;c.strokeText(String(value),x,yy);c.fillStyle=(f.target==='player'||Number(f.value)<0)?'#efb19a':heavy?'#fff0c0':'#f3e8b8';c.fillText(String(value),x,yy);
+      }else if(f.type==='counter'){
+        c.font='bold 15px sans-serif';c.textAlign='center';c.fillStyle='#c5eeff';c.fillText('반격!',x,y-(reduced?0:q*18));
       }else if(f.type==='impact'){
         const yy=y>FLOOR-15?y-35:y,heavy=f.heavy||f.tier===3||Number(f.value)>=16,n=reduced?4:heavy?10:7,spread=reduced?14:9+q*(heavy?43:27);
         for(let i=0;i<n;i++){const angle=i*TAU/n+.25;line(c,[[x+Math.cos(angle)*spread*.35,yy+Math.sin(angle)*spread*.35],[x+Math.cos(angle)*spread,yy+Math.sin(angle)*spread]],i%2?'#d6efdd':'#e9c68b',heavy?2.5:2);}
@@ -337,7 +339,7 @@ const RebornArt = (() => {
       }else if(f.type==='droplets'){
         const yy=y>FLOOR-15?y-35:y,heavy=f.heavy||f.tier===3,crystalHit=f.targetKind==='boss';
         for(let i=0;i<(reduced?3:heavy?7:4);i++){const angle=-Math.PI*.95+i*.43,r=reduced?17:12+q*(20+i*5),xx=x+Math.cos(angle)*r,dy=yy+Math.sin(angle)*r+(reduced?0:q*q*25);
-          if(crystalHit)local(c,xx,dy,reduced?i:q+i,()=>shape(c,'M0 -5L3 0L0 5L-2 0Z','#c8dee1'),.8+a*.3);else ellipse(c,xx,dy,2+a*1.2,2+a*.6,i%2?'#a8d6a1':'#79bca4');
+          if(f.targetKind==='raven')local(c,xx,dy,reduced?0:q*2,()=>shape(c,'M-7 -2L8 0L-6 5L-2 0Z','#b39acd'));else if(f.targetKind==='golem')local(c,xx,dy,reduced?0:q,()=>shape(c,'M-4 -3L3 -5L6 1L0 5L-5 2Z','#9baea9'));else if(crystalHit)local(c,xx,dy,reduced?i:q+i,()=>shape(c,'M0 -5L3 0L0 5L-2 0Z','#c8dee1'),.8+a*.3);else ellipse(c,xx,dy,2+a*1.2,2+a*.6,i%2?'#a8d6a1':'#79bca4');
         }
       }else if(f.type==='fire'||f.type==='burst'){
         const yy=y>FLOOR-20?y-43:y,rad=18+ease(q)*(f.type==='burst'?80:58);
@@ -384,8 +386,10 @@ const RebornArt = (() => {
       local(ctx,550,367+bob,0,()=>{crystal(ctx,0,0,1.25,'#bce5dd');ellipse(ctx,0,-24,32,39,null,'#b3dcd1',.8);});
     }
     if(state.enemy){if(state.enemy.objects)field?.telegraph(ctx,state.enemy);else telegraph(ctx,state.enemy,t,reduced);}
+    if(state.player?.counterRemaining>0&&state.enemy?.hp>0){const e=state.enemy;ellipse(ctx,e.x,FLOOR-e.lift-40,e.kind==='golem'?80:48,e.kind==='golem'?100:50,null,'#bee4eb',1.5);ctx.font='bold 13px sans-serif';ctx.textAlign='center';ctx.fillStyle='#d5f0f0';ctx.fillText('회피 성공 · 빈틈에 반격',e.x,FLOOR-e.lift-(e.kind==='golem'?220:105));}
     if(state.player)hero(ctx,state.player,t,reduced);
     if(state.enemy&&!field?.draw(ctx,state.enemy,t,reduced))slime(ctx,state.enemy,t,reduced);
+    if(state.enemy?.entryRemaining>0){const e=state.enemy,q=clamp(e.entryRemaining/.65);ctx.save();ctx.globalAlpha=q*.55;if(e.kind==='slime'){for(let i=0;i<5;i++)leaf(ctx,e.x+(i-2)*19,FLOOR-85-q*80,.6,'#bad09c',i);}else if(e.kind==='boss'){ellipse(ctx,e.x,FLOOR-65,75+(1-q)*25,85,null,'#eddbad',3);}ctx.restore();}
     magic(ctx,state,t,reduced);
     effects(ctx,state,t,reduced);
     ctx.restore();

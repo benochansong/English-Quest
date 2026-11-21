@@ -9,11 +9,12 @@ const RebornVoice=(()=>{
     const availableCount=manifest.utterances.filter(x=>x.available&&x.embedded).length;
     let status={state:'idle',source:null,message:`영어 음성 ${availableCount}/${manifest.utterances.length}개 · 듣기 버튼을 눌러 주세요.`};
     function report(state,source,message){status={state,source,message,id:currentId,context:request.context,priority:request.priority};options.onStatus?.(status);}
+    function lineGain(item){const rms=item?.verification?.rms;return Number.isFinite(rms)&&rms>0?Math.min(1,.126/rms):1;}
     function stop(){generation++;if(timeout!==null){clear(timeout);timeout=null;}if(active){active.onplaying=active.onended=active.onerror=null;active.pause?.();active=null;}synth?.cancel?.();mixer.duck(false);if(status.state==='playing'||status.state==='loading')report('stopped',null,'음성이 멈췄습니다. 다시 듣기로 재생할 수 있습니다.');}
     function configure(values){if('slow'in values)slow=!!values.slow;if('fallback'in values)fallback=!!values.fallback;stop();report('idle',null,'재생 설정 변경됨 · 다시 듣기를 누르세요.');}
     function refreshVolume(){
       if(mixer.voiceVolume<=0){stop();report('muted',null,'음량이 0이거나 음소거 상태입니다. 소리를 켠 뒤 다시 듣기를 누르세요.');}
-      else if(active)active.volume=mixer.voiceVolume;
+      else if(active)active.volume=mixer.voiceVolume*lineGain(table.get(currentId));
     }
     function play(id,next={}){
       const proposed={priority:100,context:null,...next};
@@ -40,7 +41,7 @@ const RebornVoice=(()=>{
       if(!item.available||!item.embedded)return browserFallback('제작 음성 파일 미포함');
       try{
         const slowTake=slow&&item.embeddedSlow;
-        active=new AudioClass(slowTake||item.embedded);const media=active;active.volume=mixer.voiceVolume;active.playbackRate=(slow&&!slowTake)?0.75:1;active.preservesPitch=true;
+        active=new AudioClass(slowTake||item.embedded);const media=active;active.volume=mixer.voiceVolume*lineGain(table.get(currentId));active.playbackRate=(slow&&!slowTake)?0.75:1;active.preservesPitch=true;
         active.onplaying=()=>{if(!live()||active!==media)return;mixer.duck(true);report('playing','asset',item.voiceModel?'Piper AI 영어 음성 재생 중':'음성 파일 재생 중');started('asset');};
         active.onended=()=>{if(active===media)finish('ended','asset','음성 파일 재생 완료');};
         active.onerror=()=>{if(!live()||active!==media)return;active?.pause?.();active=null;clear(timeout);timeout=null;browserFallback('음성 파일 오류');};

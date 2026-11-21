@@ -1,7 +1,7 @@
 /* Offline state-reading actor: gameplay uses real keys/buttons, never injected HP/state. */
 const assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),{pathToFileURL}=require('node:url'),crypto=require('node:crypto');
 const {chromium}=require('playwright');
-const root=path.resolve(__dirname,'..'),out=path.join(root,'docs/reborn-phase4'),channel=process.env.REBORN_BROWSER||'chrome';
+const root=path.resolve(__dirname,'..'),out=path.join(root,process.env.REBORN_QA_OUT||'docs/reborn-phase4'),channel=process.env.REBORN_BROWSER||'chrome';
 const read=p=>p.evaluate(()=>JSON.parse(JSON.stringify(RebornApp.game.state)));
 const click=(p,a)=>p.locator(`[data-action="${a}"]:visible`).first().click();
 async function play(p,{stopAtClear=false,muted=false,observe}={}){

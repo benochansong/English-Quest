@@ -1,0 +1,710 @@
+{
+  "browser": "chrome",
+  "version": "157.0.8103.79",
+  "baseline": false,
+  "artifactSha256": "18c28194fc46d9b3534bbfd62c7cdf919232439f4c4bae7e51cd0bb596ec1866",
+  "offline": true,
+  "runs": [
+    {
+      "elapsedSeconds": 37.202,
+      "stats": {
+        "correct": 7,
+        "wrong": 0,
+        "assisted": 0,
+        "independent": 7,
+        "expressions": [
+          "Move left!",
+          "Watch out!",
+          "I need fire.",
+          "Attack the crystal!",
+          "Attack the slime!",
+          "Use your magic!"
+        ],
+        "reviewExpressions": [],
+        "goals": [
+          "independent-listening",
+          "combo-three",
+          "crystal-break",
+          "forest-clear"
+        ],
+        "combat": {
+          "damageDealt": 230,
+          "damageReceived": 0,
+          "dodges": 0,
+          "successfulDodges": 0,
+          "perfectDodges": 0,
+          "highestCombo": 3,
+          "magicUsed": 2,
+          "magicHits": 2,
+          "weaknessHits": 1,
+          "swordHits": 17,
+          "counterattacks": 0
+        },
+        "listening": {
+          "correct": 5,
+          "wrong": 0,
+          "assisted": 0,
+          "independent": 5,
+          "asset": 5,
+          "fallback": 0,
+          "unheard": 0
+        },
+        "magic": {
+          "correct": 2,
+          "wrong": 0,
+          "assisted": 0,
+          "independent": 2
+        },
+        "flow": {
+          "forcedScreens": 7,
+          "forcedSeconds": 12.433333333333268,
+          "sentenceArrangements": 2,
+          "actionOpportunities": 5,
+          "actionSuccesses": 5,
+          "independentActions": 4,
+          "heardExpressions": [
+            "left",
+            "dodge",
+            "fire",
+            "crystal",
+            "attack",
+            "magic"
+          ],
+          "independentExpressions": [
+            "dodge",
+            "crystal",
+            "fire"
+          ],
+          "helpExpressions": [],
+          "outcomes": [
+            {
+              "id": "1:action:4",
+              "key": "dodge",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "1:5",
+              "key": "crystal",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "1:7",
+              "key": "fire",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "1:action:12",
+              "key": "dodge",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "1:action:13",
+              "key": "fire",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": false,
+              "actual": true,
+              "reason": "action"
+            }
+          ],
+          "audio": {
+            "requested": 23,
+            "playing": 20,
+            "ended": 11,
+            "stopped": 10,
+            "error": 0,
+            "missing": 0,
+            "muted": 0,
+            "blocked": 0,
+            "ignored": 1
+          }
+        },
+        "battlefield": {
+          "missedAttacks": 0,
+          "groundings": 0,
+          "shieldBreaks": 0,
+          "wrongCrystals": 0
+        }
+      },
+      "learning": {
+        "left": {
+          "introduced": true,
+          "stage": "practice",
+          "independent": 1,
+          "streak": 1,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "dodge": {
+          "introduced": true,
+          "stage": "familiar",
+          "independent": 3,
+          "streak": 3,
+          "actual": 2,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "attack": {
+          "introduced": true,
+          "stage": "practice",
+          "independent": 1,
+          "streak": 1,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "magic": {
+          "introduced": true,
+          "stage": "practice",
+          "independent": 1,
+          "streak": 1,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "fire": {
+          "introduced": true,
+          "stage": "familiar",
+          "independent": 2,
+          "streak": 2,
+          "actual": 1,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "crystal": {
+          "introduced": true,
+          "stage": "practice",
+          "independent": 1,
+          "streak": 1,
+          "actual": 1,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "wind": {
+          "introduced": false,
+          "stage": "guided",
+          "independent": 0,
+          "streak": 0,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": null
+        },
+        "blue": {
+          "introduced": false,
+          "stage": "guided",
+          "independent": 0,
+          "streak": 0,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": null
+        }
+      },
+      "measure": {
+        "screens": 7,
+        "forcedSeconds": 12.437,
+        "arrangements": 2
+      }
+    },
+    {
+      "elapsedSeconds": 36.875,
+      "stats": {
+        "correct": 3,
+        "wrong": 0,
+        "assisted": 0,
+        "independent": 3,
+        "expressions": [
+          "Watch out!",
+          "Move left!",
+          "Attack the crystal!",
+          "I need fire.",
+          "Attack the slime!",
+          "Use your magic!"
+        ],
+        "reviewExpressions": [],
+        "goals": [
+          "independent-listening",
+          "combo-three",
+          "crystal-break",
+          "forest-clear"
+        ],
+        "combat": {
+          "damageDealt": 230,
+          "damageReceived": 0,
+          "dodges": 0,
+          "successfulDodges": 0,
+          "perfectDodges": 0,
+          "highestCombo": 3,
+          "magicUsed": 2,
+          "magicHits": 2,
+          "weaknessHits": 1,
+          "swordHits": 18,
+          "counterattacks": 0
+        },
+        "listening": {
+          "correct": 3,
+          "wrong": 0,
+          "assisted": 0,
+          "independent": 3,
+          "asset": 3,
+          "fallback": 0,
+          "unheard": 0
+        },
+        "magic": {
+          "correct": 0,
+          "wrong": 0,
+          "assisted": 0,
+          "independent": 0
+        },
+        "flow": {
+          "forcedScreens": 3,
+          "forcedSeconds": 5.275000000000052,
+          "sentenceArrangements": 0,
+          "actionOpportunities": 8,
+          "actionSuccesses": 7,
+          "independentActions": 5,
+          "heardExpressions": [
+            "dodge",
+            "left",
+            "crystal",
+            "fire",
+            "attack",
+            "magic"
+          ],
+          "independentExpressions": [
+            "dodge",
+            "crystal"
+          ],
+          "helpExpressions": [],
+          "outcomes": [
+            {
+              "id": "2:action:1",
+              "key": "dodge",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "2:action:3",
+              "key": "dodge",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "2:action:4",
+              "key": "dodge",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "2:action:5",
+              "key": "crystal",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "2:action:6",
+              "key": "fire",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": false,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "2:action:11",
+              "key": "fire",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": false,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "2:action:13",
+              "key": "dodge",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            }
+          ],
+          "audio": {
+            "requested": 18,
+            "playing": 17,
+            "ended": 7,
+            "stopped": 10,
+            "error": 0,
+            "missing": 0,
+            "muted": 0,
+            "blocked": 0,
+            "ignored": 0
+          }
+        },
+        "battlefield": {
+          "missedAttacks": 0,
+          "groundings": 0,
+          "shieldBreaks": 0,
+          "wrongCrystals": 0
+        }
+      },
+      "learning": {
+        "left": {
+          "introduced": true,
+          "stage": "familiar",
+          "independent": 2,
+          "streak": 2,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "dodge": {
+          "introduced": true,
+          "stage": "familiar",
+          "independent": 7,
+          "streak": 7,
+          "actual": 6,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "attack": {
+          "introduced": true,
+          "stage": "familiar",
+          "independent": 2,
+          "streak": 2,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "magic": {
+          "introduced": true,
+          "stage": "familiar",
+          "independent": 2,
+          "streak": 2,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "fire": {
+          "introduced": true,
+          "stage": "familiar",
+          "independent": 2,
+          "streak": 2,
+          "actual": 1,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "crystal": {
+          "introduced": true,
+          "stage": "familiar",
+          "independent": 2,
+          "streak": 2,
+          "actual": 2,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "wind": {
+          "introduced": false,
+          "stage": "guided",
+          "independent": 0,
+          "streak": 0,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": null
+        },
+        "blue": {
+          "introduced": false,
+          "stage": "guided",
+          "independent": 0,
+          "streak": 0,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": null
+        }
+      },
+      "measure": {
+        "screens": 3,
+        "forcedSeconds": 5.279,
+        "arrangements": 0
+      }
+    },
+    {
+      "elapsedSeconds": 36.635,
+      "stats": {
+        "correct": 0,
+        "wrong": 0,
+        "assisted": 0,
+        "independent": 0,
+        "expressions": [
+          "Watch out!",
+          "Attack the crystal!",
+          "I need fire."
+        ],
+        "reviewExpressions": [],
+        "goals": [
+          "combo-three",
+          "crystal-break",
+          "perfect-dodge",
+          "boss-dodge",
+          "forest-clear"
+        ],
+        "combat": {
+          "damageDealt": 230,
+          "damageReceived": 8,
+          "dodges": 2,
+          "successfulDodges": 1,
+          "perfectDodges": 1,
+          "highestCombo": 3,
+          "magicUsed": 2,
+          "magicHits": 2,
+          "weaknessHits": 1,
+          "swordHits": 17,
+          "counterattacks": 0
+        },
+        "listening": {
+          "correct": 0,
+          "wrong": 0,
+          "assisted": 0,
+          "independent": 0,
+          "asset": 0,
+          "fallback": 0,
+          "unheard": 0
+        },
+        "magic": {
+          "correct": 0,
+          "wrong": 0,
+          "assisted": 0,
+          "independent": 0
+        },
+        "flow": {
+          "forcedScreens": 0,
+          "forcedSeconds": 0,
+          "sentenceArrangements": 0,
+          "actionOpportunities": 8,
+          "actionSuccesses": 7,
+          "independentActions": 5,
+          "heardExpressions": [
+            "dodge",
+            "crystal",
+            "fire"
+          ],
+          "independentExpressions": [
+            "dodge",
+            "crystal"
+          ],
+          "helpExpressions": [],
+          "outcomes": [
+            {
+              "id": "3:action:1",
+              "key": "dodge",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "3:action:2",
+              "key": "dodge",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "3:action:3",
+              "key": "dodge",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "3:action:4",
+              "key": "crystal",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "3:action:5",
+              "key": "fire",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": false,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "3:action:7",
+              "key": "dodge",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "3:action:9",
+              "key": "fire",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": false,
+              "actual": true,
+              "reason": "action"
+            }
+          ],
+          "audio": {
+            "requested": 12,
+            "playing": 12,
+            "ended": 6,
+            "stopped": 5,
+            "error": 0,
+            "missing": 0,
+            "muted": 0,
+            "blocked": 0,
+            "ignored": 0
+          }
+        },
+        "battlefield": {
+          "missedAttacks": 1,
+          "groundings": 0,
+          "shieldBreaks": 0,
+          "wrongCrystals": 0
+        }
+      },
+      "learning": {
+        "left": {
+          "introduced": true,
+          "stage": "familiar",
+          "independent": 2,
+          "streak": 2,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "dodge": {
+          "introduced": true,
+          "stage": "familiar",
+          "independent": 11,
+          "streak": 11,
+          "actual": 10,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "attack": {
+          "introduced": true,
+          "stage": "familiar",
+          "independent": 2,
+          "streak": 2,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "magic": {
+          "introduced": true,
+          "stage": "familiar",
+          "independent": 2,
+          "streak": 2,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "fire": {
+          "introduced": true,
+          "stage": "familiar",
+          "independent": 2,
+          "streak": 2,
+          "actual": 1,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "crystal": {
+          "introduced": true,
+          "stage": "familiar",
+          "independent": 3,
+          "streak": 3,
+          "actual": 3,
+          "misses": 0,
+          "lastResult": "independent"
+        },
+        "wind": {
+          "introduced": false,
+          "stage": "guided",
+          "independent": 0,
+          "streak": 0,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": null
+        },
+        "blue": {
+          "introduced": false,
+          "stage": "guided",
+          "independent": 0,
+          "streak": 0,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": null
+        }
+      },
+      "measure": {
+        "screens": 0,
+        "forcedSeconds": 0,
+        "arrangements": 0
+      }
+    }
+  ],
+  "errors": [],
+  "requests": []
+}

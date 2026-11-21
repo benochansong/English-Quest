@@ -1,7 +1,7 @@
 /* Touch, assisted environmental actions, and real aerial attack coverage. */
 const {play,read,click}=require('./reborn-battlefield-browser.cjs');
 const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs/promises'),path=require('node:path'),{pathToFileURL}=require('node:url');
-const root=path.resolve(__dirname,'..'),out=path.join(root,'docs/reborn-phase4'),channel=process.env.REBORN_BROWSER||'chrome';
+const root=path.resolve(__dirname,'..'),out=path.join(root,process.env.REBORN_QA_OUT||'docs/reborn-phase4'),channel=process.env.REBORN_BROWSER||'chrome';
 (async()=>{
  const browser=await chromium.launch({channel,headless:true});
  try{

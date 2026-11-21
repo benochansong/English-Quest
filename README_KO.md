@@ -1,3 +1,7 @@
+# REBORN Phase 5 — 검과 목소리
+
+`EnglishQuest_REBORN.html`을 Chrome 또는 Edge에서 여세요. 검 입력 예약·접촉 자세·정확한 회피 뒤 반격, 적별 피격, 36개 영어 음량 균형과 경고 믹싱을 개선했습니다. [실행·조작](REBORN_PHASE5_README_KO.md) · [전후 측정](REBORN_PHASE5_GAMEPLAY_REVIEW.md) · [검증 보고서](REBORN_PHASE5_TEST_REPORT.md) · [사람 평가 양식](REBORN_PHASE5_HUMAN_PLAYTEST.md). 사람 재미·발음 평가는 아직 미실시입니다.
+
 # REBORN Phase 4 — 사냥꾼의 길
 
 `EnglishQuest_REBORN.html`을 Chrome 또는 Edge로 열고 **사냥꾼의 길 시작**을 누르세요. 숲 슬라임을 잡으면 바람 절벽의 까마귀, 다음에는 수정 유적의 골렘으로 이어집니다. **E / 수정 버튼**으로 환경을 활용하며, 기존 챔피언 전투 실험실과 v0.8 원본은 보존했습니다. [실행 안내](REBORN_PHASE4_README_KO.md) · [검사 결과](REBORN_PHASE4_TEST_REPORT.md) · [전투 비교·사람 검토](REBORN_PHASE4_GAMEPLAY_REVIEW.md).

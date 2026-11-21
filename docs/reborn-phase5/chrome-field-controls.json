@@ -1,0 +1,36 @@
+{
+  "browser": "chrome",
+  "version": "157.0.8103.79",
+  "touch": true,
+  "assistedBlue": true,
+  "muteInvalidation": true,
+  "safePause": true,
+  "rangeAndWrongSelection": true,
+  "repeatLessonSkipped": true,
+  "aerialStates": [
+    "PATROL",
+    "APPROACH",
+    "TELEGRAPH_DIVE",
+    "DIVE_ATTACK",
+    "RECOVERY",
+    "TELEGRAPH_SWEEP",
+    "SWEEP_ATTACK",
+    "TELEGRAPH_FEATHERS",
+    "FEATHER_BURST"
+  ],
+  "finalCombat": {
+    "damageDealt": 110,
+    "damageReceived": 12,
+    "dodges": 1,
+    "successfulDodges": 1,
+    "perfectDodges": 1,
+    "highestCombo": 3,
+    "magicUsed": 1,
+    "magicHits": 1,
+    "weaknessHits": 0,
+    "swordHits": 8,
+    "counterattacks": 0
+  },
+  "errors": [],
+  "requests": []
+}
