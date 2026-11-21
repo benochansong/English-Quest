@@ -1,0 +1,26 @@
+{
+  "artifactBytes": 2207690,
+  "artifactSha256": "32efdd50a9e434750d1ab3b6e8ce28424f8da5322252224901f8f4ce6cd87899",
+  "nodeTests": 171,
+  "nodeExitCode": 0,
+  "pythonTests": 3,
+  "pythonExitCode": 0,
+  "browserExitCodes": {
+    "chrome": {
+      "samples": 0,
+      "full": 0,
+      "learning": 0,
+      "combat": 0
+    },
+    "msedge": {
+      "samples": 0,
+      "full": 0,
+      "learning": 0,
+      "combat": 0
+    }
+  },
+  "productionFiles": 34,
+  "failed": 0,
+  "missing": 0,
+  "manualListeningApproved": 0
+}

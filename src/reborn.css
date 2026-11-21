@@ -224,3 +224,8 @@ body.reborn {
   .reborn *, .reborn *::before,.reborn *::after { scroll-behavior:auto !important; animation:none !important; transition:none !important; }
 }
 .reborn[data-reduced-motion=true] *, .reborn[data-reduced-motion=true] *::before,.reborn[data-reduced-motion=true] *::after { animation:none !important; transition:none !important; }
+/* Offline speech diagnostic controls share the existing accessible button layout. */
+.audio-diagnostic{margin:12px 0;padding:16px 20px;border:1px solid #55746b;border-radius:14px;background:#132d2a}
+.audio-diagnostic h2{font-size:1.1rem;margin:0 0 8px}
+.audio-diagnostic p{overflow-wrap:anywhere;margin:7px 0}
+.audio-diagnostic .button-row{flex-wrap:wrap}

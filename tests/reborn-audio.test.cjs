@@ -123,3 +123,15 @@ test('All combat event cue names route to an actual sound preset',()=>{
   const {RebornAudio}=environment(),m=RebornAudio.create();m.unlock();
   for(const id of ['sword_swing','sword_impact','slime_bounce','slime_warning','slime_jump','slime_rush','slime_land','slime_defeat','player_hit','magic_charge','magic_explosion','crystal_charge','boss_entrance','boss_defeat','boss_phase','correct','incorrect','defeat','dodge','victory'])assert.equal(m.sfx(id),true,id);
 });
+
+test('Piper media counts one audible start, updates live volume, and cancels at zero',()=>{
+  const a=voiceLab();a.voice.play('fire');a.files[0].onplaying();a.files[0].onplaying();assert.equal(a.heard.length,1,'buffer resume is not another heard event');
+  a.mixer.voiceVolume=.22;a.voice.refreshVolume();assert.equal(a.files[0].volume,.22);assert.equal(a.voice.status.state,'playing');
+  a.mixer.voiceVolume=0;a.voice.refreshVolume();assert.equal(a.files[0].paused,true);assert.equal(a.voice.status.state,'muted');assert.equal(a.ducks.at(-1),false);
+});
+
+test('Late failed-file events cannot finish or contaminate explicitly selected fallback speech',()=>{
+  const a=voiceLab();a.voice.configure({fallback:true});a.voice.play('fire');const old=a.files[0],lateStart=old.onplaying,lateEnd=old.onended;
+  old.onerror();assert.equal(a.voice.status.source,'browser-fallback');lateStart();lateEnd();assert.equal(a.heard.length,0);assert.equal(a.voice.status.state,'loading');
+  a.utterances[0].onstart();assert.equal(a.heard.length,1);assert.equal(a.heard[0].source,'browser-fallback');a.utterances[0].onend();assert.equal(a.voice.status.state,'ended');
+});

@@ -8,7 +8,7 @@ const path=require('node:path');
 const crypto=require('node:crypto');
 const {pathToFileURL}=require('node:url');
 const {chromium}=require('playwright');
-const root=path.resolve(__dirname,'..'),out=path.join(root,'docs/reborn-phase2');
+const root=path.resolve(__dirname,'..'),out=path.join(root,process.env.REBORN_QA_OUT||'docs/reborn-phase2');
 const hash=bytes=>crypto.createHash('sha256').update(bytes).digest('hex').toUpperCase();
 const originalHash='E0F49C2BB74125F16828C0A1D9F5B448B0FEA1831C6AF9117290668FEDA0CBAD';
 const phase1Hash='6A97F8E8E8E800D4BA32728396E6A80C606B839E59C4645F873DE89B8D0D5BC2';
@@ -251,7 +251,9 @@ async function settings(p){
   await p.locator('#muted').check();await click(p,'replay');assert.equal(await p.evaluate(()=>RebornApp.voice.status.state),'muted');assert.equal(await p.evaluate(()=>RebornApp.audio.voiceVolume),0);await p.locator('#muted').uncheck();
   await p.locator('#slow').check();await p.locator('#fallback').check();assert.deepEqual(await p.evaluate(()=>({slow:RebornApp.voice.slow,fallback:RebornApp.voice.fallback})),{slow:true,fallback:true});await p.locator('#fallback').uncheck();
   await p.locator('#reduced').check();assert.equal(await p.evaluate(()=>document.body.dataset.reducedMotion),'true');for(const level of ['off','low','normal']){await p.locator('#shake').selectOption(level);assert.equal(await p.evaluate(()=>RebornApp.settings.shakeIntensity),level);}
-  await click(p,'replay');assert.equal(await p.evaluate(()=>RebornApp.voice.status.state),'missing');
+  await click(p,'replay');
+  if(await p.evaluate(()=>RebornApp.voice.availableCount>0))await p.waitForFunction(()=>['playing','ended'].includes(RebornApp.voice.status.state));
+  else assert.equal(await p.evaluate(()=>RebornApp.voice.status.state),'missing');
   console.log('five native range controls, mute, slow, explicit fallback, shake and reduced motion settings passed');
 }
 async function originalSmoke(browser){

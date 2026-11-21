@@ -1,3 +1,7 @@
+# Subsequent Piper audio update
+
+This file records the historical Phase 2 baseline before voice production. Its 0/34 counts and original artifact hashes remain historical evidence. The current audio build has 34/34 Piper files; see [current voice report](REBORN_PIPER_VOICE_REPORT.md) for the new artifact and tests.
+
 # REBORN Phase 2 — verification report
 
 Verified on Windows, 2026-11-21. The enhanced combat slice passes its automated rules and complete offline Chrome/Edge journeys. **Production English voice files remain unavailable: 0/34.** Audio loading, optional synthesis, text assistance and original procedural sound are implemented; no recorded-English quality approval or human enjoyment result is claimed.

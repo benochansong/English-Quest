@@ -1,0 +1,5 @@
+.venv-piper/
+.piper-models/
+.piper-local/
+__pycache__/
+*.pyc

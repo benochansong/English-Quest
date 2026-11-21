@@ -1,0 +1,12 @@
+✔ All34 exact script entries map to genuine verified mono PCM speech files and immutable receipts (79.3486ms)
+✔ The standalone game embeds the exact34 approved files without an engine or model runtime (28.8776ms)
+✔ Downloaded model identity matches official LFS metadata and all receipts, with no Lessac distribution (4.7146ms)
+✔ Packaging rejects changed or unapproved audio, while genuinely missing files stay unavailable (683.0373ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 990.0723

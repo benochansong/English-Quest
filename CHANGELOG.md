@@ -1,3 +1,11 @@
+# 2026-11-21 — REBORN Piper offline speech
+
+- Generated all 34 unchanged English utterances locally with Piper 1.8.0 and the public-domain `en_US-ljspeech-medium` model; bundled genuine mono PCM WAV in the standalone Reborn HTML.
+- Generated the requested first five Lessac samples for local research only; excluded that model and its audio from GitHub and the distributed HTML.
+- Added repeatable selective generation, provenance receipts, waveform checks, hash-checked packaging, Korean diagnostics and playback controls, source/availability reporting, and human listening checklists.
+- Preserved combat rules, AI, mixer channels, original v0.8 application and Phase 1 archive. No paid APIs, accounts, external runtime speech or new game mechanics.
+- See REBORN_PIPER_VOICE_REPORT.md for final validation and REBORN_PIPER_LICENSES.md for rights review; no human listening approval is asserted.
+
 # REBORN Phase 2 — The Battle Awakens (2026-11-21)
 
 - 별도 전투 실험실에 3연속 검격, 입력 버퍼, 실제 피해 숫자, 단계별 타격 정지와 넉백을 추가했습니다.

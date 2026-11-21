@@ -1,0 +1,526 @@
+{
+  "browser": "msedge",
+  "version": "157.0.4341.60",
+  "stage": "full-production",
+  "count": 34,
+  "offline": true,
+  "errors": [],
+  "requests": [],
+  "artifactSha256": "32efdd50a9e434750d1ab3b6e8ce28424f8da5322252224901f8f4ce6cd87899",
+  "artifactBytes": 2207690,
+  "results": [
+    {
+      "id": "VO_HELLO",
+      "normal": {
+        "id": "VO_HELLO",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.568889,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_MOVE_LEFT",
+      "normal": {
+        "id": "VO_MOVE_LEFT",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.940408,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_MOVE_RIGHT",
+      "normal": {
+        "id": "VO_MOVE_RIGHT",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.928798,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_WATCH_OUT",
+      "normal": {
+        "id": "VO_WATCH_OUT",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.754649,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_DODGE",
+      "normal": {
+        "id": "VO_DODGE",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.638549,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_ATTACK",
+      "normal": {
+        "id": "VO_ATTACK",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.534059,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_ATTACK_SLIME",
+      "normal": {
+        "id": "VO_ATTACK_SLIME",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.288707,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_USE_MAGIC",
+      "normal": {
+        "id": "VO_USE_MAGIC",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.114558,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_LISTEN",
+      "normal": {
+        "id": "VO_LISTEN",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.033288,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_GOOD_JOB",
+      "normal": {
+        "id": "VO_GOOD_JOB",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.684989,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_TRY_AGAIN",
+      "normal": {
+        "id": "VO_TRY_AGAIN",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.824308,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_YOU_CAN",
+      "normal": {
+        "id": "VO_YOU_CAN",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.033288,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_NEED_FIRE",
+      "normal": {
+        "id": "VO_NEED_FIRE",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.172608,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_OPEN_GATE",
+      "normal": {
+        "id": "VO_OPEN_GATE",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.963628,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_FOLLOW",
+      "normal": {
+        "id": "VO_FOLLOW",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.696599,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_BE_CAREFUL",
+      "normal": {
+        "id": "VO_BE_CAREFUL",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.743039,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_SLIME_COMING",
+      "normal": {
+        "id": "VO_SLIME_COMING",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.137778,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_ENEMY_WEAK",
+      "normal": {
+        "id": "VO_ENEMY_WEAK",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.416417,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_ONCE_MORE",
+      "normal": {
+        "id": "VO_ONCE_MORE",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.079728,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_VICTORY",
+      "normal": {
+        "id": "VO_VICTORY",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.673379,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_READY",
+      "normal": {
+        "id": "VO_READY",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.882358,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_KEEP_DISTANCE",
+      "normal": {
+        "id": "VO_KEEP_DISTANCE",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.195828,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_WAIT",
+      "normal": {
+        "id": "VO_WAIT",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.149388,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_CHARGE",
+      "normal": {
+        "id": "VO_CHARGE",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.288707,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_BOSS",
+      "normal": {
+        "id": "VO_BOSS",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.346757,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_JUMP",
+      "normal": {
+        "id": "VO_JUMP",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.917188,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_THREE",
+      "normal": {
+        "id": "VO_THREE",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.126168,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_CRYSTAL",
+      "normal": {
+        "id": "VO_CRYSTAL",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.439637,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_TAKE_BREAK",
+      "normal": {
+        "id": "VO_TAKE_BREAK",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.789478,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_RETURN",
+      "normal": {
+        "id": "VO_RETURN",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.114558,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_ATTACK_CRYSTAL",
+      "normal": {
+        "id": "VO_ATTACK_CRYSTAL",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.160998,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_CORE_EXPOSED",
+      "normal": {
+        "id": "VO_CORE_EXPOSED",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.683447,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_PERFECT_DODGE",
+      "normal": {
+        "id": "VO_PERFECT_DODGE",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 1.114558,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    },
+    {
+      "id": "VO_COMBO_FINISH",
+      "normal": {
+        "id": "VO_COMBO_FINISH",
+        "matched": true,
+        "rate": 1,
+        "pitch": true,
+        "volume": 0.595,
+        "duration": 0.928798,
+        "ducked": true,
+        "source": "asset"
+      },
+      "replay": true,
+      "slow": true
+    }
+  ],
+  "controls": "volume/mute/zero/stop/interruption/scene cleanup passed",
+  "savePreserved": true,
+  "humanListening": "Not performed"
+}

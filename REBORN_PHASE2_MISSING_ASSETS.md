@@ -1,3 +1,7 @@
+# Subsequent Piper audio update
+
+The missing list below is the historical Phase 2 baseline. All 34 normal-speed utterances now have technically verified Piper WAV files. Separate slow takes and three distinct acted voices are not supplied; 0.75× pitch-preserving playback is available. See [current voice report](REBORN_PIPER_VOICE_REPORT.md). Human listening approval remains pending.
+
 # REBORN Phase 2 — missing production audio
 
 Confirmed available: **0/34 English voice files**. Repository scan found no authorized recordings. Connected tools do not supply an approved speech generator; available unconnected providers do not constitute authorization or delivered assets. No paid service call was made.

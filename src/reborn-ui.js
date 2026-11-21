@@ -3,7 +3,7 @@ const RebornApp=(()=>{
   const game=RebornCombat.create();
   const settings={master:.7,voice:.85,sfx:.65,music:0,ui:.5,muted:false,shakeIntensity:'low',reducedMotion:globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches||false};
   const audio=RebornAudio.create(settings);
-  const voiceCount=RebornVoiceManifest.utterances.filter(x=>x.available).length;
+  const voiceCount=RebornVoiceManifest.utterances.filter(x=>x.available&&x.embedded).length;
   document.body.dataset.reducedMotion=String(settings.reducedMotion);
   let voiceSession=0,voiceChallenge=null,hintChallenge=null,visibleMode='',lastEventMode='',overlayKey='',lastFrame=0,accumulator=0,lastHud=0,words=[],showEnglish=false,showKorean=false;
   const held=new Set(),pointerActions=new Map();
@@ -18,15 +18,23 @@ const RebornApp=(()=>{
     <section class="toolbar" aria-label="조작과 음성"><div class="control-pad">${button('left','<strong>←</strong><small>A · 이동</small>','aria-label="왼쪽 이동"')}${button('right','<strong>→</strong><small>D · 이동</small>','aria-label="오른쪽 이동"')}${button('attack','<strong>검</strong><small>J · 공격</small>','aria-label="검 공격"')}${button('dodge','<strong>회피</strong><small>K · 피하기</small>','aria-label="회피"')}${button('magic','<strong>마법</strong><small>L · 문장</small>','aria-label="영어 마법"')}</div>
     <div class="voice-panel"><div class="button-row">${button('replay','▶ 듣기 / 다시 듣기 <kbd>R</kbd>')}${button('english','영어 원문')}${button('korean','한국어 뜻 <kbd>H</kbd>')}</div><div class="audio-options"><label><input id="slow" type="checkbox"> 느리게 0.75×</label><label><input id="fallback" type="checkbox"> 기기 음성 대안 (합성)</label></div><p id="voice-status" class="voice-status" role="status"></p><p id="hint-text" class="hint-text" hidden></p></div></section>
     <details class="settings"><summary>소리·화면 설정</summary><div class="settings-grid">${[['master','전체',70],['voice','영어 음성',85],['sfx','전투 효과음',65],['music','장면별 음악',0],['ui','안내 효과음',50]].map(([id,label,val])=>`<label>${label}<input type="range" data-volume="${id}" min="0" max="100" value="${val}" aria-label="${label} 음량"></label>`).join('')}<label><input id="muted" type="checkbox"> 전체 음소거</label><label>화면 흔들림<select id="shake" aria-label="화면 흔들림 강도"><option value="off">끄기</option><option value="low" selected>낮게</option><option value="normal">보통</option></select></label><label><input id="reduced" type="checkbox" ${settings.reducedMotion?'checked':''}> 움직임 줄이기</label></div><p class="muted">제작 음성 ${voiceCount}/${RebornVoiceManifest.utterances.length}개 · 기기 합성 음성은 선택 사항입니다. 음악은 원작 절차적 패턴이며 기본 꺼짐입니다.</p></details>
+    <section class="audio-diagnostic" aria-labelledby="audio-test-title"><h2 id="audio-test-title">영어 음성 테스트</h2><p id="audio-source"></p><p id="audio-level"></p><p id="audio-playback" role="status" aria-live="polite"></p><p id="audio-expression">테스트 표현: Hello!</p><div class="button-row">${button('test-voice','▶ 영어 음성 듣기','class="primary"')}${button('voice-replay','다시 듣기')}${button('voice-normal','보통 속도')}${button('voice-slow','느리게 듣기')}${button('stop-voice','■ 음성 정지')}</div><p class="muted">무료 로컬 합성 음성입니다. 발음·억양은 사람의 듣기 검토가 남아 있습니다. 음량은 위의 소리·화면 설정에서 조절하세요.</p></section>
     <details class="input-help"><summary>조작 도움말 · 연속 공격과 회피</summary><p>A / D 또는 ← / → 이동 · J를 차례로 눌러 빠른 베기 → 올려 베기 → 마무리 공격. 누르고 있기만 하면 연속 공격하지 않습니다.</p><p>K는 바라보는 방향으로 회피합니다. 적의 공격이 닿는 순간 무적 시간 안에 있으면 Perfect Dodge와 마법 충전을 얻습니다. 성공 회피는 필수가 아닙니다.</p><p>L은 충전된 문장 마법 · R 다시 듣기 · H 한국어 도움 · Esc 일시정지. 일반 공격에는 영어 문제가 없습니다.</p></details>
     <details class="expression-practice"><summary>${RebornVoiceManifest.utterances.length}개 표현 미리 듣기·복습</summary><p>전투 중 열면 안전하게 멈춥니다. 제작 음성 ${voiceCount}/${RebornVoiceManifest.utterances.length}개, 누락된 표현은 원문 도움을 이용하세요.</p><div class="expression-list">${RebornVoiceManifest.utterances.map(x=>button('phrase',`<b>${escape(x.en)}</b><span>${escape(x.ko)} · ${escape(x.speaker)}</span>`,`data-voice="${x.id}"`)).join('')}</div></details>
     <footer class="footer"><span>직접 움직이고, 듣고, 행동하세요.</span><span>v0.8 모험·아카데미 저장과 완전히 분리된 연습입니다.</span></footer></div>`;
   const $=id=>document.getElementById(id),canvas=$('battle'),ctx=canvas.getContext('2d'),overlay=$('overlay');
   const voice=RebornVoice.create(RebornVoiceManifest,audio,{
-    onStatus(status){$('voice-status').textContent=status.message;},
+    onStatus(status){$('voice-status').textContent=status.message;renderAudioDiagnostic(status);},
     onHeard(event){if(game.state.session===voiceSession&&game.state.challenge===voiceChallenge&&voiceChallenge?.voiceId===event.id)game.heard(event.source);}
   });
   $('voice-status').textContent=voice.status.message;
+  function renderAudioDiagnostic(status=voice.status){
+    const source=status.source==='browser-fallback'?'기기 합성 음성 대안':voiceCount?'Piper AI 영어 음성':'사용 가능한 음성 파일 없음';
+    $('audio-source').textContent=`음성 출처: ${source} · 검증된 파일 ${voiceCount} / ${RebornVoiceManifest.utterances.length}`;
+    $('audio-level').textContent=`영어 음량 ${Math.round(settings.voice*100)}% · 전체 ${Math.round(settings.master*100)}% · ${settings.muted?'음소거':'소리 켜짐'} · ${$('slow').checked?'느리게 0.75×':'보통 1×'}`;
+    $('audio-playback').textContent=status.message;
+  }
+  renderAudioDiagnostic();
   function playVoice(id){voiceSession=game.state.session;voiceChallenge=game.state.challenge;voice.play(id);renderHints();}
   function renderHints(){const item=voice.getItem(game.state.challenge?.voiceId||voice.currentId);$('hint-text').hidden=!(item&&(showEnglish||showKorean));$('hint-text').textContent=item?[showEnglish?item.en:'',showKorean?item.ko:''].filter(Boolean).join(' — '):'';}
   function reveal(kind){game.assist(kind);if(kind==='english')showEnglish=true;else showKorean=true;renderHints();}
@@ -47,6 +55,14 @@ const RebornApp=(()=>{
     else if(action==='pause'){if(game.state.mode==='PAUSED')game.resume();else pause();}
     else if(action==='resume')game.resume();
     else if(action==='replay')playVoice(game.state.challenge?.voiceId||voice.currentId||game.state.lastVoiceId||'VO_HELLO');
+    else if(['test-voice','voice-replay','voice-normal','voice-slow'].includes(action)){
+      const id=action==='test-voice'?'VO_HELLO':voice.currentId||'VO_HELLO';
+      game.assist('hint');pause();
+      if(action==='voice-normal'||action==='voice-slow'){$('slow').checked=action==='voice-slow';voice.configure({slow:$('slow').checked});}
+      playVoice(id);showEnglish=showKorean=true;renderHints();
+      const item=voice.getItem(id);$('audio-expression').textContent=`테스트 표현: ${item.en} · ${item.ko}`;
+    }
+    else if(action==='stop-voice')voice.stop();
     else if(action==='english'||action==='korean')reveal(action);
     else if(action==='phrase'){game.assist('hint');pause();showEnglish=showKorean=true;playVoice(element.dataset.voice);}
     else if(action==='answer')game.answer(element.dataset.answer);
@@ -74,7 +90,7 @@ const RebornApp=(()=>{
   }
   function renderOverlay(){
     const s=game.state,c=s.challenge,t=s.tutorial;
-    if(c?.id!==hintChallenge){hintChallenge=c?.id;showEnglish=showKorean=false;const library=document.querySelector('.expression-practice');if(c&&library.open){game.assist('hint');library.open=false;}renderHints();}
+    if(c?.id!==hintChallenge){hintChallenge=c?.id;showEnglish=showKorean=false;$('audio-expression').textContent='테스트 표현: Hello!';const library=document.querySelector('.expression-practice');if(c&&library.open){game.assist('hint');library.open=false;}renderHints();}
     const key=[s.session,s.mode,s.stage,t?.index,c?.id,c?.phase,c?.attempts,c?.feedback,s.awaitingProceed].join('|');
     if(key===overlayKey)return;overlayKey=key;words=[];
     let html='';
@@ -115,8 +131,8 @@ const RebornApp=(()=>{
   document.addEventListener('keyup',event=>{const action=keymap[event.code];if(!action)return;held.delete(event.code);if(labels[action]&&![...held].some(code=>keymap[code]===action)&&!Array.from(pointerActions.values()).includes(action))game.input(action,false);});
   globalThis.addEventListener('blur',()=>{if(!['INTRO','VICTORY','DEFEAT'].includes(game.state.mode))pause();else release();});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
-  document.addEventListener('change',event=>{const el=event.target;if(el.id==='slow'||el.id==='fallback'){voice.configure({slow:$('slow').checked,fallback:$('fallback').checked});}if(el.id==='muted'){settings.muted=el.checked;audio.configure({muted:el.checked});voice.stop();}if(el.id==='shake')settings.shakeIntensity=el.value;if(el.id==='reduced'){settings.reducedMotion=el.checked;document.body.dataset.reducedMotion=String(el.checked);}});
-  document.addEventListener('input',event=>{const key=event.target.dataset.volume;if(key){audio.unlock();settings[key]=Number(event.target.value)/100;audio.configure({[key]:settings[key]});if(key==='voice'||key==='master')voice.stop();}});
+  document.addEventListener('change',event=>{const el=event.target;if(el.id==='slow'||el.id==='fallback'){voice.configure({slow:$('slow').checked,fallback:$('fallback').checked});}if(el.id==='muted'){settings.muted=el.checked;audio.configure({muted:el.checked});voice.refreshVolume();}if(el.id==='shake')settings.shakeIntensity=el.value;if(el.id==='reduced'){settings.reducedMotion=el.checked;document.body.dataset.reducedMotion=String(el.checked);}renderAudioDiagnostic();});
+  document.addEventListener('input',event=>{const key=event.target.dataset.volume;if(key){audio.unlock();settings[key]=Number(event.target.value)/100;audio.configure({[key]:settings[key]});if(key==='voice'||key==='master')voice.refreshVolume();renderAudioDiagnostic();}});
   document.querySelectorAll('details').forEach(el=>el.addEventListener('toggle',()=>{if(el.open&&el.classList.contains('expression-practice'))game.assist('hint');if(el.open&&!['INTRO','PAUSED','VICTORY','DEFEAT'].includes(game.state.mode))pause();}));
   function frame(now){const elapsed=lastFrame?Math.min(.15,(now-lastFrame)/1000):0;lastFrame=now;accumulator+=elapsed;let steps=0;while(accumulator>=1/60&&steps++<9){game.update(1/60);accumulator-=1/60;}drain();audio.tick();RebornArt.draw(ctx,game.state,now/1000,settings);if(now-lastHud>80){sync();lastHud=now;}requestAnimationFrame(frame);}
   sync();requestAnimationFrame(frame);
