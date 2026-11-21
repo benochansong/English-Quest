@@ -1,0 +1,21 @@
+msedge 157.0.4341.60 offline academy
+layout: academy-hall passed at five viewports
+single local timing snapshot (ms, not a benchmark): {"activities":500,"loadMs":259.2,"selectionMs":15.8,"dashboardMs":0.6,"hallRenderMs":2.4}
+layout: academy-preview passed at five viewports
+layout: academy-results passed at five viewports
+skip, preview/guided/independent/application/results, correction, manual tier and unit reward lock passed
+layout: academy-listening-fallback passed at five viewports
+all five practice modes, hints, text listening evidence and no practice reward farming passed
+catalog: 500 distinct reachable controls; 69 representative unit/skill activities answered via UI
+authentic completed v7 migrates with old bytes and three chapters/position/skills preserved
+layout: academy-placement passed at five viewports
+two alternate 24-item diagnostics, four skill results, honest no-audio placement and automatic/manual tier passed
+four missions: wrong/retry, resume, completion, replay and one-time small gold rewards passed
+layout: academy-analytics passed at five viewports
+due review and analytics agree with saved independent/assisted records
+layout: academy-backup passed at five viewports
+actual JSON download, preview/cancel, malformed/future/oversized rejection, stale checkpoint protection, confirmed snapshot restore and reload passed
+Academy milestone UI passed without external requests or uncaught errors.
+layout: academy-hall passed at five viewports
+layout: academy-optional-input passed at five viewports
+optional authored text, recognition mock lifecycle/errors/stale events/privacy, TTS rates and active mute fallback passed (no physical microphone or speaker claim)

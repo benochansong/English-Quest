@@ -1,0 +1,1145 @@
+{
+  "browser": "msedge",
+  "version": "157.0.4341.60",
+  "sha256": "9ea2c05a2980950f054178bc3945d743b16537f11e427d207a40e3939aa084cd",
+  "offline": true,
+  "errors": [],
+  "requests": [],
+  "result": {
+    "duration": 6.513,
+    "mode": "VICTORY",
+    "kind": "slime",
+    "stats": {
+      "correct": 3,
+      "wrong": 0,
+      "assisted": 0,
+      "independent": 3,
+      "expressions": [
+        "I need fire.",
+        "Move left!",
+        "Watch out!"
+      ],
+      "reviewExpressions": [],
+      "goals": [
+        "perfect-dodge",
+        "independent-listening",
+        "combo-three"
+      ],
+      "combat": {
+        "damageDealt": 70,
+        "damageReceived": 7,
+        "dodges": 1,
+        "successfulDodges": 1,
+        "perfectDodges": 1,
+        "highestCombo": 3,
+        "magicUsed": 1,
+        "magicHits": 1,
+        "weaknessHits": 0,
+        "swordHits": 4,
+        "counterattacks": 0
+      },
+      "listening": {
+        "correct": 2,
+        "wrong": 0,
+        "assisted": 0,
+        "independent": 2,
+        "asset": 2,
+        "fallback": 0,
+        "unheard": 0
+      },
+      "magic": {
+        "correct": 1,
+        "wrong": 0,
+        "assisted": 0,
+        "independent": 1
+      },
+      "flow": {
+        "forcedScreens": 3,
+        "forcedSeconds": 3.9749999999999885,
+        "sentenceArrangements": 1,
+        "actionOpportunities": 1,
+        "actionSuccesses": 1,
+        "independentActions": 1,
+        "heardExpressions": [
+          "fire",
+          "left",
+          "dodge"
+        ],
+        "independentExpressions": [
+          "fire"
+        ],
+        "helpExpressions": [],
+        "outcomes": [
+          {
+            "id": "2:1",
+            "key": "fire",
+            "success": true,
+            "heard": true,
+            "assisted": false,
+            "independent": true,
+            "actual": true,
+            "reason": "action"
+          }
+        ],
+        "audio": {
+          "requested": 9,
+          "playing": 7,
+          "ended": 3,
+          "stopped": 4,
+          "error": 0,
+          "missing": 0,
+          "muted": 0,
+          "blocked": 0,
+          "ignored": 1
+        }
+      },
+      "battlefield": {
+        "missedAttacks": 0,
+        "groundings": 0,
+        "shieldBreaks": 0,
+        "wrongCrystals": 0
+      }
+    },
+    "learning": {
+      "left": {
+        "introduced": true,
+        "stage": "practice",
+        "independent": 1,
+        "streak": 1,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": "independent"
+      },
+      "dodge": {
+        "introduced": true,
+        "stage": "practice",
+        "independent": 1,
+        "streak": 1,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": "independent"
+      },
+      "attack": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "magic": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "fire": {
+        "introduced": true,
+        "stage": "practice",
+        "independent": 1,
+        "streak": 1,
+        "actual": 1,
+        "misses": 0,
+        "lastResult": "independent"
+      },
+      "crystal": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "wind": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "blue": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      }
+    },
+    "report": {
+      "kind": "slime",
+      "durationSeconds": 13.033,
+      "stats": {
+        "correct": 3,
+        "wrong": 0,
+        "assisted": 0,
+        "independent": 3,
+        "expressions": [
+          "I need fire.",
+          "Move left!",
+          "Watch out!"
+        ],
+        "reviewExpressions": [],
+        "goals": [
+          "perfect-dodge",
+          "independent-listening",
+          "combo-three"
+        ],
+        "combat": {
+          "damageDealt": 70,
+          "damageReceived": 7,
+          "dodges": 1,
+          "successfulDodges": 1,
+          "perfectDodges": 1,
+          "highestCombo": 3,
+          "magicUsed": 1,
+          "magicHits": 1,
+          "weaknessHits": 0,
+          "swordHits": 4,
+          "counterattacks": 0
+        },
+        "listening": {
+          "correct": 2,
+          "wrong": 0,
+          "assisted": 0,
+          "independent": 2,
+          "asset": 2,
+          "fallback": 0,
+          "unheard": 0
+        },
+        "magic": {
+          "correct": 1,
+          "wrong": 0,
+          "assisted": 0,
+          "independent": 1
+        },
+        "flow": {
+          "forcedScreens": 3,
+          "forcedSeconds": 3.9749999999999885,
+          "sentenceArrangements": 1,
+          "actionOpportunities": 1,
+          "actionSuccesses": 1,
+          "independentActions": 1,
+          "heardExpressions": [
+            "fire",
+            "left",
+            "dodge"
+          ],
+          "independentExpressions": [
+            "fire"
+          ],
+          "helpExpressions": [],
+          "outcomes": [
+            {
+              "id": "2:1",
+              "key": "fire",
+              "success": true,
+              "heard": true,
+              "assisted": false,
+              "independent": true,
+              "actual": true,
+              "reason": "action"
+            }
+          ],
+          "audio": {
+            "requested": 8,
+            "playing": 7,
+            "ended": 3,
+            "stopped": 4,
+            "error": 0,
+            "missing": 0,
+            "muted": 0,
+            "blocked": 0,
+            "ignored": 1
+          }
+        },
+        "battlefield": {
+          "missedAttacks": 0,
+          "groundings": 0,
+          "shieldBreaks": 0,
+          "wrongCrystals": 0
+        }
+      },
+      "metrics": {
+        "damageReceived": 7,
+        "successfulDodges": 1,
+        "missedAttacks": 0,
+        "highestCombo": 3,
+        "groundings": 0,
+        "shieldBreaks": 0,
+        "weaknessHits": 0,
+        "spokenRequests": 8,
+        "listeningOpportunities": 1,
+        "independentActions": 1,
+        "assistedActions": 0,
+        "textOnlyActions": 0,
+        "helpExpressions": [],
+        "interruptions": 3,
+        "interruptionSeconds": 3.975
+      }
+    },
+    "patterns": [
+      "jump"
+    ],
+    "states": [
+      "RECOVERY",
+      "HIT_REACTION",
+      "IDLE"
+    ],
+    "screens": [
+      "2:4",
+      "2:5"
+    ]
+  },
+  "mutedResult": {
+    "duration": 10.249,
+    "mode": "VICTORY",
+    "kind": "slime",
+    "stats": {
+      "correct": 2,
+      "wrong": 0,
+      "assisted": 2,
+      "independent": 0,
+      "expressions": [
+        "I need fire.",
+        "Move left!"
+      ],
+      "reviewExpressions": [
+        {
+          "id": "fire",
+          "voiceId": "VO_NEED_FIRE",
+          "english": "I need fire.",
+          "ko": "나는 불이 필요해요.",
+          "reasons": [
+            "hint"
+          ]
+        },
+        {
+          "id": "left",
+          "voiceId": "VO_MOVE_LEFT",
+          "english": "Move left!",
+          "ko": "왼쪽으로 이동해요!",
+          "reasons": [
+            "hint"
+          ]
+        },
+        {
+          "id": "dodge",
+          "voiceId": "VO_WATCH_OUT",
+          "english": "Watch out!",
+          "ko": "조심해요!",
+          "reasons": [
+            "missed"
+          ]
+        }
+      ],
+      "goals": [
+        "combo-three"
+      ],
+      "combat": {
+        "damageDealt": 70,
+        "damageReceived": 7,
+        "dodges": 0,
+        "successfulDodges": 0,
+        "perfectDodges": 0,
+        "highestCombo": 3,
+        "magicUsed": 1,
+        "magicHits": 1,
+        "weaknessHits": 0,
+        "swordHits": 4,
+        "counterattacks": 0
+      },
+      "listening": {
+        "correct": 1,
+        "wrong": 0,
+        "assisted": 1,
+        "independent": 0,
+        "asset": 0,
+        "fallback": 0,
+        "unheard": 1
+      },
+      "magic": {
+        "correct": 1,
+        "wrong": 0,
+        "assisted": 1,
+        "independent": 0
+      },
+      "flow": {
+        "forcedScreens": 2,
+        "forcedSeconds": 1.0249999999999988,
+        "sentenceArrangements": 1,
+        "actionOpportunities": 2,
+        "actionSuccesses": 1,
+        "independentActions": 0,
+        "heardExpressions": [],
+        "independentExpressions": [],
+        "helpExpressions": [],
+        "outcomes": [
+          {
+            "id": "4:1",
+            "key": "fire",
+            "success": true,
+            "heard": false,
+            "assisted": true,
+            "independent": false,
+            "actual": true,
+            "reason": "action"
+          },
+          {
+            "id": "4:action:5",
+            "key": "dodge",
+            "success": false,
+            "heard": false,
+            "assisted": false,
+            "independent": false,
+            "actual": true,
+            "reason": "missed"
+          }
+        ],
+        "audio": {
+          "requested": 8,
+          "playing": 0,
+          "ended": 0,
+          "stopped": 1,
+          "error": 0,
+          "missing": 0,
+          "muted": 8,
+          "blocked": 0,
+          "ignored": 0
+        }
+      },
+      "battlefield": {
+        "missedAttacks": 0,
+        "groundings": 0,
+        "shieldBreaks": 0,
+        "wrongCrystals": 0
+      }
+    },
+    "learning": {
+      "left": {
+        "introduced": true,
+        "stage": "practice",
+        "independent": 1,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": "assisted"
+      },
+      "dodge": {
+        "introduced": true,
+        "stage": "practice",
+        "independent": 1,
+        "streak": 0,
+        "actual": 0,
+        "misses": 1,
+        "lastResult": "review"
+      },
+      "attack": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "magic": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "fire": {
+        "introduced": true,
+        "stage": "practice",
+        "independent": 1,
+        "streak": 0,
+        "actual": 1,
+        "misses": 0,
+        "lastResult": "assisted"
+      },
+      "crystal": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "wind": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      },
+      "blue": {
+        "introduced": false,
+        "stage": "guided",
+        "independent": 0,
+        "streak": 0,
+        "actual": 0,
+        "misses": 0,
+        "lastResult": null
+      }
+    },
+    "report": {
+      "kind": "slime",
+      "durationSeconds": 10.967,
+      "stats": {
+        "correct": 2,
+        "wrong": 0,
+        "assisted": 2,
+        "independent": 0,
+        "expressions": [
+          "I need fire.",
+          "Move left!",
+          "Watch out!"
+        ],
+        "reviewExpressions": [
+          {
+            "id": "fire",
+            "voiceId": "VO_NEED_FIRE",
+            "english": "I need fire.",
+            "ko": "나는 불이 필요해요.",
+            "reasons": [
+              "hint"
+            ]
+          },
+          {
+            "id": "left",
+            "voiceId": "VO_MOVE_LEFT",
+            "english": "Move left!",
+            "ko": "왼쪽으로 이동해요!",
+            "reasons": [
+              "hint"
+            ]
+          },
+          {
+            "id": "dodge",
+            "voiceId": "VO_WATCH_OUT",
+            "english": "Watch out!",
+            "ko": "조심해요!",
+            "reasons": [
+              "missed"
+            ]
+          }
+        ],
+        "goals": [
+          "combo-three"
+        ],
+        "combat": {
+          "damageDealt": 70,
+          "damageReceived": 7,
+          "dodges": 0,
+          "successfulDodges": 0,
+          "perfectDodges": 0,
+          "highestCombo": 3,
+          "magicUsed": 1,
+          "magicHits": 1,
+          "weaknessHits": 0,
+          "swordHits": 4,
+          "counterattacks": 0
+        },
+        "listening": {
+          "correct": 1,
+          "wrong": 0,
+          "assisted": 1,
+          "independent": 0,
+          "asset": 0,
+          "fallback": 0,
+          "unheard": 1
+        },
+        "magic": {
+          "correct": 1,
+          "wrong": 0,
+          "assisted": 1,
+          "independent": 0
+        },
+        "flow": {
+          "forcedScreens": 2,
+          "forcedSeconds": 1.0249999999999988,
+          "sentenceArrangements": 1,
+          "actionOpportunities": 2,
+          "actionSuccesses": 1,
+          "independentActions": 0,
+          "heardExpressions": [],
+          "independentExpressions": [],
+          "helpExpressions": [
+            "fire",
+            "left"
+          ],
+          "outcomes": [
+            {
+              "id": "4:1",
+              "key": "fire",
+              "success": true,
+              "heard": false,
+              "assisted": true,
+              "independent": false,
+              "actual": true,
+              "reason": "action"
+            },
+            {
+              "id": "4:action:5",
+              "key": "dodge",
+              "success": false,
+              "heard": false,
+              "assisted": false,
+              "independent": false,
+              "actual": true,
+              "reason": "missed"
+            }
+          ],
+          "audio": {
+            "requested": 7,
+            "playing": 0,
+            "ended": 0,
+            "stopped": 1,
+            "error": 0,
+            "missing": 0,
+            "muted": 7,
+            "blocked": 0,
+            "ignored": 0
+          }
+        },
+        "battlefield": {
+          "missedAttacks": 0,
+          "groundings": 0,
+          "shieldBreaks": 0,
+          "wrongCrystals": 0
+        }
+      },
+      "metrics": {
+        "damageReceived": 7,
+        "successfulDodges": 0,
+        "missedAttacks": 0,
+        "highestCombo": 3,
+        "groundings": 0,
+        "shieldBreaks": 0,
+        "weaknessHits": 0,
+        "spokenRequests": 7,
+        "listeningOpportunities": 2,
+        "independentActions": 0,
+        "assistedActions": 1,
+        "textOnlyActions": 1,
+        "helpExpressions": [
+          "fire",
+          "left"
+        ],
+        "interruptions": 2,
+        "interruptionSeconds": 1.025
+      }
+    },
+    "patterns": [
+      "jump",
+      "rush"
+    ],
+    "states": [
+      "IDLE",
+      "APPROACH",
+      "RECOVERY",
+      "TELEGRAPH",
+      "ATTACK",
+      "HIT_REACTION",
+      "STAGGER"
+    ],
+    "screens": [
+      "4:4"
+    ]
+  },
+  "completedSave": {
+    "format": "EnglishQuestIntegrated",
+    "version": 1,
+    "revision": 14,
+    "profile": {
+      "version": 8,
+      "started": true,
+      "currentChapter": 1,
+      "level": 1,
+      "xp": 0,
+      "gold": 0,
+      "hp": 100,
+      "rpg": {
+        "classId": "vanguard",
+        "promptSeen": true,
+        "skills": [],
+        "availablePoints": 0,
+        "spentPoints": 0,
+        "collection": [
+          "travelerSword"
+        ],
+        "equipped": {
+          "weapon": null,
+          "armor": null,
+          "accessory": null
+        },
+        "dungeons": {
+          "words": {
+            "clears": 0,
+            "best": 0,
+            "lastIds": []
+          },
+          "sentences": {
+            "clears": 0,
+            "best": 0,
+            "lastIds": []
+          },
+          "echoes": {
+            "clears": 0,
+            "best": 0,
+            "lastIds": []
+          }
+        }
+      },
+      "completed": [],
+      "unlocked": 1,
+      "chapterComplete": false,
+      "learning": {},
+      "mistakes": {},
+      "marked": [],
+      "schedule": {},
+      "history": [],
+      "achievements": [
+        "firstAdventurer"
+      ],
+      "village": {
+        "progress": {
+          "4": {
+            "accepted": false,
+            "step": 0,
+            "completed": false,
+            "correct": 0,
+            "wrong": 0,
+            "tags": [],
+            "reviewTags": []
+          },
+          "5": {
+            "accepted": false,
+            "step": 0,
+            "completed": false,
+            "correct": 0,
+            "wrong": 0,
+            "tags": [],
+            "reviewTags": []
+          },
+          "6": {
+            "accepted": false,
+            "step": 0,
+            "completed": false,
+            "correct": 0,
+            "wrong": 0,
+            "tags": [],
+            "reviewTags": []
+          }
+        },
+        "inventory": {
+          "potion": 0,
+          "charm": 0,
+          "cloak": 0
+        },
+        "scenarioStep": 0,
+        "scenarioComplete": false
+      },
+      "academy": {
+        "tier": 1,
+        "tierMode": "auto",
+        "records": {},
+        "expressions": {},
+        "recent": [],
+        "units": {},
+        "missions": {},
+        "diagnostics": [],
+        "diagnosticRuns": 0,
+        "rewarded": [],
+        "badges": [],
+        "sessions": 0,
+        "evidenceCount": 0,
+        "adjustedAt": 0,
+        "speechAttempts": 0
+      },
+      "voice": {
+        "introduced": [],
+        "records": {},
+        "recent": [],
+        "missions": {},
+        "speechAttempts": 0
+      },
+      "exploration": {
+        "area": "forest",
+        "x": 100,
+        "y": 450,
+        "direction": "down",
+        "completed": [],
+        "observed": [],
+        "opened": [],
+        "discovered": [
+          "forest"
+        ],
+        "recruited": [],
+        "activeCompanion": null,
+        "choices": {
+          "crossroad": null,
+          "restoration": null
+        },
+        "quests": {
+          "map": "active",
+          "companions": "locked",
+          "bridge": "locked",
+          "fragments": "locked",
+          "path": "locked"
+        },
+        "completedChapter": false,
+        "cosmetics": [],
+        "notes": [],
+        "rewarded": [],
+        "tutorialSeen": false
+      },
+      "settings": {
+        "sound": false,
+        "voice": true,
+        "volume": 0.45,
+        "speechRate": "normal",
+        "speechVolume": 1
+      }
+    },
+    "extension": {
+      "version": 1,
+      "quest": "complete",
+      "recognition": true,
+      "records": {
+        "left": {
+          "encountered": 2,
+          "audioPlayed": 1,
+          "attempted": 2,
+          "completed": 0,
+          "independent": 0,
+          "assisted": 0,
+          "text": 0,
+          "translation": 1,
+          "replay": 0,
+          "missed": 0,
+          "reviews": 1
+        },
+        "dodge": {
+          "encountered": 2,
+          "audioPlayed": 1,
+          "attempted": 1,
+          "completed": 0,
+          "independent": 0,
+          "assisted": 0,
+          "text": 0,
+          "translation": 0,
+          "replay": 0,
+          "missed": 1,
+          "reviews": 0
+        },
+        "fire": {
+          "encountered": 2,
+          "audioPlayed": 2,
+          "attempted": 2,
+          "completed": 2,
+          "independent": 1,
+          "assisted": 1,
+          "text": 0,
+          "translation": 1,
+          "replay": 0,
+          "missed": 0,
+          "reviews": 0
+        }
+      },
+      "memory": {
+        "left": {
+          "introduced": true,
+          "independent": 1,
+          "streak": 0,
+          "actual": 0,
+          "misses": 0,
+          "lastResult": "assisted",
+          "stage": "practice"
+        },
+        "dodge": {
+          "introduced": true,
+          "independent": 1,
+          "streak": 0,
+          "actual": 0,
+          "misses": 1,
+          "lastResult": "review",
+          "stage": "practice"
+        },
+        "fire": {
+          "introduced": true,
+          "independent": 1,
+          "streak": 0,
+          "actual": 1,
+          "misses": 0,
+          "lastResult": "assisted",
+          "stage": "practice"
+        }
+      },
+      "runs": [
+        {
+          "runId": "0f9a9d18-78f6-49f4-9506-1bfbc4967c63",
+          "encounterId": "forest-awakens",
+          "status": "victory",
+          "enemyDefeated": true,
+          "meaningful": 1,
+          "independent": 1,
+          "assisted": 0
+        },
+        {
+          "runId": "7a49e111-aa92-4205-8701-73eaf1cb8f99",
+          "encounterId": "forest-awakens",
+          "status": "cancel",
+          "enemyDefeated": false,
+          "meaningful": 0,
+          "independent": 0,
+          "assisted": 0
+        },
+        {
+          "runId": "f4976b77-8b0c-479d-a583-315351d2d3a5",
+          "encounterId": "forest-awakens",
+          "status": "victory",
+          "enemyDefeated": true,
+          "meaningful": 1,
+          "independent": 0,
+          "assisted": 1
+        }
+      ],
+      "processed": [
+        "0f9a9d18-78f6-49f4-9506-1bfbc4967c63",
+        "7a49e111-aa92-4205-8701-73eaf1cb8f99",
+        "f4976b77-8b0c-479d-a583-315351d2d3a5"
+      ],
+      "active": null,
+      "checkpoint": {
+        "screen": "MAP",
+        "chapter": 1,
+        "mapSelection": 0,
+        "location": "forest-map"
+      },
+      "settings": {
+        "master": 0.45,
+        "voice": 1,
+        "sfx": 0.65,
+        "music": 0,
+        "ui": 0.5,
+        "ambient": 0.16,
+        "muted": true,
+        "shakeIntensity": "low",
+        "reducedMotion": false
+      },
+      "lastOutcome": "victory"
+    }
+  },
+  "save": {
+    "format": "EnglishQuestIntegrated",
+    "version": 1,
+    "revision": 19,
+    "profile": {
+      "version": 8,
+      "started": true,
+      "currentChapter": 1,
+      "level": 1,
+      "xp": 0,
+      "gold": 0,
+      "hp": 100,
+      "rpg": {
+        "classId": "vanguard",
+        "promptSeen": true,
+        "skills": [],
+        "availablePoints": 0,
+        "spentPoints": 0,
+        "collection": [
+          "travelerSword"
+        ],
+        "equipped": {
+          "weapon": null,
+          "armor": null,
+          "accessory": null
+        },
+        "dungeons": {
+          "words": {
+            "clears": 0,
+            "best": 0,
+            "lastIds": []
+          },
+          "sentences": {
+            "clears": 0,
+            "best": 0,
+            "lastIds": []
+          },
+          "echoes": {
+            "clears": 0,
+            "best": 0,
+            "lastIds": []
+          }
+        }
+      },
+      "completed": [],
+      "unlocked": 1,
+      "chapterComplete": false,
+      "learning": {},
+      "mistakes": {},
+      "marked": [],
+      "schedule": {},
+      "history": [],
+      "achievements": [
+        "firstAdventurer"
+      ],
+      "village": {
+        "progress": {
+          "4": {
+            "accepted": false,
+            "step": 0,
+            "completed": false,
+            "correct": 0,
+            "wrong": 0,
+            "tags": [],
+            "reviewTags": []
+          },
+          "5": {
+            "accepted": false,
+            "step": 0,
+            "completed": false,
+            "correct": 0,
+            "wrong": 0,
+            "tags": [],
+            "reviewTags": []
+          },
+          "6": {
+            "accepted": false,
+            "step": 0,
+            "completed": false,
+            "correct": 0,
+            "wrong": 0,
+            "tags": [],
+            "reviewTags": []
+          }
+        },
+        "inventory": {
+          "potion": 0,
+          "charm": 0,
+          "cloak": 0
+        },
+        "scenarioStep": 0,
+        "scenarioComplete": false
+      },
+      "academy": {
+        "tier": 1,
+        "tierMode": "auto",
+        "records": {},
+        "expressions": {},
+        "recent": [],
+        "units": {},
+        "missions": {},
+        "diagnostics": [],
+        "diagnosticRuns": 0,
+        "rewarded": [],
+        "badges": [],
+        "sessions": 0,
+        "evidenceCount": 0,
+        "adjustedAt": 0,
+        "speechAttempts": 0
+      },
+      "voice": {
+        "introduced": [],
+        "records": {},
+        "recent": [],
+        "missions": {},
+        "speechAttempts": 0
+      },
+      "exploration": {
+        "area": "forest",
+        "x": 100,
+        "y": 450,
+        "direction": "down",
+        "completed": [],
+        "observed": [],
+        "opened": [],
+        "discovered": [
+          "forest"
+        ],
+        "recruited": [],
+        "activeCompanion": null,
+        "choices": {
+          "crossroad": null,
+          "restoration": null
+        },
+        "quests": {
+          "map": "active",
+          "companions": "locked",
+          "bridge": "locked",
+          "fragments": "locked",
+          "path": "locked"
+        },
+        "completedChapter": false,
+        "cosmetics": [],
+        "notes": [],
+        "rewarded": [],
+        "tutorialSeen": false
+      },
+      "settings": {
+        "sound": true,
+        "voice": true,
+        "volume": 0.45,
+        "speechRate": "normal",
+        "speechVolume": 1
+      }
+    },
+    "extension": {
+      "version": 1,
+      "quest": "accepted",
+      "recognition": false,
+      "records": {},
+      "memory": {},
+      "runs": [
+        {
+          "runId": "7462512f-35da-4773-9770-cd8f75ddc94b",
+          "encounterId": "forest-awakens",
+          "status": "cancel",
+          "enemyDefeated": false,
+          "meaningful": 0,
+          "independent": 0,
+          "assisted": 0
+        }
+      ],
+      "processed": [
+        "7462512f-35da-4773-9770-cd8f75ddc94b"
+      ],
+      "active": null,
+      "checkpoint": {
+        "screen": "MAP",
+        "chapter": 1,
+        "mapSelection": 0,
+        "location": "forest-map"
+      },
+      "settings": {
+        "master": 0.45,
+        "voice": 1,
+        "sfx": 0.65,
+        "music": 0,
+        "ui": 0.5,
+        "ambient": 0.16,
+        "muted": false,
+        "shakeIntensity": "low",
+        "reducedMotion": false
+      },
+      "lastOutcome": "cancel"
+    }
+  }
+}

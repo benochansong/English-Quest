@@ -1,0 +1,9 @@
+/* Shared campaign shell; REBORN styles are confined to its temporary combat frame. */
+.world-card{padding:24px;margin:20px 0;border:1px solid #bca766;border-radius:16px;background:linear-gradient(120deg,#193b37,#102c31);color:#f0e9c9}
+.world-card h3{font-size:24px;margin:8px 0}.world-card p{line-height:1.7}.world-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.world-rowan{display:grid;grid-template-columns:150px 1fr;gap:24px;align-items:center}.world-rowan svg{width:100%;height:200px}.world-quote{font-size:24px;color:#e8d394}
+#world-combat{background:#0c2429;color:#eee8cc;min-height:100vh}#world-combat[hidden]{display:none}
+.world-combat-bar{position:sticky;top:0;z-index:20;background:#153431;padding:12px 20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;border-bottom:1px solid #bca766}
+.world-combat-bar p{flex:1;margin:0;min-width:220px}.world-combat-bar button{color:#eee8cc;background:#244841;border:1px solid #bca766;padding:12px 18px;border-radius:10px;cursor:pointer}
+#world-frame{width:100%;height:calc(100vh - 85px);min-height:740px;border:0;display:block}.world-evidence{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}.world-error{color:#ffbdae}
+@media(max-width:650px){.world-card{padding:18px}.world-rowan{grid-template-columns:1fr}.world-rowan svg{height:120px}.world-combat-bar{position:relative}#world-frame{height:1250px}.world-actions .btn{flex:1 1 140px}}
